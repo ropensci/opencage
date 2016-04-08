@@ -1,0 +1,17 @@
+Package: opencage
+Type: Package
+Title: This Packages Is An Interface To The OpenCage API
+Version: 0.1.0
+Authors@R: person("Maëlle", "Salmon", email = "maelle.salmon@yahoo.se", role = c("aut", "cre"))
+Description: This packages accesses the OpenCage API which provides Forward
+    geocoding (from placename to longitude and latitude) and Reverse geocoding (from
+    longitude and latitude to placename)
+License: GPL (>= 2)
+LazyData: TRUE
+URL: http://github.com/masalmon/opencage
+BugReports: http://github.com/masalmon/opencage/issues
+Imports:
+    httr,
+    jsonlite,
+    dplyr
+RoxygenNote: 5.0.1
