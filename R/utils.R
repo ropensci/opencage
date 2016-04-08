@@ -17,7 +17,7 @@ opencage_parse <- function(req) {
   list(results = suppressWarnings(do.call(dplyr::bind_rows,
                            lapply(temp$results, as.data.frame))),
        total_results = temp$total_results,
-       time_stamp = temp$timestamp$timestamp$created_http)
+       time_stamp = temp$timestamp$created_http)
 }
 
 # base URL for all queries
