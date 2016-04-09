@@ -23,7 +23,7 @@ opencage_parse <- function(req) {
   class_of_common <- lapply(common_dataframes, functionClass)
   class_of_common <- lapply(class_of_common, as.data.frame)
 
-  class_of_common <- dplyr::bind_cols(bind_cols(class_of_common))
+  class_of_common <- dplyr::bind_cols(class_of_common)
   unique_class <- apply(class_of_common, 1, unique)
   length_class <- lapply(unique_class, length)
   if(any(length_class > 1)){
