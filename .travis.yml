@@ -1,0 +1,18 @@
+language: r
+sudo: false
+cache: packages
+secure: "jFD2v/49efGezaiAwwmlM0Pm2KEOLqMO81CoRLkyDFuXDDVsHLO7zIPNKYK5ss+rua6oXArDkurik0T0colfH9Qg55c0sFMrvq24luDzOzlIOOxSUiGfq97bphHZGkKIDVhwjaSRtLdex7KGjR6enl8l1JIxxRZxDOYBJCdM12lYV2WjqeGAMMANS5vvu11CLh9ZpE/RjfZKuyvXCutdKpoAwhRaluDXdKlcYh6t+4Io6PwLIdHs4ito2Pk37CKuzx8KQBQbmtsscIpGRUlx7pql8t/WIdfalqmAMDCStZvz0BKT6G4yfAyKPx7jHrMa65MRTgIkyjh8AMMcHY2XZQmGD84qNOqHW2YSwWNWjF6KsE6PNyNKPCsp0yMhXW7QSBwTJBNCtQAv2hjUFf9ITwyAaS+Pt8lNOcOF/WX0ZkZLYv7v0FzAOTnTxy/1jjUMmIVRzCuYvUHrbska6AGSiC4RJaA2211pzqci1f+AmKmSo4kzcg4DQpOXvvVVEkTR9qP0K9A1luFpqaS1Pviyi33N53FCAuKAig8leFcwy5zbmwF7wv6qRSw8Rv1eFaskPks0SO5OLRrXOcaVsTw+lVTYyjj0aGMLKExjqLF5TFuhHLnygXim6aDiHm5Zw/YP4CWPAOfc0Pz0/su2izy+lEKGLXi4fNjekXazFcX9ruI="
+
+r_binary_packages:
+  - httr
+  - dplyr
+  - jsonlite
+  - lubridate
+
+notifications:
+    email:
+      on_success: change
+      on_failure: change
+
+after_success:
+  - Rscript -e 'library(covr); codecov()'
