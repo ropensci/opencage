@@ -12,7 +12,7 @@ opencage_parse <- function(req) {
   if (identical(text, "")) stop(call. = FALSE, "No output to parse", call. = FALSE)
   temp <- jsonlite::fromJSON(text,
                              simplifyVector = FALSE)
-print(req$all_headers)
+
   no_results <- temp$total_results
   if(no_results > 0){
     results <- lapply(temp$results, unlist)
@@ -29,8 +29,7 @@ print(req$all_headers)
 
   list(results = results,
        total_results = no_results,
-       time_stamp = lubridate::dmy_hms(temp$timestamp$created_http),
-       remaining = temp$response$rate)
+       time_stamp = lubridate::dmy_hms(temp$timestamp$created_http))
 }
 
 # base URL for all queries

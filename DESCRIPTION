@@ -1,6 +1,6 @@
 Package: opencage
 Type: Package
-Title: This Packages Is An Interface To The OpenCage API
+Title: Interface To The OpenCage API
 Version: 0.1.0
 Authors@R: person("Maëlle", "Salmon", email = "maelle.salmon@yahoo.se", role = c("aut", "cre"))
 Description: This packages accesses the OpenCage API which provides Forward
