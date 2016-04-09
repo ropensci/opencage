@@ -9,7 +9,7 @@
 #' @param language an IETF format language code (such as es for Spanish or pt-BR for Brazilian Portuguese). If no language is explicitly specified, we will look for an HTTP Accept-Language header like those sent by a brower and use the first language specified and if none are specified en (English) will be assumed
 #' @param limit How many results should be returned. Default is 10.
 #' @param min_confidence an integer from 1-10. Only results with at least this confidence will be returned.
-#' @param no_annotations Logical, when TRUE the output will not contain annotations.
+#' @param no_annotation Logical, when TRUE the output will not contain annotations.
 #' @param no_dedupe Logical, when TRUE the output will not be deduplicated
 #' @param pretty if TRUE enables pretty printing of the response payload
 #'
