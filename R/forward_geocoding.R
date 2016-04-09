@@ -11,7 +11,6 @@
 #' @param min_confidence an integer from 1-10. Only results with at least this confidence will be returned.
 #' @param no_annotations Logical (default FALSE), when TRUE the output will not contain annotations.
 #' @param no_dedupe Logical (default FALSE), when TRUE the output will not be deduplicated
-#' @param pretty Logical (default FALSE), if TRUE enables pretty printing of the response payload
 #'
 #' @details For getting your API key register at https://geocoder.opencagedata.com/pricing. The free API key provides up to 2,500 calls a day.
 #' It is recommended you save your API key as en environment variable. See https://stat545-ubc.github.io/bit003_api-key-env-var.html
@@ -33,8 +32,7 @@ opencage_forward <- function(placename, key,
                              limit = 10,
                              min_confidence = NULL,
                              no_annotations = NULL,
-                             no_dedupe = NULL,
-                             pretty = NULL){
+                             no_dedupe = NULL){
   # check arguments
   opencage_query_check(placename = placename,
                        key = key,
@@ -44,11 +42,9 @@ opencage_forward <- function(placename, key,
                        limit = limit,
                        min_confidence = min_confidence,
                        no_annotations = no_annotations,
-                       no_dedupe = no_dedupe,
-                       pretty = pretty)
+                       no_dedupe = no_dedupe)
 
   no_annotations <- ifelse(is.null(no_annotations), FALSE, TRUE)
-  pretty <- ifelse(is.null(pretty), FALSE, TRUE)
   no_dedupe <- ifelse(is.null(no_dedupe), FALSE, TRUE)
 
   # res
@@ -60,7 +56,6 @@ opencage_forward <- function(placename, key,
                            min_confidence = min_confidence,
                            no_annotations = ifelse(no_annotations == TRUE, 1, 0),
                            no_dedupe = ifelse(no_dedupe == TRUE, 1, 0),
-                           pretty = ifelse(pretty == TRUE, 1, 0),
                            key = key))
 
   # done!

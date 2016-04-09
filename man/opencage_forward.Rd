@@ -6,7 +6,7 @@
 \usage{
 opencage_forward(placename, key, bound = NULL, countrycode = NULL,
   language = NULL, limit = 10, min_confidence = NULL,
-  no_annotations = NULL, no_dedupe = NULL, pretty = NULL)
+  no_annotations = NULL, no_dedupe = NULL)
 }
 \arguments{
 \item{placename}{placename}
@@ -26,8 +26,6 @@ opencage_forward(placename, key, bound = NULL, countrycode = NULL,
 \item{no_annotations}{Logical (default FALSE), when TRUE the output will not contain annotations.}
 
 \item{no_dedupe}{Logical (default FALSE), when TRUE the output will not be deduplicated}
-
-\item{pretty}{Logical (default FALSE), if TRUE enables pretty printing of the response payload}
 }
 \value{
 A list with

@@ -57,8 +57,7 @@ opencage_query_check <- function(latitude = NULL,
                                  limit,
                                  min_confidence,
                                  no_annotations,
-                                 no_dedupe,
-                                 pretty){
+                                 no_dedupe){
   # check latitude
   if(!is.null(latitude)){
     if (!dplyr::between(latitude, -90, 90)){
@@ -158,12 +157,7 @@ opencage_query_check <- function(latitude = NULL,
     }
   }
 
-  # check pretty
-  if(!is.null(pretty)){
-    if(!is.logical(pretty)){
-      stop("pretty has to be a logical.")
-    }
-  }
+
 }
 
 # function get class of data.frame
