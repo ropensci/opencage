@@ -2,10 +2,11 @@ language: r
 sudo: false
 cache: packages
 r_binary_packages:
-- httr
-- dplyr
-- jsonlite
-- lubridate
+  - httr
+  - dplyr
+  - jsonlite
+  - lubridate
+  - cover
 notifications:
   email:
     on_success: change
