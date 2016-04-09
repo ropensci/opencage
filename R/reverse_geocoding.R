@@ -14,11 +14,13 @@
 #'
 #' @details For getting your API key register at https://geocoder.opencagedata.com/pricing. The free API key provides up to 2,500 calls a day.
 #'
-#' @return A data.frame (`dplyr` `tbl_df`)
+#' @return A list with results as a data.frame (`dplyr` `tbl_df`)
 #' @export
 #'
 #' @examples
-opencage_reverse <- function(latitude, longitude, key,
+opencage_reverse <- function(latitude,
+                             longitude,
+                             key,
                              bound = NULL,
                              countrycode = NULL,
                              language = NULL,
@@ -27,36 +29,25 @@ opencage_reverse <- function(latitude, longitude, key,
                              no_annotation = NULL,
                              no_dedupe = NULL,
                              pretty = NULL){
-  # check arguments
-  opencage_query_check(latitude,
-                       longitude,
-                       bound,
-                       countrycode,
-                       language,
-                       limit,
-                       min_confidence,
-                       no_annotation,
-                       no_dedupe,
-                       pretty,
-                       key)
 
-  # build query
-  opencage_query <- build_opencage_query(q = paste0(latitude,
-                                                    "+",
-                                                    longitude),
-                                         key = key,
-                                         bound = bound,
-                                         countrycode = countrycode,
-                                         language = language,
-                                         limit = limit,
-                                         min_confidence = min_confidence,
-                                         no_annotation = no_annotation,
-                                         no_dedupe = no_dedupe,
-                                         pretty = pretty)
+
+  # check arguments
+  opencage_query_check(latitude = latitude,
+                       longitude = longitude,
+                       key = key,
+                       bound = bound,
+                       countrycode = countrycode,
+                       language = language,
+                       limit = limit,
+                       min_confidence = min_confidence,
+                       no_annotation = no_annotation,
+                       no_dedupe = no_dedupe,
+                       pretty = pretty)
+
 
   # res
-  temp <- opencage_get(queryPar = list(latitude = latitude,
-                                     longitude = longitude,
+  temp <- opencage_get(queryPar = list(q = paste0(latitude,
+                                     "+", longitude),
                                      key = key,
                                      bound = bound,
                                      countrycode = countrycode,

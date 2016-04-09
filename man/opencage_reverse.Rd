@@ -32,7 +32,7 @@ opencage_reverse(latitude, longitude, key, bound = NULL, countrycode = NULL,
 \item{pretty}{if TRUE enables pretty printing of the response payload}
 }
 \value{
-A data.frame (`dplyr` `tbl_df`)
+A list with results as a data.frame (`dplyr` `tbl_df`)
 }
 \description{
 Reverse Geocoding

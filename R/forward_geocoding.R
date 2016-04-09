@@ -13,7 +13,7 @@
 #'
 #' @details For getting your API key register at https://geocoder.opencagedata.com/pricing. The free API key provides up to 2,500 calls a day.
 #'
-#' @return A data.frame (`dplyr` `tbl_df`)
+#' @return A list with results as a data.frame (`dplyr` `tbl_df`)
 #' @export
 #'
 #' @examples

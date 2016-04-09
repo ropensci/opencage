@@ -30,7 +30,7 @@ opencage_forward(placename, key, bound = NULL, countrycode = NULL,
 \item{no_annotations}{Logical, when TRUE the output will not contain annotations.}
 }
 \value{
-A data.frame (`dplyr` `tbl_df`)
+A list with results as a data.frame (`dplyr` `tbl_df`)
 }
 \description{
 Forward Geocoding

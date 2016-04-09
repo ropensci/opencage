@@ -97,10 +97,10 @@ opencage_query_check <- function(latitude = NULL,
     }
   }
 
-  # check countryCode
+  # check countrycode
   if(!is.null(countrycode)){
     data("countrycodes")
-    if(!(countrycode %in% countryCodes$code)){
+    if(!(countrycode %in% countrycodes$code)){
       stop("countrycode does not have a valid value.")
     }
   }
@@ -114,7 +114,7 @@ opencage_query_check <- function(latitude = NULL,
   }
   if(length(lang)>1){
     data("countrycodes")
-    if(!(lang[2] %in% countryCodes$code)){
+    if(!(lang[2] %in% countrycodes$code)){
       stop("The country part of language is not valid.")
     }
   }
