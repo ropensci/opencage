@@ -1,6 +1,8 @@
 opencage
 ========
 
+[![Build Status](https://travis-ci.org/masalmon/opencage.svg?branch=master)](https://travis-ci.org/masalmon/opencage)
+
 Installation
 ============
 
@@ -33,8 +35,8 @@ opencage_forward(placename = "Sarzeau", key = Sys.getenv("OPENCAGE_KEY"))
     ## 
     ##    annotations.DMS.lat annotations.DMS.lng annotations.MGRS
     ##                  (chr)               (chr)            (chr)
-    ## 1 47° 31' 43.56984'' N 2° 45' 51.11856'' W  30TWT1774963954
-    ## 2 47° 31' 40.80828'' N  2° 46' 7.68144'' W  30TWT1740363867
+    ## 1 47° 31' 43.56984'' N 2° 45' 51.11892'' W  30TWT1774963954
+    ## 2 47° 31' 40.80828'' N  2° 46' 7.68180'' W  30TWT1740363867
     ## Variables not shown: annotations.Maidenhead (chr), annotations.Mercator.x
     ##   (chr), annotations.Mercator.y (chr), annotations.OSM.edit_url (chr),
     ##   annotations.OSM.url (chr), annotations.callingcode (fctr),
@@ -59,7 +61,7 @@ opencage_forward(placename = "Sarzeau", key = Sys.getenv("OPENCAGE_KEY"))
     ## [1] 2
     ## 
     ## $time_stamp
-    ## [1] "2016-04-09 19:51:09 UTC"
+    ## [1] "2016-04-09 20:51:31 UTC"
 
 Reverse geocoding
 -----------------
@@ -102,4 +104,4 @@ opencage_reverse(latitude = 0, longitude = 0,
     ## [1] 2
     ## 
     ## $time_stamp
-    ## [1] "2016-04-09 19:56:49 UTC"
+    ## [1] "2016-04-09 20:51:33 UTC"

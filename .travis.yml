@@ -6,7 +6,7 @@ r_binary_packages:
   - dplyr
   - jsonlite
   - lubridate
-  - cover
+  - covr
 notifications:
   email:
     on_success: change
