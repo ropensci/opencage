@@ -13,9 +13,32 @@ opencage_parse <- function(req) {
 
   temp <- jsonlite::fromJSON(text,
                              simplifyVector = FALSE)
+  res <- lapply(temp$results, as.data.frame)
+
+  # check that same class if same name
+  names <- lapply( res, names)
+  common_names <- Reduce(intersect, names)
+  common_dataframes <- lapply(res, "[", common_names)
+
+  class_of_common <- lapply(common_dataframes, functionClass)
+  class_of_common <- lapply(class_of_common, as.data.frame)
+
+  class_of_common <- dplyr::bind_cols(bind_cols(class_of_common))
+  unique_class <- apply(class_of_common, 1, unique)
+  length_class <- lapply(unique_class, length)
+  if(any(length_class > 1)){
+    not_same_class <- common_names[length_class > 1]
+    # force to character
+    for(name in not_same_class){
+      for (i in 1:length(res)){
+        res[[i]][[name]] <- as.character(res[[i]][[name]] )
+      }
+    }
+  }
+
 
   list(results = suppressWarnings(do.call(dplyr::bind_rows,
-                           lapply(temp$results, as.data.frame))),
+                           res)),
        total_results = temp$total_results,
        time_stamp = temp$timestamp$created_http)
 }
@@ -100,7 +123,7 @@ opencage_query_check <- function(latitude = NULL,
   # check countrycode
   if(!is.null(countrycode)){
     data("countrycodes")
-    if(!(countrycode %in% countrycodes$code)){
+    if(!(countrycode %in% countrycodes$Code)){
       stop("countrycode does not have a valid value.")
     }
   }
@@ -152,3 +175,12 @@ opencage_query_check <- function(latitude = NULL,
   }
 }
 
+# function get class of data.frame
+functionClass <- function(x){
+  unlist(lapply(x, class))
+}
+
+# function for coercing to character
+functionCol <- function(x, col){
+  x[, col] <- as.character(x[, col])
+}
