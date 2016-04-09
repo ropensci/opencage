@@ -45,6 +45,8 @@ It is recommended you save your API key as an environment variable. See https://
 \examples{
 \dontrun{
 opencage_forward(placename = "Sarzeau", key = Sys.getenv("OPENCAGE_KEY"))
+opencage_forward(placename = "Islington, London", key = Sys.getenv("OPENCAGE_KEY"))
+opencage_forward(placename = "Triererstr 15, Weimar 99423, Deutschland", key = Sys.getenv("OPENCAGE_KEY"))
 }
 
 }
