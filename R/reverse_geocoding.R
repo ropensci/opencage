@@ -27,7 +27,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' opencage_reverse(latitude = 43.56984, longitude = 51.11892, key = Sys.getenv("OPENCAGE_KEY"))
+#' opencage_reverse(latitude = 0, longitude = 0,
+#' key = Sys.getenv("OPENCAGE_KEY"),
+#' limit = 2)
 #'}
 opencage_reverse <- function(latitude,
                              longitude,

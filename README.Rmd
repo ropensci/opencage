@@ -1,0 +1,46 @@
+---
+title: "opencage R package"
+author: "Maëlle Salmon"
+date: "`r Sys.Date()`"
+output:
+  md_document:
+    variant: markdown_github
+---
+opencage
+=============
+
+
+# Installation
+
+To install the package, you will need the devtools package.
+
+```{r, eval = FALSE}
+library("devtools")
+install_github("masalmon/opencage")
+
+```
+
+To use the package, you will also need an API key. For this register at https://geocoder.opencagedata.com/pricing. The free API key provides up to 2,500 calls a day. It is recommended you save your API key as an environment variable. See https://stat545-ubc.github.io/bit003_api-key-env-var.html
+
+# Geocoding
+
+The opencage API supports forward and reverse geocoding. Below are two easy examples. For more information about the query parameters, see the package documentation.
+
+## Forward geocoding
+
+Forward geocoding is from placename to latitude and longitude tuplet(s).
+
+```{r}
+library("opencage")
+opencage_forward(placename = "Sarzeau", key = Sys.getenv("OPENCAGE_KEY"))
+```
+
+## Reverse geocoding
+
+Reverse geocoding is from latitude and longitude to placename(s).
+
+```{r}
+opencage_reverse(latitude = 0, longitude = 0, 
+                 key = Sys.getenv("OPENCAGE_KEY"),
+                 limit = 2)
+```
