@@ -15,3 +15,12 @@ NULL
 #' @examples
 #' data("languagecodes")
 NULL
+
+#' API messages
+#' @format Codes and corresponding messages from the API.
+#' @name code_message
+#' @docType data
+#' @keywords data
+#' @examples
+#' data("code_message")
+NULL

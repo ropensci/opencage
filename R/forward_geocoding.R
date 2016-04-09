@@ -58,6 +58,9 @@ opencage_forward <- function(placename, key,
                            no_dedupe = ifelse(no_dedupe == TRUE, 1, 0),
                            key = key))
 
+  # check message
+  opencage_check(temp)
+
   # done!
   opencage_parse(temp)
 }

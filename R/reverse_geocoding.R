@@ -66,6 +66,9 @@ opencage_reverse <- function(latitude,
                                      min_confidence = min_confidence,
                                      no_annotations = ifelse(no_annotations == TRUE, 1, 0),
                                      no_dedupe = ifelse(no_dedupe == TRUE, 1, 0)))
+  # check message
+  opencage_check(temp)
+
   # done!
   opencage_parse(temp)
 
