@@ -8,3 +8,4 @@
 ^\.Rhistory$
 ^CONDUCT\.md$
 datamanagement.R
+^appveyor\.yml$

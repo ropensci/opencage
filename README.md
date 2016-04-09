@@ -1,7 +1,7 @@
 opencage
 ========
 
-[![Build Status](https://travis-ci.org/masalmon/opencage.svg?branch=master)](https://travis-ci.org/masalmon/opencage)
+[![Build Status](https://travis-ci.org/masalmon/opencage.svg?branch=master)](https://travis-ci.org/masalmon/opencage) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/masalmon/opencage?branch=master&svg=true)](https://ci.appveyor.com/project/masalmon/opencage)
 
 Installation
 ============
@@ -61,7 +61,7 @@ opencage_forward(placename = "Sarzeau", key = Sys.getenv("OPENCAGE_KEY"))
     ## [1] 2
     ## 
     ## $time_stamp
-    ## [1] "2016-04-09 20:51:31 UTC"
+    ## [1] "2016-04-09 20:56:38 UTC"
 
 Reverse geocoding
 -----------------
@@ -75,33 +75,34 @@ opencage_reverse(latitude = 0, longitude = 0,
 ```
 
     ## $results
-    ## Source: local data frame [2 x 39]
+    ## Source: local data frame [2 x 41]
     ## 
     ##    annotations.DMS.lat  annotations.DMS.lng annotations.MGRS
     ##                  (chr)                (chr)            (chr)
-    ## 1 43° 58' 33.33144'' N 11° 35' 26.17116'' E  32TQP0778572461
-    ## 2 43° 58' 34.72680'' N  11° 34' 5.56536'' E  32TQP0598872448
+    ## 1  44° 0' 35.49240'' N 10° 51' 33.01560'' E  32TPP4903374648
+    ## 2 43° 56' 25.93860'' N 11° 14' 15.57312'' E  32TPP7958367702
     ## Variables not shown: annotations.Maidenhead (chr), annotations.Mercator.x
     ##   (chr), annotations.Mercator.y (chr), annotations.OSM.edit_url (chr),
     ##   annotations.OSM.url (chr), annotations.callingcode (fctr),
-    ##   annotations.geohash (chr), annotations.sun.rise.apparent (fctr),
-    ##   annotations.sun.rise.astronomical (fctr), annotations.sun.rise.civil
-    ##   (fctr), annotations.sun.rise.nautical (chr),
-    ##   annotations.sun.set.apparent (fctr), annotations.sun.set.astronomical
-    ##   (chr), annotations.sun.set.civil (fctr), annotations.sun.set.nautical
-    ##   (fctr), annotations.timezone.name (fctr),
-    ##   annotations.timezone.now_in_dst (fctr), annotations.timezone.offset_sec
-    ##   (fctr), annotations.timezone.offset_string (fctr),
+    ##   annotations.geohash (chr), annotations.sun.rise.apparent (chr),
+    ##   annotations.sun.rise.astronomical (chr), annotations.sun.rise.civil
+    ##   (chr), annotations.sun.rise.nautical (chr), annotations.sun.set.apparent
+    ##   (chr), annotations.sun.set.astronomical (chr), annotations.sun.set.civil
+    ##   (chr), annotations.sun.set.nautical (chr), annotations.timezone.name
+    ##   (fctr), annotations.timezone.now_in_dst (fctr),
+    ##   annotations.timezone.offset_sec (fctr),
+    ##   annotations.timezone.offset_string (fctr),
     ##   annotations.timezone.short_name (fctr), annotations.what3words.words
     ##   (chr), bounds.northeast.lat (chr), bounds.northeast.lng (chr),
-    ##   bounds.southwest.lat (chr), bounds.southwest.lng (chr),
-    ##   components.country (fctr), components.country_code (fctr),
-    ##   components.county (fctr), components.road (chr), components.state
-    ##   (fctr), components.suburb (fctr), components.village (fctr), confidence
-    ##   (chr), formatted (chr), geometry.lat (chr), geometry.lng (chr)
+    ##   bounds.southwest.lat (chr), bounds.southwest.lng (chr), components.city
+    ##   (fctr), components.country (fctr), components.country_code (fctr),
+    ##   components.county (chr), components.road (chr), components.state (fctr),
+    ##   components.suburb (chr), confidence (chr), formatted (chr), geometry.lat
+    ##   (chr), geometry.lng (chr), components.postcode (fctr), components.town
+    ##   (fctr)
     ## 
     ## $total_results
     ## [1] 2
     ## 
     ## $time_stamp
-    ## [1] "2016-04-09 20:51:33 UTC"
+    ## [1] "2016-04-09 20:51:01 UTC"
