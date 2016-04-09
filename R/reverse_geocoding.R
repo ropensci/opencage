@@ -13,6 +13,7 @@
 #' @param pretty if TRUE enables pretty printing of the response payload
 #'
 #' @details For getting your API key register at https://geocoder.opencagedata.com/pricing. The free API key provides up to 2,500 calls a day.
+#' It is recommended you save your API key as en environment variable. See https://stat545-ubc.github.io/bit003_api-key-env-var.html
 #'
 #' @return A list with results as a data.frame (`dplyr` `tbl_df`)
 #' @export

@@ -13,33 +13,43 @@ opencage_parse <- function(req) {
 
   temp <- jsonlite::fromJSON(text,
                              simplifyVector = FALSE)
-  res <- lapply(temp$results, as.data.frame)
 
-  # check that same class if same name
-  names <- lapply( res, names)
-  common_names <- Reduce(intersect, names)
-  common_dataframes <- lapply(res, "[", common_names)
+  no_results <- temp$total_results
+  if(no_results > 0){
+    res <- lapply(temp$results, as.data.frame)
 
-  class_of_common <- lapply(common_dataframes, functionClass)
-  class_of_common <- lapply(class_of_common, as.data.frame)
+    # check that same class if same name
+    names <- lapply( res, names)
+    common_names <- Reduce(intersect, names)
+    common_dataframes <- lapply(res, "[", common_names)
 
-  class_of_common <- dplyr::bind_cols(class_of_common)
-  unique_class <- apply(class_of_common, 1, unique)
-  length_class <- lapply(unique_class, length)
-  if(any(length_class > 1)){
-    not_same_class <- common_names[length_class > 1]
-    # force to character
-    for(name in not_same_class){
-      for (i in 1:length(res)){
-        res[[i]][[name]] <- as.character(res[[i]][[name]] )
+    class_of_common <- lapply(common_dataframes, functionClass)
+    class_of_common <- lapply(class_of_common, as.data.frame)
+
+    class_of_common <- dplyr::bind_cols(class_of_common)
+    unique_class <- apply(class_of_common, 1, unique)
+    length_class <- lapply(unique_class, length)
+    if(any(length_class > 1)){
+      not_same_class <- common_names[length_class > 1]
+      # force to character
+      for(name in not_same_class){
+        for (i in 1:length(res)){
+          res[[i]][[name]] <- as.character(res[[i]][[name]] )
+        }
       }
     }
+    results <- suppressWarnings(do.call(dplyr::bind_rows,
+                                        res))
+  }
+  else{
+    results <- NULL
   }
 
 
-  list(results = suppressWarnings(do.call(dplyr::bind_rows,
-                           res)),
-       total_results = temp$total_results,
+
+
+  list(results = results,
+       total_results = no_results,
        time_stamp = temp$timestamp$created_http)
 }
 
