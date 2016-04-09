@@ -1,7 +1,7 @@
 opencage
 ========
 
-[![Build Status](https://travis-ci.org/masalmon/opencage.svg?branch=master)](https://travis-ci.org/masalmon/opencage) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/masalmon/opencage?branch=master&svg=true)](https://ci.appveyor.com/project/masalmon/opencage)
+[![Build Status](https://travis-ci.org/masalmon/opencage.svg?branch=master)](https://travis-ci.org/masalmon/opencage) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/masalmon/opencage?branch=master&svg=true)](https://ci.appveyor.com/project/masalmon/opencage) [![codecov.io](https://codecov.io/github/masalmon/opencage/coverage.svg?branch=master)](https://codecov.io/github/masalmon/opencage?branch=master)
 
 Installation
 ============
@@ -61,7 +61,7 @@ opencage_forward(placename = "Sarzeau", key = Sys.getenv("OPENCAGE_KEY"))
     ## [1] 2
     ## 
     ## $time_stamp
-    ## [1] "2016-04-09 20:56:38 UTC"
+    ## [1] "2016-04-09 21:05:44 UTC"
 
 Reverse geocoding
 -----------------
@@ -105,4 +105,4 @@ opencage_reverse(latitude = 0, longitude = 0,
     ## [1] 2
     ## 
     ## $time_stamp
-    ## [1] "2016-04-09 20:51:01 UTC"
+    ## [1] "2016-04-09 21:00:07 UTC"
