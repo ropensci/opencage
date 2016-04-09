@@ -2,6 +2,7 @@ library("opencage")
 context("opencage_parse")
 
 test_that("opencage_parse returns what it should for both functions",{
+  skip_on_cran()
   results <- opencage_forward(placename = "Sarzeau", key = Sys.getenv("OPENCAGE_KEY"))
   expect_is(results, "list")
   expect_is(results[["results"]], "tbl_df")

@@ -26,7 +26,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' opencage_reverse(latitude = 43.56984, longitude = 51.11892, key = Sys.getenv("OPENCAGE_KEY"))
+#'}
 opencage_reverse <- function(latitude,
                              longitude,
                              key,
@@ -56,7 +58,7 @@ opencage_reverse <- function(latitude,
 
 
   # res
-  temp <- opencage_get(queryPar = list(q = paste0(latitude,
+  temp <- opencage_get(query_par = list(q = paste0(latitude,
                                      "+", longitude),
                                      key = key,
                                      bound = bound,
@@ -64,8 +66,10 @@ opencage_reverse <- function(latitude,
                                      language = language,
                                      limit = limit,
                                      min_confidence = min_confidence,
-                                     no_annotations = ifelse(no_annotations == TRUE, 1, 0),
-                                     no_dedupe = ifelse(no_dedupe == TRUE, 1, 0)))
+                                     no_annotations =
+                                       ifelse(no_annotations == TRUE, 1, 0),
+                                     no_dedupe =
+                                       ifelse(no_dedupe == TRUE, 1, 0)))
   # check message
   opencage_check(temp)
 

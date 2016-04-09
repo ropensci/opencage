@@ -45,6 +45,8 @@ For getting your API key register at https://geocoder.opencagedata.com/pricing. 
 It is recommended you save your API key as an environment variable. See https://stat545-ubc.github.io/bit003_api-key-env-var.html
 }
 \examples{
+\dontrun{
 opencage_reverse(latitude = 43.56984, longitude = 51.11892, key = Sys.getenv("OPENCAGE_KEY"))
+}
 }
 

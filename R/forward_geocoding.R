@@ -24,7 +24,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' opencage_forward(placename = "Sarzeau", key = Sys.getenv("OPENCAGE_KEY"))
+#'
 opencage_forward <- function(placename, key,
                              bound = NULL,
                              countrycode = NULL,
@@ -48,13 +50,14 @@ opencage_forward <- function(placename, key,
   no_dedupe <- ifelse(is.null(no_dedupe), FALSE, TRUE)
 
   # res
-  temp <- opencage_get(queryPar = list(q = placename,
+  temp <- opencage_get(query_par = list(q = placename,
                            bound = bound,
                            countrycode = countrycode,
                            language = language,
                            limit = limit,
                            min_confidence = min_confidence,
-                           no_annotations = ifelse(no_annotations == TRUE, 1, 0),
+                           no_annotations =
+                             ifelse(no_annotations == TRUE, 1, 0),
                            no_dedupe = ifelse(no_dedupe == TRUE, 1, 0),
                            key = key))
 

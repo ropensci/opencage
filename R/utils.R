@@ -9,7 +9,8 @@ opencage_check <- function(req) {
 # function for parsing the response
 opencage_parse <- function(req) {
   text <- httr::content(req, as = "text")
-  if (identical(text, "")) stop(call. = FALSE, "No output to parse", call. = FALSE)
+  if (identical(text, "")) stop("No output to parse",
+                                call. = FALSE)
   temp <- jsonlite::fromJSON(text,
                              simplifyVector = FALSE)
 
@@ -38,10 +39,10 @@ opencage_url <- function() {
 }
 
 # get resultrs
-opencage_get <- function(queryPar){
-  queryPar <- Filter(Negate(is.null), queryPar)
+opencage_get <- function(query_par){
+  query_par <- Filter(Negate(is.null), query_par) # nolint
   httr::GET(url = opencage_url(),
-            query = queryPar)
+            query = query_par)
 }
 
 # function that checks the query
@@ -100,10 +101,10 @@ opencage_query_check <- function(latitude = NULL,
     if(!dplyr::between(bound[4], -90, 90)){
       stop(call. = FALSE, "max lat should be between -90 and 90.")
     }
-    if(bound[1]>bound[3]){
+    if(bound[1] > bound[3]){
       stop(call. = FALSE, "min long has to be smaller than max long")
     }
-    if(bound[2]>bound[4]){
+    if(bound[2] > bound[4]){
       stop(call. = FALSE, "min lat has to be smaller than max lat")
     }
   }
@@ -123,7 +124,7 @@ opencage_query_check <- function(latitude = NULL,
   if(!(lang[1] %in% languagecodes$alpha2)){
     stop(call. = FALSE, "The language code is not valid.")
   }
-  if(length(lang)>1){
+  if(length(lang) > 1){
     data("countrycodes")
     if(!(lang[2] %in% countrycodes$code)){
       stop(call. = FALSE, "The country part of language is not valid.")
@@ -137,7 +138,7 @@ opencage_query_check <- function(latitude = NULL,
   # check min_confidence
   if(!is.null(min_confidence)){
     if(!(min_confidence %in% c(1:10))){
-      stop(call. = FALSE, "min_confidence should be an integer between 1 and 10.")
+      stop(call. = FALSE, "min_confidence should be an integer between 1 and 10.") # nolint
     }
   }
 

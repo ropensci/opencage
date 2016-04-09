@@ -16,4 +16,4 @@ Imports:
     dplyr,
     lubridate
 RoxygenNote: 5.0.1
-Suggests: testthat
+Suggests: testthat, lintr
