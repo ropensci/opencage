@@ -26,6 +26,7 @@
 #' @examples
 #' \dontrun{
 #' opencage_forward(placename = "Sarzeau", key = Sys.getenv("OPENCAGE_KEY"))
+#'}
 #'
 opencage_forward <- function(placename, key,
                              bound = NULL,
