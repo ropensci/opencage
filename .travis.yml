@@ -1,21 +1,17 @@
 language: r
 sudo: false
 cache: packages
-
 env:
   global:
-    - secure: "jFD2v/49efGezaiAwwmlM0Pm2KEOLqMO81CoRLkyDFuXDDVsHLO7zIPNKYK5ss+rua6oXArDkurik0T0colfH9Qg55c0sFMrvq24luDzOzlIOOxSUiGfq97bphHZGkKIDVhwjaSRtLdex7KGjR6enl8l1JIxxRZxDOYBJCdM12lYV2WjqeGAMMANS5vvu11CLh9ZpE/RjfZKuyvXCutdKpoAwhRaluDXdKlcYh6t+4Io6PwLIdHs4ito2Pk37CKuzx8KQBQbmtsscIpGRUlx7pql8t/WIdfalqmAMDCStZvz0BKT6G4yfAyKPx7jHrMa65MRTgIkyjh8AMMcHY2XZQmGD84qNOqHW2YSwWNWjF6KsE6PNyNKPCsp0yMhXW7QSBwTJBNCtQAv2hjUFf9ITwyAaS+Pt8lNOcOF/WX0ZkZLYv7v0FzAOTnTxy/1jjUMmIVRzCuYvUHrbska6AGSiC4RJaA2211pzqci1f+AmKmSo4kzcg4DQpOXvvVVEkTR9qP0K9A1luFpqaS1Pviyi33N53FCAuKAig8leFcwy5zbmwF7wv6qRSw8Rv1eFaskPks0SO5OLRrXOcaVsTw+lVTYyjj0aGMLKExjqLF5TFuhHLnygXim6aDiHm5Zw/YP4CWPAOfc0Pz0/su2izy+lEKGLXi4fNjekXazFcX9ruI="
-
+  - secure: n9SbCaUCAn6zURBJY8SI8jYfxMbRBUERtrFSPpbQv3u7mdlYl8D6DbC9Kqn2MgFGYMgngtuuy9KRKv7nAQ8LGBr0INXiLXQLVnbgDmKvJb5XSVEjGvfxzS4WjDDXsO+nAcl6tVh3ZgivEQRTK85yOsvs/FhNsq1nyp/aFU36P+Ois2YlhVOncgYIAQ6UVg3VzyVugKdEjMtwsWKm+qj8hZZCqQBHdv5P8G8fTnBYg0u03WxFlJpJpv8aeIsljLNNGXTJWxnemDhADBjDU1lZ9eRDzhl3fN5DHFP3K13E7Jah6dTiO8+04+opmFrpt7gnRWBIL/dzOHg92sBAb8s+1zEmMhP2fURwtfPe9MKzlnqUmAehQOqf6iPP5EF5WglwdIlkG2AFkFn1b7kj3vrDZnUdSArws8Ip4uWBP4370a5VkzCz8wyjJ+8tfbf1bINHXmCoLDgsU4I5kRTwiWUHd0FW5ofdqYm11+b8Fpwpa+PsnO6UtX0e4xk/mC7TOGXN14GKYogAoH7PbaGi8uB0dC4FLFg3Q+v5rm0VCJ1lCIJcMk/lI26BWmY5trtzLOmvh5JQzeyID/ewV0yiw6MBioTXRVmjyKozwEi2jCWsJ5929Y8oI7bZhPzlc+hvivgtHr8gZLmRjJJ7B+d+ljdgjwLYI4puR+v4/ewh7Zn0cBM=
 r_binary_packages:
-  - httr
-  - dplyr
-  - jsonlite
-  - lubridate
-
+- httr
+- dplyr
+- jsonlite
+- lubridate
 notifications:
-    email:
-      on_success: change
-      on_failure: change
-
+  email:
+    on_success: change
+    on_failure: change
 after_success:
-  - Rscript -e 'library(covr); codecov()'
+- Rscript -e 'library(covr); codecov()'
