@@ -9,9 +9,9 @@
 #' @param language an IETF format language code (such as es for Spanish or pt-BR for Brazilian Portuguese). If no language is explicitly specified, we will look for an HTTP Accept-Language header like those sent by a brower and use the first language specified and if none are specified en (English) will be assumed
 #' @param limit How many results should be returned. Default is 10.
 #' @param min_confidence an integer from 1-10. Only results with at least this confidence will be returned.
-#' @param no_annotation Logical, when TRUE the output will not contain annotations.
-#' @param no_dedupe Logical, when TRUE the output will not be deduplicated
-#' @param pretty if TRUE enables pretty printing of the response payload
+#' @param no_annotations Logical (default FALSE), when TRUE the output will not contain annotations.
+#' @param no_dedupe Logical (default FALSE), when TRUE the output will not be deduplicated
+#' @param pretty Logical (default FALSE), if TRUE enables pretty printing of the response payload
 #'
 #' @details For getting your API key register at https://geocoder.opencagedata.com/pricing. The free API key provides up to 2,500 calls a day.
 #' It is recommended you save your API key as en environment variable. See https://stat545-ubc.github.io/bit003_api-key-env-var.html
@@ -32,7 +32,7 @@ opencage_forward <- function(placename, key,
                              language = NULL,
                              limit = 10,
                              min_confidence = NULL,
-                             no_annotation = NULL,
+                             no_annotations = NULL,
                              no_dedupe = NULL,
                              pretty = NULL){
   # check arguments
@@ -43,9 +43,13 @@ opencage_forward <- function(placename, key,
                        language = language,
                        limit = limit,
                        min_confidence = min_confidence,
-                       no_annotation = no_annotation,
+                       no_annotations = no_annotations,
                        no_dedupe = no_dedupe,
                        pretty = pretty)
+
+  no_annotations <- ifelse(is.null(no_annotations), FALSE, TRUE)
+  pretty <- ifelse(is.null(pretty), FALSE, TRUE)
+  no_dedupe <- ifelse(is.null(no_dedupe), FALSE, TRUE)
 
   # res
   temp <- opencage_get(queryPar = list(q = placename,
@@ -54,9 +58,9 @@ opencage_forward <- function(placename, key,
                            language = language,
                            limit = limit,
                            min_confidence = min_confidence,
-                           no_annotation = no_annotation,
-                           no_dedupe = no_dedupe,
-                           pretty = pretty,
+                           no_annotations = ifelse(no_annotations == TRUE, 1, 0),
+                           no_dedupe = ifelse(no_dedupe == TRUE, 1, 0),
+                           pretty = ifelse(pretty == TRUE, 1, 0),
                            key = key))
 
   # done!

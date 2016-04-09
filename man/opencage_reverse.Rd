@@ -6,7 +6,7 @@
 \usage{
 opencage_reverse(latitude, longitude, key, bound = NULL, countrycode = NULL,
   language = NULL, limit = 10, min_confidence = NULL,
-  no_annotation = NULL, no_dedupe = NULL, pretty = NULL)
+  no_annotations = NULL, no_dedupe = NULL, pretty = NULL)
 }
 \arguments{
 \item{latitude}{latitude}
@@ -25,11 +25,11 @@ opencage_reverse(latitude, longitude, key, bound = NULL, countrycode = NULL,
 
 \item{min_confidence}{an integer from 1-10. Only results with at least this confidence will be returned.}
 
-\item{no_annotation}{Logical, when TRUE the output will not contain annotations.}
+\item{no_annotations}{Logical (default FALSE), when TRUE the output will not contain annotations.}
 
-\item{no_dedupe}{Logical, when TRUE the output will not be deduplicated}
+\item{no_dedupe}{Logical (default FALSE), when TRUE the output will not be deduplicated}
 
-\item{pretty}{if TRUE enables pretty printing of the response payload}
+\item{pretty}{Logical (default FALSE), if TRUE enables pretty printing of the response payload}
 }
 \value{
 A list with

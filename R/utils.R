@@ -56,7 +56,7 @@ opencage_query_check <- function(latitude = NULL,
                                  language,
                                  limit,
                                  min_confidence,
-                                 no_annotation,
+                                 no_annotations,
                                  no_dedupe,
                                  pretty){
   # check latitude
@@ -144,9 +144,9 @@ opencage_query_check <- function(latitude = NULL,
     }
   }
 
-  # check no_annotations
-  if(!is.null(no_annotation)){
-    if(!is.logical(no_annotation)){
+  # check no_annotationss
+  if(!is.null(no_annotations)){
+    if(!is.logical(no_annotations)){
       stop("no_location has to be a logical.")
     }
   }
