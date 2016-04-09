@@ -1,9 +1,11 @@
 #' Forward Geocoding
 #'
+#' Forward Geocoding, that is, from placename to latitude and longitude tuplet(s).
+#'
 #' @param placename placename
 #' @param key your OpenCage key
 #' @param bound Provides the geocoder with a hint to the region that the query resides in. This value will restrict the possible results to the supplied region. The bound parameter should be specified as 4 coordinate points forming the south-west and north-east corners of a bounding box. For example bound=-0.563160,51.280430,0.278970,51.683979 (min long, min lat, max long, max lat).
-#' @param countrycode Restricts the results to the given country. The country code is a two letter code as defined by the ISO 3166-1 Alpha 2 standard. E.g. 'gb' for the United Kingdom, 'fr' for France, 'us' for United States. Non-two letter countrycodes are ignored.
+#' @param countrycode Restricts the results to the given country. The country code is a two letter code as defined by the ISO 3166-1 Alpha 2 standard. E.g. 'gb' for the United Kingdom, 'fr' for France, 'us' for United States.
 #' @param language an IETF format language code (such as es for Spanish or pt-BR for Brazilian Portuguese). If no language is explicitly specified, we will look for an HTTP Accept-Language header like those sent by a brower and use the first language specified and if none are specified en (English) will be assumed
 #' @param limit How many results should be returned. Default is 10.
 #' @param min_confidence an integer from 1-10. Only results with at least this confidence will be returned.
@@ -14,7 +16,12 @@
 #' @details For getting your API key register at https://geocoder.opencagedata.com/pricing. The free API key provides up to 2,500 calls a day.
 #' It is recommended you save your API key as en environment variable. See https://stat545-ubc.github.io/bit003_api-key-env-var.html
 #'
-#' @return A list with results as a data.frame (`dplyr` `tbl_df`)
+#' @return A list with
+#' \itemize{
+#' \item results as a data.frame (`dplyr` `tbl_df`) called results with one line per results,
+#' \item the number of results as an integer
+#' \item the timestamp as a POSIXct object
+#' }
 #' @export
 #'
 #' @examples

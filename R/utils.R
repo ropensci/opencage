@@ -16,30 +16,11 @@ opencage_parse <- function(req) {
 
   no_results <- temp$total_results
   if(no_results > 0){
-    res <- lapply(temp$results, as.data.frame)
-
-    # check that same class if same name
-    names <- lapply( res, names)
-    common_names <- Reduce(intersect, names)
-    common_dataframes <- lapply(res, "[", common_names)
-
-    class_of_common <- lapply(common_dataframes, functionClass)
-    class_of_common <- lapply(class_of_common, as.data.frame)
-
-    class_of_common <- dplyr::bind_cols(class_of_common)
-    unique_class <- apply(class_of_common, 1, unique)
-    length_class <- lapply(unique_class, length)
-    if(any(length_class > 1)){
-      not_same_class <- common_names[length_class > 1]
-      # force to character
-      for(name in not_same_class){
-        for (i in 1:length(res)){
-          res[[i]][[name]] <- as.character(res[[i]][[name]] )
-        }
-      }
-    }
-    results <- suppressWarnings(do.call(dplyr::bind_rows,
-                                        res))
+    results <- lapply(temp$results, unlist)
+    results <- lapply(results, as.data.frame)
+    results <- lapply(results, t)
+    results <- lapply(results, as.data.frame)
+    results <- suppressWarnings(dplyr::bind_rows(results))
   }
   else{
     results <- NULL
@@ -50,7 +31,7 @@ opencage_parse <- function(req) {
 
   list(results = results,
        total_results = no_results,
-       time_stamp = temp$timestamp$created_http)
+       time_stamp = lubridate::dmy_hms(temp$timestamp$created_http))
 }
 
 # base URL for all queries

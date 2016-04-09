@@ -13,5 +13,6 @@ BugReports: http://github.com/masalmon/opencage/issues
 Imports:
     httr,
     jsonlite,
-    dplyr
+    dplyr,
+    lubridate
 RoxygenNote: 5.0.1
