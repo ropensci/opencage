@@ -7,7 +7,7 @@
                               limit = 10,
                               min_confidence = NULL,
                               no_annotations = NULL,
-                              no_dedupe = NULL){
+                              no_dedupe = NULL){# nocov start
 
 
   # check arguments
@@ -82,3 +82,4 @@
 #' limit = 2)
 #'}
 opencage_reverse <- memoise::memoise(.opencage_reverse)
+# nocov end

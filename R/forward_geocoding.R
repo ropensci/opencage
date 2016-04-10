@@ -5,7 +5,7 @@
                              limit = 10,
                              min_confidence = NULL,
                              no_annotations = NULL,
-                             no_dedupe = NULL){
+                             no_dedupe = NULL){# nocov start
   # check arguments
   opencage_query_check(placename = placename,
                        key = key,
@@ -73,3 +73,4 @@
 #'}
 #'
 opencage_forward <- memoise::memoise(.opencage_forward)
+# nocov end
