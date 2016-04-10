@@ -33,3 +33,37 @@ test_that("opencage_parse returns what it should for both functions",{
   expect_is(results[["time_stamp"]], "POSIXct")
   expect_equal(length(results), 3)
 })
+
+test_that("opencage_parse returns what it should for both functions with several parameters",{
+  skip_on_cran()
+
+  results <- opencage_forward(placename = "Paris",
+                              key = Sys.getenv("OPENCAGE_KEY"),
+                              limit = 2,
+                              min_confidence = 5,
+                              language = "fr",
+                              no_annotations = TRUE)
+  expect_is(results, "list")
+  expect_is(results[["results"]], "tbl_df")
+  expect_is(results[["total_results"]], "integer")
+  expect_is(results[["time_stamp"]], "POSIXct")
+  expect_equal(length(results), 3)
+  expect_equal(sum(grepl("annotation", names(results[["results"]]))), 0)
+  expect_true(dplyr::between(nrow(results[["results"]]), 1, 2))
+
+  results <- opencage_reverse(latitude = 44,
+                              longitude = 44,
+                              key = Sys.getenv("OPENCAGE_KEY"),
+                              limit = 2,
+                              min_confidence = 5,
+                              language = "pt-BR",
+                              no_annotations = TRUE)
+  expect_is(results, "list")
+  expect_is(results[["results"]], "tbl_df")
+  expect_is(results[["total_results"]], "integer")
+  expect_is(results[["time_stamp"]], "POSIXct")
+  expect_equal(length(results), 3)
+  expect_equal(sum(grepl("annotation", names(results[["results"]]))), 0)
+  expect_true(dplyr::between(nrow(results[["results"]]), 1, 2))
+
+})
