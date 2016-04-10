@@ -64,6 +64,7 @@
 #'
 #' @details For getting your API key register at https://geocoder.opencagedata.com/pricing. The free API key provides up to 2,500 calls a day.
 #' It is recommended you save your API key as an environment variable. See https://stat545-ubc.github.io/bit003_api-key-env-var.html
+#' Note that the package uses `memoise` with no timeout argument so that results are cached inside an active R session. The underlying data at OpenCage is updated about once a day.
 #'
 #' @return A list with
 #' \itemize{
