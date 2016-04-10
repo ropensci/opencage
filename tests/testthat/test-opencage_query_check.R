@@ -77,6 +77,11 @@ test_that("opencage_query_check checks language",{
                                 language = "notalanguagecode",
                                 key = Sys.getenv("OPENCAGE_KEY")),
                "The language code is not valid.")
+
+  expect_error(opencage_forward(placename = "Sarzeau",
+                                language = "fr-NOTACOUNTRYCODE",
+                                key = Sys.getenv("OPENCAGE_KEY")),
+               "The country part of language is not valid.")
 })
 
 

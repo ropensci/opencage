@@ -67,3 +67,16 @@ test_that("opencage_parse returns what it should for both functions with several
   expect_true(dplyr::between(nrow(results[["results"]]), 1, 2))
 
 })
+
+test_that("opencage_parse deals well with resuls being NULL",{
+  results <- opencage_forward(placename = "thiswillgetmenoresultswichisgood",
+                              key = Sys.getenv("OPENCAGE_KEY"),
+                              limit = 2,
+                              min_confidence = 5,
+                              language = "pt-BR",
+                              no_annotations = TRUE)
+  expect_is(results, "list")
+  expect_null(results[["results"]])
+  expect_is(results[["total_results"]], "integer")
+  expect_is(results[["time_stamp"]], "POSIXct")
+})
