@@ -1,3 +1,44 @@
+.opencage_forward <- function(placename, key,
+                             bound = NULL,
+                             countrycode = NULL,
+                             language = NULL,
+                             limit = 10,
+                             min_confidence = NULL,
+                             no_annotations = NULL,
+                             no_dedupe = NULL){
+  # check arguments
+  opencage_query_check(placename = placename,
+                       key = key,
+                       bound = bound,
+                       countrycode = countrycode,
+                       language = language,
+                       limit = limit,
+                       min_confidence = min_confidence,
+                       no_annotations = no_annotations,
+                       no_dedupe = no_dedupe)
+
+  no_annotations <- ifelse(is.null(no_annotations), FALSE, TRUE)
+  no_dedupe <- ifelse(is.null(no_dedupe), FALSE, TRUE)
+
+  # res
+  temp <- opencage_get(query_par = list(q = placename,
+                                        bound = bound,
+                                        countrycode = countrycode,
+                                        language = language,
+                                        limit = limit,
+                                        min_confidence = min_confidence,
+                                        no_annotations =
+                                          ifelse(no_annotations == TRUE, 1, 0),
+                                        no_dedupe = ifelse(no_dedupe == TRUE, 1, 0),
+                                        key = key))
+
+  # check message
+  opencage_check(temp)
+
+  # done!
+  opencage_parse(temp)
+}
+
 #' Forward Geocoding
 #'
 #' Forward Geocoding, that is, from placename to latitude and longitude tuplet(s).
@@ -30,43 +71,4 @@
 #' opencage_forward(placename = "Triererstr 15, Weimar 99423, Deutschland", key = Sys.getenv("OPENCAGE_KEY"))
 #'}
 #'
-opencage_forward <- function(placename, key,
-                             bound = NULL,
-                             countrycode = NULL,
-                             language = NULL,
-                             limit = 10,
-                             min_confidence = NULL,
-                             no_annotations = NULL,
-                             no_dedupe = NULL){
-  # check arguments
-  opencage_query_check(placename = placename,
-                       key = key,
-                       bound = bound,
-                       countrycode = countrycode,
-                       language = language,
-                       limit = limit,
-                       min_confidence = min_confidence,
-                       no_annotations = no_annotations,
-                       no_dedupe = no_dedupe)
-
-  no_annotations <- ifelse(is.null(no_annotations), FALSE, TRUE)
-  no_dedupe <- ifelse(is.null(no_dedupe), FALSE, TRUE)
-
-  # res
-  temp <- opencage_get(query_par = list(q = placename,
-                           bound = bound,
-                           countrycode = countrycode,
-                           language = language,
-                           limit = limit,
-                           min_confidence = min_confidence,
-                           no_annotations =
-                             ifelse(no_annotations == TRUE, 1, 0),
-                           no_dedupe = ifelse(no_dedupe == TRUE, 1, 0),
-                           key = key))
-
-  # check message
-  opencage_check(temp)
-
-  # done!
-  opencage_parse(temp)
-}
+opencage_forward <- memoise::memoise(.opencage_forward)

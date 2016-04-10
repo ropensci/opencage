@@ -27,7 +27,9 @@ To use the package, you will also need an API key. For this register at https://
 
 # Geocoding
 
-The opencage API supports forward and reverse geocoding. Below are two easy examples. For more information about the query parameters, see the package documentation.
+The opencage API supports forward and reverse geocoding. Below are two easy examples. For more information about the query parameters, see the package documentation, the [API doc](https://geocoder.opencagedata.com/api) and [OpenCage FAQ](https://geocoder.opencagedata.com/faq).
+
+Sources of OpenCage are open geospatial data including OpenStreetMap, Yahoo! GeoPlanet, Natural Earth Data, Thematic Mapping, Ordnance Survey OpenSpace, Statistics New Zealand, Zillow, MaxMind, GeoNames, the US Census Bureau and Flickr's shapefiles plus a whole lot more besides. See [this page](https://geocoder.opencagedata.com/credits) for the full list of credits.
 
 ## Forward geocoding
 
@@ -46,4 +48,21 @@ Reverse geocoding is from latitude and longitude to placename(s).
 opencage_reverse(latitude = 0, longitude = 0, 
                  key = Sys.getenv("OPENCAGE_KEY"),
                  limit = 2)
+```
+
+## Caching
+
+Note that the package using [memoise](https://github.com/hadley/memoise) with no timeout arguments so that results are cached inside an active R session. The underlying data at OpenCage is updated about once a day.
+
+```{r}
+system.time(opencage_reverse(latitude = 10, longitude = 10,
+key = Sys.getenv("OPENCAGE_KEY")))
+
+system.time(opencage_reverse(latitude = 10, longitude = 10,
+key = Sys.getenv("OPENCAGE_KEY")))
+
+memoise::forget(opencage_reverse)
+system.time(opencage_reverse(latitude = 10, longitude = 10,
+key = Sys.getenv("OPENCAGE_KEY")))
+
 ```

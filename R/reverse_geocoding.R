@@ -1,3 +1,52 @@
+.opencage_reverse <- function(latitude,
+                              longitude,
+                              key,
+                              bound = NULL,
+                              countrycode = NULL,
+                              language = NULL,
+                              limit = 10,
+                              min_confidence = NULL,
+                              no_annotations = NULL,
+                              no_dedupe = NULL){
+
+
+  # check arguments
+  opencage_query_check(latitude = latitude,
+                       longitude = longitude,
+                       key = key,
+                       bound = bound,
+                       countrycode = countrycode,
+                       language = language,
+                       limit = limit,
+                       min_confidence = min_confidence,
+                       no_annotations = no_annotations,
+                       no_dedupe = no_dedupe)
+
+  no_annotations <- ifelse(is.null(no_annotations), FALSE, TRUE)
+  no_dedupe <- ifelse(is.null(no_dedupe), FALSE, TRUE)
+
+
+  # res
+  temp <- opencage_get(query_par = list(q = paste0(latitude,
+                                                   "+", longitude),
+                                        key = key,
+                                        bound = bound,
+                                        countrycode = countrycode,
+                                        language = language,
+                                        limit = limit,
+                                        min_confidence = min_confidence,
+                                        no_annotations =
+                                          ifelse(no_annotations == TRUE, 1, 0),
+                                        no_dedupe =
+                                          ifelse(no_dedupe == TRUE, 1, 0)))
+  # check message
+  opencage_check(temp)
+
+  # done!
+  opencage_parse(temp)
+
+}
+
 #' Reverse Geocoding
 #'
 #' Reverse Geocoding, that is, from latitude and longitude to placename(s).
@@ -31,51 +80,4 @@
 #' key = Sys.getenv("OPENCAGE_KEY"),
 #' limit = 2)
 #'}
-opencage_reverse <- function(latitude,
-                             longitude,
-                             key,
-                             bound = NULL,
-                             countrycode = NULL,
-                             language = NULL,
-                             limit = 10,
-                             min_confidence = NULL,
-                             no_annotations = NULL,
-                             no_dedupe = NULL){
-
-
-  # check arguments
-  opencage_query_check(latitude = latitude,
-                       longitude = longitude,
-                       key = key,
-                       bound = bound,
-                       countrycode = countrycode,
-                       language = language,
-                       limit = limit,
-                       min_confidence = min_confidence,
-                       no_annotations = no_annotations,
-                       no_dedupe = no_dedupe)
-
-  no_annotations <- ifelse(is.null(no_annotations), FALSE, TRUE)
-  no_dedupe <- ifelse(is.null(no_dedupe), FALSE, TRUE)
-
-
-  # res
-  temp <- opencage_get(query_par = list(q = paste0(latitude,
-                                     "+", longitude),
-                                     key = key,
-                                     bound = bound,
-                                     countrycode = countrycode,
-                                     language = language,
-                                     limit = limit,
-                                     min_confidence = min_confidence,
-                                     no_annotations =
-                                       ifelse(no_annotations == TRUE, 1, 0),
-                                     no_dedupe =
-                                       ifelse(no_dedupe == TRUE, 1, 0)))
-  # check message
-  opencage_check(temp)
-
-  # done!
-  opencage_parse(temp)
-
-}
+opencage_reverse <- memoise::memoise(.opencage_reverse)

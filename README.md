@@ -18,7 +18,9 @@ To use the package, you will also need an API key. For this register at <https:/
 Geocoding
 =========
 
-The opencage API supports forward and reverse geocoding. Below are two easy examples. For more information about the query parameters, see the package documentation.
+The opencage API supports forward and reverse geocoding. Below are two easy examples. For more information about the query parameters, see the package documentation, the [API doc](https://geocoder.opencagedata.com/api) and [OpenCage FAQ](https://geocoder.opencagedata.com/faq).
+
+Sources of OpenCage are open geospatial data including OpenStreetMap, Yahoo! GeoPlanet, Natural Earth Data, Thematic Mapping, Ordnance Survey OpenSpace, Statistics New Zealand, Zillow, MaxMind, GeoNames, the US Census Bureau and Flickr's shapefiles plus a whole lot more besides. See [this page](https://geocoder.opencagedata.com/credits) for the full list of credits.
 
 Forward geocoding
 -----------------
@@ -35,8 +37,8 @@ opencage_forward(placename = "Sarzeau", key = Sys.getenv("OPENCAGE_KEY"))
     ## 
     ##    annotations.DMS.lat annotations.DMS.lng annotations.MGRS
     ##                  (chr)               (chr)            (chr)
-    ## 1 47° 31' 43.56984'' N 2° 45' 51.11892'' W  30TWT1774963954
-    ## 2 47° 31' 40.80828'' N  2° 46' 7.68180'' W  30TWT1740363867
+    ## 1 47° 31' 43.56984'' N 2° 45' 51.11856'' W  30TWT1774963954
+    ## 2 47° 31' 40.80828'' N  2° 46' 7.68144'' W  30TWT1740363867
     ## Variables not shown: annotations.Maidenhead (chr), annotations.Mercator.x
     ##   (chr), annotations.Mercator.y (chr), annotations.OSM.edit_url (chr),
     ##   annotations.OSM.url (chr), annotations.callingcode (fctr),
@@ -61,7 +63,7 @@ opencage_forward(placename = "Sarzeau", key = Sys.getenv("OPENCAGE_KEY"))
     ## [1] 2
     ## 
     ## $time_stamp
-    ## [1] "2016-04-09 21:05:44 UTC"
+    ## [1] "2016-04-10 06:50:59 UTC"
 
 Reverse geocoding
 -----------------
@@ -105,4 +107,39 @@ opencage_reverse(latitude = 0, longitude = 0,
     ## [1] 2
     ## 
     ## $time_stamp
-    ## [1] "2016-04-09 21:00:07 UTC"
+    ## [1] "2016-04-10 06:51:01 UTC"
+
+Caching
+-------
+
+Note that the package using [memoise](https://github.com/hadley/memoise) with no timeout arguments so that results are cached inside an active R session. The underlying data at OpenCage is updated about once a day.
+
+``` r
+system.time(opencage_reverse(latitude = 10, longitude = 10,
+key = Sys.getenv("OPENCAGE_KEY")))
+```
+
+    ##    user  system elapsed 
+    ##    0.10    0.00    0.59
+
+``` r
+system.time(opencage_reverse(latitude = 10, longitude = 10,
+key = Sys.getenv("OPENCAGE_KEY")))
+```
+
+    ##    user  system elapsed 
+    ##       0       0       0
+
+``` r
+memoise::forget(opencage_reverse)
+```
+
+    ## [1] TRUE
+
+``` r
+system.time(opencage_reverse(latitude = 10, longitude = 10,
+key = Sys.getenv("OPENCAGE_KEY")))
+```
+
+    ##    user  system elapsed 
+    ##    0.11    0.00    0.66

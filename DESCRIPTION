@@ -14,6 +14,7 @@ Imports:
     httr,
     jsonlite,
     dplyr,
-    lubridate
+    lubridate,
+    memoise
 RoxygenNote: 5.0.1
 Suggests: testthat, lintr
