@@ -80,3 +80,16 @@ test_that("opencage_parse deals well with resuls being NULL",{
   expect_is(results[["total_results"]], "integer")
   expect_is(results[["time_stamp"]], "POSIXct")
 })
+
+
+test_that("the bounds argument is well taken into account",{
+  results1 <- opencage_forward(placename = "Berlin",
+                               key = Sys.getenv("OPENCAGE_KEY"))
+
+  results2 <- opencage_forward(placename = "Berlin",
+                               bounds = c(-90,38,0, 45),
+                               key = Sys.getenv("OPENCAGE_KEY"))
+
+  expect_true(!("Germany" %in% results2$results$components.country))
+  expect_true("Germany" %in% results1$results$components.country)
+})

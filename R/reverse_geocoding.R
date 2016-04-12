@@ -1,7 +1,7 @@
 .opencage_reverse <- function(latitude,
                               longitude,
                               key,
-                              bound = NULL,
+                              bounds = NULL,
                               countrycode = NULL,
                               language = NULL,
                               limit = 10,
@@ -14,7 +14,7 @@
   opencage_query_check(latitude = latitude,
                        longitude = longitude,
                        key = key,
-                       bound = bound,
+                       bounds = bounds,
                        countrycode = countrycode,
                        language = language,
                        limit = limit,
@@ -30,7 +30,7 @@
   temp <- opencage_get(query_par = list(q = paste0(latitude,
                                                    "+", longitude),
                                         key = key,
-                                        bound = bound,
+                                        bounds = bounds,
                                         countrycode = countrycode,
                                         language = language,
                                         limit = limit,
@@ -54,7 +54,7 @@
 #' @param latitude latitude
 #' @param longitude longitude
 #' @param key your OpenCage key
-#' @param bound Provides the geocoder with a hint to the region that the query resides in. This value will restrict the possible results to the supplied region. The bound parameter should be specified as 4 coordinate points forming the south-west and north-east corners of a bounding box. For example bound=-0.563160,51.280430,0.278970,51.683979 (min long, min lat, max long, max lat).
+#' @param bounds Provides the geocoder with a hint to the region that the query resides in. This value will restrict the possible results to the supplied region. The bounds parameter should be specified as 4 coordinate points forming the south-west and north-east corners of a boundsing box. For example bounds=-0.563160,51.280430,0.278970,51.683979 (min long, min lat, max long, max lat).
 #' @param countrycode Restricts the results to the given country. The country code is a two letter code as defined by the ISO 3166-1 Alpha 2 standard. E.g. 'gb' for the United Kingdom, 'fr' for France, 'us' for United States.
 #' @param language an IETF format language code (such as es for Spanish or pt-BR for Brazilian Portuguese). If no language is explicitly specified, we will look for an HTTP Accept-Language header like those sent by a brower and use the first language specified and if none are specified en (English) will be assumed
 #' @param limit How many results should be returned. Default is 10.

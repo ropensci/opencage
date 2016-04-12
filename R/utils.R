@@ -41,6 +41,14 @@ opencage_url <- function() {
 # get resultrs
 opencage_get <- function(query_par){
   query_par <- Filter(Negate(is.null), query_par) # nolint
+  if(!is.null(query_par$bounds)){
+    bounds <- query_par$bounds
+    query_par$bounds <- paste(bounds[1],
+          bounds[2],
+          bounds[3],
+          bounds[4],
+          sep = ",")
+  }
   httr::GET(url = opencage_url(),
             query = query_par)
 }
@@ -50,7 +58,7 @@ opencage_query_check <- function(latitude = NULL,
                                  longitude = NULL,
                                  placename = NULL,
                                  key,
-                                 bound,
+                                 bounds,
                                  countrycode,
                                  language,
                                  limit,
@@ -84,27 +92,27 @@ opencage_query_check <- function(latitude = NULL,
     }
   }
 
-  # check bounds
-  if(!is.null(bound)){
-    if(length(bound) != 4){
-      stop(call. = FALSE, "Bound should be a vector of 4 numeric values.")
+  # check boundss
+  if(!is.null(bounds)){
+    if(length(bounds) != 4){
+      stop(call. = FALSE, "bounds should be a vector of 4 numeric values.")
     }
-    if(!dplyr::between(bound[1], -180, 180)){
+    if(!dplyr::between(bounds[1], -180, 180)){
       stop(call. = FALSE, "min long should be between -180 and 180.")
     }
-    if(!dplyr::between(bound[2], -90, 90)){
+    if(!dplyr::between(bounds[2], -90, 90)){
       stop(call. = FALSE, "min lat should be between -90 and 90.")
     }
-    if(!dplyr::between(bound[3], -180, 180)){
+    if(!dplyr::between(bounds[3], -180, 180)){
       stop(call. = FALSE, "max long should be between -180 and 180.")
     }
-    if(!dplyr::between(bound[4], -90, 90)){
+    if(!dplyr::between(bounds[4], -90, 90)){
       stop(call. = FALSE, "max lat should be between -90 and 90.")
     }
-    if(bound[1] > bound[3]){
+    if(bounds[1] > bounds[3]){
       stop(call. = FALSE, "min long has to be smaller than max long")
     }
-    if(bound[2] > bound[4]){
+    if(bounds[2] > bounds[4]){
       stop(call. = FALSE, "min lat has to be smaller than max lat")
     }
   }

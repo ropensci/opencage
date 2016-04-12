@@ -62,7 +62,7 @@ test_that("opencage_query_check checks bound",{
   expect_error(opencage_forward(placename = "Sarzeau",
                                 bound = c(53.280430,0.278970,51.683979),
                                 key = Sys.getenv("OPENCAGE_KEY")),
-               "Bound should be a vector of 4 numeric values.")
+               "bounds should be a vector of 4 numeric values.")
 })
 
 test_that("opencage_query_check checks countrycode",{
