@@ -19,7 +19,7 @@ opencage_forward(placename, key, bounds = NULL, countrycode = NULL,
 
 \item{language}{an IETF format language code (such as es for Spanish or pt-BR for Brazilian Portuguese). If no language is explicitly specified, we will look for an HTTP Accept-Language header like those sent by a brower and use the first language specified and if none are specified en (English) will be assumed}
 
-\item{limit}{How many results should be returned. Default is 10.}
+\item{limit}{How many results should be returned (1-100). Default is 10.}
 
 \item{min_confidence}{an integer from 1-10. Only results with at least this confidence will be returned.}
 

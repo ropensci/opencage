@@ -141,7 +141,11 @@ opencage_query_check <- function(latitude = NULL,
 }
 
   # check limit
- # no max?
+  if(!is.null(limit)){
+    if(!(limit %in% c(1:100))){
+      stop(call. = FALSE, "limit should be an integer between 1 and 100.") # nolint
+    }
+  }
 
   # check min_confidence
   if(!is.null(min_confidence)){

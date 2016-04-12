@@ -92,6 +92,13 @@ test_that("opencage_query_check checks min_confidence",{
                "min_confidence should be an integer between 1 and 10.")
 })
 
+test_that("opencage_query_check checks limit",{
+  expect_error(opencage_forward(placename = "Sarzeau",
+                                limit = 200,
+                                key = Sys.getenv("OPENCAGE_KEY")),
+               "limit should be an integer between 1 and 100.")
+})
+
 test_that("opencage_query_check checks no_annotations",{
   expect_error(opencage_forward(placename = "Sarzeau",
                                 no_annotations = "yes",
