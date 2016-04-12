@@ -31,7 +31,8 @@ opencage_parse <- function(req) {
 
   list(results = results,
        total_results = no_results,
-       time_stamp = lubridate::dmy_hms(temp$timestamp$created_http))
+       time_stamp = lubridate::dmy_hms(temp$timestamp$created_http,
+                                       tz = "GMT"))
 }
 
 # base URL for all queries
