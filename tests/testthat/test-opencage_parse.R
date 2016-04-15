@@ -8,7 +8,7 @@ test_that("opencage_parse returns what it should for both functions",{
   expect_is(results[["results"]], "tbl_df")
   expect_is(results[["total_results"]], "integer")
   expect_is(results[["time_stamp"]], "POSIXct")
-  expect_equal(length(results), 3)
+  expect_equal(length(results), 4)
 
 
   results <- opencage_forward(placename = "Islington, London", key = Sys.getenv("OPENCAGE_KEY"))
@@ -16,14 +16,14 @@ test_that("opencage_parse returns what it should for both functions",{
   expect_is(results[["results"]], "tbl_df")
   expect_is(results[["total_results"]], "integer")
   expect_is(results[["time_stamp"]], "POSIXct")
-  expect_equal(length(results), 3)
+  expect_equal(length(results), 4)
 
   results <- opencage_forward(placename = "Triererstr 15, Weimar 99423, Deutschland", key = Sys.getenv("OPENCAGE_KEY"))
   expect_is(results, "list")
   expect_is(results[["results"]], "tbl_df")
   expect_is(results[["total_results"]], "integer")
   expect_is(results[["time_stamp"]], "POSIXct")
-  expect_equal(length(results), 3)
+  expect_equal(length(results), 4)
 
   results <- opencage_reverse(longitude = 0, latitude = 0,
                               limit = 2, key = Sys.getenv("OPENCAGE_KEY"))
@@ -31,7 +31,7 @@ test_that("opencage_parse returns what it should for both functions",{
   expect_is(results[["results"]], "tbl_df")
   expect_is(results[["total_results"]], "integer")
   expect_is(results[["time_stamp"]], "POSIXct")
-  expect_equal(length(results), 3)
+  expect_equal(length(results), 4)
 })
 
 test_that("opencage_parse returns what it should for both functions with several parameters",{
@@ -47,7 +47,7 @@ test_that("opencage_parse returns what it should for both functions with several
   expect_is(results[["results"]], "tbl_df")
   expect_is(results[["total_results"]], "integer")
   expect_is(results[["time_stamp"]], "POSIXct")
-  expect_equal(length(results), 3)
+  expect_equal(length(results), 4)
   expect_equal(sum(grepl("annotation", names(results[["results"]]))), 0)
   expect_true(dplyr::between(nrow(results[["results"]]), 1, 2))
 
@@ -62,7 +62,7 @@ test_that("opencage_parse returns what it should for both functions with several
   expect_is(results[["results"]], "tbl_df")
   expect_is(results[["total_results"]], "integer")
   expect_is(results[["time_stamp"]], "POSIXct")
-  expect_equal(length(results), 3)
+  expect_equal(length(results), 4)
   expect_equal(sum(grepl("annotation", names(results[["results"]]))), 0)
   expect_true(dplyr::between(nrow(results[["results"]]), 1, 2))
 

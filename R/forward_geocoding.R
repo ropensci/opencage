@@ -5,7 +5,7 @@
                              limit = 10,
                              min_confidence = NULL,
                              no_annotations = NULL,
-                             no_dedupe = NULL){# nocov start
+                             no_dedupe = NULL){
   # check arguments
   opencage_query_check(placename = placename,
                        key = key,
@@ -62,6 +62,7 @@
 #' \item results as a data.frame (`dplyr` `tbl_df`) called results with one line per results,
 #' \item the number of results as an integer
 #' \item the timestamp as a POSIXct object
+#' \item rate_info data.frame (`dplyr` `tbl_df`) with the maximal number of API calls per day for the used key, the number of remaining calls for the day and the time at which the number of remaining calls with be reset.
 #' }
 #' @export
 #'
@@ -73,4 +74,4 @@
 #'}
 #'
 opencage_forward <- memoise::memoise(.opencage_forward)
-# nocov end
+
