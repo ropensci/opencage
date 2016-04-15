@@ -1,12 +1,12 @@
 language: r
 sudo: false
 cache: packages
-r_binary_packages:
-  - httr
-  - dplyr
-  - jsonlite
-  - lubridate
-  - covr
+
+
+r_github_packages:
+  - jimhester/covr
+  - jimhester/lintr
+
 notifications:
   email:
     on_success: change
