@@ -17,4 +17,7 @@ Imports:
     lubridate,
     memoise
 RoxygenNote: 5.0.1
-Suggests: testthat, lintr
+Suggests: testthat, lintr,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
