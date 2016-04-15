@@ -20,7 +20,7 @@ Geocoding
 
 The [OpenCage](https://geocoder.opencagedata.com/) API supports forward and reverse geocoding. Sources of OpenCage are open geospatial data including OpenStreetMap, Yahoo! GeoPlanet, Natural Earth Data, Thematic Mapping, Ordnance Survey OpenSpace, Statistics New Zealand, Zillow, MaxMind, GeoNames, the US Census Bureau and Flickr's shapefiles plus a whole lot more besides. See [this page](https://geocoder.opencagedata.com/credits) for the full list of credits.
 
-Below are two simple examples. For more information about the query parameters, see the package documentation, the [API doc](https://geocoder.opencagedata.com/api) and [OpenCage FAQ](https://geocoder.opencagedata.com/faq).
+Below are two simple examples.
 
 Forward geocoding
 -----------------
@@ -29,41 +29,29 @@ Forward geocoding is from placename to latitude and longitude tuplet(s).
 
 ``` r
 library("opencage")
-opencage_forward(placename = "Sarzeau", key = Sys.getenv("OPENCAGE_KEY"))
+output <- opencage_forward(placename = "Sarzeau", key = Sys.getenv("OPENCAGE_KEY"))
+print(output$time_stamp)
 ```
 
-    ## $results
-    ## Source: local data frame [2 x 42]
-    ## 
-    ##    annotations.DMS.lat annotations.DMS.lng annotations.MGRS
-    ##                  (chr)               (chr)            (chr)
-    ## 1 47° 31' 43.56984'' N 2° 45' 51.11892'' W  30TWT1774963954
-    ## 2 47° 31' 40.80828'' N  2° 46' 7.68180'' W  30TWT1740363867
-    ## Variables not shown: annotations.Maidenhead (chr), annotations.Mercator.x
-    ##   (chr), annotations.Mercator.y (chr), annotations.OSM.edit_url (chr),
-    ##   annotations.OSM.url (chr), annotations.callingcode (fctr),
-    ##   annotations.geohash (chr), annotations.sun.rise.apparent (fctr),
-    ##   annotations.sun.rise.astronomical (fctr), annotations.sun.rise.civil
-    ##   (fctr), annotations.sun.rise.nautical (fctr),
-    ##   annotations.sun.set.apparent (fctr), annotations.sun.set.astronomical
-    ##   (fctr), annotations.sun.set.civil (fctr), annotations.sun.set.nautical
-    ##   (fctr), annotations.timezone.name (fctr),
-    ##   annotations.timezone.now_in_dst (fctr), annotations.timezone.offset_sec
-    ##   (fctr), annotations.timezone.offset_string (fctr),
-    ##   annotations.timezone.short_name (fctr), annotations.what3words.words
-    ##   (chr), bounds.northeast.lat (chr), bounds.northeast.lng (chr),
-    ##   bounds.southwest.lat (chr), bounds.southwest.lng (chr), components.city
-    ##   (fctr), components.country (fctr), components.country_code (fctr),
-    ##   components.county (fctr), components.postcode (fctr), components.state
-    ##   (fctr), confidence (chr), formatted (chr), geometry.lat (chr),
-    ##   geometry.lng (chr), components.post_office (fctr), components.road
-    ##   (fctr), components.suburb (fctr), components.village (fctr)
-    ## 
-    ## $total_results
-    ## [1] 2
-    ## 
-    ## $time_stamp
-    ## [1] "2016-04-10 07:03:59 UTC"
+    ## [1] "2016-04-15 21:07:55 GMT"
+
+``` r
+library("dplyr")
+output$rate_info %>% knitr::kable()
+```
+
+|  limit|  remaining| rest                |
+|------:|----------:|:--------------------|
+|   2500|       2325| 2016-04-16 02:00:00 |
+
+``` r
+output$results %>% knitr::kable()
+```
+
+| annotations.DMS.lat  | annotations.DMS.lng | annotations.MGRS | annotations.Maidenhead | annotations.Mercator.x | annotations.Mercator.y | annotations.OSM.edit\_url                                                     | annotations.OSM.url                                                                   | annotations.callingcode | annotations.geohash  | annotations.sun.rise.apparent | annotations.sun.rise.astronomical | annotations.sun.rise.civil | annotations.sun.rise.nautical | annotations.sun.set.apparent | annotations.sun.set.astronomical | annotations.sun.set.civil | annotations.sun.set.nautical | annotations.timezone.name | annotations.timezone.now\_in\_dst | annotations.timezone.offset\_sec | annotations.timezone.offset\_string | annotations.timezone.short\_name | annotations.what3words.words | bounds.northeast.lat | bounds.northeast.lng | bounds.southwest.lat | bounds.southwest.lng | components.city | components.country | components.country\_code | components.county | components.postcode | components.state | confidence | formatted                                       |  geometry.lat|  geometry.lng| components.post\_office | components.road | components.suburb | components.village |
+|:---------------------|:--------------------|:-----------------|:-----------------------|:-----------------------|:-----------------------|:------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------|:------------------------|:---------------------|:------------------------------|:----------------------------------|:---------------------------|:------------------------------|:-----------------------------|:---------------------------------|:--------------------------|:-----------------------------|:--------------------------|:----------------------------------|:---------------------------------|:------------------------------------|:---------------------------------|:-----------------------------|:---------------------|:---------------------|:---------------------|:---------------------|:----------------|:-------------------|:-------------------------|:------------------|:--------------------|:-----------------|:-----------|:------------------------------------------------|-------------:|-------------:|:------------------------|:----------------|:------------------|:-------------------|
+| 47° 31' 43.56984'' N | 2° 45' 51.11856'' W | 30TWT1774963954  | IN87om86hv             | -307709.292            | 5997281.031            | <https://www.openstreetmap.org/edit?relation=959447#map=17/47.52877/-2.76420> | <https://www.openstreetmap.org/?mlat=47.52877&mlon=-2.76420#map=17/47.52877/-2.76420> | 33                      | gbqn3h75jkz3h3mvtyj6 | 1460697660                    | 1460690760                        | 1460695740                 | 1460693340                    | 1460746920                   | 1460753820                       | 1460748840                | 1460751240                   | Europe/Paris              | 1                                 | 7200                             | 200                                 | CEST                             | gasp.jiggle.creamier         | 47.568813            | -2.6630649           | 47.484236            | -2.8536849           | Sarzeau         | France             | fr                       | Vannes            | 56370               | Brittany         | 6          | 56370 Sarzeau, France                           |      47.52877|       -2.7642| NA                      | NA              | NA                | NA                 |
+| 47° 31' 40.80828'' N | 2° 46' 7.68144'' W  | 30TWT1740363867  | IN87om76rr             | -308221.451            | 5997154.952            | <https://www.openstreetmap.org/edit?node=846574100#map=17/47.52800/-2.76880>  | <https://www.openstreetmap.org/?mlat=47.52800&mlon=-2.76880#map=17/47.52800/-2.76880> | 33                      | gbqn2upydmbc15dm9h6g | 1460697660                    | 1460690760                        | 1460695740                 | 1460693340                    | 1460746920                   | 1460753820                       | 1460748840                | 1460751240                   | Europe/Paris              | 1                                 | 7200                             | 200                                 | CEST                             | netball.anchored.accomplice  | 47.5280523           | -2.7687504           | 47.5279523           | -2.7688504           | NA              | France             | fr                       | Vannes            | 56370               | Brittany         | 10         | SARZEAU, Rue de la Poste, 56370 Sarzeau, France |      47.52800|       -2.7688| SARZEAU                 | Rue de la Poste | Kerjolis          | Sarzeau            |
 
 Reverse geocoding
 -----------------
@@ -71,42 +59,55 @@ Reverse geocoding
 Reverse geocoding is from latitude and longitude to placename(s).
 
 ``` r
-opencage_reverse(latitude = 0, longitude = 0, 
-                 key = Sys.getenv("OPENCAGE_KEY"),
-                 limit = 2)
+output2 <- opencage_reverse(latitude = 51.5034070, 
+                            longitude = -0.1275920, 
+                 key = Sys.getenv("OPENCAGE_KEY"))
+print(output2$time_stamp)
 ```
 
-    ## $results
-    ## Source: local data frame [2 x 39]
-    ## 
-    ##    annotations.DMS.lat  annotations.DMS.lng annotations.MGRS
-    ##                  (chr)                (chr)            (chr)
-    ## 1 43° 58' 33.33144'' N 11° 35' 26.17116'' E  32TQP0778572461
-    ## 2 43° 58' 34.72680'' N  11° 34' 5.56536'' E  32TQP0598872448
-    ## Variables not shown: annotations.Maidenhead (chr), annotations.Mercator.x
-    ##   (chr), annotations.Mercator.y (chr), annotations.OSM.edit_url (chr),
-    ##   annotations.OSM.url (chr), annotations.callingcode (fctr),
-    ##   annotations.geohash (chr), annotations.sun.rise.apparent (fctr),
-    ##   annotations.sun.rise.astronomical (fctr), annotations.sun.rise.civil
-    ##   (fctr), annotations.sun.rise.nautical (fctr),
-    ##   annotations.sun.set.apparent (fctr), annotations.sun.set.astronomical
-    ##   (fctr), annotations.sun.set.civil (fctr), annotations.sun.set.nautical
-    ##   (fctr), annotations.timezone.name (fctr),
-    ##   annotations.timezone.now_in_dst (fctr), annotations.timezone.offset_sec
-    ##   (fctr), annotations.timezone.offset_string (fctr),
-    ##   annotations.timezone.short_name (fctr), annotations.what3words.words
-    ##   (chr), bounds.northeast.lat (chr), bounds.northeast.lng (chr),
-    ##   bounds.southwest.lat (chr), bounds.southwest.lng (chr),
-    ##   components.country (fctr), components.country_code (fctr),
-    ##   components.county (fctr), components.road (chr), components.state
-    ##   (fctr), components.suburb (fctr), components.village (fctr), confidence
-    ##   (chr), formatted (chr), geometry.lat (chr), geometry.lng (chr)
-    ## 
-    ## $total_results
-    ## [1] 2
-    ## 
-    ## $time_stamp
-    ## [1] "2016-04-10 07:04:01 UTC"
+    ## [1] "2016-04-15 21:14:15 GMT"
+
+``` r
+output2$rate_info %>% knitr::kable()
+```
+
+|  limit|  remaining| rest                |
+|------:|----------:|:--------------------|
+|   2500|       2324| 2016-04-16 02:00:00 |
+
+``` r
+output2$results %>% knitr::kable()
+```
+
+| annotations.DMS.lat  | annotations.DMS.lng | annotations.MGRS | annotations.Maidenhead | annotations.Mercator.x | annotations.Mercator.y | annotations.OSGB.easting | annotations.OSGB.gridref | annotations.OSGB.northing | annotations.OSM.edit\_url                                                      | annotations.OSM.url                                                                   | annotations.callingcode | annotations.geohash  | annotations.sun.rise.apparent | annotations.sun.rise.astronomical | annotations.sun.rise.civil | annotations.sun.rise.nautical | annotations.sun.set.apparent | annotations.sun.set.astronomical | annotations.sun.set.civil | annotations.sun.set.nautical | annotations.timezone.name | annotations.timezone.now\_in\_dst | annotations.timezone.offset\_sec | annotations.timezone.offset\_string | annotations.timezone.short\_name | annotations.what3words.words | components.attraction | components.city | components.country | components.country\_code | components.house\_number | components.postcode | components.road | components.state | components.state\_district | components.suburb | confidence | formatted                                          |  geometry.lat|  geometry.lng|
+|:---------------------|:--------------------|:-----------------|:-----------------------|:-----------------------|:-----------------------|:-------------------------|:-------------------------|:--------------------------|:-------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------|:------------------------|:---------------------|:------------------------------|:----------------------------------|:---------------------------|:------------------------------|:-----------------------------|:---------------------------------|:--------------------------|:-----------------------------|:--------------------------|:----------------------------------|:---------------------------------|:------------------------------------|:---------------------------------|:-----------------------------|:----------------------|:----------------|:-------------------|:-------------------------|:-------------------------|:--------------------|:----------------|:-----------------|:---------------------------|:------------------|:-----------|:---------------------------------------------------|-------------:|-------------:|
+| 51° 30' 12.38490'' N | 0° 7' 39.74919'' E  | 30UXC9933909723  | IO91wm40qt             | -14216.402             | 6677371.368            | 530044.64                | TQ 300 799               | 179939.726                | <https://www.openstreetmap.org/edit?relation=1879842#map=17/51.50344/-0.12771> | <https://www.openstreetmap.org/?mlat=51.50344&mlon=-0.12771#map=17/51.50344/-0.12771> | 44                      | gcpuvpgj21jujy3ytfp1 | 1460696580                    | 1460688840                        | 1460694480                 | 1460691780                    | 1460746740                   | 1460754540                       | 1460748840                | 1460751540                   | Europe/London             | 1                                 | 3600                             | 100                                 | BST                              | onions.toned.active          | 10 Downing Street     | London          | United Kingdom     | gb                       | 10                       | SW1A 2AA            | Downing Street  | England          | Greater London             | Covent Garden     | 10         | 10 Downing Street, London SW1A 2AA, United Kingdom |             1|             1|
+
+Output
+------
+
+For both `opencage_forward` and `opencage_reverse` functions, the package returns a list with a time stamp for the query, the total number of results, a data.frame (`dplyr tbl_df`) with information about the remaining calls to the API unless you have an unlimited account, and a data.frame (`dplyr tbl_df`) with the results corresponding to your query. You can find longitude and latitude for each results as `geometry.lat` and `geometry.lng`. Other information includes country and country information, time of sunset and sunrise, geohash (a geocoding system identifying a point with a single string, as explained in many more details [here](https://www.elastic.co/guide/en/elasticsearch/guide/current/geohashes.html) and [here](https://en.wikipedia.org/wiki/Geohash) -- for pure conversion between longitude/latitude and geohashes, see [this package](https://github.com/Ironholds/geohash)). Depending on the data available in the API for the results one gets different columns: there can be a lot to explore!
+
+Parameters
+----------
+
+Optional parameters of both `opencage_forward` and `opencage_reverse` can make the query more precise:
+
+-   `bounds`: Provides the geocoder with a hint to the region that the query resides in. This value will restrict the possible results to the supplied region. The bounds parameter should be specified as 4 coordinate points forming the south-west and north-east corners of a boundsing box. For example bounds=-0.563160,51.280430,0.278970,51.683979 (min long, min lat, max long, max lat).
+
+-   `countrycode`: Restricts the results to the given country. The country code is a two letter code as defined by the ISO 3166-1 Alpha 2 standard. E.g. 'GB' for the United Kingdom, 'FR' for France, 'US' for United States.
+
+-   `language`: an IETF format language code (such as es for Spanish or pt-BR for Brazilian Portuguese). If no language is explicitly specified, we will look for an HTTP Accept-Language header like those sent by a brower and use the first language specified and if none are specified en (English) will be assumed
+
+-   `limit`: How many results should be returned (1-100). Default is 10.
+
+-   `min_confidence`: an integer from 1-10. Only results with at least this confidence will be returned.
+
+-   `no_annotations`: Logical (default FALSE), when TRUE the output will not contain annotations.
+
+-   `no_dedupe`: Logical (default FALSE), when TRUE the output will not be deduplicated.
+
+For more information about the output and the query parameters, see the package documentation, the [API doc](https://geocoder.opencagedata.com/api) and [OpenCage FAQ](https://geocoder.opencagedata.com/faq).
 
 Caching
 -------
@@ -119,7 +120,7 @@ key = Sys.getenv("OPENCAGE_KEY")))
 ```
 
     ##    user  system elapsed 
-    ##    0.11    0.00    0.56
+    ##    0.03    0.00    0.46
 
 ``` r
 system.time(opencage_reverse(latitude = 10, longitude = 10,
@@ -141,4 +142,4 @@ key = Sys.getenv("OPENCAGE_KEY")))
 ```
 
     ##    user  system elapsed 
-    ##    0.09    0.01    0.65
+    ##    0.04    0.00    0.44
