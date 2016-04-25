@@ -177,3 +177,21 @@ opencage_query_check <- function(latitude = NULL,
 
 
 }
+
+#' Retrieve Opencage API key
+#'
+#' An Opencage API Key
+#' Looks in env var \code{OPENCAGE_KEY}
+#'
+#' @keywords internal
+#' @export
+opencage_key <- function(quiet = FALSE) {
+  pat <- Sys.getenv("OPENCAGE_KEY")
+  if (identical(pat, ""))  {
+    return(NULL)
+  }
+  if (!quiet) {
+    message("Using Opencage API Key from envvar OPENCAGE_KEY")
+  }
+  return(pat)
+}

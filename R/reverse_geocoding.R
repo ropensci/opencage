@@ -1,6 +1,6 @@
 .opencage_reverse <- function(latitude,
                               longitude,
-                              key,
+                              key=opencage_key(),
                               bounds = NULL,
                               countrycode = NULL,
                               language = NULL,

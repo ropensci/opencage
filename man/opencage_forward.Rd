@@ -4,9 +4,9 @@
 \alias{opencage_forward}
 \title{Forward Geocoding}
 \usage{
-opencage_forward(placename, key, bounds = NULL, countrycode = NULL,
-  language = NULL, limit = 10, min_confidence = NULL,
-  no_annotations = NULL, no_dedupe = NULL)
+opencage_forward(placename, key = opencage_key(), bounds = NULL,
+  countrycode = NULL, language = NULL, limit = 10,
+  min_confidence = NULL, no_annotations = NULL, no_dedupe = NULL)
 }
 \arguments{
 \item{placename}{placename}
