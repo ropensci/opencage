@@ -9,7 +9,10 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-This package is an interface to the OpenCage API that allows forward and reverse geocoding. To use the package, you will also need an API key. For this register at https://geocoder.opencagedata.com/pricing. The free API key provides up to 2,500 calls a day. It is recommended you save your API key as an environment variable. See https://stat545-ubc.github.io/bit003_api-key-env-var.html
+This package is an interface to the OpenCage API that allows forward and reverse geocoding. 
+To use the package, you will also need an API key. For this register at https://geocoder.opencagedata.com/pricing. The free API key provides up to 2,500 calls a day. It is recommended you save your API key as an environment variable. See https://stat545-ubc.github.io/bit003_api-key-env-var.html
+
+Both functions of the package will conveniently look for your API key using Sys.getenv("OPENCAGE_KEY") so if your API key is an environment variable called "OPENCAGE_KEY" you don't need to input it.
 
 # Geocoding
 
@@ -21,9 +24,9 @@ Below are two simple examples.
 
 Forward geocoding is from placename to latitude and longitude tuplet(s).
 
-```{r, warnings = FALSE, message = FALSE}
+```{r, warning = FALSE, message = FALSE}
 library("opencage")
-output <- opencage_forward(placename = "Sarzeau", key = Sys.getenv("OPENCAGE_KEY"))
+output <- opencage_forward(placename = "Sarzeau")
 print(output$time_stamp)
 library("dplyr")
 output$rate_info %>% knitr::kable()
@@ -36,8 +39,7 @@ Reverse geocoding is from latitude and longitude to placename(s).
 
 ```{r}
 output2 <- opencage_reverse(latitude = 51.5034070, 
-                            longitude = -0.1275920, 
-                 key = Sys.getenv("OPENCAGE_KEY"))
+                            longitude = -0.1275920)
 print(output2$time_stamp)
 output2$rate_info %>% knitr::kable()
 output2$results %>% knitr::kable()
@@ -72,14 +74,11 @@ Optional parameters of both `opencage_forward` and `opencage_reverse` can make t
 Note that the package uses [memoise](https://github.com/hadley/memoise) with no timeout argument so that results are cached inside an active R session. The underlying data at OpenCage is updated about once a day.
 
 ```{r}
-system.time(opencage_reverse(latitude = 10, longitude = 10,
-key = Sys.getenv("OPENCAGE_KEY")))
+system.time(opencage_reverse(latitude = 10, longitude = 10))
 
-system.time(opencage_reverse(latitude = 10, longitude = 10,
-key = Sys.getenv("OPENCAGE_KEY")))
+system.time(opencage_reverse(latitude = 10, longitude = 10))
 
 memoise::forget(opencage_reverse)
-system.time(opencage_reverse(latitude = 10, longitude = 10,
-key = Sys.getenv("OPENCAGE_KEY")))
+system.time(opencage_reverse(latitude = 10, longitude = 10))
 
 ```

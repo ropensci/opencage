@@ -15,6 +15,8 @@ install_github("masalmon/opencage")
 
 To use the package, you will also need an API key. For this register at <https://geocoder.opencagedata.com/pricing>. The free API key provides up to 2,500 calls a day. It is recommended you save your API key as an environment variable. See <https://stat545-ubc.github.io/bit003_api-key-env-var.html>
 
+Both functions of the package will conveniently look for your API key using Sys.getenv("OPENCAGE\_KEY") so if your API key is an environment variable called "OPENCAGE\_KEY" you don't need to input it.
+
 Geocoding
 =========
 
@@ -29,11 +31,11 @@ Forward geocoding is from placename to latitude and longitude tuplet(s).
 
 ``` r
 library("opencage")
-output <- opencage_forward(placename = "Sarzeau", key = Sys.getenv("OPENCAGE_KEY"))
+output <- opencage_forward(placename = "Sarzeau")
 print(output$time_stamp)
 ```
 
-    ## [1] "2016-04-26 18:21:38 CEST"
+    ## [1] "2016-04-26 18:30:40 CEST"
 
 ``` r
 library("dplyr")
@@ -42,7 +44,7 @@ output$rate_info %>% knitr::kable()
 
 |  limit|  remaining| rest                |
 |------:|----------:|:--------------------|
-|   2500|       2344| 2016-04-27 02:00:00 |
+|   2500|       2308| 2016-04-27 02:00:00 |
 
 ``` r
 output$results %>% knitr::kable()
@@ -60,12 +62,16 @@ Reverse geocoding is from latitude and longitude to placename(s).
 
 ``` r
 output2 <- opencage_reverse(latitude = 51.5034070, 
-                            longitude = -0.1275920, 
-                 key = Sys.getenv("OPENCAGE_KEY"))
+                            longitude = -0.1275920)
+```
+
+    ## Using Opencage API Key from envvar OPENCAGE_KEY
+
+``` r
 print(output2$time_stamp)
 ```
 
-    ## [1] "2016-04-26 18:27:01 CEST"
+    ## [1] "2016-04-26 18:23:13 CEST"
 
 ``` r
 output2$rate_info %>% knitr::kable()
@@ -73,7 +79,7 @@ output2$rate_info %>% knitr::kable()
 
 |  limit|  remaining| rest                |
 |------:|----------:|:--------------------|
-|   2500|       2343| 2016-04-27 02:00:00 |
+|   2500|       2307| 2016-04-27 02:00:00 |
 
 ``` r
 output2$results %>% knitr::kable()
@@ -115,17 +121,19 @@ Caching
 Note that the package uses [memoise](https://github.com/hadley/memoise) with no timeout argument so that results are cached inside an active R session. The underlying data at OpenCage is updated about once a day.
 
 ``` r
-system.time(opencage_reverse(latitude = 10, longitude = 10,
-key = Sys.getenv("OPENCAGE_KEY")))
+system.time(opencage_reverse(latitude = 10, longitude = 10))
 ```
+
+    ## Using Opencage API Key from envvar OPENCAGE_KEY
 
     ##    user  system elapsed 
-    ##    0.03    0.00    0.33
+    ##    0.02    0.00    0.33
 
 ``` r
-system.time(opencage_reverse(latitude = 10, longitude = 10,
-key = Sys.getenv("OPENCAGE_KEY")))
+system.time(opencage_reverse(latitude = 10, longitude = 10))
 ```
+
+    ## Using Opencage API Key from envvar OPENCAGE_KEY
 
     ##    user  system elapsed 
     ##       0       0       0
@@ -137,9 +145,10 @@ memoise::forget(opencage_reverse)
     ## [1] TRUE
 
 ``` r
-system.time(opencage_reverse(latitude = 10, longitude = 10,
-key = Sys.getenv("OPENCAGE_KEY")))
+system.time(opencage_reverse(latitude = 10, longitude = 10))
 ```
 
+    ## Using Opencage API Key from envvar OPENCAGE_KEY
+
     ##    user  system elapsed 
-    ##    0.05    0.00    0.36
+    ##    0.03    0.00    0.36
