@@ -33,8 +33,8 @@ opencage_parse <- function(req) {
 
   list(results = results,
        total_results = no_results,
-       time_stamp = lubridate::dmy_hms(temp$timestamp$created_http,
-                                       tz = "GMT"),
+       time_stamp = as.POSIXct(temp$timestamp$created_unix,
+                               origin="1970-01-01"),
        rate_info = dplyr::tbl_df(data.frame(
          limit = temp$rate$limit,
          remaining = temp$rate$remaining,

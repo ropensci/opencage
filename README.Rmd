@@ -35,7 +35,7 @@ Below are two simple examples.
 
 Forward geocoding is from placename to latitude and longitude tuplet(s).
 
-```{r, warnings = FALSE, message = FALSE}
+```{r, warning = FALSE, message = FALSE}
 library("opencage")
 output <- opencage_forward(placename = "Sarzeau", key = Sys.getenv("OPENCAGE_KEY"))
 print(output$time_stamp)

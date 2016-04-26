@@ -30,29 +30,19 @@ Forward geocoding is from placename to latitude and longitude tuplet(s).
 ``` r
 library("opencage")
 output <- opencage_forward(placename = "Sarzeau", key = Sys.getenv("OPENCAGE_KEY"))
-```
-
-    ## Warning: All formats failed to parse. No formats found.
-
-``` r
 print(output$time_stamp)
 ```
 
-    ## [1] NA
+    ## [1] "2016-04-26 18:21:38 CEST"
 
 ``` r
 library("dplyr")
-```
-
-    ## Warning: package 'dplyr' was built under R version 3.2.5
-
-``` r
 output$rate_info %>% knitr::kable()
 ```
 
 |  limit|  remaining| rest                |
 |------:|----------:|:--------------------|
-|   2500|       2405| 2016-04-27 02:00:00 |
+|   2500|       2344| 2016-04-27 02:00:00 |
 
 ``` r
 output$results %>% knitr::kable()
@@ -72,15 +62,10 @@ Reverse geocoding is from latitude and longitude to placename(s).
 output2 <- opencage_reverse(latitude = 51.5034070, 
                             longitude = -0.1275920, 
                  key = Sys.getenv("OPENCAGE_KEY"))
-```
-
-    ## Warning: All formats failed to parse. No formats found.
-
-``` r
 print(output2$time_stamp)
 ```
 
-    ## [1] NA
+    ## [1] "2016-04-26 18:27:01 CEST"
 
 ``` r
 output2$rate_info %>% knitr::kable()
@@ -88,7 +73,7 @@ output2$rate_info %>% knitr::kable()
 
 |  limit|  remaining| rest                |
 |------:|----------:|:--------------------|
-|   2500|       2404| 2016-04-27 02:00:00 |
+|   2500|       2343| 2016-04-27 02:00:00 |
 
 ``` r
 output2$results %>% knitr::kable()
@@ -134,10 +119,8 @@ system.time(opencage_reverse(latitude = 10, longitude = 10,
 key = Sys.getenv("OPENCAGE_KEY")))
 ```
 
-    ## Warning: All formats failed to parse. No formats found.
-
     ##    user  system elapsed 
-    ##    0.03    0.00    0.34
+    ##    0.03    0.00    0.33
 
 ``` r
 system.time(opencage_reverse(latitude = 10, longitude = 10,
@@ -158,7 +141,5 @@ system.time(opencage_reverse(latitude = 10, longitude = 10,
 key = Sys.getenv("OPENCAGE_KEY")))
 ```
 
-    ## Warning: All formats failed to parse. No formats found.
-
     ##    user  system elapsed 
-    ##    0.04    0.00    0.35
+    ##    0.05    0.00    0.36
