@@ -21,8 +21,10 @@ opencage_parse <- function(req) {
     results <- lapply(results, t)
     results <- lapply(results, as.data.frame)
     results <- suppressWarnings(dplyr::bind_rows(results))
-    results$geometry.lat <- as.numeric(results$geometry.lat)
-    results$geometry.lng <- as.numeric(results$geometry.lng)
+    results$geometry.lat <- as.numeric(
+      as.character(results$geometry.lat))
+    results$geometry.lng <- as.numeric(
+      as.character(results$geometry.lng))
   }
   else{
     results <- NULL
