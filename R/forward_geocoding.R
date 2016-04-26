@@ -1,4 +1,4 @@
-.opencage_forward <- function(placename, key,
+.opencage_forward <- function(placename, key=opencage_key(),
                              bounds = NULL,
                              countrycode = NULL,
                              language = NULL,
