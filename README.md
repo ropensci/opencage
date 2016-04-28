@@ -37,7 +37,7 @@ output <- opencage_forward(placename = "Sarzeau")
 print(output$time_stamp)
 ```
 
-    ## [1] "2016-04-28 12:24:46 CEST"
+    ## [1] "2016-04-28 15:02:22 CEST"
 
 ``` r
 library("dplyr")
@@ -46,7 +46,7 @@ output$rate_info %>% knitr::kable()
 
 |  limit|  remaining| rest                |
 |------:|----------:|:--------------------|
-|   2500|       2344| 2016-04-29 02:00:00 |
+|   2500|       2081| 2016-04-29 02:00:00 |
 
 ``` r
 output$results %>% knitr::kable()
@@ -68,7 +68,7 @@ output2 <- opencage_reverse(latitude = 51.5034070,
 print(output2$time_stamp)
 ```
 
-    ## [1] "2016-04-28 12:26:51 CEST"
+    ## [1] "2016-04-28 14:56:48 CEST"
 
 ``` r
 output2$rate_info %>% knitr::kable()
@@ -76,7 +76,7 @@ output2$rate_info %>% knitr::kable()
 
 |  limit|  remaining| rest                |
 |------:|----------:|:--------------------|
-|   2500|       2343| 2016-04-29 02:00:00 |
+|   2500|       2080| 2016-04-29 02:00:00 |
 
 ``` r
 output2$results %>% knitr::kable()
@@ -136,7 +136,7 @@ results2$results %>% knitr::kable()
 | 42° 41' 35.28636'' N | 73° 22' 19.39728'' W | 18TXN3335128023  | FN32hq56ii             | -8167739.779           | 5236398.071            | <https://www.openstreetmap.org/edit?node=158915747#map=17/42.69314/-73.37205>   | <https://www.openstreetmap.org/?mlat=42.69314&mlon=-73.37205#map=17/42.69314/-73.37205> | 1                       | dreffkh1e1nwfg7r4r2t | 1461837000                    | 1461830460                        | 1461835140                 | 1461832920                    | 1461887460                   | 1461807660                       | 1461802920                | 1461805200                   | America/New\_York         | 1                                 | -14400                           | -400                                | EDT                              | cartons.eliminates.uses       | 42.7131351           | -73.3520548          | 42.6731351           | -73.3920548          | village           | NA              | United States of America | us                       | Rensselaer County | New York         | 7          | Berlin, Rensselaer County, New York, United States of America          |      42.69314|     -73.37205| NA              | Berlin             |
 | 40° 33' 40.22424'' N | 81° 47' 39.48144'' W | 17TME3275690348  | EN90cn44qq             | -9105299.87            | 4920037.921            | <https://www.openstreetmap.org/edit?node=153968558#map=17/40.56117/-81.79430>   | <https://www.openstreetmap.org/?mlat=40.56117&mlon=-81.79430#map=17/40.56117/-81.79430> | 1                       | dpjydxzjywtpgn0rxvjf | 1461839220                    | 1461833040                        | 1461837480                 | 1461835320                    | 1461802800                   | 1461809100                       | 1461804600                | 1461806760                   | America/New\_York         | 1                                 | -14400                           | -400                                | EDT                              | sing.quietest.certificate     | 40.5811734           | -81.7743004          | 40.5411734           | -81.8143004          | village           | NA              | United States of America | us                       | Holmes County     | Ohio             | 7          | Berlin, Holmes County, Ohio, United States of America                  |      40.56117|     -81.79430| NA              | Berlin             |
 
--   `countrycode`: Restricts the results to the given country. The country code is a two letter code as defined by the ISO 3166-1 Alpha 2 standard. E.g. 'GB' for the United Kingdom, 'FR' for France, 'US' for United States. See example below.
+-   `countrycode`: Restricts the results to the given country. The country code is a two letter code as defined by the ISO 3166-1 Alpha 2 standard. E.g. "GB" for the United Kingdom, "FR" for France, "US" for United States. See example below.
 
 ``` r
 results3 <- opencage_forward(placename = "Berlin", country = "DE")
@@ -155,7 +155,7 @@ results3$results %>% knitr::kable()
 | 53° 51' 4.53384'' N  | 10° 40' 56.93196'' E | 32UPE1067368285  | JO53iu14vh             | 1189168.356            | 7107508.609            | <https://www.openstreetmap.org/edit?node=1630863689#map=17/53.85126/10.68248> | <https://www.openstreetmap.org/?mlat=53.85126&mlon=10.68248#map=17/53.85126/10.68248> | 49                      | u1xd756drf74zwdx76by | 1461815160                    | 1461805320                        | 1461812760                 | 1461809520                    | 1461869100                   | 1461879060                       | 1461871560                | 1461874740                   | Europe/Berlin             | 1                                 | 7200                             | 200                                 | CEST                             | chase.pencils.themes         | 53.8513094           | 10.6825311           | 53.8512094           | 10.6824311           | address29         | Lübeck          | Germany            | de                       | Schleswig-Holstein | 10         | Berliner Platz, 23560 Lübeck, Germany                                |      53.85126|     10.682481| NA                | NA                | 23560               | Berliner Platz   | NA                 | Berlin               | Sankt Jürgen               | NA                       | Hüxtertor / Mühlentor / Gärtnergasse | NA                    | NA                      | NA                     |
 | 52° 27' 24.31584'' N | 13° 34' 45.17324'' E | 33UVU0346012790  | JO62sk99mo             | 1511631.276            | 6849235.295            | <https://www.openstreetmap.org/edit?way=168058334#map=17/52.45675/13.57921>   | <https://www.openstreetmap.org/?mlat=52.45675&mlon=13.57921#map=17/52.45675/13.57921> | 49                      | u33dmj2ndxu2tewv03c0 | 1461814740                    | 1461805620                        | 1461812400                 | 1461809400                    | 1461868080                   | 1461877320                       | 1461870480                | 1461873480                   | Europe/Berlin             | 1                                 | 7200                             | 200                                 | CEST                             | fields.lists.impulse         | 52.4569793           | 13.5798073           | 52.4565392           | 13.5784995           | building          | NA              | Germany            | de                       | Berlin             | 10         | Vitanas Seniorencentrum, Parrisiusstraße 4-14, 12555 Berlin, Germany |      52.45675|     13.579215| NA                | NA                | 12555               | Parrisiusstraße  | NA                 | NA                   | Treptow-Köpenick           | 4-14                     | Köpenick                             | NA                    | Vitanas Seniorencentrum | Dammvorstadt           |
 
--   `language`: an IETF format language code (such as es for Spanish or pt-BR for Brazilian Portuguese). If no language is explicitly specified, we will look for an HTTP Accept-Language header like those sent by a brower and use the first language specified and if none are specified en (English) will be assumed See example below.
+-   `language`: an IETF format language code (such as "es" for Spanish or "pt-BR" for Brazilian Portuguese). If no language is explicitly specified, we will look for an HTTP Accept-Language header like those sent by a brower and use the first language specified and if none are specified en (English) will be assumed See example below.
 
 ``` r
 results3$results %>% knitr::kable()
@@ -210,7 +210,7 @@ system.time(opencage_reverse(latitude = 10, longitude = 10))
 ```
 
     ##    user  system elapsed 
-    ##    0.03    0.00    0.36
+    ##    0.03    0.00    0.34
 
 ``` r
 system.time(opencage_reverse(latitude = 10, longitude = 10))
@@ -230,4 +230,4 @@ system.time(opencage_reverse(latitude = 10, longitude = 10))
 ```
 
     ##    user  system elapsed 
-    ##    0.04    0.00    0.39
+    ##    0.01    0.00    0.31
