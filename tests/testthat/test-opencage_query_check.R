@@ -2,6 +2,7 @@ library("opencage")
 context("opencage_query_check")
 
 test_that("opencage_query_check checks latitude",{
+  skip_on_cran()
   expect_error(opencage_reverse(latitude = 433,
                                 longitude = 51.11892,
                                 key = Sys.getenv("OPENCAGE_KEY")),
@@ -9,6 +10,7 @@ test_that("opencage_query_check checks latitude",{
 })
 
 test_that("opencage_query_check checks longitude",{
+  skip_on_cran()
   expect_error(opencage_reverse(latitude = 43,
                                 longitude = 5111892,
                                 key = Sys.getenv("OPENCAGE_KEY")),
@@ -16,12 +18,14 @@ test_that("opencage_query_check checks longitude",{
 })
 
 test_that("opencage_query_check checks placename",{
+  skip_on_cran()
           expect_error(opencage_forward(placename = 222,
                                         key = Sys.getenv("OPENCAGE_KEY")),
                        "Placename should be a character.")
           })
 
 test_that("opencage_query_check checks key",{
+  skip_on_cran()
           expect_error(opencage_reverse(latitude = 43.3,
                                         longitude = 51.11892,
                                         key = 45),
@@ -29,6 +33,7 @@ test_that("opencage_query_check checks key",{
   })
 
 test_that("opencage_query_check checks bound",{
+  skip_on_cran()
   expect_error(opencage_forward(placename = "Sarzeau",
                                 bound = c(-563160,51.280430,0.278970,51.683979),
                                 key = Sys.getenv("OPENCAGE_KEY")),
@@ -66,6 +71,7 @@ test_that("opencage_query_check checks bound",{
 })
 
 test_that("opencage_query_check checks countrycode",{
+  skip_on_cran()
   expect_error(opencage_forward(placename = "Sarzeau",
                                 countrycode = "notacountrycode",
                                 key = Sys.getenv("OPENCAGE_KEY")),
@@ -73,6 +79,7 @@ test_that("opencage_query_check checks countrycode",{
 })
 
 test_that("opencage_query_check checks language",{
+  skip_on_cran()
   expect_error(opencage_forward(placename = "Sarzeau",
                                 language = "notalanguagecode",
                                 key = Sys.getenv("OPENCAGE_KEY")),
@@ -86,6 +93,7 @@ test_that("opencage_query_check checks language",{
 
 
 test_that("opencage_query_check checks min_confidence",{
+  skip_on_cran()
   expect_error(opencage_forward(placename = "Sarzeau",
                                 min_confidence = 20,
                                 key = Sys.getenv("OPENCAGE_KEY")),
@@ -93,6 +101,7 @@ test_that("opencage_query_check checks min_confidence",{
 })
 
 test_that("opencage_query_check checks limit",{
+  skip_on_cran()
   expect_error(opencage_forward(placename = "Sarzeau",
                                 limit = 200,
                                 key = Sys.getenv("OPENCAGE_KEY")),
@@ -100,6 +109,7 @@ test_that("opencage_query_check checks limit",{
 })
 
 test_that("opencage_query_check checks no_annotations",{
+  skip_on_cran()
   expect_error(opencage_forward(placename = "Sarzeau",
                                 no_annotations = "yes",
                                 key = Sys.getenv("OPENCAGE_KEY")),
@@ -107,6 +117,7 @@ test_that("opencage_query_check checks no_annotations",{
 })
 
 test_that("opencage_query_check checks no_dedupe",{
+  skip_on_cran()
   expect_error(opencage_forward(placename = "Sarzeau",
                                 no_dedupe = "yes",
                                 key = Sys.getenv("OPENCAGE_KEY")),
