@@ -51,6 +51,8 @@
 #'
 #' Reverse geocoding, from latitude and longitude to placename(s).
 #'
+#' @import memoise
+#'
 #' @param latitude Latitude
 #' @param longitude Longitude
 #' @param key Your OpenCage key

@@ -3,3 +3,4 @@
 export(opencage_forward)
 export(opencage_key)
 export(opencage_reverse)
+import(memoise)

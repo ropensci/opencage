@@ -1,7 +1,6 @@
 # status check
 opencage_check <- function(req) {
   if (req$status_code < 400) return(invisible())
-  data("code_message")
   message <- code_message$message[code_message$code == req$status_code]
   stop("HTTP failure: ", req$status_code, "\n", message, call. = FALSE)
 }
@@ -128,7 +127,6 @@ opencage_query_check <- function(latitude = NULL,
 
   # check countrycode
   if(!is.null(countrycode)){
-    data("countrycodes")
     if(!(countrycode %in% countrycodes$Code)){
       stop(call. = FALSE, "countrycode does not have a valid value.")
     }
@@ -136,13 +134,11 @@ opencage_query_check <- function(latitude = NULL,
 
   # check language
   if(!is.null(language)){
-  data("languagecodes")
   lang <- strsplit(language, "-")[[1]]
   if(!(lang[1] %in% languagecodes$alpha2)){
     stop(call. = FALSE, "The language code is not valid.")
   }
   if(length(lang) > 1){
-    data("countrycodes")
     if(!(lang[2] %in% countrycodes$Code)){
       stop(call. = FALSE, "The country part of language is not valid.")
     }

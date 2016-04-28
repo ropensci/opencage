@@ -43,6 +43,8 @@
 #'
 #' Forward geocoding, from placename to latitude and longitude tuplet(s).
 #'
+#' @import memoise
+#'
 #' @param placename Placename
 #' @param key Your OpenCage key
 #' @param bounds Provides the geocoder with a hint to the region that the query resides in. This value will restrict the possible results to the supplied region. The bounds parameter should be specified as 4 coordinate points forming the south-west and north-east corners of a boundsing box. For example \code{bounds = c(-0.563160, 51.280430, 0.278970, 51.683979)} (min long, min lat, max long, max lat).
