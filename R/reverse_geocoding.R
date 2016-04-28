@@ -66,6 +66,8 @@
 #' It is recommended you save your API key as an environment variable. See https://stat545-ubc.github.io/bit003_api-key-env-var.html
 #' Note that the package uses `memoise` with no timeout argument so that results are cached inside an active R session. The underlying data at OpenCage is updated about once a day.
 #'
+#' Regarding multiple results, the API doc states that "In cases where the geocoder is able to find multiple matches, the geocoder will return multiple results. The confidence or coordinates for each result should be examined to determine whether each result from an ambiguous query is sufficiently high to warrant using a result or not. A good strategy to reduce ambiguity is to use the optional `bounds` parameter described below to limit the area searched."
+#'
 #' @return A list with
 #' \itemize{
 #' \item results as a data.frame (`dplyr` `tbl_df`) called results with one line per results,
