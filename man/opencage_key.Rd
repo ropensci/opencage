@@ -4,7 +4,7 @@
 \alias{opencage_key}
 \title{Retrieve Opencage API key}
 \usage{
-opencage_key(quiet = FALSE)
+opencage_key(quiet = TRUE)
 }
 \description{
 An Opencage API Key

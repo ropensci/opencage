@@ -183,7 +183,7 @@ opencage_query_check <- function(latitude = NULL,
 #'
 #' @keywords internal
 #' @export
-opencage_key <- function(quiet = FALSE) {
+opencage_key <- function(quiet = TRUE) {
   pat <- Sys.getenv("OPENCAGE_KEY")
   if (identical(pat, ""))  {
     return(NULL)
