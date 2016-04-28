@@ -23,6 +23,7 @@ install_github("masalmon/opencage")
 
 ```
 
+This package is an interface to the OpenCage API that allows forward and reverse geocoding. 
 To use the package, you will also need an API key. For this register at https://geocoder.opencagedata.com/pricing. The free API key provides up to 2,500 calls a day. It is recommended you save your API key as an environment variable. See https://stat545-ubc.github.io/bit003_api-key-env-var.html
 
 Both functions of the package will conveniently look for your API key using Sys.getenv("OPENCAGE_KEY") so if your API key is an environment variable called "OPENCAGE_KEY" you don't need to input it.
@@ -52,7 +53,7 @@ output$results %>% knitr::kable()
 
 Reverse geocoding is from latitude and longitude to placename(s).
 
-```{r}
+```{r, message=FALSE}
 output2 <- opencage_reverse(latitude = 51.5034070, 
                             longitude = -0.1275920)
 print(output2$time_stamp)
@@ -62,17 +63,40 @@ output2$results %>% knitr::kable()
 
 ## Output
 
-For both `opencage_forward` and `opencage_reverse` functions, the package returns a list with a time stamp for the query, the total number of results, a data.frame (`dplyr tbl_df`) with information about the remaining calls to the API unless you have an unlimited account, and a data.frame (`dplyr tbl_df`) with the results corresponding to your query. You can find longitude and latitude for each results as `geometry.lat` and `geometry.lng`. Other information includes country and country information, time of sunset and sunrise, geohash (a geocoding system identifying a point with a single string, as explained in many more details [here](https://www.elastic.co/guide/en/elasticsearch/guide/current/geohashes.html) and [here](https://en.wikipedia.org/wiki/Geohash) -- for pure conversion between longitude/latitude and geohashes, see [this package](https://github.com/Ironholds/geohash)).  Depending on the data available in the API for the results one gets different columns: there can be a lot to explore!
+For both `opencage_forward` and `opencage_reverse` functions, the package returns a list with a time stamp for the query, the total number of results, a data.frame (`dplyr tbl_df`) with information about the remaining calls to the API unless you have an unlimited account, and a data.frame (`dplyr tbl_df`) with the results corresponding to your query. You can find longitude and latitude for each results as `geometry.lat` and `geometry.lng`. Other information includes country and country information, time of sunset and sunrise, geohash (a geocoding system identifying a point with a single string, as explained in many more details [here](https://www.elastic.co/guide/en/elasticsearch/guide/current/geohashes.html) and [here](https://en.wikipedia.org/wiki/Geohash); for pure conversion between longitude/latitude and geohashes, see [this package](https://github.com/Ironholds/geohash)).  Depending on the data available in the API for the results one gets different columns; there can be a lot to explore!
 
 ## Parameters
 
 Optional parameters of both `opencage_forward` and `opencage_reverse` can make the query more precise:
 
-* `bounds`: Provides the geocoder with a hint to the region that the query resides in. This value will restrict the possible results to the supplied region. The bounds parameter should be specified as 4 coordinate points forming the south-west and north-east corners of a boundsing box. For example bounds=-0.563160,51.280430,0.278970,51.683979 (min long, min lat, max long, max lat).
+* `bounds`: Provides the geocoder with a hint to the region that the query resides in. This value will restrict the possible results to the supplied region. The bounds parameter should be specified as 4 coordinate points forming the south-west and north-east corners of a bounding box. For example `bounds = c(-0.563160, 51.280430, 0.278970, 51.683979)` (min long, min lat, max long, max lat).
 
-* `countrycode`: Restricts the results to the given country. The country code is a two letter code as defined by the ISO 3166-1 Alpha 2 standard. E.g. 'GB' for the United Kingdom, 'FR' for France, 'US' for United States.
+Below is an example of the use of `bounds` where the rectangle given in the second call does not include Europe so that we don't get results for Berlin in Germany.
 
-* `language`: an IETF format language code (such as es for Spanish or pt-BR for Brazilian Portuguese). If no language is explicitly specified, we will look for an HTTP Accept-Language header like those sent by a brower and use the first language specified and if none are specified en (English) will be assumed
+```{r, message=FALSE}
+results1 <- opencage_forward(placename = "Berlin")
+results1$results %>% knitr::kable()
+results2 <- opencage_forward(placename = "Berlin",
+                             bounds = c(-90,38,0, 45))
+results2$results %>% knitr::kable()
+```
+
+* `countrycode`: Restricts the results to the given country. The country code is a two letter code as defined by the ISO 3166-1 Alpha 2 standard. E.g. 'GB' for the United Kingdom, 'FR' for France, 'US' for United States. See example below.
+
+```{r, message=FALSE}
+results3 <- opencage_forward(placename = "Berlin", country = "DE")
+results3$results %>% knitr::kable()
+
+```
+
+* `language`: an IETF format language code (such as es for Spanish or pt-BR for Brazilian Portuguese). If no language is explicitly specified, we will look for an HTTP Accept-Language header like those sent by a brower and use the first language specified and if none are specified en (English) will be assumed See example below.
+
+```{r, message=FALSE}
+results3$results %>% knitr::kable()
+results4 <- opencage_forward(placename = "Berlin", country = "DE", language = "de")
+results4$results %>% knitr::kable()
+
+```
 
 * `limit`: How many results should be returned (1-100). Default is 10.
 
@@ -86,9 +110,9 @@ Optional parameters of both `opencage_forward` and `opencage_reverse` can make t
 
 ## Caching
 
-Note that the package uses [memoise](https://github.com/hadley/memoise) with no timeout argument so that results are cached inside an active R session. The underlying data at OpenCage is updated about once a day.
+The underlying data at OpenCage is updated about once a day. Note that the package uses [memoise](https://github.com/hadley/memoise) with no timeout argument so that results are cached inside an active R session. 
 
-```{r}
+```{r, message=FALSE}
 system.time(opencage_reverse(latitude = 10, longitude = 10))
 
 system.time(opencage_reverse(latitude = 10, longitude = 10))

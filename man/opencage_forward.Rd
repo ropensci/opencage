@@ -2,26 +2,26 @@
 % Please edit documentation in R/forward_geocoding.R
 \name{opencage_forward}
 \alias{opencage_forward}
-\title{Forward Geocoding}
+\title{Forward geocoding}
 \usage{
 opencage_forward(placename, key = opencage_key(), bounds = NULL,
   countrycode = NULL, language = NULL, limit = 10,
   min_confidence = NULL, no_annotations = NULL, no_dedupe = NULL)
 }
 \arguments{
-\item{placename}{placename}
+\item{placename}{Placename}
 
-\item{key}{your OpenCage key}
+\item{key}{Your OpenCage key}
 
-\item{bounds}{Provides the geocoder with a hint to the region that the query resides in. This value will restrict the possible results to the supplied region. The bounds parameter should be specified as 4 coordinate points forming the south-west and north-east corners of a boundsing box. For example bounds=-0.563160,51.280430,0.278970,51.683979 (min long, min lat, max long, max lat).}
+\item{bounds}{Provides the geocoder with a hint to the region that the query resides in. This value will restrict the possible results to the supplied region. The bounds parameter should be specified as 4 coordinate points forming the south-west and north-east corners of a boundsing box. For example \code{bounds = c(-0.563160, 51.280430, 0.278970, 51.683979)} (min long, min lat, max long, max lat).}
 
 \item{countrycode}{Restricts the results to the given country. The country code is a two letter code as defined by the ISO 3166-1 Alpha 2 standard. E.g. 'GB' for the United Kingdom, 'FR' for France, 'US' for United States.}
 
-\item{language}{an IETF format language code (such as es for Spanish or pt-BR for Brazilian Portuguese). If no language is explicitly specified, we will look for an HTTP Accept-Language header like those sent by a brower and use the first language specified and if none are specified en (English) will be assumed}
+\item{language}{An IETF format language code (such as es for Spanish or pt-BR for Brazilian Portuguese). If no language is explicitly specified, we will look for an HTTP Accept-Language header like those sent by a brower and use the first language specified and if none are specified en (English) will be assumed}
 
 \item{limit}{How many results should be returned (1-100). Default is 10.}
 
-\item{min_confidence}{an integer from 1-10. Only results with at least this confidence will be returned.}
+\item{min_confidence}{An integer from 1-10. Only results with at least this confidence will be returned.}
 
 \item{no_annotations}{Logical (default FALSE), when TRUE the output will not contain annotations.}
 
@@ -37,20 +37,23 @@ A list with
 }
 }
 \description{
-Forward Geocoding, that is, from placename to latitude and longitude tuplet(s).
+Forward geocoding, from placename to latitude and longitude tuplet(s).
 }
 \details{
-For getting your API key register at https://geocoder.opencagedata.com/pricing. The free API key provides up to 2,500 calls a day.
-It is recommended you save your API key as an environment variable. See https://stat545-ubc.github.io/bit003_api-key-env-var.html
-Note that the package uses `memoise` with no timeout argument so that results are cached inside an active R session. The underlying data at OpenCage is updated about once a day.
+To get an API key to access OpenCage geocoding, register at https://geocoder.opencagedata.com/pricing. The free API key provides up to 2,500 calls a day. For ease of use, save your API key as an environment variable as described at https://stat545-ubc.github.io/bit003_api-key-env-var.html
+It is recommended you save your API key as an environment variable. See https://stat545-ubc.github.io/bit003_api-key-env-var.html Both functions of the package will conveniently look for your API key using Sys.getenv("OPENCAGE_KEY") so if your API key is an environment variable called "OPENCAGE_KEY" you don't need to input it.
+
+The underlying data at OpenCage is updated about once a day. Note that the package uses `memoise` with no timeout argument so that results are cached inside an active R session.
 
 Regarding multiple results, the API doc states that "In cases where the geocoder is able to find multiple matches, the geocoder will return multiple results. The confidence or coordinates for each result should be examined to determine whether each result from an ambiguous query is sufficiently high to warrant using a result or not. A good strategy to reduce ambiguity is to use the optional `bounds` parameter described below to limit the area searched." Multiple results might mean you get a result for the airport and a road when querying a city name, or results for cities with the same name in different countries.
 }
 \examples{
 \dontrun{
-opencage_forward(placename = "Sarzeau", key = Sys.getenv("OPENCAGE_KEY"))
-opencage_forward(placename = "Islington, London", key = Sys.getenv("OPENCAGE_KEY"))
-opencage_forward(placename = "Triererstr 15, Weimar 99423, Deutschland", key = Sys.getenv("OPENCAGE_KEY"))
+opencage_forward(placename = "Sarzeau")
+opencage_forward(placename = "Islington, London")
+opencage_forward(placename = "Triererstr 15,
+                              Weimar 99423,
+                              Deutschland")
 }
 
 }
