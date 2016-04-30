@@ -10,6 +10,17 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r, echo = FALSE, warning=FALSE, message=FALSE}
+NOT_CRAN <- identical(tolower(Sys.getenv("NOT_CRAN")), "true")
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  purl = NOT_CRAN,
+  eval = NOT_CRAN
+)
+```
+
+
 This package is an interface to the OpenCage API that allows forward and reverse geocoding. To use the package, you will need an API key. To get an API key for OpenCage geocoding, register at https://geocoder.opencagedata.com/pricing. The free API key provides up to 2,500 calls a day. For ease of use, save your API key as an environment variable as described at https://stat545-ubc.github.io/bit003_api-key-env-var.html.
 
 Both functions of the package will conveniently look for your API key using `Sys.getenv("OPENCAGE_KEY")` so if your API key is an environment variable called "OPENCAGE_KEY" you don't need to input it manually.
