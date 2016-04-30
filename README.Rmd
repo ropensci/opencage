@@ -23,16 +23,15 @@ install_github("masalmon/opencage")
 
 ```
 
-This package is an interface to the OpenCage API that allows forward and reverse geocoding. 
-To use the package, you will also need an API key. For this register at https://geocoder.opencagedata.com/pricing. The free API key provides up to 2,500 calls a day. It is recommended you save your API key as an environment variable. See https://stat545-ubc.github.io/bit003_api-key-env-var.html
+This package is an interface to the OpenCage API that allows forward and reverse geocoding. This package is an interface to the OpenCage API that allows forward and reverse geocoding. To use the package, you will need an API key. To get an API key for OpenCage geocoding, register at https://geocoder.opencagedata.com/pricing. The free API key provides up to 2,500 calls a day. For ease of use, save your API key as an environment variable as described at https://stat545-ubc.github.io/bit003_api-key-env-var.html.
 
-Both functions of the package will conveniently look for your API key using Sys.getenv("OPENCAGE_KEY") so if your API key is an environment variable called "OPENCAGE_KEY" you don't need to input it.
+Both functions of the package will conveniently look for your API key using `Sys.getenv("OPENCAGE_KEY")` so if your API key is an environment variable called "OPENCAGE_KEY" you don't need to input it manually.
 
 # Geocoding
 
 The [OpenCage](https://geocoder.opencagedata.com/) API supports forward and reverse geocoding. Sources of OpenCage are open geospatial data including OpenStreetMap, Yahoo! GeoPlanet, Natural Earth Data, Thematic Mapping, Ordnance Survey OpenSpace, Statistics New Zealand, Zillow, MaxMind, GeoNames, the US Census Bureau and Flickr's shapefiles plus a whole lot more besides. See [this page](https://geocoder.opencagedata.com/credits) for the full list of credits.
 
- Regarding multiple results, the API doc states that "In cases where the geocoder is able to find multiple matches, the geocoder will return multiple results. The confidence or coordinates for each result should be examined to determine whether each result from an ambiguous query is sufficiently high to warrant using a result or not. A good strategy to reduce ambiguity is to use the optional `bounds` parameter described below to limit the area searched." Multiple results might mean you get a result for the airport and a road when querying a city name, or results for cities with the same name in different countries. 
+Both forward and reverse geocoding typically return multiple results. Regarding these multiple results, the API doc states, "In cases where the geocoder is able to find multiple matches, the geocoder will return multiple results. The confidence or coordinates for each result should be examined to determine whether each result from an ambiguous query is sufficiently high to warrant using a result or not. A good strategy to reduce ambiguity is to use the optional `bounds` parameter described below to limit the area searched." Multiple results might mean you get a result for the airport and a road when querying a city name, or results for cities with the same name in different countries. 
 
 Below are two simple examples.
 
@@ -69,7 +68,7 @@ For both `opencage_forward` and `opencage_reverse` functions, the package return
 
 Optional parameters of both `opencage_forward` and `opencage_reverse` can make the query more precise:
 
-* `bounds`: Provides the geocoder with a hint to the region that the query resides in. This value will restrict the possible results to the supplied region. The bounds parameter should be specified as 4 coordinate points forming the south-west and north-east corners of a bounding box. For example `bounds = c(-0.563160, 51.280430, 0.278970, 51.683979)` (min long, min lat, max long, max lat).
+* `bounds`: Provides the geocoder with a hint to the region that the query resides in. This value will restrict the possible results to the supplied region. The bounds parameter should be specified as 4 coordinate points forming the south-west and north-east corners of a bounding box. For example, `bounds = c(-0.563160, 51.280430, 0.278970, 51.683979)` (min long, min lat, max long, max lat).
 
 Below is an example of the use of `bounds` where the rectangle given in the second call does not include Europe so that we don't get results for Berlin in Germany.
 
@@ -89,7 +88,7 @@ results3$results %>% knitr::kable()
 
 ```
 
-* `language`: an IETF format language code (such as "es" for Spanish or "pt-BR" for Brazilian Portuguese). If no language is explicitly specified, we will look for an HTTP Accept-Language header like those sent by a brower and use the first language specified and if none are specified en (English) will be assumed See example below.
+* `language`: an IETF format language code (such as "es" for Spanish or "pt-BR" for Brazilian Portuguese). If no language is explicitly specified, we will look for an HTTP Accept-Language header like those sent by a brower and use the first language specified and if none are specified "en" (English) will be assumed See example below.
 
 ```{r, message=FALSE}
 results3$results %>% knitr::kable()
