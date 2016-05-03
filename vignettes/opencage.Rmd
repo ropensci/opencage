@@ -1,6 +1,6 @@
 ---
-title: "R package for the OpenCage API"
-subtitle: "Both forward and reverse geocoding"
+title: "R Package for the OpenCage API"
+subtitle: "Forward and Reverse Geocoding"
 author: "Maëlle Salmon"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
