@@ -1,7 +1,7 @@
 opencage
 ========
 
-[![Build Status](https://travis-ci.org/ropenscilabs/opencage.svg?branch=master)](https://travis-ci.org/ropenscilabs/opencage) [![Build status](https://ci.appveyor.com/api/projects/status/ch31nmshuodk5m92?svg=true)](https://ci.appveyor.com/project/masalmon/opencage-1k7o6) [![codecov.io](https://codecov.io/github/ropenscilabs/opencage/coverage.svg?branch=master)](https://codecov.io/github/masalmon/opencage?branch=master)
+[![Build Status](https://travis-ci.org/ropenscilabs/opencage.svg?branch=master)](https://travis-ci.org/ropenscilabs/opencage) [![Build status](https://ci.appveyor.com/api/projects/status/ch31nmshuodk5m92?svg=true)](https://ci.appveyor.com/project/masalmon/opencage-1k7o6) [![codecov.io](https://codecov.io/github/ropenscilabs/opencage/coverage.svg?branch=master)](https://codecov.io/github/ropenscilabs/opencage?branch=master)
 
 Installation
 ============
@@ -37,7 +37,7 @@ output <- opencage_forward(placename = "Sarzeau")
 print(output$time_stamp)
 ```
 
-    ## [1] "2016-05-03 20:56:41 CEST"
+    ## [1] "2016-05-03 21:10:18 CEST"
 
 ``` r
 library("dplyr")
@@ -46,7 +46,7 @@ output$rate_info %>% knitr::kable()
 
 |  limit|  remaining| rest                |
 |------:|----------:|:--------------------|
-|   2500|       2333| 2016-05-04 02:00:00 |
+|   2500|       2289| 2016-05-04 02:00:00 |
 
 ``` r
 output$results %>% knitr::kable()
@@ -68,7 +68,7 @@ output2 <- opencage_reverse(latitude = 51.5034070,
 print(output2$time_stamp)
 ```
 
-    ## [1] "2016-05-03 20:56:43 CEST"
+    ## [1] "2016-05-03 21:02:06 CEST"
 
 ``` r
 output2$rate_info %>% knitr::kable()
@@ -76,7 +76,7 @@ output2$rate_info %>% knitr::kable()
 
 |  limit|  remaining| rest                |
 |------:|----------:|:--------------------|
-|   2500|       2332| 2016-05-04 02:00:00 |
+|   2500|       2288| 2016-05-04 02:00:00 |
 
 ``` r
 output2$results %>% knitr::kable()
@@ -127,7 +127,7 @@ results2$results %>% knitr::kable()
 |:---------------------|:---------------------|:-----------------|:-----------------------|:-----------------------|:-----------------------|:--------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------|:------------------------|:---------------------|:------------------------------|:----------------------------------|:---------------------------|:------------------------------|:-----------------------------|:---------------------------------|:--------------------------|:-----------------------------|:--------------------------|:----------------------------------|:---------------------------------|:------------------------------------|:---------------------------------|:------------------------------|:---------------------|:---------------------|:---------------------|:---------------------|:------------------|:----------------|:-------------------------|:-------------------------|:------------------|:-----------------|:-----------|:-----------------------------------------------------------------------|-------------:|-------------:|:----------------|:-------------------|
 | 44° 28' 7.21056'' N  | 71° 11' 6.27612'' W  | 19TCK2619726251  | FN44jl72sl             | -7924286.49            | 5508315.317            | <https://www.openstreetmap.org/edit?relation=170184#map=17/44.46867/-71.18508>  | <https://www.openstreetmap.org/?mlat=44.46867&mlon=-71.18508#map=17/44.46867/-71.18508> | 1                       | drvkupk8g2zdsyw72s2c | 1462267800                    | 1462260720                        | 1462265880                 | 1462263420                    | 1462319520                   | 1462240260                       | 1462235100                | 1462237500                   | America/New\_York         | 1                                 | -14400                           | -400                                | EDT                              | angle.liability.nerve         | 44.528436            | -71.1236419          | 44.445057            | -71.3978579          | city              | Berlin          | United States of America | us                       | Coös County       | New Hampshire    | 5          | Berlin, Coös County, New Hampshire, United States of America           |      44.46867|     -71.18508| NA              | NA                 |
 | 41° 37' 17.35680'' N | 72° 44' 44.34648'' W | 18TXM8780710206  | FN31po09md             | -8098008.916           | 5076059.694            | <https://www.openstreetmap.org/edit?node=158845944#map=17/41.62149/-72.74565>   | <https://www.openstreetmap.org/?mlat=41.62149&mlon=-72.74565#map=17/41.62149/-72.74565> | 1                       | drkkb8unxrwwbsuj9tjy | 1462268580                    | 1462262040                        | 1462266720                 | 1462264500                    | 1462319520                   | 1462239660                       | 1462234920                | 1462237200                   | America/New\_York         | 1                                 | -14400                           | -400                                | EDT                              | frosts.crowds.reef            | 41.661488            | -72.7056518          | 41.581488            | -72.7856518          | city              | NA              | United States of America | us                       | Hartford County   | Connecticut      | 7          | Berlin, Hartford County, Connecticut, United States of America         |      41.62149|     -72.74565| Berlin          | NA                 |
-| 39° 47' 28.41432'' N | 74° 55' 44.59260'' W | 18SWK0607404588  | FM29ms89mv             | -8341064.081           | 4808298.871            | <https://www.openstreetmap.org/edit?relation=170680#map=17/39.79123/-74.92905>  | <https://www.openstreetmap.org/?mlat=39.79123&mlon=-74.92905#map=17/39.79123/-74.92905> | 1                       | dr4dqgy2dw0jyzb7kgs3 | 1462269360                    | 1462263060                        | 1462267560                 | 1462265400                    | 1462319760                   | 1462239660                       | 1462235160                | 1462237320                   | America/New\_York         | 1                                 | -14400                           | -400                                | EDT                              | verdict.rushes.upgrading      | 39.8091498           | -74.9079589          | 39.77601             | -74.9661129          | city              | Berlin          | United States of America | us                       | Camden County     | New Jersey       | 7          | Berlin, Camden County, New Jersey, United States of America            |      39.79123|     -74.92905| NA              | NA                 |
+| 39° 47' 28.41432'' N | 74° 55' 44.59260'' W | 18SWK0607404588  | FM29ms89mv             | -8341064.081           | 4808298.871            | <https://www.openstreetmap.org/edit?relation=170680#map=17/39.79123/-74.92905>  | <https://www.openstreetmap.org/?mlat=39.79123&mlon=-74.92905#map=17/39.79123/-74.92905> | 1                       | dr4dqgy2dw0jyzb7kgs3 | 1462269360                    | 1462263060                        | 1462267560                 | 1462265400                    | 1462319760                   | 1462239660                       | 1462235160                | 1462237320                   | America/New\_York         | 1                                 | -14400                           | -400                                | EDT                              | verdict.rushes.upgrading      | 39.809175            | -74.9079589          | 39.77601             | -74.9661129          | city              | Berlin          | United States of America | us                       | Camden County     | New Jersey       | 7          | Berlin, Camden County, New Jersey, United States of America            |      39.79123|     -74.92905| NA              | NA                 |
 | 42° 22' 52.33440'' N | 71° 38' 13.24320'' W | 19TBG8291095470  | FN42ej31nl             | -7974595.698           | 5189444.074            | <https://www.openstreetmap.org/edit?relation=1844156#map=17/42.38120/-71.63701> | <https://www.openstreetmap.org/?mlat=42.38120&mlon=-71.63701#map=17/42.38120/-71.63701> | 1                       | drt11g782th32euc09nn | 1462268220                    | 1462261560                        | 1462266360                 | 1462264080                    | 1462319340                   | 1462239660                       | 1462234800                | 1462237080                   | America/New\_York         | 1                                 | -14400                           | -400                                | EDT                              | astonished.rightfully.pythons | 42.4182811           | -71.5802309          | 42.3505932           | -71.6787957          | city              | Berlin          | United States of America | us                       | Worcester County  | Massachusetts    | 7          | Berlin, Worcester County, Massachusetts, United States of America      |      42.38120|     -71.63701| NA              | NA                 |
 | 38° 19' 21.41544'' N | 75° 13' 3.68076'' W  | 18SVH8097141633  | FM28jh37vk             | -8373194.849           | 4598602.233            | <https://www.openstreetmap.org/edit?relation=133689#map=17/38.32262/-75.21769>  | <https://www.openstreetmap.org/?mlat=38.32262&mlon=-75.21769#map=17/38.32262/-75.21769> | 1                       | dqfd02kjkv3cm4dts5ph | 1462269600                    | 1462263540                        | 1462267860                 | 1462265760                    | 1462319700                   | 1462239360                       | 1462234980                | 1462237080                   | America/New\_York         | 1                                 | -14400                           | -400                                | EDT                              | floral.evenly.shortwave       | 38.355184            | -75.1880179          | 38.308406            | -75.2347939          | city              | Berlin          | United States of America | us                       | Worcester County  | Maryland         | 7          | Berlin, Worcester County, Maryland, United States of America           |      38.32262|     -75.21769| NA              | NA                 |
 | 43° 58' 4.93140'' N  | 88° 56' 36.41136'' W | 16TCP4410170158  | EN53mx62sh             | -9901139.296           | 5430821.988            | <https://www.openstreetmap.org/edit?relation=251729#map=17/43.96804/-88.94345>  | <https://www.openstreetmap.org/?mlat=43.96804&mlon=-88.94345#map=17/43.96804/-88.94345> | 1                       | dpbf0h1k7kn9fnpft5qz | 1462272120                    | 1462265160                        | 1462270200                 | 1462267800                    | 1462237320                   | 1462244340                       | 1462239240                | 1462241640                   | America/Chicago           | 1                                 | -18000                           | -500                                | CDT                              | admits.indecision.skins       | 43.997968            | -88.9207259          | 43.947614            | -88.9808519          | city              | City of Berlin  | United States of America | us                       | Green Lake County | Wisconsin        | 7          | City of Berlin, Green Lake County, Wisconsin, United States of America |      43.96804|     -88.94345| NA              | NA                 |
@@ -210,7 +210,7 @@ system.time(opencage_reverse(latitude = 10, longitude = 10))
 ```
 
     ##    user  system elapsed 
-    ##    0.05    0.00    0.44
+    ##    0.06    0.00    0.50
 
 ``` r
 system.time(opencage_reverse(latitude = 10, longitude = 10))
@@ -230,7 +230,7 @@ system.time(opencage_reverse(latitude = 10, longitude = 10))
 ```
 
     ##    user  system elapsed 
-    ##    0.05    0.00    0.42
+    ##    0.05    0.00    0.45
 
 Meta
 ----
