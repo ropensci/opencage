@@ -8,8 +8,8 @@ Description: This packages accesses the OpenCage API, which provides forward
     longitude and latitude to placename).
 License: GPL (>= 2)
 LazyData: TRUE
-URL: http://github.com/masalmon/opencage
-BugReports: http://github.com/masalmon/opencage/issues
+URL: http://github.com/ropenscilabs/opencage
+BugReports: http://github.com/ropenscilabs/opencage/issues
 Imports: httr,
     jsonlite,
     dplyr,
