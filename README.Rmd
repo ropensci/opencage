@@ -9,9 +9,9 @@ output:
 opencage
 =============
 
-[![Build Status](https://travis-ci.org/masalmon/opencage.svg?branch=master)](https://travis-ci.org/masalmon/opencage)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/masalmon/opencage?branch=master&svg=true)](https://ci.appveyor.com/project/masalmon/opencage)
-[![codecov.io](https://codecov.io/github/masalmon/opencage/coverage.svg?branch=master)](https://codecov.io/github/masalmon/opencage?branch=master)
+[![Build Status](https://travis-ci.org/ropenscilabs/opencage.svg?branch=master)](https://travis-ci.org/ropenscilabs/opencage)
+[![Build status](https://ci.appveyor.com/api/projects/status/ch31nmshuodk5m92?svg=true)](https://ci.appveyor.com/project/masalmon/opencage-1k7o6)
+[![codecov.io](https://codecov.io/github/ropenscilabs/opencage/coverage.svg?branch=master)](https://codecov.io/github/masalmon/opencage?branch=master)
 
 # Installation
 
