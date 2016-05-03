@@ -9,3 +9,4 @@
 ^CONDUCT\.md$
 datamanagement.R
 ^appveyor\.yml$
+^inst/.+$
