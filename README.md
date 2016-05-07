@@ -1,7 +1,7 @@
 opencage
 ========
 
-[![Build Status](https://travis-ci.org/ropenscilabs/opencage.svg?branch=master)](https://travis-ci.org/ropenscilabs/opencage) [![Build status](https://ci.appveyor.com/api/projects/status/ch31nmshuodk5m92?svg=true)](https://ci.appveyor.com/project/masalmon/opencage-1k7o6) [![codecov.io](https://codecov.io/github/ropenscilabs/opencage/coverage.svg?branch=master)](https://codecov.io/github/ropenscilabs/opencage?branch=master)
+[![Build Status](https://travis-ci.org/ropenscilabs/opencage.svg?branch=master)](https://travis-ci.org/ropenscilabs/opencage) [![Build status](https://ci.appveyor.com/api/projects/status/410099wd2lic6sm9?svg=true)](https://ci.appveyor.com/project/masalmon/opencage) [![codecov.io](https://codecov.io/github/ropenscilabs/opencage/coverage.svg?branch=master)](https://codecov.io/github/ropenscilabs/opencage?branch=master)
 
 Installation
 ============
@@ -37,7 +37,7 @@ output <- opencage_forward(placename = "Sarzeau")
 print(output$time_stamp)
 ```
 
-    ## [1] "2016-05-07 08:16:19 CEST"
+    ## [1] "2016-05-07 08:18:47 CEST"
 
 ``` r
 library("dplyr")
@@ -46,7 +46,7 @@ output$rate_info %>% knitr::kable()
 
 |  limit|  remaining| rest                |
 |------:|----------:|:--------------------|
-|   2500|       2357| 2016-05-08 02:00:00 |
+|   2500|       2323| 2016-05-08 02:00:00 |
 
 ``` r
 output$results %>% knitr::kable()
@@ -68,7 +68,7 @@ output2 <- opencage_reverse(latitude = 51.5034070,
 print(output2$time_stamp)
 ```
 
-    ## [1] "2016-05-07 08:07:45 CEST"
+    ## [1] "2016-05-07 08:22:30 CEST"
 
 ``` r
 output2$rate_info %>% knitr::kable()
@@ -76,7 +76,7 @@ output2$rate_info %>% knitr::kable()
 
 |  limit|  remaining| rest                |
 |------:|----------:|:--------------------|
-|   2500|       2356| 2016-05-08 02:00:00 |
+|   2500|       2322| 2016-05-08 02:00:00 |
 
 ``` r
 output2$results %>% knitr::kable()
@@ -210,7 +210,7 @@ system.time(opencage_reverse(latitude = 10, longitude = 10))
 ```
 
     ##    user  system elapsed 
-    ##    0.04    0.00    0.58
+    ##    0.01    0.02    0.55
 
 ``` r
 system.time(opencage_reverse(latitude = 10, longitude = 10))
@@ -230,7 +230,7 @@ system.time(opencage_reverse(latitude = 10, longitude = 10))
 ```
 
     ##    user  system elapsed 
-    ##    0.04    0.02    0.46
+    ##    0.03    0.00    0.44
 
 Meta
 ----
