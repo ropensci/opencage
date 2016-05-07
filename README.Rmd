@@ -10,7 +10,7 @@ opencage
 =============
 
 [![Build Status](https://travis-ci.org/ropenscilabs/opencage.svg?branch=master)](https://travis-ci.org/ropenscilabs/opencage)
-[![Build status](https://ci.appveyor.com/api/projects/status/r3yfhksllhy7dk56?svg=true)](https://ci.appveyor.com/project/masalmon/opencage-nbq3v)
+[![Build status](https://ci.appveyor.com/api/projects/status/ch31nmshuodk5m92?svg=true)](https://ci.appveyor.com/project/masalmon/opencage-1k7o6)
 [![codecov.io](https://codecov.io/github/ropenscilabs/opencage/coverage.svg?branch=master)](https://codecov.io/github/ropenscilabs/opencage?branch=master)
 
 # Installation
