@@ -1,4 +1,6 @@
 library(testthat)
 library(opencage)
 
-test_check("opencage")
+if (identical(tolower(Sys.getenv("NOT_CRAN")), "true")) {
+  test_check("opencage")
+}
