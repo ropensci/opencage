@@ -8,14 +8,21 @@ output:
 ---
 opencage
 =============
-
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/opencage)](http://cran.r-project.org/package=opencage)
 [![Build Status](https://travis-ci.org/ropenscilabs/opencage.svg?branch=master)](https://travis-ci.org/ropenscilabs/opencage)
 [![Build status](https://ci.appveyor.com/api/projects/status/410099wd2lic6sm9?svg=true)](https://ci.appveyor.com/project/masalmon/opencage)
 [![codecov.io](https://codecov.io/github/ropenscilabs/opencage/coverage.svg?branch=master)](https://codecov.io/github/ropenscilabs/opencage?branch=master)
 
 # Installation
 
-To install the package, you will need the devtools package.
+
+Install the package with:
+
+```{r eval = FALSE}
+install.packages("opencage")
+```
+
+Or install the development version using [devtools](https://github.com/hadley/devtools) with:
 
 ```{r, eval = FALSE}
 library("devtools")
