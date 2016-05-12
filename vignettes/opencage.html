@@ -1,0 +1,2873 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Maëlle Salmon" />
+
+<meta name="date" content="2016-05-12" />
+
+<title>R Package for the OpenCage API</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div class="fluid-row" id="header">
+
+
+<h1 class="title">R Package for the OpenCage API</h1>
+<h3 class="subtitle"><em>Forward and Reverse Geocoding</em></h3>
+<h4 class="author"><em>Maëlle Salmon</em></h4>
+<h4 class="date"><em>2016-05-12</em></h4>
+
+</div>
+
+
+<p>This package is an interface to the OpenCage API that allows forward and reverse geocoding. To use the package, you will need an API key. To get an API key for OpenCage geocoding, register at <a href="https://geocoder.opencagedata.com/pricing" class="uri">https://geocoder.opencagedata.com/pricing</a>. The free API key provides up to 2,500 calls a day. For ease of use, save your API key as an environment variable as described at <a href="http://stat545.com/bit003_api-key-env-var.html" class="uri">http://stat545.com/bit003_api-key-env-var.html</a>.</p>
+<p>Both functions of the package will conveniently look for your API key using <code>Sys.getenv(&quot;OPENCAGE_KEY&quot;)</code> so if your API key is an environment variable called “OPENCAGE_KEY” you don’t need to input it manually.</p>
+<div id="geocoding" class="section level1">
+<h1>Geocoding</h1>
+<p>The <a href="https://geocoder.opencagedata.com/">OpenCage</a> API supports forward and reverse geocoding. Sources of OpenCage are open geospatial data including OpenStreetMap, Yahoo! GeoPlanet, Natural Earth Data, Thematic Mapping, Ordnance Survey OpenSpace, Statistics New Zealand, Zillow, MaxMind, GeoNames, the US Census Bureau and Flickr’s shapefiles plus a whole lot more besides. See <a href="https://geocoder.opencagedata.com/credits">this page</a> for the full list of credits.</p>
+<p>Both forward and reverse geocoding typically return multiple results. Regarding these multiple results, the API doc states, “In cases where the geocoder is able to find multiple matches, the geocoder will return multiple results. The confidence or coordinates for each result should be examined to determine whether each result from an ambiguous query is sufficiently high to warrant using a result or not. A good strategy to reduce ambiguity is to use the optional <code>bounds</code> parameter described below to limit the area searched.” Multiple results might mean you get a result for the airport and a road when querying a city name, or results for cities with the same name in different countries.</p>
+<p>Below are two simple examples.</p>
+<div id="forward-geocoding" class="section level2">
+<h2>Forward geocoding</h2>
+<p>Forward geocoding is from placename to latitude and longitude tuplet(s).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;opencage&quot;</span>)
+output &lt;-<span class="st"> </span><span class="kw">opencage_forward</span>(<span class="dt">placename =</span> <span class="st">&quot;Sarzeau&quot;</span>)
+<span class="kw">print</span>(output$time_stamp)
+<span class="co">#&gt; [1] &quot;2016-05-12 13:53:57 CEST&quot;</span>
+<span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)
+output$rate_info %&gt;%<span class="st"> </span>knitr::<span class="kw">kable</span>()</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">limit</th>
+<th align="right">remaining</th>
+<th align="left">rest</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">2500</td>
+<td align="right">2463</td>
+<td align="left">2016-05-13 02:00:00</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output$results %&gt;%<span class="st"> </span>knitr::<span class="kw">kable</span>()</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">annotations.DMS.lat</th>
+<th align="left">annotations.DMS.lng</th>
+<th align="left">annotations.MGRS</th>
+<th align="left">annotations.Maidenhead</th>
+<th align="left">annotations.Mercator.x</th>
+<th align="left">annotations.Mercator.y</th>
+<th align="left">annotations.OSM.edit_url</th>
+<th align="left">annotations.OSM.url</th>
+<th align="left">annotations.callingcode</th>
+<th align="left">annotations.geohash</th>
+<th align="left">annotations.sun.rise.apparent</th>
+<th align="left">annotations.sun.rise.astronomical</th>
+<th align="left">annotations.sun.rise.civil</th>
+<th align="left">annotations.sun.rise.nautical</th>
+<th align="left">annotations.sun.set.apparent</th>
+<th align="left">annotations.sun.set.astronomical</th>
+<th align="left">annotations.sun.set.civil</th>
+<th align="left">annotations.sun.set.nautical</th>
+<th align="left">annotations.timezone.name</th>
+<th align="left">annotations.timezone.now_in_dst</th>
+<th align="left">annotations.timezone.offset_sec</th>
+<th align="left">annotations.timezone.offset_string</th>
+<th align="left">annotations.timezone.short_name</th>
+<th align="left">annotations.what3words.words</th>
+<th align="left">bounds.northeast.lat</th>
+<th align="left">bounds.northeast.lng</th>
+<th align="left">bounds.southwest.lat</th>
+<th align="left">bounds.southwest.lng</th>
+<th align="left">components._type</th>
+<th align="left">components.city</th>
+<th align="left">components.country</th>
+<th align="left">components.country_code</th>
+<th align="left">components.county</th>
+<th align="left">components.postcode</th>
+<th align="left">components.state</th>
+<th align="left">confidence</th>
+<th align="left">formatted</th>
+<th align="right">geometry.lat</th>
+<th align="right">geometry.lng</th>
+<th align="left">components.post_office</th>
+<th align="left">components.road</th>
+<th align="left">components.suburb</th>
+<th align="left">components.village</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">47° 31’ 43.56984’’ N</td>
+<td align="left">2° 45’ 51.11856’’ W</td>
+<td align="left">30TWT1774963954</td>
+<td align="left">IN87om86hv</td>
+<td align="left">-307709.292</td>
+<td align="left">5997281.031</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?relation=959447#map=17/47.52877/-2.76420" class="uri">https://www.openstreetmap.org/edit?relation=959447#map=17/47.52877/-2.76420</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=47.52877&amp;mlon=-2.76420#map=17/47.52877/-2.76420" class="uri">https://www.openstreetmap.org/?mlat=47.52877&amp;mlon=-2.76420#map=17/47.52877/-2.76420</a></td>
+<td align="left">33</td>
+<td align="left">gbqn3h75jkz3h3mvtyj6</td>
+<td align="left">1463027820</td>
+<td align="left">1463019420</td>
+<td align="left">1463025660</td>
+<td align="left">1463022840</td>
+<td align="left">1463081940</td>
+<td align="left">1463090400</td>
+<td align="left">1463084100</td>
+<td align="left">1463086920</td>
+<td align="left">Europe/Paris</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">gasp.jiggle.creamier</td>
+<td align="left">47.568813</td>
+<td align="left">-2.6630649</td>
+<td align="left">47.484236</td>
+<td align="left">-2.8536849</td>
+<td align="left">city</td>
+<td align="left">Sarzeau</td>
+<td align="left">France</td>
+<td align="left">fr</td>
+<td align="left">Vannes</td>
+<td align="left">56370</td>
+<td align="left">Brittany</td>
+<td align="left">6</td>
+<td align="left">56370 Sarzeau, France</td>
+<td align="right">47.52877</td>
+<td align="right">-2.7642</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">47° 31’ 40.80828’’ N</td>
+<td align="left">2° 46’ 7.68144’’ W</td>
+<td align="left">30TWT1740363867</td>
+<td align="left">IN87om76rr</td>
+<td align="left">-308221.451</td>
+<td align="left">5997154.952</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=846574100#map=17/47.52800/-2.76880" class="uri">https://www.openstreetmap.org/edit?node=846574100#map=17/47.52800/-2.76880</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=47.52800&amp;mlon=-2.76880#map=17/47.52800/-2.76880" class="uri">https://www.openstreetmap.org/?mlat=47.52800&amp;mlon=-2.76880#map=17/47.52800/-2.76880</a></td>
+<td align="left">33</td>
+<td align="left">gbqn2upydmbc15dm9h6g</td>
+<td align="left">1463027820</td>
+<td align="left">1463019420</td>
+<td align="left">1463025660</td>
+<td align="left">1463022840</td>
+<td align="left">1463081940</td>
+<td align="left">1463090400</td>
+<td align="left">1463084100</td>
+<td align="left">1463086920</td>
+<td align="left">Europe/Paris</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">netball.anchored.accomplice</td>
+<td align="left">47.5280523</td>
+<td align="left">-2.7687504</td>
+<td align="left">47.5279523</td>
+<td align="left">-2.7688504</td>
+<td align="left">post_office</td>
+<td align="left">NA</td>
+<td align="left">France</td>
+<td align="left">fr</td>
+<td align="left">Vannes</td>
+<td align="left">56370</td>
+<td align="left">Brittany</td>
+<td align="left">10</td>
+<td align="left">SARZEAU, Rue de la Poste, 56370 Sarzeau, France</td>
+<td align="right">47.52800</td>
+<td align="right">-2.7688</td>
+<td align="left">SARZEAU</td>
+<td align="left">Rue de la Poste</td>
+<td align="left">Kerjolis</td>
+<td align="left">Sarzeau</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="reverse-geocoding" class="section level2">
+<h2>Reverse geocoding</h2>
+<p>Reverse geocoding is from latitude and longitude to placename(s).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output2 &lt;-<span class="st"> </span><span class="kw">opencage_reverse</span>(<span class="dt">latitude =</span> <span class="fl">51.5034070</span>, 
+                            <span class="dt">longitude =</span> -<span class="fl">0.1275920</span>)
+<span class="kw">print</span>(output2$time_stamp)
+<span class="co">#&gt; [1] &quot;2016-05-12 13:44:49 CEST&quot;</span>
+output2$rate_info %&gt;%<span class="st"> </span>knitr::<span class="kw">kable</span>()</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">limit</th>
+<th align="right">remaining</th>
+<th align="left">rest</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">2500</td>
+<td align="right">2462</td>
+<td align="left">2016-05-13 02:00:00</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output2$results %&gt;%<span class="st"> </span>knitr::<span class="kw">kable</span>()</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">annotations.DMS.lat</th>
+<th align="left">annotations.DMS.lng</th>
+<th align="left">annotations.MGRS</th>
+<th align="left">annotations.Maidenhead</th>
+<th align="left">annotations.Mercator.x</th>
+<th align="left">annotations.Mercator.y</th>
+<th align="left">annotations.OSGB.easting</th>
+<th align="left">annotations.OSGB.gridref</th>
+<th align="left">annotations.OSGB.northing</th>
+<th align="left">annotations.OSM.edit_url</th>
+<th align="left">annotations.OSM.url</th>
+<th align="left">annotations.callingcode</th>
+<th align="left">annotations.geohash</th>
+<th align="left">annotations.sun.rise.apparent</th>
+<th align="left">annotations.sun.rise.astronomical</th>
+<th align="left">annotations.sun.rise.civil</th>
+<th align="left">annotations.sun.rise.nautical</th>
+<th align="left">annotations.sun.set.apparent</th>
+<th align="left">annotations.sun.set.astronomical</th>
+<th align="left">annotations.sun.set.civil</th>
+<th align="left">annotations.sun.set.nautical</th>
+<th align="left">annotations.timezone.name</th>
+<th align="left">annotations.timezone.now_in_dst</th>
+<th align="left">annotations.timezone.offset_sec</th>
+<th align="left">annotations.timezone.offset_string</th>
+<th align="left">annotations.timezone.short_name</th>
+<th align="left">annotations.what3words.words</th>
+<th align="left">components._type</th>
+<th align="left">components.attraction</th>
+<th align="left">components.city</th>
+<th align="left">components.country</th>
+<th align="left">components.country_code</th>
+<th align="left">components.house_number</th>
+<th align="left">components.postcode</th>
+<th align="left">components.road</th>
+<th align="left">components.state</th>
+<th align="left">components.state_district</th>
+<th align="left">components.suburb</th>
+<th align="left">confidence</th>
+<th align="left">formatted</th>
+<th align="right">geometry.lat</th>
+<th align="right">geometry.lng</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">51° 30’ 12.38490’’ N</td>
+<td align="left">0° 7’ 39.74919’’ E</td>
+<td align="left">30UXC9933909723</td>
+<td align="left">IO91wm40qt</td>
+<td align="left">-14216.402</td>
+<td align="left">6677371.368</td>
+<td align="left">530044.64</td>
+<td align="left">TQ 300 799</td>
+<td align="left">179939.726</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?relation=1879842#map=17/51.50344/-0.12771" class="uri">https://www.openstreetmap.org/edit?relation=1879842#map=17/51.50344/-0.12771</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=51.50344&amp;mlon=-0.12771#map=17/51.50344/-0.12771" class="uri">https://www.openstreetmap.org/?mlat=51.50344&amp;mlon=-0.12771#map=17/51.50344/-0.12771</a></td>
+<td align="left">44</td>
+<td align="left">gcpuvpgj21jujy3ytfp1</td>
+<td align="left">1463026320</td>
+<td align="left">1463015820</td>
+<td align="left">1463023860</td>
+<td align="left">1463020560</td>
+<td align="left">1463082180</td>
+<td align="left">1463092860</td>
+<td align="left">1463084640</td>
+<td align="left">1463088000</td>
+<td align="left">Europe/London</td>
+<td align="left">1</td>
+<td align="left">3600</td>
+<td align="left">100</td>
+<td align="left">BST</td>
+<td align="left">onions.toned.active</td>
+<td align="left">attraction</td>
+<td align="left">10 Downing Street</td>
+<td align="left">London</td>
+<td align="left">United Kingdom</td>
+<td align="left">gb</td>
+<td align="left">10</td>
+<td align="left">SW1A 2AA</td>
+<td align="left">Downing Street</td>
+<td align="left">England</td>
+<td align="left">Greater London</td>
+<td align="left">Covent Garden</td>
+<td align="left">10</td>
+<td align="left">10 Downing Street, London SW1A 2AA, United Kingdom</td>
+<td align="right">51.50344</td>
+<td align="right">-0.1277081</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="output" class="section level2">
+<h2>Output</h2>
+<p>For both <code>opencage_forward</code> and <code>opencage_reverse</code> functions, the package returns a list with a time stamp for the query, the total number of results, a data.frame (<code>dplyr tbl_df</code>) with information about the remaining calls to the API unless you have an unlimited account, and a data.frame (<code>dplyr tbl_df</code>) with the results corresponding to your query. You can find longitude and latitude for each results as <code>geometry.lat</code> and <code>geometry.lng</code>. Other information includes country and country information, time of sunset and sunrise, geohash (a geocoding system identifying a point with a single string, as explained in many more details <a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/geohashes.html">here</a> and <a href="https://en.wikipedia.org/wiki/Geohash">here</a>; for pure conversion between longitude/latitude and geohashes, see <a href="https://github.com/Ironholds/geohash">this package</a>). Depending on the data available in the API for the results one gets different columns; there can be a lot to explore!</p>
+</div>
+<div id="parameters" class="section level2">
+<h2>Parameters</h2>
+<p>Optional parameters of both <code>opencage_forward</code> and <code>opencage_reverse</code> can make the query more precise:</p>
+<ul>
+<li><code>bounds</code>: Provides the geocoder with a hint to the region that the query resides in. This value will restrict the possible results to the supplied region. The bounds parameter should be specified as 4 coordinate points forming the south-west and north-east corners of a bounding box. For example, <code>bounds = c(-0.563160, 51.280430, 0.278970, 51.683979)</code> (min long, min lat, max long, max lat).</li>
+</ul>
+<p>Below is an example of the use of <code>bounds</code> where the rectangle given in the second call does not include Europe so that we don’t get results for Berlin in Germany.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results1 &lt;-<span class="st"> </span><span class="kw">opencage_forward</span>(<span class="dt">placename =</span> <span class="st">&quot;Berlin&quot;</span>)
+results1$results %&gt;%<span class="st"> </span>knitr::<span class="kw">kable</span>()</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">annotations.DMS.lat</th>
+<th align="left">annotations.DMS.lng</th>
+<th align="left">annotations.MGRS</th>
+<th align="left">annotations.Maidenhead</th>
+<th align="left">annotations.Mercator.x</th>
+<th align="left">annotations.Mercator.y</th>
+<th align="left">annotations.OSM.edit_url</th>
+<th align="left">annotations.OSM.url</th>
+<th align="left">annotations.callingcode</th>
+<th align="left">annotations.geohash</th>
+<th align="left">annotations.sun.rise.apparent</th>
+<th align="left">annotations.sun.rise.astronomical</th>
+<th align="left">annotations.sun.rise.civil</th>
+<th align="left">annotations.sun.rise.nautical</th>
+<th align="left">annotations.sun.set.apparent</th>
+<th align="left">annotations.sun.set.astronomical</th>
+<th align="left">annotations.sun.set.civil</th>
+<th align="left">annotations.sun.set.nautical</th>
+<th align="left">annotations.timezone.name</th>
+<th align="left">annotations.timezone.now_in_dst</th>
+<th align="left">annotations.timezone.offset_sec</th>
+<th align="left">annotations.timezone.offset_string</th>
+<th align="left">annotations.timezone.short_name</th>
+<th align="left">annotations.what3words.words</th>
+<th align="left">bounds.northeast.lat</th>
+<th align="left">bounds.northeast.lng</th>
+<th align="left">bounds.southwest.lat</th>
+<th align="left">bounds.southwest.lng</th>
+<th align="left">components._type</th>
+<th align="left">components.city</th>
+<th align="left">components.country</th>
+<th align="left">components.country_code</th>
+<th align="left">components.state</th>
+<th align="left">confidence</th>
+<th align="left">formatted</th>
+<th align="right">geometry.lat</th>
+<th align="right">geometry.lng</th>
+<th align="left">components.county</th>
+<th align="left">components.town</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">52° 31’ 1.33140’’ N</td>
+<td align="left">13° 23’ 19.89564’’ E</td>
+<td align="left">33UUU9067619766</td>
+<td align="left">JO62qm64pc</td>
+<td align="left">1490441.066</td>
+<td align="left">6860227.862</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=240109189#map=17/52.51704/13.38886" class="uri">https://www.openstreetmap.org/edit?node=240109189#map=17/52.51704/13.38886</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=52.51704&amp;mlon=13.38886#map=17/52.51704/13.38886" class="uri">https://www.openstreetmap.org/?mlat=52.51704&amp;mlon=13.38886#map=17/52.51704/13.38886</a></td>
+<td align="left">49</td>
+<td align="left">u33db8mmzj1t355u0c0j</td>
+<td align="left">1463022840</td>
+<td align="left">1463011380</td>
+<td align="left">1463020320</td>
+<td align="left">1463016840</td>
+<td align="left">1463079180</td>
+<td align="left">1463090940</td>
+<td align="left">1463081760</td>
+<td align="left">1463085240</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">third.gurgled.such</td>
+<td align="left">52.6770365</td>
+<td align="left">13.5488599</td>
+<td align="left">52.3570365</td>
+<td align="left">13.2288599</td>
+<td align="left">city</td>
+<td align="left">Berlin</td>
+<td align="left">Germany</td>
+<td align="left">de</td>
+<td align="left">Berlin</td>
+<td align="left">4</td>
+<td align="left">Berlin, Germany</td>
+<td align="right">52.51704</td>
+<td align="right">13.38886</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">44° 28’ 7.21056’’ N</td>
+<td align="left">71° 11’ 6.27612’’ W</td>
+<td align="left">19TCK2619726251</td>
+<td align="left">FN44jl72sl</td>
+<td align="left">-7924286.49</td>
+<td align="left">5508315.317</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?relation=170184#map=17/44.46867/-71.18508" class="uri">https://www.openstreetmap.org/edit?relation=170184#map=17/44.46867/-71.18508</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=44.46867&amp;mlon=-71.18508#map=17/44.46867/-71.18508" class="uri">https://www.openstreetmap.org/?mlat=44.46867&amp;mlon=-71.18508#map=17/44.46867/-71.18508</a></td>
+<td align="left">1</td>
+<td align="left">drvkupk8g2zdsyw72s2c</td>
+<td align="left">1463044740</td>
+<td align="left">1463037240</td>
+<td align="left">1463042700</td>
+<td align="left">1463040180</td>
+<td align="left">1463011380</td>
+<td align="left">1463018880</td>
+<td align="left">1463013360</td>
+<td align="left">1463015940</td>
+<td align="left">America/New_York</td>
+<td align="left">1</td>
+<td align="left">-14400</td>
+<td align="left">-400</td>
+<td align="left">EDT</td>
+<td align="left">angle.liability.nerve</td>
+<td align="left">44.528436</td>
+<td align="left">-71.1236419</td>
+<td align="left">44.445057</td>
+<td align="left">-71.3978579</td>
+<td align="left">city</td>
+<td align="left">Berlin</td>
+<td align="left">United States of America</td>
+<td align="left">us</td>
+<td align="left">New Hampshire</td>
+<td align="left">5</td>
+<td align="left">Berlin, Coös County, New Hampshire, United States of America</td>
+<td align="right">44.46867</td>
+<td align="right">-71.18508</td>
+<td align="left">Coös County</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">41° 37’ 17.35680’’ N</td>
+<td align="left">72° 44’ 44.34648’’ W</td>
+<td align="left">18TXM8780710206</td>
+<td align="left">FN31po09md</td>
+<td align="left">-8098008.916</td>
+<td align="left">5076059.694</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=158845944#map=17/41.62149/-72.74565" class="uri">https://www.openstreetmap.org/edit?node=158845944#map=17/41.62149/-72.74565</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=41.62149&amp;mlon=-72.74565#map=17/41.62149/-72.74565" class="uri">https://www.openstreetmap.org/?mlat=41.62149&amp;mlon=-72.74565#map=17/41.62149/-72.74565</a></td>
+<td align="left">1</td>
+<td align="left">drkkb8unxrwwbsuj9tjy</td>
+<td align="left">1463045580</td>
+<td align="left">1463038680</td>
+<td align="left">1463043660</td>
+<td align="left">1463041320</td>
+<td align="left">1463011260</td>
+<td align="left">1463018160</td>
+<td align="left">1463013180</td>
+<td align="left">1463015520</td>
+<td align="left">America/New_York</td>
+<td align="left">1</td>
+<td align="left">-14400</td>
+<td align="left">-400</td>
+<td align="left">EDT</td>
+<td align="left">frosts.crowds.reef</td>
+<td align="left">41.661488</td>
+<td align="left">-72.7056518</td>
+<td align="left">41.581488</td>
+<td align="left">-72.7856518</td>
+<td align="left">city</td>
+<td align="left">NA</td>
+<td align="left">United States of America</td>
+<td align="left">us</td>
+<td align="left">Connecticut</td>
+<td align="left">7</td>
+<td align="left">Berlin, Hartford County, Connecticut, United States of America</td>
+<td align="right">41.62149</td>
+<td align="right">-72.74565</td>
+<td align="left">Hartford County</td>
+<td align="left">Berlin</td>
+</tr>
+<tr class="even">
+<td align="left">39° 47’ 28.41432’’ N</td>
+<td align="left">74° 55’ 44.59260’’ W</td>
+<td align="left">18SWK0607404588</td>
+<td align="left">FM29ms89mv</td>
+<td align="left">-8341064.081</td>
+<td align="left">4808298.871</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?relation=170680#map=17/39.79123/-74.92905" class="uri">https://www.openstreetmap.org/edit?relation=170680#map=17/39.79123/-74.92905</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=39.79123&amp;mlon=-74.92905#map=17/39.79123/-74.92905" class="uri">https://www.openstreetmap.org/?mlat=39.79123&amp;mlon=-74.92905#map=17/39.79123/-74.92905</a></td>
+<td align="left">1</td>
+<td align="left">dr4dqgy2dw0jyzb7kgs3</td>
+<td align="left">1463046360</td>
+<td align="left">1463039820</td>
+<td align="left">1463044560</td>
+<td align="left">1463042280</td>
+<td align="left">1463011500</td>
+<td align="left">1463018100</td>
+<td align="left">1463013360</td>
+<td align="left">1463015580</td>
+<td align="left">America/New_York</td>
+<td align="left">1</td>
+<td align="left">-14400</td>
+<td align="left">-400</td>
+<td align="left">EDT</td>
+<td align="left">verdict.rushes.upgrading</td>
+<td align="left">39.8091498</td>
+<td align="left">-74.9079589</td>
+<td align="left">39.77601</td>
+<td align="left">-74.9661129</td>
+<td align="left">city</td>
+<td align="left">Berlin</td>
+<td align="left">United States of America</td>
+<td align="left">us</td>
+<td align="left">New Jersey</td>
+<td align="left">7</td>
+<td align="left">Berlin, Camden County, New Jersey, United States of America</td>
+<td align="right">39.79123</td>
+<td align="right">-74.92905</td>
+<td align="left">Camden County</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">42° 22’ 52.33440’’ N</td>
+<td align="left">71° 38’ 13.24320’’ W</td>
+<td align="left">19TBG8291095470</td>
+<td align="left">FN42ej31nl</td>
+<td align="left">-7974595.698</td>
+<td align="left">5189444.074</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?relation=1844156#map=17/42.38120/-71.63701" class="uri">https://www.openstreetmap.org/edit?relation=1844156#map=17/42.38120/-71.63701</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=42.38120&amp;mlon=-71.63701#map=17/42.38120/-71.63701" class="uri">https://www.openstreetmap.org/?mlat=42.38120&amp;mlon=-71.63701#map=17/42.38120/-71.63701</a></td>
+<td align="left">1</td>
+<td align="left">drt11g782th32euc09nn</td>
+<td align="left">1463045160</td>
+<td align="left">1463038140</td>
+<td align="left">1463043240</td>
+<td align="left">1463040840</td>
+<td align="left">1463097540</td>
+<td align="left">1463018160</td>
+<td align="left">1463013060</td>
+<td align="left">1463015460</td>
+<td align="left">America/New_York</td>
+<td align="left">1</td>
+<td align="left">-14400</td>
+<td align="left">-400</td>
+<td align="left">EDT</td>
+<td align="left">astonished.rightfully.pythons</td>
+<td align="left">42.4182811</td>
+<td align="left">-71.5802309</td>
+<td align="left">42.3505932</td>
+<td align="left">-71.6787957</td>
+<td align="left">city</td>
+<td align="left">Berlin</td>
+<td align="left">United States of America</td>
+<td align="left">us</td>
+<td align="left">Massachusetts</td>
+<td align="left">7</td>
+<td align="left">Berlin, Worcester County, Massachusetts, United States of America</td>
+<td align="right">42.38120</td>
+<td align="right">-71.63701</td>
+<td align="left">Worcester County</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">38° 19’ 21.41544’’ N</td>
+<td align="left">75° 13’ 3.68076’’ W</td>
+<td align="left">18SVH8097141633</td>
+<td align="left">FM28jh37vk</td>
+<td align="left">-8373194.849</td>
+<td align="left">4598602.233</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?relation=133689#map=17/38.32262/-75.21769" class="uri">https://www.openstreetmap.org/edit?relation=133689#map=17/38.32262/-75.21769</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=38.32262&amp;mlon=-75.21769#map=17/38.32262/-75.21769" class="uri">https://www.openstreetmap.org/?mlat=38.32262&amp;mlon=-75.21769#map=17/38.32262/-75.21769</a></td>
+<td align="left">1</td>
+<td align="left">dqfd02kjkv3cm4dts5ph</td>
+<td align="left">1463046660</td>
+<td align="left">1463040300</td>
+<td align="left">1463044860</td>
+<td align="left">1463042700</td>
+<td align="left">1463011380</td>
+<td align="left">1463017680</td>
+<td align="left">1463013120</td>
+<td align="left">1463015340</td>
+<td align="left">America/New_York</td>
+<td align="left">1</td>
+<td align="left">-14400</td>
+<td align="left">-400</td>
+<td align="left">EDT</td>
+<td align="left">floral.evenly.shortwave</td>
+<td align="left">38.355184</td>
+<td align="left">-75.1880179</td>
+<td align="left">38.308406</td>
+<td align="left">-75.2347939</td>
+<td align="left">city</td>
+<td align="left">Berlin</td>
+<td align="left">United States of America</td>
+<td align="left">us</td>
+<td align="left">Maryland</td>
+<td align="left">7</td>
+<td align="left">Berlin, Worcester County, Maryland, United States of America</td>
+<td align="right">38.32262</td>
+<td align="right">-75.21769</td>
+<td align="left">Worcester County</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">43° 58’ 4.93140’’ N</td>
+<td align="left">88° 56’ 36.41136’’ W</td>
+<td align="left">16TCP4410170158</td>
+<td align="left">EN53mx62sh</td>
+<td align="left">-9901139.296</td>
+<td align="left">5430821.988</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?relation=251729#map=17/43.96804/-88.94345" class="uri">https://www.openstreetmap.org/edit?relation=251729#map=17/43.96804/-88.94345</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=43.96804&amp;mlon=-88.94345#map=17/43.96804/-88.94345" class="uri">https://www.openstreetmap.org/?mlat=43.96804&amp;mlon=-88.94345#map=17/43.96804/-88.94345</a></td>
+<td align="left">1</td>
+<td align="left">dpbf0h1k7kn9fnpft5qz</td>
+<td align="left">1463049060</td>
+<td align="left">1463041680</td>
+<td align="left">1463047080</td>
+<td align="left">1463044560</td>
+<td align="left">1463015520</td>
+<td align="left">1463022960</td>
+<td align="left">1463017560</td>
+<td align="left">1463020020</td>
+<td align="left">America/Chicago</td>
+<td align="left">1</td>
+<td align="left">-18000</td>
+<td align="left">-500</td>
+<td align="left">CDT</td>
+<td align="left">admits.indecision.skins</td>
+<td align="left">43.997968</td>
+<td align="left">-88.9207259</td>
+<td align="left">43.947614</td>
+<td align="left">-88.9808519</td>
+<td align="left">city</td>
+<td align="left">City of Berlin</td>
+<td align="left">United States of America</td>
+<td align="left">us</td>
+<td align="left">Wisconsin</td>
+<td align="left">7</td>
+<td align="left">City of Berlin, Green Lake County, Wisconsin, United States of America</td>
+<td align="right">43.96804</td>
+<td align="right">-88.94345</td>
+<td align="left">Green Lake County</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">39° 55’ 14.29068’’ N</td>
+<td align="left">78° 57’ 28.08756’’ W</td>
+<td align="left">17SPE7452920945</td>
+<td align="left">FM09mw50bw</td>
+<td align="left">-8789542.324</td>
+<td align="left">4826990.633</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?relation=189091#map=17/39.92064/-78.95780" class="uri">https://www.openstreetmap.org/edit?relation=189091#map=17/39.92064/-78.95780</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=39.92064&amp;mlon=-78.95780#map=17/39.92064/-78.95780" class="uri">https://www.openstreetmap.org/?mlat=39.92064&amp;mlon=-78.95780#map=17/39.92064/-78.95780</a></td>
+<td align="left">1</td>
+<td align="left">dppg572dtcgx2cbq86cy</td>
+<td align="left">1463047320</td>
+<td align="left">1463040720</td>
+<td align="left">1463045460</td>
+<td align="left">1463043240</td>
+<td align="left">1463012520</td>
+<td align="left">1463019060</td>
+<td align="left">1463014320</td>
+<td align="left">1463016600</td>
+<td align="left">America/New_York</td>
+<td align="left">1</td>
+<td align="left">-14400</td>
+<td align="left">-400</td>
+<td align="left">EDT</td>
+<td align="left">rangers.chopsticks.crumbs</td>
+<td align="left">39.927231</td>
+<td align="left">-78.9372069</td>
+<td align="left">39.914615</td>
+<td align="left">-78.9657809</td>
+<td align="left">city</td>
+<td align="left">Berlin</td>
+<td align="left">United States of America</td>
+<td align="left">us</td>
+<td align="left">Pennsylvania</td>
+<td align="left">8</td>
+<td align="left">Berlin, Somerset County, Pennsylvania, United States of America</td>
+<td align="right">39.92064</td>
+<td align="right">-78.95780</td>
+<td align="left">Somerset County</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">39° 45’ 32.17932’’ N</td>
+<td align="left">89° 54’ 11.38824’’ W</td>
+<td align="left">16SBK5129805033</td>
+<td align="left">EM59bs12od</td>
+<td align="left">-10007974.37</td>
+<td align="left">4803640.851</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?relation=126290#map=17/39.75894/-89.90316" class="uri">https://www.openstreetmap.org/edit?relation=126290#map=17/39.75894/-89.90316</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=39.75894&amp;mlon=-89.90316#map=17/39.75894/-89.90316" class="uri">https://www.openstreetmap.org/?mlat=39.75894&amp;mlon=-89.90316#map=17/39.75894/-89.90316</a></td>
+<td align="left">1</td>
+<td align="left">dp044jys87qee3bchu0k</td>
+<td align="left">1463049960</td>
+<td align="left">1463043420</td>
+<td align="left">1463048100</td>
+<td align="left">1463045880</td>
+<td align="left">1463015100</td>
+<td align="left">1463021640</td>
+<td align="left">1463016900</td>
+<td align="left">1463019180</td>
+<td align="left">America/Chicago</td>
+<td align="left">1</td>
+<td align="left">-18000</td>
+<td align="left">-500</td>
+<td align="left">CDT</td>
+<td align="left">fluent.mocked.fancied</td>
+<td align="left">39.764932</td>
+<td align="left">-89.8931649</td>
+<td align="left">39.750371</td>
+<td align="left">-89.9121009</td>
+<td align="left">city</td>
+<td align="left">Berlin</td>
+<td align="left">United States of America</td>
+<td align="left">us</td>
+<td align="left">Illinois</td>
+<td align="left">8</td>
+<td align="left">Berlin, Sangamon County, Illinois, United States of America</td>
+<td align="right">39.75894</td>
+<td align="right">-89.90316</td>
+<td align="left">Sangamon County</td>
+<td align="left">NA</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results2 &lt;-<span class="st"> </span><span class="kw">opencage_forward</span>(<span class="dt">placename =</span> <span class="st">&quot;Berlin&quot;</span>,
+                             <span class="dt">bounds =</span> <span class="kw">c</span>(-<span class="dv">90</span>,<span class="dv">38</span>,<span class="dv">0</span>, <span class="dv">45</span>))
+results2$results %&gt;%<span class="st"> </span>knitr::<span class="kw">kable</span>()</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">annotations.DMS.lat</th>
+<th align="left">annotations.DMS.lng</th>
+<th align="left">annotations.MGRS</th>
+<th align="left">annotations.Maidenhead</th>
+<th align="left">annotations.Mercator.x</th>
+<th align="left">annotations.Mercator.y</th>
+<th align="left">annotations.OSM.edit_url</th>
+<th align="left">annotations.OSM.url</th>
+<th align="left">annotations.callingcode</th>
+<th align="left">annotations.geohash</th>
+<th align="left">annotations.sun.rise.apparent</th>
+<th align="left">annotations.sun.rise.astronomical</th>
+<th align="left">annotations.sun.rise.civil</th>
+<th align="left">annotations.sun.rise.nautical</th>
+<th align="left">annotations.sun.set.apparent</th>
+<th align="left">annotations.sun.set.astronomical</th>
+<th align="left">annotations.sun.set.civil</th>
+<th align="left">annotations.sun.set.nautical</th>
+<th align="left">annotations.timezone.name</th>
+<th align="left">annotations.timezone.now_in_dst</th>
+<th align="left">annotations.timezone.offset_sec</th>
+<th align="left">annotations.timezone.offset_string</th>
+<th align="left">annotations.timezone.short_name</th>
+<th align="left">annotations.what3words.words</th>
+<th align="left">bounds.northeast.lat</th>
+<th align="left">bounds.northeast.lng</th>
+<th align="left">bounds.southwest.lat</th>
+<th align="left">bounds.southwest.lng</th>
+<th align="left">components._type</th>
+<th align="left">components.city</th>
+<th align="left">components.country</th>
+<th align="left">components.country_code</th>
+<th align="left">components.county</th>
+<th align="left">components.state</th>
+<th align="left">confidence</th>
+<th align="left">formatted</th>
+<th align="right">geometry.lat</th>
+<th align="right">geometry.lng</th>
+<th align="left">components.town</th>
+<th align="left">components.village</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">44° 28’ 7.21056’’ N</td>
+<td align="left">71° 11’ 6.27612’’ W</td>
+<td align="left">19TCK2619726251</td>
+<td align="left">FN44jl72sl</td>
+<td align="left">-7924286.49</td>
+<td align="left">5508315.317</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?relation=170184#map=17/44.46867/-71.18508" class="uri">https://www.openstreetmap.org/edit?relation=170184#map=17/44.46867/-71.18508</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=44.46867&amp;mlon=-71.18508#map=17/44.46867/-71.18508" class="uri">https://www.openstreetmap.org/?mlat=44.46867&amp;mlon=-71.18508#map=17/44.46867/-71.18508</a></td>
+<td align="left">1</td>
+<td align="left">drvkupk8g2zdsyw72s2c</td>
+<td align="left">1463044740</td>
+<td align="left">1463037240</td>
+<td align="left">1463042700</td>
+<td align="left">1463040180</td>
+<td align="left">1463011380</td>
+<td align="left">1463018880</td>
+<td align="left">1463013360</td>
+<td align="left">1463015940</td>
+<td align="left">America/New_York</td>
+<td align="left">1</td>
+<td align="left">-14400</td>
+<td align="left">-400</td>
+<td align="left">EDT</td>
+<td align="left">angle.liability.nerve</td>
+<td align="left">44.528436</td>
+<td align="left">-71.1236419</td>
+<td align="left">44.445057</td>
+<td align="left">-71.3978579</td>
+<td align="left">city</td>
+<td align="left">Berlin</td>
+<td align="left">United States of America</td>
+<td align="left">us</td>
+<td align="left">Coös County</td>
+<td align="left">New Hampshire</td>
+<td align="left">5</td>
+<td align="left">Berlin, Coös County, New Hampshire, United States of America</td>
+<td align="right">44.46867</td>
+<td align="right">-71.18508</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">41° 37’ 17.35680’’ N</td>
+<td align="left">72° 44’ 44.34648’’ W</td>
+<td align="left">18TXM8780710206</td>
+<td align="left">FN31po09md</td>
+<td align="left">-8098008.916</td>
+<td align="left">5076059.694</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=158845944#map=17/41.62149/-72.74565" class="uri">https://www.openstreetmap.org/edit?node=158845944#map=17/41.62149/-72.74565</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=41.62149&amp;mlon=-72.74565#map=17/41.62149/-72.74565" class="uri">https://www.openstreetmap.org/?mlat=41.62149&amp;mlon=-72.74565#map=17/41.62149/-72.74565</a></td>
+<td align="left">1</td>
+<td align="left">drkkb8unxrwwbsuj9tjy</td>
+<td align="left">1463045580</td>
+<td align="left">1463038680</td>
+<td align="left">1463043660</td>
+<td align="left">1463041320</td>
+<td align="left">1463011260</td>
+<td align="left">1463018160</td>
+<td align="left">1463013180</td>
+<td align="left">1463015520</td>
+<td align="left">America/New_York</td>
+<td align="left">1</td>
+<td align="left">-14400</td>
+<td align="left">-400</td>
+<td align="left">EDT</td>
+<td align="left">frosts.crowds.reef</td>
+<td align="left">41.661488</td>
+<td align="left">-72.7056518</td>
+<td align="left">41.581488</td>
+<td align="left">-72.7856518</td>
+<td align="left">city</td>
+<td align="left">NA</td>
+<td align="left">United States of America</td>
+<td align="left">us</td>
+<td align="left">Hartford County</td>
+<td align="left">Connecticut</td>
+<td align="left">7</td>
+<td align="left">Berlin, Hartford County, Connecticut, United States of America</td>
+<td align="right">41.62149</td>
+<td align="right">-72.74565</td>
+<td align="left">Berlin</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">39° 47’ 28.41432’’ N</td>
+<td align="left">74° 55’ 44.59260’’ W</td>
+<td align="left">18SWK0607404588</td>
+<td align="left">FM29ms89mv</td>
+<td align="left">-8341064.081</td>
+<td align="left">4808298.871</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?relation=170680#map=17/39.79123/-74.92905" class="uri">https://www.openstreetmap.org/edit?relation=170680#map=17/39.79123/-74.92905</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=39.79123&amp;mlon=-74.92905#map=17/39.79123/-74.92905" class="uri">https://www.openstreetmap.org/?mlat=39.79123&amp;mlon=-74.92905#map=17/39.79123/-74.92905</a></td>
+<td align="left">1</td>
+<td align="left">dr4dqgy2dw0jyzb7kgs3</td>
+<td align="left">1463046360</td>
+<td align="left">1463039820</td>
+<td align="left">1463044560</td>
+<td align="left">1463042280</td>
+<td align="left">1463011500</td>
+<td align="left">1463018100</td>
+<td align="left">1463013360</td>
+<td align="left">1463015580</td>
+<td align="left">America/New_York</td>
+<td align="left">1</td>
+<td align="left">-14400</td>
+<td align="left">-400</td>
+<td align="left">EDT</td>
+<td align="left">verdict.rushes.upgrading</td>
+<td align="left">39.8091498</td>
+<td align="left">-74.9079589</td>
+<td align="left">39.77601</td>
+<td align="left">-74.9661129</td>
+<td align="left">city</td>
+<td align="left">Berlin</td>
+<td align="left">United States of America</td>
+<td align="left">us</td>
+<td align="left">Camden County</td>
+<td align="left">New Jersey</td>
+<td align="left">7</td>
+<td align="left">Berlin, Camden County, New Jersey, United States of America</td>
+<td align="right">39.79123</td>
+<td align="right">-74.92905</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">42° 22’ 52.33440’’ N</td>
+<td align="left">71° 38’ 13.24320’’ W</td>
+<td align="left">19TBG8291095470</td>
+<td align="left">FN42ej31nl</td>
+<td align="left">-7974595.698</td>
+<td align="left">5189444.074</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?relation=1844156#map=17/42.38120/-71.63701" class="uri">https://www.openstreetmap.org/edit?relation=1844156#map=17/42.38120/-71.63701</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=42.38120&amp;mlon=-71.63701#map=17/42.38120/-71.63701" class="uri">https://www.openstreetmap.org/?mlat=42.38120&amp;mlon=-71.63701#map=17/42.38120/-71.63701</a></td>
+<td align="left">1</td>
+<td align="left">drt11g782th32euc09nn</td>
+<td align="left">1463045160</td>
+<td align="left">1463038140</td>
+<td align="left">1463043240</td>
+<td align="left">1463040840</td>
+<td align="left">1463097540</td>
+<td align="left">1463018160</td>
+<td align="left">1463013060</td>
+<td align="left">1463015460</td>
+<td align="left">America/New_York</td>
+<td align="left">1</td>
+<td align="left">-14400</td>
+<td align="left">-400</td>
+<td align="left">EDT</td>
+<td align="left">astonished.rightfully.pythons</td>
+<td align="left">42.4182811</td>
+<td align="left">-71.5802309</td>
+<td align="left">42.3505932</td>
+<td align="left">-71.6787957</td>
+<td align="left">city</td>
+<td align="left">Berlin</td>
+<td align="left">United States of America</td>
+<td align="left">us</td>
+<td align="left">Worcester County</td>
+<td align="left">Massachusetts</td>
+<td align="left">7</td>
+<td align="left">Berlin, Worcester County, Massachusetts, United States of America</td>
+<td align="right">42.38120</td>
+<td align="right">-71.63701</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">38° 19’ 21.41544’’ N</td>
+<td align="left">75° 13’ 3.68076’’ W</td>
+<td align="left">18SVH8097141633</td>
+<td align="left">FM28jh37vk</td>
+<td align="left">-8373194.849</td>
+<td align="left">4598602.233</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?relation=133689#map=17/38.32262/-75.21769" class="uri">https://www.openstreetmap.org/edit?relation=133689#map=17/38.32262/-75.21769</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=38.32262&amp;mlon=-75.21769#map=17/38.32262/-75.21769" class="uri">https://www.openstreetmap.org/?mlat=38.32262&amp;mlon=-75.21769#map=17/38.32262/-75.21769</a></td>
+<td align="left">1</td>
+<td align="left">dqfd02kjkv3cm4dts5ph</td>
+<td align="left">1463046660</td>
+<td align="left">1463040300</td>
+<td align="left">1463044860</td>
+<td align="left">1463042700</td>
+<td align="left">1463011380</td>
+<td align="left">1463017680</td>
+<td align="left">1463013120</td>
+<td align="left">1463015340</td>
+<td align="left">America/New_York</td>
+<td align="left">1</td>
+<td align="left">-14400</td>
+<td align="left">-400</td>
+<td align="left">EDT</td>
+<td align="left">floral.evenly.shortwave</td>
+<td align="left">38.355184</td>
+<td align="left">-75.1880179</td>
+<td align="left">38.308406</td>
+<td align="left">-75.2347939</td>
+<td align="left">city</td>
+<td align="left">Berlin</td>
+<td align="left">United States of America</td>
+<td align="left">us</td>
+<td align="left">Worcester County</td>
+<td align="left">Maryland</td>
+<td align="left">7</td>
+<td align="left">Berlin, Worcester County, Maryland, United States of America</td>
+<td align="right">38.32262</td>
+<td align="right">-75.21769</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">43° 58’ 4.93140’’ N</td>
+<td align="left">88° 56’ 36.41136’’ W</td>
+<td align="left">16TCP4410170158</td>
+<td align="left">EN53mx62sh</td>
+<td align="left">-9901139.296</td>
+<td align="left">5430821.988</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?relation=251729#map=17/43.96804/-88.94345" class="uri">https://www.openstreetmap.org/edit?relation=251729#map=17/43.96804/-88.94345</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=43.96804&amp;mlon=-88.94345#map=17/43.96804/-88.94345" class="uri">https://www.openstreetmap.org/?mlat=43.96804&amp;mlon=-88.94345#map=17/43.96804/-88.94345</a></td>
+<td align="left">1</td>
+<td align="left">dpbf0h1k7kn9fnpft5qz</td>
+<td align="left">1463049060</td>
+<td align="left">1463041680</td>
+<td align="left">1463047080</td>
+<td align="left">1463044560</td>
+<td align="left">1463015520</td>
+<td align="left">1463022960</td>
+<td align="left">1463017560</td>
+<td align="left">1463020020</td>
+<td align="left">America/Chicago</td>
+<td align="left">1</td>
+<td align="left">-18000</td>
+<td align="left">-500</td>
+<td align="left">CDT</td>
+<td align="left">admits.indecision.skins</td>
+<td align="left">43.997968</td>
+<td align="left">-88.9207259</td>
+<td align="left">43.947614</td>
+<td align="left">-88.9808519</td>
+<td align="left">city</td>
+<td align="left">City of Berlin</td>
+<td align="left">United States of America</td>
+<td align="left">us</td>
+<td align="left">Green Lake County</td>
+<td align="left">Wisconsin</td>
+<td align="left">7</td>
+<td align="left">City of Berlin, Green Lake County, Wisconsin, United States of America</td>
+<td align="right">43.96804</td>
+<td align="right">-88.94345</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">39° 55’ 14.29068’’ N</td>
+<td align="left">78° 57’ 28.08756’’ W</td>
+<td align="left">17SPE7452920945</td>
+<td align="left">FM09mw50bw</td>
+<td align="left">-8789542.324</td>
+<td align="left">4826990.633</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?relation=189091#map=17/39.92064/-78.95780" class="uri">https://www.openstreetmap.org/edit?relation=189091#map=17/39.92064/-78.95780</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=39.92064&amp;mlon=-78.95780#map=17/39.92064/-78.95780" class="uri">https://www.openstreetmap.org/?mlat=39.92064&amp;mlon=-78.95780#map=17/39.92064/-78.95780</a></td>
+<td align="left">1</td>
+<td align="left">dppg572dtcgx2cbq86cy</td>
+<td align="left">1463047320</td>
+<td align="left">1463040720</td>
+<td align="left">1463045460</td>
+<td align="left">1463043240</td>
+<td align="left">1463012520</td>
+<td align="left">1463019060</td>
+<td align="left">1463014320</td>
+<td align="left">1463016600</td>
+<td align="left">America/New_York</td>
+<td align="left">1</td>
+<td align="left">-14400</td>
+<td align="left">-400</td>
+<td align="left">EDT</td>
+<td align="left">rangers.chopsticks.crumbs</td>
+<td align="left">39.927231</td>
+<td align="left">-78.9372069</td>
+<td align="left">39.914615</td>
+<td align="left">-78.9657809</td>
+<td align="left">city</td>
+<td align="left">Berlin</td>
+<td align="left">United States of America</td>
+<td align="left">us</td>
+<td align="left">Somerset County</td>
+<td align="left">Pennsylvania</td>
+<td align="left">8</td>
+<td align="left">Berlin, Somerset County, Pennsylvania, United States of America</td>
+<td align="right">39.92064</td>
+<td align="right">-78.95780</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">39° 45’ 32.17932’’ N</td>
+<td align="left">89° 54’ 11.38824’’ W</td>
+<td align="left">16SBK5129805033</td>
+<td align="left">EM59bs12od</td>
+<td align="left">-10007974.37</td>
+<td align="left">4803640.851</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?relation=126290#map=17/39.75894/-89.90316" class="uri">https://www.openstreetmap.org/edit?relation=126290#map=17/39.75894/-89.90316</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=39.75894&amp;mlon=-89.90316#map=17/39.75894/-89.90316" class="uri">https://www.openstreetmap.org/?mlat=39.75894&amp;mlon=-89.90316#map=17/39.75894/-89.90316</a></td>
+<td align="left">1</td>
+<td align="left">dp044jys87qee3bchu0k</td>
+<td align="left">1463049960</td>
+<td align="left">1463043420</td>
+<td align="left">1463048100</td>
+<td align="left">1463045880</td>
+<td align="left">1463015100</td>
+<td align="left">1463021640</td>
+<td align="left">1463016900</td>
+<td align="left">1463019180</td>
+<td align="left">America/Chicago</td>
+<td align="left">1</td>
+<td align="left">-18000</td>
+<td align="left">-500</td>
+<td align="left">CDT</td>
+<td align="left">fluent.mocked.fancied</td>
+<td align="left">39.764932</td>
+<td align="left">-89.8931649</td>
+<td align="left">39.750371</td>
+<td align="left">-89.9121009</td>
+<td align="left">city</td>
+<td align="left">Berlin</td>
+<td align="left">United States of America</td>
+<td align="left">us</td>
+<td align="left">Sangamon County</td>
+<td align="left">Illinois</td>
+<td align="left">8</td>
+<td align="left">Berlin, Sangamon County, Illinois, United States of America</td>
+<td align="right">39.75894</td>
+<td align="right">-89.90316</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">42° 41’ 35.28636’’ N</td>
+<td align="left">73° 22’ 19.39728’’ W</td>
+<td align="left">18TXN3335128023</td>
+<td align="left">FN32hq56ii</td>
+<td align="left">-8167739.779</td>
+<td align="left">5236398.071</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=158915747#map=17/42.69314/-73.37205" class="uri">https://www.openstreetmap.org/edit?node=158915747#map=17/42.69314/-73.37205</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=42.69314&amp;mlon=-73.37205#map=17/42.69314/-73.37205" class="uri">https://www.openstreetmap.org/?mlat=42.69314&amp;mlon=-73.37205#map=17/42.69314/-73.37205</a></td>
+<td align="left">1</td>
+<td align="left">dreffkh1e1nwfg7r4r2t</td>
+<td align="left">1463045520</td>
+<td align="left">1463038440</td>
+<td align="left">1463043600</td>
+<td align="left">1463041200</td>
+<td align="left">1463011560</td>
+<td align="left">1463018700</td>
+<td align="left">1463013540</td>
+<td align="left">1463015940</td>
+<td align="left">America/New_York</td>
+<td align="left">1</td>
+<td align="left">-14400</td>
+<td align="left">-400</td>
+<td align="left">EDT</td>
+<td align="left">cartons.eliminates.uses</td>
+<td align="left">42.7131351</td>
+<td align="left">-73.3520548</td>
+<td align="left">42.6731351</td>
+<td align="left">-73.3920548</td>
+<td align="left">village</td>
+<td align="left">NA</td>
+<td align="left">United States of America</td>
+<td align="left">us</td>
+<td align="left">Rensselaer County</td>
+<td align="left">New York</td>
+<td align="left">7</td>
+<td align="left">Berlin, Rensselaer County, New York, United States of America</td>
+<td align="right">42.69314</td>
+<td align="right">-73.37205</td>
+<td align="left">NA</td>
+<td align="left">Berlin</td>
+</tr>
+<tr class="even">
+<td align="left">40° 33’ 40.22424’’ N</td>
+<td align="left">81° 47’ 39.48144’’ W</td>
+<td align="left">17TME3275690348</td>
+<td align="left">EN90cn44qq</td>
+<td align="left">-9105299.87</td>
+<td align="left">4920037.921</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=153968558#map=17/40.56117/-81.79430" class="uri">https://www.openstreetmap.org/edit?node=153968558#map=17/40.56117/-81.79430</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=40.56117&amp;mlon=-81.79430#map=17/40.56117/-81.79430" class="uri">https://www.openstreetmap.org/?mlat=40.56117&amp;mlon=-81.79430#map=17/40.56117/-81.79430</a></td>
+<td align="left">1</td>
+<td align="left">dpjydxzjywtpgn0rxvjf</td>
+<td align="left">1463047860</td>
+<td align="left">1463041200</td>
+<td align="left">1463046060</td>
+<td align="left">1463043720</td>
+<td align="left">1463013300</td>
+<td align="left">1463019960</td>
+<td align="left">1463015100</td>
+<td align="left">1463017440</td>
+<td align="left">America/New_York</td>
+<td align="left">1</td>
+<td align="left">-14400</td>
+<td align="left">-400</td>
+<td align="left">EDT</td>
+<td align="left">sing.quietest.certificate</td>
+<td align="left">40.5811734</td>
+<td align="left">-81.7743004</td>
+<td align="left">40.5411734</td>
+<td align="left">-81.8143004</td>
+<td align="left">village</td>
+<td align="left">NA</td>
+<td align="left">United States of America</td>
+<td align="left">us</td>
+<td align="left">Holmes County</td>
+<td align="left">Ohio</td>
+<td align="left">7</td>
+<td align="left">Berlin, Holmes County, Ohio, United States of America</td>
+<td align="right">40.56117</td>
+<td align="right">-81.79430</td>
+<td align="left">NA</td>
+<td align="left">Berlin</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>countrycode</code>: Restricts the results to the given country. The country code is a two letter code as defined by the ISO 3166-1 Alpha 2 standard. E.g. “GB” for the United Kingdom, “FR” for France, “US” for United States. See example below.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results3 &lt;-<span class="st"> </span><span class="kw">opencage_forward</span>(<span class="dt">placename =</span> <span class="st">&quot;Berlin&quot;</span>, <span class="dt">country =</span> <span class="st">&quot;DE&quot;</span>)
+results3$results %&gt;%<span class="st"> </span>knitr::<span class="kw">kable</span>()</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">annotations.DMS.lat</th>
+<th align="left">annotations.DMS.lng</th>
+<th align="left">annotations.MGRS</th>
+<th align="left">annotations.Maidenhead</th>
+<th align="left">annotations.Mercator.x</th>
+<th align="left">annotations.Mercator.y</th>
+<th align="left">annotations.OSM.edit_url</th>
+<th align="left">annotations.OSM.url</th>
+<th align="left">annotations.callingcode</th>
+<th align="left">annotations.geohash</th>
+<th align="left">annotations.sun.rise.apparent</th>
+<th align="left">annotations.sun.rise.astronomical</th>
+<th align="left">annotations.sun.rise.civil</th>
+<th align="left">annotations.sun.rise.nautical</th>
+<th align="left">annotations.sun.set.apparent</th>
+<th align="left">annotations.sun.set.astronomical</th>
+<th align="left">annotations.sun.set.civil</th>
+<th align="left">annotations.sun.set.nautical</th>
+<th align="left">annotations.timezone.name</th>
+<th align="left">annotations.timezone.now_in_dst</th>
+<th align="left">annotations.timezone.offset_sec</th>
+<th align="left">annotations.timezone.offset_string</th>
+<th align="left">annotations.timezone.short_name</th>
+<th align="left">annotations.what3words.words</th>
+<th align="left">bounds.northeast.lat</th>
+<th align="left">bounds.northeast.lng</th>
+<th align="left">bounds.southwest.lat</th>
+<th align="left">bounds.southwest.lng</th>
+<th align="left">components._type</th>
+<th align="left">components.city</th>
+<th align="left">components.country</th>
+<th align="left">components.country_code</th>
+<th align="left">components.state</th>
+<th align="left">confidence</th>
+<th align="left">formatted</th>
+<th align="right">geometry.lat</th>
+<th align="right">geometry.lng</th>
+<th align="left">components.county</th>
+<th align="left">components.hamlet</th>
+<th align="left">components.postcode</th>
+<th align="left">components.road</th>
+<th align="left">components.village</th>
+<th align="left">components.city_district</th>
+<th align="left">components.house_number</th>
+<th align="left">components.suburb</th>
+<th align="left">components.unknown</th>
+<th align="left">components.restaurant</th>
+<th align="left">components.building</th>
+<th align="left">components.residential</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">52° 31’ 1.33140’’ N</td>
+<td align="left">13° 23’ 19.89564’’ E</td>
+<td align="left">33UUU9067619766</td>
+<td align="left">JO62qm64pc</td>
+<td align="left">1490441.066</td>
+<td align="left">6860227.862</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=240109189#map=17/52.51704/13.38886" class="uri">https://www.openstreetmap.org/edit?node=240109189#map=17/52.51704/13.38886</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=52.51704&amp;mlon=13.38886#map=17/52.51704/13.38886" class="uri">https://www.openstreetmap.org/?mlat=52.51704&amp;mlon=13.38886#map=17/52.51704/13.38886</a></td>
+<td align="left">49</td>
+<td align="left">u33db8mmzj1t355u0c0j</td>
+<td align="left">1463022840</td>
+<td align="left">1463011380</td>
+<td align="left">1463020320</td>
+<td align="left">1463016840</td>
+<td align="left">1463079180</td>
+<td align="left">1463090940</td>
+<td align="left">1463081760</td>
+<td align="left">1463085240</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">third.gurgled.such</td>
+<td align="left">52.6770365</td>
+<td align="left">13.5488599</td>
+<td align="left">52.3570365</td>
+<td align="left">13.2288599</td>
+<td align="left">city</td>
+<td align="left">Berlin</td>
+<td align="left">Germany</td>
+<td align="left">de</td>
+<td align="left">Berlin</td>
+<td align="left">4</td>
+<td align="left">Berlin, Germany</td>
+<td align="right">52.51704</td>
+<td align="right">13.388860</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">54° 2’ 10.89780’’ N</td>
+<td align="left">10° 26’ 46.07268’’ E</td>
+<td align="left">32UNE9470788534</td>
+<td align="left">JO54fa38mr</td>
+<td align="left">1162858.017</td>
+<td align="left">7142435.831</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=50798110#map=17/54.03636/10.44613" class="uri">https://www.openstreetmap.org/edit?node=50798110#map=17/54.03636/10.44613</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=54.03636&amp;mlon=10.44613#map=17/54.03636/10.44613" class="uri">https://www.openstreetmap.org/?mlat=54.03636&amp;mlon=10.44613#map=17/54.03636/10.44613</a></td>
+<td align="left">49</td>
+<td align="left">u1x7mtn8se8n18vzuczv</td>
+<td align="left">1463023140</td>
+<td align="left">0</td>
+<td align="left">1463020440</td>
+<td align="left">1463016660</td>
+<td align="left">1463080260</td>
+<td align="left">0</td>
+<td align="left">1463083020</td>
+<td align="left">1463086860</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">jungle.scaled.quantity</td>
+<td align="left">54.0563605</td>
+<td align="left">10.4661313</td>
+<td align="left">54.0163605</td>
+<td align="left">10.4261313</td>
+<td align="left">village</td>
+<td align="left">NA</td>
+<td align="left">Germany</td>
+<td align="left">de</td>
+<td align="left">Schleswig-Holstein</td>
+<td align="left">7</td>
+<td align="left">23823 Berlin, Germany</td>
+<td align="right">54.03636</td>
+<td align="right">10.446131</td>
+<td align="left">Trave-Land</td>
+<td align="left">Berlin</td>
+<td align="left">23823</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">54° 24’ 18.42840’’ N</td>
+<td align="left">9° 25’ 55.18776’’ E</td>
+<td align="left">32UNF2804128682</td>
+<td align="left">JO44rj17uf</td>
+<td align="left">1049965.059</td>
+<td align="left">7212486.314</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?way=68276512#map=17/54.40512/9.43200" class="uri">https://www.openstreetmap.org/edit?way=68276512#map=17/54.40512/9.43200</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=54.40512&amp;mlon=9.43200#map=17/54.40512/9.43200" class="uri">https://www.openstreetmap.org/?mlat=54.40512&amp;mlon=9.43200#map=17/54.40512/9.43200</a></td>
+<td align="left">49</td>
+<td align="left">u1wtw8hhv3q2jjmfesu3</td>
+<td align="left">1463023260</td>
+<td align="left">0</td>
+<td align="left">1463020560</td>
+<td align="left">1463016660</td>
+<td align="left">1463080620</td>
+<td align="left">0</td>
+<td align="left">1463083380</td>
+<td align="left">1463087340</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">makeups.propelled.panther</td>
+<td align="left">54.4069751</td>
+<td align="left">9.4342708</td>
+<td align="left">54.4029778</td>
+<td align="left">9.4299614</td>
+<td align="left">road</td>
+<td align="left">NA</td>
+<td align="left">Germany</td>
+<td align="left">de</td>
+<td align="left">Schleswig-Holstein</td>
+<td align="left">10</td>
+<td align="left">Berlin, 24848 Klein Bennebek, Germany</td>
+<td align="right">54.40512</td>
+<td align="right">9.431997</td>
+<td align="left">Kropp-Stapelholm</td>
+<td align="left">NA</td>
+<td align="left">24848</td>
+<td align="left">Berlin</td>
+<td align="left">Klein Bennebek</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">52° 30’ 13.47300’’ N</td>
+<td align="left">13° 19’ 47.85456’’ E</td>
+<td align="left">33UUU8664618379</td>
+<td align="left">JO62pm90ov</td>
+<td align="left">1483884.315</td>
+<td align="left">6857802.372</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=4012854129#map=17/52.50374/13.32996" class="uri">https://www.openstreetmap.org/edit?node=4012854129#map=17/52.50374/13.32996</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=52.50374&amp;mlon=13.32996#map=17/52.50374/13.32996" class="uri">https://www.openstreetmap.org/?mlat=52.50374&amp;mlon=13.32996#map=17/52.50374/13.32996</a></td>
+<td align="left">49</td>
+<td align="left">u336xq486wfr91wcvvev</td>
+<td align="left">1463022840</td>
+<td align="left">1463011380</td>
+<td align="left">1463020320</td>
+<td align="left">1463016840</td>
+<td align="left">1463079180</td>
+<td align="left">1463090940</td>
+<td align="left">1463081760</td>
+<td align="left">1463085240</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">touchy.candle.reserved</td>
+<td align="left">52.5037925</td>
+<td align="left">13.3300096</td>
+<td align="left">52.5036925</td>
+<td align="left">13.3299096</td>
+<td align="left">building</td>
+<td align="left">NA</td>
+<td align="left">Germany</td>
+<td align="left">de</td>
+<td align="left">Berlin</td>
+<td align="left">10</td>
+<td align="left">Berlin, Kurfürstendamm 21, 10719 Berlin, Germany</td>
+<td align="right">52.50374</td>
+<td align="right">13.329960</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">10719</td>
+<td align="left">Kurfürstendamm</td>
+<td align="left">NA</td>
+<td align="left">Charlottenburg-Wilmersdorf</td>
+<td align="left">21</td>
+<td align="left">Charlottenburg</td>
+<td align="left">Berlin</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">52° 19’ 25.76604’’ N</td>
+<td align="left">9° 48’ 22.74660’’ E</td>
+<td align="left">32UNC5495397361</td>
+<td align="left">JO42vh67sr</td>
+<td align="left">1091634.382</td>
+<td align="left">6825048.473</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=260139043#map=17/52.32382/9.80632" class="uri">https://www.openstreetmap.org/edit?node=260139043#map=17/52.32382/9.80632</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=52.32382&amp;mlon=9.80632#map=17/52.32382/9.80632" class="uri">https://www.openstreetmap.org/?mlat=52.32382&amp;mlon=9.80632#map=17/52.32382/9.80632</a></td>
+<td align="left">49</td>
+<td align="left">u1qcxjk8rg9p397vepz1</td>
+<td align="left">1463023740</td>
+<td align="left">1463012460</td>
+<td align="left">1463021220</td>
+<td align="left">1463017740</td>
+<td align="left">1463079960</td>
+<td align="left">1463091540</td>
+<td align="left">1463082540</td>
+<td align="left">1463086020</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">dial.vine.finders</td>
+<td align="left">52.3238739</td>
+<td align="left">9.8063685</td>
+<td align="left">52.3237739</td>
+<td align="left">9.8062685</td>
+<td align="left">restaurant</td>
+<td align="left">Hanover</td>
+<td align="left">Germany</td>
+<td align="left">de</td>
+<td align="left">Lower Saxony</td>
+<td align="left">10</td>
+<td align="left">Berlin, 4. Allee, 30521 Hanover, Germany</td>
+<td align="right">52.32382</td>
+<td align="right">9.806318</td>
+<td align="left">Region Hannover</td>
+<td align="left">NA</td>
+<td align="left">30521</td>
+<td align="left">4. Allee</td>
+<td align="left">NA</td>
+<td align="left">Döhren-Wülfel</td>
+<td align="left">NA</td>
+<td align="left">Mittelfeld</td>
+<td align="left">NA</td>
+<td align="left">Berlin</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">52° 22’ 12.67680’’ N</td>
+<td align="left">9° 45’ 10.62252’’ E</td>
+<td align="left">32UND5126202479</td>
+<td align="left">JO42vi08iu</td>
+<td align="left">1085693.506</td>
+<td align="left">6833476.151</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=320881943#map=17/52.37019/9.75295" class="uri">https://www.openstreetmap.org/edit?node=320881943#map=17/52.37019/9.75295</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=52.37019&amp;mlon=9.75295#map=17/52.37019/9.75295" class="uri">https://www.openstreetmap.org/?mlat=52.37019&amp;mlon=9.75295#map=17/52.37019/9.75295</a></td>
+<td align="left">49</td>
+<td align="left">u1qcvvtyknx5um9fq9f9</td>
+<td align="left">1463023740</td>
+<td align="left">1463012400</td>
+<td align="left">1463021220</td>
+<td align="left">1463017740</td>
+<td align="left">1463080020</td>
+<td align="left">1463091600</td>
+<td align="left">1463082540</td>
+<td align="left">1463086080</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">army.outdoors.hitters</td>
+<td align="left">52.370238</td>
+<td align="left">9.7530007</td>
+<td align="left">52.370138</td>
+<td align="left">9.7529007</td>
+<td align="left">road</td>
+<td align="left">Hanover</td>
+<td align="left">Germany</td>
+<td align="left">de</td>
+<td align="left">Lower Saxony</td>
+<td align="left">10</td>
+<td align="left">Berliner Allee, 30175 Hanover, Germany</td>
+<td align="right">52.37019</td>
+<td align="right">9.752951</td>
+<td align="left">Region Hannover</td>
+<td align="left">NA</td>
+<td align="left">30175</td>
+<td align="left">Berliner Allee</td>
+<td align="left">NA</td>
+<td align="left">South-City-Bult</td>
+<td align="left">NA</td>
+<td align="left">South-City</td>
+<td align="left">Berlin</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">52° 30’ 20.91132’’ N</td>
+<td align="left">13° 19’ 56.43624’’ E</td>
+<td align="left">33UUU8681318605</td>
+<td align="left">JO62pm91vj</td>
+<td align="left">1484149.678</td>
+<td align="left">6858179.301</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=3889599519#map=17/52.50581/13.33234" class="uri">https://www.openstreetmap.org/edit?node=3889599519#map=17/52.50581/13.33234</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=52.50581&amp;mlon=13.33234#map=17/52.50581/13.33234" class="uri">https://www.openstreetmap.org/?mlat=52.50581&amp;mlon=13.33234#map=17/52.50581/13.33234</a></td>
+<td align="left">49</td>
+<td align="left">u336xqkkd05ubvhv9zd8</td>
+<td align="left">1463022840</td>
+<td align="left">1463011380</td>
+<td align="left">1463020320</td>
+<td align="left">1463016840</td>
+<td align="left">1463079180</td>
+<td align="left">1463090940</td>
+<td align="left">1463081760</td>
+<td align="left">1463085240</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">empire.opposite.unwell</td>
+<td align="left">52.5058587</td>
+<td align="left">13.3323934</td>
+<td align="left">52.5057587</td>
+<td align="left">13.3322934</td>
+<td align="left">building</td>
+<td align="left">NA</td>
+<td align="left">Germany</td>
+<td align="left">de</td>
+<td align="left">Berlin</td>
+<td align="left">10</td>
+<td align="left">Berlin, Hardenbergstraße 27-28a, 10623 Berlin, Germany</td>
+<td align="right">52.50581</td>
+<td align="right">13.332343</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">10623</td>
+<td align="left">Hardenbergstraße</td>
+<td align="left">NA</td>
+<td align="left">Charlottenburg-Wilmersdorf</td>
+<td align="left">27-28a</td>
+<td align="left">Charlottenburg</td>
+<td align="left">Berlin</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">53° 51’ 4.53384’’ N</td>
+<td align="left">10° 40’ 56.93196’’ E</td>
+<td align="left">32UPE1067368285</td>
+<td align="left">JO53iu14vh</td>
+<td align="left">1189168.356</td>
+<td align="left">7107508.609</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=1630863689#map=17/53.85126/10.68248" class="uri">https://www.openstreetmap.org/edit?node=1630863689#map=17/53.85126/10.68248</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=53.85126&amp;mlon=10.68248#map=17/53.85126/10.68248" class="uri">https://www.openstreetmap.org/?mlat=53.85126&amp;mlon=10.68248#map=17/53.85126/10.68248</a></td>
+<td align="left">49</td>
+<td align="left">u1xd756drf74zwdx76by</td>
+<td align="left">1463023140</td>
+<td align="left">0</td>
+<td align="left">1463020440</td>
+<td align="left">1463016720</td>
+<td align="left">1463080200</td>
+<td align="left">0</td>
+<td align="left">1463082840</td>
+<td align="left">1463086680</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">chase.pencils.themes</td>
+<td align="left">53.8513094</td>
+<td align="left">10.6825311</td>
+<td align="left">53.8512094</td>
+<td align="left">10.6824311</td>
+<td align="left">road</td>
+<td align="left">Lübeck</td>
+<td align="left">Germany</td>
+<td align="left">de</td>
+<td align="left">Schleswig-Holstein</td>
+<td align="left">10</td>
+<td align="left">Berliner Platz, 23560 Lübeck, Germany</td>
+<td align="right">53.85126</td>
+<td align="right">10.682481</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">23560</td>
+<td align="left">Berliner Platz</td>
+<td align="left">NA</td>
+<td align="left">Sankt Jürgen</td>
+<td align="left">NA</td>
+<td align="left">Hüxtertor / Mühlentor / Gärtnergasse</td>
+<td align="left">Berlin</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">52° 27’ 24.31584’’ N</td>
+<td align="left">13° 34’ 45.17324’’ E</td>
+<td align="left">33UVU0346012790</td>
+<td align="left">JO62sk99mo</td>
+<td align="left">1511631.276</td>
+<td align="left">6849235.295</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?way=168058334#map=17/52.45675/13.57921" class="uri">https://www.openstreetmap.org/edit?way=168058334#map=17/52.45675/13.57921</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=52.45675&amp;mlon=13.57921#map=17/52.45675/13.57921" class="uri">https://www.openstreetmap.org/?mlat=52.45675&amp;mlon=13.57921#map=17/52.45675/13.57921</a></td>
+<td align="left">49</td>
+<td align="left">u33dmj2ndxu2tewv03c0</td>
+<td align="left">1463022840</td>
+<td align="left">1463011380</td>
+<td align="left">1463020260</td>
+<td align="left">1463016780</td>
+<td align="left">1463079120</td>
+<td align="left">1463090820</td>
+<td align="left">1463081640</td>
+<td align="left">1463085180</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">fields.lists.impulse</td>
+<td align="left">52.4569793</td>
+<td align="left">13.5798073</td>
+<td align="left">52.4565392</td>
+<td align="left">13.5784995</td>
+<td align="left">building</td>
+<td align="left">NA</td>
+<td align="left">Germany</td>
+<td align="left">de</td>
+<td align="left">Berlin</td>
+<td align="left">10</td>
+<td align="left">Vitanas Seniorencentrum, Parrisiusstraße 4-14, 12555 Berlin, Germany</td>
+<td align="right">52.45675</td>
+<td align="right">13.579215</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">12555</td>
+<td align="left">Parrisiusstraße</td>
+<td align="left">NA</td>
+<td align="left">Treptow-Köpenick</td>
+<td align="left">4-14</td>
+<td align="left">Köpenick</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">Vitanas Seniorencentrum</td>
+<td align="left">Dammvorstadt</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>language</code>: an IETF format language code (such as “es” for Spanish or “pt-BR” for Brazilian Portuguese). If no language is explicitly specified, we will look for an HTTP Accept-Language header like those sent by a brower and use the first language specified and if none are specified “en” (English) will be assumed. See example below.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results3$results %&gt;%<span class="st"> </span>knitr::<span class="kw">kable</span>()</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">annotations.DMS.lat</th>
+<th align="left">annotations.DMS.lng</th>
+<th align="left">annotations.MGRS</th>
+<th align="left">annotations.Maidenhead</th>
+<th align="left">annotations.Mercator.x</th>
+<th align="left">annotations.Mercator.y</th>
+<th align="left">annotations.OSM.edit_url</th>
+<th align="left">annotations.OSM.url</th>
+<th align="left">annotations.callingcode</th>
+<th align="left">annotations.geohash</th>
+<th align="left">annotations.sun.rise.apparent</th>
+<th align="left">annotations.sun.rise.astronomical</th>
+<th align="left">annotations.sun.rise.civil</th>
+<th align="left">annotations.sun.rise.nautical</th>
+<th align="left">annotations.sun.set.apparent</th>
+<th align="left">annotations.sun.set.astronomical</th>
+<th align="left">annotations.sun.set.civil</th>
+<th align="left">annotations.sun.set.nautical</th>
+<th align="left">annotations.timezone.name</th>
+<th align="left">annotations.timezone.now_in_dst</th>
+<th align="left">annotations.timezone.offset_sec</th>
+<th align="left">annotations.timezone.offset_string</th>
+<th align="left">annotations.timezone.short_name</th>
+<th align="left">annotations.what3words.words</th>
+<th align="left">bounds.northeast.lat</th>
+<th align="left">bounds.northeast.lng</th>
+<th align="left">bounds.southwest.lat</th>
+<th align="left">bounds.southwest.lng</th>
+<th align="left">components._type</th>
+<th align="left">components.city</th>
+<th align="left">components.country</th>
+<th align="left">components.country_code</th>
+<th align="left">components.state</th>
+<th align="left">confidence</th>
+<th align="left">formatted</th>
+<th align="right">geometry.lat</th>
+<th align="right">geometry.lng</th>
+<th align="left">components.county</th>
+<th align="left">components.hamlet</th>
+<th align="left">components.postcode</th>
+<th align="left">components.road</th>
+<th align="left">components.village</th>
+<th align="left">components.city_district</th>
+<th align="left">components.house_number</th>
+<th align="left">components.suburb</th>
+<th align="left">components.unknown</th>
+<th align="left">components.restaurant</th>
+<th align="left">components.building</th>
+<th align="left">components.residential</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">52° 31’ 1.33140’’ N</td>
+<td align="left">13° 23’ 19.89564’’ E</td>
+<td align="left">33UUU9067619766</td>
+<td align="left">JO62qm64pc</td>
+<td align="left">1490441.066</td>
+<td align="left">6860227.862</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=240109189#map=17/52.51704/13.38886" class="uri">https://www.openstreetmap.org/edit?node=240109189#map=17/52.51704/13.38886</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=52.51704&amp;mlon=13.38886#map=17/52.51704/13.38886" class="uri">https://www.openstreetmap.org/?mlat=52.51704&amp;mlon=13.38886#map=17/52.51704/13.38886</a></td>
+<td align="left">49</td>
+<td align="left">u33db8mmzj1t355u0c0j</td>
+<td align="left">1463022840</td>
+<td align="left">1463011380</td>
+<td align="left">1463020320</td>
+<td align="left">1463016840</td>
+<td align="left">1463079180</td>
+<td align="left">1463090940</td>
+<td align="left">1463081760</td>
+<td align="left">1463085240</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">third.gurgled.such</td>
+<td align="left">52.6770365</td>
+<td align="left">13.5488599</td>
+<td align="left">52.3570365</td>
+<td align="left">13.2288599</td>
+<td align="left">city</td>
+<td align="left">Berlin</td>
+<td align="left">Germany</td>
+<td align="left">de</td>
+<td align="left">Berlin</td>
+<td align="left">4</td>
+<td align="left">Berlin, Germany</td>
+<td align="right">52.51704</td>
+<td align="right">13.388860</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">54° 2’ 10.89780’’ N</td>
+<td align="left">10° 26’ 46.07268’’ E</td>
+<td align="left">32UNE9470788534</td>
+<td align="left">JO54fa38mr</td>
+<td align="left">1162858.017</td>
+<td align="left">7142435.831</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=50798110#map=17/54.03636/10.44613" class="uri">https://www.openstreetmap.org/edit?node=50798110#map=17/54.03636/10.44613</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=54.03636&amp;mlon=10.44613#map=17/54.03636/10.44613" class="uri">https://www.openstreetmap.org/?mlat=54.03636&amp;mlon=10.44613#map=17/54.03636/10.44613</a></td>
+<td align="left">49</td>
+<td align="left">u1x7mtn8se8n18vzuczv</td>
+<td align="left">1463023140</td>
+<td align="left">0</td>
+<td align="left">1463020440</td>
+<td align="left">1463016660</td>
+<td align="left">1463080260</td>
+<td align="left">0</td>
+<td align="left">1463083020</td>
+<td align="left">1463086860</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">jungle.scaled.quantity</td>
+<td align="left">54.0563605</td>
+<td align="left">10.4661313</td>
+<td align="left">54.0163605</td>
+<td align="left">10.4261313</td>
+<td align="left">village</td>
+<td align="left">NA</td>
+<td align="left">Germany</td>
+<td align="left">de</td>
+<td align="left">Schleswig-Holstein</td>
+<td align="left">7</td>
+<td align="left">23823 Berlin, Germany</td>
+<td align="right">54.03636</td>
+<td align="right">10.446131</td>
+<td align="left">Trave-Land</td>
+<td align="left">Berlin</td>
+<td align="left">23823</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">54° 24’ 18.42840’’ N</td>
+<td align="left">9° 25’ 55.18776’’ E</td>
+<td align="left">32UNF2804128682</td>
+<td align="left">JO44rj17uf</td>
+<td align="left">1049965.059</td>
+<td align="left">7212486.314</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?way=68276512#map=17/54.40512/9.43200" class="uri">https://www.openstreetmap.org/edit?way=68276512#map=17/54.40512/9.43200</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=54.40512&amp;mlon=9.43200#map=17/54.40512/9.43200" class="uri">https://www.openstreetmap.org/?mlat=54.40512&amp;mlon=9.43200#map=17/54.40512/9.43200</a></td>
+<td align="left">49</td>
+<td align="left">u1wtw8hhv3q2jjmfesu3</td>
+<td align="left">1463023260</td>
+<td align="left">0</td>
+<td align="left">1463020560</td>
+<td align="left">1463016660</td>
+<td align="left">1463080620</td>
+<td align="left">0</td>
+<td align="left">1463083380</td>
+<td align="left">1463087340</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">makeups.propelled.panther</td>
+<td align="left">54.4069751</td>
+<td align="left">9.4342708</td>
+<td align="left">54.4029778</td>
+<td align="left">9.4299614</td>
+<td align="left">road</td>
+<td align="left">NA</td>
+<td align="left">Germany</td>
+<td align="left">de</td>
+<td align="left">Schleswig-Holstein</td>
+<td align="left">10</td>
+<td align="left">Berlin, 24848 Klein Bennebek, Germany</td>
+<td align="right">54.40512</td>
+<td align="right">9.431997</td>
+<td align="left">Kropp-Stapelholm</td>
+<td align="left">NA</td>
+<td align="left">24848</td>
+<td align="left">Berlin</td>
+<td align="left">Klein Bennebek</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">52° 30’ 13.47300’’ N</td>
+<td align="left">13° 19’ 47.85456’’ E</td>
+<td align="left">33UUU8664618379</td>
+<td align="left">JO62pm90ov</td>
+<td align="left">1483884.315</td>
+<td align="left">6857802.372</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=4012854129#map=17/52.50374/13.32996" class="uri">https://www.openstreetmap.org/edit?node=4012854129#map=17/52.50374/13.32996</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=52.50374&amp;mlon=13.32996#map=17/52.50374/13.32996" class="uri">https://www.openstreetmap.org/?mlat=52.50374&amp;mlon=13.32996#map=17/52.50374/13.32996</a></td>
+<td align="left">49</td>
+<td align="left">u336xq486wfr91wcvvev</td>
+<td align="left">1463022840</td>
+<td align="left">1463011380</td>
+<td align="left">1463020320</td>
+<td align="left">1463016840</td>
+<td align="left">1463079180</td>
+<td align="left">1463090940</td>
+<td align="left">1463081760</td>
+<td align="left">1463085240</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">touchy.candle.reserved</td>
+<td align="left">52.5037925</td>
+<td align="left">13.3300096</td>
+<td align="left">52.5036925</td>
+<td align="left">13.3299096</td>
+<td align="left">building</td>
+<td align="left">NA</td>
+<td align="left">Germany</td>
+<td align="left">de</td>
+<td align="left">Berlin</td>
+<td align="left">10</td>
+<td align="left">Berlin, Kurfürstendamm 21, 10719 Berlin, Germany</td>
+<td align="right">52.50374</td>
+<td align="right">13.329960</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">10719</td>
+<td align="left">Kurfürstendamm</td>
+<td align="left">NA</td>
+<td align="left">Charlottenburg-Wilmersdorf</td>
+<td align="left">21</td>
+<td align="left">Charlottenburg</td>
+<td align="left">Berlin</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">52° 19’ 25.76604’’ N</td>
+<td align="left">9° 48’ 22.74660’’ E</td>
+<td align="left">32UNC5495397361</td>
+<td align="left">JO42vh67sr</td>
+<td align="left">1091634.382</td>
+<td align="left">6825048.473</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=260139043#map=17/52.32382/9.80632" class="uri">https://www.openstreetmap.org/edit?node=260139043#map=17/52.32382/9.80632</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=52.32382&amp;mlon=9.80632#map=17/52.32382/9.80632" class="uri">https://www.openstreetmap.org/?mlat=52.32382&amp;mlon=9.80632#map=17/52.32382/9.80632</a></td>
+<td align="left">49</td>
+<td align="left">u1qcxjk8rg9p397vepz1</td>
+<td align="left">1463023740</td>
+<td align="left">1463012460</td>
+<td align="left">1463021220</td>
+<td align="left">1463017740</td>
+<td align="left">1463079960</td>
+<td align="left">1463091540</td>
+<td align="left">1463082540</td>
+<td align="left">1463086020</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">dial.vine.finders</td>
+<td align="left">52.3238739</td>
+<td align="left">9.8063685</td>
+<td align="left">52.3237739</td>
+<td align="left">9.8062685</td>
+<td align="left">restaurant</td>
+<td align="left">Hanover</td>
+<td align="left">Germany</td>
+<td align="left">de</td>
+<td align="left">Lower Saxony</td>
+<td align="left">10</td>
+<td align="left">Berlin, 4. Allee, 30521 Hanover, Germany</td>
+<td align="right">52.32382</td>
+<td align="right">9.806318</td>
+<td align="left">Region Hannover</td>
+<td align="left">NA</td>
+<td align="left">30521</td>
+<td align="left">4. Allee</td>
+<td align="left">NA</td>
+<td align="left">Döhren-Wülfel</td>
+<td align="left">NA</td>
+<td align="left">Mittelfeld</td>
+<td align="left">NA</td>
+<td align="left">Berlin</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">52° 22’ 12.67680’’ N</td>
+<td align="left">9° 45’ 10.62252’’ E</td>
+<td align="left">32UND5126202479</td>
+<td align="left">JO42vi08iu</td>
+<td align="left">1085693.506</td>
+<td align="left">6833476.151</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=320881943#map=17/52.37019/9.75295" class="uri">https://www.openstreetmap.org/edit?node=320881943#map=17/52.37019/9.75295</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=52.37019&amp;mlon=9.75295#map=17/52.37019/9.75295" class="uri">https://www.openstreetmap.org/?mlat=52.37019&amp;mlon=9.75295#map=17/52.37019/9.75295</a></td>
+<td align="left">49</td>
+<td align="left">u1qcvvtyknx5um9fq9f9</td>
+<td align="left">1463023740</td>
+<td align="left">1463012400</td>
+<td align="left">1463021220</td>
+<td align="left">1463017740</td>
+<td align="left">1463080020</td>
+<td align="left">1463091600</td>
+<td align="left">1463082540</td>
+<td align="left">1463086080</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">army.outdoors.hitters</td>
+<td align="left">52.370238</td>
+<td align="left">9.7530007</td>
+<td align="left">52.370138</td>
+<td align="left">9.7529007</td>
+<td align="left">road</td>
+<td align="left">Hanover</td>
+<td align="left">Germany</td>
+<td align="left">de</td>
+<td align="left">Lower Saxony</td>
+<td align="left">10</td>
+<td align="left">Berliner Allee, 30175 Hanover, Germany</td>
+<td align="right">52.37019</td>
+<td align="right">9.752951</td>
+<td align="left">Region Hannover</td>
+<td align="left">NA</td>
+<td align="left">30175</td>
+<td align="left">Berliner Allee</td>
+<td align="left">NA</td>
+<td align="left">South-City-Bult</td>
+<td align="left">NA</td>
+<td align="left">South-City</td>
+<td align="left">Berlin</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">52° 30’ 20.91132’’ N</td>
+<td align="left">13° 19’ 56.43624’’ E</td>
+<td align="left">33UUU8681318605</td>
+<td align="left">JO62pm91vj</td>
+<td align="left">1484149.678</td>
+<td align="left">6858179.301</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=3889599519#map=17/52.50581/13.33234" class="uri">https://www.openstreetmap.org/edit?node=3889599519#map=17/52.50581/13.33234</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=52.50581&amp;mlon=13.33234#map=17/52.50581/13.33234" class="uri">https://www.openstreetmap.org/?mlat=52.50581&amp;mlon=13.33234#map=17/52.50581/13.33234</a></td>
+<td align="left">49</td>
+<td align="left">u336xqkkd05ubvhv9zd8</td>
+<td align="left">1463022840</td>
+<td align="left">1463011380</td>
+<td align="left">1463020320</td>
+<td align="left">1463016840</td>
+<td align="left">1463079180</td>
+<td align="left">1463090940</td>
+<td align="left">1463081760</td>
+<td align="left">1463085240</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">empire.opposite.unwell</td>
+<td align="left">52.5058587</td>
+<td align="left">13.3323934</td>
+<td align="left">52.5057587</td>
+<td align="left">13.3322934</td>
+<td align="left">building</td>
+<td align="left">NA</td>
+<td align="left">Germany</td>
+<td align="left">de</td>
+<td align="left">Berlin</td>
+<td align="left">10</td>
+<td align="left">Berlin, Hardenbergstraße 27-28a, 10623 Berlin, Germany</td>
+<td align="right">52.50581</td>
+<td align="right">13.332343</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">10623</td>
+<td align="left">Hardenbergstraße</td>
+<td align="left">NA</td>
+<td align="left">Charlottenburg-Wilmersdorf</td>
+<td align="left">27-28a</td>
+<td align="left">Charlottenburg</td>
+<td align="left">Berlin</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">53° 51’ 4.53384’’ N</td>
+<td align="left">10° 40’ 56.93196’’ E</td>
+<td align="left">32UPE1067368285</td>
+<td align="left">JO53iu14vh</td>
+<td align="left">1189168.356</td>
+<td align="left">7107508.609</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=1630863689#map=17/53.85126/10.68248" class="uri">https://www.openstreetmap.org/edit?node=1630863689#map=17/53.85126/10.68248</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=53.85126&amp;mlon=10.68248#map=17/53.85126/10.68248" class="uri">https://www.openstreetmap.org/?mlat=53.85126&amp;mlon=10.68248#map=17/53.85126/10.68248</a></td>
+<td align="left">49</td>
+<td align="left">u1xd756drf74zwdx76by</td>
+<td align="left">1463023140</td>
+<td align="left">0</td>
+<td align="left">1463020440</td>
+<td align="left">1463016720</td>
+<td align="left">1463080200</td>
+<td align="left">0</td>
+<td align="left">1463082840</td>
+<td align="left">1463086680</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">chase.pencils.themes</td>
+<td align="left">53.8513094</td>
+<td align="left">10.6825311</td>
+<td align="left">53.8512094</td>
+<td align="left">10.6824311</td>
+<td align="left">road</td>
+<td align="left">Lübeck</td>
+<td align="left">Germany</td>
+<td align="left">de</td>
+<td align="left">Schleswig-Holstein</td>
+<td align="left">10</td>
+<td align="left">Berliner Platz, 23560 Lübeck, Germany</td>
+<td align="right">53.85126</td>
+<td align="right">10.682481</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">23560</td>
+<td align="left">Berliner Platz</td>
+<td align="left">NA</td>
+<td align="left">Sankt Jürgen</td>
+<td align="left">NA</td>
+<td align="left">Hüxtertor / Mühlentor / Gärtnergasse</td>
+<td align="left">Berlin</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">52° 27’ 24.31584’’ N</td>
+<td align="left">13° 34’ 45.17324’’ E</td>
+<td align="left">33UVU0346012790</td>
+<td align="left">JO62sk99mo</td>
+<td align="left">1511631.276</td>
+<td align="left">6849235.295</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?way=168058334#map=17/52.45675/13.57921" class="uri">https://www.openstreetmap.org/edit?way=168058334#map=17/52.45675/13.57921</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=52.45675&amp;mlon=13.57921#map=17/52.45675/13.57921" class="uri">https://www.openstreetmap.org/?mlat=52.45675&amp;mlon=13.57921#map=17/52.45675/13.57921</a></td>
+<td align="left">49</td>
+<td align="left">u33dmj2ndxu2tewv03c0</td>
+<td align="left">1463022840</td>
+<td align="left">1463011380</td>
+<td align="left">1463020260</td>
+<td align="left">1463016780</td>
+<td align="left">1463079120</td>
+<td align="left">1463090820</td>
+<td align="left">1463081640</td>
+<td align="left">1463085180</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">fields.lists.impulse</td>
+<td align="left">52.4569793</td>
+<td align="left">13.5798073</td>
+<td align="left">52.4565392</td>
+<td align="left">13.5784995</td>
+<td align="left">building</td>
+<td align="left">NA</td>
+<td align="left">Germany</td>
+<td align="left">de</td>
+<td align="left">Berlin</td>
+<td align="left">10</td>
+<td align="left">Vitanas Seniorencentrum, Parrisiusstraße 4-14, 12555 Berlin, Germany</td>
+<td align="right">52.45675</td>
+<td align="right">13.579215</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">12555</td>
+<td align="left">Parrisiusstraße</td>
+<td align="left">NA</td>
+<td align="left">Treptow-Köpenick</td>
+<td align="left">4-14</td>
+<td align="left">Köpenick</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">Vitanas Seniorencentrum</td>
+<td align="left">Dammvorstadt</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results4 &lt;-<span class="st"> </span><span class="kw">opencage_forward</span>(<span class="dt">placename =</span> <span class="st">&quot;Berlin&quot;</span>, <span class="dt">country =</span> <span class="st">&quot;DE&quot;</span>, <span class="dt">language =</span> <span class="st">&quot;de&quot;</span>)
+results4$results %&gt;%<span class="st"> </span>knitr::<span class="kw">kable</span>()</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">annotations.DMS.lat</th>
+<th align="left">annotations.DMS.lng</th>
+<th align="left">annotations.MGRS</th>
+<th align="left">annotations.Maidenhead</th>
+<th align="left">annotations.Mercator.x</th>
+<th align="left">annotations.Mercator.y</th>
+<th align="left">annotations.OSM.edit_url</th>
+<th align="left">annotations.OSM.url</th>
+<th align="left">annotations.callingcode</th>
+<th align="left">annotations.geohash</th>
+<th align="left">annotations.sun.rise.apparent</th>
+<th align="left">annotations.sun.rise.astronomical</th>
+<th align="left">annotations.sun.rise.civil</th>
+<th align="left">annotations.sun.rise.nautical</th>
+<th align="left">annotations.sun.set.apparent</th>
+<th align="left">annotations.sun.set.astronomical</th>
+<th align="left">annotations.sun.set.civil</th>
+<th align="left">annotations.sun.set.nautical</th>
+<th align="left">annotations.timezone.name</th>
+<th align="left">annotations.timezone.now_in_dst</th>
+<th align="left">annotations.timezone.offset_sec</th>
+<th align="left">annotations.timezone.offset_string</th>
+<th align="left">annotations.timezone.short_name</th>
+<th align="left">annotations.what3words.words</th>
+<th align="left">bounds.northeast.lat</th>
+<th align="left">bounds.northeast.lng</th>
+<th align="left">bounds.southwest.lat</th>
+<th align="left">bounds.southwest.lng</th>
+<th align="left">components._type</th>
+<th align="left">components.city</th>
+<th align="left">components.country</th>
+<th align="left">components.country_code</th>
+<th align="left">components.state</th>
+<th align="left">confidence</th>
+<th align="left">formatted</th>
+<th align="right">geometry.lat</th>
+<th align="right">geometry.lng</th>
+<th align="left">components.county</th>
+<th align="left">components.hamlet</th>
+<th align="left">components.postcode</th>
+<th align="left">components.road</th>
+<th align="left">components.village</th>
+<th align="left">components.city_district</th>
+<th align="left">components.house_number</th>
+<th align="left">components.suburb</th>
+<th align="left">components.unknown</th>
+<th align="left">components.restaurant</th>
+<th align="left">components.building</th>
+<th align="left">components.residential</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">52° 31’ 1.33140’’ N</td>
+<td align="left">13° 23’ 19.89564’’ E</td>
+<td align="left">33UUU9067619766</td>
+<td align="left">JO62qm64pc</td>
+<td align="left">1490441.066</td>
+<td align="left">6860227.862</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=240109189#map=17/52.51704/13.38886" class="uri">https://www.openstreetmap.org/edit?node=240109189#map=17/52.51704/13.38886</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=52.51704&amp;mlon=13.38886#map=17/52.51704/13.38886" class="uri">https://www.openstreetmap.org/?mlat=52.51704&amp;mlon=13.38886#map=17/52.51704/13.38886</a></td>
+<td align="left">49</td>
+<td align="left">u33db8mmzj1t355u0c0j</td>
+<td align="left">1463022840</td>
+<td align="left">1463011380</td>
+<td align="left">1463020320</td>
+<td align="left">1463016840</td>
+<td align="left">1463079180</td>
+<td align="left">1463090940</td>
+<td align="left">1463081760</td>
+<td align="left">1463085240</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">nirgends.digitalen.landkarte</td>
+<td align="left">52.6770365</td>
+<td align="left">13.5488599</td>
+<td align="left">52.3570365</td>
+<td align="left">13.2288599</td>
+<td align="left">city</td>
+<td align="left">Berlin</td>
+<td align="left">Deutschland</td>
+<td align="left">de</td>
+<td align="left">Berlin</td>
+<td align="left">4</td>
+<td align="left">Berlin, Deutschland</td>
+<td align="right">52.51704</td>
+<td align="right">13.388860</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">54° 2’ 10.89780’’ N</td>
+<td align="left">10° 26’ 46.07268’’ E</td>
+<td align="left">32UNE9470788534</td>
+<td align="left">JO54fa38mr</td>
+<td align="left">1162858.017</td>
+<td align="left">7142435.831</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=50798110#map=17/54.03636/10.44613" class="uri">https://www.openstreetmap.org/edit?node=50798110#map=17/54.03636/10.44613</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=54.03636&amp;mlon=10.44613#map=17/54.03636/10.44613" class="uri">https://www.openstreetmap.org/?mlat=54.03636&amp;mlon=10.44613#map=17/54.03636/10.44613</a></td>
+<td align="left">49</td>
+<td align="left">u1x7mtn8se8n18vzuczv</td>
+<td align="left">1463023140</td>
+<td align="left">0</td>
+<td align="left">1463020440</td>
+<td align="left">1463016660</td>
+<td align="left">1463080260</td>
+<td align="left">0</td>
+<td align="left">1463083020</td>
+<td align="left">1463086860</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">zusehen.sicht.besucht</td>
+<td align="left">54.0563605</td>
+<td align="left">10.4661313</td>
+<td align="left">54.0163605</td>
+<td align="left">10.4261313</td>
+<td align="left">village</td>
+<td align="left">NA</td>
+<td align="left">Deutschland</td>
+<td align="left">de</td>
+<td align="left">Schleswig-Holstein</td>
+<td align="left">7</td>
+<td align="left">23823 Berlin, Deutschland</td>
+<td align="right">54.03636</td>
+<td align="right">10.446131</td>
+<td align="left">Trave-Land</td>
+<td align="left">Berlin</td>
+<td align="left">23823</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">54° 24’ 18.42840’’ N</td>
+<td align="left">9° 25’ 55.18776’’ E</td>
+<td align="left">32UNF2804128682</td>
+<td align="left">JO44rj17uf</td>
+<td align="left">1049965.059</td>
+<td align="left">7212486.314</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?way=68276512#map=17/54.40512/9.43200" class="uri">https://www.openstreetmap.org/edit?way=68276512#map=17/54.40512/9.43200</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=54.40512&amp;mlon=9.43200#map=17/54.40512/9.43200" class="uri">https://www.openstreetmap.org/?mlat=54.40512&amp;mlon=9.43200#map=17/54.40512/9.43200</a></td>
+<td align="left">49</td>
+<td align="left">u1wtw8hhv3q2jjmfesu3</td>
+<td align="left">1463023260</td>
+<td align="left">0</td>
+<td align="left">1463020560</td>
+<td align="left">1463016660</td>
+<td align="left">1463080620</td>
+<td align="left">0</td>
+<td align="left">1463083380</td>
+<td align="left">1463087340</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">niedrig.sicher.kranz</td>
+<td align="left">54.4069751</td>
+<td align="left">9.4342708</td>
+<td align="left">54.4029778</td>
+<td align="left">9.4299614</td>
+<td align="left">road</td>
+<td align="left">NA</td>
+<td align="left">Deutschland</td>
+<td align="left">de</td>
+<td align="left">Schleswig-Holstein</td>
+<td align="left">10</td>
+<td align="left">Berlin, 24848 Klein Bennebek, Deutschland</td>
+<td align="right">54.40512</td>
+<td align="right">9.431997</td>
+<td align="left">Kropp-Stapelholm</td>
+<td align="left">NA</td>
+<td align="left">24848</td>
+<td align="left">Berlin</td>
+<td align="left">Klein Bennebek</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">52° 30’ 13.47300’’ N</td>
+<td align="left">13° 19’ 47.85456’’ E</td>
+<td align="left">33UUU8664618379</td>
+<td align="left">JO62pm90ov</td>
+<td align="left">1483884.315</td>
+<td align="left">6857802.372</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=4012854129#map=17/52.50374/13.32996" class="uri">https://www.openstreetmap.org/edit?node=4012854129#map=17/52.50374/13.32996</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=52.50374&amp;mlon=13.32996#map=17/52.50374/13.32996" class="uri">https://www.openstreetmap.org/?mlat=52.50374&amp;mlon=13.32996#map=17/52.50374/13.32996</a></td>
+<td align="left">49</td>
+<td align="left">u336xq486wfr91wcvvev</td>
+<td align="left">1463022840</td>
+<td align="left">1463011380</td>
+<td align="left">1463020320</td>
+<td align="left">1463016840</td>
+<td align="left">1463079180</td>
+<td align="left">1463090940</td>
+<td align="left">1463081760</td>
+<td align="left">1463085240</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">abgekürzt.vergabe.bequem</td>
+<td align="left">52.5037925</td>
+<td align="left">13.3300096</td>
+<td align="left">52.5036925</td>
+<td align="left">13.3299096</td>
+<td align="left">building</td>
+<td align="left">NA</td>
+<td align="left">Deutschland</td>
+<td align="left">de</td>
+<td align="left">Berlin</td>
+<td align="left">10</td>
+<td align="left">Berlin, Kurfürstendamm 21, 10719 Berlin, Deutschland</td>
+<td align="right">52.50374</td>
+<td align="right">13.329960</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">10719</td>
+<td align="left">Kurfürstendamm</td>
+<td align="left">NA</td>
+<td align="left">Charlottenburg-Wilmersdorf</td>
+<td align="left">21</td>
+<td align="left">Charlottenburg</td>
+<td align="left">Berlin</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">52° 19’ 25.76604’’ N</td>
+<td align="left">9° 48’ 22.74660’’ E</td>
+<td align="left">32UNC5495397361</td>
+<td align="left">JO42vh67sr</td>
+<td align="left">1091634.382</td>
+<td align="left">6825048.473</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=260139043#map=17/52.32382/9.80632" class="uri">https://www.openstreetmap.org/edit?node=260139043#map=17/52.32382/9.80632</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=52.32382&amp;mlon=9.80632#map=17/52.32382/9.80632" class="uri">https://www.openstreetmap.org/?mlat=52.32382&amp;mlon=9.80632#map=17/52.32382/9.80632</a></td>
+<td align="left">49</td>
+<td align="left">u1qcxjk8rg9p397vepz1</td>
+<td align="left">1463023740</td>
+<td align="left">1463012460</td>
+<td align="left">1463021220</td>
+<td align="left">1463017740</td>
+<td align="left">1463079960</td>
+<td align="left">1463091540</td>
+<td align="left">1463082540</td>
+<td align="left">1463086020</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">erreichte.kreis.knopf</td>
+<td align="left">52.3238739</td>
+<td align="left">9.8063685</td>
+<td align="left">52.3237739</td>
+<td align="left">9.8062685</td>
+<td align="left">restaurant</td>
+<td align="left">Hannover</td>
+<td align="left">Deutschland</td>
+<td align="left">de</td>
+<td align="left">Niedersachsen</td>
+<td align="left">10</td>
+<td align="left">Berlin, 4. Allee, 30521 Hannover, Deutschland</td>
+<td align="right">52.32382</td>
+<td align="right">9.806318</td>
+<td align="left">Region Hannover</td>
+<td align="left">NA</td>
+<td align="left">30521</td>
+<td align="left">4. Allee</td>
+<td align="left">NA</td>
+<td align="left">Döhren-Wülfel</td>
+<td align="left">NA</td>
+<td align="left">Mittelfeld</td>
+<td align="left">NA</td>
+<td align="left">Berlin</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">52° 22’ 12.67680’’ N</td>
+<td align="left">9° 45’ 10.62252’’ E</td>
+<td align="left">32UND5126202479</td>
+<td align="left">JO42vi08iu</td>
+<td align="left">1085693.506</td>
+<td align="left">6833476.151</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=320881943#map=17/52.37019/9.75295" class="uri">https://www.openstreetmap.org/edit?node=320881943#map=17/52.37019/9.75295</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=52.37019&amp;mlon=9.75295#map=17/52.37019/9.75295" class="uri">https://www.openstreetmap.org/?mlat=52.37019&amp;mlon=9.75295#map=17/52.37019/9.75295</a></td>
+<td align="left">49</td>
+<td align="left">u1qcvvtyknx5um9fq9f9</td>
+<td align="left">1463023740</td>
+<td align="left">1463012400</td>
+<td align="left">1463021220</td>
+<td align="left">1463017740</td>
+<td align="left">1463080020</td>
+<td align="left">1463091600</td>
+<td align="left">1463082540</td>
+<td align="left">1463086080</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">greift.zentrum.teilt</td>
+<td align="left">52.370238</td>
+<td align="left">9.7530007</td>
+<td align="left">52.370138</td>
+<td align="left">9.7529007</td>
+<td align="left">road</td>
+<td align="left">Hannover</td>
+<td align="left">Deutschland</td>
+<td align="left">de</td>
+<td align="left">Niedersachsen</td>
+<td align="left">10</td>
+<td align="left">Berliner Allee, 30175 Hannover, Deutschland</td>
+<td align="right">52.37019</td>
+<td align="right">9.752951</td>
+<td align="left">Region Hannover</td>
+<td align="left">NA</td>
+<td align="left">30175</td>
+<td align="left">Berliner Allee</td>
+<td align="left">NA</td>
+<td align="left">Südstadt-Bult</td>
+<td align="left">NA</td>
+<td align="left">Südstadt</td>
+<td align="left">Berlin</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">52° 30’ 20.91132’’ N</td>
+<td align="left">13° 19’ 56.43624’’ E</td>
+<td align="left">33UUU8681318605</td>
+<td align="left">JO62pm91vj</td>
+<td align="left">1484149.678</td>
+<td align="left">6858179.301</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=3889599519#map=17/52.50581/13.33234" class="uri">https://www.openstreetmap.org/edit?node=3889599519#map=17/52.50581/13.33234</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=52.50581&amp;mlon=13.33234#map=17/52.50581/13.33234" class="uri">https://www.openstreetmap.org/?mlat=52.50581&amp;mlon=13.33234#map=17/52.50581/13.33234</a></td>
+<td align="left">49</td>
+<td align="left">u336xqkkd05ubvhv9zd8</td>
+<td align="left">1463022840</td>
+<td align="left">1463011380</td>
+<td align="left">1463020320</td>
+<td align="left">1463016840</td>
+<td align="left">1463079180</td>
+<td align="left">1463090940</td>
+<td align="left">1463081760</td>
+<td align="left">1463085240</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">übungen.schon.furcht</td>
+<td align="left">52.5058587</td>
+<td align="left">13.3323934</td>
+<td align="left">52.5057587</td>
+<td align="left">13.3322934</td>
+<td align="left">building</td>
+<td align="left">NA</td>
+<td align="left">Deutschland</td>
+<td align="left">de</td>
+<td align="left">Berlin</td>
+<td align="left">10</td>
+<td align="left">Berlin, Hardenbergstraße 27-28a, 10623 Berlin, Deutschland</td>
+<td align="right">52.50581</td>
+<td align="right">13.332343</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">10623</td>
+<td align="left">Hardenbergstraße</td>
+<td align="left">NA</td>
+<td align="left">Charlottenburg-Wilmersdorf</td>
+<td align="left">27-28a</td>
+<td align="left">Charlottenburg</td>
+<td align="left">Berlin</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">53° 51’ 4.53384’’ N</td>
+<td align="left">10° 40’ 56.93196’’ E</td>
+<td align="left">32UPE1067368285</td>
+<td align="left">JO53iu14vh</td>
+<td align="left">1189168.356</td>
+<td align="left">7107508.609</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?node=1630863689#map=17/53.85126/10.68248" class="uri">https://www.openstreetmap.org/edit?node=1630863689#map=17/53.85126/10.68248</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=53.85126&amp;mlon=10.68248#map=17/53.85126/10.68248" class="uri">https://www.openstreetmap.org/?mlat=53.85126&amp;mlon=10.68248#map=17/53.85126/10.68248</a></td>
+<td align="left">49</td>
+<td align="left">u1xd756drf74zwdx76by</td>
+<td align="left">1463023140</td>
+<td align="left">0</td>
+<td align="left">1463020440</td>
+<td align="left">1463016720</td>
+<td align="left">1463080200</td>
+<td align="left">0</td>
+<td align="left">1463082840</td>
+<td align="left">1463086680</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">umzug.hübsch.tapfer</td>
+<td align="left">53.8513094</td>
+<td align="left">10.6825311</td>
+<td align="left">53.8512094</td>
+<td align="left">10.6824311</td>
+<td align="left">road</td>
+<td align="left">Lübeck</td>
+<td align="left">Deutschland</td>
+<td align="left">de</td>
+<td align="left">Schleswig-Holstein</td>
+<td align="left">10</td>
+<td align="left">Berliner Platz, 23560 Lübeck, Deutschland</td>
+<td align="right">53.85126</td>
+<td align="right">10.682481</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">23560</td>
+<td align="left">Berliner Platz</td>
+<td align="left">NA</td>
+<td align="left">Sankt Jürgen</td>
+<td align="left">NA</td>
+<td align="left">Hüxtertor / Mühlentor / Gärtnergasse</td>
+<td align="left">Berlin</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">52° 27’ 24.31584’’ N</td>
+<td align="left">13° 34’ 45.17324’’ E</td>
+<td align="left">33UVU0346012790</td>
+<td align="left">JO62sk99mo</td>
+<td align="left">1511631.276</td>
+<td align="left">6849235.295</td>
+<td align="left"><a href="https://www.openstreetmap.org/edit?way=168058334#map=17/52.45675/13.57921" class="uri">https://www.openstreetmap.org/edit?way=168058334#map=17/52.45675/13.57921</a></td>
+<td align="left"><a href="https://www.openstreetmap.org/?mlat=52.45675&amp;mlon=13.57921#map=17/52.45675/13.57921" class="uri">https://www.openstreetmap.org/?mlat=52.45675&amp;mlon=13.57921#map=17/52.45675/13.57921</a></td>
+<td align="left">49</td>
+<td align="left">u33dmj2ndxu2tewv03c0</td>
+<td align="left">1463022840</td>
+<td align="left">1463011380</td>
+<td align="left">1463020260</td>
+<td align="left">1463016780</td>
+<td align="left">1463079120</td>
+<td align="left">1463090820</td>
+<td align="left">1463081640</td>
+<td align="left">1463085180</td>
+<td align="left">Europe/Berlin</td>
+<td align="left">1</td>
+<td align="left">7200</td>
+<td align="left">200</td>
+<td align="left">CEST</td>
+<td align="left">allein.ausübt.schock</td>
+<td align="left">52.4569793</td>
+<td align="left">13.5798073</td>
+<td align="left">52.4565392</td>
+<td align="left">13.5784995</td>
+<td align="left">building</td>
+<td align="left">NA</td>
+<td align="left">Deutschland</td>
+<td align="left">de</td>
+<td align="left">Berlin</td>
+<td align="left">10</td>
+<td align="left">Vitanas Seniorencentrum, Parrisiusstraße 4-14, 12555 Berlin, Deutschland</td>
+<td align="right">52.45675</td>
+<td align="right">13.579215</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">12555</td>
+<td align="left">Parrisiusstraße</td>
+<td align="left">NA</td>
+<td align="left">Treptow-Köpenick</td>
+<td align="left">4-14</td>
+<td align="left">Köpenick</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">Vitanas Seniorencentrum</td>
+<td align="left">Dammvorstadt</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p><code>limit</code>: How many results should be returned (1-100). Default is 10.</p></li>
+<li><p><code>min_confidence</code>: an integer from 1-10. Only results with at least this confidence will be returned.</p></li>
+<li><p><code>no_annotations</code>: Logical (default FALSE), when TRUE the output will not contain annotations.</p></li>
+<li><p><code>no_dedupe</code>: Logical (default FALSE), when TRUE the output will not be deduplicated.</p></li>
+</ul>
+<p>For more information about the output and the query parameters, see the package documentation, the <a href="https://geocoder.opencagedata.com/api">API doc</a> and <a href="https://geocoder.opencagedata.com/faq">OpenCage FAQ</a>.</p>
+</div>
+<div id="caching" class="section level2">
+<h2>Caching</h2>
+<p>The underlying data at OpenCage is updated about once a day. Note that the package uses <a href="https://github.com/hadley/memoise">memoise</a> with no timeout argument so that results are cached inside an active R session.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(<span class="kw">opencage_reverse</span>(<span class="dt">latitude =</span> <span class="dv">10</span>, <span class="dt">longitude =</span> <span class="dv">10</span>))
+<span class="co">#&gt;    user  system elapsed </span>
+<span class="co">#&gt;    0.03    0.00    0.38</span>
+
+<span class="kw">system.time</span>(<span class="kw">opencage_reverse</span>(<span class="dt">latitude =</span> <span class="dv">10</span>, <span class="dt">longitude =</span> <span class="dv">10</span>))
+<span class="co">#&gt;    user  system elapsed </span>
+<span class="co">#&gt;       0       0       0</span>
+
+memoise::<span class="kw">forget</span>(opencage_reverse)
+<span class="co">#&gt; [1] TRUE</span>
+<span class="kw">system.time</span>(<span class="kw">opencage_reverse</span>(<span class="dt">latitude =</span> <span class="dv">10</span>, <span class="dt">longitude =</span> <span class="dv">10</span>))
+<span class="co">#&gt;    user  system elapsed </span>
+<span class="co">#&gt;    0.01    0.00    0.33</span></code></pre></div>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

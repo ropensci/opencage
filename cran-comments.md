@@ -1,3 +1,11 @@
+## Resubmission
+
+This is a resubmission. In this version I have:
+
+* changed Julia Silge's role to c("ctb", "rev") and added a comment for "rev".
+
+* updated a broken link in the vignette.
+
 ## Test environments
 * local Windows install, R 3.2.4
 * ubuntu 12.04 (on travis-ci), R 3.2.3
@@ -9,13 +17,7 @@
 R CMD check results
 0 errors | 0 warnings | 1 note
 
-The note is:
-Authors@R field gives persons with no valid roles:
-  Julia Silge [rev]
-  
-* The rev role is not part of the suggested subset of MARC Code List for Relators but it is part of the MARC Code List. The role of Julia Silge in the development of this package was indeed reviewing it for rOpenSci (https://github.com/ropensci/onboarding/issues/36).
-
-* In this article, https://journal.r-project.org/archive/2012-1/RJournal_2012-1_Hornik~et~al.pdf, it is stated that "all MARC relator codes are supported".
+* The Openstreetmap links are not invalid but they require login. They are part of the output of the package functions and appear in the vignette.
 
 ## Release summary
 
