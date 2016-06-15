@@ -29,16 +29,21 @@ opencage_parse <- function(req) {
     results <- NULL
   }
 
+  if(!is.null(temp$rate)){
+    rate_info <- dplyr::tbl_df(data.frame(
+      limit = temp$rate$limit,
+      remaining = temp$rate$remaining,
+      rest = as.POSIXct(temp$rate$reset, origin="1970-01-01")))
+  }else{
+    rate_info <- NULL
+  }
 
   list(results = results,
        total_results = no_results,
        time_stamp = as.POSIXct(temp$timestamp$created_unix,
                                origin="1970-01-01"),
-       rate_info = dplyr::tbl_df(data.frame(
-         limit = temp$rate$limit,
-         remaining = temp$rate$remaining,
-         rest = as.POSIXct(temp$rate$reset, origin="1970-01-01")
-       )))
+       rate_info = rate_info
+       )
 }
 
 # base URL for all queries
