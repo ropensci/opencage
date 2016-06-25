@@ -38,6 +38,10 @@ opencage_parse <- function(req) {
     rate_info <- NULL
   }
 
+  if(!is.null(results)){
+    results <- dplyr::tbl_df(results)
+  }
+
   list(results = results,
        total_results = no_results,
        time_stamp = as.POSIXct(temp$timestamp$created_unix,
