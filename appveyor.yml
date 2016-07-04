@@ -17,10 +17,13 @@ environment:
     USE_RTOOLS: true
 
   matrix:
-  - R_VERSION: release
-    R_ARCH: x64
+  - R_VERSION: stable
 
   - R_VERSION: patched
+
+  - R_VERSION: oldrel
+
+  - R_VERSION: devel
 
 # Adapt as necessary starting from here
 
