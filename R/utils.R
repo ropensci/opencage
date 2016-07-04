@@ -81,7 +81,8 @@ opencage_query_check <- function(latitude = NULL,
                                  limit,
                                  min_confidence,
                                  no_annotations,
-                                 no_dedupe){
+                                 no_dedupe,
+                                 no_record){
   # check latitude
   if(!is.null(latitude)){
     if (!dplyr::between(latitude, -90, 90)){
@@ -168,10 +169,17 @@ opencage_query_check <- function(latitude = NULL,
     }
   }
 
-  # check no_annotationss
+  # check no_annotations
   if(!is.null(no_annotations)){
     if(!is.logical(no_annotations)){
       stop(call. = FALSE, "no_annotations has to be a logical.")
+    }
+  }
+
+  # check no_record
+  if(!is.null(no_record)){
+    if(!is.logical(no_record)){
+      stop(call. = FALSE, "no_record has to be a logical.")
     }
   }
 

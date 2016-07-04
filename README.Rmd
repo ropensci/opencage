@@ -10,7 +10,7 @@ opencage
 =============
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/opencage)](http://cran.r-project.org/package=opencage)
 [![Build Status](https://travis-ci.org/ropenscilabs/opencage.svg?branch=master)](https://travis-ci.org/ropenscilabs/opencage)
-[![Build status](https://ci.appveyor.com/api/projects/status/410099wd2lic6sm9?svg=true)](https://ci.appveyor.com/project/masalmon/opencage)
+[![Build status](https://ci.appveyor.com/api/projects/status/w7174arrgs1daskd?svg=true)](https://ci.appveyor.com/project/masalmon/opencage)
 [![codecov.io](https://codecov.io/github/ropenscilabs/opencage/coverage.svg?branch=master)](https://codecov.io/github/ropenscilabs/opencage?branch=master)
 
 # Installation
@@ -128,6 +128,13 @@ system.time(opencage_reverse(latitude = 10, longitude = 10))
 
 ```
 
+## Privacy
+
+Both functions have a parameter `no_record`. It is `FALSE` by default. 
+
+* When `no_record` is `FALSE` a log of the query is made by OpenCage. The company uses them to better generally understand how people are using its service (forward or reverse geocoding, what parts of the world are people most interested in, etc) and for debugging. The overwhelming majority (99.9999+% of queries) are never specifically looked at (sheer volume prevents that) and are automatically deleted after a few days. More information about privacy can be found [here](https://geocoder.opencagedata.com/faq#legal).
+
+* When `no_record` is `TRUE` the actual query is replaced with FILTERED in OpenCage logs, so that the company has no chance to see what your request was.
 
 ## Meta
 

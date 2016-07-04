@@ -4,8 +4,9 @@
                              language = NULL,
                              limit = 10,
                              min_confidence = NULL,
-                             no_annotations = NULL,
-                             no_dedupe = NULL){
+                             no_annotations = FALSE,
+                             no_dedupe = FALSE,
+                             no_record = FALSE){
   # check arguments
   opencage_query_check(placename = placename,
                        key = key,
@@ -15,10 +16,12 @@
                        limit = limit,
                        min_confidence = min_confidence,
                        no_annotations = no_annotations,
-                       no_dedupe = no_dedupe)
+                       no_dedupe = no_dedupe,
+                       no_record = no_record)
 
   no_annotations <- ifelse(is.null(no_annotations), FALSE, TRUE)
   no_dedupe <- ifelse(is.null(no_dedupe), FALSE, TRUE)
+  no_record <- ifelse(is.null(no_record), FALSE, TRUE)
 
   # res
   temp <- opencage_get(query_par = list(q = placename,
@@ -30,6 +33,7 @@
                                         no_annotations =
                                           ifelse(no_annotations == TRUE, 1, 0),
                                         no_dedupe = ifelse(no_dedupe == TRUE, 1, 0),
+                                        no_record = ifelse(no_record == TRUE, 1, 0),
                                         key = key))
 
   # check message
@@ -54,6 +58,7 @@
 #' @param min_confidence An integer from 1-10. Only results with at least this confidence will be returned.
 #' @param no_annotations Logical (default FALSE), when TRUE the output will not contain annotations.
 #' @param no_dedupe Logical (default FALSE), when TRUE the output will not be deduplicated.
+#' @param no_record Logical (default FALSE), when TRUE no log entry of the query is created at OpenCage.
 #'
 #' @details To get an API key to access OpenCage geocoding, register at \url{https://geocoder.opencagedata.com/pricing}. The free API key provides up to 2,500 calls a day. For ease of use, save your API key as an environment variable as described at \url{https://stat545-ubc.github.io/bit003_api-key-env-var.html}.
 #' Both functions of the package will conveniently look for your API key using \code{Sys.getenv("OPENCAGE_KEY")} so if your API key is an environment variable called "OPENCAGE_KEY" you don't need to input it manually.

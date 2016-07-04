@@ -123,3 +123,11 @@ test_that("opencage_query_check checks no_dedupe",{
                                 key = Sys.getenv("OPENCAGE_KEY")),
                "no_dedupe has to be a logical.")
 })
+
+test_that("opencage_query_check checks no_record",{
+  skip_on_cran()
+  expect_error(opencage_forward(placename = "Sarzeau",
+                                no_record = "yes",
+                                key = Sys.getenv("OPENCAGE_KEY")),
+               "no_record has to be a logical.")
+})
