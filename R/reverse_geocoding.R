@@ -24,8 +24,9 @@
                        no_dedupe = no_dedupe,
                        no_record = no_record)
 
-  no_annotations <- ifelse(is.null(no_annotations), FALSE, TRUE)
-  no_dedupe <- ifelse(is.null(no_dedupe), FALSE, TRUE)
+  no_annotations <- ifelse(is.null(no_annotations), FALSE, no_annotations)
+  no_dedupe <- ifelse(is.null(no_dedupe), FALSE, no_dedupe)
+  no_record <- ifelse(is.null(no_record), FALSE, no_record)
 
 
   # res
