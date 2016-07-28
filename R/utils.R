@@ -33,7 +33,7 @@ opencage_parse <- function(req) {
     rate_info <- dplyr::tbl_df(data.frame(
       limit = temp$rate$limit,
       remaining = temp$rate$remaining,
-      rest = as.POSIXct(temp$rate$reset, origin="1970-01-01")))
+      reset = as.POSIXct(temp$rate$reset, origin="1970-01-01")))
   }else{
     rate_info <- NULL
   }
