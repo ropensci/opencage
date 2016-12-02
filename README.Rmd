@@ -9,9 +9,9 @@ output:
 opencage
 =============
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/opencage)](http://cran.r-project.org/package=opencage)
-[![Build Status](https://travis-ci.org/ropenscilabs/opencage.svg?branch=master)](https://travis-ci.org/ropenscilabs/opencage)
-[![Build status](https://ci.appveyor.com/api/projects/status/iketgu0vk55kt0b0?svg=true)](https://ci.appveyor.com/project/ropenscilabs/opencage)
-[![codecov.io](https://codecov.io/github/ropenscilabs/opencage/coverage.svg?branch=master)](https://codecov.io/github/ropenscilabs/opencage?branch=master)
+[![Build Status](https://travis-ci.org/ropensci/opencage.svg?branch=master)](https://travis-ci.org/ropensci/opencage)
+[![Build status](https://ci.appveyor.com/api/projects/status/iketgu0vk55kt0b0?svg=true)](https://ci.appveyor.com/project/ropensci/opencage)
+[![codecov.io](https://codecov.io/github/ropensci/opencage/coverage.svg?branch=master)](https://codecov.io/github/ropensci/opencage?branch=master)
 
 # Installation
 
@@ -26,7 +26,7 @@ Or install the development version using [devtools](https://github.com/hadley/de
 
 ```{r, eval = FALSE}
 library("devtools")
-install_github("ropenscilabs/opencage")
+install_github("ropensci/opencage")
 
 ```
 
@@ -138,7 +138,7 @@ Both functions have a parameter `no_record`. It is `FALSE` by default.
 
 ## Meta
 
-* Please [report any issues or bugs](https://github.com/ropenscilabs/opencage/issues).
+* Please [report any issues or bugs](https://github.com/ropensci/opencage/issues).
 * License: GPL
 * Get citation information for `opencage` in R doing `citation(package = 'opencage')`
 * Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
