@@ -136,6 +136,8 @@ Both functions have a parameter `no_record`. It is `FALSE` by default.
 
 * When `no_record` is `TRUE` the actual query is replaced with FILTERED in OpenCage logs, so that the company has no chance to see what your request was.
 
+They also have an `abbr` parameter, FALSE by default. When it is TRUE the addresses are abbreviated in the results, see more details in [this blog post](http://blog.opencagedata.com/post/160294347883/shrtr-pls).
+
 ## Meta
 
 * Please [report any issues or bugs](https://github.com/ropensci/opencage/issues).

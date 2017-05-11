@@ -1,7 +1,7 @@
 Package: opencage
 Type: Package
 Title: Interface to the OpenCage API
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: c(person("Maëlle", "Salmon", email = "maelle.salmon@yahoo.se", role = c("aut", "cre")), person("Noam", "Ross", role = "ctb"), person("Julia", "Silge", role = c("ctb","rev"), comment = "Julia Silge reviewed the package for rOpenSci, see https://github.com/ropensci/onboarding/issues/36."))
 Description: Tool for accessing the OpenCage API, which provides forward
     geocoding (from placename to longitude and latitude) and reverse geocoding (from

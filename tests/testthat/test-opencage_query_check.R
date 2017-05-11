@@ -131,3 +131,12 @@ test_that("opencage_query_check checks no_record",{
                                 key = Sys.getenv("OPENCAGE_KEY")),
                "no_record has to be a logical.")
 })
+
+
+test_that("opencage_query_check checks abbrv",{
+  skip_on_cran()
+  expect_error(opencage_forward(placename = "Sarzeau",
+                                abbrv = "yes",
+                                key = Sys.getenv("OPENCAGE_KEY")),
+               "abbrv has to be a logical.")
+})
