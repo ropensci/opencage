@@ -12,4 +12,3 @@ Language codes
 data("languagecodes")
 }
 \keyword{data}
-

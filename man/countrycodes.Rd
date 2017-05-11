@@ -12,4 +12,3 @@ Country codes
 data("countrycodes")
 }
 \keyword{data}
-

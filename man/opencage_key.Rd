@@ -11,4 +11,3 @@ An Opencage API Key
 Looks in env var \code{OPENCAGE_KEY}
 }
 \keyword{internal}
-

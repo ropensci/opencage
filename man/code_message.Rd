@@ -12,4 +12,3 @@ API messages
 data("code_message")
 }
 \keyword{data}
-
