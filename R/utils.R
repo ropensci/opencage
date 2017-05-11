@@ -75,6 +75,7 @@ opencage_query_check <- function(latitude = NULL,
                                  longitude = NULL,
                                  placename = NULL,
                                  key,
+                                 abbrv,
                                  bounds,
                                  countrycode,
                                  language,
@@ -169,6 +170,12 @@ opencage_query_check <- function(latitude = NULL,
     }
   }
 
+  # check abbrv
+  if(!is.null(abbrv)){
+    if(!is.logical(abbrv)){
+      stop(call. = FALSE, "abbrv has to be a logical.")
+    }
+  }
   # check no_annotations
   if(!is.null(no_annotations)){
     if(!is.logical(no_annotations)){
