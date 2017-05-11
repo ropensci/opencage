@@ -43,16 +43,16 @@ output <- opencage_forward(placename = "Sarzeau")
 print(output$time_stamp)
 ```
 
-    ## [1] "2017-05-11 20:02:31 CEST"
+    ## [1] "2017-05-11 20:22:07 CEST"
 
 ``` r
 library("dplyr")
 output$rate_info %>% knitr::kable()
 ```
 
-|  limit|  remaining| rest                |
+|  limit|  remaining| reset               |
 |------:|----------:|:--------------------|
-|   2500|       2499| 2017-05-12 02:00:00 |
+|   2500|       2285| 2017-05-12 02:00:00 |
 
 ``` r
 output$results %>% knitr::kable()
@@ -74,15 +74,15 @@ output2 <- opencage_reverse(latitude = 51.5034070,
 print(output2$time_stamp)
 ```
 
-    ## [1] "2017-05-11 20:02:33 CEST"
+    ## [1] "2017-05-11 20:22:09 CEST"
 
 ``` r
 output2$rate_info %>% knitr::kable()
 ```
 
-|  limit|  remaining| rest                |
+|  limit|  remaining| reset               |
 |------:|----------:|:--------------------|
-|   2500|       2498| 2017-05-12 02:00:00 |
+|   2500|       2284| 2017-05-12 02:00:00 |
 
 ``` r
 output2$results %>% knitr::kable()
@@ -216,7 +216,7 @@ system.time(opencage_reverse(latitude = 10, longitude = 10))
 ```
 
     ##    user  system elapsed 
-    ##    0.05    0.01    0.48
+    ##    0.05    0.02    0.59
 
 ``` r
 system.time(opencage_reverse(latitude = 10, longitude = 10))
@@ -236,7 +236,7 @@ system.time(opencage_reverse(latitude = 10, longitude = 10))
 ```
 
     ##    user  system elapsed 
-    ##    0.02    0.03    0.47
+    ##    0.01    0.03    0.45
 
 Privacy
 -------
@@ -246,6 +246,9 @@ Both functions have a parameter `no_record`. It is `FALSE` by default.
 -   When `no_record` is `FALSE` a log of the query is made by OpenCage. The company uses them to better generally understand how people are using its service (forward or reverse geocoding, what parts of the world are people most interested in, etc) and for debugging. The overwhelming majority (99.9999+% of queries) are never specifically looked at (sheer volume prevents that) and are automatically deleted after a few days. More information about privacy can be found [here](https://geocoder.opencagedata.com/faq#legal).
 
 -   When `no_record` is `TRUE` the actual query is replaced with FILTERED in OpenCage logs, so that the company has no chance to see what your request was.
+
+Addresses
+---------
 
 They also have an `abbr` parameter, FALSE by default. When it is TRUE the addresses are abbreviated in the results, see more details in [this blog post](http://blog.opencagedata.com/post/160294347883/shrtr-pls).
 

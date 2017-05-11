@@ -126,3 +126,7 @@ Both functions have a parameter `no_record`. It is `FALSE` by default.
 * When `no_record` is `FALSE` a log of the query is made by OpenCage. The company uses them to better generally understand how people are using its service (forward or reverse geocoding, what parts of the world are people most interested in, etc) and for debugging. The overwhelming majority (99.9999+% of queries) are never specifically looked at (sheer volume prevents that) and are automatically deleted after a few days. More information about privacy can be found [here](https://geocoder.opencagedata.com/faq#legal).
 
 * When `no_record` is `TRUE` the actual query is replaced with FILTERED in OpenCage logs, so that the company has no chance to see what your request was.
+
+## Addresses
+
+They also have an `abbr` parameter, FALSE by default. When it is TRUE the addresses are abbreviated in the results, see more details in [this blog post](http://blog.opencagedata.com/post/160294347883/shrtr-pls).
