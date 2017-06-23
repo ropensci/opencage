@@ -24,6 +24,11 @@ opencage_parse <- function(req) {
       as.character(results$geometry.lat))
     results$geometry.lng <- as.numeric(
       as.character(results$geometry.lng))
+
+      # if requests exists in the api response add the query to results
+      if("request" %in% names(temp)) {
+        results$query <- as.character(temp$request$query)
+      }
   }
   else{
     results <- NULL
@@ -55,7 +60,7 @@ opencage_url <- function() {
   "http://api.opencagedata.com/geocode/v1/json/"
 }
 
-# get resultrs
+# get results
 opencage_get <- function(query_par){
   query_par <- Filter(Negate(is.null), query_par) # nolint
   if(!is.null(query_par$bounds)){
@@ -83,7 +88,8 @@ opencage_query_check <- function(latitude = NULL,
                                  min_confidence,
                                  no_annotations,
                                  no_dedupe,
-                                 no_record){
+                                 no_record,
+                                 add_request){
   # check latitude
   if(!is.null(latitude)){
     if (!dplyr::between(latitude, -90, 90)){
@@ -197,6 +203,12 @@ opencage_query_check <- function(latitude = NULL,
     }
   }
 
+  # check add_request
+  if(!is.null(add_request)){
+    if(!is.logical(add_request)){
+      stop(call. = FALSE, "add_request has to be a logical.")
+    }
+  }
 
 }
 
