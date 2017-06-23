@@ -140,3 +140,11 @@ test_that("opencage_query_check checks abbrv",{
                                 key = Sys.getenv("OPENCAGE_KEY")),
                "abbrv has to be a logical.")
 })
+
+test_that("opencage_query_check checks add_request",{
+  skip_on_cran()
+  expect_error(opencage_forward(placename = "Sarzeau",
+                                add_request = "yes",
+                                key = Sys.getenv("OPENCAGE_KEY")),
+               "add_request has to be a logical.")
+})
