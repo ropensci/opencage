@@ -8,7 +8,7 @@
                              no_dedupe = FALSE,
                              no_record = FALSE,
                              abbrv = FALSE,
-                             add_request = FALSE){
+                             add_request = TRUE){
   # check arguments
   opencage_query_check(placename = placename,
                        key = key,
