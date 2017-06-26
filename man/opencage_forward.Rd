@@ -32,7 +32,7 @@ opencage_forward(placename, key = opencage_key(), bounds = NULL,
 
 \item{abbrv}{Logical (default FALSE), when TRUE addresses are abbreviated (e.g. C. instead of Calle)}
 
-\item{add_request}{Logical (default TRUE), when FALSE the request text is removed from the results data frame.}
+\item{add_request}{Logical (default TRUE), when FALSE the query text is removed from the results data frame.}
 }
 \value{
 A list with
