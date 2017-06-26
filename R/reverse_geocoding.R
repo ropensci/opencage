@@ -1,6 +1,6 @@
 .opencage_reverse <- function(latitude,
                               longitude,
-                              key=opencage_key(),
+                              key = opencage_key(),
                               bounds = NULL,
                               countrycode = NULL,
                               language = NULL,
@@ -50,9 +50,9 @@
                                          no_record =
                                            ifelse(no_record == TRUE, 1, 0),
                                         abbrv =
-                                          ifelse(abbrv == TRUE, 1, 0)),
+                                          ifelse(abbrv == TRUE, 1, 0),
                                          add_request =
-                                           ifelse(add_request == TRUE, 1, 0))
+                                           ifelse(add_request == TRUE, 1, 0)))
   # check message
   opencage_check(temp)
 
