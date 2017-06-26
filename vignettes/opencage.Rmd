@@ -130,3 +130,9 @@ Both functions have a parameter `no_record`. It is `FALSE` by default.
 ## Addresses
 
 They also have an `abbr` parameter, FALSE by default. When it is TRUE the addresses are abbreviated in the results, see more details in [this blog post](http://blog.opencagedata.com/post/160294347883/shrtr-pls).
+
+## Return query text
+
+The OpenCage API includes an optional `add_request` parameter that when set to 1 
+the query text is added to the response. This argument is set to TRUE by default,
+which allows for easy merging of the response data and the orignal query text.
