@@ -1,6 +1,6 @@
 .opencage_reverse <- function(latitude,
                               longitude,
-                              key=opencage_key(),
+                              key = opencage_key(),
                               bounds = NULL,
                               countrycode = NULL,
                               language = NULL,
@@ -9,8 +9,8 @@
                               no_annotations = FALSE,
                               no_dedupe = FALSE,
                               no_record = FALSE,
-                              abbrv = FALSE){
-
+                              abbrv = FALSE,
+                              add_request = TRUE){
 
   # check arguments
   opencage_query_check(latitude = latitude,
@@ -24,12 +24,14 @@
                        no_annotations = no_annotations,
                        no_dedupe = no_dedupe,
                        no_record = no_record,
-                       abbrv = abbrv)
+                       abbrv = abbrv,
+                       add_request = add_request)
 
   no_annotations <- ifelse(is.null(no_annotations), FALSE, no_annotations)
   no_dedupe <- ifelse(is.null(no_dedupe), FALSE, no_dedupe)
   no_record <- ifelse(is.null(no_record), FALSE, no_record)
   abbrv <- ifelse(is.null(abbrv), FALSE, abbrv)
+  add_request <- ifelse(is.null(add_request), TRUE, add_request)
 
 
   # res
@@ -48,7 +50,9 @@
                                          no_record =
                                            ifelse(no_record == TRUE, 1, 0),
                                         abbrv =
-                                          ifelse(abbrv == TRUE, 1, 0)))
+                                          ifelse(abbrv == TRUE, 1, 0),
+                                         add_request =
+                                           ifelse(add_request == TRUE, 1, 0)))
   # check message
   opencage_check(temp)
 
@@ -75,6 +79,7 @@
 #' @param no_dedupe Logical (default FALSE), when TRUE the output will not be deduplicated.
 #' @param no_record Logical (default FALSE), when TRUE no log entry of the query is created at OpenCage.
 #' @param abbrv Logical (default FALSE), when TRUE addresses are abbreviated (e.g. C. instead of Calle)
+#' @param add_request Logical (default TRUE), when FALSE the query text is removed from the results data frame.
 #'
 #' @details To get an API key to access OpenCage geocoding, register at \url{https://geocoder.opencagedata.com/pricing}. The free API key provides up to 2,500 calls a day. For ease of use, save your API key as an environment variable as described at \url{https://stat545-ubc.github.io/bit003_api-key-env-var.html}.
 #' Both functions of the package will conveniently look for your API key using \code{Sys.getenv("OPENCAGE_KEY")} so if your API key is an environment variable called "OPENCAGE_KEY" you don't need to input it manually.

@@ -7,7 +7,7 @@
 opencage_forward(placename, key = opencage_key(), bounds = NULL,
   countrycode = NULL, language = NULL, limit = 10,
   min_confidence = NULL, no_annotations = FALSE, no_dedupe = FALSE,
-  no_record = FALSE, abbrv = FALSE)
+  no_record = FALSE, abbrv = FALSE, add_request = TRUE)
 }
 \arguments{
 \item{placename}{Placename.}
@@ -31,6 +31,8 @@ opencage_forward(placename, key = opencage_key(), bounds = NULL,
 \item{no_record}{Logical (default FALSE), when TRUE no log entry of the query is created at OpenCage.}
 
 \item{abbrv}{Logical (default FALSE), when TRUE addresses are abbreviated (e.g. C. instead of Calle)}
+
+\item{add_request}{Logical (default TRUE), when FALSE the query text is removed from the results data frame.}
 }
 \value{
 A list with
