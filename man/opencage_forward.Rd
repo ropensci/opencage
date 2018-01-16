@@ -18,7 +18,7 @@ opencage_forward(placename, key = opencage_key(), bounds = NULL,
 
 \item{countrycode}{Restricts the results to the given country. The country code is a two letter code as defined by the ISO 3166-1 Alpha 2 standard. E.g. "GB" for the United Kingdom, "FR" for France, "US" for United States.}
 
-\item{language}{An IETF format language code (such as "es" for Spanish or "pt-BR" for Brazilian Portuguese). If no language is explicitly specified, we will look for an HTTP Accept-Language header like those sent by a brower and use the first language specified and if none are specified "en" (English) will be assumed.}
+\item{language}{An IETF format language code (such as "es" for Spanish or "pt-BR" for Brazilian Portuguese). If no language is explicitly specified, we will look for an HTTP Accept-Language header like those sent by a browser and use the first language specified and if none are specified "en" (English) will be assumed.}
 
 \item{limit}{How many results should be returned (1-100). Default is 10.}
 
