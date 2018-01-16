@@ -9,4 +9,4 @@
 
 ## Release summary
 
-* Adds two new parameters of the API, abbrv and no_record.
+* Bug fix, a parameter didn't work because of Namibia.
