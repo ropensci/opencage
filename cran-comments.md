@@ -5,7 +5,11 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 note
+0 errors | 0 warnings | 1 note
+Authors@R field gives persons with non-standard roles:
+  Julia Silge [rev] (Julia Silge reviewed the package for rOpenSci, see https://github.com/ropensci/onboarding/issues/36.): rev
+  
+This is a non standard but accepted role.
 
 ## Release summary
 
