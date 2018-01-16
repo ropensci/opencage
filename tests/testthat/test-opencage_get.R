@@ -6,3 +6,11 @@ test_that("opencage_get returns a response object",{
                               key = Sys.getenv("OPENCAGE_KEY"))),
             "response")
 })
+
+test_that("opencage_get returns a response object for Namibia NA countrycode",{
+  skip_on_cran()
+  expect_is(opencage_get(list(placename = "Windhoek",
+                              key = Sys.getenv("OPENCAGE_KEY"),
+                              country = "NA")),
+            "response")
+})
