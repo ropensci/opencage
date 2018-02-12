@@ -1,16 +1,24 @@
 library("opencage")
 context("oc_get")
-test_that("oc_get returns a response object",{
+test_that("oc_get returns a response object", {
   skip_on_cran()
-  expect_is(oc_get(list(placename = "Sarzeau",
-                              key = Sys.getenv("OPENCAGE_KEY"))),
-            "response")
+  expect_is(
+    oc_get(list(
+      placename = "Sarzeau",
+      key = Sys.getenv("OPENCAGE_KEY")
+    )),
+    "response"
+  )
 })
 
-test_that("oc_get returns a response object for Namibia NA countrycode",{
+test_that("oc_get returns a response object for Namibia NA countrycode", {
   skip_on_cran()
-  expect_is(oc_get(list(placename = "Windhoek",
-                              key = Sys.getenv("OPENCAGE_KEY"),
-                              country = "NA")),
-            "response")
+  expect_is(
+    oc_get(list(
+      placename = "Windhoek",
+      key = Sys.getenv("OPENCAGE_KEY"),
+      country = "NA"
+    )),
+    "response"
+  )
 })

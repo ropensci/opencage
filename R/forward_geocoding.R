@@ -1,55 +1,61 @@
-.opencage_forward <- function(placename, key=oc_key(),
-                             bounds = NULL,
-                             countrycode = NULL,
-                             language = NULL,
-                             limit = 10,
-                             min_confidence = NULL,
-                             no_annotations = FALSE,
-                             no_dedupe = FALSE,
-                             no_record = FALSE,
-                             abbrv = FALSE,
-                             add_request = TRUE){
-  # check arguments
-  oc_query_check(placename = placename,
-                       key = key,
-                       bounds = bounds,
-                       countrycode = countrycode,
-                       language = language,
-                       limit = limit,
-                       min_confidence = min_confidence,
-                       no_annotations = no_annotations,
-                       no_dedupe = no_dedupe,
-                       no_record = no_record,
-                       abbrv = abbrv,
-                       add_request = add_request)
+.opencage_forward <-
+  function(placename,
+           key = oc_key(),
+           bounds = NULL,
+           countrycode = NULL,
+           language = NULL,
+           limit = 10,
+           min_confidence = NULL,
+           no_annotations = FALSE,
+           no_dedupe = FALSE,
+           no_record = FALSE,
+           abbrv = FALSE,
+           add_request = TRUE) {
+    # check arguments
+    oc_query_check(
+      placename = placename,
+      key = key,
+      bounds = bounds,
+      countrycode = countrycode,
+      language = language,
+      limit = limit,
+      min_confidence = min_confidence,
+      no_annotations = no_annotations,
+      no_dedupe = no_dedupe,
+      no_record = no_record,
+      abbrv = abbrv,
+      add_request = add_request
+    )
 
-  no_annotations <- ifelse(is.null(no_annotations), FALSE, no_annotations)
-  no_dedupe <- ifelse(is.null(no_dedupe), FALSE, no_dedupe)
-  no_record <- ifelse(is.null(no_record), FALSE, no_record)
-  abbrv <- ifelse(is.null(abbrv), FALSE, abbrv)
-  add_request <- ifelse(is.null(add_request), TRUE, add_request)
+    no_annotations <- ifelse(is.null(no_annotations), FALSE, no_annotations)
+    no_dedupe <- ifelse(is.null(no_dedupe), FALSE, no_dedupe)
+    no_record <- ifelse(is.null(no_record), FALSE, no_record)
+    abbrv <- ifelse(is.null(abbrv), FALSE, abbrv)
+    add_request <- ifelse(is.null(add_request), TRUE, add_request)
 
-  # res
-  temp <- oc_get(query_par = list(q = placename,
-                                        bounds = bounds,
-                                        countrycode = countrycode,
-                                        language = language,
-                                        limit = limit,
-                                        min_confidence = min_confidence,
-                                        no_annotations =
-                                          ifelse(no_annotations == TRUE, 1, 0),
-                                        no_dedupe = ifelse(no_dedupe == TRUE, 1, 0),
-                                        no_record = ifelse(no_record == TRUE, 1, 0),
-                                        abbrv = ifelse(abbrv == TRUE, 1, 0),
-                                        add_request = ifelse(add_request == TRUE, 1, 0),
-                                        key = key))
+    # res
+    temp <- oc_get(query_par = list(
+      q = placename,
+      bounds = bounds,
+      countrycode = countrycode,
+      language = language,
+      limit = limit,
+      min_confidence = min_confidence,
+      no_annotations =
+        ifelse(no_annotations == TRUE, 1, 0),
+      no_dedupe = ifelse(no_dedupe == TRUE, 1, 0),
+      no_record = ifelse(no_record == TRUE, 1, 0),
+      abbrv = ifelse(abbrv == TRUE, 1, 0),
+      add_request = ifelse(add_request == TRUE, 1, 0),
+      key = key
+    ))
 
-  # check message
-  oc_check(temp)
+    # check message
+    oc_check(temp)
 
-  # done!
-  oc_parse(temp)
-}
+    # done!
+    oc_parse(temp)
+  }
 
 #' Forward geocoding
 #'
@@ -93,7 +99,6 @@
 #' opencage_forward(placename = "Triererstr 15,
 #'                               Weimar 99423,
 #'                               Deutschland")
-#'}
+#' }
 #'
 opencage_forward <- memoise::memoise(.opencage_forward)
-
