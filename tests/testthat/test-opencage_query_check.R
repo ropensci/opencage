@@ -1,7 +1,7 @@
 library("opencage")
-context("opencage_query_check")
+context("oc_query_check")
 
-test_that("opencage_query_check checks latitude",{
+test_that("oc_query_check checks latitude",{
   skip_on_cran()
   expect_error(opencage_reverse(latitude = 433,
                                 longitude = 51.11892,
@@ -9,7 +9,7 @@ test_that("opencage_query_check checks latitude",{
                "Latitude should be between -90 and 90.")
 })
 
-test_that("opencage_query_check checks longitude",{
+test_that("oc_query_check checks longitude",{
   skip_on_cran()
   expect_error(opencage_reverse(latitude = 43,
                                 longitude = 5111892,
@@ -17,14 +17,14 @@ test_that("opencage_query_check checks longitude",{
                "Longitude should be between -180 and 180.")
 })
 
-test_that("opencage_query_check checks placename",{
+test_that("oc_query_check checks placename",{
   skip_on_cran()
           expect_error(opencage_forward(placename = 222,
                                         key = Sys.getenv("OPENCAGE_KEY")),
                        "Placename should be a character.")
           })
 
-test_that("opencage_query_check checks key",{
+test_that("oc_query_check checks key",{
   skip_on_cran()
           expect_error(opencage_reverse(latitude = 43.3,
                                         longitude = 51.11892,
@@ -32,7 +32,7 @@ test_that("opencage_query_check checks key",{
                        "Key should be a character.")
   })
 
-test_that("opencage_query_check checks bound",{
+test_that("oc_query_check checks bound",{
   skip_on_cran()
   expect_error(opencage_forward(placename = "Sarzeau",
                                 bound = c(-563160,51.280430,0.278970,51.683979),
@@ -70,7 +70,7 @@ test_that("opencage_query_check checks bound",{
                "bounds should be a vector of 4 numeric values.")
 })
 
-test_that("opencage_query_check checks countrycode",{
+test_that("oc_query_check checks countrycode",{
   skip_on_cran()
   expect_error(opencage_forward(placename = "Sarzeau",
                                 countrycode = "notacountrycode",
@@ -78,7 +78,7 @@ test_that("opencage_query_check checks countrycode",{
                "countrycode does not have a valid value.")
 })
 
-test_that("opencage_query_check checks language",{
+test_that("oc_query_check checks language",{
   skip_on_cran()
   expect_error(opencage_forward(placename = "Sarzeau",
                                 language = "notalanguagecode",
@@ -92,7 +92,7 @@ test_that("opencage_query_check checks language",{
 })
 
 
-test_that("opencage_query_check checks min_confidence",{
+test_that("oc_query_check checks min_confidence",{
   skip_on_cran()
   expect_error(opencage_forward(placename = "Sarzeau",
                                 min_confidence = 20,
@@ -100,7 +100,7 @@ test_that("opencage_query_check checks min_confidence",{
                "min_confidence should be an integer between 1 and 10.")
 })
 
-test_that("opencage_query_check checks limit",{
+test_that("oc_query_check checks limit",{
   skip_on_cran()
   expect_error(opencage_forward(placename = "Sarzeau",
                                 limit = 200,
@@ -108,7 +108,7 @@ test_that("opencage_query_check checks limit",{
                "limit should be an integer between 1 and 100.")
 })
 
-test_that("opencage_query_check checks no_annotations",{
+test_that("oc_query_check checks no_annotations",{
   skip_on_cran()
   expect_error(opencage_forward(placename = "Sarzeau",
                                 no_annotations = "yes",
@@ -116,7 +116,7 @@ test_that("opencage_query_check checks no_annotations",{
                "no_annotations has to be a logical.")
 })
 
-test_that("opencage_query_check checks no_dedupe",{
+test_that("oc_query_check checks no_dedupe",{
   skip_on_cran()
   expect_error(opencage_forward(placename = "Sarzeau",
                                 no_dedupe = "yes",
@@ -124,7 +124,7 @@ test_that("opencage_query_check checks no_dedupe",{
                "no_dedupe has to be a logical.")
 })
 
-test_that("opencage_query_check checks no_record",{
+test_that("oc_query_check checks no_record",{
   skip_on_cran()
   expect_error(opencage_forward(placename = "Sarzeau",
                                 no_record = "yes",
@@ -133,7 +133,7 @@ test_that("opencage_query_check checks no_record",{
 })
 
 
-test_that("opencage_query_check checks abbrv",{
+test_that("oc_query_check checks abbrv",{
   skip_on_cran()
   expect_error(opencage_forward(placename = "Sarzeau",
                                 abbrv = "yes",
@@ -141,7 +141,7 @@ test_that("opencage_query_check checks abbrv",{
                "abbrv has to be a logical.")
 })
 
-test_that("opencage_query_check checks add_request",{
+test_that("oc_query_check checks add_request",{
   skip_on_cran()
   expect_error(opencage_forward(placename = "Sarzeau",
                                 add_request = "yes",

@@ -4,7 +4,7 @@
 \alias{opencage_forward}
 \title{Forward geocoding}
 \usage{
-opencage_forward(placename, key = opencage_key(), bounds = NULL,
+opencage_forward(placename, key = oc_key(), bounds = NULL,
   countrycode = NULL, language = NULL, limit = 10,
   min_confidence = NULL, no_annotations = FALSE, no_dedupe = FALSE,
   no_record = FALSE, abbrv = FALSE, add_request = TRUE)

@@ -1,12 +1,12 @@
 # status check
-opencage_check <- function(req) {
+oc_check <- function(req) {
   if (req$status_code < 400) return(invisible())
   message <- code_message$message[code_message$code == req$status_code]
   stop("HTTP failure: ", req$status_code, "\n", message, call. = FALSE)
 }
 
 # function for parsing the response
-opencage_parse <- function(req) {
+oc_parse <- function(req) {
   text <- httr::content(req, as = "text")
   if (identical(text, "")) stop("No output to parse",
                                 call. = FALSE)
@@ -56,12 +56,12 @@ opencage_parse <- function(req) {
 }
 
 # base URL for all queries
-opencage_url <- function() {
+oc_url <- function() {
   "http://api.opencagedata.com/geocode/v1/json/"
 }
 
 # get results
-opencage_get <- function(query_par){
+oc_get <- function(query_par){
   query_par <- Filter(Negate(is.null), query_par) # nolint
   if(!is.null(query_par$bounds)){
     bounds <- query_par$bounds
@@ -71,12 +71,12 @@ opencage_get <- function(query_par){
           bounds[4],
           sep = ",")
   }
-  httr::GET(url = opencage_url(),
+  httr::GET(url = oc_url(),
             query = query_par)
 }
 
 # function that checks the query
-opencage_query_check <- function(latitude = NULL,
+oc_query_check <- function(latitude = NULL,
                                  longitude = NULL,
                                  placename = NULL,
                                  key,
@@ -219,7 +219,7 @@ opencage_query_check <- function(latitude = NULL,
 #'
 #' @keywords internal
 #' @export
-opencage_key <- function(quiet = TRUE) {
+oc_key <- function(quiet = TRUE) {
   pat <- Sys.getenv("OPENCAGE_KEY")
   if (identical(pat, ""))  {
     return(NULL)

@@ -1,7 +1,7 @@
 library("opencage")
-context("opencage_parse")
+context("oc_parse")
 
-test_that("opencage_parse returns what it should for both functions",{
+test_that("oc_parse returns what it should for both functions",{
   skip_on_cran()
   results <- opencage_forward(placename = "Sarzeau", key = Sys.getenv("OPENCAGE_KEY", ""))
   expect_is(results, "list")
@@ -34,7 +34,7 @@ test_that("opencage_parse returns what it should for both functions",{
   expect_equal(length(results), 4)
 })
 
-test_that("opencage_parse returns what it should for both functions with several parameters",{
+test_that("oc_parse returns what it should for both functions with several parameters",{
   skip_on_cran()
 
   results <- opencage_forward(placename = "Paris",
@@ -68,7 +68,7 @@ test_that("opencage_parse returns what it should for both functions with several
 
 })
 
-test_that("opencage_parse deals well with resuls being NULL",{
+test_that("oc_parse deals well with resuls being NULL",{
   results <- opencage_forward(placename = "thiswillgetmenoresultswichisgood",
                               key = Sys.getenv("OPENCAGE_KEY"),
                               limit = 2,

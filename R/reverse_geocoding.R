@@ -1,6 +1,6 @@
 .opencage_reverse <- function(latitude,
                               longitude,
-                              key = opencage_key(),
+                              key = oc_key(),
                               bounds = NULL,
                               countrycode = NULL,
                               language = NULL,
@@ -13,7 +13,7 @@
                               add_request = TRUE){
 
   # check arguments
-  opencage_query_check(latitude = latitude,
+  oc_query_check(latitude = latitude,
                        longitude = longitude,
                        key = key,
                        bounds = bounds,
@@ -35,7 +35,7 @@
 
 
   # res
-  temp <- opencage_get(query_par = list(q = paste0(latitude,
+  temp <- oc_get(query_par = list(q = paste0(latitude,
                                                    ",", longitude),
                                         key = key,
                                         bounds = bounds,
@@ -54,10 +54,10 @@
                                          add_request =
                                            ifelse(add_request == TRUE, 1, 0)))
   # check message
-  opencage_check(temp)
+  oc_check(temp)
 
   # done!
-  opencage_parse(temp)
+  oc_parse(temp)
 
 }
 

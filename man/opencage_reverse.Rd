@@ -4,7 +4,7 @@
 \alias{opencage_reverse}
 \title{Reverse geocoding}
 \usage{
-opencage_reverse(latitude, longitude, key = opencage_key(), bounds = NULL,
+opencage_reverse(latitude, longitude, key = oc_key(), bounds = NULL,
   countrycode = NULL, language = NULL, limit = 10,
   min_confidence = NULL, no_annotations = FALSE, no_dedupe = FALSE,
   no_record = FALSE, abbrv = FALSE, add_request = TRUE)

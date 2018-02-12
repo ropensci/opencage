@@ -1,4 +1,4 @@
-.opencage_forward <- function(placename, key=opencage_key(),
+.opencage_forward <- function(placename, key=oc_key(),
                              bounds = NULL,
                              countrycode = NULL,
                              language = NULL,
@@ -10,7 +10,7 @@
                              abbrv = FALSE,
                              add_request = TRUE){
   # check arguments
-  opencage_query_check(placename = placename,
+  oc_query_check(placename = placename,
                        key = key,
                        bounds = bounds,
                        countrycode = countrycode,
@@ -30,7 +30,7 @@
   add_request <- ifelse(is.null(add_request), TRUE, add_request)
 
   # res
-  temp <- opencage_get(query_par = list(q = placename,
+  temp <- oc_get(query_par = list(q = placename,
                                         bounds = bounds,
                                         countrycode = countrycode,
                                         language = language,
@@ -45,10 +45,10 @@
                                         key = key))
 
   # check message
-  opencage_check(temp)
+  oc_check(temp)
 
   # done!
-  opencage_parse(temp)
+  oc_parse(temp)
 }
 
 #' Forward geocoding
