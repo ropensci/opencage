@@ -5,8 +5,6 @@ oc_check <- function(req) {
   stop("HTTP failure: ", req$status_code, "\n", message, call. = FALSE)
 }
 
-#' @importFrom httr content
-#' @importFrom jsonlite fromJSON
 # function for parsing the response
 oc_parse <- function(req) {
   text <- httr::content(req, as = "text")
@@ -30,14 +28,11 @@ oc_url <- function() {
 }
 
 # set user agent
-#' @importFrom httr user_agent
 oc_user_agent <- function() {
   httr::user_agent("http://github.com/ropensci/opencage")
 }
 
 # get results
-#' @importFrom purrr compact
-#' @importFrom httr GET
 .oc_get <- function(query_par, usr_agnt) {
   query_par <- purrr::compact(query_par) # nolint
   if (!is.null(query_par$bounds)) {
@@ -57,11 +52,9 @@ oc_user_agent <- function() {
   )
 }
 
-#' @importFrom memoise memoise
 oc_get <- memoise::memoise(.oc_get)
 
 # function that checks the query
-#' @importFrom dplyr between
 oc_query_check <- function(latitude = NULL,
                            longitude = NULL,
                            placename = NULL,
@@ -198,7 +191,6 @@ oc_query_check <- function(latitude = NULL,
 }
 # format to "old" style (version <= 0.1.4)
 # for opencage_forward, opencage_reverse
-#' @importFrom dplyr bind_rows tbl_df
 opencage_format <- function(lst){
   no_results <- lst$total_results
   if (no_results > 0) {
