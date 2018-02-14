@@ -18,7 +18,7 @@ oc_parse <- function(req) {
   }
   jsn <- jsonlite::fromJSON(
     text,
-    simplifyVector = FALSE
+    flatten = TRUE
   )
   jsn[["url"]] <- req[["url"]]
   jsn
