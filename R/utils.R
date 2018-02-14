@@ -57,14 +57,8 @@ opencage_format <- function(lst){
     results <- lapply(lst$results, unlist)
     results <- lapply(results, as.data.frame)
     results <- lapply(results, t)
-    results <- lapply(results, as.data.frame)
+    results <- lapply(results, as.data.frame, stringsAsFactors = FALSE)
     results <- suppressWarnings(dplyr::bind_rows(results))
-    results$"geometry.lat" <- as.numeric(
-      as.character(results$"geometry.lat")
-    )
-    results$"geometry.lng" <- as.numeric(
-      as.character(results$"geometry.lng")
-    )
 
     # if requests exists in the api response add the query to results
     if ("request" %in% names(lst)) {
