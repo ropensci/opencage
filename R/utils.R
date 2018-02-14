@@ -24,7 +24,12 @@ oc_parse <- function(req) {
 
 # Get data frame of results
 oc_parse_df <- function(jsn) {
-  results_df <- jsn[["results"]]
+  if (purrr::has_element(jsn, jsn[["results"]]) == TRUE) {
+    results_df <- jsn[["results"]]
+  } else {
+    results_df <- purrr::map_df(jsn, "results")
+  }
+
   # Make column names nicer
   colnames(results_df) <- sub("annotations\\.", "", colnames(results_df))
   colnames(results_df) <- sub("bounds\\.", "", colnames(results_df))
