@@ -36,7 +36,7 @@ oc_reverse <-
       oc_get(
         query_par =
           list(
-            q = paste0(latitude,",", longitude),
+            q = paste0(latitude, ",", longitude),
             key = key,
             bounds = bounds,
             countrycode = countrycode,
