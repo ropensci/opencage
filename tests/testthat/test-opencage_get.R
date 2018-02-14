@@ -7,7 +7,7 @@ test_that("oc_get returns a response object", {
       placename = "Sarzeau",
       key = Sys.getenv("OPENCAGE_KEY")
     )),
-    "response"
+    "HttpResponse"
   )
 })
 
@@ -19,6 +19,6 @@ test_that("oc_get returns a response object for Namibia NA countrycode", {
       key = Sys.getenv("OPENCAGE_KEY"),
       country = "NA"
     )),
-    "response"
+    "HttpResponse"
   )
 })

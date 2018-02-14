@@ -7,7 +7,7 @@ oc_check <- function(req) {
 
 # function for parsing the response
 oc_parse <- function(req) {
-  text <- httr::content(req, as = "text")
+  text <- req$parse()
   if (identical(text, "")) {
     stop(
       "No output to parse",
@@ -27,13 +27,9 @@ oc_url <- function() {
   "https://api.opencagedata.com/geocode/v1/json/"
 }
 
-# set user agent
-oc_user_agent <- function() {
-  httr::user_agent("http://github.com/ropensci/opencage")
-}
 
 # get results
-.oc_get <- function(query_par, usr_agnt) {
+.oc_get <- function(query_par) {
   query_par <- purrr::compact(query_par) # nolint
   if (!is.null(query_par$bounds)) {
     bounds <- query_par$bounds
@@ -45,11 +41,9 @@ oc_user_agent <- function() {
       sep = ","
     )
   }
-  httr::GET(
-    url = oc_url(),
-    config = oc_user_agent(),
-    query = query_par
-  )
+  client <- crul::HttpClient$new(url = oc_url(),
+                                 headers = list(`User-Agent` = "opencage-R"))
+  client$get(query = query_par)
 }
 
 oc_get <- memoise::memoise(.oc_get)
