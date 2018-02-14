@@ -51,6 +51,38 @@ oc_forward <-
     oc_parse(res)
   }
 
+#' @export
+oc_forward_df <-
+  function(placename,
+           key = oc_key(),
+           bounds = NULL,
+           countrycode = NULL,
+           language = NULL,
+           limit = 10,
+           min_confidence = NULL,
+           no_annotations = FALSE,
+           no_dedupe = FALSE,
+           no_record = FALSE,
+           abbrv = FALSE,
+           add_request = TRUE) {
+    lst <- oc_forward(
+      placename = placename,
+      key = key,
+      bounds = bounds,
+      countrycode = countrycode,
+      language = language,
+      limit = limit,
+      min_confidence = min_confidence,
+      no_annotations = no_annotations,
+      no_dedupe = no_dedupe,
+      no_record = no_record,
+      abbrv = abbrv,
+      add_request = add_request
+    )
+    # Parse from list format to data frame
+    oc_parse_df(lst)
+  }
+
 #' Forward geocoding
 #'
 #' Forward geocoding, from placename to latitude and longitude tuplet(s).

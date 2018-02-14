@@ -18,10 +18,22 @@ oc_parse <- function(req) {
   }
   jsn <- jsonlite::fromJSON(
     text,
-    simplifyVector = FALSE
+    flatten = TRUE
   )
   jsn[["url"]] <- req[["url"]]
   jsn
+}
+
+# Get data frame of results
+oc_parse_df <- function(jsn) {
+  results_df <- jsn[["results"]]
+  # Make column names nicer
+  colnames(results_df) <- sub("annotations\\.", "", colnames(results_df))
+  colnames(results_df) <- sub("bounds\\.", "", colnames(results_df))
+  colnames(results_df) <- sub("components\\.", "", colnames(results_df))
+  colnames(results_df) <- sub("geometry.", "", colnames(results_df))
+
+  dplyr::select(results_df, lat, lng, dplyr::everything())
 }
 
 # base URL for all queries
