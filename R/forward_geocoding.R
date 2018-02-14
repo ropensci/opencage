@@ -12,6 +12,7 @@ oc_forward <-
            no_record = FALSE,
            abbrv = FALSE,
            add_request = TRUE) {
+
     # check arguments
     oc_query_check(
       placename = placename,
@@ -27,6 +28,23 @@ oc_forward <-
       abbrv = abbrv,
       add_request = add_request
     )
+
+    # vectorise
+    if(length(placename) > 1){
+      return(purrr::map(placename,
+                        oc_forward,
+                        key = key,
+                        bounds = bounds,
+                        countrycode = countrycode,
+                        language = language,
+                        limit = limit,
+                        min_confidence = min_confidence,
+                        no_annotations = no_annotations,
+                        no_dedupe = no_dedupe,
+                        no_record = no_record,
+                        abbrv = abbrv,
+                        add_request = add_request))
+    }
 
     # res
     res <- oc_get(query_par = list(

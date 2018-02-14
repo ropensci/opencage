@@ -3,7 +3,7 @@ context("oc_parse")
 
 test_that("oc_parse returns what it should for both functions", {
   skip_on_cran()
-  results <- opencage_forward(placename = "Sarzeau", key = Sys.getenv("OPENCAGE_KEY", ""))
+  results <- opencage_forward(placename = "Sarzeau")
   expect_is(results, "list")
   expect_is(results[["results"]], "tbl_df")
   expect_is(results[["total_results"]], "integer")
@@ -11,14 +11,15 @@ test_that("oc_parse returns what it should for both functions", {
   expect_equal(length(results), 4)
 
 
-  results <- opencage_forward(placename = "Islington, London", key = Sys.getenv("OPENCAGE_KEY"))
+  results <- opencage_forward(placename = "Islington, London")
   expect_is(results, "list")
   expect_is(results[["results"]], "tbl_df")
   expect_is(results[["total_results"]], "integer")
   expect_is(results[["time_stamp"]], "POSIXct")
   expect_equal(length(results), 4)
 
-  results <- opencage_forward(placename = "Triererstr 15, Weimar 99423, Deutschland", key = Sys.getenv("OPENCAGE_KEY"))
+  placename <- "Triererstr 15, Weimar 99423, Deutschland"
+  results <- opencage_forward(placename = placename)
   expect_is(results, "list")
   expect_is(results[["results"]], "tbl_df")
   expect_is(results[["total_results"]], "integer")
@@ -36,7 +37,8 @@ test_that("oc_parse returns what it should for both functions", {
   expect_equal(length(results), 4)
 })
 
-test_that("oc_parse returns what it should for both functions with several parameters", {
+test_that("oc_parse returns what it should for both functions
+          with several parameters", {
   skip_on_cran()
 
   results <- opencage_forward(
@@ -52,7 +54,8 @@ test_that("oc_parse returns what it should for both functions with several param
   expect_is(results[["total_results"]], "integer")
   expect_is(results[["time_stamp"]], "POSIXct")
   expect_equal(length(results), 4)
-  expect_equal(sum(grepl("annotation", names(results[["results"]]))), 0)
+  expect_equal(sum(grepl("annotation",
+                         names(results[["results"]]))), 0)
   expect_true(dplyr::between(nrow(results[["results"]]), 1, 2))
 
   results <- opencage_reverse(
@@ -69,7 +72,8 @@ test_that("oc_parse returns what it should for both functions with several param
   expect_is(results[["total_results"]], "integer")
   expect_is(results[["time_stamp"]], "POSIXct")
   expect_equal(length(results), 4)
-  expect_equal(sum(grepl("annotation", names(results[["results"]]))), 0)
+  expect_equal(sum(grepl("annotation",
+                         names(results[["results"]]))), 0)
   expect_true(dplyr::between(nrow(results[["results"]]), 1, 2))
 })
 

@@ -5,11 +5,9 @@ oc_check <- function(req) {
   stop("HTTP failure: ", req$status_code, "\n", message, call. = FALSE)
 }
 
-#' @importFrom httr content
-#' @importFrom jsonlite fromJSON
 # function for parsing the response
 oc_parse <- function(req) {
-  text <- httr::content(req, as = "text")
+  text <- req$parse()
   if (identical(text, "")) {
     stop(
       "No output to parse",
@@ -41,16 +39,9 @@ oc_url <- function() {
   "https://api.opencagedata.com/geocode/v1/json/"
 }
 
-# set user agent
-#' @importFrom httr user_agent
-oc_user_agent <- function() {
-  httr::user_agent("http://github.com/ropensci/opencage")
-}
 
 # get results
-#' @importFrom purrr compact
-#' @importFrom httr GET
-.oc_get <- function(query_par, usr_agnt) {
+.oc_get <- function(query_par) {
   query_par <- purrr::compact(query_par) # nolint
   if (!is.null(query_par$bounds)) {
     bounds <- query_par$bounds
@@ -62,34 +53,24 @@ oc_user_agent <- function() {
       sep = ","
     )
   }
-  httr::GET(
-    url = oc_url(),
-    config = oc_user_agent(),
-    query = query_par
-  )
+  client <- crul::HttpClient$new(url = oc_url(),
+                                 headers = list(`User-Agent` = "opencage-R"))
+  client$get(query = query_par)
 }
 
-#' @importFrom memoise memoise
 oc_get <- memoise::memoise(.oc_get)
 
 
 # format to "old" style (version <= 0.1.4)
 # for opencage_forward, opencage_reverse
-#' @importFrom dplyr bind_rows tbl_df
 opencage_format <- function(lst){
   no_results <- lst$total_results
   if (no_results > 0) {
     results <- lapply(lst$results, unlist)
     results <- lapply(results, as.data.frame)
     results <- lapply(results, t)
-    results <- lapply(results, as.data.frame)
+    results <- lapply(results, as.data.frame, stringsAsFactors = FALSE)
     results <- suppressWarnings(dplyr::bind_rows(results))
-    results$"geometry.lat" <- as.numeric(
-      as.character(results$"geometry.lat")
-    )
-    results$"geometry.lng" <- as.numeric(
-      as.character(results$"geometry.lng")
-    )
 
     # if requests exists in the api response add the query to results
     if ("request" %in% names(lst)) {

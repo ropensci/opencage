@@ -14,6 +14,27 @@ oc_reverse <-
            abbrv = FALSE,
            add_request = TRUE) {
 
+    if(length(latitude) != length(longitude))
+      stop("The number of values for latitude and longitude are not equal.",
+           call. = FALSE)
+
+    # vectorise
+    if(length(latitude) > 1){
+      return(purrr::map2(latitude,
+                         longitude,
+                         oc_reverse,
+                         key = key,
+                         bounds = bounds,
+                         countrycode = countrycode,
+                         language = language,
+                         limit = limit,
+                         min_confidence = min_confidence,
+                         no_annotations = no_annotations,
+                         no_dedupe = no_dedupe,
+                         no_record = no_record,
+                         abbrv = abbrv,
+                         add_request = add_request))
+    }
     # check arguments
     oc_query_check(
       latitude = latitude,

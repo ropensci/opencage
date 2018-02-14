@@ -1,13 +1,13 @@
 Type: Package
 Package: opencage
 Title: Interface to the OpenCage API
-Version: 0.1.4
+Version: 0.1.4.9001
 Authors@R: c(
     person("Maëlle", "Salmon", email = "maelle.salmon@yahoo.se", role = c("aut", "cre")), 
+    person("Daniel", "Possenriede", role = "aut", comment = c(ORCID = "0000-0002-6738-9845")),
     person("Noam", "Ross", role = "ctb"), 
-    person("Julia", "Silge", role = c("rev"), comment = "Julia Silge reviewed the package for rOpenSci, see https://github.com/ropensci/onboarding/issues/36."), 
     person("Jake", "Russ", role = "ctb"), 
-    person("Daniel", "Possenriede", role = "ctb", comment = c(ORCID = "0000-0002-6738-9845")))
+    person("Julia", "Silge", role = c("rev"), comment = "Julia Silge reviewed the package for rOpenSci, see https://github.com/ropensci/onboarding/issues/36."))
 Description: Tool for accessing the OpenCage API, which provides forward
     geocoding (from placename to longitude and latitude) and reverse geocoding (from
     longitude and latitude to placename).
@@ -16,10 +16,10 @@ URL: http://github.com/ropensci/opencage
 BugReports: http://github.com/ropensci/opencage/issues
 Imports: 
     dplyr (>= 0.7.4),
-    httr (>= 1.3.1),
     jsonlite (>= 1.5),
     memoise (>= 1.1.0),
-    purrr (>= 0.2.4)
+    purrr (>= 0.2.4),
+    crul (>= 0.5.0)
 Suggests: 
     knitr (>= 1.19),
     lintr (>= 1.0.2),

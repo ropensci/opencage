@@ -1,3 +1,13 @@
+# opencage 0.1.4.9001
+
+## Breaking changes
+
+* `opencage_forward()` and `opencage_reverse()` will always output strings as characters, i.e. they won't coerce to factor depending on the `stringsAsFactor` option.
+
+## New features
+
+## Bug fixes and minor improvements
+
 # opencage 0.1.4
 
 * Bug fix: now the `countrycode` argument can be used for Namibia thanks to Daniel Possenriede.
