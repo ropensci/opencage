@@ -1,7 +1,7 @@
 ---
 title: "R Package for the OpenCage API"
 subtitle: "Forward and Reverse Geocoding"
-author: "Maëlle Salmon"
+author: "Maëlle Salmon, Daniel Possenriede"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -31,7 +31,7 @@ The [OpenCage](https://geocoder.opencagedata.com/) API supports forward and reve
 
 Both forward and reverse geocoding typically return multiple results. Regarding these multiple results, the API doc states, "In cases where the geocoder is able to find multiple matches, the geocoder will return multiple results. The confidence or coordinates for each result should be examined to determine whether each result from an ambiguous query is sufficiently high to warrant using a result or not. A good strategy to reduce ambiguity is to use the optional `bounds` parameter described below to limit the area searched." Multiple results might mean you get a result for the airport and a road when querying a city name, or results for cities with the same name in different countries. 
 
-Below are two simple examples.
+Below are two simple examples. When building queries, OpenCage [best practices docs](https://geocoder.opencagedata.com/api#bestpractices) can be very useful.
 
 ## Forward geocoding
 
