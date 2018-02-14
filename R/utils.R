@@ -60,8 +60,39 @@ oc_user_agent <- function() {
 #' @importFrom memoise memoise
 oc_get <- memoise::memoise(.oc_get)
 
+#' Query check
 # function that checks the query
-#' @importFrom dplyr between
+#' @param bounds Provides the geocoder with a hint to the region that
+#' the query resides in. This value will restrict the possible results
+#' to the supplied region. The bounds parameter should be specified as
+#' 4 coordinate points forming the south-west and north-east corners of
+#'  a bounding box.
+#'  For example, \code{bounds = c(-0.563160, 51.280430, 0.278970, 51.683979)}
+#'   (min long, min lat, max long, max lat).
+#' @param countrycode Restricts the results to the given country.
+#' The country code is a two letter code as defined by the ISO 3166-1 Alpha 2
+#' standard. E.g. "GB" for the United Kingdom, "FR" for France,
+#' "US" for United States.
+#' @param language An IETF format language code
+#' (such as "es" for Spanish or "pt-BR" for Brazilian Portuguese).
+#'  If no language is explicitly specified, we will look for an HTTP
+#'  Accept-Language header like those sent by a browser and use the
+#'  first language specified and if none are specified "en" (English)
+#'   will be assumed.
+#' @param limit How many results should be returned (1-100). Default is 10.
+#' @param min_confidence An integer from 1-10. Only results with at least
+#' this confidence will be returned.
+#' @param no_annotations Logical (default FALSE), when TRUE the output will
+#' not contain annotations.
+#' @param no_dedupe Logical (default FALSE), when TRUE the output will not be
+#' deduplicated.
+#' @param no_record Logical (default FALSE), when TRUE no log entry of
+#'  the query is created at OpenCage.
+#' @param abbrv Logical (default FALSE), when TRUE addresses are abbreviated
+#'  (e.g. C. instead of Calle)
+#' @param add_request Logical (default TRUE), when FALSE the query text
+#' is removed from the results data frame.
+
 oc_query_check <- function(latitude = NULL,
                            longitude = NULL,
                            placename = NULL,
@@ -207,11 +238,11 @@ opencage_format <- function(lst){
     results <- lapply(results, t)
     results <- lapply(results, as.data.frame)
     results <- suppressWarnings(dplyr::bind_rows(results))
-    results$geometry.lat <- as.numeric(
-      as.character(results$geometry.lat)
+    results$"geometry.lat" <- as.numeric(
+      as.character(results$"geometry.lat")
     )
-    results$geometry.lng <- as.numeric(
-      as.character(results$geometry.lng)
+    results$"geometry.lng" <- as.numeric(
+      as.character(results$"geometry.lng")
     )
 
     # if requests exists in the api response add the query to results
