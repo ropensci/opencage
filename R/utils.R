@@ -66,15 +66,11 @@ oc_get <- memoise::memoise(.oc_get)
 opencage_format <- function(lst){
   no_results <- lst$total_results
   if (no_results > 0) {
-    results <- lapply(lst$results, unlist)
-    results <- lapply(results, as.data.frame)
-    results <- lapply(results, t)
-    results <- lapply(results, as.data.frame, stringsAsFactors = FALSE)
-    results <- suppressWarnings(dplyr::bind_rows(results))
+    results <- lst[["results"]]
 
     # if requests exists in the api response add the query to results
     if ("request" %in% names(lst)) {
-      results$query <- as.character(lst$request$query)
+      results$query <- lst$request$query
     }
   }
   else {
