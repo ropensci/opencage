@@ -56,6 +56,40 @@ oc_reverse <-
     oc_parse(res)
   }
 
+#' @export
+oc_reverse_df <-
+  function(latitude,
+           longitude,
+           key = oc_key(),
+           bounds = NULL,
+           countrycode = NULL,
+           language = NULL,
+           limit = 10,
+           min_confidence = NULL,
+           no_annotations = FALSE,
+           no_dedupe = FALSE,
+           no_record = FALSE,
+           abbrv = FALSE,
+           add_request = TRUE) {
+    lst <- oc_reverse(
+      latitude = latitude,
+      longitude = longitude,
+      key = key,
+      bounds = bounds,
+      countrycode = countrycode,
+      language = language,
+      limit = limit,
+      min_confidence = min_confidence,
+      no_annotations = no_annotations,
+      no_dedupe = no_dedupe,
+      no_record = no_record,
+      abbrv = abbrv,
+      add_request = add_request
+    )
+    # Parse from list format to data frame
+    oc_parse_df(lst)
+  }
+
 #' Reverse geocoding
 #'
 #' Reverse geocoding, from latitude and longitude to placename(s).
