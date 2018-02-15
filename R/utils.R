@@ -7,7 +7,7 @@ oc_check <- function(req) {
 
 # function for parsing the response
 oc_parse <- function(req) {
-  text <- req$parse()
+  text <- req$parse(encoding = "UTF-8")
   if (identical(text, "")) {
     stop(
       "No output to parse",
@@ -47,6 +47,10 @@ oc_url <- function() {
 
 # get results
 .oc_get <- function(query_par) {
+  if ("countrycode" %in% names(query_par)){
+    query_par$countrycode <- oc_glue_countrycode(query_par$countrycode)
+
+    }
   query_par <- purrr::compact(query_par) # nolint
   if (!is.null(query_par$bounds)) {
     bounds <- query_par$bounds
@@ -123,4 +127,10 @@ oc_key <- function(quiet = TRUE) {
     message("Using Opencage API Key from envvar OPENCAGE_KEY")
   }
   return(pat)
+}
+
+# function to format countrycode
+oc_glue_countrycode <- function(countrycode){
+  glued_cc <- toString(countrycode)
+  tolower(gsub(" ", "", glued_cc))
 }
