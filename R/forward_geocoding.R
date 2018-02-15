@@ -30,7 +30,7 @@ oc_forward <-
     )
 
     # vectorise
-    if(length(placename) > 1){
+    if (length(placename) > 1){
       return(purrr::map(placename,
                         oc_forward,
                         key = key,
