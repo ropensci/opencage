@@ -126,6 +126,27 @@ test_that("oc_query_check checks countrycode", {
   )
 })
 
+test_that("oc_query_check ok with lower case", {
+  skip_on_cran()
+  expect_is(
+    opencage_forward(
+      placename = "Sarzeau",
+      countrycode = "fr",
+      key = Sys.getenv("OPENCAGE_KEY")
+    ),
+    "list"
+  )
+
+  expect_is(
+    opencage_forward(
+      placename = "Sarzeau",
+      countrycode = "FR",
+      key = Sys.getenv("OPENCAGE_KEY")
+    ),
+    "list"
+  )
+})
+
 test_that("oc_query_check checks language", {
   skip_on_cran()
   expect_error(
