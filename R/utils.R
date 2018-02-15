@@ -7,7 +7,7 @@ oc_check <- function(req) {
 
 # function for parsing the response
 oc_parse <- function(req) {
-  text <- req$parse()
+  text <- req$parse(encoding = "UTF-8")
   if (identical(text, "")) {
     stop(
       "No output to parse",
