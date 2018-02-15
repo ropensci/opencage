@@ -22,3 +22,15 @@ test_that("oc_get returns a response object for Namibia NA countrycode", {
     "HttpResponse"
   )
 })
+
+test_that("oc_get returns a response object for vector countrycode", {
+  skip_on_cran()
+  expect_is(
+    oc_get(list(
+      placename = "Paris",
+      key = Sys.getenv("OPENCAGE_KEY"),
+      countrycode = c("FR", "US")
+    )),
+    "HttpResponse"
+  )
+})
