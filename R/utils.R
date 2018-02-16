@@ -22,21 +22,58 @@ oc_parse <- function(req) {
   jsn
 }
 
-# Get data frame of results
-oc_parse_df <- function(jsn) {
-  if (purrr::has_element(jsn, jsn[["results"]]) == TRUE) {
-    results_df <- jsn[["results"]]
+# Helper function to parse single query for df form
+oc_parse_df_single <- function(lst) {
+  if (lst[["total_results"]] > 0) {
+    plyr::mutate(lst[["results"]], query = lst[["request"]]["query"])
   } else {
-    results_df <- purrr::map_df(jsn, "results")
+    stop("Placename did not return any results. Try reformatting your query.")
   }
+}
+
+# Helper function to parse multiple queries for df form
+oc_parse_df_multiple <- function(lst) {
+  # Create list of queries to add to results data frames
+  queries <- purrr::map(lst, c("request", "query"))
+
+  # Subset list to list of results data frames
+  # If no result, create data frame with query variable from queries
+  results_ldf <- purrr::map(lst, ~ if (.[["total_results"]] > 0) {
+    .[["results"]]
+  } else {
+    data.frame(query = .[["request"]]["query"], stringsAsFactors = FALSE)
+  })
+  # Find number of null results and create warning
+  total_results <- purrr::map_int(lst, "total_results")
+  no_results <- length(total_results[total_results == 0])
+  if (no_results > 0) {
+    warning(as.character(no_results), " placename(s) did not return any results.")
+  }
+  # Create query column and bind data frames
+  purrr::map2_df(results_ldf, queries, ~ dplyr::mutate(.x, query = .y))
+}
+
+# Get data frame of results
+oc_parse_df <- function(lst) {
+  if (purrr::has_element(lst, lst[["results"]]) == TRUE) {
+    results_df <- oc_parse_df_single(lst)
+  } else {
+    results_df <- oc_parse_df_multiple(lst)
+  }
+  if (ncol(results_df) < 2) {
+    stop("None of the placenames returned any results. Try reformatting your queries.")
+  } else{
 
   # Make column names nicer
   colnames(results_df) <- sub("annotations\\.", "", colnames(results_df))
   colnames(results_df) <- sub("bounds\\.", "", colnames(results_df))
   colnames(results_df) <- sub("components\\.", "", colnames(results_df))
-  colnames(results_df) <- sub("geometry.", "", colnames(results_df))
+  colnames(results_df) <- sub("geometry\\.", "", colnames(results_df))
+  colnames(results_df) <- gsub("\\.", "_", colnames(results_df))
+  colnames(results_df) <- sub("^_", "", colnames(results_df))
 
-  dplyr::select(results_df, lat, lng, dplyr::everything())
+  dplyr::select(results_df, query, lat, lng, dplyr::everything())
+  }
 }
 
 # base URL for all queries
