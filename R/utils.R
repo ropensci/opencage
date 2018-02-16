@@ -25,9 +25,9 @@ oc_parse <- function(req) {
 # Helper function to parse single query for df form
 oc_parse_df_single <- function(lst) {
   if (lst[["total_results"]] > 0) {
-    plyr::mutate(lst[["results"]], query = lst[["request"]]["query"])
+    dplyr::mutate(lst[["results"]], query = lst[["request"]][["query"]])
   } else {
-    stop("Placename did not return any results. Try reformatting your query.")
+    stop("placename did not return any results. Try reformatting your query.")
   }
 }
 

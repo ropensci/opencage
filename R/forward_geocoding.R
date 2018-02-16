@@ -71,7 +71,7 @@ oc_forward <-
 
 #' @export
 oc_forward_df <-
-  function(placename,
+  function(data, placename,
            key = oc_key(),
            bounds = NULL,
            countrycode = NULL,
@@ -83,6 +83,15 @@ oc_forward_df <-
            no_record = FALSE,
            abbrv = FALSE,
            add_request = TRUE) {
+    # Input vector or data frame
+    if (is.vector(data == TRUE)) {
+      placename <- data
+    } else {
+      placename <- data[[substitute(placename)]]
+    }
+    if (length(placename) == 0) {
+      stop("placename is missing, with no default")
+    }
     lst <- oc_forward(
       placename = placename,
       key = key,
