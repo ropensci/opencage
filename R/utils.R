@@ -25,7 +25,8 @@ oc_parse <- function(req) {
 # Helper function to parse single query for df form
 oc_parse_df_single <- function(lst) {
   if (lst[["total_results"]] > 0) {
-    dplyr::mutate(lst[["results"]], query = lst[["request"]][["query"]])
+    results_df <- dplyr::mutate(lst[["results"]], query = lst[["request"]][["query"]])
+    tibble::as_tibble(results_df)
   } else {
     stop("placename did not return any results. Try reformatting your query.")
   }
@@ -37,11 +38,11 @@ oc_parse_df_multiple <- function(lst) {
   queries <- purrr::map(lst, c("request", "query"))
 
   # Subset list to list of results data frames
-  # If no result, create data frame with query variable from queries
+  # If no result, create tbl_df with query variable from queries
   results_ldf <- purrr::map(lst, ~ if (.[["total_results"]] > 0) {
     .[["results"]]
   } else {
-    data.frame(query = .[["request"]]["query"], stringsAsFactors = FALSE)
+    tibble::tibble(query = .[["request"]][["query"]])
   })
   # Find number of null results and create warning
   total_results <- purrr::map_int(lst, "total_results")
@@ -49,8 +50,9 @@ oc_parse_df_multiple <- function(lst) {
   if (no_results > 0) {
     warning(as.character(no_results), " placename(s) did not return any results.")
   }
-  # Create query column and bind data frames
-  purrr::map2_df(results_ldf, queries, ~ dplyr::mutate(.x, query = .y))
+  # Create query column, bind data frames, and convert to tbl_df
+  results_df <- purrr::map2_df(results_ldf, queries, ~ dplyr::mutate(.x, query = .y))
+  tibble::as_tibble(results_df)
 }
 
 # Get data frame of results
