@@ -25,8 +25,8 @@ oc_parse <- function(req) {
 # Helper function to parse single query for df form
 oc_parse_df_single <- function(lst) {
   if (lst[["total_results"]] > 0) {
-    results_df <- dplyr::mutate(lst[["results"]], query = lst[["request"]][["query"]])
-    tibble::as_tibble(results_df)
+    results <- dplyr::mutate(lst[["results"]], query = lst[["request"]][["query"]])
+    tibble::as_tibble(results)
   } else {
     stop("placename did not return any results. Try reformatting your query.")
   }
@@ -51,30 +51,30 @@ oc_parse_df_multiple <- function(lst) {
     warning(as.character(no_results), " placename(s) did not return any results.")
   }
   # Create query column, bind data frames, and convert to tbl_df
-  results_df <- purrr::map2_df(results_ldf, queries, ~ dplyr::mutate(.x, query = .y))
-  tibble::as_tibble(results_df)
+  results <- purrr::map2_df(results_ldf, queries, ~ dplyr::mutate(.x, query = .y))
+  tibble::as_tibble(results)
 }
 
-# Get data frame of results
+# Get tibble of results
 oc_parse_df <- function(lst) {
   if (purrr::has_element(lst, lst[["results"]]) == TRUE) {
-    results_df <- oc_parse_df_single(lst)
+    results <- oc_parse_df_single(lst)
   } else {
-    results_df <- oc_parse_df_multiple(lst)
+    results <- oc_parse_df_multiple(lst)
   }
-  if (ncol(results_df) < 2) {
+  if (ncol(results) < 2) {
     stop("None of the placenames returned any results. Try reformatting your queries.")
   } else{
 
   # Make column names nicer
-  colnames(results_df) <- sub("annotations\\.", "", colnames(results_df))
-  colnames(results_df) <- sub("bounds\\.", "", colnames(results_df))
-  colnames(results_df) <- sub("components\\.", "", colnames(results_df))
-  colnames(results_df) <- sub("geometry\\.", "", colnames(results_df))
-  colnames(results_df) <- gsub("\\.", "_", colnames(results_df))
-  colnames(results_df) <- sub("^_", "", colnames(results_df))
+  colnames(results) <- sub("annotations\\.", "", colnames(results))
+  colnames(results) <- sub("bounds\\.", "", colnames(results))
+  colnames(results) <- sub("components\\.", "", colnames(results))
+  colnames(results) <- sub("geometry\\.", "", colnames(results))
+  colnames(results) <- gsub("\\.", "_", colnames(results))
+  colnames(results) <- sub("^_", "", colnames(results))
 
-  dplyr::select(results_df, query, lat, lng, dplyr::everything())
+  dplyr::select(results, query, lat, lng, dplyr::everything())
   }
 }
 

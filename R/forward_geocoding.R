@@ -71,7 +71,9 @@ oc_forward <-
 
 #' @export
 oc_forward_df <-
-  function(data, placename,
+  function(df,
+           placename,
+           output = c("all", "short", "mutate"),
            key = oc_key(),
            bounds = NULL,
            countrycode = NULL,
@@ -84,13 +86,24 @@ oc_forward_df <-
            abbrv = FALSE,
            add_request = TRUE) {
     # Input vector or data frame
-    if (is.vector(data == TRUE)) {
-      placename <- data
+    if (is.vector(df == TRUE)) {
+      placename <- df
     } else {
-      placename <- data[[substitute(placename)]]
+      placename <- df[[substitute(placename)]]
     }
     if (length(placename) == 0) {
       stop("placename is missing, with no default")
+    }
+    # output format
+    output <- match.arg(output)
+    if (output == "short" || output == "mutate") {
+      no_annotations <- TRUE
+    }
+    if (output == "mutate") {
+      limit <- 1
+      if (is.data.frame(df) == FALSE) {
+        stop("first argument must be a data frame to use mutate output")
+      }
     }
     lst <- oc_forward(
       placename = placename,
@@ -107,7 +120,18 @@ oc_forward_df <-
       add_request = add_request
     )
     # Parse from list format to data frame
-    oc_parse_df(lst)
+    results_tbl <- oc_parse_df(lst)
+    # Format output
+    if (output == "short") {
+      dplyr::select(results_tbl, query, lat, lng,
+                    suppressWarnings(dplyr::one_of("country", "state", "type")))
+    } else if (output == "mutate") {
+      results_tbl <- dplyr::select(results_tbl, lat, lng,
+                                   suppressWarnings(dplyr::one_of("country", "state", "type")))
+      dplyr::bind_cols(df, results_tbl)
+    } else {
+      results_tbl
+    }
   }
 
 #' Forward geocoding
