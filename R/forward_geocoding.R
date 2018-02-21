@@ -102,7 +102,7 @@ oc_forward_df <-
     if (output == "mutate") {
       limit <- 1
       if (is.data.frame(df) == FALSE) {
-        stop("first argument must be a data frame to use mutate output")
+        stop("df must be a data frame to use mutate output")
       }
     }
     lst <- oc_forward(
@@ -124,10 +124,11 @@ oc_forward_df <-
     # Format output
     if (output == "short") {
       dplyr::select(results_tbl, query, lat, lng,
-                    suppressWarnings(dplyr::one_of("country", "state", "type")))
+                    suppressWarnings(dplyr::one_of("formatted", "country", "state", "type")))
     } else if (output == "mutate") {
       results_tbl <- dplyr::select(results_tbl, lat, lng,
-                                   suppressWarnings(dplyr::one_of("country", "state", "type")))
+                                   suppressWarnings(dplyr::one_of("formatted", "country",
+                                                                  "state", "type")))
       dplyr::bind_cols(df, results_tbl)
     } else {
       results_tbl

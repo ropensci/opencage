@@ -79,8 +79,10 @@ oc_reverse <-
 
 #' @export
 oc_reverse_df <-
-  function(latitude,
+  function(df = NULL,
+           latitude,
            longitude,
+           output = c("all", "short", "mutate"),
            key = oc_key(),
            bounds = NULL,
            countrycode = NULL,
@@ -92,6 +94,21 @@ oc_reverse_df <-
            no_record = FALSE,
            abbrv = FALSE,
            add_request = TRUE) {
+    if (is.null(df) == FALSE) {
+      latitude <- df[[substitute(latitude)]]
+      longitude <- df[[substitute(longitude)]]
+    }
+    # output format
+    output <- match.arg(output)
+    if (output == "short" || output == "mutate") {
+      no_annotations <- TRUE
+    }
+    if (output == "mutate") {
+      limit <- 1
+      if (is.data.frame(df) == FALSE) {
+        stop("df must be a data frame to use mutate output")
+      }
+    }
     lst <- oc_reverse(
       latitude = latitude,
       longitude = longitude,
@@ -108,7 +125,19 @@ oc_reverse_df <-
       add_request = add_request
     )
     # Parse from list format to data frame
-    oc_parse_df(lst)
+    results_tbl <- oc_parse_df(lst)
+    # Format output
+    if (output == "short") {
+      dplyr::select(results_tbl, lat, lng,
+                    suppressWarnings(dplyr::one_of("formatted", "country", "state", "type")))
+    } else if (output == "mutate") {
+      results_tbl <- dplyr::select(results_tbl,
+                                   suppressWarnings(dplyr::one_of("formatted", "country",
+                                                                  "state", "type")))
+      dplyr::bind_cols(df, results_tbl)
+    } else {
+      results_tbl
+    }
   }
 
 #' Reverse geocoding
