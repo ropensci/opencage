@@ -6,7 +6,7 @@ oc_check <- function(req) {
 }
 
 # function for parsing the response
-oc_parse <- function(req) {
+oc_parse <- function(req, output) {
   text <- req$parse(encoding = "UTF-8")
   if (identical(text, "")) {
     stop(
@@ -14,11 +14,25 @@ oc_parse <- function(req) {
       call. = FALSE
     )
   }
-  jsn <- jsonlite::fromJSON(
-    text,
-    simplifyVector = FALSE
-  )
-  jsn
+  if (output == "df_list") {
+    jsn <- jsonlite::fromJSON(text, simplifyVector = TRUE, flatten = TRUE)
+    if (jsn$total_results == 0) {
+      results <- tibble::tibble(formatted = NA)
+    } else {
+      results <- tibble::as.tibble(jsn$results)
+    }
+    # Make column names nicer
+    colnames(results) <- sub("^annotations\\.", "", colnames(results))
+    colnames(results) <- sub("^bounds\\.", "", colnames(results))
+    colnames(results) <- sub("^components\\.", "", colnames(results))
+    colnames(results) <- sub("^geometry\\.", "", colnames(results))
+    colnames(results) <- sub("^_", "", colnames(results))
+    colnames(results) <- gsub("\\.", "_", colnames(results))
+    colnames(results) <- gsub("-", "_", colnames(results))
+    results
+  } else if (output == "json_list") {
+  jsonlite::fromJSON(text, simplifyVector = FALSE)
+  }
 }
 
 # base URL for all queries

@@ -2,6 +2,7 @@
 oc_forward <-
   function(placename,
            key = oc_key(),
+           output = c("df_list", "json_list"),
            bounds = NULL,
            countrycode = NULL,
            language = NULL,
@@ -34,6 +35,7 @@ oc_forward <-
       return(purrr::map(placename,
                         oc_forward,
                         key = key,
+                        output = c("df_list", "json_list"),
                         bounds = bounds,
                         countrycode = countrycode,
                         language = language,
@@ -66,7 +68,7 @@ oc_forward <-
     oc_check(res)
 
     # done!
-    oc_parse(res)
+    oc_parse(res, output)
   }
 
 #' Forward geocoding

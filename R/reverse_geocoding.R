@@ -3,6 +3,7 @@ oc_reverse <-
   function(latitude,
            longitude,
            key = oc_key(),
+           output = c("df_list", "json_list"),
            bounds = NULL,
            countrycode = NULL,
            language = NULL,
@@ -18,12 +19,15 @@ oc_reverse <-
       stop("The number of values for latitude and longitude are not equal.",
            call. = FALSE)
 
+    output <- match.arg(output)
+
     # vectorise
     if (length(latitude) > 1){
       return(purrr::map2(latitude,
                          longitude,
                          oc_reverse,
                          key = key,
+                         output = c("df_list", "json_list"),
                          bounds = bounds,
                          countrycode = countrycode,
                          language = language,
@@ -57,7 +61,7 @@ oc_reverse <-
       oc_get(
         query_par =
           list(
-            q = paste0(latitude, ",", longitude),
+            q = paste(latitude, longitude, sep = ","),
             key = key,
             bounds = bounds,
             countrycode = countrycode,
@@ -74,7 +78,7 @@ oc_reverse <-
     oc_check(res)
 
     # done!
-    oc_parse(res)
+    oc_parse(res, output)
   }
 
 #' Reverse geocoding
