@@ -18,7 +18,6 @@ oc_parse <- function(req) {
     text,
     simplifyVector = FALSE
   )
-  jsn[["url"]] <- req[["url"]]
   jsn
 }
 
