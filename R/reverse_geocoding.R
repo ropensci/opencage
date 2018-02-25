@@ -27,7 +27,7 @@ oc_reverse <-
                          longitude,
                          oc_reverse,
                          key = key,
-                         output = c("df_list", "json_list"),
+                         output = output,
                          bounds = bounds,
                          countrycode = countrycode,
                          language = language,

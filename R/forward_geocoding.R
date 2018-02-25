@@ -30,12 +30,14 @@ oc_forward <-
       add_request = add_request
     )
 
+    output <- match.arg(output) # move to oc_query_check?
+
     # vectorise
     if (length(placename) > 1){
       return(purrr::map(placename,
                         oc_forward,
                         key = key,
-                        output = c("df_list", "json_list"),
+                        output = output,
                         bounds = bounds,
                         countrycode = countrycode,
                         language = language,
