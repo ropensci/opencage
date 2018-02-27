@@ -16,9 +16,65 @@ oc_parse <- function(req) {
   }
   jsn <- jsonlite::fromJSON(
     text,
-    simplifyVector = FALSE
+    flatten = TRUE
   )
   jsn
+}
+
+# Helper function to parse single query for df form
+oc_parse_df_single <- function(lst) {
+  if (lst[["total_results"]] > 0) {
+    results <- dplyr::mutate(lst[["results"]], query = lst[["request"]][["query"]])
+    tibble::as_tibble(results)
+  } else {
+    stop("placename did not return any results. Try reformatting your query.")
+  }
+}
+
+# Helper function to parse multiple queries for df form
+oc_parse_df_multiple <- function(lst) {
+  # Create list of queries to add to results data frames
+  queries <- purrr::map(lst, c("request", "query"))
+
+  # Subset list to list of results data frames
+  # If no result, create tbl_df with query variable from queries
+  results_ldf <- purrr::map(lst, ~ if (.[["total_results"]] > 0) {
+    .[["results"]]
+  } else {
+    tibble::tibble(query = .[["request"]][["query"]])
+  })
+  # Find number of null results and create warning
+  total_results <- purrr::map_int(lst, "total_results")
+  no_results <- length(total_results[total_results == 0])
+  if (no_results > 0) {
+    warning(as.character(no_results), " placename(s) did not return any results.")
+  }
+  # Create query column, bind data frames, and convert to tbl_df
+  results <- purrr::map2_df(results_ldf, queries, ~ dplyr::mutate(.x, query = .y))
+  tibble::as_tibble(results)
+}
+
+# Get tibble of results
+oc_parse_df <- function(lst) {
+  if (purrr::has_element(lst, lst[["results"]]) == TRUE) {
+    results <- oc_parse_df_single(lst)
+  } else {
+    results <- oc_parse_df_multiple(lst)
+  }
+  if (ncol(results) < 2) {
+    stop("None of the placenames returned any results. Try reformatting your queries.")
+  } else{
+
+  # Make column names nicer
+  colnames(results) <- sub("annotations\\.", "", colnames(results))
+  colnames(results) <- sub("bounds\\.", "", colnames(results))
+  colnames(results) <- sub("components\\.", "", colnames(results))
+  colnames(results) <- sub("geometry\\.", "", colnames(results))
+  colnames(results) <- gsub("\\.", "_", colnames(results))
+  colnames(results) <- sub("^_", "", colnames(results))
+
+  dplyr::select(results, query, lat, lng, dplyr::everything())
+  }
 }
 
 # base URL for all queries
@@ -57,15 +113,11 @@ oc_get <- memoise::memoise(.oc_get)
 opencage_format <- function(lst){
   no_results <- lst$total_results
   if (no_results > 0) {
-    results <- lapply(lst$results, unlist)
-    results <- lapply(results, as.data.frame)
-    results <- lapply(results, t)
-    results <- lapply(results, as.data.frame, stringsAsFactors = FALSE)
-    results <- suppressWarnings(dplyr::bind_rows(results))
+    results <- lst[["results"]]
 
     # if requests exists in the api response add the query to results
     if ("request" %in% names(lst)) {
-      results$query <- as.character(lst$request$query)
+      results$query <- lst$request$query
     }
   }
   else {

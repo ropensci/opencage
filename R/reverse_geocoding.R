@@ -77,6 +77,69 @@ oc_reverse <-
     oc_parse(res)
   }
 
+#' @export
+oc_reverse_df <-
+  function(df = NULL,
+           latitude,
+           longitude,
+           output = c("all", "short", "mutate"),
+           key = oc_key(),
+           bounds = NULL,
+           countrycode = NULL,
+           language = NULL,
+           limit = 10,
+           min_confidence = NULL,
+           no_annotations = FALSE,
+           no_dedupe = FALSE,
+           no_record = FALSE,
+           abbrv = FALSE,
+           add_request = TRUE) {
+    if (is.null(df) == FALSE) {
+      latitude <- df[[substitute(latitude)]]
+      longitude <- df[[substitute(longitude)]]
+    }
+    # output format
+    output <- match.arg(output)
+    if (output == "short" || output == "mutate") {
+      no_annotations <- TRUE
+    }
+    if (output == "mutate") {
+      limit <- 1
+      if (is.data.frame(df) == FALSE) {
+        stop("df must be a data frame to use mutate output")
+      }
+    }
+    lst <- oc_reverse(
+      latitude = latitude,
+      longitude = longitude,
+      key = key,
+      bounds = bounds,
+      countrycode = countrycode,
+      language = language,
+      limit = limit,
+      min_confidence = min_confidence,
+      no_annotations = no_annotations,
+      no_dedupe = no_dedupe,
+      no_record = no_record,
+      abbrv = abbrv,
+      add_request = add_request
+    )
+    # Parse from list format to data frame
+    results_tbl <- oc_parse_df(lst)
+    # Format output
+    if (output == "short") {
+      dplyr::select(results_tbl, lat, lng,
+                    suppressWarnings(dplyr::one_of("formatted", "country", "state", "type")))
+    } else if (output == "mutate") {
+      results_tbl <- dplyr::select(results_tbl,
+                                   suppressWarnings(dplyr::one_of("formatted", "country",
+                                                                  "state", "type")))
+      dplyr::bind_cols(df, results_tbl)
+    } else {
+      results_tbl
+    }
+  }
+
 #' Reverse geocoding
 #'
 #' Reverse geocoding, from latitude and longitude to placename(s).
