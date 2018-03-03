@@ -123,6 +123,7 @@ opencage_reverse <-
       latitude = latitude,
       longitude = longitude,
       key = key,
+      output = c("json_list"),
       bounds = bounds,
       countrycode = countrycode,
       language = language,

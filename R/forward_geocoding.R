@@ -151,6 +151,7 @@ opencage_forward <-
     lst <- oc_forward(
       placename = placename,
       key = key,
+      output = c("json_list"),
       bounds = bounds,
       countrycode = countrycode,
       language = language,
