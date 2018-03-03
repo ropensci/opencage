@@ -72,7 +72,13 @@ oc_get <- function(oc_url) {
   client$get()
 }
 
-oc_get_memoise <- memoise::memoise(oc_get)
+# limit requests per second
+oc_get_limited <- ratelimitr::limit_rate(
+  oc_get,
+  ratelimitr::rate(n = 1, period = 1)
+)
+
+oc_get_memoise <- memoise::memoise(oc_get_limited)
 
 
 # format to "old" style (version <= 0.1.4)

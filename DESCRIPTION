@@ -15,11 +15,12 @@ License: GPL (>= 2)
 URL: http://github.com/ropensci/opencage
 BugReports: http://github.com/ropensci/opencage/issues
 Imports: 
+    crul (>= 0.5.2),
     dplyr (>= 0.7.4),
     jsonlite (>= 1.5),
     memoise (>= 1.1.0),
     purrr (>= 0.2.4),
-    crul (>= 0.5.0)
+    ratelimitr (>= 0.3.9)
 Suggests: 
     knitr (>= 1.19),
     lintr (>= 1.0.2),
