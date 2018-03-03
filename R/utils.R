@@ -35,19 +35,15 @@ oc_parse <- function(req, output) {
   }
 }
 
-# base URL for all queries
-oc_url <- function() {
-  "https://api.opencagedata.com/geocode/v1/json/"
-}
+# build url
+oc_build_url <- function(query_par) {
+  query_par <- purrr::compact(query_par) # nolint
 
-
-# get results
-.oc_get <- function(query_par) {
   if ("countrycode" %in% names(query_par)){
     query_par$countrycode <-
       tolower(paste(query_par$countrycode, collapse = ","))
-    }
-  query_par <- purrr::compact(query_par) # nolint
+  }
+
   if (!is.null(query_par$bounds)) {
     bounds <- query_par$bounds
     query_par$bounds <- paste(
@@ -58,12 +54,25 @@ oc_url <- function() {
       sep = ","
     )
   }
-  client <- crul::HttpClient$new(url = oc_url(),
-                                 headers = list(`User-Agent` = "opencage-R"))
-  client$get(query = query_par)
+
+  crul::url_build(
+    url = "https://api.opencagedata.com",
+    path = "geocode/v1/json",
+    query = query_par
+  )
 }
 
-oc_get <- memoise::memoise(.oc_get)
+# get results
+oc_get <- function(oc_url) {
+  client <- crul::HttpClient$new(
+    url = oc_url,
+    headers = list(`User-Agent` = "opencage-R")
+  )
+
+  client$get()
+}
+
+oc_get_memoise <- memoise::memoise(oc_get)
 
 
 # format to "old" style (version <= 0.1.4)

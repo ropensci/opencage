@@ -2,7 +2,7 @@
 oc_forward <-
   function(placename,
            key = oc_key(),
-           output = c("df_list", "json_list"),
+           output = c("df_list", "json_list", "url_only"),
            bounds = NULL,
            countrycode = NULL,
            language = NULL,
@@ -49,22 +49,35 @@ oc_forward <-
                         abbrv = abbrv,
                         add_request = add_request))
     }
+    # build url
+    oc_url <- oc_build_url(
+      query_par = list(
+        q = placename,
+        bounds = bounds,
+        countrycode = countrycode,
+        language = language,
+        limit = limit,
+        min_confidence = min_confidence,
+        no_annotations = as.integer(no_annotations),
+        no_dedupe = as.integer(no_dedupe),
+        no_record = as.integer(no_record),
+        abbrv = as.integer(abbrv),
+        add_request = as.integer(add_request),
+        key = key
+      )
+    )
 
-    # res
-    res <- oc_get(query_par = list(
-      q = placename,
-      bounds = bounds,
-      countrycode = countrycode,
-      language = language,
-      limit = limit,
-      min_confidence = min_confidence,
-      no_annotations = as.integer(no_annotations),
-      no_dedupe = as.integer(no_dedupe),
-      no_record = as.integer(no_record),
-      abbrv = as.integer(abbrv),
-      add_request = as.integer(add_request),
-      key = key
-    ))
+    if (output == "url_only") {
+      if (interactive()) {
+        return(oc_url)
+      } else {
+        stop("'url_only' reveals your opencage key. \n
+             It is therefore only available in interactive mode.")
+      }
+    }
+
+    # get result
+    res <- oc_get_memoise(oc_url)
 
     # check message
     oc_check(res)
