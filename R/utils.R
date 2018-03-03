@@ -66,7 +66,7 @@ oc_build_url <- function(query_par) {
 oc_get <- function(oc_url) {
   client <- crul::HttpClient$new(
     url = oc_url,
-    headers = list(`User-Agent` = "opencage-R")
+    headers = list(`User-Agent` = "https://github.com/ropensci/opencage")
   )
 
   client$get()
