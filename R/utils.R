@@ -73,10 +73,14 @@ oc_get <- function(oc_url) {
 }
 
 # limit requests per second
-oc_get_limited <- ratelimitr::limit_rate(
-  oc_get,
-  ratelimitr::rate(n = 1, period = 1)
-)
+oc_get_limited <-
+  ratelimitr::limit_rate(
+    oc_get,
+    ratelimitr::rate(
+      n = getOption("oc_requests_per_second", default = 1),
+      period = 1
+    )
+  )
 
 oc_get_memoise <- memoise::memoise(oc_get_limited)
 
