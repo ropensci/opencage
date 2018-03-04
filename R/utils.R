@@ -30,13 +30,13 @@ oc_parse <- function(req, output) {
     colnames(results) <- gsub("\\.", "_", colnames(results))
     colnames(results) <- gsub("-", "_", colnames(results))
     results
-  } else if (output == "json_list") {
+  } else if (output == "json_list" || output == "geojson_list") {
   jsonlite::fromJSON(text, simplifyVector = FALSE)
   }
 }
 
 # build url
-oc_build_url <- function(query_par) {
+oc_build_url <- function(query_par, endpoint) {
   query_par <- purrr::compact(query_par) # nolint
 
   if ("countrycode" %in% names(query_par)){
@@ -55,9 +55,11 @@ oc_build_url <- function(query_par) {
     )
   }
 
+  oc_path <- paste0("geocode/v1/", endpoint)
+
   crul::url_build(
     url = "https://api.opencagedata.com",
-    path = "geocode/v1/json",
+    path = oc_path,
     query = query_par
   )
 }

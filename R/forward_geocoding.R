@@ -2,7 +2,7 @@
 oc_forward <-
   function(placename,
            key = oc_key(),
-           output = c("df_list", "json_list", "url_only"),
+           output = c("df_list", "json_list", "geojson_list", "url_only"),
            bounds = NULL,
            countrycode = NULL,
            language = NULL,
@@ -33,7 +33,7 @@ oc_forward <-
     output <- match.arg(output) # move to oc_query_check?
 
     # vectorise
-    if (length(placename) > 1){
+    if (length(placename) > 1) {
       return(purrr::map(placename,
                         oc_forward,
                         key = key,
@@ -49,6 +49,14 @@ oc_forward <-
                         abbrv = abbrv,
                         add_request = add_request))
     }
+
+    # define endpoint
+    if (output == "geojson_list") {
+      endpoint <- "geojson"
+    } else {
+      endpoint <- "json"
+    }
+
     # build url
     oc_url <- oc_build_url(
       query_par = list(
@@ -64,7 +72,8 @@ oc_forward <-
         abbrv = as.integer(abbrv),
         add_request = as.integer(add_request),
         key = key
-      )
+      ),
+      endpoint = endpoint
     )
 
     if (output == "url_only") {
