@@ -50,6 +50,8 @@ oc_forward <-
                         add_request = add_request))
     }
 
+    if (is.na(placename)) placename <- NULL
+
     # define endpoint
     if (output == "geojson_list") {
       endpoint <- "geojson"
