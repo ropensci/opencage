@@ -17,7 +17,7 @@ oc_parse <- function(req, output) {
   if (output == "df_list") {
     jsn <- jsonlite::fromJSON(text, simplifyVector = TRUE, flatten = TRUE)
     if (jsn$total_results == 0) {
-      results <- tibble::tibble(formatted = NA)
+      results <- tibble::tibble(lat = NA_real_, lng = NA_real_)
     } else {
       results <- tibble::as.tibble(jsn$results)
     }
