@@ -31,7 +31,12 @@ oc_parse <- function(req, output) {
     colnames(results) <- gsub("-", "_", colnames(results))
     results
   } else if (output == "json_list" || output == "geojson_list") {
-  jsonlite::fromJSON(text, simplifyVector = FALSE)
+    jsn <- jsonlite::fromJSON(text, simplifyVector = FALSE)
+    if (output == "geojson_list") {
+      structure(jsn, class = c("geo_list"))
+    } else {
+      jsn
+    }
   }
 }
 
