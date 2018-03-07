@@ -3,7 +3,7 @@ oc_reverse <-
   function(latitude,
            longitude,
            key = oc_key(),
-           output = c("df_list", "json_list", "url_only"),
+           output = c("df_list", "json_list", "geojson_list", "url_only"),
            bounds = NULL,
            countrycode = NULL,
            language = NULL,
@@ -56,6 +56,13 @@ oc_reverse <-
       add_request = add_request
     )
 
+    # define endpoint
+    if (output == "geojson_list") {
+      endpoint <- "geojson"
+    } else {
+      endpoint <- "json"
+    }
+
     # build url
     oc_url <- oc_build_url(
       query_par =
@@ -72,7 +79,8 @@ oc_reverse <-
           no_record = as.integer(no_record),
           abbrv = as.integer(abbrv),
           add_request = as.integer(add_request)
-        )
+        ),
+      endpoint = endpoint
     )
 
     if (output == "url_only") return(oc_url)

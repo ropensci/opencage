@@ -50,6 +50,7 @@ oc_forward <-
                         add_request = add_request))
     }
 
+    # convert NA's to NULL to not return bogus results
     if (is.na(placename)) placename <- NULL
 
     # define endpoint
