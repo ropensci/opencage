@@ -34,20 +34,27 @@ oc_forward <-
 
     # vectorise
     if (length(placename) > 1) {
+      pb <- oc_init_progress(placename)
       return(purrr::map(placename,
-                        oc_forward,
-                        key = key,
-                        output = output,
-                        bounds = bounds,
-                        countrycode = countrycode,
-                        language = language,
-                        limit = limit,
-                        min_confidence = min_confidence,
-                        no_annotations = no_annotations,
-                        no_dedupe = no_dedupe,
-                        no_record = no_record,
-                        abbrv = abbrv,
-                        add_request = add_request))
+                        ~ {
+                          pb$tick()
+                          oc_forward(
+                            placename = .x,
+                            key = key,
+                            output = output,
+                            bounds = bounds,
+                            countrycode = countrycode,
+                            language = language,
+                            limit = limit,
+                            min_confidence = min_confidence,
+                            no_annotations = no_annotations,
+                            no_dedupe = no_dedupe,
+                            no_record = no_record,
+                            abbrv = abbrv,
+                            add_request = add_request
+                          )
+                        })
+             )
     }
 
     # convert NA's to NULL to not return bogus results

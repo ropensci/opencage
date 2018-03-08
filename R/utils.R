@@ -91,6 +91,14 @@ oc_get_limited <-
 
 oc_get_memoise <- memoise::memoise(oc_get_limited)
 
+# initialise progress bar
+oc_init_progress <- function(vec){
+    progress::progress_bar$new(
+      format = "Retrieving results from the OpenCage API [:bar] :percent",
+      total = length(vec), clear = FALSE,
+      width= 60)
+}
+
 
 # format to "old" style (version <= 0.1.4)
 # for opencage_forward, opencage_reverse

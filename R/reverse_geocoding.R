@@ -23,21 +23,30 @@ oc_reverse <-
 
     # vectorise
     if (length(latitude) > 1){
+      pb <- oc_init_progress(latitude)
       return(purrr::map2(latitude,
                          longitude,
-                         oc_reverse,
-                         key = key,
-                         output = output,
-                         bounds = bounds,
-                         countrycode = countrycode,
-                         language = language,
-                         limit = limit,
-                         min_confidence = min_confidence,
-                         no_annotations = no_annotations,
-                         no_dedupe = no_dedupe,
-                         no_record = no_record,
-                         abbrv = abbrv,
-                         add_request = add_request))
+                         ~ {
+                           pb$tick()
+                           oc_reverse(
+                             latitude = .x,
+                             longitude = .y,
+                             key = key,
+                             output = output,
+                             bounds = bounds,
+                             countrycode = countrycode,
+                             language = language,
+                             limit = limit,
+                             min_confidence = min_confidence,
+                             no_annotations = no_annotations,
+                             no_dedupe = no_dedupe,
+                             no_record = no_record,
+                             abbrv = abbrv,
+                             add_request = add_request
+                           )
+                           }
+                         )
+      )
     }
     # check arguments
     oc_query_check(
