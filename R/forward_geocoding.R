@@ -102,7 +102,7 @@ oc_forward <-
     oc_check(res)
 
     # done!
-    oc_parse(res, output)
+    oc_parse(res, output, query = placename)
   }
 
 #' Forward geocoding
