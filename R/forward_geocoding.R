@@ -34,7 +34,7 @@ oc_forward <-
 
     # vectorise
     if (length(placename) > 1) {
-      pb <- oc_init_progress(placename)
+      pb <- oc_init_progress(placename) # nolint
       return(purrr::map(placename,
                         ~ {
                           pb$tick()

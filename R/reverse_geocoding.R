@@ -23,7 +23,7 @@ oc_reverse <-
 
     # vectorise
     if (length(latitude) > 1){
-      pb <- oc_init_progress(latitude)
+      pb <- oc_init_progress(latitude) # nolint
       return(purrr::map2(latitude,
                          longitude,
                          ~ {

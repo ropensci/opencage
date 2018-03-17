@@ -96,7 +96,7 @@ oc_init_progress <- function(vec){
     progress::progress_bar$new(
       format = "Retrieving results from the OpenCage API [:bar] :percent",
       total = length(vec), clear = FALSE,
-      width= 60)
+      width = 60)
 }
 
 
