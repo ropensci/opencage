@@ -5,6 +5,7 @@ Version: 0.1.4.9001
 Authors@R: c(
     person("Maëlle", "Salmon", email = "maelle.salmon@yahoo.se", role = c("aut", "cre")), 
     person("Daniel", "Possenriede", role = "aut", comment = c(ORCID = "0000-0002-6738-9845")),
+    person("Jesse", "Sadler", role = "aut", comment = c(ORCID = "0000-0001-6081-9681")),
     person("Noam", "Ross", role = "ctb"), 
     person("Jake", "Russ", role = "ctb"), 
     person("Julia", "Silge", role = c("rev"), comment = "Julia Silge reviewed the package for rOpenSci, see https://github.com/ropensci/onboarding/issues/36."))
