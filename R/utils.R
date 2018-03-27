@@ -22,8 +22,7 @@ oc_parse <- function(req, output, query) {
       results <- tibble::as.tibble(jsn$results)
     }
     if ("request" %in% names(jsn)) {
-      results <- tibble::add_column(results, query = query)
-      results <- dplyr::select(results, query, dplyr::everything())
+      results <- tibble::add_column(results, query = query, .before = 1)
     }
     # Make column names nicer
     colnames(results) <- sub("^annotations\\.", "", colnames(results))
