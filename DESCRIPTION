@@ -3,7 +3,7 @@ Package: opencage
 Title: Interface to the OpenCage API
 Version: 0.1.4.9001
 Authors@R: c(
-    person("Maëlle", "Salmon", email = "maelle.salmon@yahoo.se", role = c("aut", "cre")), 
+    person("Maëlle", "Salmon", email = "maelle.salmon@yahoo.se", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-2815-0399")), 
     person("Daniel", "Possenriede", role = "aut", comment = c(ORCID = "0000-0002-6738-9845")),
     person("Jesse", "Sadler", role = "aut", comment = c(ORCID = "0000-0001-6081-9681")),
     person("Noam", "Ross", role = "ctb"), 
