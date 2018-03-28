@@ -107,21 +107,20 @@ oc_reverse <-
 #' @export
 oc_reverse_df <-
   function(data,
-           latitude,
-           longitude,
-           bind_cols = TRUE,
-           output = c("short", "all"),
-           key = oc_key(),
-           bounds = NULL,
-           countrycode = NULL,
-           language = NULL,
-           limit = 1,
-           min_confidence = NULL,
-           no_annotations = FALSE,
-           no_dedupe = FALSE,
-           no_record = FALSE,
-           abbrv = FALSE) {
-
+             latitude,
+             longitude,
+             bind_cols = TRUE,
+             output = c("short", "all"),
+             key = oc_key(),
+             bounds = NULL,
+             countrycode = NULL,
+             language = NULL,
+             limit = 1,
+             min_confidence = NULL,
+             no_annotations = FALSE,
+             no_dedupe = FALSE,
+             no_record = FALSE,
+             abbrv = FALSE) {
     latitude <- data[[substitute(latitude)]]
     longitude <- data[[substitute(longitude)]]
     output <- match.arg(output)
@@ -131,66 +130,74 @@ oc_reverse_df <-
     }
 
     if (bind_cols == FALSE) {
-      results_list <- oc_reverse(latitude = latitude,
-                                 longitude = longitude,
-                                 key = key,
-                                 output = "df_list",
-                                 bounds = bounds,
-                                 countrycode = countrycode,
-                                 language = language,
-                                 limit = limit,
-                                 min_confidence = min_confidence,
-                                 no_annotations = no_annotations,
-                                 no_dedupe = no_dedupe,
-                                 no_record = no_record,
-                                 abbrv = abbrv,
-                                 add_request = add_request)
+      results_list <- oc_reverse(
+        latitude = latitude,
+        longitude = longitude,
+        key = key,
+        output = "df_list",
+        bounds = bounds,
+        countrycode = countrycode,
+        language = language,
+        limit = limit,
+        min_confidence = min_confidence,
+        no_annotations = no_annotations,
+        no_dedupe = no_dedupe,
+        no_record = no_record,
+        abbrv = abbrv,
+        add_request = add_request
+      )
       results <- dplyr::bind_rows(results_list)
       if (output == "short") {
-        results <- dplyr::select(results, query, formatted)
+        results <- dplyr::select(results, query, formatted) # nolint
       } else {
-        results <- dplyr::select(results, query, dplyr::everything())
+        results <- dplyr::select(results, query, dplyr::everything()) # nolint
       }
     } else {
       if (nrow(data) == 1) {
         results_nest <- dplyr::mutate(data,
-                                      op = list(oc_reverse(latitude = latitude,
-                                                           longitude = longitude,
-                                                           key = key,
-                                                           output = "df_list",
-                                                           bounds = bounds,
-                                                           countrycode = countrycode,
-                                                           language = language,
-                                                           limit = limit,
-                                                           min_confidence = min_confidence,
-                                                           no_annotations = no_annotations,
-                                                           no_dedupe = no_dedupe,
-                                                           no_record = no_record,
-                                                           abbrv = abbrv,
-                                                           add_request = add_request)))
+          op = list(oc_reverse(
+            latitude = latitude,
+            longitude = longitude,
+            key = key,
+            output = "df_list",
+            bounds = bounds,
+            countrycode = countrycode,
+            language = language,
+            limit = limit,
+            min_confidence = min_confidence,
+            no_annotations = no_annotations,
+            no_dedupe = no_dedupe,
+            no_record = no_record,
+            abbrv = abbrv,
+            add_request = add_request
+          ))
+        )
       } else {
         results_nest <- dplyr::mutate(data,
-                                      op = oc_reverse(latitude = latitude,
-                                                      longitude = longitude,
-                                                      key = key,
-                                                      output = "df_list",
-                                                      bounds = bounds,
-                                                      countrycode = countrycode,
-                                                      language = language,
-                                                      limit = limit,
-                                                      min_confidence = min_confidence,
-                                                      no_annotations = no_annotations,
-                                                      no_dedupe = no_dedupe,
-                                                      no_record = no_record,
-                                                      abbrv = abbrv,
-                                                      add_request = add_request))
+          op = oc_reverse(
+            latitude = latitude,
+            longitude = longitude,
+            key = key,
+            output = "df_list",
+            bounds = bounds,
+            countrycode = countrycode,
+            language = language,
+            limit = limit,
+            min_confidence = min_confidence,
+            no_annotations = no_annotations,
+            no_dedupe = no_dedupe,
+            no_record = no_record,
+            abbrv = abbrv,
+            add_request = add_request
+          )
+        )
       }
       results <- tidyr::unnest(results_nest)
 
       if (output == "short") {
-        results <- dplyr::select(results, 1:query, formatted, -query)
+        results <- dplyr::select(results, 1:query, formatted, -query) # nolint
       } else {
-        results <- dplyr::select(results, 1:query, dplyr::everything(), -query)
+        results <- dplyr::select(results, 1:query, dplyr::everything(), -query) # nolint
       }
       results
     }
