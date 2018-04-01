@@ -35,26 +35,30 @@ oc_forward <-
     # vectorise
     if (length(placename) > 1) {
       pb <- oc_init_progress(placename) # nolint
-      return(purrr::map(placename,
-                        ~ {
-                          pb$tick()
-                          oc_forward(
-                            placename = .x,
-                            key = key,
-                            output = output,
-                            bounds = bounds,
-                            countrycode = countrycode,
-                            language = language,
-                            limit = limit,
-                            min_confidence = min_confidence,
-                            no_annotations = no_annotations,
-                            no_dedupe = no_dedupe,
-                            no_record = no_record,
-                            abbrv = abbrv,
-                            add_request = add_request
-                          )
-                        })
-             )
+      arglist <-
+        purrr::compact(
+          list(
+            placename = placename,
+            output = output,
+            key = key,
+            bounds = bounds,
+            countrycode = countrycode,
+            language = language,
+            limit = limit,
+            min_confidence = min_confidence,
+            no_annotations = no_annotations,
+            no_dedupe = no_dedupe,
+            no_record = no_record,
+            abbrv = abbrv,
+            add_request = add_request
+          )
+        )
+      return(
+        purrr::pmap(
+          .l = arglist,
+          .f = oc_forward
+        )
+      )
     }
 
     # convert NA's to NULL to not return bogus results

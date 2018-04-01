@@ -99,7 +99,7 @@ oc_query_check <- function(latitude = NULL,
 
   # check countrycode
   if (!is.null(countrycode)) {
-    if (!(all(toupper(countrycode) %in% countrycodes$Code))) {
+    if (!(all(toupper(unlist(countrycode)) %in% countrycodes$Code))) {
       stop(call. = FALSE, "countrycode does not have a valid value.")
     }
   }
