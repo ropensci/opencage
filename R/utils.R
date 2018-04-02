@@ -97,8 +97,10 @@ oc_get_memoise <- memoise::memoise(oc_get_limited)
 # initialise progress bar
 oc_init_progress <- function(vec){
     progress::progress_bar$new(
-      format = "Retrieving results from the OpenCage API [:bar] :percent",
-      total = length(vec), clear = FALSE,
+      format =
+        "Retrieving results from the OpenCage API [:spin] :percent ETA: :eta",
+      total = length(vec),
+      clear = TRUE,
       width = 60)
 }
 
