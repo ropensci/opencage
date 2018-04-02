@@ -67,7 +67,9 @@ oc_query_check <- function(latitude = NULL,
   }
 
   # check key
-  if (!is.null(key)) {
+  if (is.null(key)) {
+    stop(call. = FALSE, "A `key` must be provided.")
+  } else {
     if (!is.character(key)) {
       stop(call. = FALSE, "Key should be a character.")
     }
