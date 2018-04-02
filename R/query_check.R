@@ -31,30 +31,33 @@
 #' @param add_request Logical (default TRUE), when FALSE the query text
 #' is removed from the results data frame.
 
-oc_query_check <- function(latitude = NULL,
-                           longitude = NULL,
-                           placename = NULL,
-                           key,
-                           abbrv,
-                           bounds,
-                           countrycode,
-                           language,
-                           limit,
-                           min_confidence,
-                           no_annotations,
-                           no_dedupe,
-                           no_record,
-                           add_request) {
+oc_query_check <-
+  function(
+    latitude = NULL,
+    longitude = NULL,
+    placename = NULL,
+    key,
+    bounds,
+    countrycode,
+    language,
+    limit,
+    min_confidence,
+    no_annotations,
+    no_dedupe,
+    no_record,
+    abbrv,
+    add_request
+  ) {
   # check latitude
   if (!is.null(latitude)) {
-    if (!dplyr::between(latitude, -90, 90)) {
+    if (!all(dplyr::between(latitude, -90, 90))) {
       stop(call. = FALSE, "Latitude should be between -90 and 90.")
     }
   }
 
   # check longitude
   if (!is.null(longitude)) {
-    if (!dplyr::between(longitude, -180, 180)) {
+    if (!all(dplyr::between(longitude, -180, 180))) {
       stop(call. = FALSE, "Longitude should be between -180 and 180.")
     }
   }
