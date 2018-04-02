@@ -1,18 +1,21 @@
 #' @export
 oc_forward <-
   function(placename,
-           key = oc_key(),
            output = c("df_list", "json_list", "geojson_list", "url_only"),
+           key = oc_key(),
            bounds = NULL,
            countrycode = NULL,
            language = NULL,
            limit = 10,
            min_confidence = NULL,
-           no_annotations = FALSE,
+           no_annotations = TRUE,
            no_dedupe = FALSE,
            no_record = FALSE,
            abbrv = FALSE,
-           add_request = TRUE) {
+           add_request = FALSE) {
+
+    # check output
+    output <- match.arg(output)
 
     # check arguments
     oc_query_check(
@@ -29,8 +32,43 @@ oc_forward <-
       abbrv = abbrv,
       add_request = add_request
     )
+    # process request
+    oc_process(
+      placename = placename,
+      output = output,
+      key = key,
+      bounds = bounds,
+      countrycode = countrycode,
+      language = language,
+      limit = limit,
+      min_confidence = min_confidence,
+      no_annotations = no_annotations,
+      no_dedupe = no_dedupe,
+      no_record = no_record,
+      abbrv = abbrv,
+      add_request = add_request
+    )
+  }
 
-    output <- match.arg(output) # move to oc_query_check?
+oc_process <-
+  function(placename = NULL,
+           latitude = NULL,
+           longitude = NULL,
+           key = oc_key(),
+           output = NULL,
+           bounds = NULL,
+           countrycode = NULL,
+           language = NULL,
+           limit = 1,
+           min_confidence = NULL,
+           no_annotations = TRUE,
+           no_dedupe = FALSE,
+           no_record = FALSE,
+           abbrv = FALSE,
+           add_request = FALSE,
+           .pb = NULL) {
+
+    if ( (!is.null(.pb) ) )  .pb$tick()
 
     # vectorise
     if (length(placename) > 1) {
@@ -56,7 +94,8 @@ oc_forward <-
       return(
         purrr::pmap(
           .l = arglist,
-          .f = oc_forward
+          .f = oc_process,
+          .pb = pb
         )
       )
     }
