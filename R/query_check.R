@@ -34,17 +34,17 @@
 oc_query_check <- function(latitude = NULL,
                            longitude = NULL,
                            placename = NULL,
-                           key,
-                           abbrv,
-                           bounds,
-                           countrycode,
-                           language,
-                           limit,
-                           min_confidence,
-                           no_annotations,
-                           no_dedupe,
-                           no_record,
-                           add_request) {
+                           key = NULL,
+                           abbrv = NULL,
+                           bounds = NULL,
+                           countrycode = NULL,
+                           language = NULL,
+                           limit = NULL,
+                           min_confidence = NULL,
+                           no_annotations = NULL,
+                           no_dedupe = NULL,
+                           no_record = NULL,
+                           add_request = NULL) {
   # check latitude
   if (!is.null(latitude)) {
     if (!dplyr::between(latitude, -90, 90)) {
@@ -58,6 +58,7 @@ oc_query_check <- function(latitude = NULL,
       stop(call. = FALSE, "Longitude should be between -180 and 180.")
     }
   }
+
   # check placename
   if (!is.null(placename)) {
     if (!is.character(placename)) {

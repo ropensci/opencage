@@ -2,44 +2,37 @@ library("opencage")
 context("oc_query_check")
 
 test_that("oc_query_check checks latitude", {
-  skip_on_cran()
   expect_error(
-    opencage_reverse(
+    oc_query_check(
       latitude = 433,
-      longitude = 51.11892,
-      key = Sys.getenv("OPENCAGE_KEY")
+      longitude = 51.11892
     ),
     "Latitude should be between -90 and 90."
   )
 })
 
 test_that("oc_query_check checks longitude", {
-  skip_on_cran()
   expect_error(
-    opencage_reverse(
+    oc_query_check(
       latitude = 43,
-      longitude = 5111892,
-      key = Sys.getenv("OPENCAGE_KEY")
+      longitude = 5111892
     ),
     "Longitude should be between -180 and 180."
   )
 })
 
 test_that("oc_query_check checks placename", {
-  skip_on_cran()
   expect_error(
-    opencage_forward(
-      placename = 222,
-      key = Sys.getenv("OPENCAGE_KEY")
+    oc_query_check(
+      placename = 222
     ),
     "Placename should be a character."
   )
 })
 
 test_that("oc_query_check checks key", {
-  skip_on_cran()
   expect_error(
-    opencage_reverse(
+    oc_query_check(
       latitude = 43.3,
       longitude = 51.11892,
       key = 45
@@ -49,111 +42,91 @@ test_that("oc_query_check checks key", {
 })
 
 test_that("oc_query_check checks bound", {
-  skip_on_cran()
   expect_error(
-    opencage_forward(
+    oc_query_check(
       placename = "Sarzeau",
-      bound = c(-563160, 51.280430, 0.278970, 51.683979),
-      key = Sys.getenv("OPENCAGE_KEY")
+      bound = c(-563160, 51.280430, 0.278970, 51.683979)
     ),
     "min long should be between -180 and 180."
   )
 
   expect_error(
-    opencage_forward(
+    oc_query_check(
       placename = "Sarzeau",
-      bound = c(-0.563160, 51280430, 0.278970, 51.683979),
-      key = Sys.getenv("OPENCAGE_KEY")
+      bound = c(-0.563160, 51280430, 0.278970, 51.683979)
     ),
     "min lat should be between -90 and 90."
   )
 
   expect_error(
-    opencage_forward(
+    oc_query_check(
       placename = "Sarzeau",
-      bound = c(-0.563160, 51.280430, 278970, 51.683979),
-      key = Sys.getenv("OPENCAGE_KEY")
+      bound = c(-0.563160, 51.280430, 278970, 51.683979)
     ),
     "max long should be between -180 and 180."
   )
 
   expect_error(
-    opencage_forward(
+    oc_query_check(
       placename = "Sarzeau",
-      bound = c(-0.563160, 51.280430, 0.278970, 51683979),
-      key = Sys.getenv("OPENCAGE_KEY")
+      bound = c(-0.563160, 51.280430, 0.278970, 51683979)
     ),
     "max lat should be between -90 and 90."
   )
 
   expect_error(
-    opencage_forward(
+    oc_query_check(
       placename = "Sarzeau",
-      bound = c(0.563160, 51.280430, 0.278970, 51.683979),
-      key = Sys.getenv("OPENCAGE_KEY")
+      bound = c(0.563160, 51.280430, 0.278970, 51.683979)
     ),
     "min long has to be smaller than max long"
   )
 
   expect_error(
-    opencage_forward(
+    oc_query_check(
       placename = "Sarzeau",
-      bound = c(-0.563160, 53.280430, 0.278970, 51.683979),
-      key = Sys.getenv("OPENCAGE_KEY")
+      bound = c(-0.563160, 53.280430, 0.278970, 51.683979)
     ),
     "min lat has to be smaller than max lat"
   )
 
   expect_error(
-    opencage_forward(
+    oc_query_check(
       placename = "Sarzeau",
-      bound = c(53.280430, 0.278970, 51.683979),
-      key = Sys.getenv("OPENCAGE_KEY")
+      bound = c(53.280430, 0.278970, 51.683979)
     ),
     "bounds should be a vector of 4 numeric values."
   )
 })
 
 test_that("oc_query_check checks countrycode", {
-  skip_on_cran()
   expect_error(
-    opencage_forward(
+    oc_query_check(
       placename = "Sarzeau",
-      countrycode = "notacountrycode",
-      key = Sys.getenv("OPENCAGE_KEY")
+      countrycode = "notacountrycode"
     ),
     "countrycode does not have a valid value."
   )
 })
 
-test_that("oc_query_check ok with lower case", {
-  skip_on_cran()
-  expect_is(
-    opencage_forward(
+test_that("oc_query_check ok with lower case countrycode", {
+  expect_equal(
+   oc_query_check(
       placename = "Sarzeau",
-      countrycode = "fr",
-      key = Sys.getenv("OPENCAGE_KEY")
+      countrycode = "fr"
     ),
-    "list"
-  )
-
-  expect_is(
-    opencage_forward(
-      placename = "Sarzeau",
-      countrycode = "FR",
-      key = Sys.getenv("OPENCAGE_KEY")
-    ),
-    "list"
+   oc_query_check(
+     placename = "Sarzeau",
+     countrycode = "FR"
+   )
   )
 })
 
 test_that("oc_query_check checks language", {
-  skip_on_cran()
   expect_error(
-    opencage_forward(
+    oc_query_check(
       placename = "Sarzeau",
-      language = "notalanguagecode",
-      key = Sys.getenv("OPENCAGE_KEY")
+      language = "notalanguagecode"
     ),
     "The language code is not valid."
   )
@@ -161,8 +134,7 @@ test_that("oc_query_check checks language", {
   expect_error(
     opencage_forward(
       placename = "Sarzeau",
-      language = "fr-NOTACOUNTRYCODE",
-      key = Sys.getenv("OPENCAGE_KEY")
+      language = "fr-NOTACOUNTRYCODE"
     ),
     "The country part of language is not valid."
   )
@@ -170,60 +142,50 @@ test_that("oc_query_check checks language", {
 
 
 test_that("oc_query_check checks min_confidence", {
-  skip_on_cran()
   expect_error(
-    opencage_forward(
+    oc_query_check(
       placename = "Sarzeau",
-      min_confidence = 20,
-      key = Sys.getenv("OPENCAGE_KEY")
+      min_confidence = 20
     ),
     "min_confidence should be an integer between 1 and 10."
   )
 })
 
 test_that("oc_query_check checks limit", {
-  skip_on_cran()
   expect_error(
-    opencage_forward(
+    oc_query_check(
       placename = "Sarzeau",
-      limit = 200,
-      key = Sys.getenv("OPENCAGE_KEY")
+      limit = 200
     ),
     "limit should be an integer between 1 and 100."
   )
 })
 
 test_that("oc_query_check checks no_annotations", {
-  skip_on_cran()
   expect_error(
-    opencage_forward(
+    oc_query_check(
       placename = "Sarzeau",
-      no_annotations = "yes",
-      key = Sys.getenv("OPENCAGE_KEY")
+      no_annotations = "yes"
     ),
     "no_annotations has to be a logical."
   )
 })
 
 test_that("oc_query_check checks no_dedupe", {
-  skip_on_cran()
   expect_error(
-    opencage_forward(
+    oc_query_check(
       placename = "Sarzeau",
-      no_dedupe = "yes",
-      key = Sys.getenv("OPENCAGE_KEY")
+      no_dedupe = "yes"
     ),
     "no_dedupe has to be a logical."
   )
 })
 
 test_that("oc_query_check checks no_record", {
-  skip_on_cran()
   expect_error(
-    opencage_forward(
+    oc_query_check(
       placename = "Sarzeau",
-      no_record = "yes",
-      key = Sys.getenv("OPENCAGE_KEY")
+      no_record = "yes"
     ),
     "no_record has to be a logical."
   )
@@ -231,24 +193,20 @@ test_that("oc_query_check checks no_record", {
 
 
 test_that("oc_query_check checks abbrv", {
-  skip_on_cran()
   expect_error(
-    opencage_forward(
+    oc_query_check(
       placename = "Sarzeau",
-      abbrv = "yes",
-      key = Sys.getenv("OPENCAGE_KEY")
+      abbrv = "yes"
     ),
     "abbrv has to be a logical."
   )
 })
 
 test_that("oc_query_check checks add_request", {
-  skip_on_cran()
   expect_error(
-    opencage_forward(
+    oc_query_check(
       placename = "Sarzeau",
-      add_request = "yes",
-      key = Sys.getenv("OPENCAGE_KEY")
+      add_request = "yes"
     ),
     "add_request has to be a logical."
   )
