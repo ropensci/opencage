@@ -36,19 +36,19 @@ oc_query_check <-
     latitude = NULL,
     longitude = NULL,
     placename = NULL,
-    key,
-    bounds,
-    countrycode,
-    language,
-    limit,
-    min_confidence,
-    no_annotations,
-    no_dedupe,
-    no_record,
-    abbrv,
-    add_request
+    key = NULL,
+    bounds = NULL,
+    countrycode = NULL,
+    language = NULL,
+    limit = NULL,
+    min_confidence = NULL,
+    no_annotations = NULL,
+    no_dedupe = NULL,
+    no_record = NULL,
+    abbrv = NULL,
+    add_request = NULL
   ) {
-  # check latitude
+    # check latitude
   if (!is.null(latitude)) {
     if (!all(dplyr::between(latitude, -90, 90))) {
       stop(call. = FALSE, "Latitude should be between -90 and 90.")
@@ -61,6 +61,7 @@ oc_query_check <-
       stop(call. = FALSE, "Longitude should be between -180 and 180.")
     }
   }
+
   # check placename
   if (!is.null(placename)) {
     if (!is.character(placename)) {
@@ -69,7 +70,9 @@ oc_query_check <-
   }
 
   # check key
-  if (!is.null(key)) {
+  if (is.null(key)) {
+    stop(call. = FALSE, "A `key` must be provided.")
+  } else {
     if (!is.character(key)) {
       stop(call. = FALSE, "Key should be a character.")
     }
@@ -123,7 +126,7 @@ oc_query_check <-
   # check limit
   if (!is.null(limit)) {
     if (!(limit %in% c(1:100))) {
-      stop(call. = FALSE, "limit should be an integer between 1 and 100.") # nolint
+      stop(call. = FALSE, "limit should be an integer between 1 and 100.") #nolint
     }
   }
 
