@@ -1,6 +1,16 @@
 library("opencage")
 context("oc_query_check")
 
+test_that("oc_query_check checks placename", {
+  expect_error(
+    oc_query_check(
+      placename = 222,
+      key = "32randomlettersanddigits12345678"
+    ),
+    "`placename` must be a character vector."
+  )
+})
+
 test_that("oc_query_check checks latitude", {
   expect_error(
     oc_query_check(
@@ -8,7 +18,7 @@ test_that("oc_query_check checks latitude", {
       longitude = 51.11892,
       key = "32randomlettersanddigits12345678"
     ),
-    "Latitude should be between -90 and 90."
+    "`latitude` must be between -90 and 90."
   )
 })
 
@@ -19,17 +29,7 @@ test_that("oc_query_check checks longitude", {
       longitude = 5111892,
       key = "32randomlettersanddigits12345678"
     ),
-    "Longitude should be between -180 and 180."
-  )
-})
-
-test_that("oc_query_check checks placename", {
-  expect_error(
-    oc_query_check(
-      placename = 222,
-      key = "32randomlettersanddigits12345678"
-    ),
-    "Placename should be a character."
+    "`longitude` must be between -180 and 180."
   )
 })
 
@@ -40,7 +40,7 @@ test_that("oc_query_check checks key", {
       longitude = 51.11892,
       key = 45
     ),
-    "Key should be a character."
+    "`key` must be a character vector."
   )
 })
 
@@ -49,9 +49,18 @@ test_that("oc_query_check checks bound", {
     oc_query_check(
       placename = "Sarzeau",
       key = "32randomlettersanddigits12345678",
+      bound = c(53.280430, 0.278970, 51.683979)
+    ),
+    "`bounds` must be a vector of 4 numeric values."
+  )
+
+  expect_error(
+    oc_query_check(
+      placename = "Sarzeau",
+      key = "32randomlettersanddigits12345678",
       bound = c(-563160, 51.280430, 0.278970, 51.683979)
     ),
-    "min long should be between -180 and 180."
+    "min lon must be between -180 and 180."
   )
 
   expect_error(
@@ -60,7 +69,7 @@ test_that("oc_query_check checks bound", {
       key = "32randomlettersanddigits12345678",
       bound = c(-0.563160, 51280430, 0.278970, 51.683979)
     ),
-    "min lat should be between -90 and 90."
+    "min lat must be between -90 and 90."
   )
 
   expect_error(
@@ -69,7 +78,7 @@ test_that("oc_query_check checks bound", {
       key = "32randomlettersanddigits12345678",
       bound = c(-0.563160, 51.280430, 278970, 51.683979)
     ),
-    "max long should be between -180 and 180."
+    "max lon must be between -180 and 180."
   )
 
   expect_error(
@@ -78,7 +87,7 @@ test_that("oc_query_check checks bound", {
       key = "32randomlettersanddigits12345678",
       bound = c(-0.563160, 51.280430, 0.278970, 51683979)
     ),
-    "max lat should be between -90 and 90."
+    "max lat must be between -90 and 90."
   )
 
   expect_error(
@@ -87,7 +96,7 @@ test_that("oc_query_check checks bound", {
       key = "32randomlettersanddigits12345678",
       bound = c(0.563160, 51.280430, 0.278970, 51.683979)
     ),
-    "min long has to be smaller than max long"
+    "min lon must be smaller than max long"
   )
 
   expect_error(
@@ -96,16 +105,7 @@ test_that("oc_query_check checks bound", {
       key = "32randomlettersanddigits12345678",
       bound = c(-0.563160, 53.280430, 0.278970, 51.683979)
     ),
-    "min lat has to be smaller than max lat"
-  )
-
-  expect_error(
-    oc_query_check(
-      placename = "Sarzeau",
-      key = "32randomlettersanddigits12345678",
-      bound = c(53.280430, 0.278970, 51.683979)
-    ),
-    "bounds should be a vector of 4 numeric values."
+    "min lat must be smaller than max lat"
   )
 })
 
@@ -116,7 +116,7 @@ test_that("oc_query_check checks countrycode", {
       key = "32randomlettersanddigits12345678",
       countrycode = "notacountrycode"
     ),
-    "countrycode does not have a valid value."
+    "`countrycode` does not have a valid value."
   )
 })
 
@@ -142,7 +142,7 @@ test_that("oc_query_check checks language", {
       key = "32randomlettersanddigits12345678",
       language = "notalanguagecode"
     ),
-    "The language code is not valid."
+    "The `language` code is not valid."
   )
 
   expect_error(
@@ -151,21 +151,10 @@ test_that("oc_query_check checks language", {
       key = "32randomlettersanddigits12345678",
       language = "fr-NOTACOUNTRYCODE"
     ),
-    "The country part of language is not valid."
+    "The country code of `language` is not valid."
   )
 })
 
-
-test_that("oc_query_check checks min_confidence", {
-  expect_error(
-    oc_query_check(
-      placename = "Sarzeau",
-      key = "32randomlettersanddigits12345678",
-      min_confidence = 20
-    ),
-    "min_confidence should be an integer between 1 and 10."
-  )
-})
 
 test_that("oc_query_check checks limit", {
   expect_error(
@@ -174,7 +163,18 @@ test_that("oc_query_check checks limit", {
       key = "32randomlettersanddigits12345678",
       limit = 200
     ),
-    "limit should be an integer between 1 and 100."
+    "`limit` must be an integer between 1 and 100."
+  )
+})
+
+test_that("oc_query_check checks min_confidence", {
+  expect_error(
+    oc_query_check(
+      placename = "Sarzeau",
+      key = "32randomlettersanddigits12345678",
+      min_confidence = 20
+    ),
+    "`min_confidence` must be an integer between 1 and 10."
   )
 })
 
@@ -185,7 +185,7 @@ test_that("oc_query_check checks no_annotations", {
       key = "32randomlettersanddigits12345678",
       no_annotations = "yes"
     ),
-    "no_annotations has to be a logical."
+    "`no_annotations` must be a logical vector."
   )
 })
 
@@ -196,7 +196,7 @@ test_that("oc_query_check checks no_dedupe", {
       key = "32randomlettersanddigits12345678",
       no_dedupe = "yes"
     ),
-    "no_dedupe has to be a logical."
+    "`no_dedupe` must be a logical vector."
   )
 })
 
@@ -207,7 +207,7 @@ test_that("oc_query_check checks no_record", {
       key = "32randomlettersanddigits12345678",
       no_record = "yes"
     ),
-    "no_record has to be a logical."
+    "`no_record` must be a logical vector."
   )
 })
 
@@ -219,7 +219,7 @@ test_that("oc_query_check checks abbrv", {
       key = "32randomlettersanddigits12345678",
       abbrv = "yes"
     ),
-    "abbrv has to be a logical."
+    "`abbrv` must be a logical vector."
   )
 })
 
@@ -230,6 +230,6 @@ test_that("oc_query_check checks add_request", {
       key = "32randomlettersanddigits12345678",
       add_request = "yes"
     ),
-    "add_request has to be a logical."
+    "`add_request` must be a logical vector."
   )
 })
