@@ -1,1 +1,1 @@
-exclusions: list("tests/testthat.R", "tests/testthat/test-opencage_check.R", "tests/testthat/test-opencage_get.R", "tests/testthat/test-opencage_parse.R", "tests/testthat/test-opencage_query_check.R", "tests/testthat/test-opencage_url.R", "tests/testthat/test-lintr.R")
+exclusions: list()
