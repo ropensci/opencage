@@ -49,9 +49,11 @@ oc_query_check <-
     add_request = NULL
   ) {
     # vectorise
-    if (length(placename) > 1 ||
-      length(latitude) > 1 ||
-      length(longitude) > 1) {
+    if (
+      length(placename) > 1 ||
+      length(latitude)  > 1 ||
+      length(longitude) > 1
+    ) {
       arglist <-
         purrr::compact(
           list(
