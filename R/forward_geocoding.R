@@ -33,7 +33,7 @@ oc_forward <-
       add_request = add_request
     )
     # process request
-    oc_process(
+    oc_process_map(
       placename = placename,
       output = output,
       key = key,
@@ -50,56 +50,75 @@ oc_forward <-
     )
   }
 
-oc_process <-
-  function(placename = NULL,
-           latitude = NULL,
-           longitude = NULL,
-           key = oc_key(),
-           output = NULL,
-           bounds = NULL,
-           countrycode = NULL,
-           language = NULL,
-           limit = 1,
-           min_confidence = NULL,
-           no_annotations = TRUE,
-           no_dedupe = FALSE,
-           no_record = FALSE,
-           abbrv = FALSE,
-           add_request = FALSE,
-           .pb = NULL) {
-
-    if ( (!is.null(.pb) ) )  .pb$tick()
-
-    # vectorise
+oc_process_map <-
+  function(
+    placename = NULL,
+    latitude = NULL,
+    longitude = NULL,
+    key = key,
+    output = NULL,
+    bounds = NULL,
+    countrycode = NULL,
+    language = NULL,
+    limit = 1,
+    min_confidence = NULL,
+    no_annotations = TRUE,
+    no_dedupe = FALSE,
+    no_record = FALSE,
+    abbrv = FALSE,
+    add_request = FALSE
+    ) {
     if (length(placename) > 1) {
       pb <- oc_init_progress(placename) # nolint
-      arglist <-
-        purrr::compact(
-          list(
-            placename = placename,
-            output = output,
-            key = key,
-            bounds = bounds,
-            countrycode = countrycode,
-            language = language,
-            limit = limit,
-            min_confidence = min_confidence,
-            no_annotations = no_annotations,
-            no_dedupe = no_dedupe,
-            no_record = no_record,
-            abbrv = abbrv,
-            add_request = add_request
-          )
-        )
-      return(
-        purrr::pmap(
-          .l = arglist,
-          .f = oc_process,
-          .pb = pb
+    } else if (length(latitude) > 1) {
+      pb <- oc_init_progress(latitude)
+    } else {
+      pb <- NULL
+    }
+    arglist <-
+      purrr::compact(
+        list(
+          placename = placename,
+          latitude = latitude,
+          longitude = longitude,
+          output = output,
+          key = key,
+          bounds = list(bounds),
+          countrycode = (countrycode),
+          language = language,
+          limit = limit,
+          min_confidence = min_confidence,
+          no_annotations = no_annotations,
+          no_dedupe = no_dedupe,
+          no_record = no_record,
+          abbrv = abbrv,
+          add_request = add_request
         )
       )
-    }
+    purrr::pmap(.l = arglist,
+                .f = oc_process,
+                pb = pb)
+  }
 
+oc_process <-
+      function(placename = NULL,
+               latitude = NULL,
+               longitude = NULL,
+               key = oc_key(),
+               output = NULL,
+               bounds = NULL,
+               countrycode = NULL,
+               language = NULL,
+               limit = 1,
+               min_confidence = NULL,
+               no_annotations = TRUE,
+               no_dedupe = FALSE,
+               no_record = FALSE,
+               abbrv = FALSE,
+               add_request = FALSE,
+               pb = NULL) {
+
+    if (!is.null(pb))  pb$tick()
     # convert NA's to NULL to not return bogus results
     if (is.na(placename)) placename <- NULL
 
@@ -165,6 +184,7 @@ oc_forward_df <-
              no_record = FALSE,
              abbrv = FALSE) {
     placename <- data[[substitute(placename)]]
+    countrycode <- data[[substitute(countrycode)]]
     output <- match.arg(output)
     add_request <- TRUE # Ensure that query column always exists
     if (output == "short") {
