@@ -10,8 +10,7 @@ opencage
 =============
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/opencage)](http://cran.r-project.org/package=opencage)
 [![Build Status](https://travis-ci.org/ropensci/opencage.svg?branch=master)](https://travis-ci.org/ropensci/opencage)
-[![Build status](https://ci.appveyor.com/api/projects/status/iketgu0vk55kt0b0?svg=true)](https://ci.appveyor.com/project/ropensci/opencage)
-[![codecov.io](https://codecov.io/github/ropensci/opencage/coverage.svg?branch=master)](https://codecov.io/github/ropensci/opencage?branch=master)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/opencage?branch=master&svg=true)](https://ci.appveyor.com/project/maelle/opencage)[![codecov.io](https://codecov.io/github/ropensci/opencage/coverage.svg?branch=master)](https://codecov.io/github/ropensci/opencage?branch=master)
 [![](https://badges.ropensci.org/36_status.svg)](https://github.com/ropensci/onboarding/issues/36)
 
 # Installation
