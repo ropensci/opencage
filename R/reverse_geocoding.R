@@ -2,58 +2,26 @@
 oc_reverse <-
   function(latitude,
            longitude,
-           key = oc_key(),
            output = c("df_list", "json_list", "geojson_list", "url_only"),
-           bounds = NULL,
+           key = oc_key(),
            countrycode = NULL,
            language = NULL,
-           limit = 10,
+           limit = 10L,
            min_confidence = NULL,
-           no_annotations = FALSE,
+           no_annotations = TRUE,
            no_dedupe = FALSE,
            no_record = FALSE,
            abbrv = FALSE,
-           add_request = TRUE) {
+           add_request = FALSE) {
 
-    if (length(latitude) != length(longitude))
-      stop("The number of values for latitude and longitude are not equal.",
-           call. = FALSE)
-
+    # check output
     output <- match.arg(output)
 
-    # vectorise
-    if (length(latitude) > 1){
-      pb <- oc_init_progress(latitude) # nolint
-      return(purrr::map2(latitude,
-                         longitude,
-                         ~ {
-                           pb$tick()
-                           oc_reverse(
-                             latitude = .x,
-                             longitude = .y,
-                             key = key,
-                             output = output,
-                             bounds = bounds,
-                             countrycode = countrycode,
-                             language = language,
-                             limit = limit,
-                             min_confidence = min_confidence,
-                             no_annotations = no_annotations,
-                             no_dedupe = no_dedupe,
-                             no_record = no_record,
-                             abbrv = abbrv,
-                             add_request = add_request
-                           )
-                           }
-                         )
-      )
-    }
     # check arguments
     oc_check_query(
       latitude = latitude,
       longitude = longitude,
       key = key,
-      bounds = bounds,
       countrycode = countrycode,
       language = language,
       limit = limit,
@@ -153,27 +121,9 @@ oc_reverse_df <-
         results <- dplyr::select(results, query, dplyr::everything()) # nolint
       }
     } else {
-      if (nrow(data) == 1) {
-        results_nest <- dplyr::mutate(data,
-          op = list(oc_reverse(
-            latitude = latitude,
-            longitude = longitude,
-            key = key,
-            output = "df_list",
-            bounds = bounds,
-            countrycode = countrycode,
-            language = language,
-            limit = limit,
-            min_confidence = min_confidence,
-            no_annotations = no_annotations,
-            no_dedupe = no_dedupe,
-            no_record = no_record,
-            abbrv = abbrv,
-            add_request = add_request
-          ))
-        )
-      } else {
-        results_nest <- dplyr::mutate(data,
+      results_nest <-
+        dplyr::mutate(
+          data,
           op = oc_reverse(
             latitude = latitude,
             longitude = longitude,
@@ -192,15 +142,19 @@ oc_reverse_df <-
           )
         )
       }
-      results <- tidyr::unnest(results_nest)
 
-      if (output == "short") {
-        results <- dplyr::select(results, 1:query, formatted, -query) # nolint
-      } else {
-        results <- dplyr::select(results, 1:query, dplyr::everything(), -query) # nolint
-      }
-      results
+    results <- tidyr::unnest(results_nest, op) # nolint
+    # `op` is necessary, so that other list columns are not unnested
+    # but lintr complains about `op` not being defined
+
+    if (output == "short") {
+      results <-
+        dplyr::select(results, 1:query, formatted, -query)
+    } else {
+      results <-
+        dplyr::select(results, 1:query, dplyr::everything(), -query)
     }
+    results
   }
 
 #' Reverse geocoding
@@ -235,6 +189,10 @@ opencage_reverse <-
            no_record = FALSE,
            abbrv = FALSE,
            add_request = TRUE) {
+    if (length(latitude) > 1) {
+      stop(call. = FALSE,
+           "`opencage_reverse` is not vectorised, use `oc_reverse` instead.")
+      }
     lst <- oc_reverse(
       latitude = latitude,
       longitude = longitude,
@@ -251,5 +209,6 @@ opencage_reverse <-
       abbrv = abbrv,
       add_request = add_request
     )
+    lst <- lst[[1]]
     opencage_format(lst)
   }

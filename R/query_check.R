@@ -50,39 +50,48 @@ oc_check_query <-
     abbrv = NULL,
     add_request = NULL
   ) {
-    # vectorise
-    if (
-      length(placename) > 1 ||
-      length(latitude)  > 1 ||
-      length(longitude) > 1
-    ) {
-      arglist <-
-        purrr::compact(
-          list(
-            placename = placename,
-            latitude = latitude,
-            longitude = longitude,
-            key = key,
-            bounds = bounds,
-            countrycode = countrycode,
-            language = language,
-            limit = limit,
-            min_confidence = min_confidence,
-            no_annotations = no_annotations,
-            no_dedupe = no_dedupe,
-            no_record = no_record,
-            abbrv = abbrv,
-            add_request = add_request
-          )
-        )
-      return(
-        purrr::pwalk(
-          .l = arglist,
-          .f = oc_query_check
+    arglist <-
+      purrr::compact(
+        list(
+          placename = placename,
+          latitude = latitude,
+          longitude = longitude,
+          key = key,
+          bounds = bounds,
+          countrycode = countrycode,
+          language = language,
+          limit = limit,
+          min_confidence = min_confidence,
+          no_annotations = no_annotations,
+          no_dedupe = no_dedupe,
+          no_record = no_record,
+          abbrv = abbrv,
+          add_request = add_request
         )
       )
-    }
+    purrr::pwalk(
+      .l = arglist,
+      .f = .oc_check_query
+    )
+  }
 
+.oc_check_query <-
+  function(
+    placename = NULL,
+    latitude = NULL,
+    longitude = NULL,
+    key = NULL,
+    bounds = NULL,
+    countrycode = NULL,
+    language = NULL,
+    limit = NULL,
+    min_confidence = NULL,
+    no_annotations = NULL,
+    no_dedupe = NULL,
+    no_record = NULL,
+    abbrv = NULL,
+    add_request = NULL
+  ) {
     # check placename
     if (!is.null(placename)) {
       if (!is.character(placename)) {

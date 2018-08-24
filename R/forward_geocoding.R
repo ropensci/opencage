@@ -33,7 +33,7 @@ oc_forward <-
       add_request = add_request
     )
     # process request
-    oc_process_map(
+    oc_process(
       placename = placename,
       output = output,
       key = key,
@@ -50,17 +50,17 @@ oc_forward <-
     )
   }
 
-oc_process_map <-
+oc_process <-
   function(
     placename = NULL,
     latitude = NULL,
     longitude = NULL,
-    key = key,
-    output = NULL,
+    key = oc_key(),
+    output = "url_only",
     bounds = NULL,
     countrycode = NULL,
     language = NULL,
-    limit = 1,
+    limit = 1L,
     min_confidence = NULL,
     no_annotations = TRUE,
     no_dedupe = FALSE,
@@ -96,20 +96,22 @@ oc_process_map <-
         )
       )
     purrr::pmap(.l = arglist,
-                .f = oc_process,
+                .f = .oc_process,
+                output = output,
+                key = key,
                 pb = pb)
   }
 
-oc_process <-
+.oc_process <-
       function(placename = NULL,
                latitude = NULL,
                longitude = NULL,
                key = oc_key(),
-               output = NULL,
+               output = "url_only",
                bounds = NULL,
                countrycode = NULL,
                language = NULL,
-               limit = 1,
+               limit = 1L,
                min_confidence = NULL,
                no_annotations = TRUE,
                no_dedupe = FALSE,
@@ -214,53 +216,54 @@ oc_forward_df <-
         results <- dplyr::select(results, query, lat, lng, dplyr::everything()) # nolint
       }
     } else {
-      if (nrow(data) == 1) {
-        # make sure output of mutate with oc_forward is a list
-        results_nest <- dplyr::mutate(data,
-          op = list(oc_forward(
-            placename = placename,
-            key = key,
-            output = "df_list",
-            bounds = bounds,
-            countrycode = countrycode,
-            language = language,
-            limit = limit,
-            min_confidence = min_confidence,
-            no_annotations = no_annotations,
-            no_dedupe = no_dedupe,
-            no_record = no_record,
-            abbrv = abbrv,
-            add_request = add_request
-          ))
+      results_nest <-
+        dplyr::mutate(
+          data,
+          op =
+            oc_forward(
+              placename = placename,
+              key = key,
+              output = "df_list",
+              bounds = bounds,
+              countrycode = countrycode,
+              language = language,
+              limit = limit,
+              min_confidence = min_confidence,
+              no_annotations = no_annotations,
+              no_dedupe = no_dedupe,
+              no_record = no_record,
+              abbrv = abbrv,
+              add_request = add_request
+            )
         )
-      } else {
-        results_nest <- dplyr::mutate(data,
-          op = oc_forward(
-            placename = placename,
-            key = key,
-            output = "df_list",
-            bounds = bounds,
-            countrycode = countrycode,
-            language = language,
-            limit = limit,
-            min_confidence = min_confidence,
-            no_annotations = no_annotations,
-            no_dedupe = no_dedupe,
-            no_record = no_record,
-            abbrv = abbrv,
-            add_request = add_request
-          )
-        )
-      }
-      results <- tidyr::unnest(results_nest)
+
+      results <- tidyr::unnest(results_nest, op) # nolint
+      # `op` is necessary, so that other list columns are not unnested
+      # but lintr complains about `op` not being defined
 
       if (output == "short") {
-        results <- dplyr::select(results, 1:query, lat, lng, formatted, -query) # nolint
+        results <-
+          dplyr::select(
+            results,
+            1:query,
+            lat,
+            lng,
+            formatted,
+            -query
+          )
       } else {
-        results <- dplyr::select(results, 1:query, lat, lng, dplyr::everything(), -query) # nolint
+        results <-
+          dplyr::select(
+            results,
+            1:query,
+            lat,
+            lng,
+            dplyr::everything(),
+            -query
+          )
       }
-      results
     }
+    results
   }
 
 #' Forward geocoding
@@ -318,13 +321,17 @@ opencage_forward <-
            bounds = NULL,
            countrycode = NULL,
            language = NULL,
-           limit = 10,
+           limit = 10L,
            min_confidence = NULL,
            no_annotations = FALSE,
            no_dedupe = FALSE,
            no_record = FALSE,
            abbrv = FALSE,
            add_request = TRUE) {
+    if (length(placename) > 1) {
+      stop(call. = FALSE,
+           "`opencage_forward` is not vectorised, use `oc_forward` instead.")
+    }
     lst <- oc_forward(
       placename = placename,
       key = key,
@@ -340,5 +347,6 @@ opencage_forward <-
       abbrv = abbrv,
       add_request = add_request
     )
+    lst <- lst[[1]]
     opencage_format(lst)
   }

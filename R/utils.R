@@ -108,9 +108,9 @@ oc_init_progress <- function(vec){
 # format to "old" style (version <= 0.1.4)
 # for opencage_forward, opencage_reverse
 opencage_format <- function(lst){
-  no_results <- lst$total_results
+  no_results <- lst[["total_results"]]
   if (no_results > 0) {
-    results <- lapply(lst$results, unlist)
+    results <- lapply(lst[["results"]], unlist)
     results <- lapply(results, as.data.frame)
     results <- lapply(results, t)
     results <- lapply(results, as.data.frame, stringsAsFactors = FALSE)
