@@ -1,5 +1,7 @@
-#' Query check
-# function that checks the query
+#' Check OpenCage query arguments
+#'
+#' Function that checks the query arguments passed to OpenCage
+#'
 #' @param bounds Provides the geocoder with a hint to the region that
 #' the query resides in. This value will restrict the possible results
 #' to the supplied region. The bounds parameter should be specified as
@@ -31,7 +33,7 @@
 #' @param add_request Logical (default TRUE), when FALSE the query text
 #' is removed from the results data frame.
 
-oc_query_check <-
+oc_check_query <-
   function(
     placename = NULL,
     latitude = NULL,

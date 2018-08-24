@@ -49,7 +49,7 @@ oc_reverse <-
       )
     }
     # check arguments
-    oc_query_check(
+    oc_check_query(
       latitude = latitude,
       longitude = longitude,
       key = key,
@@ -210,7 +210,7 @@ oc_reverse_df <-
 #' @param latitude Latitude.
 #' @param longitude Longitude.
 #' @param key Your OpenCage key.
-#' @inheritParams oc_query_check
+#' @inheritParams oc_check_query
 #'
 #' @inherit opencage_forward return details
 #'

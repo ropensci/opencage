@@ -1,9 +1,9 @@
 library("opencage")
-context("oc_query_check")
+context("oc_check_query")
 
-test_that("oc_query_check checks placename", {
+test_that("oc_check_query checks placename", {
   expect_error(
-    oc_query_check(
+    oc_check_query(
       placename = 222,
       key = "32randomlettersanddigits12345678"
     ),
@@ -11,9 +11,9 @@ test_that("oc_query_check checks placename", {
   )
 })
 
-test_that("oc_query_check checks latitude", {
+test_that("oc_check_query checks latitude", {
   expect_error(
-    oc_query_check(
+    oc_check_query(
       latitude = 433,
       longitude = 51.11892,
       key = "32randomlettersanddigits12345678"
@@ -22,9 +22,9 @@ test_that("oc_query_check checks latitude", {
   )
 })
 
-test_that("oc_query_check checks longitude", {
+test_that("oc_check_query checks longitude", {
   expect_error(
-    oc_query_check(
+    oc_check_query(
       latitude = 43,
       longitude = 5111892,
       key = "32randomlettersanddigits12345678"
@@ -33,9 +33,9 @@ test_that("oc_query_check checks longitude", {
   )
 })
 
-test_that("oc_query_check checks key", {
+test_that("oc_check_query checks key", {
   expect_error(
-    oc_query_check(
+    oc_check_query(
       latitude = 43.3,
       longitude = 51.11892,
       key = 45
@@ -135,9 +135,9 @@ test_that("oc_query_check ok with lower case countrycode", {
   )
 })
 
-test_that("oc_query_check checks language", {
+test_that("oc_check_query checks language", {
   expect_error(
-    oc_query_check(
+    oc_check_query(
       placename = "Sarzeau",
       key = "32randomlettersanddigits12345678",
       language = "notalanguagecode"
@@ -156,9 +156,9 @@ test_that("oc_query_check checks language", {
 })
 
 
-test_that("oc_query_check checks limit", {
+test_that("oc_check_query checks limit", {
   expect_error(
-    oc_query_check(
+    oc_check_query(
       placename = "Sarzeau",
       key = "32randomlettersanddigits12345678",
       limit = 200
@@ -167,9 +167,9 @@ test_that("oc_query_check checks limit", {
   )
 })
 
-test_that("oc_query_check checks min_confidence", {
+test_that("oc_check_query checks min_confidence", {
   expect_error(
-    oc_query_check(
+    oc_check_query(
       placename = "Sarzeau",
       key = "32randomlettersanddigits12345678",
       min_confidence = 20
@@ -178,9 +178,9 @@ test_that("oc_query_check checks min_confidence", {
   )
 })
 
-test_that("oc_query_check checks no_annotations", {
+test_that("oc_check_query checks no_annotations", {
   expect_error(
-    oc_query_check(
+    oc_check_query(
       placename = "Sarzeau",
       key = "32randomlettersanddigits12345678",
       no_annotations = "yes"
@@ -189,9 +189,9 @@ test_that("oc_query_check checks no_annotations", {
   )
 })
 
-test_that("oc_query_check checks no_dedupe", {
+test_that("oc_check_query checks no_dedupe", {
   expect_error(
-    oc_query_check(
+    oc_check_query(
       placename = "Sarzeau",
       key = "32randomlettersanddigits12345678",
       no_dedupe = "yes"
@@ -200,9 +200,9 @@ test_that("oc_query_check checks no_dedupe", {
   )
 })
 
-test_that("oc_query_check checks no_record", {
+test_that("oc_check_query checks no_record", {
   expect_error(
-    oc_query_check(
+    oc_check_query(
       placename = "Sarzeau",
       key = "32randomlettersanddigits12345678",
       no_record = "yes"
@@ -211,10 +211,9 @@ test_that("oc_query_check checks no_record", {
   )
 })
 
-
-test_that("oc_query_check checks abbrv", {
+test_that("oc_check_query checks abbrv", {
   expect_error(
-    oc_query_check(
+    oc_check_query(
       placename = "Sarzeau",
       key = "32randomlettersanddigits12345678",
       abbrv = "yes"
@@ -223,9 +222,9 @@ test_that("oc_query_check checks abbrv", {
   )
 })
 
-test_that("oc_query_check checks add_request", {
+test_that("oc_check_query checks add_request", {
   expect_error(
-    oc_query_check(
+    oc_check_query(
       placename = "Sarzeau",
       key = "32randomlettersanddigits12345678",
       add_request = "yes"

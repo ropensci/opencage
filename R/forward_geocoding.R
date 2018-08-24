@@ -18,7 +18,7 @@ oc_forward <-
     output <- match.arg(output)
 
     # check arguments
-    oc_query_check(
+    oc_check_query(
       placename = placename,
       key = key,
       bounds = bounds,
@@ -267,7 +267,7 @@ oc_forward_df <-
 #'
 #' Forward geocoding, from placename to latitude and longitude tuplet(s).
 #'
-#' @inheritParams oc_query_check
+#' @inheritParams oc_check_query
 #' @param key Your OpenCage key.
 #' @param placename Placename.
 #' @details
