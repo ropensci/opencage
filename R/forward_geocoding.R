@@ -161,7 +161,7 @@ oc_process <-
     res <- oc_get_memoise(oc_url)
 
     # check message
-    oc_check(res)
+    oc_check_status(res)
 
     # done!
     oc_parse(res, output, query = placename)

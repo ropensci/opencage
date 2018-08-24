@@ -1,5 +1,5 @@
 # status check
-oc_check <- function(req) {
+oc_check_status <- function(req) {
   if (req$status_code < 400) return(invisible())
   message <- code_message$message[code_message$code == req$status_code]
   stop("HTTP failure: ", req$status_code, "\n", message, call. = FALSE)
