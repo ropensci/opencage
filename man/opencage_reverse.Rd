@@ -16,18 +16,9 @@ opencage_reverse(latitude, longitude, key = oc_key(), bounds = NULL,
 
 \item{key}{Your OpenCage key.}
 
-\item{bounds}{Provides the geocoder with a hint to the region that
-the query resides in. This value will restrict the possible results
-to the supplied region. The bounds parameter should be specified as
-4 coordinate points forming the south-west and north-east corners of
- a bounding box.
- For example, \code{bounds = c(-0.563160, 51.280430, 0.278970, 51.683979)}
-  (min long, min lat, max long, max lat).}
+\item{bounds}{Bounding box, ignored for reverse geocoding.}
 
-\item{countrycode}{Restricts the results to the given country.
-The country code is a two letter code as defined by the ISO 3166-1 Alpha 2
-standard. E.g. "GB" for the United Kingdom, "FR" for France,
-"US" for United States.}
+\item{countrycode}{Country code, ignored for reverse geocoding.}
 
 \item{language}{An IETF format language code
 (such as "es" for Spanish or "pt-BR" for Brazilian Portuguese).
