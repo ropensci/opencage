@@ -8,7 +8,7 @@
 #' 4 coordinate points forming the south-west and north-east corners of
 #'  a bounding box.
 #'  For example, \code{bounds = c(-0.563160, 51.280430, 0.278970, 51.683979)}
-#'   (min lon, min lat, max lon, max lat).
+#'   (xmin, ymin, xmax, ymax).
 #' @param countrycode Restricts the results to the given country.
 #' The country code is a two letter code as defined by the ISO 3166-1 Alpha 2
 #' standard. E.g. "GB" for the United Kingdom, "FR" for France,
@@ -125,26 +125,12 @@ oc_check_query <-
     # check bounds
     if (!is.null(bounds)) {
       if (length(bounds) != 4) {
-        stop(call. = FALSE, "`bounds` must be a vector of 4 numeric values.")
+        stop(
+          call. = FALSE,
+          "Every `bbox` must be a numeric vector of length 4."
+        )
       }
-      if (!dplyr::between(bounds[1], -180, 180)) {
-        stop(call. = FALSE, "min lon must be between -180 and 180.")
-      }
-      if (!dplyr::between(bounds[2], -90, 90)) {
-        stop(call. = FALSE, "min lat must be between -90 and 90.")
-      }
-      if (!dplyr::between(bounds[3], -180, 180)) {
-        stop(call. = FALSE, "max lon must be between -180 and 180.")
-      }
-      if (!dplyr::between(bounds[4], -90, 90)) {
-        stop(call. = FALSE, "max lat must be between -90 and 90.")
-      }
-      if (bounds[1] > bounds[3]) {
-        stop(call. = FALSE, "min lon must be smaller than max long")
-      }
-      if (bounds[2] > bounds[4]) {
-        stop(call. = FALSE, "min lat must be smaller than max lat")
-      }
+      oc_check_bbox(bounds[[1]], bounds[[2]], bounds[[3]], bounds[[4]])
     }
 
     # check countrycode

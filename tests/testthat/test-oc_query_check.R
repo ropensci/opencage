@@ -44,74 +44,9 @@ test_that("oc_check_query checks key", {
   )
 })
 
-test_that("oc_query_check checks bound", {
+test_that("oc_check_query checks countrycode", {
   expect_error(
-    oc_query_check(
-      placename = "Sarzeau",
-      key = "32randomlettersanddigits12345678",
-      bound = c(53.280430, 0.278970, 51.683979)
-    ),
-    "`bounds` must be a vector of 4 numeric values."
-  )
-
-  expect_error(
-    oc_query_check(
-      placename = "Sarzeau",
-      key = "32randomlettersanddigits12345678",
-      bound = c(-563160, 51.280430, 0.278970, 51.683979)
-    ),
-    "min lon must be between -180 and 180."
-  )
-
-  expect_error(
-    oc_query_check(
-      placename = "Sarzeau",
-      key = "32randomlettersanddigits12345678",
-      bound = c(-0.563160, 51280430, 0.278970, 51.683979)
-    ),
-    "min lat must be between -90 and 90."
-  )
-
-  expect_error(
-    oc_query_check(
-      placename = "Sarzeau",
-      key = "32randomlettersanddigits12345678",
-      bound = c(-0.563160, 51.280430, 278970, 51.683979)
-    ),
-    "max lon must be between -180 and 180."
-  )
-
-  expect_error(
-    oc_query_check(
-      placename = "Sarzeau",
-      key = "32randomlettersanddigits12345678",
-      bound = c(-0.563160, 51.280430, 0.278970, 51683979)
-    ),
-    "max lat must be between -90 and 90."
-  )
-
-  expect_error(
-    oc_query_check(
-      placename = "Sarzeau",
-      key = "32randomlettersanddigits12345678",
-      bound = c(0.563160, 51.280430, 0.278970, 51.683979)
-    ),
-    "min lon must be smaller than max long"
-  )
-
-  expect_error(
-    oc_query_check(
-      placename = "Sarzeau",
-      key = "32randomlettersanddigits12345678",
-      bound = c(-0.563160, 53.280430, 0.278970, 51.683979)
-    ),
-    "min lat must be smaller than max lat"
-  )
-})
-
-test_that("oc_query_check checks countrycode", {
-  expect_error(
-    oc_query_check(
+    oc_check_query(
       placename = "Sarzeau",
       key = "32randomlettersanddigits12345678",
       countrycode = "notacountrycode"
@@ -120,14 +55,16 @@ test_that("oc_query_check checks countrycode", {
   )
 })
 
-test_that("oc_query_check ok with lower case countrycode", {
-  expect_equal(
-   oc_query_check(
+test_that("oc_check_query ok with lower case countrycode", {
+  expect_silent(
+   oc_check_query(
       placename = "Sarzeau",
       key = "32randomlettersanddigits12345678",
       countrycode = "fr"
-    ),
-   oc_query_check(
+    )
+   )
+  expect_silent(
+   oc_check_query(
      placename = "Sarzeau",
      key = "32randomlettersanddigits12345678",
      countrycode = "FR"

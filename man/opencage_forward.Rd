@@ -20,7 +20,7 @@ to the supplied region. The bounds parameter should be specified as
 4 coordinate points forming the south-west and north-east corners of
  a bounding box.
  For example, \code{bounds = c(-0.563160, 51.280430, 0.278970, 51.683979)}
-  (min long, min lat, max long, max lat).}
+  (xmin, ymin, xmax, ymax).}
 
 \item{countrycode}{Restricts the results to the given country.
 The country code is a two letter code as defined by the ISO 3166-1 Alpha 2
