@@ -4,7 +4,6 @@ oc_reverse <-
            longitude,
            output = c("df_list", "json_list", "geojson_list", "url_only"),
            key = oc_key(),
-           countrycode = NULL,
            language = NULL,
            limit = 10L,
            min_confidence = NULL,
@@ -22,7 +21,6 @@ oc_reverse <-
       latitude = latitude,
       longitude = longitude,
       key = key,
-      countrycode = countrycode,
       language = language,
       limit = limit,
       min_confidence = min_confidence,
@@ -88,8 +86,6 @@ oc_reverse_df <-
         longitude = longitude,
         key = key,
         output = "df_list",
-        bounds = bounds,
-        countrycode = countrycode,
         language = language,
         limit = limit,
         min_confidence = min_confidence,
@@ -114,8 +110,6 @@ oc_reverse_df <-
             longitude = longitude,
             key = key,
             output = "df_list",
-            bounds = bounds,
-            countrycode = countrycode,
             language = language,
             limit = limit,
             min_confidence = min_confidence,
@@ -149,6 +143,8 @@ oc_reverse_df <-
 #' @param latitude Latitude.
 #' @param longitude Longitude.
 #' @param key Your OpenCage key.
+#' @param bounds Bounding box, ignored for reverse geocoding.
+#' @param countrycode Country code, ignored for reverse geocoding.
 #' @inheritParams oc_check_query
 #'
 #' @inherit opencage_forward return details
@@ -183,8 +179,6 @@ opencage_reverse <-
       longitude = longitude,
       key = key,
       output = c("json_list"),
-      bounds = bounds,
-      countrycode = countrycode,
       language = language,
       limit = limit,
       min_confidence = min_confidence,
