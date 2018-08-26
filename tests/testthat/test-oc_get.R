@@ -53,12 +53,10 @@ test_that("oc_get returns a response object for vector countrycode", {
 test_that("oc_get_limited is rate limited", {
   skip_on_cran()
   tm <- system.time({
-    replicate(oc_get_limited("https://httpbin.org/get"), 2)
+    replicate(2, oc_get_limited("https://httpbin.org/get"))
   })
-  expect_gte(
-    tm[["elapsed"]],
-    ratelimitr::get_rates(oc_get_limited)[[1]][["period"]]
-  )
+  rate <- ratelimitr::get_rates(oc_get_limited)
+  expect_gte(tm[["elapsed"]], rate[[1]][["period"]] / rate[[1]][["n"]])
 })
 
 test_that("oc_get_memoise memoises", {
