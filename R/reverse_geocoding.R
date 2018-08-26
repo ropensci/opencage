@@ -48,28 +48,36 @@ oc_reverse <-
       add_request = add_request
     )
   }
-
 #' @export
 oc_reverse_df <-
   function(data,
-             latitude,
-             longitude,
-             bind_cols = TRUE,
-             output = c("short", "all"),
-             key = oc_key(),
-             bounds = NULL,
-             countrycode = NULL,
-             language = NULL,
-             limit = 1,
-             min_confidence = NULL,
-             no_annotations = FALSE,
-             no_dedupe = FALSE,
-             no_record = FALSE,
-             abbrv = FALSE) {
+           latitude,
+           longitude,
+           bind_cols = TRUE,
+           output = c("short", "all"),
+           key = oc_key(),
+           language = NULL,
+           limit = 1,
+           min_confidence = NULL,
+           no_annotations = FALSE,
+           no_dedupe = FALSE,
+           no_record = FALSE,
+           abbrv = FALSE,
+           ...) {
     latitude <- data[[substitute(latitude)]]
     longitude <- data[[substitute(longitude)]]
+    language <- eval(substitute(alist(language)))[[1]]
+    if (is.symbol(language)) {
+      language <- data[[deparse(language)]]
+    } else if (is.call(language)) {
+      language <- eval(language)
+    }
+    language <- as.list(language)
+
     output <- match.arg(output)
-    add_request <- TRUE # Ensure that query column always exists
+
+    # Ensure that query column always exists
+    add_request <- TRUE
     if (output == "short") {
       no_annotations <- TRUE
     }

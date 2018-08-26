@@ -174,23 +174,41 @@ oc_process <-
 #' @export
 oc_forward_df <-
   function(data,
-             placename,
-             bind_cols = TRUE,
-             output = c("short", "all"),
-             key = oc_key(),
-             bounds = NULL,
-             countrycode = NULL,
-             language = NULL,
-             limit = 1,
-             min_confidence = NULL,
-             no_annotations = FALSE,
-             no_dedupe = FALSE,
-             no_record = FALSE,
-             abbrv = FALSE) {
-    placename <- data[[substitute(placename)]]
-    countrycode <- data[[substitute(countrycode)]]
+           placename,
+           bind_cols = TRUE,
+           output = c("short", "all"),
+           key = oc_key(),
+           bounds = NULL,
+           countrycode = NULL,
+           language = NULL,
+           limit = 1L,
+           min_confidence = NULL,
+           no_annotations = TRUE,
+           no_dedupe = FALSE,
+           no_record = FALSE,
+           abbrv = FALSE,
+           ...) {
+
+    placename <- data[[deparse(substitute(placename))]]
+    countrycode <- eval(substitute(alist(countrycode)))[[1]]
+    if (is.symbol(countrycode)) {
+      countrycode <- data[[deparse(countrycode)]]
+    } else if (is.call(countrycode)) {
+      countrycode <- eval(countrycode)
+    }
+    countrycode <- as.list(countrycode)
+    language <- eval(substitute(alist(language)))[[1]]
+    if (is.symbol(language)) {
+      language <- data[[deparse(language)]]
+    } else if (is.call(language)) {
+      language <- eval(language)
+    }
+    language <- as.list(language)
     output <- match.arg(output)
-    add_request <- TRUE # Ensure that query column always exists
+
+    # Ensure that query column always exists
+    add_request <- TRUE
+
     if (output == "short") {
       no_annotations <- TRUE
     }
@@ -213,9 +231,11 @@ oc_forward_df <-
       )
       results <- dplyr::bind_rows(results_list)
       if (output == "short") {
-        results <- dplyr::select(results, query, lat, lng, formatted) # nolint
+        results <-
+          dplyr::select(results, query, lat, lng, formatted)
       } else {
-        results <- dplyr::select(results, query, lat, lng, dplyr::everything()) # nolint
+        results <-
+          dplyr::select(results, query, lat, lng, dplyr::everything())
       }
     } else {
       results_nest <-
