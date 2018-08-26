@@ -32,44 +32,21 @@ oc_reverse <-
       abbrv = abbrv,
       add_request = add_request
     )
-
-    # define endpoint
-    if (output == "geojson_list") {
-      endpoint <- "geojson"
-    } else {
-      endpoint <- "json"
-    }
-
-    # build url
-    oc_url <- oc_build_url(
-      query_par =
-        list(
-          q = paste(latitude, longitude, sep = ","),
-          key = key,
-          bounds = bounds,
-          countrycode = countrycode,
-          language = language,
-          limit = limit,
-          min_confidence = min_confidence,
-          no_annotations = as.integer(no_annotations),
-          no_dedupe = as.integer(no_dedupe),
-          no_record = as.integer(no_record),
-          abbrv = as.integer(abbrv),
-          add_request = as.integer(add_request)
-        ),
-      endpoint = endpoint
+    # process request
+    oc_process(
+      latitude = latitude,
+      longitude = longitude,
+      output = output,
+      key = key,
+      language = language,
+      limit = limit,
+      min_confidence = min_confidence,
+      no_annotations = no_annotations,
+      no_dedupe = no_dedupe,
+      no_record = no_record,
+      abbrv = abbrv,
+      add_request = add_request
     )
-
-    if (output == "url_only") return(oc_url)
-
-    # get result
-    res <- oc_get_memoise(oc_url)
-
-    # check message
-    oc_check(res)
-
-    # done!
-    oc_parse(res, output, query = paste(latitude, longitude, sep = ", "))
   }
 
 #' @export

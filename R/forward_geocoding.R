@@ -121,8 +121,6 @@ oc_process <-
                pb = NULL) {
 
     if (!is.null(pb))  pb$tick()
-    # convert NA's to NULL to not return bogus results
-    if (is.na(placename)) placename <- NULL
 
     # define endpoint
     if (output == "geojson_list") {
@@ -131,10 +129,16 @@ oc_process <-
       endpoint <- "json"
     }
 
+    # convert NA's to NULL to not return bogus results
+    if (!is.null(placename) && is.na(placename)) placename <- NULL
+
+    if (!is.null(placename)) query <- placename
+    if (!is.null(latitude)) query <- paste(latitude, longitude, sep = ",")
+
     # build url
     oc_url <- oc_build_url(
       query_par = list(
-        q = placename,
+        q = query,
         bounds = bounds,
         countrycode = countrycode,
         language = language,
@@ -166,7 +170,7 @@ oc_process <-
     oc_check_status(res)
 
     # done!
-    oc_parse(res, output, query = placename)
+    oc_parse(req = res, output = output, query = query)
   }
 
 #' @export
