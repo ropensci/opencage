@@ -104,6 +104,12 @@ oc_init_progress <- function(vec){
       width = 60)
 }
 
+# check whether code is being run in testing environment
+# useful with `interactive()`, see
+# http://testthat.r-lib.org/news/index.html#other-new-features
+is_testing <- function() {
+  identical(Sys.getenv("TESTTHAT"), "true")
+}
 
 # format to "old" style (version <= 0.1.4)
 # for opencage_forward, opencage_reverse

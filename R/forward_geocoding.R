@@ -153,7 +153,7 @@ oc_process <-
     )
 
     if (output == "url_only") {
-      if (interactive()) {
+      if (interactive() || is_testing()) {
         return(oc_url)
       } else {
         stop("'url_only' reveals your opencage key. \n
