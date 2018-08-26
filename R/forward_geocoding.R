@@ -6,13 +6,14 @@ oc_forward <-
            bounds = NULL,
            countrycode = NULL,
            language = NULL,
-           limit = 10,
+           limit = 10L,
            min_confidence = NULL,
            no_annotations = TRUE,
            no_dedupe = FALSE,
            no_record = FALSE,
            abbrv = FALSE,
-           add_request = FALSE) {
+           add_request = FALSE,
+           ...) {
 
     # check output
     output <- match.arg(output)

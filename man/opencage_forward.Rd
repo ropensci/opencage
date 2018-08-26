@@ -5,7 +5,7 @@
 \title{Forward geocoding}
 \usage{
 opencage_forward(placename, key = oc_key(), bounds = NULL,
-  countrycode = NULL, language = NULL, limit = 10,
+  countrycode = NULL, language = NULL, limit = 10L,
   min_confidence = NULL, no_annotations = FALSE, no_dedupe = FALSE,
   no_record = FALSE, abbrv = FALSE, add_request = TRUE)
 }

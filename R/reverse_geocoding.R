@@ -11,7 +11,8 @@ oc_reverse <-
            no_dedupe = FALSE,
            no_record = FALSE,
            abbrv = FALSE,
-           add_request = FALSE) {
+           add_request = FALSE,
+           ...) {
 
     # check output
     output <- match.arg(output)

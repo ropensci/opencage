@@ -32,6 +32,7 @@
 #'  (e.g. C. instead of Calle)
 #' @param add_request Logical (default TRUE), when FALSE the query text
 #' is removed from the results data frame.
+#' @param ... not used (yet).
 
 oc_check_query <-
   function(
