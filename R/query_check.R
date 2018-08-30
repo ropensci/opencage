@@ -136,7 +136,7 @@ oc_check_query <-
 
     # check countrycode
     if (!is.null(countrycode)) {
-      if (!(all(toupper(unlist(countrycode)) %in% countrycodes$Code))) {
+      if (!(all(toupper(unlist(countrycode)) %in% countrycodes$code))) {
         stop(call. = FALSE, "`countrycode` does not have a valid value.")
       }
     }
@@ -144,11 +144,11 @@ oc_check_query <-
     # check language
     if (!is.null(language)) {
       lang <- strsplit(language, "-")[[1]]
-      if (!(lang[1] %in% languagecodes$alpha2)) {
+      if (!(lang[1] %in% languagecodes$code)) {
         stop(call. = FALSE, "The `language` code is not valid.")
       }
       if (length(lang) > 1) {
-        if (!(lang[2] %in% countrycodes$Code)) {
+        if (!(lang[2] %in% countrycodes$code)) {
           stop(call. = FALSE, "The country code of `language` is not valid.")
         }
       }
