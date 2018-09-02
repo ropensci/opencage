@@ -10,21 +10,23 @@ test_that("oc_process creates meaningful URLs for single query.", {
                key = fk)
   expect_is(res, "list")
   expect_is(unlist(res), "character")
-  expect_match(res[[1]], "q=Paris")
-  expect_match(res[[1]], "key=fakekey")
+  expect_match(res[[1]], "q=Paris", fixed = TRUE)
+  expect_match(res[[1]], "key=fakekey", fixed = TRUE)
 
   res <-
     oc_process(placename = "Islington, London",
                output = "url_only",
                key = fk)
-  expect_match(res[[1]], "q=Islington%2C%20London")
+  expect_match(res[[1]], "q=Islington%2C%20London", fixed = TRUE)
+  expect_match(res[[1]], "key=fakekey", fixed = TRUE)
 
   res <-
     oc_process(placename = "Triererstr 15, 99423 Weimar, Deutschland",
                output = "url_only",
                key = fk)
   expect_match(res[[1]],
-               "q=Triererstr%2015%2C%2099423%20Weimar%2C%20Deutschland")
+               "q=Triererstr%2015%2C%2099423%20Weimar%2C%20Deutschland",
+               fixed = TRUE)
 
   res <-
     oc_process(
@@ -35,7 +37,7 @@ test_that("oc_process creates meaningful URLs for single query.", {
     )
   expect_is(res, "list")
   expect_is(unlist(res), "character")
-  expect_match(res[[1]], "q=41.40139%2C2.1287")
+  expect_match(res[[1]], "q=41.40139%2C2.1287", fixed = TRUE)
 })
 
 test_that("oc_process creates meaningful URLs for multiple queries.", {
@@ -46,8 +48,11 @@ test_that("oc_process creates meaningful URLs for multiple queries.", {
   )
   expect_is(res, "list")
   expect_is(unlist(res), "character")
-  expect_match(res[[1]], "q=Paris")
-  expect_match(res[[2]], "q=Hamburg")
+  expect_match(res[[1]], "q=Paris", fixed = TRUE)
+  expect_match(res[[2]], "q=Hamburg", fixed = TRUE)
+  expect_match(res[[1]], "key=fakekey", fixed = TRUE)
+  expect_match(res[[2]], "key=fakekey", fixed = TRUE)
+
 
   res <- oc_process(
     latitude = c(48.87378, 37.83032),
@@ -57,14 +62,14 @@ test_that("oc_process creates meaningful URLs for multiple queries.", {
   )
   expect_is(res, "list")
   expect_is(unlist(res), "character")
-  expect_match(res[[1]], "q=48.87378%2C2.295037")
-  expect_match(res[[2]], "q=37.83032%2C-122.47975")
+  expect_match(res[[1]], "q=48.87378%2C2.295037", fixed = TRUE)
+  expect_match(res[[2]], "q=37.83032%2C-122.47975", fixed = TRUE)
 })
 
 test_that("oc_process deals well with res being NULL", {
   skip_on_cran()
     res <- oc_process(
-    placename = "thiswillgetmenoreswichisgood",
+    placename = "thiswillgetmenoreswhichisgood",
     key = Sys.getenv("OPENCAGE_KEY"),
     limit = 2,
     min_confidence = 5,
@@ -83,7 +88,7 @@ test_that("the bounds argument is well taken into account", {
     bounds = list(c(-5.5, 51.2, 0.2, 51.6)),
     output = "url_only"
   )
-  expect_match(res[[1]], "bounds=-5.5%2C51.2%2C0.2%2C51.6")
+  expect_match(res[[1]], "bounds=-5.5%2C51.2%2C0.2%2C51.6", fixed = TRUE)
 
   res <- oc_process(
     placename = "Sarzeau",
@@ -91,7 +96,7 @@ test_that("the bounds argument is well taken into account", {
     bounds = oc_bbox(-5.6, 51.2, 0.2, 51.6),
     output = "url_only"
   )
-  expect_match(res[[1]], "bounds=-5.6%2C51.2%2C0.2%2C51.6")
+  expect_match(res[[1]], "bounds=-5.6%2C51.2%2C0.2%2C51.6", fixed = TRUE)
 
   res <- oc_process(
     place = c("Hamburg", "Hamburg"),
@@ -104,8 +109,8 @@ test_that("the bounds argument is well taken into account", {
     ),
     output = "url_only"
   )
-  expect_match(res[[1]], "bounds=8.1%2C53.39%2C10.32%2C54.02")
-  expect_match(res[[2]], "bounds=-78.86%2C42.7%2C-78.81%2C42.73")
+  expect_match(res[[1]], "bounds=8.1%2C53.39%2C10.32%2C54.02", fixed = TRUE)
+  expect_match(res[[2]], "bounds=-78.86%2C42.7%2C-78.81%2C42.73", fixed = TRUE)
 
   res1 <- oc_process(
     placename = "Berlin",
