@@ -123,3 +123,94 @@ test_that("the bounds argument is well taken into account", {
   expect_equal(res1[[1]][["country"]], "Germany")
   expect_true(res2[[1]][["country"]] != "Germany")
 })
+
+test_that("oc_process handles language argument.", {
+  res1 <- oc_process(
+    placename = c("New York", "Rio", "Tokyo"),
+    language = "ja",
+    output = "url_only",
+    key = fk
+  )
+  expect_match(res1[[1]], "language=ja", fixed = TRUE)
+  expect_match(res1[[2]], "language=ja", fixed = TRUE)
+
+  res2 <- oc_process(
+    placename = c("Paris", "Hamburg"),
+    language = c("de", "fr"),
+    output = "url_only",
+    key = fk
+  )
+  expect_match(res2[[1]], "language=de", fixed = TRUE)
+  expect_match(res2[[2]], "language=fr", fixed = TRUE)
+})
+
+test_that("oc_process handles countrycode argument.", {
+  res1 <- oc_process(
+    placename = c("Hamburg", "Paris"),
+    countrycode = "DE",
+    output = "url_only",
+    key = fk
+  )
+  expect_match(res1[[1]], "countrycode=de", fixed = TRUE)
+  expect_match(res1[[2]], "countrycode=de", fixed = TRUE)
+
+  res2 <- oc_process(
+    placename = c("Hamburg", "Paris"),
+    countrycode = list(c("US", "FR"), "DE"),
+    output = "url_only",
+    key = fk
+  )
+  expect_match(res2[[1]], "countrycode=us%2Cfr", fixed = TRUE)
+  expect_match(res2[[2]], "countrycode=de", fixed = TRUE)
+
+  res3 <- oc_process(
+    placename = c("Hamburg", "Paris"),
+    countrycode = list("US", "DE"),
+    output = "url_only",
+    key = fk
+  )
+  expect_match(res3[[1]], "countrycode=us", fixed = TRUE)
+  expect_match(res3[[2]], "countrycode=de", fixed = TRUE)
+})
+
+test_that("oc_process handles various other arguments.", {
+  res1 <- oc_process(
+    placename = "Hamburg",
+    output = "url_only",
+    key = NULL,
+    limit = 1L,
+    min_confidence = NULL,
+    no_annotations = FALSE,
+    no_dedupe = FALSE,
+    no_record = FALSE,
+    abbrv = FALSE,
+    add_request = FALSE
+  )
+  expect_match(res1[[1]], "limit=1", fixed = TRUE)
+  expect_false(grepl(pattern = "min_confidence", x = res1[[1]], fixed = TRUE))
+  expect_match(res1[[1]], "no_annotations=0", fixed = TRUE)
+  expect_match(res1[[1]], "no_dedupe=0", fixed = TRUE)
+  expect_match(res1[[1]], "no_record=0", fixed = TRUE)
+  expect_match(res1[[1]], "abbrv=0", fixed = TRUE)
+  expect_match(res1[[1]], "add_request=0", fixed = TRUE)
+
+  res2 <- oc_process(
+    placename = "Hamburg",
+    output = "url_only",
+    key = NULL,
+    limit = 10,
+    min_confidence = 8,
+    no_annotations = TRUE,
+    no_dedupe = TRUE,
+    no_record = TRUE,
+    abbrv = TRUE,
+    add_request = TRUE
+  )
+  expect_match(res2[[1]], "limit=10", fixed = TRUE)
+  expect_match(res2[[1]], "min_confidence=8", fixed = TRUE)
+  expect_match(res2[[1]], "no_annotations=1", fixed = TRUE)
+  expect_match(res2[[1]], "no_dedupe=1", fixed = TRUE)
+  expect_match(res2[[1]], "no_record=1", fixed = TRUE)
+  expect_match(res2[[1]], "abbrv=1", fixed = TRUE)
+  expect_match(res2[[1]], "add_request=1", fixed = TRUE)
+})
