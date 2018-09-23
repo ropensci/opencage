@@ -218,4 +218,28 @@ test_that("oc_process handles various other arguments.", {
   expect_match(res2[[1]], "&no_record=1", fixed = TRUE)
   expect_match(res2[[1]], "&abbrv=1", fixed = TRUE)
   expect_match(res2[[1]], "&add_request=1", fixed = TRUE)
+
+  res3 <- oc_process(
+    placename = c("Hamburg", "Hamburg"),
+    output = "url_only",
+    key = NULL,
+    limit = c(10L, 5L),
+    min_confidence = c(8L, 5L),
+    no_annotations = c(TRUE, FALSE),
+    no_dedupe = c(TRUE, FALSE),
+    abbrv = c(TRUE, FALSE),
+    add_request = c(TRUE, FALSE)
+  )
+  expect_match(res3[[1]], "&limit=10", fixed = TRUE)
+  expect_match(res3[[2]], "&limit=5", fixed = TRUE)
+  expect_match(res3[[1]], "&min_confidence=8", fixed = TRUE)
+  expect_match(res3[[2]], "&min_confidence=5", fixed = TRUE)
+  expect_match(res3[[1]], "&no_annotations=1", fixed = TRUE)
+  expect_match(res3[[2]], "&no_annotations=0", fixed = TRUE)
+  expect_match(res3[[1]], "&no_dedupe=1", fixed = TRUE)
+  expect_match(res3[[2]], "&no_dedupe=0", fixed = TRUE)
+  expect_match(res3[[1]], "&abbrv=1", fixed = TRUE)
+  expect_match(res3[[2]], "&abbrv=0", fixed = TRUE)
+  expect_match(res3[[1]], "&add_request=1", fixed = TRUE)
+  expect_match(res3[[2]], "&add_request=0", fixed = TRUE)
 })
