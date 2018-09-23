@@ -11,7 +11,7 @@ test_that("oc_process creates meaningful URLs for single query.", {
   expect_is(res, "list")
   expect_is(unlist(res), "character")
   expect_match(res[[1]], "q=Paris", fixed = TRUE)
-  expect_match(res[[1]], "key=fakekey", fixed = TRUE)
+  expect_match(res[[1]], "&key=fakekey", fixed = TRUE)
 
   res <-
     oc_process(placename = "Islington, London",
@@ -50,8 +50,8 @@ test_that("oc_process creates meaningful URLs for multiple queries.", {
   expect_is(unlist(res), "character")
   expect_match(res[[1]], "q=Paris", fixed = TRUE)
   expect_match(res[[2]], "q=Hamburg", fixed = TRUE)
-  expect_match(res[[1]], "key=fakekey", fixed = TRUE)
-  expect_match(res[[2]], "key=fakekey", fixed = TRUE)
+  expect_match(res[[1]], "&key=fakekey", fixed = TRUE)
+  expect_match(res[[2]], "&key=fakekey", fixed = TRUE)
 
 
   res <- oc_process(
@@ -88,7 +88,7 @@ test_that("the bounds argument is well taken into account", {
     bounds = list(c(-5.5, 51.2, 0.2, 51.6)),
     output = "url_only"
   )
-  expect_match(res[[1]], "bounds=-5.5%2C51.2%2C0.2%2C51.6", fixed = TRUE)
+  expect_match(res[[1]], "&bounds=-5.5%2C51.2%2C0.2%2C51.6", fixed = TRUE)
 
   res <- oc_process(
     placename = "Sarzeau",
@@ -96,7 +96,7 @@ test_that("the bounds argument is well taken into account", {
     bounds = oc_bbox(-5.6, 51.2, 0.2, 51.6),
     output = "url_only"
   )
-  expect_match(res[[1]], "bounds=-5.6%2C51.2%2C0.2%2C51.6", fixed = TRUE)
+  expect_match(res[[1]], "&bounds=-5.6%2C51.2%2C0.2%2C51.6", fixed = TRUE)
 
   res <- oc_process(
     place = c("Hamburg", "Hamburg"),
@@ -109,8 +109,8 @@ test_that("the bounds argument is well taken into account", {
     ),
     output = "url_only"
   )
-  expect_match(res[[1]], "bounds=8.1%2C53.39%2C10.32%2C54.02", fixed = TRUE)
-  expect_match(res[[2]], "bounds=-78.86%2C42.7%2C-78.81%2C42.73", fixed = TRUE)
+  expect_match(res[[1]], "&bounds=8.1%2C53.39%2C10.32%2C54.02", fixed = TRUE)
+  expect_match(res[[2]], "&bounds=-78.86%2C42.7%2C-78.81%2C42.73", fixed = TRUE)
 
   res1 <- oc_process(
     placename = "Berlin",
@@ -136,8 +136,8 @@ test_that("oc_process handles language argument.", {
     output = "url_only",
     key = fk
   )
-  expect_match(res1[[1]], "language=ja", fixed = TRUE)
-  expect_match(res1[[2]], "language=ja", fixed = TRUE)
+  expect_match(res1[[1]], "&language=ja", fixed = TRUE)
+  expect_match(res1[[2]], "&language=ja", fixed = TRUE)
 
   res2 <- oc_process(
     placename = c("Paris", "Hamburg"),
@@ -145,8 +145,8 @@ test_that("oc_process handles language argument.", {
     output = "url_only",
     key = fk
   )
-  expect_match(res2[[1]], "language=de", fixed = TRUE)
-  expect_match(res2[[2]], "language=fr", fixed = TRUE)
+  expect_match(res2[[1]], "&language=de", fixed = TRUE)
+  expect_match(res2[[2]], "&language=fr", fixed = TRUE)
 })
 
 test_that("oc_process handles countrycode argument.", {
@@ -156,8 +156,8 @@ test_that("oc_process handles countrycode argument.", {
     output = "url_only",
     key = fk
   )
-  expect_match(res1[[1]], "countrycode=de", fixed = TRUE)
-  expect_match(res1[[2]], "countrycode=de", fixed = TRUE)
+  expect_match(res1[[1]], "&countrycode=de", fixed = TRUE)
+  expect_match(res1[[2]], "&countrycode=de", fixed = TRUE)
 
   res2 <- oc_process(
     placename = c("Hamburg", "Paris"),
@@ -165,8 +165,8 @@ test_that("oc_process handles countrycode argument.", {
     output = "url_only",
     key = fk
   )
-  expect_match(res2[[1]], "countrycode=us%2Cfr", fixed = TRUE)
-  expect_match(res2[[2]], "countrycode=de", fixed = TRUE)
+  expect_match(res2[[1]], "&countrycode=us%2Cfr", fixed = TRUE)
+  expect_match(res2[[2]], "&countrycode=de", fixed = TRUE)
 
   res3 <- oc_process(
     placename = c("Hamburg", "Paris"),
@@ -174,8 +174,8 @@ test_that("oc_process handles countrycode argument.", {
     output = "url_only",
     key = fk
   )
-  expect_match(res3[[1]], "countrycode=us", fixed = TRUE)
-  expect_match(res3[[2]], "countrycode=de", fixed = TRUE)
+  expect_match(res3[[1]], "&countrycode=us", fixed = TRUE)
+  expect_match(res3[[2]], "&countrycode=de", fixed = TRUE)
 })
 
 test_that("oc_process handles various other arguments.", {
@@ -191,13 +191,13 @@ test_that("oc_process handles various other arguments.", {
     abbrv = FALSE,
     add_request = FALSE
   )
-  expect_match(res1[[1]], "limit=1", fixed = TRUE)
+  expect_match(res1[[1]], "&limit=1", fixed = TRUE)
   expect_false(grepl(pattern = "min_confidence", x = res1[[1]], fixed = TRUE))
-  expect_match(res1[[1]], "no_annotations=0", fixed = TRUE)
-  expect_match(res1[[1]], "no_dedupe=0", fixed = TRUE)
-  expect_match(res1[[1]], "no_record=0", fixed = TRUE)
-  expect_match(res1[[1]], "abbrv=0", fixed = TRUE)
-  expect_match(res1[[1]], "add_request=0", fixed = TRUE)
+  expect_match(res1[[1]], "&no_annotations=0", fixed = TRUE)
+  expect_match(res1[[1]], "&no_dedupe=0", fixed = TRUE)
+  expect_match(res1[[1]], "&no_record=0", fixed = TRUE)
+  expect_match(res1[[1]], "&abbrv=0", fixed = TRUE)
+  expect_match(res1[[1]], "&add_request=0", fixed = TRUE)
 
   res2 <- oc_process(
     placename = "Hamburg",
@@ -211,11 +211,11 @@ test_that("oc_process handles various other arguments.", {
     abbrv = TRUE,
     add_request = TRUE
   )
-  expect_match(res2[[1]], "limit=10", fixed = TRUE)
-  expect_match(res2[[1]], "min_confidence=8", fixed = TRUE)
-  expect_match(res2[[1]], "no_annotations=1", fixed = TRUE)
-  expect_match(res2[[1]], "no_dedupe=1", fixed = TRUE)
-  expect_match(res2[[1]], "no_record=1", fixed = TRUE)
-  expect_match(res2[[1]], "abbrv=1", fixed = TRUE)
-  expect_match(res2[[1]], "add_request=1", fixed = TRUE)
+  expect_match(res2[[1]], "&limit=10", fixed = TRUE)
+  expect_match(res2[[1]], "&min_confidence=8", fixed = TRUE)
+  expect_match(res2[[1]], "&no_annotations=1", fixed = TRUE)
+  expect_match(res2[[1]], "&no_dedupe=1", fixed = TRUE)
+  expect_match(res2[[1]], "&no_record=1", fixed = TRUE)
+  expect_match(res2[[1]], "&abbrv=1", fixed = TRUE)
+  expect_match(res2[[1]], "&add_request=1", fixed = TRUE)
 })
