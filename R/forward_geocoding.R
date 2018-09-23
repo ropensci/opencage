@@ -191,20 +191,63 @@ oc_forward_df <-
            ...) {
 
     placename <- data[[deparse(substitute(placename))]]
+
     countrycode <- eval(substitute(alist(countrycode)))[[1]]
     if (is.symbol(countrycode)) {
       countrycode <- data[[deparse(countrycode)]]
     } else if (is.call(countrycode)) {
       countrycode <- eval(countrycode)
     }
-    countrycode <- as.list(countrycode)
+    if (!is.null(countrycode)) countrycode <- as.list(countrycode)
+
     language <- eval(substitute(alist(language)))[[1]]
     if (is.symbol(language)) {
       language <- data[[deparse(language)]]
     } else if (is.call(language)) {
       language <- eval(language)
     }
-    language <- as.list(language)
+    if (!is.null(language)) language <- as.list(language)
+
+    limit <- eval(substitute(alist(limit)))[[1]]
+    if (is.symbol(limit)) {
+      limit <- data[[deparse(limit)]]
+    } else if (is.call(limit)) {
+      limit <- eval(limit)
+    }
+    if (!is.null(language)) limit <- as.list(limit)
+
+    min_confidence <- eval(substitute(alist(min_confidence)))[[1]]
+    if (is.symbol(min_confidence)) {
+      min_confidence <- data[[deparse(min_confidence)]]
+    } else if (is.call(min_confidence)) {
+      min_confidence <- eval(min_confidence)
+    }
+    if (!is.null(min_confidence)) min_confidence <- as.list(min_confidence)
+
+    no_annotations <- eval(substitute(alist(no_annotations)))[[1]]
+    if (is.symbol(no_annotations)) {
+      no_annotations <- data[[deparse(no_annotations)]]
+    } else if (is.call(no_annotations)) {
+      no_annotations <- eval(no_annotations)
+    }
+    if (!is.null(no_annotations)) no_annotations <- as.list(no_annotations)
+
+    no_dedupe <- eval(substitute(alist(no_dedupe)))[[1]]
+    if (is.symbol(no_dedupe)) {
+      no_dedupe <- data[[deparse(no_dedupe)]]
+    } else if (is.call(no_dedupe)) {
+      no_dedupe <- eval(no_dedupe)
+    }
+    if (!is.null(no_dedupe)) no_dedupe <- as.list(no_dedupe)
+
+    abbrev <- eval(substitute(alist(abbrev)))[[1]]
+    if (is.symbol(abbrev)) {
+      abbrev <- data[[deparse(abbrev)]]
+    } else if (is.call(abbrev)) {
+      abbrev <- eval(abbrev)
+    }
+    if (!is.null(abbrev)) abbrev <- as.list(abbrev)
+
     output <- match.arg(output)
 
     # Ensure that query column always exists

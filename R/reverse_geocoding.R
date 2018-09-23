@@ -56,22 +56,63 @@ oc_reverse_df <-
            output = c("short", "all"),
            key = oc_key(),
            language = NULL,
-           limit = 1,
+           limit = 1L,
            min_confidence = NULL,
-           no_annotations = FALSE,
+           no_annotations = TRUE,
            no_dedupe = FALSE,
            no_record = FALSE,
            abbrv = FALSE,
            ...) {
     latitude <- data[[substitute(latitude)]]
     longitude <- data[[substitute(longitude)]]
+
     language <- eval(substitute(alist(language)))[[1]]
     if (is.symbol(language)) {
       language <- data[[deparse(language)]]
     } else if (is.call(language)) {
       language <- eval(language)
     }
-    language <- as.list(language)
+    if (!is.null(language)) language <- as.list(language)
+
+    limit <- eval(substitute(alist(limit)))[[1]]
+    if (is.symbol(limit)) {
+      limit <- data[[deparse(limit)]]
+    } else if (is.call(limit)) {
+      limit <- eval(limit)
+    }
+    if (!is.null(language)) limit <- as.list(limit)
+
+    min_confidence <- eval(substitute(alist(min_confidence)))[[1]]
+    if (is.symbol(min_confidence)) {
+      min_confidence <- data[[deparse(min_confidence)]]
+    } else if (is.call(min_confidence)) {
+      min_confidence <- eval(min_confidence)
+    }
+    if (!is.null(min_confidence)) min_confidence <- as.list(min_confidence)
+
+    no_annotations <- eval(substitute(alist(no_annotations)))[[1]]
+    if (is.symbol(no_annotations)) {
+      no_annotations <- data[[deparse(no_annotations)]]
+    } else if (is.call(no_annotations)) {
+      no_annotations <- eval(no_annotations)
+    }
+    if (!is.null(no_annotations)) no_annotations <- as.list(no_annotations)
+
+    no_dedupe <- eval(substitute(alist(no_dedupe)))[[1]]
+    if (is.symbol(no_dedupe)) {
+      no_dedupe <- data[[deparse(no_dedupe)]]
+    } else if (is.call(no_dedupe)) {
+      no_dedupe <- eval(no_dedupe)
+    }
+    if (!is.null(no_dedupe)) no_dedupe <- as.list(no_dedupe)
+
+    abbrev <- eval(substitute(alist(abbrev)))[[1]]
+    if (is.symbol(abbrev)) {
+      abbrev <- data[[deparse(abbrev)]]
+    } else if (is.call(abbrev)) {
+      abbrev <- eval(abbrev)
+    }
+    if (!is.null(abbrev)) abbrev <- as.list(abbrev)
 
     output <- match.arg(output)
 
@@ -98,30 +139,33 @@ oc_reverse_df <-
       )
       results <- dplyr::bind_rows(results_list)
       if (output == "short") {
-        results <- dplyr::select(results, query, formatted) # nolint
+        results <-
+          dplyr::select(results, query, formatted)
       } else {
-        results <- dplyr::select(results, query, dplyr::everything()) # nolint
+        results <-
+          dplyr::select(results, query, dplyr::everything())
       }
     } else {
       results_nest <-
         dplyr::mutate(
           data,
-          op = oc_reverse(
-            latitude = latitude,
-            longitude = longitude,
-            key = key,
-            output = "df_list",
-            language = language,
-            limit = limit,
-            min_confidence = min_confidence,
-            no_annotations = no_annotations,
-            no_dedupe = no_dedupe,
-            no_record = no_record,
-            abbrv = abbrv,
-            add_request = add_request
-          )
+          op =
+            oc_reverse(
+              latitude = latitude,
+              longitude = longitude,
+              key = key,
+              output = "df_list",
+              language = language,
+              limit = limit,
+              min_confidence = min_confidence,
+              no_annotations = no_annotations,
+              no_dedupe = no_dedupe,
+              no_record = no_record,
+              abbrv = abbrv,
+              add_request = add_request
+            )
         )
-      }
+    }
 
     results <- tidyr::unnest(results_nest, op) # nolint
     # `op` is necessary, so that other list columns are not unnested
