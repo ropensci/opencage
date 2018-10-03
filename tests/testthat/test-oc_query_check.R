@@ -42,6 +42,22 @@ test_that("oc_check_query checks key", {
     ),
     "`key` must be a character vector."
   )
+  expect_error(
+    oc_check_query(
+      latitude = 43.3,
+      longitude = 51.11892,
+      key = c("fakekey1", "fakekey2")
+    ),
+    "`key` must be a vector of length one."
+  )
+  expect_error(
+    oc_check_query(
+      latitude = 43.3,
+      longitude = 51.11892,
+      key = NULL
+    ),
+    "A `key` must be provided."
+  )
 })
 
 test_that("oc_check_query checks countrycode", {
@@ -145,6 +161,14 @@ test_that("oc_check_query checks no_record", {
       no_record = "yes"
     ),
     "`no_record` must be a logical vector."
+  )
+  expect_error(
+    oc_check_query(
+      placename = "Sarzeau",
+      key = "32randomlettersanddigits12345678",
+      no_record = c(TRUE, FALSE)
+    ),
+    "`no_record` must be a vector of length one."
   )
 })
 

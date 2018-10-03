@@ -57,7 +57,6 @@ oc_check_query <-
           placename = placename,
           latitude = latitude,
           longitude = longitude,
-          key = key,
           bounds = bounds,
           countrycode = countrycode,
           language = language,
@@ -65,14 +64,15 @@ oc_check_query <-
           min_confidence = min_confidence,
           no_annotations = no_annotations,
           no_dedupe = no_dedupe,
-          no_record = no_record,
           abbrv = abbrv,
           add_request = add_request
         )
       )
     purrr::pwalk(
       .l = arglist,
-      .f = .oc_check_query
+      .f = .oc_check_query,
+      key = key,
+      no_record = no_record
     )
   }
 
@@ -117,10 +117,10 @@ oc_check_query <-
     # check key
     if (is.null(key)) {
       stop(call. = FALSE, "A `key` must be provided.")
-    } else {
-      if (!is.character(key)) {
-        stop(call. = FALSE, "`key` must be a character vector.")
-      }
+    } else if (!is.character(key)) {
+      stop(call. = FALSE, "`key` must be a character vector.")
+    } else if (length(key) > 1) {
+      stop(call. = FALSE, "`key` must be a vector of length one.")
     }
 
     # check bounds
@@ -192,6 +192,8 @@ oc_check_query <-
     if (!is.null(no_record)) {
       if (!is.logical(no_record)) {
         stop(call. = FALSE, "`no_record` must be a logical vector.")
+      } else if (length(no_record) > 1) {
+        stop(call. = FALSE, "`no_record` must be a vector of length one.")
       }
     }
 

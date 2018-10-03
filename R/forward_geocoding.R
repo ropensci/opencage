@@ -89,7 +89,6 @@ oc_process <-
           min_confidence = min_confidence,
           no_annotations = no_annotations,
           no_dedupe = no_dedupe,
-          no_record = no_record,
           abbrv = abbrv,
           add_request = add_request
         )
@@ -98,6 +97,7 @@ oc_process <-
                 .f = .oc_process,
                 output = output,
                 key = key,
+                no_record = no_record,
                 pb = pb)
   }
 
