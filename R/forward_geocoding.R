@@ -98,6 +98,10 @@ oc_process <-
           add_request = add_request
         )
       )
+
+    # prevent obscure warning message from pwalk if length(arglist) == 0
+    stopifnot(length(arglist) >= 1)
+
     purrr::pmap(.l = arglist,
                 .f = .oc_process,
                 output = output,

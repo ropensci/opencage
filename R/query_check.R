@@ -68,6 +68,10 @@ oc_check_query <-
           add_request = add_request
         )
       )
+
+    # prevent obscure warning message from pwalk if length(arglist) == 0
+    stopifnot(length(arglist) >= 1)
+
     purrr::pwalk(
       .l = arglist,
       .f = .oc_check_query,
