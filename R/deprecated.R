@@ -2,28 +2,8 @@
 #'
 #' Forward geocoding, from placename to latitude and longitude tuplet(s).
 #'
-#' @inheritParams oc_check_query
-#' @param key Your OpenCage key.
-#' @param placename Placename.
-#' @details
-#' \strong{API key}
-#' To get an API key to access OpenCage geocoding,
-#' register at \url{https://geocoder.opencagedata.com/pricing}.
-#' The free API key provides up to 2,500 calls a day. For ease of use,
-#'  save your API key as an environment variable as described at
-#'   \url{https://stat545-ubc.github.io/bit003_api-key-env-var.html}.
-#' Both functions of the package will conveniently look for your API key
-#' using \code{Sys.getenv("OPENCAGE_KEY")} so if your API key is an environment
-#'  variable called "OPENCAGE_KEY" you don't need to input it manually.
-#'
-#'
-#' \strong{memoise}
-#' The underlying data at OpenCage is updated about once a day.
-#' Note that the package uses `memoise` with no timeout argument so that results
-#'  are cached inside an active R session.
-#'
-#' This function typically returns multiple results due to placename ambiguity;
-#'  consider using the \code{bounds} parameter to limit the area searched.
+#' @inheritParams oc_process
+#' @inherit oc_process details
 #'
 #' @return A list with
 #' \itemize{
@@ -88,14 +68,11 @@ opencage_forward <-
 #'
 #' Reverse geocoding, from latitude and longitude to placename(s).
 #'
-#' @param latitude Latitude.
-#' @param longitude Longitude.
-#' @param key Your OpenCage key.
 #' @param bounds Bounding box, ignored for reverse geocoding.
 #' @param countrycode Country code, ignored for reverse geocoding.
-#' @inheritParams oc_check_query
-#'
-#' @inherit opencage_forward return details
+#' @inheritParams oc_process
+#' @inherit oc_process details
+#' @inherit opencage_forward return
 #'
 #' @export
 #'
