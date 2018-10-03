@@ -14,6 +14,15 @@ oc_reverse <-
            add_request = FALSE,
            ...) {
 
+    # check latitude is provided
+    if (missing(latitude) || is.null(latitude)) {
+      stop(call. = FALSE, "You must provide `latitude` and `longitude`.")
+    }
+    # check longitude is provided
+    if (missing(longitude) || is.null(longitude)) {
+      stop(call. = FALSE, "You must provide `latitude` and `longitude`.")
+    }
+
     # check output
     output <- match.arg(output)
 

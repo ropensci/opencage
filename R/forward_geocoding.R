@@ -15,6 +15,11 @@ oc_forward <-
            add_request = FALSE,
            ...) {
 
+    # check a placename is provided
+    if (missing(placename) || is.null(placename)) {
+      stop(call. = FALSE, "You must provide a `placename`.")
+    }
+
     # check output
     output <- match.arg(output)
 
