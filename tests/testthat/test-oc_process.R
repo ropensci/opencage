@@ -1,29 +1,25 @@
 library("opencage")
 context("oc_process")
 
-fk <- "fakekey"
-
 test_that("oc_process creates meaningful URLs for single query.", {
   res <-
     oc_process(placename = "Paris",
                output = "url_only",
-               key = fk)
+               key = NULL)
   expect_is(res, "list")
   expect_is(unlist(res), "character")
   expect_match(res[[1]], "q=Paris", fixed = TRUE)
-  expect_match(res[[1]], "&key=fakekey", fixed = TRUE)
 
   res <-
     oc_process(placename = "Islington, London",
                output = "url_only",
-               key = fk)
+               key = NULL)
   expect_match(res[[1]], "q=Islington%2C%20London", fixed = TRUE)
-  expect_match(res[[1]], "key=fakekey", fixed = TRUE)
 
   res <-
     oc_process(placename = "Triererstr 15, 99423 Weimar, Deutschland",
                output = "url_only",
-               key = fk)
+               key = NULL)
   expect_match(res[[1]],
                "q=Triererstr%2015%2C%2099423%20Weimar%2C%20Deutschland",
                fixed = TRUE)
@@ -33,7 +29,7 @@ test_that("oc_process creates meaningful URLs for single query.", {
       latitude = 41.40139,
       longitude = 2.12870,
       output = "url_only",
-      key = fk
+      key = NULL
     )
   expect_is(res, "list")
   expect_is(unlist(res), "character")
@@ -44,21 +40,18 @@ test_that("oc_process creates meaningful URLs for multiple queries.", {
   res <- oc_process(
     placename = c("Paris", "Hamburg"),
     output = "url_only",
-    key = fk
+    key = NULL
   )
   expect_is(res, "list")
   expect_is(unlist(res), "character")
   expect_match(res[[1]], "q=Paris", fixed = TRUE)
   expect_match(res[[2]], "q=Hamburg", fixed = TRUE)
-  expect_match(res[[1]], "&key=fakekey", fixed = TRUE)
-  expect_match(res[[2]], "&key=fakekey", fixed = TRUE)
-
 
   res <- oc_process(
     latitude = c(48.87378, 37.83032),
     longitude = c(2.295037, -122.47975),
     output = "url_only",
-    key = fk
+    key = NULL
   )
   expect_is(res, "list")
   expect_is(unlist(res), "character")
@@ -84,7 +77,7 @@ test_that("oc_process deals well with res being NULL", {
 test_that("the bounds argument is well taken into account", {
   res <- oc_process(
     placename = "Sarzeau",
-    key = fk,
+    key = NULL,
     bounds = list(c(-5.5, 51.2, 0.2, 51.6)),
     output = "url_only"
   )
@@ -92,7 +85,7 @@ test_that("the bounds argument is well taken into account", {
 
   res <- oc_process(
     placename = "Sarzeau",
-    key = fk,
+    key = NULL,
     bounds = oc_bbox(-5.6, 51.2, 0.2, 51.6),
     output = "url_only"
   )
@@ -100,7 +93,7 @@ test_that("the bounds argument is well taken into account", {
 
   res <- oc_process(
     place = c("Hamburg", "Hamburg"),
-    key = fk,
+    key = NULL,
     bounds = oc_bbox(
       ymax = c(54.02, 42.73),
       xmax = c(10.32, -78.81),
@@ -134,7 +127,7 @@ test_that("oc_process handles language argument.", {
     placename = c("New York", "Rio", "Tokyo"),
     language = "ja",
     output = "url_only",
-    key = fk
+    key = NULL
   )
   expect_match(res1[[1]], "&language=ja", fixed = TRUE)
   expect_match(res1[[2]], "&language=ja", fixed = TRUE)
@@ -143,7 +136,7 @@ test_that("oc_process handles language argument.", {
     placename = c("Paris", "Hamburg"),
     language = c("de", "fr"),
     output = "url_only",
-    key = fk
+    key = NULL
   )
   expect_match(res2[[1]], "&language=de", fixed = TRUE)
   expect_match(res2[[2]], "&language=fr", fixed = TRUE)
@@ -154,7 +147,7 @@ test_that("oc_process handles countrycode argument.", {
     placename = c("Hamburg", "Paris"),
     countrycode = "DE",
     output = "url_only",
-    key = fk
+    key = NULL
   )
   expect_match(res1[[1]], "&countrycode=de", fixed = TRUE)
   expect_match(res1[[2]], "&countrycode=de", fixed = TRUE)
@@ -163,7 +156,7 @@ test_that("oc_process handles countrycode argument.", {
     placename = c("Hamburg", "Paris"),
     countrycode = list(c("US", "FR"), "DE"),
     output = "url_only",
-    key = fk
+    key = NULL
   )
   expect_match(res2[[1]], "&countrycode=us%2Cfr", fixed = TRUE)
   expect_match(res2[[2]], "&countrycode=de", fixed = TRUE)
@@ -172,7 +165,7 @@ test_that("oc_process handles countrycode argument.", {
     placename = c("Hamburg", "Paris"),
     countrycode = list("US", "DE"),
     output = "url_only",
-    key = fk
+    key = NULL
   )
   expect_match(res3[[1]], "&countrycode=us", fixed = TRUE)
   expect_match(res3[[2]], "&countrycode=de", fixed = TRUE)
