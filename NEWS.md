@@ -1,8 +1,20 @@
 # opencage 0.1.4.9001
 
+This is a major rewrite of the {opencage} package. `opencage_forward()` and `opencage_reverse()` have been deprecated and are superceded by `oc_forward()` and `oc_reverse()`, respectively. In addition there are new functions `oc_forward_df()` and `oc_reverse_df()` which (reverse) geocode a `placename` column (or `latitude`/`longitude` columns). The new features include:
+
+* `oc_forward()` and `oc_reverse()` return either lists of data frames, JSON strings, GeoJSON strings, or URLs to be sent to the API (for debugging purposes).
+* `oc_forward_df()` and `oc_reverse_df()` take a data frame as input and return a data frame with the geocoding results, optionally with the source data frame bound to the results data frame. 
+* Almost all arguments of the geocoding functions are vectorised (the exceptions being `output`, `key` and `no_record`), so it is possible to serially (reverse) geocode lists of placenames or coordinates. The geocoding functions show a progress indicator when more than one `placename` or `latitude`/`longitude` pair is provided.
+* The forward geocoding functions now support multiple `countrycode`s in accordance to the OpenCage API (#44). The `countrycode`s can now be provided in upper or lower case (#47).
+* A helper function `oc_bbox()` now makes it easier to create (lists of) bounding boxes from vectors, bbox objects and data frames. 
+* http requests are now handled by {[crul](https://ropensci.github.io/crul/)}, not {[httr](http://httr.r-lib.org/)} (#37).
+* API calls are now rate limited (#32). The default limit is set to 1 call per second as per the [API limit](https://opencagedata.com/pricing) for the Free Trial package. The rate limit can be adjusted with `oc_configure()`.
+
 ## Breaking changes
 
+* `opencage_forward()`, `opencage_reverse()`, and `opencage_key()` are (soft) deprecated. `opencage_key()` has just been renamed to `oc_key()` for consistency.
 * `opencage_forward()` and `opencage_reverse()` will always output strings as characters, i.e. they won't coerce to factor depending on the `stringsAsFactor` option.
+* The column name for both `languagecodes` and `countrycodes` is now `code`, and not `alpha2` and `Code`, respectively. 
 
 ## New features
 
