@@ -4,7 +4,7 @@
 #' @param ... not used
 #'
 #' @export
-oc_configure <-
+oc_config <-
   function(
     max_rate_per_sec =
       getOption("oc_max_rate_per_sec", default = 1L),

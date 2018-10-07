@@ -1,5 +1,5 @@
 library("opencage")
-context("oc_configure")
+context("oc_config")
 
 timer <- function(expr) {
   system.time(expr)[["elapsed"]]
@@ -12,12 +12,12 @@ oc_get_limited_test <- function(reps) {
   )
 }
 
-test_that("oc_configure updates rate limit of oc_get_limit", {
+test_that("oc_config updates rate limit of oc_get_limit", {
   rps <- 5L
-  oc_configure(max_rate_per_sec = rps)
+  oc_config(max_rate_per_sec = rps)
   expect_gt(timer(oc_get_limited_test(rps + 1)), 1)
   rps <- 3L
-  oc_configure(max_rate_per_sec = rps)
+  oc_config(max_rate_per_sec = rps)
   expect_gt(timer(oc_get_limited_test(rps + 1)), 1)
   }
 )
