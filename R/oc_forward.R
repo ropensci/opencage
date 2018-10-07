@@ -73,6 +73,8 @@ oc_forward <-
   }
 
 #' @name oc_forward
+#' @param data A data frame
+#' @param bind_cols logical Bind source and results data frame?
 #' @export
 oc_forward_df <-
   function(data,

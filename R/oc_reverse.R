@@ -70,6 +70,8 @@ oc_reverse <-
   }
 
 #' @name oc_reverse
+#' @param data A data frame
+#' @param bind_cols logical Bind source and results data frame?
 #' @export
 oc_reverse_df <-
   function(data,

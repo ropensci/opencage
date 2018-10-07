@@ -62,6 +62,10 @@ is created at OpenCage.}
 removed from the results data frame.}
 
 \item{...}{Currently not used.}
+
+\item{data}{A data frame}
+
+\item{bind_cols}{logical Bind source and results data frame?}
 }
 \value{
 Depending on the \code{output} argument list of data.frame(s) (\code{df_list})
