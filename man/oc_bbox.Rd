@@ -9,13 +9,15 @@
 \usage{
 oc_bbox(...)
 
-\method{oc_bbox}{default}(xmin, ymin, xmax, ymax)
+\method{oc_bbox}{default}(xmin, ymin, xmax, ymax, ...)
 
-\method{oc_bbox}{data.frame}(data, xmin, ymin, xmax, ymax)
+\method{oc_bbox}{data.frame}(data, xmin, ymin, xmax, ymax, ...)
 
-\method{oc_bbox}{bbox}(bbox)
+\method{oc_bbox}{bbox}(bbox, ...)
 }
 \arguments{
+\item{...}{not used.}
+
 \item{xmin}{Minimum longitude (also known as \code{min lon},
 \code{southwest_lng}, \code{west}, or \code{left}).}
 

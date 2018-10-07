@@ -13,6 +13,7 @@
 #' @param data A \code{data.frame} containing at least 4 columns with \code{xmin},
 #'   \code{ymin}, \code{xmax}, and \code{ymax} values, respectively.
 #' @param bbox A \code{bbox} object, see \link[sf]{st_bbox}.
+#' @param ... not used.
 #'
 #' @return A list of bounding boxes, each of class \code{bbox}.
 #' @export
@@ -59,7 +60,7 @@ oc_bbox <- function(...) UseMethod("oc_bbox")
 
 #' @name oc_bbox
 #' @export
-oc_bbox.default <- function (xmin, ymin, xmax, ymax){
+oc_bbox.default <- function (xmin, ymin, xmax, ymax, ...){
   bbox <- function(xmin, ymin, xmax, ymax) {
     oc_check_bbox(xmin = xmin, ymin = ymin, xmax = xmax, ymax = ymax)
     structure(
@@ -84,7 +85,7 @@ oc_bbox.default <- function (xmin, ymin, xmax, ymax){
 
 #' @name oc_bbox
 #' @export
-oc_bbox.data.frame <- function (data, xmin, ymin, xmax, ymax){
+oc_bbox.data.frame <- function (data, xmin, ymin, xmax, ymax, ...){
   xmin <- data[[deparse(substitute(xmin))]]
   ymin <- data[[deparse(substitute(ymin))]]
   xmax <- data[[deparse(substitute(xmax))]]
@@ -94,7 +95,7 @@ oc_bbox.data.frame <- function (data, xmin, ymin, xmax, ymax){
 
 #' @name oc_bbox
 #' @export
-oc_bbox.bbox <- function (bbox) {
+oc_bbox.bbox <- function (bbox, ...) {
   # check coordinate reference system (and be lenient if NA_crs_)
   crs <- attr(bbox, "crs")[["epsg"]]
   if (!is.na(crs) && crs != 4326L) {
@@ -111,8 +112,8 @@ oc_bbox.bbox <- function (bbox) {
 }
 
 #' @export
-print.bbox_list <- function(bbox_list, ...) {
-  print(unclass(bbox_list))
+print.bbox_list <- function(x, ...) {
+  print(unclass(x))
 }
 
 # check bbox
