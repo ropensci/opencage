@@ -1,4 +1,16 @@
+#' Reverse geocoding
+#'
+#' Reverse geocoding, from latitude and longitude to placename(s).
+#'
+#' @inheritParams oc_process
+#' @inherit oc_process details return
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' oc_reverse(latitude = 0, longitude = 0, limit = 2)
+#' }
+
 oc_reverse <-
   function(latitude,
            longitude,
@@ -56,6 +68,8 @@ oc_reverse <-
       add_request = add_request
     )
   }
+
+#' @name oc_reverse
 #' @export
 oc_reverse_df <-
   function(data,
@@ -189,4 +203,3 @@ oc_reverse_df <-
     }
     results
   }
-

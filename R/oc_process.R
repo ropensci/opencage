@@ -9,7 +9,7 @@
 #' @param latitude Latitude.
 #' @param longitude Longitude.
 #' @param key Your OpenCage key.
-#' @param output
+#' @param output The return value of the function, either a \code{df_list}, a \code{json_list}, a \code{geojson_list}, or \code{url_only.}
 #' @param bounds Provides the geocoder with a hint to the region that the query
 #'   resides in. This value will restrict the possible results to the supplied
 #'   region. The bounds parameter should be specified as 4 coordinate points

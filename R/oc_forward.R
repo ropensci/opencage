@@ -1,4 +1,20 @@
+#' Forward geocoding
+#'
+#' Forward geocoding, from placename to latitude and longitude tuplet(s).
+#'
+#' @inheritParams oc_process
+#' @inherit oc_process details return
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' oc_forward(placename = "Sarzeau")
+#' oc_forward(placename = "Islington, London")
+#' oc_forward(placename = "Triererstr 15,
+#'                         Weimar 99423,
+#'                         Deutschland")
+#' }
+#'
 oc_forward <-
   function(placename,
            output = c("df_list", "json_list", "geojson_list", "url_only"),
@@ -56,6 +72,7 @@ oc_forward <-
     )
   }
 
+#' @name oc_forward
 #' @export
 oc_forward_df <-
   function(data,
@@ -215,4 +232,3 @@ oc_forward_df <-
     }
     results
   }
-
