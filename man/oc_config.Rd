@@ -2,16 +2,25 @@
 % Please edit documentation in R/oc_config.R
 \name{oc_config}
 \alias{oc_config}
-\title{Set default options}
+\title{Configure settings}
 \usage{
-oc_config(max_rate_per_sec = getOption("oc_max_rate_per_sec", default =
-  1L), ...)
+oc_config(rate_sec = getOption("oc_rate_sec", default = 1L), ...)
 }
 \arguments{
-\item{max_rate_per_sec}{maximum number of requests per second}
+\item{rate_sec}{\code{numeric(1)} Sets the maximum number of requests sent to
+the OpenCage API per second. Defaults to the value set in the
+\code{oc_rate_sec} option, or, in case that does not exist, to 1.}
 
-\item{...}{not used}
+\item{...}{Not used.}
 }
 \description{
-Set default options
+Configures settings for the opencage package.
+}
+\details{
+The rate limit allowed by the API depends on the OpenCage plan you
+  purchased and ranges from 1 request/sec for the "Free Trial" plan to 15
+  requests/sec for the "Medium" or "Large plan, see
+  \url{https://opencagedata.com/pricing} for details. You can set the rate
+  limit persistently across sessions by setting the \code{oc_rate_sec}
+  \code{\link[base:options]{option}} in your \code{\link[base]{.Rprofile}}.
 }
