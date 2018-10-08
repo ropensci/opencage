@@ -8,7 +8,7 @@ This is a major rewrite of the {opencage} package. `opencage_forward()` and `ope
 * The forward geocoding functions now support multiple `countrycode`s in accordance to the OpenCage API (#44). The `countrycode`s can now be provided in upper or lower case (#47).
 * A helper function `oc_bbox()` now makes it easier to create (lists of) bounding boxes from vectors, bbox objects and data frames. 
 * http requests are now handled by {[crul](https://ropensci.github.io/crul/)}, not {[httr](http://httr.r-lib.org/)} (#37).
-* API calls are now rate limited (#32). The default limit is set to 1 call per second as per the [API limit](https://opencagedata.com/pricing) for the Free Trial package. The rate limit can be adjusted with `oc_configure()`.
+* API calls are now rate limited (#32). The default limit is set to 1 call per second as per the [API limit](https://opencagedata.com/pricing) for the Free Trial package. The rate limit can be adjusted with `oc_config()`.
 
 ## Breaking changes
 
@@ -16,13 +16,9 @@ This is a major rewrite of the {opencage} package. `opencage_forward()` and `ope
 * `opencage_forward()` and `opencage_reverse()` will always output strings as characters, i.e. they won't coerce to factor depending on the `stringsAsFactor` option.
 * The column name for both `languagecodes` and `countrycodes` is now `code`, and not `alpha2` and `Code`, respectively. 
 
-## New features
-
-## Bug fixes and minor improvements
-
 # opencage 0.1.4
 
-* Bug fix: now the `countrycode` argument can be used for Namibia thanks to Daniel Possenriede.
+* Bug fix: now the `countrycode` argument can be used for Namibia (#24, #25).
 
 # opencage 0.1.3
 
