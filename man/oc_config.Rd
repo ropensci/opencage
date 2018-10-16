@@ -14,7 +14,7 @@ the OpenCage API per second. Defaults to the value set in the
 \item{...}{Not used.}
 }
 \description{
-Configures settings for the opencage package.
+Configures session settings for \pkg{opencage}.
 }
 \details{
 The rate limit allowed by the API depends on the OpenCage plan you
@@ -22,5 +22,5 @@ The rate limit allowed by the API depends on the OpenCage plan you
   requests/sec for the "Medium" or "Large plan, see
   \url{https://opencagedata.com/pricing} for details. You can set the rate
   limit persistently across sessions by setting the \code{oc_rate_sec}
-  \code{\link[base:options]{option}} in your \code{\link[base]{.Rprofile}}.
+  \link[base:options]{option} in your \code{\link[base:Startup]{.Rprofile}}.
 }
