@@ -2,12 +2,14 @@
 % Please edit documentation in R/utils.R
 \name{oc_key}
 \alias{oc_key}
-\title{Retrieve Opencage API key}
+\title{Retrieve OpenCage API key}
 \usage{
 oc_key(quiet = TRUE)
 }
-\description{
-An Opencage API Key
-Looks in env var \code{OPENCAGE_KEY}
+\arguments{
+\item{quiet}{\code{logical(1)}. Indicates whether the key is returned quietly or whether a message is printed.}
 }
-\keyword{internal}
+\description{
+Retrieves the OpenCage API Key from the environment variable
+\code{OPENCAGE_KEY}.
+}

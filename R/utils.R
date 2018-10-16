@@ -158,12 +158,13 @@ opencage_format <- function(lst){
   )
 }
 
-#' Retrieve Opencage API key
+#' Retrieve OpenCage API key
 #'
-#' An Opencage API Key
-#' Looks in env var \code{OPENCAGE_KEY}
+#' Retrieves the OpenCage API Key from the environment variable
+#' \code{OPENCAGE_KEY}.
 #'
-#' @keywords internal
+#' @param quiet \code{logical(1)}. Indicates whether the key is returned quietly or whether a message is printed.
+#'
 #' @export
 oc_key <- function(quiet = TRUE) {
   pat <- Sys.getenv("OPENCAGE_KEY")
