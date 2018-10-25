@@ -11,7 +11,7 @@ oc_config(rate_sec = getOption("oc_rate_sec", default = 1L), ...)
 the OpenCage API per second. Defaults to the value set in the
 \code{oc_rate_sec} option, or, in case that does not exist, to 1.}
 
-\item{...}{Not used.}
+\item{...}{Ignored.}
 }
 \description{
 Configures session settings for \pkg{opencage}.

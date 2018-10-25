@@ -16,7 +16,7 @@ oc_bbox(...)
 \method{oc_bbox}{bbox}(bbox, ...)
 }
 \arguments{
-\item{...}{not used.}
+\item{...}{Ignored.}
 
 \item{xmin}{Minimum longitude (also known as \code{min lon},
 \code{southwest_lng}, \code{west}, or \code{left}).}

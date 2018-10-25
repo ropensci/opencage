@@ -5,7 +5,7 @@
 #' @param rate_sec \code{numeric(1)} Sets the maximum number of requests sent to
 #'   the OpenCage API per second. Defaults to the value set in the
 #'   \code{oc_rate_sec} option, or, in case that does not exist, to 1.
-#' @param ... Not used.
+#' @param ... Ignored.
 #'
 #' @details The rate limit allowed by the API depends on the OpenCage plan you
 #'   purchased and ranges from 1 request/sec for the "Free Trial" plan to 15
