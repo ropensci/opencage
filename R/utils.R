@@ -163,7 +163,8 @@ opencage_format <- function(lst){
 #' Retrieves the OpenCage API Key from the environment variable
 #' \code{OPENCAGE_KEY}.
 #'
-#' @param quiet \code{logical(1)}. Indicates whether the key is returned quietly or whether a message is printed.
+#' @param quiet Logical vector of length one indicating whether the key is
+#'   returned quietly or whether a message is printed.
 #'
 #' @export
 oc_key <- function(quiet = TRUE) {
