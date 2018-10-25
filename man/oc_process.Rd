@@ -88,3 +88,4 @@ Note that the package uses `memoise` with no timeout argument so that results
 This function typically returns multiple results due to placename ambiguity;
  consider using the \code{bounds} parameter to limit the area searched.
 }
+\keyword{internal}

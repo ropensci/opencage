@@ -3,6 +3,9 @@
 #' Function that checks the query arguments passed to OpenCage
 #'
 #' @inheritParams oc_process
+#'
+#' @keywords internal
+
 
 oc_check_query <-
   function(

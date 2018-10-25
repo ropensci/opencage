@@ -59,6 +59,7 @@
 #'  consider using the \code{bounds} parameter to limit the area searched.
 #'
 #' @return Depending on the \code{output} argument list of data.frame(s) (\code{df_list})
+#' @keywords internal
 
 oc_process <-
   function(

@@ -11,51 +11,70 @@ oc_check_query(placename = NULL, latitude = NULL, longitude = NULL,
   add_request = NULL)
 }
 \arguments{
-\item{placename}{Placename.}
+\item{placename}{A character vector with the placename(s) to be
+geocoded. See
+\href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's
+instructions} on how to format addresses for forward geocoding best.}
 
-\item{latitude}{Latitude.}
+\item{latitude}{A numeric vector with the latitude.}
 
-\item{longitude}{Longitude.}
+\item{longitude}{A numeric vector with the longitude.}
 
-\item{key}{Your OpenCage key.}
+\item{key}{Your OpenCage API key as a character vector of length one. By
+default, \code{\link{oc_key}} will attempt to retrieve the key from the
+environment variable \code{OPENCAGE_KEY}.}
 
-\item{bounds}{Provides the geocoder with a hint to the region that the query
-resides in. This value will restrict the possible results to the supplied
-region. The bounds parameter should be specified as 4 coordinate points
-forming the south-west and north-east corners of a bounding box. For
-example, \code{bounds = c(-0.563160, 51.280430, 0.278970, 51.683979)}
-(xmin, ymin, xmax, ymax).}
+\item{bounds}{A list of bounding boxes, i.e. numeric vectors, each with 4
+coordinates forming the south-west and north-east corners of a bounding box
+\code{list(c(xmin, ymin, xmax, ymax))}. The \code{bounds} parameter will
+restrict the possible results to the supplied region. It can easily be
+specified with the \code{\link{oc_bbox}} helper, for example like
+\code{bounds = oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}.}
 
-\item{countrycode}{Restricts the results to the given country. The country
-code is a two letter code as defined by the ISO 3166-1 Alpha 2 standard.
-E.g. "GB" for the United Kingdom, "FR" for France, "US" for United States.}
+\item{countrycode}{A two letter code as defined by the
+\href{https://www.iso.org/obp/ui/#search/code}{ISO 3166-1 Alpha 2} standard
+that restricts the results to the given country or countries. E.g. "AR" for
+Argentina, "FR" for France, "NZ" for the New Zealand. Multiple countrycodes
+per \code{placename} must be provided as a list.}
 
-\item{language}{An IETF format language code (such as "es" for Spanish or
-"pt-BR" for Brazilian Portuguese). If no language is explicitly specified,
-we will look for an HTTP Accept-Language header like those sent by a
-browser and use the first language specified and if none are specified "en"
-(English) will be assumed.}
+\item{language}{An
+\href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF language tag}
+(such as "es" for Spanish or "pt-BR" for Brazilian Portuguese). OpenCage
+will attempt to return results in that language. If it is not specified,
+"en" (English) will be assumed by the API.}
 
-\item{limit}{How many results should be returned (1-100)? Default is 10.}
+\item{limit}{The maximum number of results that should be returned.
+Integer values between 1 and 100 are allowed, the default is 10 for
+(placename or latitude/longitude) vectors, 1 for data frames.}
 
-\item{min_confidence}{An integer from 1-10. Only results with at least this
-confidence will be returned.}
+\item{min_confidence}{An integer value between 0 and 10 indicating the
+precision of the returned result as defined by it's geographical extent.
+See the \href{API documentation}{https://opencagedata.com/api#confidence}
+for details. Only results with at least the requested confidence will be
+returned.}
 
-\item{no_annotations}{Logical (default FALSE), when TRUE the output will not
-contain annotations.}
+\item{no_annotations}{A logical vector indicating whether additional
+information about the result location should be returned. \code{TRUE} by
+default, which means that the output will not contain annotations.}
 
-\item{no_dedupe}{Logical (default FALSE), when TRUE the output will not be
-deduplicated.}
+\item{no_dedupe}{A logical vector (default \code{FALSE}), when \code{TRUE}
+the output will not be deduplicated.}
 
-\item{no_record}{Logical (default FALSE), when TRUE no log entry of the query
-is created at OpenCage.}
+\item{no_record}{A logical vector (default \code{FALSE}), when \code{TRUE} no
+log entry of the query is created and the forward geocoding request is not
+cached by OpenCage.}
 
-\item{abbrv}{Logical (default FALSE), when TRUE addresses are abbreviated
-(e.g. C. instead of Calle)}
+\item{abbrv}{A logical vector (default \code{FALSE}), when \code{TRUE} addresses in
+the \code{formatted} field of the results are abbreviated (e.g. "Main St."
+instead of "Main Street").}
 
-\item{add_request}{Logical (default TRUE), when FALSE the query text is
-removed from the results data frame.}
+\item{add_request}{A logical vector (default \code{FALSE}), indicating
+whether the request is returned again with the results. If the output is a
+\code{"df_list"}, the query text is added as a column to the results.
+"json_list" results will contain all request parameters, including the API
+key used! For \code{"geojson_list"} this is currently ignored by OpenCage.}
 }
 \description{
 Function that checks the query arguments passed to OpenCage
 }
+\keyword{internal}
