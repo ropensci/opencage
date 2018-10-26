@@ -72,6 +72,9 @@ oc_reverse <-
 #' @rdname oc_reverse
 #' @param data A data frame
 #' @param bind_cols logical Bind source and results data frame?
+#' @param output A character vector of length one indicating whether only the
+#'   formatted address (\code{short}) or whether all results (\code{all}) should
+#'   be returned.
 #' @export
 oc_reverse_df <-
   function(data,

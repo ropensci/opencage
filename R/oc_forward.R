@@ -75,6 +75,9 @@ oc_forward <-
 #' @rdname oc_forward
 #' @param data A data frame
 #' @param bind_cols logical Bind source and results data frame?
+#' @param output A character vector of length one indicating whether only
+#'   latitude, longitude and formatted address (\code{short}) or whether all
+#'   results (\code{all}) should be returned.
 #' @export
 oc_forward_df <-
   function(data,

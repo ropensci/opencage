@@ -88,6 +88,10 @@ currently ignored by OpenCage.}
 \item{data}{A data frame}
 
 \item{bind_cols}{logical Bind source and results data frame?}
+
+\item{output}{A character vector of length one indicating whether only
+latitude, longitude and formatted address (\code{short}) or whether all
+results (\code{all}) should be returned.}
 }
 \value{
 Depending on the \code{return} parameter, a list with either
