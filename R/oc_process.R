@@ -54,11 +54,11 @@
 #' @param abbrv A logical vector (default \code{FALSE}), when \code{TRUE} addresses in
 #'   the \code{formatted} field of the results are abbreviated (e.g. "Main St."
 #'   instead of "Main Street").
-#' @param add_request A logical vector (default \code{FALSE}), indicating
+#' @param add_request A logical vector (default \code{FALSE}) indicating
 #'   whether the request is returned again with the results. If the
-#'   \code{return} value is a \code{"df_list"}, the query text is added as a
-#'   column to the results. \code{"json_list"} results will contain all request
-#'   parameters, including the API key used! For \code{"geojson_list"} this is
+#'   \code{return} value is a \code{df_list}, the query text is added as a column
+#'   to the results. \code{json_list} results will contain all request
+#'   parameters, including the API key used! For \code{geojson_list} this is
 #'   currently ignored by OpenCage.
 #' @param ... Ignored.
 #'
