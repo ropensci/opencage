@@ -5,7 +5,7 @@
 \alias{oc_reverse_df}
 \title{Reverse geocoding}
 \usage{
-oc_reverse(latitude, longitude, output = c("df_list", "json_list",
+oc_reverse(latitude, longitude, return = c("df_list", "json_list",
   "geojson_list", "url_only"), key = oc_key(), language = NULL,
   limit = 10L, min_confidence = NULL, no_annotations = TRUE,
   no_dedupe = FALSE, no_record = FALSE, abbrv = FALSE,
@@ -21,7 +21,7 @@ oc_reverse_df(data, latitude, longitude, bind_cols = TRUE,
 
 \item{longitude}{A numeric vector with the longitude.}
 
-\item{output}{A character vector of length one indicating the return value of
+\item{return}{A character vector of length one indicating the return value of
 the function, either a list of tibbles (\code{df_list}, the default), a
 JSON list (\code{json_list}), a GeoJSON list (\code{geojson_list}), or the
 URL with which the API would be called (\code{url_only.}).}
@@ -62,10 +62,11 @@ the \code{formatted} field of the results are abbreviated (e.g. "Main St."
 instead of "Main Street").}
 
 \item{add_request}{A logical vector (default \code{FALSE}), indicating
-whether the request is returned again with the results. If the output is a
-\code{"df_list"}, the query text is added as a column to the results.
-"json_list" results will contain all request parameters, including the API
-key used! For \code{"geojson_list"} this is currently ignored by OpenCage.}
+whether the request is returned again with the results. If the
+\code{return} value is a \code{"df_list"}, the query text is added as a
+column to the results. \code{"json_list"} results will contain all request
+parameters, including the API key used! For \code{"geojson_list"} this is
+currently ignored by OpenCage.}
 
 \item{...}{Ignored.}
 
@@ -74,7 +75,7 @@ key used! For \code{"geojson_list"} this is currently ignored by OpenCage.}
 \item{bind_cols}{logical Bind source and results data frame?}
 }
 \value{
-Depending on the \code{output} parameter, a list with either
+Depending on the \code{return} parameter, a list with either
 \itemize{
 \item the results as tibbles (\code{"df_list"}, the default),
 \item the results as JSON lists (\code{"json_list"}),

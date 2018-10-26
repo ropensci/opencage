@@ -6,7 +6,7 @@ oc_check_status <- function(req) {
 }
 
 # function for parsing the response
-oc_parse <- function(req, output, query) {
+oc_parse <- function(req, return, query) {
   text <- req$parse(encoding = "UTF-8")
   if (identical(text, "")) {
     stop(
@@ -14,7 +14,7 @@ oc_parse <- function(req, output, query) {
       call. = FALSE
     )
   }
-  if (output == "df_list") {
+  if (return == "df_list") {
     jsn <- jsonlite::fromJSON(text, simplifyVector = TRUE, flatten = TRUE)
     if (jsn$total_results == 0) {
       results <- tibble::tibble(lat = NA_real_, lng = NA_real_, formatted = NA)
@@ -33,9 +33,9 @@ oc_parse <- function(req, output, query) {
     colnames(results) <- gsub("\\.", "_", colnames(results))
     colnames(results) <- gsub("-", "_", colnames(results))
     results
-  } else if (output == "json_list" || output == "geojson_list") {
+  } else if (return == "json_list" || return == "geojson_list") {
     jsn <- jsonlite::fromJSON(text, simplifyVector = FALSE)
-    if (output == "geojson_list") {
+    if (return == "geojson_list") {
       structure(jsn, class = c("geo_list"))
     } else {
       jsn

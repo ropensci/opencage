@@ -17,7 +17,7 @@
 #'
 oc_forward <-
   function(placename,
-           output = c("df_list", "json_list", "geojson_list", "url_only"),
+           return = c("df_list", "json_list", "geojson_list", "url_only"),
            key = oc_key(),
            bounds = NULL,
            countrycode = NULL,
@@ -36,8 +36,8 @@ oc_forward <-
       stop(call. = FALSE, "You must provide a `placename`.")
     }
 
-    # check output
-    output <- match.arg(output)
+    # check return
+    return <- match.arg(return)
 
     # check arguments
     oc_check_query(
@@ -57,7 +57,7 @@ oc_forward <-
     # process request
     oc_process(
       placename = placename,
-      output = output,
+      return = return,
       key = key,
       bounds = bounds,
       countrycode = countrycode,
@@ -164,7 +164,7 @@ oc_forward_df <-
       results_list <- oc_forward(
         placename = placename,
         key = key,
-        output = "df_list",
+        return = "df_list",
         bounds = bounds,
         countrycode = countrycode,
         language = language,
@@ -192,7 +192,7 @@ oc_forward_df <-
             oc_forward(
               placename = placename,
               key = key,
-              output = "df_list",
+              return = "df_list",
               bounds = bounds,
               countrycode = countrycode,
               language = language,

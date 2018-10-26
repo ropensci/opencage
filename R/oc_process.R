@@ -15,7 +15,7 @@
 #' @param key Your OpenCage API key as a character vector of length one. By
 #'   default, \code{\link{oc_key}} will attempt to retrieve the key from the
 #'   environment variable \code{OPENCAGE_KEY}.
-#' @param output A character vector of length one indicating the return value of
+#' @param return A character vector of length one indicating the return value of
 #'   the function, either a list of tibbles (\code{df_list}, the default), a
 #'   JSON list (\code{json_list}), a GeoJSON list (\code{geojson_list}), or the
 #'   URL with which the API would be called (\code{url_only.}).
@@ -55,10 +55,11 @@
 #'   the \code{formatted} field of the results are abbreviated (e.g. "Main St."
 #'   instead of "Main Street").
 #' @param add_request A logical vector (default \code{FALSE}), indicating
-#'   whether the request is returned again with the results. If the output is a
-#'   \code{"df_list"}, the query text is added as a column to the results.
-#'   "json_list" results will contain all request parameters, including the API
-#'   key used! For \code{"geojson_list"} this is currently ignored by OpenCage.
+#'   whether the request is returned again with the results. If the
+#'   \code{return} value is a \code{"df_list"}, the query text is added as a
+#'   column to the results. \code{"json_list"} results will contain all request
+#'   parameters, including the API key used! For \code{"geojson_list"} this is
+#'   currently ignored by OpenCage.
 #' @param ... Ignored.
 #'
 #' @details
@@ -89,7 +90,7 @@
 #' This function typically returns multiple results due to placename ambiguity;
 #' consider using the \code{bounds} parameter to limit the area searched.
 #'
-#' @return Depending on the \code{output} parameter, a list with either
+#' @return Depending on the \code{return} parameter, a list with either
 #' \itemize{
 #' \item the results as tibbles (\code{"df_list"}, the default),
 #' \item the results as JSON lists (\code{"json_list"}),
@@ -109,7 +110,7 @@ oc_process <-
     latitude = NULL,
     longitude = NULL,
     key = oc_key(),
-    output = "url_only",
+    return = "url_only",
     bounds = NULL,
     countrycode = NULL,
     language = NULL,
@@ -151,7 +152,7 @@ oc_process <-
 
     purrr::pmap(.l = arglist,
                 .f = .oc_process,
-                output = output,
+                return = return,
                 key = key,
                 no_record = no_record,
                 pb = pb)
@@ -162,7 +163,7 @@ oc_process <-
            latitude = NULL,
            longitude = NULL,
            key = oc_key(),
-           output = "url_only",
+           return = "url_only",
            bounds = NULL,
            countrycode = NULL,
            language = NULL,
@@ -178,7 +179,7 @@ oc_process <-
     if (!is.null(pb))  pb$tick()
 
     # define endpoint
-    if (output == "geojson_list") {
+    if (return == "geojson_list") {
       endpoint <- "geojson"
     } else {
       endpoint <- "json"
@@ -209,7 +210,7 @@ oc_process <-
       endpoint = endpoint
     )
 
-    if (output == "url_only") {
+    if (return == "url_only") {
       if (interactive() || is_testing()) {
         return(oc_url)
       } else {
@@ -225,5 +226,5 @@ oc_process <-
     oc_check_status(res)
 
     # done!
-    oc_parse(req = res, output = output, query = query)
+    oc_parse(req = res, return = return, query = query)
     }

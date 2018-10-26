@@ -14,7 +14,7 @@
 oc_reverse <-
   function(latitude,
            longitude,
-           output = c("df_list", "json_list", "geojson_list", "url_only"),
+           return = c("df_list", "json_list", "geojson_list", "url_only"),
            key = oc_key(),
            language = NULL,
            limit = 10L,
@@ -35,8 +35,8 @@ oc_reverse <-
       stop(call. = FALSE, "You must provide `latitude` and `longitude`.")
     }
 
-    # check output
-    output <- match.arg(output)
+    # check return
+    return <- match.arg(return)
 
     # check arguments
     oc_check_query(
@@ -56,7 +56,7 @@ oc_reverse <-
     oc_process(
       latitude = latitude,
       longitude = longitude,
-      output = output,
+      return = return,
       key = key,
       language = language,
       limit = limit,
@@ -152,7 +152,7 @@ oc_reverse_df <-
         latitude = latitude,
         longitude = longitude,
         key = key,
-        output = "df_list",
+        return = "df_list",
         language = language,
         limit = limit,
         min_confidence = min_confidence,
@@ -179,7 +179,7 @@ oc_reverse_df <-
               latitude = latitude,
               longitude = longitude,
               key = key,
-              output = "df_list",
+              return = "df_list",
               language = language,
               limit = limit,
               min_confidence = min_confidence,
