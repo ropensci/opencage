@@ -21,7 +21,7 @@ Imports:
     jsonlite (>= 1.5),
     memoise (>= 1.1.0),
     purrr (>= 0.2.4),
-    ratelimitr (>= 0.3.9),
+    ratelimitr (>= 0.4.0),
     progress (>= 1.1.2),
     tidyr (>= 0.8.0),
     tibble (>= 1.4.2)
