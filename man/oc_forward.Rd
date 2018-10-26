@@ -18,79 +18,116 @@ oc_forward_df(data, placename, bind_cols = TRUE, output = c("short",
   abbrv = FALSE, ...)
 }
 \arguments{
-\item{placename}{Placename.}
+\item{placename}{A character vector with the placename(s) to be
+geocoded. See
+\href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's
+instructions} on how to format addresses for forward geocoding best.}
 
-\item{output}{The return value of the function, either a \code{df_list}, a \code{json_list}, a \code{geojson_list}, or \code{url_only.}}
+\item{output}{A character vector of length one indicating the return value of
+the function, either a list of tibbles (\code{df_list}, the default), a
+JSON list (\code{json_list}), a GeoJSON list (\code{geojson_list}), or the
+URL with which the API would be called (\code{url_only.}).}
 
-\item{key}{Your OpenCage key.}
+\item{key}{Your OpenCage API key as a character vector of length one. By
+default, \code{\link{oc_key}} will attempt to retrieve the key from the
+environment variable \code{OPENCAGE_KEY}.}
 
-\item{bounds}{Provides the geocoder with a hint to the region that the query
-resides in. This value will restrict the possible results to the supplied
-region. The bounds parameter should be specified as 4 coordinate points
-forming the south-west and north-east corners of a bounding box. For
-example, \code{bounds = c(-0.563160, 51.280430, 0.278970, 51.683979)}
-(xmin, ymin, xmax, ymax).}
+\item{bounds}{A list of bounding boxes, i.e. numeric vectors, each with 4
+coordinates forming the south-west and north-east corners of a bounding box
+\code{list(c(xmin, ymin, xmax, ymax))}. The \code{bounds} parameter will
+restrict the possible results to the supplied region. It can easily be
+specified with the \code{\link{oc_bbox}} helper, for example like
+\code{bounds = oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}.}
 
-\item{countrycode}{Restricts the results to the given country. The country
-code is a two letter code as defined by the ISO 3166-1 Alpha 2 standard.
-E.g. "GB" for the United Kingdom, "FR" for France, "US" for United States.}
+\item{countrycode}{A two letter code as defined by the
+\href{https://www.iso.org/obp/ui/#search/code}{ISO 3166-1 Alpha 2} standard
+that restricts the results to the given country or countries. E.g. "AR" for
+Argentina, "FR" for France, "NZ" for the New Zealand. Multiple countrycodes
+per \code{placename} must be provided as a list.}
 
-\item{language}{An IETF format language code (such as "es" for Spanish or
-"pt-BR" for Brazilian Portuguese). If no language is explicitly specified,
-we will look for an HTTP Accept-Language header like those sent by a
-browser and use the first language specified and if none are specified "en"
-(English) will be assumed.}
+\item{language}{An
+\href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF language tag}
+(such as "es" for Spanish or "pt-BR" for Brazilian Portuguese). OpenCage
+will attempt to return results in that language. If it is not specified,
+"en" (English) will be assumed by the API.}
 
-\item{limit}{How many results should be returned (1-100)? Default is 10.}
+\item{limit}{The maximum number of results that should be returned.
+Integer values between 1 and 100 are allowed, the default is 10 for
+(placename or latitude/longitude) vectors, 1 for data frames.}
 
-\item{min_confidence}{An integer from 1-10. Only results with at least this
-confidence will be returned.}
+\item{min_confidence}{An integer value between 0 and 10 indicating the
+precision of the returned result as defined by it's geographical extent.
+See the \href{API documentation}{https://opencagedata.com/api#confidence}
+for details. Only results with at least the requested confidence will be
+returned.}
 
-\item{no_annotations}{Logical (default FALSE), when TRUE the output will not
-contain annotations.}
+\item{no_annotations}{A logical vector indicating whether additional
+information about the result location should be returned. \code{TRUE} by
+default, which means that the output will not contain annotations.}
 
-\item{no_dedupe}{Logical (default FALSE), when TRUE the output will not be
-deduplicated.}
+\item{no_dedupe}{A logical vector (default \code{FALSE}), when \code{TRUE}
+the output will not be deduplicated.}
 
-\item{no_record}{Logical (default FALSE), when TRUE no log entry of the query
-is created at OpenCage.}
+\item{no_record}{A logical vector (default \code{FALSE}), when \code{TRUE} no
+log entry of the query is created and the forward geocoding request is not
+cached by OpenCage.}
 
-\item{abbrv}{Logical (default FALSE), when TRUE addresses are abbreviated
-(e.g. C. instead of Calle)}
+\item{abbrv}{A logical vector (default \code{FALSE}), when \code{TRUE} addresses in
+the \code{formatted} field of the results are abbreviated (e.g. "Main St."
+instead of "Main Street").}
 
-\item{add_request}{Logical (default TRUE), when FALSE the query text is
-removed from the results data frame.}
+\item{add_request}{A logical vector (default \code{FALSE}), indicating
+whether the request is returned again with the results. If the output is a
+\code{"df_list"}, the query text is added as a column to the results.
+"json_list" results will contain all request parameters, including the API
+key used! For \code{"geojson_list"} this is currently ignored by OpenCage.}
 
-\item{...}{Currently not used.}
+\item{...}{Ignored.}
 
 \item{data}{A data frame}
 
 \item{bind_cols}{logical Bind source and results data frame?}
 }
 \value{
-Depending on the \code{output} argument list of data.frame(s) (\code{df_list})
+Depending on the \code{output} parameter, a list with either
+\itemize{
+\item the results as tibbles (\code{"df_list"}, the default),
+\item the results as JSON lists (\code{"json_list"}),
+\item the results as GeoJSON lists (\code{"geojson_list"}), or
+\item the URL of the OpenCage API call for debugging purposes
+(\code{"url_only"}).
+}
 }
 \description{
 Forward geocoding, from placename to latitude and longitude tuplet(s).
 }
 \details{
 \strong{API key}
-To get an API key to access OpenCage geocoding,
-register at \url{https://geocoder.opencagedata.com/pricing}.
-The free API key provides up to 2,500 calls a day. For ease of use,
- save your API key as an environment variable as described at
-  \url{https://stat545-ubc.github.io/bit003_api-key-env-var.html}.
-Both functions of the package will conveniently look for your API key
-using \code{Sys.getenv("OPENCAGE_KEY")} so if your API key is an environment
- variable called "OPENCAGE_KEY" you don't need to input it manually.
+You will need an API key in order to geocode, for
+which you will need to register with \url{https://opencagedata.com}. The
+"Free Trial" plan provides up to 2,500 API requests a day. The geocoding
+functions of the package will conveniently retrieve your API key with
+\code{\link{oc_key}} if it is saved in the environment variable
+\code{"OPENCAGE_KEY"}. For ease of use, save your API key in
+\code{\link[base:Startup]{.Renviron}} as described at
+\url{http://happygitwithr.com/api-tokens.html}.
 
 \strong{memoise}
 The underlying data at OpenCage is updated about once a day.
 Note that the package uses `memoise` with no timeout argument so that results
- are cached inside an active R session.
+are cached inside an active R session.
+
+All coordinates sent to the OpenCage API must adhere to the
+\href{https://en.wikipedia.org/wiki/World_Geodetic_System}{WGS 84}
+(\href{http://epsg.io/4326}{EPSG:4326})
+\href{https://en.wikipedia.org/wiki/Spatial_reference_system}{coordinate
+reference system} in decimal format. There is usually no reason to send more
+than six or seven digits past the decimal as that then gets down to the
+\href{https://en.wikipedia.org/wiki/Decimal_degrees}{precision of a
+centimeter}.
 
 This function typically returns multiple results due to placename ambiguity;
- consider using the \code{bounds} parameter to limit the area searched.
+consider using the \code{bounds} parameter to limit the area searched.
 }
 \examples{
 \dontrun{
@@ -101,4 +138,8 @@ oc_forward(placename = "Triererstr 15,
                         Deutschland")
 }
 
+}
+\seealso{
+The \href{https://opencagedata.com/api}{OpenCage API documentation}
+  for more information about the API.
 }

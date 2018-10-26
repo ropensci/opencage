@@ -10,41 +10,54 @@ opencage_reverse(latitude, longitude, key = oc_key(), bounds = NULL,
   no_record = FALSE, abbrv = FALSE, add_request = TRUE)
 }
 \arguments{
-\item{latitude}{Latitude.}
+\item{latitude}{A numeric vector with the latitude.}
 
-\item{longitude}{Longitude.}
+\item{longitude}{A numeric vector with the longitude.}
 
-\item{key}{Your OpenCage key.}
+\item{key}{Your OpenCage API key as a character vector of length one. By
+default, \code{\link{oc_key}} will attempt to retrieve the key from the
+environment variable \code{OPENCAGE_KEY}.}
 
 \item{bounds}{Bounding box, ignored for reverse geocoding.}
 
 \item{countrycode}{Country code, ignored for reverse geocoding.}
 
-\item{language}{An IETF format language code (such as "es" for Spanish or
-"pt-BR" for Brazilian Portuguese). If no language is explicitly specified,
-we will look for an HTTP Accept-Language header like those sent by a
-browser and use the first language specified and if none are specified "en"
-(English) will be assumed.}
+\item{language}{An
+\href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF language tag}
+(such as "es" for Spanish or "pt-BR" for Brazilian Portuguese). OpenCage
+will attempt to return results in that language. If it is not specified,
+"en" (English) will be assumed by the API.}
 
-\item{limit}{How many results should be returned (1-100)? Default is 10.}
+\item{limit}{The maximum number of results that should be returned.
+Integer values between 1 and 100 are allowed, the default is 10 for
+(placename or latitude/longitude) vectors, 1 for data frames.}
 
-\item{min_confidence}{An integer from 1-10. Only results with at least this
-confidence will be returned.}
+\item{min_confidence}{An integer value between 0 and 10 indicating the
+precision of the returned result as defined by it's geographical extent.
+See the \href{API documentation}{https://opencagedata.com/api#confidence}
+for details. Only results with at least the requested confidence will be
+returned.}
 
-\item{no_annotations}{Logical (default FALSE), when TRUE the output will not
-contain annotations.}
+\item{no_annotations}{A logical vector indicating whether additional
+information about the result location should be returned. \code{TRUE} by
+default, which means that the output will not contain annotations.}
 
-\item{no_dedupe}{Logical (default FALSE), when TRUE the output will not be
-deduplicated.}
+\item{no_dedupe}{A logical vector (default \code{FALSE}), when \code{TRUE}
+the output will not be deduplicated.}
 
-\item{no_record}{Logical (default FALSE), when TRUE no log entry of the query
-is created at OpenCage.}
+\item{no_record}{A logical vector (default \code{FALSE}), when \code{TRUE} no
+log entry of the query is created and the forward geocoding request is not
+cached by OpenCage.}
 
-\item{abbrv}{Logical (default FALSE), when TRUE addresses are abbreviated
-(e.g. C. instead of Calle)}
+\item{abbrv}{A logical vector (default \code{FALSE}), when \code{TRUE} addresses in
+the \code{formatted} field of the results are abbreviated (e.g. "Main St."
+instead of "Main Street").}
 
-\item{add_request}{Logical (default TRUE), when FALSE the query text is
-removed from the results data frame.}
+\item{add_request}{A logical vector (default \code{FALSE}), indicating
+whether the request is returned again with the results. If the output is a
+\code{"df_list"}, the query text is added as a column to the results.
+"json_list" results will contain all request parameters, including the API
+key used! For \code{"geojson_list"} this is currently ignored by OpenCage.}
 }
 \value{
 A list with
@@ -64,22 +77,31 @@ Reverse geocoding, from latitude and longitude to placename(s).
 }
 \details{
 \strong{API key}
-To get an API key to access OpenCage geocoding,
-register at \url{https://geocoder.opencagedata.com/pricing}.
-The free API key provides up to 2,500 calls a day. For ease of use,
- save your API key as an environment variable as described at
-  \url{https://stat545-ubc.github.io/bit003_api-key-env-var.html}.
-Both functions of the package will conveniently look for your API key
-using \code{Sys.getenv("OPENCAGE_KEY")} so if your API key is an environment
- variable called "OPENCAGE_KEY" you don't need to input it manually.
+You will need an API key in order to geocode, for
+which you will need to register with \url{https://opencagedata.com}. The
+"Free Trial" plan provides up to 2,500 API requests a day. The geocoding
+functions of the package will conveniently retrieve your API key with
+\code{\link{oc_key}} if it is saved in the environment variable
+\code{"OPENCAGE_KEY"}. For ease of use, save your API key in
+\code{\link[base:Startup]{.Renviron}} as described at
+\url{http://happygitwithr.com/api-tokens.html}.
 
 \strong{memoise}
 The underlying data at OpenCage is updated about once a day.
 Note that the package uses `memoise` with no timeout argument so that results
- are cached inside an active R session.
+are cached inside an active R session.
+
+All coordinates sent to the OpenCage API must adhere to the
+\href{https://en.wikipedia.org/wiki/World_Geodetic_System}{WGS 84}
+(\href{http://epsg.io/4326}{EPSG:4326})
+\href{https://en.wikipedia.org/wiki/Spatial_reference_system}{coordinate
+reference system} in decimal format. There is usually no reason to send more
+than six or seven digits past the decimal as that then gets down to the
+\href{https://en.wikipedia.org/wiki/Decimal_degrees}{precision of a
+centimeter}.
 
 This function typically returns multiple results due to placename ambiguity;
- consider using the \code{bounds} parameter to limit the area searched.
+consider using the \code{bounds} parameter to limit the area searched.
 }
 \examples{
 \dontrun{

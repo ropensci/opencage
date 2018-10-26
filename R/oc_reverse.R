@@ -3,7 +3,7 @@
 #' Reverse geocoding, from latitude and longitude to placename(s).
 #'
 #' @inheritParams oc_process
-#' @inherit oc_process details return
+#' @inherit oc_process details return seealso
 #' @export
 #'
 #' @examples
@@ -69,7 +69,7 @@ oc_reverse <-
     )
   }
 
-#' @name oc_reverse
+#' @rdname oc_reverse
 #' @param data A data frame
 #' @param bind_cols logical Bind source and results data frame?
 #' @export

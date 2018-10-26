@@ -3,7 +3,7 @@
 #' Forward geocoding, from placename to latitude and longitude tuplet(s).
 #'
 #' @inheritParams oc_process
-#' @inherit oc_process details return
+#' @inherit oc_process details return seealso
 #' @export
 #'
 #' @examples
@@ -72,7 +72,7 @@ oc_forward <-
     )
   }
 
-#' @name oc_forward
+#' @rdname oc_forward
 #' @param data A data frame
 #' @param bind_cols logical Bind source and results data frame?
 #' @export
