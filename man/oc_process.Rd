@@ -11,18 +11,14 @@ oc_process(placename = NULL, latitude = NULL, longitude = NULL,
   no_record = FALSE, abbrv = FALSE, add_request = FALSE)
 }
 \arguments{
-\item{placename}{A character vector with the placename(s) to be
-geocoded. See
+\item{placename}{A character vector with the placename(s) to be geocoded.
+Required. See
 \href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's
-instructions} on how to format addresses for forward geocoding best.}
+ instructions} on how to format addresses for forward geocoding best.}
 
-\item{latitude}{A numeric vector with the latitude.}
-
-\item{longitude}{A numeric vector with the longitude.}
-
-\item{key}{Your OpenCage API key as a character vector of length one. By
-default, \code{\link{oc_key}} will attempt to retrieve the key from the
-environment variable \code{OPENCAGE_KEY}.}
+\item{key}{Your OpenCage API key as a character vector of length one.
+Required. By default, \code{\link{oc_key}} will attempt to retrieve the key
+from the environment variable \code{OPENCAGE_KEY}.}
 
 \item{return}{A character vector of length one indicating the return value of
 the function, either a list of tibbles (\code{df_list}, the default), a
@@ -48,9 +44,8 @@ per \code{placename} must be provided as a list.}
 will attempt to return results in that language. If it is not specified,
 "en" (English) will be assumed by the API.}
 
-\item{limit}{The maximum number of results that should be returned.
-Integer values between 1 and 100 are allowed, the default is 10 for
-(placename or latitude/longitude) vectors, 1 for data frames.}
+\item{limit}{The maximum number of results that should be returned. Integer
+values between 1 and 100 are allowed, the default is 1.}
 
 \item{min_confidence}{An integer value between 0 and 10 indicating the
 precision of the returned result as defined by it's geographical extent.
@@ -69,9 +64,9 @@ the output will not be deduplicated.}
 log entry of the query is created and the forward geocoding request is not
 cached by OpenCage.}
 
-\item{abbrv}{A logical vector (default \code{FALSE}), when \code{TRUE} addresses in
-the \code{formatted} field of the results are abbreviated (e.g. "Main St."
-instead of "Main Street").}
+\item{abbrv}{A logical vector (default \code{FALSE}), when \code{TRUE}
+addresses in the \code{formatted} field of the results are abbreviated
+(e.g. "Main St." instead of "Main Street").}
 
 \item{add_request}{A logical vector (default \code{FALSE}) indicating
 whether the request is returned again with the results. If the
@@ -79,18 +74,17 @@ whether the request is returned again with the results. If the
 to the results. \code{json_list} results will contain all request
 parameters, including the API key used! For \code{geojson_list} this is
 currently ignored by OpenCage.}
-
-\item{...}{Ignored.}
 }
 \value{
-Depending on the \code{return} parameter, a list with either
-\itemize{
-\item the results as tibbles (\code{"df_list"}, the default),
-\item the results as JSON lists (\code{"json_list"}),
-\item the results as GeoJSON lists (\code{"geojson_list"}), or
-\item the URL of the OpenCage API call for debugging purposes
-(\code{"url_only"}).
-}
+\code{oc_forward} returns, depending on the \code{return} parameter,
+  a list with either
+  \itemize{
+  \item the results as tibbles (\code{"df_list"}, the default),
+  \item the results as JSON lists (\code{"json_list"}),
+  \item the results as GeoJSON lists (\code{"geojson_list"}), or
+  \item the URL of the OpenCage API call for debugging purposes
+  (\code{"url_only"}).
+  }
 }
 \description{
 This function processes all geocoding requests issued by
@@ -126,9 +120,5 @@ centimeter}.
 
 This function typically returns multiple results due to placename ambiguity;
 consider using the \code{bounds} parameter to limit the area searched.
-}
-\seealso{
-The \href{https://opencagedata.com/api}{OpenCage API documentation}
-  for more information about the API.
 }
 \keyword{internal}

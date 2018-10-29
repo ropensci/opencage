@@ -2,8 +2,28 @@
 #'
 #' Reverse geocoding, from latitude and longitude to placename(s).
 #'
-#' @inheritParams oc_process
-#' @inherit oc_process details return seealso
+#' @param latitude A numeric vector with the latitude. Required.
+#' @param longitude A numeric vector with the longitude. Required.
+#' @param limit The maximum number of results that should be returned. Integer
+#'   values between 1 and 100 are allowed, the default is 10 (\code{oc_reverse})
+#'   or 1 (\code{oc_reverse_df}), respectively.
+#' @inheritParams oc_forward
+#'
+#' @return \code{oc_reverse} returns, depending on the \code{return} parameter,
+#'   a list with either
+#'   \itemize{
+#'   \item the results as tibbles (\code{"df_list"}, the default),
+#'   \item the results as JSON lists (\code{"json_list"}),
+#'   \item the results as GeoJSON lists (\code{"geojson_list"}), or
+#'   \item the URL of the OpenCage API call for debugging purposes
+#'   (\code{"url_only"}).
+#'   }
+#'   \code{oc_reverse_df} returns a tibble.
+#'
+#' @seealso \code{\link{oc_forward}} for reverse geocoding, and the
+#'   \href{https://opencagedata.com/api}{OpenCage API documentation} for more
+#'   information about the API.
+#'
 #' @export
 #'
 #' @examples
@@ -70,11 +90,16 @@ oc_reverse <-
   }
 
 #' @rdname oc_reverse
-#' @param data A data frame
+#' @param data A data frame.
 #' @param bind_cols logical Bind source and results data frame?
 #' @param output A character vector of length one indicating whether only the
 #'   formatted address (\code{short}) or whether all results (\code{all}) should
 #'   be returned.
+#'
+#' @details
+#' \code{oc_reverse_df} also accepts unquoted column names for all arguments
+#' except \code{key}, \code{return}, and \code{no_record}.
+#'
 #' @export
 oc_reverse_df <-
   function(data,

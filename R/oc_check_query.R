@@ -2,7 +2,9 @@
 #'
 #' Function that checks the query arguments passed to OpenCage
 #'
-#' @inheritParams oc_process
+#' @param limit The maximum number of results that should be returned. Integer
+#'   values between 1 and 100 are allowed.
+#' @inheritParams oc_forward
 #'
 #' @keywords internal
 

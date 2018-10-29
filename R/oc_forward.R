@@ -2,8 +2,75 @@
 #'
 #' Forward geocoding, from placename to latitude and longitude tuplet(s).
 #'
-#' @inheritParams oc_process
-#' @inherit oc_process details return seealso
+#' @param placename A character vector with the placename(s) to be geocoded.
+#'   Required. See
+#'   \href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's
+#'    instructions} on how to format addresses for forward geocoding best.
+#' @param return A character vector of length one indicating the return value of
+#'   the function, either a list of tibbles (\code{df_list}, the default), a
+#'   JSON list (\code{json_list}), a GeoJSON list (\code{geojson_list}), or the
+#'   URL with which the API would be called (\code{url_only.}).
+#' @param key Your OpenCage API key as a character vector of length one.
+#'   Required. By default, \code{\link{oc_key}} will attempt to retrieve the key
+#'   from the environment variable \code{OPENCAGE_KEY}.
+#' @param bounds A list of bounding boxes, i.e. numeric vectors, each with 4
+#'   coordinates forming the south-west and north-east corners of a bounding box
+#'   \code{list(c(xmin, ymin, xmax, ymax))}. The \code{bounds} parameter will
+#'   restrict the possible results to the supplied region. It can easily be
+#'   specified with the \code{\link{oc_bbox}} helper, for example like
+#'   \code{bounds = oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}.
+#' @param countrycode A two letter code as defined by the
+#'   \href{https://www.iso.org/obp/ui/#search/code}{ISO 3166-1 Alpha 2} standard
+#'   that restricts the results to the given country or countries. E.g. "AR" for
+#'   Argentina, "FR" for France, "NZ" for the New Zealand. Multiple countrycodes
+#'   per \code{placename} must be provided as a list.
+#' @param language An
+#'   \href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF language tag}
+#'   (such as "es" for Spanish or "pt-BR" for Brazilian Portuguese). OpenCage
+#'   will attempt to return results in that language. If it is not specified,
+#'   "en" (English) will be assumed by the API.
+#' @param limit The maximum number of results that should be returned. Integer
+#'   values between 1 and 100 are allowed, the default is 10 (\code{oc_forward})
+#'   or 1 (\code{oc_forward_df}), respectively.
+#' @param min_confidence An integer value between 0 and 10 indicating the
+#'   precision of the returned result as defined by it's geographical extent.
+#'   See the \href{API documentation}{https://opencagedata.com/api#confidence}
+#'   for details. Only results with at least the requested confidence will be
+#'   returned.
+#' @param no_annotations A logical vector indicating whether additional
+#'   information about the result location should be returned. \code{TRUE} by
+#'   default, which means that the output will not contain annotations.
+#' @param no_dedupe A logical vector (default \code{FALSE}), when \code{TRUE}
+#'   the output will not be deduplicated.
+#' @param no_record A logical vector (default \code{FALSE}), when \code{TRUE} no
+#'   log entry of the query is created and the forward geocoding request is not
+#'   cached by OpenCage.
+#' @param abbrv A logical vector (default \code{FALSE}), when \code{TRUE}
+#'   addresses in the \code{formatted} field of the results are abbreviated
+#'   (e.g. "Main St." instead of "Main Street").
+#' @param add_request A logical vector (default \code{FALSE}) indicating
+#'   whether the request is returned again with the results. If the
+#'   \code{return} value is a \code{df_list}, the query text is added as a column
+#'   to the results. \code{json_list} results will contain all request
+#'   parameters, including the API key used! For \code{geojson_list} this is
+#'   currently ignored by OpenCage.
+#' @param ... Ignored.
+#'
+#' @return \code{oc_forward} returns, depending on the \code{return} parameter,
+#'   a list with either
+#'   \itemize{
+#'   \item the results as tibbles (\code{"df_list"}, the default),
+#'   \item the results as JSON lists (\code{"json_list"}),
+#'   \item the results as GeoJSON lists (\code{"geojson_list"}), or
+#'   \item the URL of the OpenCage API call for debugging purposes
+#'   (\code{"url_only"}).
+#'   }
+#'   \code{oc_forward_df} returns a tibble.
+#'
+#' @seealso \code{\link{oc_reverse}} for reverse geocoding, and the
+#'   \href{https://opencagedata.com/api}{OpenCage API documentation} for more
+#'   information about the API.
+#'
 #' @export
 #'
 #' @examples
@@ -78,6 +145,11 @@ oc_forward <-
 #' @param output A character vector of length one indicating whether only
 #'   latitude, longitude and formatted address (\code{short}) or whether all
 #'   results (\code{all}) should be returned.
+#'
+#' @details
+#' \code{oc_forward_df} also accepts unquoted column names for all arguments
+#' except \code{key}, \code{return}, and \code{no_record}.
+#'
 #' @export
 oc_forward_df <-
   function(data,

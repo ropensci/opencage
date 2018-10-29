@@ -2,8 +2,7 @@
 #'
 #' Forward geocoding, from placename to latitude and longitude tuplet(s).
 #'
-#' @inheritParams oc_process
-#' @inherit oc_process details
+#' @inheritParams oc_forward
 #'
 #' @return A list with
 #' \itemize{
@@ -70,8 +69,7 @@ opencage_forward <-
 #'
 #' @param bounds Bounding box, ignored for reverse geocoding.
 #' @param countrycode Country code, ignored for reverse geocoding.
-#' @inheritParams oc_process
-#' @inherit oc_process details
+#' @inheritParams oc_forward
 #' @inherit opencage_forward return
 #'
 #' @export
