@@ -7,14 +7,13 @@
 \usage{
 oc_reverse(latitude, longitude, return = c("df_list", "json_list",
   "geojson_list", "url_only"), key = oc_key(), language = NULL,
-  limit = 10L, min_confidence = NULL, no_annotations = TRUE,
-  no_dedupe = FALSE, no_record = FALSE, abbrv = FALSE,
-  add_request = FALSE, ...)
+  min_confidence = NULL, no_annotations = TRUE, no_dedupe = FALSE,
+  no_record = FALSE, abbrv = FALSE, add_request = FALSE, ...)
 
 oc_reverse_df(data, latitude, longitude, bind_cols = TRUE,
   output = c("short", "all"), key = oc_key(), language = NULL,
-  limit = 1L, min_confidence = NULL, no_annotations = TRUE,
-  no_dedupe = FALSE, no_record = FALSE, abbrv = FALSE, ...)
+  min_confidence = NULL, no_annotations = TRUE, no_dedupe = FALSE,
+  no_record = FALSE, abbrv = FALSE, ...)
 }
 \arguments{
 \item{latitude}{A numeric vector with the latitude. Required.}
@@ -35,10 +34,6 @@ from the environment variable \code{OPENCAGE_KEY}.}
 (such as "es" for Spanish or "pt-BR" for Brazilian Portuguese). OpenCage
 will attempt to return results in that language. If it is not specified,
 "en" (English) will be assumed by the API.}
-
-\item{limit}{The maximum number of results that should be returned. Integer
-values between 1 and 100 are allowed, the default is 10 (\code{oc_reverse})
-or 1 (\code{oc_reverse_df}), respectively.}
 
 \item{min_confidence}{An integer value between 0 and 10 indicating the
 precision of the returned result as defined by it's geographical extent,
@@ -99,7 +94,7 @@ except \code{key}, \code{return}, and \code{no_record}.
 }
 \examples{
 \dontrun{
-oc_reverse(latitude = 0, longitude = 0, limit = 2)
+oc_reverse(latitude = 0, longitude = 0)
 }
 }
 \seealso{

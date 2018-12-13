@@ -4,9 +4,6 @@
 #'
 #' @param latitude A numeric vector with the latitude. Required.
 #' @param longitude A numeric vector with the longitude. Required.
-#' @param limit The maximum number of results that should be returned. Integer
-#'   values between 1 and 100 are allowed, the default is 10 (\code{oc_reverse})
-#'   or 1 (\code{oc_reverse_df}), respectively.
 #' @inheritParams oc_forward
 #'
 #' @return \code{oc_reverse} returns, depending on the \code{return} parameter,
@@ -28,7 +25,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' oc_reverse(latitude = 0, longitude = 0, limit = 2)
+#' oc_reverse(latitude = 0, longitude = 0)
 #' }
 
 oc_reverse <-
@@ -37,7 +34,6 @@ oc_reverse <-
            return = c("df_list", "json_list", "geojson_list", "url_only"),
            key = oc_key(),
            language = NULL,
-           limit = 10L,
            min_confidence = NULL,
            no_annotations = TRUE,
            no_dedupe = FALSE,
@@ -64,7 +60,6 @@ oc_reverse <-
       longitude = longitude,
       key = key,
       language = language,
-      limit = limit,
       min_confidence = min_confidence,
       no_annotations = no_annotations,
       no_dedupe = no_dedupe,
@@ -79,7 +74,6 @@ oc_reverse <-
       return = return,
       key = key,
       language = language,
-      limit = limit,
       min_confidence = min_confidence,
       no_annotations = no_annotations,
       no_dedupe = no_dedupe,
@@ -109,7 +103,6 @@ oc_reverse_df <-
            output = c("short", "all"),
            key = oc_key(),
            language = NULL,
-           limit = 1L,
            min_confidence = NULL,
            no_annotations = TRUE,
            no_dedupe = FALSE,
@@ -126,14 +119,6 @@ oc_reverse_df <-
       language <- eval(language)
     }
     if (!is.null(language)) language <- as.list(language)
-
-    limit <- eval(substitute(alist(limit)))[[1]]
-    if (is.symbol(limit)) {
-      limit <- data[[deparse(limit)]]
-    } else if (is.call(limit)) {
-      limit <- eval(limit)
-    }
-    if (!is.null(language)) limit <- as.list(limit)
 
     min_confidence <- eval(substitute(alist(min_confidence)))[[1]]
     if (is.symbol(min_confidence)) {
@@ -182,7 +167,6 @@ oc_reverse_df <-
         key = key,
         return = "df_list",
         language = language,
-        limit = limit,
         min_confidence = min_confidence,
         no_annotations = no_annotations,
         no_dedupe = no_dedupe,
@@ -209,7 +193,6 @@ oc_reverse_df <-
               key = key,
               return = "df_list",
               language = language,
-              limit = limit,
               min_confidence = min_confidence,
               no_annotations = no_annotations,
               no_dedupe = no_dedupe,
