@@ -30,7 +30,7 @@ specified with the \code{\link{oc_bbox}} helper, for example like
 \href{https://www.iso.org/obp/ui/#search/code}{ISO 3166-1 Alpha 2} standard
 that restricts the results to the given country or countries. E.g. "AR" for
 Argentina, "FR" for France, "NZ" for the New Zealand. Multiple countrycodes
-per \code{placename} must be provided as a list.}
+per \code{placename} must be wrapped in a list.}
 
 \item{language}{An
 \href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF language tag}
@@ -43,10 +43,10 @@ values between 1 and 100 are allowed, the default is 10 (\code{oc_forward})
 or 1 (\code{oc_forward_df}), respectively.}
 
 \item{min_confidence}{An integer value between 0 and 10 indicating the
-precision of the returned result as defined by it's geographical extent.
-See the \href{API documentation}{https://opencagedata.com/api#confidence}
-for details. Only results with at least the requested confidence will be
-returned.}
+precision of the returned result as defined by it's geographical extent,
+(i.e. by the extent of the result's bounding box). See the \href{API
+documentation}{https://opencagedata.com/api#confidence} for details. Only
+results with at least the requested confidence will be returned.}
 
 \item{no_annotations}{A logical vector indicating whether additional
 information about the result location should be returned. \code{TRUE} by
@@ -56,19 +56,19 @@ default, which means that the output will not contain annotations.}
 the output will not be deduplicated.}
 
 \item{no_record}{A logical vector (default \code{FALSE}), when \code{TRUE} no
-log entry of the query is created and the forward geocoding request is not
-cached by OpenCage.}
+log entry of the query is created and the geocoding request is not cached
+by OpenCage.}
 
 \item{abbrv}{A logical vector (default \code{FALSE}), when \code{TRUE}
 addresses in the \code{formatted} field of the results are abbreviated
 (e.g. "Main St." instead of "Main Street").}
 
-\item{add_request}{A logical vector (default \code{FALSE}) indicating
-whether the request is returned again with the results. If the
-\code{return} value is a \code{df_list}, the query text is added as a column
-to the results. \code{json_list} results will contain all request
-parameters, including the API key used! For \code{geojson_list} this is
-currently ignored by OpenCage.}
+\item{add_request}{A logical vector (default \code{FALSE}) indicating whether
+the request is returned again with the results. If the \code{return} value
+is a \code{df_list}, the query text is added as a column to the results.
+\code{json_list} results will contain all request parameters, including the
+API key used! For \code{geojson_list} this is currently ignored by
+OpenCage.}
 }
 \value{
 A list with
