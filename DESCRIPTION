@@ -9,9 +9,9 @@ Authors@R: c(
     person("Noam", "Ross", role = "ctb"), 
     person("Jake", "Russ", role = "ctb"), 
     person("Julia", "Silge", role = c("rev"), comment = "Julia Silge reviewed the package for rOpenSci, see https://github.com/ropensci/onboarding/issues/36."))
-Description: Geocode with the OpenCage API, which provides forward
-    geocoding (from placename to longitude and latitude) and reverse geocoding (from
-    longitude and latitude to placename). 
+Description: Geocode with the OpenCage API, either from placename to longitude 
+    and latitude (forward geocoding) or from longitude and latitude to 
+    placename (reverse geocoding), see <https://opencagedata.com/>.
 License: GPL (>= 3.1)
 URL: http://github.com/ropensci/opencage
 BugReports: http://github.com/ropensci/opencage/issues
@@ -33,4 +33,4 @@ Suggests:
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: TRUE
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
