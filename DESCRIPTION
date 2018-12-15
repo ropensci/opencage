@@ -32,5 +32,6 @@ Suggests:
     testthat (>= 2.0.0)
 VignetteBuilder: knitr
 Encoding: UTF-8
+Language: en-GB
 LazyData: TRUE
 RoxygenNote: 6.1.1
