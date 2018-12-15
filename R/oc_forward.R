@@ -1,6 +1,6 @@
 #' Forward geocoding
 #'
-#' Forward geocoding, from placename to latitude and longitude tuplet(s).
+#' Forward geocoding, from placename to latitude and longitude tuple(s).
 #'
 #' @param placename A character vector with the placename(s) to be geocoded.
 #'   Required. See

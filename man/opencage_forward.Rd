@@ -84,7 +84,7 @@ for the day and the time at which the number of remaining calls will
 }
 }
 \description{
-Forward geocoding, from placename to latitude and longitude tuplet(s).
+Forward geocoding, from placename to latitude and longitude tuple(s).
 }
 \examples{
 \dontrun{

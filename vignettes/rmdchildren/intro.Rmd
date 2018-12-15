@@ -10,7 +10,7 @@ The geocoding functions of the package will conveniently retrieve your API key w
 
 ## Forward geocoding
 
-Forward geocoding is from placename to latitude and longitude tuplet(s).
+Forward geocoding is from placename to latitude and longitude tuple(s).
 
 ```{r, warning = FALSE, message = FALSE}
 library("opencage")

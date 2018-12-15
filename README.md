@@ -54,7 +54,7 @@ variable in `.Renviron` as described at
 
 ## Forward geocoding
 
-Forward geocoding is from placename to latitude and longitude tuplet(s).
+Forward geocoding is from placename to latitude and longitude tuple(s).
 
 ``` r
 library("opencage")
@@ -184,18 +184,18 @@ results4 <- oc_forward(placename = c("Paris"), countrycode = list(c("FR", "US"))
 knitr::kable(results4)
 ```
 
-| confidence | formatted                                                                      | northeast\_lat | northeast\_lng | southwest\_lat | southwest\_lng | ISO\_3166\_1\_alpha\_2 | type      | city      | country | country\_code | county         | political\_union | state                      | postcode | state\_code | bus\_stop | locality | road                      | road\_type | suburb        | place |      lat |          lng |
-| ---------: | :----------------------------------------------------------------------------- | -------------: | -------------: | -------------: | -------------: | :--------------------- | :-------- | :-------- | :------ | :------------ | :------------- | :--------------- | :------------------------- | :------- | :---------- | :-------- | :------- | :------------------------ | :--------- | :------------ | :---- | -------: | -----------: |
-|          6 | Paris, France                                                                  |       48.90216 |        2.46976 |       48.81558 |       2.224122 | FR                     | city      | Paris     | France  | fr            | Paris          | European Union   | Ile-de-France              | NA       | NA          | NA        | NA       | NA                        | NA         | NA            | NA    | 48.85661 |     2.351499 |
-|          7 | Paris, AR 72855, United States of America                                      |       35.30650 |     \-93.67508 |       35.26725 |    \-93.761807 | US                     | city      | Paris     | USA     | us            | Logan County   | NA               | Arkansas                   | 72855    | AR          | NA        | NA       | NA                        | NA         | NA            | NA    | 35.29203 |  \-93.729917 |
-|          5 | Paris, TX 75460, United States of America                                      |       33.73839 |     \-95.43541 |       33.62063 |    \-95.627940 | US                     | city      | Paris     | USA     | us            | Lamar County   | NA               | Texas                      | 75460    | TX          | NA        | NA       | NA                        | NA         | NA            | NA    | 33.66180 |  \-95.555513 |
-|          7 | Paris, KY 40361, United States of America                                      |       38.23827 |     \-84.23209 |       38.16492 |    \-84.307326 | US                     | city      | Paris     | USA     | us            | Bourbon County | NA               | Kentucky                   | 40361    | KY          | NA        | NA       | NA                        | NA         | NA            | NA    | 38.20980 |  \-84.252987 |
-|          9 | Paris, South Las Vegas Boulevard, Paradise, NV 89109, United States of America |       36.11205 |    \-115.17261 |       36.11195 |   \-115.172711 | US                     | bus\_stop | NA        | USA     | us            | Clark County   | NA               | Nevada                     | 89109    | NV          | Paris     | Paradise | South Las Vegas Boulevard | bus\_stop  | Hughes Center | NA    | 36.11200 | \-115.172661 |
-|          7 | Paris, MO 65275, United States of America                                      |       39.48928 |     \-91.99168 |       39.46916 |    \-92.021480 | US                     | city      | Paris     | USA     | us            | Monroe County  | NA               | Missouri                   | 65275    | MO          | NA        | NA       | NA                        | NA         | NA            | NA    | 39.48087 |  \-92.001281 |
-|          7 | Paris, IL 61944, United States of America                                      |       39.64998 |     \-87.64920 |       39.58149 |    \-87.721046 | US                     | city      | Paris     | USA     | us            | Edgar County   | NA               | Illinois                   | 61944    | IL          | NA        | NA       | NA                        | NA         | NA            | NA    | 39.61115 |  \-87.696137 |
-|          7 | Paris, TN 38242, United States of America                                      |       36.32902 |     \-88.26507 |       36.26600 |    \-88.367113 | US                     | city      | Paris     | USA     | us            | Henry County   | NA               | Tennessee                  | 38242    | TN          | NA        | NA       | NA                        | NA         | NA            | NA    | 36.30200 |  \-88.326711 |
-|         10 | Paris, 47210 Villeréal, France                                                 |             NA |             NA |             NA |             NA | FR                     | place     | Villeréal | France  | fr            | Lot-et-Garonne | European Union   | Aquitaine                  | 47210    | NA          | NA        | NA       | NA                        | NA         | NA            | Paris | 44.63933 |     0.747184 |
-|         10 | Paris, 83590 Gonfaron, France                                                  |             NA |             NA |             NA |             NA | FR                     | place     | Gonfaron  | France  | fr            | Var            | European Union   | Provence-Alpes-Côte d’Azur | 83590    | NA          | NA        | NA       | NA                        | NA         | NA            | Paris | 43.32019 |     6.312719 |
+| confidence | formatted                                                                      | northeast\_lat | northeast\_lng | southwest\_lat | southwest\_lng | ISO\_3166\_1\_alpha\_2 | type      | city        | country | country\_code | county         | political\_union | state         | postcode | state\_code | bus\_stop | locality | road                      | road\_type | suburb        | place |      lat |          lng |
+| ---------: | :----------------------------------------------------------------------------- | -------------: | -------------: | -------------: | -------------: | :--------------------- | :-------- | :---------- | :------ | :------------ | :------------- | :--------------- | :------------ | :------- | :---------- | :-------- | :------- | :------------------------ | :--------- | :------------ | :---- | -------: | -----------: |
+|          6 | Paris, France                                                                  |       48.90216 |        2.46976 |       48.81558 |       2.224122 | FR                     | city      | Paris       | France  | fr            | Paris          | European Union   | Ile-de-France | NA       | NA          | NA        | NA       | NA                        | NA         | NA            | NA    | 48.85661 |     2.351499 |
+|          7 | Paris, AR 72855, United States of America                                      |       35.30650 |     \-93.67508 |       35.26725 |    \-93.761807 | US                     | city      | Paris       | USA     | us            | Logan County   | NA               | Arkansas      | 72855    | AR          | NA        | NA       | NA                        | NA         | NA            | NA    | 35.29203 |  \-93.729917 |
+|          5 | Paris, TX 75460, United States of America                                      |       33.73839 |     \-95.43541 |       33.62063 |    \-95.627940 | US                     | city      | Paris       | USA     | us            | Lamar County   | NA               | Texas         | 75460    | TX          | NA        | NA       | NA                        | NA         | NA            | NA    | 33.66180 |  \-95.555513 |
+|          7 | Paris, KY 40361, United States of America                                      |       38.23827 |     \-84.23209 |       38.16492 |    \-84.307326 | US                     | city      | Paris       | USA     | us            | Bourbon County | NA               | Kentucky      | 40361    | KY          | NA        | NA       | NA                        | NA         | NA            | NA    | 38.20980 |  \-84.252987 |
+|          9 | Paris, South Las Vegas Boulevard, Paradise, NV 89109, United States of America |       36.11205 |    \-115.17261 |       36.11195 |   \-115.172711 | US                     | bus\_stop | NA          | USA     | us            | Clark County   | NA               | Nevada        | 89109    | NV          | Paris     | Paradise | South Las Vegas Boulevard | bus\_stop  | Hughes Center | NA    | 36.11200 | \-115.172661 |
+|          7 | Paris, MO 65275, United States of America                                      |       39.48928 |     \-91.99168 |       39.46916 |    \-92.021480 | US                     | city      | Paris       | USA     | us            | Monroe County  | NA               | Missouri      | 65275    | MO          | NA        | NA       | NA                        | NA         | NA            | NA    | 39.48087 |  \-92.001281 |
+|          7 | Paris, IL 61944, United States of America                                      |       39.64998 |     \-87.64920 |       39.58149 |    \-87.721046 | US                     | city      | Paris       | USA     | us            | Edgar County   | NA               | Illinois      | 61944    | IL          | NA        | NA       | NA                        | NA         | NA            | NA    | 39.61115 |  \-87.696137 |
+|          7 | Paris, TN 38242, United States of America                                      |       36.32902 |     \-88.26507 |       36.26600 |    \-88.367113 | US                     | city      | Paris       | USA     | us            | Henry County   | NA               | Tennessee     | 38242    | TN          | NA        | NA       | NA                        | NA         | NA            | NA    | 36.30200 |  \-88.326711 |
+|         10 | Paris, 47210 Villeréal, France                                                 |             NA |             NA |             NA |             NA | FR                     | place     | Villeréal   | France  | fr            | Lot-et-Garonne | European Union   | Aquitaine     | 47210    | NA          | NA        | NA       | NA                        | NA         | NA            | Paris | 44.63933 |     0.747184 |
+|         10 | Paris, 40500 Saint-Sever, France                                               |             NA |             NA |             NA |             NA | FR                     | place     | Saint-Sever | France  | fr            | Landes         | European Union   | Aquitaine     | 40500    | NA          | NA        | NA       | NA                        | NA         | NA            | Paris | 43.76228 |   \-0.526991 |
 
 ## Specifying what is returned
 
@@ -258,14 +258,14 @@ system.time(oc_reverse(latitude = 10, longitude = 10))
 ```
 
     ##    user  system elapsed 
-    ##    0.03    0.00    0.99
+    ##    0.01    0.00    1.03
 
 ``` r
 system.time(oc_reverse(latitude = 10, longitude = 10))
 ```
 
     ##    user  system elapsed 
-    ##    0.02    0.00    0.02
+    ##       0       0       0
 
 To clear the cache of all results, you need to call
 `memoise::forget(opencage:::oc_get_memoise)`.
@@ -281,7 +281,7 @@ system.time(oc_reverse(latitude = 10, longitude = 10))
 ```
 
     ##    user  system elapsed 
-    ##    0.04    0.00    0.96
+    ##    0.02    0.00    0.99
 
 ## Privacy
 

@@ -106,7 +106,7 @@ results (\code{all}) should be returned.}
   \code{oc_forward_df} returns a tibble.
 }
 \description{
-Forward geocoding, from placename to latitude and longitude tuplet(s).
+Forward geocoding, from placename to latitude and longitude tuple(s).
 }
 \details{
 \code{oc_forward_df} also accepts unquoted column names for all arguments
