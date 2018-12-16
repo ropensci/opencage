@@ -116,7 +116,7 @@ All coordinates sent to the OpenCage API must adhere to the
 reference system} in decimal format. There is usually no reason to send more
 than six or seven digits past the decimal as that then gets down to the
 \href{https://en.wikipedia.org/wiki/Decimal_degrees}{precision of a
-centimeter}.
+centimetre}.
 
 This function typically returns multiple results due to placename ambiguity;
 consider using the \code{bounds} parameter to limit the area searched.

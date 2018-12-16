@@ -92,7 +92,7 @@ Both `oc_forward_df()` and `oc_reverse_df()` return a single tibble.
 ## Multiple results
 
 Forward geocoding typically returns multiple results. Regarding these
-ambigious results, the API doc
+ambiguous results, the API doc
 [states](https://opencagedata.com/api#ambiguous-results): “When forward
 geocoding we may find multiple valid matches. Many places have the same
 or similar names. In this case the geocoder will return multiple

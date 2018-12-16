@@ -1,6 +1,6 @@
 # opencage 0.1.4.9001
 
-This is a major rewrite of the {opencage} package. `opencage_forward()` and `opencage_reverse()` have been deprecated and are superceded by `oc_forward()` and `oc_reverse()`, respectively. In addition there are two new functions `oc_forward_df()` and `oc_reverse_df()`, which (reverse) geocode a `placename` column (or `latitude`/`longitude` columns) in a data frame. 
+This is a major rewrite of the {opencage} package. `opencage_forward()` and `opencage_reverse()` have been deprecated and are superseded by `oc_forward()` and `oc_reverse()`, respectively. In addition there are two new functions `oc_forward_df()` and `oc_reverse_df()`, which (reverse) geocode a `placename` column (or `latitude`/`longitude` columns) in a data frame. 
 
 The new features include:
 
