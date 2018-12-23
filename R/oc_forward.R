@@ -171,6 +171,15 @@ oc_forward_df <-
 
     placename <- data[[deparse(substitute(placename))]]
 
+    bounds_ <- eval(substitute(alist(bounds)))[[1]]
+    if (is.symbol(bounds_)) {
+      bounds_ <- data[[deparse(bounds_)]]
+      if (!is.null(bounds_)) bounds <- bounds_
+    } else if (is.call(bounds_)) {
+      bounds <- eval(bounds_)
+    }
+    if (!is.null(bounds)) bounds <- as.list(bounds)
+
     countrycode_ <- eval(substitute(alist(countrycode)))[[1]]
     if (is.symbol(countrycode_)) {
       countrycode_ <- data[[deparse(countrycode_)]]
