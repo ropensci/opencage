@@ -112,45 +112,55 @@ oc_reverse_df <-
     latitude <- data[[substitute(latitude)]]
     longitude <- data[[substitute(longitude)]]
 
-    language <- eval(substitute(alist(language)))[[1]]
-    if (is.symbol(language)) {
-      language <- data[[deparse(language)]]
-    } else if (is.call(language)) {
-      language <- eval(language)
+    language_ <- eval(substitute(alist(language)))[[1]]
+    if (is.symbol(language_)) {
+      language_ <- data[[deparse(language_)]]
+      if (!is.null(language_))
+        language <- language_
+    } else if (is.call(language_)) {
+      language <- eval(language_)
     }
     if (!is.null(language)) language <- as.list(language)
 
-    min_confidence <- eval(substitute(alist(min_confidence)))[[1]]
-    if (is.symbol(min_confidence)) {
-      min_confidence <- data[[deparse(min_confidence)]]
-    } else if (is.call(min_confidence)) {
-      min_confidence <- eval(min_confidence)
+    min_confidence_ <- eval(substitute(alist(min_confidence)))[[1]]
+    if (is.symbol(min_confidence_)) {
+      min_confidence_ <- data[[deparse(min_confidence_)]]
+      if (!is.null(min_confidence_))
+        min_confidence <- min_confidence_
+    } else if (is.call(min_confidence_)) {
+      min_confidence <- eval(min_confidence_)
     }
     if (!is.null(min_confidence)) min_confidence <- as.list(min_confidence)
 
-    no_annotations <- eval(substitute(alist(no_annotations)))[[1]]
-    if (is.symbol(no_annotations)) {
-      no_annotations <- data[[deparse(no_annotations)]]
-    } else if (is.call(no_annotations)) {
-      no_annotations <- eval(no_annotations)
+    no_annotations_ <- eval(substitute(alist(no_annotations)))[[1]]
+    if (is.symbol(no_annotations_)) {
+      no_annotations_ <- data[[deparse(no_annotations_)]]
+      if (!is.null(no_annotations_))
+        no_annotations <- no_annotations_
+    } else if (is.call(no_annotations_)) {
+      no_annotations <- eval(no_annotations_)
     }
     if (!is.null(no_annotations)) no_annotations <- as.list(no_annotations)
 
-    no_dedupe <- eval(substitute(alist(no_dedupe)))[[1]]
-    if (is.symbol(no_dedupe)) {
-      no_dedupe <- data[[deparse(no_dedupe)]]
-    } else if (is.call(no_dedupe)) {
-      no_dedupe <- eval(no_dedupe)
+    no_dedupe_ <- eval(substitute(alist(no_dedupe)))[[1]]
+    if (is.symbol(no_dedupe_)) {
+      no_dedupe_ <- data[[deparse(no_dedupe_)]]
+      if (!is.null(no_dedupe_))
+        no_dedupe <- no_dedupe_
+    } else if (is.call(no_dedupe_)) {
+      no_dedupe <- eval(no_dedupe_)
     }
     if (!is.null(no_dedupe)) no_dedupe <- as.list(no_dedupe)
 
-    abbrev <- eval(substitute(alist(abbrev)))[[1]]
-    if (is.symbol(abbrev)) {
-      abbrev <- data[[deparse(abbrev)]]
-    } else if (is.call(abbrev)) {
-      abbrev <- eval(abbrev)
+    abbrv_ <- eval(substitute(alist(abbrv)))[[1]]
+    if (is.symbol(abbrv_)) {
+      abbrv_ <- data[[deparse(abbrv_)]]
+      if (!is.null(abbrv_))
+        abbrv <- abbrv_
+    } else if (is.call(abbrv_)) {
+      abbrv <- eval(abbrv_)
     }
-    if (!is.null(abbrev)) abbrev <- as.list(abbrev)
+    if (!is.null(abbrv)) abbrv <- as.list(abbrv)
 
     output <- match.arg(output)
 
