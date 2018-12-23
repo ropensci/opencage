@@ -118,10 +118,12 @@ test_that("the bounds argument is well taken into account", {
     return = "df_list"
   )
 
+  # res2 is empty with limit=1 or 2 -> bug in OpenCage?!
   res2 <- oc_process(
     placename = "Berlin",
     bounds = list(c(-90, 38, 0, 45)),
     key = Sys.getenv("OPENCAGE_KEY"),
+    limit = 3,
     return = "df_list"
   )
 
