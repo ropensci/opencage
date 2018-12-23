@@ -10,6 +10,10 @@ opencage_reverse(latitude, longitude, key = oc_key(), bounds = NULL,
   no_record = FALSE, abbrv = FALSE, add_request = TRUE)
 }
 \arguments{
+\item{latitude}{A numeric vector with the latitude. Required.}
+
+\item{longitude}{A numeric vector with the longitude. Required.}
+
 \item{key}{Your OpenCage API key as a character vector of length one.
 Required. By default, \code{\link{oc_key}} will attempt to retrieve the key
 from the environment variable \code{OPENCAGE_KEY}.}
@@ -24,9 +28,8 @@ from the environment variable \code{OPENCAGE_KEY}.}
 will attempt to return results in that language. If it is not specified,
 "en" (English) will be assumed by the API.}
 
-\item{limit}{The maximum number of results that should be returned. Integer
-values between 1 and 100 are allowed, the default is 10 (\code{oc_forward})
-or 1 (\code{oc_forward_df}), respectively.}
+\item{limit}{How many results should be returned (1-100), ignored for reverse
+geocoding.}
 
 \item{min_confidence}{An integer value between 0 and 10 indicating the
 precision of the returned result as defined by it's geographical extent,

@@ -69,7 +69,9 @@ opencage_forward <-
 #'
 #' @param bounds Bounding box, ignored for reverse geocoding.
 #' @param countrycode Country code, ignored for reverse geocoding.
-#' @inheritParams oc_forward
+#' @param limit How many results should be returned (1-100), ignored for reverse
+#'   geocoding.
+#' @inheritParams oc_reverse
 #' @inherit opencage_forward return
 #'
 #' @export
