@@ -34,9 +34,10 @@
 #'   or 1 (\code{oc_forward_df}), respectively.
 #' @param min_confidence An integer value between 0 and 10 indicating the
 #'   precision of the returned result as defined by it's geographical extent,
-#'   (i.e. by the extent of the result's bounding box). See the \href{API
-#'   documentation}{https://opencagedata.com/api#confidence} for details. Only
-#'   results with at least the requested confidence will be returned.
+#'   (i.e. by the extent of the result's bounding box). See the
+#'   \href{https://opencagedata.com/api#confidence}{API documentation} for
+#'   details. Only results with at least the requested confidence will be
+#'   returned.
 #' @param no_annotations A logical vector indicating whether additional
 #'   information about the result location should be returned. \code{TRUE} by
 #'   default, which means that the output will not contain annotations.
