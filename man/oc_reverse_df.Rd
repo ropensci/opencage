@@ -2,12 +2,21 @@
 % Please edit documentation in R/oc_reverse.R
 \name{oc_reverse_df}
 \alias{oc_reverse_df}
+\alias{oc_reverse_df.data.frame}
+\alias{oc_reverse_df.numeric}
 \title{Reverse geocoding with data frames}
 \usage{
-oc_reverse_df(data, latitude, longitude, bind_cols = TRUE,
-  output = c("short", "all"), key = oc_key(), language = NULL,
-  min_confidence = NULL, roadinfo = FALSE, no_annotations = TRUE,
+oc_reverse_df(...)
+
+\method{oc_reverse_df}{data.frame}(data, latitude, longitude,
+  bind_cols = TRUE, output = c("short", "all"), key = oc_key(),
+  language = NULL, min_confidence = NULL, no_annotations = TRUE,
   no_dedupe = FALSE, no_record = FALSE, abbrv = FALSE, ...)
+
+\method{oc_reverse_df}{numeric}(latitude, longitude, output = c("short",
+  "all"), key = oc_key(), language = NULL, min_confidence = NULL,
+  no_annotations = TRUE, no_dedupe = FALSE, no_record = FALSE,
+  abbrv = FALSE, ...)
 }
 \arguments{
 \item{data}{A data frame.}
