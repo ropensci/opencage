@@ -63,6 +63,15 @@ oc_build_url <- function(query_par, endpoint) {
     )
   }
 
+  if (!is.null(query_par$proximity)) {
+    proximity <- query_par$proximity
+    query_par$proximity <- paste(
+      proximity["latitude"],
+      proximity["longitude"],
+      sep = ","
+    )
+  }
+
   oc_path <- paste0("geocode/v1/", endpoint)
 
   crul::url_build(

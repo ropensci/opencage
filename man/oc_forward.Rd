@@ -6,16 +6,16 @@
 \title{Forward geocoding}
 \usage{
 oc_forward(placename, return = c("df_list", "json_list", "geojson_list",
-  "url_only"), key = oc_key(), bounds = NULL, countrycode = NULL,
-  language = NULL, limit = 10L, min_confidence = NULL,
-  no_annotations = TRUE, no_dedupe = FALSE, no_record = FALSE,
-  abbrv = FALSE, add_request = FALSE, ...)
+  "url_only"), key = oc_key(), bounds = NULL, proximity = NULL,
+  countrycode = NULL, language = NULL, limit = 10L,
+  min_confidence = NULL, no_annotations = TRUE, no_dedupe = FALSE,
+  no_record = FALSE, abbrv = FALSE, add_request = FALSE, ...)
 
 oc_forward_df(data, placename, bind_cols = TRUE, output = c("short",
-  "all"), key = oc_key(), bounds = NULL, countrycode = NULL,
-  language = NULL, limit = 1L, min_confidence = NULL,
-  no_annotations = TRUE, no_dedupe = FALSE, no_record = FALSE,
-  abbrv = FALSE, ...)
+  "all"), key = oc_key(), proximity = NULL, bounds = NULL,
+  countrycode = NULL, language = NULL, limit = 1L,
+  min_confidence = NULL, no_annotations = TRUE, no_dedupe = FALSE,
+  no_record = FALSE, abbrv = FALSE, ...)
 }
 \arguments{
 \item{placename}{A character vector with the placename(s) to be geocoded.
@@ -38,6 +38,13 @@ coordinates forming the south-west and north-east corners of a bounding box
 restrict the possible results to the supplied region. It can easily be
 specified with the \code{\link{oc_bbox}} helper, for example like
 \code{bounds = oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}.}
+
+\item{proximity}{A list of bounding boxes, i.e. numeric vectors, each with
+with latitude, longitude coordinates in decimal format. They provide
+OpenCage with a hint to bias results in favour of those closer to the
+specified location. It can easily be specified with the
+\code{\link{oc_points}} helper, for example like \code{proximity =
+oc_points(41.40139,2.12870)}.}
 
 \item{countrycode}{A two letter code as defined by the
 \href{https://www.iso.org/obp/ui/#search/code}{ISO 3166-1 Alpha 2} standard

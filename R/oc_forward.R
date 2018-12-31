@@ -19,6 +19,12 @@
 #'   restrict the possible results to the supplied region. It can easily be
 #'   specified with the \code{\link{oc_bbox}} helper, for example like
 #'   \code{bounds = oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}.
+#' @param proximity A list of bounding boxes, i.e. numeric vectors, each with
+#'   with latitude, longitude coordinates in decimal format. They provide
+#'   OpenCage with a hint to bias results in favour of those closer to the
+#'   specified location. It can easily be specified with the
+#'   \code{\link{oc_points}} helper, for example like \code{proximity =
+#'   oc_points(41.40139,2.12870)}.
 #' @param countrycode A two letter code as defined by the
 #'   \href{https://www.iso.org/obp/ui/#search/code}{ISO 3166-1 Alpha 2} standard
 #'   that restricts the results to the given country or countries. E.g. "AR" for
@@ -88,6 +94,7 @@ oc_forward <-
            return = c("df_list", "json_list", "geojson_list", "url_only"),
            key = oc_key(),
            bounds = NULL,
+           proximity = NULL,
            countrycode = NULL,
            language = NULL,
            limit = 10L,
@@ -112,6 +119,7 @@ oc_forward <-
       placename = placename,
       key = key,
       bounds = bounds,
+      proximity = proximity,
       countrycode = countrycode,
       language = language,
       limit = limit,
@@ -128,6 +136,7 @@ oc_forward <-
       return = return,
       key = key,
       bounds = bounds,
+      proximity = proximity,
       countrycode = countrycode,
       language = language,
       limit = limit,
@@ -158,6 +167,7 @@ oc_forward_df <-
            bind_cols = TRUE,
            output = c("short", "all"),
            key = oc_key(),
+           proximity = NULL,
            bounds = NULL,
            countrycode = NULL,
            language = NULL,
@@ -179,6 +189,15 @@ oc_forward_df <-
       bounds <- eval(bounds_)
     }
     if (!is.null(bounds)) bounds <- as.list(bounds)
+
+    proximity_ <- eval(substitute(alist(proximity)))[[1]]
+    if (is.symbol(proximity_)) {
+      proximity_ <- data[[deparse(proximity_)]]
+      if (!is.null(proximity_)) proximity <- proximity_
+    } else if (is.call(proximity_)) {
+      proximity <- eval(proximity_)
+    }
+    if (!is.null(proximity)) proximity <- as.list(proximity)
 
     countrycode_ <- eval(substitute(alist(countrycode)))[[1]]
     if (is.symbol(countrycode_)) {
@@ -258,6 +277,7 @@ oc_forward_df <-
         key = key,
         return = "df_list",
         bounds = bounds,
+        proximity = proximity,
         countrycode = countrycode,
         language = language,
         limit = limit,
@@ -286,6 +306,7 @@ oc_forward_df <-
               key = key,
               return = "df_list",
               bounds = bounds,
+              proximity = proximity,
               countrycode = countrycode,
               language = language,
               limit = limit,

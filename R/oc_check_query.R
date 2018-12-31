@@ -16,6 +16,7 @@ oc_check_query <-
     longitude = NULL,
     key = NULL,
     bounds = NULL,
+    proximity = NULL,
     countrycode = NULL,
     language = NULL,
     limit = NULL,
@@ -33,6 +34,7 @@ oc_check_query <-
           latitude = latitude,
           longitude = longitude,
           bounds = bounds,
+          proximity = proximity,
           countrycode = countrycode,
           language = language,
           limit = limit,
@@ -62,6 +64,7 @@ oc_check_query <-
     longitude = NULL,
     key = NULL,
     bounds = NULL,
+    proximity = NULL,
     countrycode = NULL,
     language = NULL,
     limit = NULL,
@@ -109,10 +112,34 @@ oc_check_query <-
       if (length(bounds) != 4) {
         stop(
           call. = FALSE,
-          "Every `bbox` must be a numeric vector of length 4."
+          "Every `bbox` must be a numeric vector of length 4.",
+          "Did you forget to wrap the vector(s) in a list?"
         )
       }
       oc_check_bbox(bounds[[1]], bounds[[2]], bounds[[3]], bounds[[4]])
+    }
+
+    # check proximity
+    if (!is.null(proximity)) {
+      if (length(proximity) != 2) {
+        stop(
+          call. = FALSE,
+          "Every `proximity` point must be a numeric vector of length 2.\n",
+          "Did you forget to wrap the vector(s) in a list?"
+        )
+      }
+      if (!hasName(proximity, "latitude") || !hasName(proximity, "longitude")){
+        stop(
+          call. = FALSE,
+          "The coordinates of every `proximity` point must be named ",
+          "'latitude' and 'longitude'."
+        )
+      }
+      oc_check_query(
+        latitude = proximity[["latitude"]],
+        longitude = proximity[["longitude"]],
+        key = key
+      )
     }
 
     # check countrycode
