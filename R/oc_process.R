@@ -20,34 +20,6 @@
 #'   (\code{"url_only"}).
 #'   }
 #'
-#' @details
-#' \strong{API key}
-#' You will need an API key in order to geocode, for
-#' which you will need to register with \url{https://opencagedata.com}. The
-#' "Free Trial" plan provides up to 2,500 API requests a day. The geocoding
-#' functions of the package will conveniently retrieve your API key with
-#' \code{\link{oc_key}} if it is saved in the environment variable
-#' \code{"OPENCAGE_KEY"}. For ease of use, save your API key in
-#' \code{\link[base:Startup]{.Renviron}} as described at
-#' \url{http://happygitwithr.com/api-tokens.html}.
-#'
-#' \strong{memoise}
-#' The underlying data at OpenCage is updated about once a day.
-#' Note that the package uses `memoise` with no timeout argument so that results
-#' are cached inside an active R session.
-#'
-#' All coordinates sent to the OpenCage API must adhere to the
-#' \href{https://en.wikipedia.org/wiki/World_Geodetic_System}{WGS 84}
-#' (\href{http://epsg.io/4326}{EPSG:4326})
-#' \href{https://en.wikipedia.org/wiki/Spatial_reference_system}{coordinate
-#' reference system} in decimal format. There is usually no reason to send more
-#' than six or seven digits past the decimal as that then gets down to the
-#' \href{https://en.wikipedia.org/wiki/Decimal_degrees}{precision of a
-#' centimetre}.
-#'
-#' This function typically returns multiple results due to placename ambiguity;
-#' consider using the \code{bounds} parameter to limit the area searched.
-#'
 #' @keywords internal
 
 oc_process <-
