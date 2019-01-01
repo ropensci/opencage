@@ -118,17 +118,17 @@ test_that("the bounds argument is well taken into account", {
     return = "df_list"
   )
 
-  # res2 is empty with limit=1 or 2 -> bug in OpenCage?!
+  # res2 is empty with limit=1, 2 or 3 -> bug in OpenCage?! => vcrify
   res2 <- oc_process(
     placename = "Berlin",
     bounds = list(c(-90, 38, 0, 45)),
     key = Sys.getenv("OPENCAGE_KEY"),
-    limit = 3,
+    limit = 10,
     return = "df_list"
   )
 
   expect_equal(res1[[1]][["country"]], "Germany")
-  expect_true(res2[[1]][["country"]] != "Germany")
+  expect_true(res2[[1]][[1, "country"]] != "Germany")
 })
 
 test_that("oc_process handles language argument.", {
