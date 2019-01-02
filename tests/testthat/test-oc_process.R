@@ -74,7 +74,7 @@ test_that("oc_process deals well with res being NULL", {
 })
 
 
-test_that("the bounds argument is well taken into account", {
+test_that("oc_process handles bounds argument.", {
   res <- oc_process(
     placename = "Sarzeau",
     key = NULL,
@@ -121,6 +121,36 @@ test_that("the bounds argument is well taken into account", {
 
   expect_equal(res1[[1]][["country"]], "Germany")
   expect_true(res2[[1]][[1, "country"]] != "Germany")
+})
+
+test_that("oc_process handles proximity argument.", {
+  res <- oc_process(
+    placename = "Warsaw",
+    key = NULL,
+    proximity = list(c(latitude = 41.2, longitude = -85.8)),
+    return = "url_only"
+  )
+  expect_match(res[[1]], "&proximity=41.2%2C-85.8", fixed = TRUE)
+
+  res <- oc_process(
+    placename = "Warsaw",
+    key = NULL,
+    proximity = oc_points(latitude = 41.2, longitude = -85.8),
+    return = "url_only"
+  )
+  expect_match(res[[1]], "&proximity=41.2%2C-85.8", fixed = TRUE)
+
+  res <- oc_process(
+    place = c("Warsaw", "Warsaw"),
+    key = NULL,
+    proximity = oc_points(
+      longitude = c(-85.8, 19.0),
+      latitude = c(41.2, 52.0)
+    ),
+    return = "url_only"
+  )
+  expect_match(res[[1]], "&proximity=41.2%2C-85.8", fixed = TRUE)
+  expect_match(res[[2]], "&proximity=52%2C19", fixed = TRUE)
 })
 
 test_that("oc_process handles language argument.", {
