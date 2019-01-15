@@ -1,11 +1,8 @@
 ## Test oc_get ##
 
 test_that("oc_get returns a response object", {
-  skip_on_cran()
-  skip_if_offline()
-
-  expect_s3_class(
-    oc_get(
+  vcr::use_cassette("oc_get_response", {
+    res <- oc_get(
       oc_build_url(
         query_par = list(
           placename = "Sarzeau",
@@ -13,17 +10,14 @@ test_that("oc_get returns a response object", {
         ),
         endpoint = "json"
       )
-    ),
-    "HttpResponse"
-  )
+    )
+  })
+  expect_s3_class(res, "HttpResponse")
 })
 
 test_that("oc_get returns a response object for Namibia NA countrycode", {
-  skip_on_cran()
-  skip_if_offline()
-
-  expect_s3_class(
-    oc_get(
+  vcr::use_cassette("oc_get_namibia", {
+    res <- oc_get(
       oc_build_url(
         query_par = list(
           placename = "Windhoek",
@@ -32,17 +26,14 @@ test_that("oc_get returns a response object for Namibia NA countrycode", {
         ),
         endpoint = "json"
       )
-    ),
-    "HttpResponse"
-  )
+    )
+  })
+  expect_s3_class(res, "HttpResponse")
 })
 
 test_that("oc_get returns a response object for vector countrycode", {
-  skip_on_cran()
-  skip_if_offline()
-
-  expect_s3_class(
-    oc_get(
+  vcr::use_cassette("oc_get_countrycode", {
+    res <- oc_get(
       oc_build_url(
         query_par = list(
           placename = "Paris",
@@ -51,9 +42,9 @@ test_that("oc_get returns a response object for vector countrycode", {
         ),
         endpoint = "json"
       )
-    ),
-    "HttpResponse"
-  )
+    )
+  })
+  expect_s3_class(res, "HttpResponse")
 })
 
 test_that("oc_get_limited is rate limited", {
