@@ -29,8 +29,9 @@ Imports:
 Suggests: 
     knitr (>= 1.19),
     rmarkdown (>= 1.8),
+    sf,
     testthat (>= 2.1.0),
-    sf
+    vcr
 VignetteBuilder: knitr
 Encoding: UTF-8
 Language: en-GB
