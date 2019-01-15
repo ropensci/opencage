@@ -35,7 +35,8 @@ Suggests:
     mockery,
     rmarkdown (>= 1.8),
     sf (>= 0.9),
-    testthat (>= 2.1.0)
+    testthat (>= 2.1.0),
+    vcr (>= 0.6.0)
 VignetteBuilder: knitr
 Encoding: UTF-8
 Language: en-GB
