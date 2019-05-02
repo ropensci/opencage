@@ -19,7 +19,7 @@ oc_parse <- function(req, return, query) {
     if (jsn$total_results == 0) {
       results <- tibble::tibble(lat = NA_real_, lng = NA_real_, formatted = NA)
     } else {
-      results <- tibble::as.tibble(jsn$results)
+      results <- tibble::as_tibble(jsn$results)
     }
     if ("request" %in% names(jsn)) {
       results <- tibble::add_column(results, query = query, .before = 1)
