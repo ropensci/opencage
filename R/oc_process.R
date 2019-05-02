@@ -129,13 +129,16 @@ oc_process <-
     )
 
     if (return == "url_only") {
-      if (interactive() || is_testing()) {
+      if (interactive() || is.null(key)) {
         return(oc_url)
       } else {
-        stop("'url_only' reveals your opencage key. \n
-             It is therefore only available in interactive mode.")
+        stop(
+          call. = FALSE,
+          "'url_only' reveals your opencage key.
+          It is therefore only available in interactive mode."
+        )
       }
-      }
+    }
 
     # get result
     res <- oc_get_memoise(oc_url)
