@@ -211,18 +211,18 @@ oc_reverse_df <-
               add_request = add_request
             )
         )
-    }
 
-    results <- tidyr::unnest(results_nest, op) # nolint
-    # `op` is necessary, so that other list columns are not unnested
-    # but lintr complains about `op` not being defined
+      results <- tidyr::unnest(results_nest, op) # nolint
+      # `op` is necessary, so that other list columns are not unnested
+      # but lintr complains about `op` not being defined
 
-    if (output == "short") {
-      results <-
-        dplyr::select(results, 1:query, formatted, -query)
-    } else {
-      results <-
-        dplyr::select(results, 1:query, dplyr::everything(), -query)
+      if (output == "short") {
+        results <-
+          dplyr::select(results, 1:query, formatted,-query)
+      } else {
+        results <-
+          dplyr::select(results, 1:query, dplyr::everything(),-query)
+      }
     }
     results
   }
