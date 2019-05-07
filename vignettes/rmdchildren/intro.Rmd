@@ -1,12 +1,12 @@
 # Geocoding
 
-The [OpenCage](https://opencagedata.com/) API supports forward and reverse geocoding. Sources of OpenCage are open geospatial data including OpenStreetMap, Yahoo! GeoPlanet, Natural Earth Data, Thematic Mapping, Ordnance Survey OpenSpace, Statistics New Zealand, Zillow, MaxMind, GeoNames, the US Census Bureau and Flickr's shapefiles plus a whole lot more besides. See [this page](https://opencagedata.com/credits) for the full list of credits.
+The [OpenCage](https://opencagedata.com/) API supports forward and reverse geocoding. Sources of OpenCage are open geospatial data including OpenStreetMap, Yahoo! GeoPlanet, Natural Earth Data, Thematic Mapping, Ordnance Survey OpenSpace, Statistics New Zealand, Zillow, MaxMind, GeoNames, the US Census Bureau and Flickr's shapefiles plus a whole lot more besides. Refer to [the full list of credits](https://opencagedata.com/credits).
 
 ## API key
 
 To use the package, you will need to register at https://opencagedata.com/users/sign_up to get an API key. The "Free Trial" plan provides up to 2,500 API requests a day. 
 
-The geocoding functions of the package will conveniently retrieve your API key with `oc_key()` if it is saved in the environment variable `"OPENCAGE_KEY"`. For ease of use, save your API key as an environment variable in `.Renviron` as described at http://happygitwithr.com/api-tokens.html.
+The geocoding functions of the package will conveniently retrieve your API key with `oc_key()` if it is saved in the environment variable `"OPENCAGE_KEY"`. For ease of use, [save your API key as an environment variable in `.Renviron`](https://happygitwithr.com/github-pat.html#step-by-step).
 
 ## Forward geocoding
 
@@ -79,9 +79,9 @@ knitr::kable(results5)
 
 * `limit` specifies the maximum number of results that should be returned. Integer values between 1 and 100 are allowed, the default is 10 for `oc_forward()` and 1 for `oc_forward_df()`. Reverse geocoding always returns at most one result. 
 
-* `min_confidence`, an integer value between 0 and 10, indicates the precision of the returned result as defined by it's geographical extent, (i.e. by the extent of the result's bounding box). See the \href{API documentation}{https://opencagedata.com/api#confidence} for details. Only results with at least the requested confidence will be returned.
+* `min_confidence`, an integer value between 0 and 10, indicates the precision of the returned result as defined by its geographical extent, (i.e. by the extent of the result's bounding box). See the \href{API documentation}{https://opencagedata.com/api#confidence} for details. Only results with at least the requested confidence will be returned.
 
-* `no_annotations`: OpenCage supplies additional information about the result location in the annotations field. The annotations include, among others, country information, time of sunset and sunrise, or the location in different geocoding formats, like Maidenhead, Mercator projection (EPSG 3857), geohash or what3words. Some annotations, like the Irish Transverse Mercator (ITM) or the US Federal Information Processing Standards (FIPS) code will only be shown, where appropriate. `no_annotations` is `TRUE` by default, which means that the output will not contain annotations.
+* `no_annotations`: OpenCage supplies additional information about the result location in the annotations field. The annotations include, among others, country information, time of sunset and sunrise, or the location in different geocoding formats, like Maidenhead, Mercator projection (EPSG 3857), geohash or what3words. Some annotations, like the Irish Transverse Mercator (ITM) or the US Federal Information Processing Standards (FIPS) code will only be shown when appropriate. `no_annotations` is `TRUE` by default, which means that the output will not contain annotations.
 
 * `no_dedupe` is `FALSE` by default. When TRUE the output will not be deduplicated.
 
