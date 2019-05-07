@@ -3,7 +3,7 @@
 #' Forward geocoding, from placename to latitude and longitude tuple(s).
 #'
 #' @param placename A character vector with the placename(s) to be geocoded.
-#'   Required. See
+#'   Required. If the placename(s) is/are address(es), see
 #'   \href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's
 #'    instructions} on how to format addresses for forward geocoding best.
 #' @param return A character vector of length one indicating the return value of
