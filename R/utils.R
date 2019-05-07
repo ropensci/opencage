@@ -86,6 +86,7 @@ oc_get <- function(oc_url) {
 oc_get_limited <-
   ratelimitr::limit_rate(
     oc_get,
+    # rate can be changed via oc_config()/ratelimitr::UPDATE_RATE()
     ratelimitr::rate(
       n = 1L,
       period = 1L
