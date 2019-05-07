@@ -23,4 +23,7 @@ The rate limit allowed by the API depends on the OpenCage plan you
   \url{https://opencagedata.com/pricing} for details. You can set the rate
   limit persistently across sessions by setting the \code{oc_rate_sec}
   \link[base:options]{option} in your \code{\link[base:Startup]{.Rprofile}}.
+  If you have the \link{usethis} package installed, you can edit your
+  \code{\link[base:Startup]{.Rprofile}} most easily with
+  \code{\link[usethis:edit]{usethis::edit_r_profile()}}.
 }
