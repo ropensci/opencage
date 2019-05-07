@@ -82,14 +82,16 @@ oc_check_query <-
     # check latitude
     if (!is.null(latitude)) {
       if (!(dplyr::between(latitude, -90, 90))) {
-        stop(call. = FALSE, "`latitude` must be between -90 and 90.")
+        stop("Every `latitude` must be numeric and between -90 and 90.",
+             call. = FALSE)
       }
     }
 
     # check longitude
     if (!is.null(longitude)) {
       if (!(dplyr::between(longitude, -180, 180))) {
-        stop(call. = FALSE, "`longitude` must be between -180 and 180.")
+        stop("Every `longitude` must be numeric and between -180 and 180.",
+             call. = FALSE)
       }
     }
 
@@ -116,7 +118,9 @@ oc_check_query <-
     # check countrycode
     if (!is.null(countrycode)) {
       if (!(all(toupper(unlist(countrycode)) %in% countrycodes$code))) {
-        stop(call. = FALSE, "`countrycode` does not have a valid value.")
+        stop("Every `countrycode` must be valid.",
+             "See `data('countrycodes')` for valid values.",
+             call. = FALSE)
       }
     }
 
@@ -124,11 +128,17 @@ oc_check_query <-
     if (!is.null(language)) {
       lang <- strsplit(language, "-")[[1]]
       if (!(lang[1] %in% languagecodes$code)) {
-        stop(call. = FALSE, "The `language` code is not valid.")
+        stop("Every `language` abbreviation must be valid.",
+             "The first part, the languagecode, is incorrect.",
+             "See `data('languagecodes')` for valid values.",
+             call. = FALSE)
       }
       if (length(lang) > 1) {
         if (!(lang[2] %in% countrycodes$code)) {
-          stop(call. = FALSE, "The country code of `language` is not valid.")
+          stop("Every `language` abbreviation must be valid.",
+               "The second part, the countrycode, is incorrect.",
+               "See `data('countrycodes')` for valid values.",
+               call. = FALSE)
         }
       }
     }
@@ -138,7 +148,7 @@ oc_check_query <-
       if (!(limit %in% c(1:100))) {
         stop(
           call. = FALSE,
-          "`limit` must be an integer between 1 and 100."
+          "Every `limit` must be an integer between 1 and 100."
         )
       }
     }
@@ -148,7 +158,7 @@ oc_check_query <-
       if (!(min_confidence %in% c(1:10))) {
         stop(
           call. = FALSE,
-          "`min_confidence` must be an integer between 1 and 10."
+          "Every `min_confidence` must be an integer between 1 and 10."
         )
       }
     }

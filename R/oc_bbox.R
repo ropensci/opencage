@@ -120,27 +120,27 @@ print.bbox_list <- function(x, ...) {
 oc_check_bbox <- function(xmin, ymin, xmax, ymax) {
   bnds <- c(xmin, ymin, xmax, ymax)
   if (any(is.na(bnds))) {
-    stop(call. = FALSE, "Every `bbox` element must be non-missing.")
+    stop("Every `bbox` element must be non-missing.", call. = FALSE)
   }
   if (!all(is.numeric(bnds))) {
-    stop(call. = FALSE, "Every `bbox` must be a numeric vector.")
+    stop("Every `bbox` must be a numeric vector.", call. = FALSE)
   }
   if (!dplyr::between(xmin, -180, 180)) {
-    stop(call. = FALSE, "`xmin` must be between -180 and 180.")
+    stop("Every `xmin` must be between -180 and 180.", call. = FALSE)
   }
   if (!dplyr::between(ymin, -90, 90)) {
-    stop(call. = FALSE, "`ymin` must be between -90 and 90.")
+    stop("Every `ymin` must be between -90 and 90.", call. = FALSE)
   }
   if (!dplyr::between(xmax, -180, 180)) {
-    stop(call. = FALSE, "`xmax` must be between -180 and 180.")
+    stop("Every `xmax` must be between -180 and 180.", call. = FALSE)
   }
   if (!dplyr::between(ymax, -90, 90)) {
-    stop(call. = FALSE, "`ymax` must be between -90 and 90.")
+    stop("Every `ymax` must be between -90 and 90.", call. = FALSE)
   }
   if (xmin > xmax) {
-    stop(call. = FALSE, "`xmin` must be smaller than `xmax`")
+    stop("`xmin` must always be smaller than `xmax`", call. = FALSE)
   }
   if (ymin > ymax) {
-    stop(call. = FALSE, "`ymin` must be smaller than `ymax`")
+    stop("`ymin` must always be smaller than `ymax`", call. = FALSE)
   }
 }
