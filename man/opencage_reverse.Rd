@@ -32,7 +32,7 @@ will attempt to return results in that language. If it is not specified,
 geocoding.}
 
 \item{min_confidence}{An integer value between 0 and 10 indicating the
-precision of the returned result as defined by it's geographical extent,
+precision of the returned result as defined by its geographical extent,
 (i.e. by the extent of the result's bounding box). See the
 \href{https://opencagedata.com/api#confidence}{API documentation} for
 details. Only results with at least the requested confidence will be

@@ -218,10 +218,10 @@ oc_reverse_df <-
 
       if (output == "short") {
         results <-
-          dplyr::select(results, 1:query, formatted,-query)
+          dplyr::select(results, 1:query, formatted, -query)
       } else {
         results <-
-          dplyr::select(results, 1:query, dplyr::everything(),-query)
+          dplyr::select(results, 1:query, dplyr::everything(), -query)
       }
     }
     results
