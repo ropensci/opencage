@@ -1,6 +1,5 @@
 library("opencage")
 context("oc_check_status")
-# vcrify
 # keys from https://opencagedata.com/api#codes or
 # https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/library-guidelines.md nolint
 key_402 <- "4372eff77b8343cebfc843eb4da4ddc4" # always returns a 402 responce

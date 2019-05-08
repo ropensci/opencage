@@ -13,6 +13,8 @@ oc_get_limited_test <- function(reps) {
 }
 
 test_that("oc_config updates rate limit of oc_get_limit", {
+  skip_on_cran()
+  skip_if_offline()
   rps <- 5L
   oc_config(max_rate_per_sec = rps)
   expect_gt(timer(oc_get_limited_test(rps + 1)), 1)

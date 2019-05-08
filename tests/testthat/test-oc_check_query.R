@@ -18,7 +18,7 @@ test_that("oc_check_query checks latitude", {
       longitude = 51.11892,
       key = "32randomlettersanddigits12345678"
     ),
-    "`latitude` must be between -90 and 90."
+    "Every `latitude` must be numeric and between -90 and 90."
   )
 })
 
@@ -29,7 +29,7 @@ test_that("oc_check_query checks longitude", {
       longitude = 5111892,
       key = "32randomlettersanddigits12345678"
     ),
-    "`longitude` must be between -180 and 180."
+    "Every `longitude` must be numeric and between -180 and 180."
   )
 })
 
@@ -67,7 +67,7 @@ test_that("oc_check_query checks countrycode", {
       key = "32randomlettersanddigits12345678",
       countrycode = "notacountrycode"
     ),
-    "`countrycode` does not have a valid value."
+    "Every `countrycode` must be valid.*"
   )
 })
 
@@ -95,7 +95,7 @@ test_that("oc_check_query checks language", {
       key = "32randomlettersanddigits12345678",
       language = "notalanguagecode"
     ),
-    "The `language` code is not valid."
+    "languagecode"
   )
 
   expect_error(
@@ -104,7 +104,7 @@ test_that("oc_check_query checks language", {
       key = "32randomlettersanddigits12345678",
       language = "fr-NOTACOUNTRYCODE"
     ),
-    "The country code of `language` is not valid."
+    "countrycode"
   )
 })
 
