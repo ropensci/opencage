@@ -1,7 +1,7 @@
 Type: Package
 Package: opencage
-Title: Interface to the OpenCage API
-Version: 0.1.4.9001
+Title: Geocode with the OpenCage API
+Version: 0.1.4.9002
 Authors@R: c(
     person("Maëlle", "Salmon", email = "maelle.salmon@yahoo.se", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-2815-0399")), 
     person("Daniel", "Possenriede", role = "aut", comment = c(ORCID = "0000-0002-6738-9845")),
@@ -9,9 +9,9 @@ Authors@R: c(
     person("Noam", "Ross", role = "ctb"), 
     person("Jake", "Russ", role = "ctb"), 
     person("Julia", "Silge", role = c("rev"), comment = "Julia Silge reviewed the package for rOpenSci, see https://github.com/ropensci/onboarding/issues/36."))
-Description: Tool for accessing the OpenCage API, which provides forward
-    geocoding (from placename to longitude and latitude) and reverse geocoding (from
-    longitude and latitude to placename).
+Description: Geocode with the OpenCage API, either from placename to longitude 
+    and latitude (forward geocoding) or from longitude and latitude to 
+    placename (reverse geocoding), see <https://opencagedata.com/>.
 License: GPL (>= 3.1)
 URL: http://github.com/ropensci/opencage
 BugReports: http://github.com/ropensci/opencage/issues
@@ -21,7 +21,7 @@ Imports:
     jsonlite (>= 1.5),
     memoise (>= 1.1.0),
     purrr (>= 0.2.4),
-    ratelimitr (>= 0.3.9),
+    ratelimitr (>= 0.4.0),
     progress (>= 1.1.2),
     tidyr (>= 0.8.0),
     tibble (>= 1.4.2)
@@ -32,5 +32,6 @@ Suggests:
     testthat (>= 2.0.0)
 VignetteBuilder: knitr
 Encoding: UTF-8
+Language: en-GB
 LazyData: TRUE
-RoxygenNote: 6.0.1.9000
+RoxygenNote: 6.1.1

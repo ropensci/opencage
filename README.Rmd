@@ -1,21 +1,19 @@
 ---
-title: "opencage R package"
-author: "Maëlle Salmon"
-date: "`r Sys.Date()`"
 output:
-  md_document:
-    variant: markdown_github
+  github_document
 ---
-opencage
-=============
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+# opencage
+
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/opencage)](http://cran.r-project.org/package=opencage)
 [![Build Status](https://travis-ci.org/ropensci/opencage.svg?branch=master)](https://travis-ci.org/ropensci/opencage)
 [![Build status](https://ci.appveyor.com/api/projects/status/iketgu0vk55kt0b0?svg=true)](https://ci.appveyor.com/project/ropensci/opencage)
 [![codecov.io](https://codecov.io/github/ropensci/opencage/coverage.svg?branch=master)](https://codecov.io/github/ropensci/opencage?branch=master)
 [![](https://badges.ropensci.org/36_status.svg)](https://github.com/ropensci/onboarding/issues/36)
 
-# Installation
+Geocode with the OpenCage API, either from placename to longitude and latitude (forward geocoding) or from longitude and latitude to placename (reverse geocoding). 
 
+# Installation
 
 Install the package with:
 
@@ -23,123 +21,16 @@ Install the package with:
 install.packages("opencage")
 ```
 
-Or install the development version using [devtools](https://github.com/hadley/devtools) with:
+Or install the development version using [remotes](https://remotes.r-lib.org/) with:
 
 ```{r, eval = FALSE}
-library("devtools")
-install_github("ropensci/opencage")
+remotes::install_github("ropensci/opencage")
 
 ```
 
-This package is an interface to the OpenCage API that allows forward and reverse geocoding. To use the package, you will need an API key. To get an API key for OpenCage geocoding, register at https://geocoder.opencagedata.com/pricing. The free API key provides up to 2,500 calls a day. For ease of use, save your API key as an environment variable as described at http://stat545.com/bit003_api-key-env-var.html.
 
-Both functions of the package will conveniently look for your API key using `Sys.getenv("OPENCAGE_KEY")` so if your API key is an environment variable called "OPENCAGE_KEY" you don't need to input it manually.
-
-# Geocoding
-
-The [OpenCage](https://geocoder.opencagedata.com/) API supports forward and reverse geocoding. Sources of OpenCage are open geospatial data including OpenStreetMap, Yahoo! GeoPlanet, Natural Earth Data, Thematic Mapping, Ordnance Survey OpenSpace, Statistics New Zealand, Zillow, MaxMind, GeoNames, the US Census Bureau and Flickr's shapefiles plus a whole lot more besides. See [this page](https://geocoder.opencagedata.com/credits) for the full list of credits.
-
-Both forward and reverse geocoding typically return multiple results. Regarding these multiple results, the API doc states, "In cases where the geocoder is able to find multiple matches, the geocoder will return multiple results. The confidence or coordinates for each result should be examined to determine whether each result from an ambiguous query is sufficiently high to warrant using a result or not. A good strategy to reduce ambiguity is to use the optional `bounds` parameter described below to limit the area searched." Multiple results might mean you get a result for the airport and a road when querying a city name, or results for cities with the same name in different countries. 
-
-Below are two simple examples.
-
-## Forward geocoding
-
-Forward geocoding is from placename to latitude and longitude tuplet(s).
-
-```{r, warning = FALSE, message = FALSE}
-library("opencage")
-output <- opencage_forward(placename = "Sarzeau")
-print(output$time_stamp)
-library("dplyr")
-output$rate_info %>% knitr::kable()
-output$results %>% knitr::kable()
+```{r child='vignettes/rmdchildren/intro.Rmd'} 
 ```
-
-## Reverse geocoding
-
-Reverse geocoding is from latitude and longitude to placename(s).
-
-```{r, message=FALSE}
-output2 <- opencage_reverse(latitude = 51.5034070, 
-                            longitude = -0.1275920)
-print(output2$time_stamp)
-output2$rate_info %>% knitr::kable()
-output2$results %>% knitr::kable()
-```
-
-## Output
-
-For both `opencage_forward` and `opencage_reverse` functions, the package returns a list with a time stamp for the query, the total number of results, a data.frame (`dplyr tbl_df`) with information about the remaining calls to the API unless you have an unlimited account, and a data.frame (`dplyr tbl_df`) with the results corresponding to your query. You can find longitude and latitude for each results as `geometry.lat` and `geometry.lng`. Other information includes country and country information, time of sunset and sunrise, geohash (a geocoding system identifying a point with a single string, as explained in many more details [here](https://www.elastic.co/guide/en/elasticsearch/guide/current/geohashes.html) and [here](https://en.wikipedia.org/wiki/Geohash); for pure conversion between longitude/latitude and geohashes, see [this package](https://github.com/Ironholds/geohash)).  Depending on the data available in the API for the results one gets different columns; there can be a lot to explore!
-
-## Parameters
-
-Optional parameters of both `opencage_forward` and `opencage_reverse` can make the query more precise:
-
-* `bounds`: Provides the geocoder with a hint to the region that the query resides in. This value will restrict the possible results to the supplied region. The bounds parameter should be specified as 4 coordinate points forming the south-west and north-east corners of a bounding box. For example, `bounds = c(-0.563160, 51.280430, 0.278970, 51.683979)` (min long, min lat, max long, max lat).
-
-Below is an example of the use of `bounds` where the rectangle given in the second call does not include Europe so that we don't get results for Berlin in Germany.
-
-```{r, message=FALSE}
-results1 <- opencage_forward(placename = "Berlin")
-results1$results %>% knitr::kable()
-results2 <- opencage_forward(placename = "Berlin",
-                             bounds = c(-90,38,0, 45))
-results2$results %>% knitr::kable()
-```
-
-* `countrycode`: Restricts the results to the given country. The country code is a two letter code as defined by the ISO 3166-1 Alpha 2 standard. E.g. "GB" for the United Kingdom, "FR" for France, "US" for United States. See example below.
-
-```{r, message=FALSE}
-results3 <- opencage_forward(placename = "Berlin", country = "DE")
-results3$results %>% knitr::kable()
-
-```
-
-* `language`: an IETF format language code (such as "es" for Spanish or "pt-BR" for Brazilian Portuguese). If no language is explicitly specified, we will look for an HTTP Accept-Language header like those sent by a brower and use the first language specified and if none are specified "en" (English) will be assumed. See example below.
-
-```{r, message=FALSE}
-results3$results %>% knitr::kable()
-results4 <- opencage_forward(placename = "Berlin", country = "DE", language = "de")
-results4$results %>% knitr::kable()
-
-```
-
-* `limit`: How many results should be returned (1-100). Default is 10.
-
-* `min_confidence`: an integer from 1-10. Only results with at least this confidence will be returned.
-
-* `no_annotations`: Logical (default FALSE), when TRUE the output will not contain annotations.
-
-* `no_dedupe`: Logical (default FALSE), when TRUE the output will not be deduplicated.
-
- For more information about the output and the query parameters, see the package documentation, the [API doc](https://geocoder.opencagedata.com/api) and [OpenCage FAQ](https://geocoder.opencagedata.com/faq).
-
-## Caching
-
-The underlying data at OpenCage is updated about once a day. Note that the package uses [memoise](https://github.com/hadley/memoise) with no timeout argument so that results are cached inside an active R session. 
-
-```{r, message=FALSE}
-system.time(opencage_reverse(latitude = 10, longitude = 10))
-
-system.time(opencage_reverse(latitude = 10, longitude = 10))
-
-memoise::forget(opencage_reverse)
-system.time(opencage_reverse(latitude = 10, longitude = 10))
-
-```
-
-## Privacy
-
-Both functions have a parameter `no_record`. It is `FALSE` by default. 
-
-* When `no_record` is `FALSE` a log of the query is made by OpenCage. The company uses them to better generally understand how people are using its service (forward or reverse geocoding, what parts of the world are people most interested in, etc) and for debugging. The overwhelming majority (99.9999+% of queries) are never specifically looked at (sheer volume prevents that) and are automatically deleted after a few days. More information about privacy can be found [here](https://geocoder.opencagedata.com/faq#legal).
-
-* When `no_record` is `TRUE` the actual query is replaced with FILTERED in OpenCage logs, so that the company has no chance to see what your request was.
-
-## Addresses
-
-They also have an `abbr` parameter, FALSE by default. When it is TRUE the addresses are abbreviated in the results, see more details in [this blog post](http://blog.opencagedata.com/post/160294347883/shrtr-pls).
 
 ## Meta
 

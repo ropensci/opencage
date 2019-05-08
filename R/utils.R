@@ -1,12 +1,12 @@
 # status check
-oc_check <- function(req) {
+oc_check_status <- function(req) {
   if (req$status_code < 400) return(invisible())
   message <- code_message$message[code_message$code == req$status_code]
   stop("HTTP failure: ", req$status_code, "\n", message, call. = FALSE)
 }
 
 # function for parsing the response
-oc_parse <- function(req, output, query) {
+oc_parse <- function(req, return, query) {
   text <- req$parse(encoding = "UTF-8")
   if (identical(text, "")) {
     stop(
@@ -14,12 +14,12 @@ oc_parse <- function(req, output, query) {
       call. = FALSE
     )
   }
-  if (output == "df_list") {
+  if (return == "df_list") {
     jsn <- jsonlite::fromJSON(text, simplifyVector = TRUE, flatten = TRUE)
     if (jsn$total_results == 0) {
       results <- tibble::tibble(lat = NA_real_, lng = NA_real_, formatted = NA)
     } else {
-      results <- tibble::as.tibble(jsn$results)
+      results <- tibble::as_tibble(jsn$results)
     }
     if ("request" %in% names(jsn)) {
       results <- tibble::add_column(results, query = query, .before = 1)
@@ -33,9 +33,9 @@ oc_parse <- function(req, output, query) {
     colnames(results) <- gsub("\\.", "_", colnames(results))
     colnames(results) <- gsub("-", "_", colnames(results))
     results
-  } else if (output == "json_list" || output == "geojson_list") {
+  } else if (return == "json_list" || return == "geojson_list") {
     jsn <- jsonlite::fromJSON(text, simplifyVector = FALSE)
-    if (output == "geojson_list") {
+    if (return == "geojson_list") {
       structure(jsn, class = c("geo_list"))
     } else {
       jsn
@@ -86,9 +86,10 @@ oc_get <- function(oc_url) {
 oc_get_limited <-
   ratelimitr::limit_rate(
     oc_get,
+    # rate can be changed via oc_config()/ratelimitr::UPDATE_RATE()
     ratelimitr::rate(
-      n = getOption("oc_requests_per_second", default = 1),
-      period = 1
+      n = 1L,
+      period = 1L
     )
   )
 
@@ -97,18 +98,19 @@ oc_get_memoise <- memoise::memoise(oc_get_limited)
 # initialise progress bar
 oc_init_progress <- function(vec){
     progress::progress_bar$new(
-      format = "Retrieving results from the OpenCage API [:bar] :percent",
-      total = length(vec), clear = FALSE,
+      format =
+        "Retrieving results from OpenCage [:spin] :percent ETA: :eta",
+      total = length(vec),
+      clear = FALSE,
       width = 60)
 }
-
 
 # format to "old" style (version <= 0.1.4)
 # for opencage_forward, opencage_reverse
 opencage_format <- function(lst){
-  no_results <- lst$total_results
+  no_results <- lst[["total_results"]]
   if (no_results > 0) {
-    results <- lapply(lst$results, unlist)
+    results <- lapply(lst[["results"]], unlist)
     results <- lapply(results, as.data.frame)
     results <- lapply(results, t)
     results <- lapply(results, as.data.frame, stringsAsFactors = FALSE)
@@ -150,12 +152,14 @@ opencage_format <- function(lst){
   )
 }
 
-#' Retrieve Opencage API key
+#' Retrieve OpenCage API key
 #'
-#' An Opencage API Key
-#' Looks in env var \code{OPENCAGE_KEY}
+#' Retrieves the OpenCage API Key from the environment variable
+#' \code{OPENCAGE_KEY}.
 #'
-#' @keywords internal
+#' @param quiet Logical vector of length one indicating whether the key is
+#'   returned quietly or whether a message is printed.
+#'
 #' @export
 oc_key <- function(quiet = TRUE) {
   pat <- Sys.getenv("OPENCAGE_KEY")
