@@ -12,7 +12,7 @@
 #'   \code{northeast_lat}, \code{north}, or \code{top}).
 #' @param data A \code{data.frame} containing at least 4 columns with \code{xmin},
 #'   \code{ymin}, \code{xmax}, and \code{ymax} values, respectively.
-#' @param bbox A \code{bbox} object, see \link[sf]{st_bbox}.
+#' @param bbox A \code{bbox} object, see \code{sf::st_bbox}.
 #' @param ... Ignored.
 #'
 #' @return A list of bounding boxes, each of class \code{bbox}.

@@ -33,7 +33,7 @@ oc_bbox(...)
 \item{data}{A \code{data.frame} containing at least 4 columns with \code{xmin},
 \code{ymin}, \code{xmax}, and \code{ymax} values, respectively.}
 
-\item{bbox}{A \code{bbox} object, see \link[sf]{st_bbox}.}
+\item{bbox}{A \code{bbox} object, see \code{sf::st_bbox}.}
 }
 \value{
 A list of bounding boxes, each of class \code{bbox}.

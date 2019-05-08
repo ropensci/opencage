@@ -118,7 +118,7 @@ oc_check_query <-
     # check countrycode
     if (!is.null(countrycode)) {
       if (!(all(toupper(unlist(countrycode)) %in% countrycodes$code))) {
-        stop("Every `countrycode` must be valid.",
+        stop("Every `countrycode` must be valid. ",
              "See `data('countrycodes')` for valid values.",
              call. = FALSE)
       }
@@ -128,15 +128,15 @@ oc_check_query <-
     if (!is.null(language)) {
       lang <- strsplit(language, "-")[[1]]
       if (!(lang[1] %in% languagecodes$code)) {
-        stop("Every `language` abbreviation must be valid.",
-             "The first part, the languagecode, is incorrect.",
+        stop("Every `language` abbreviation must be valid. ",
+             "The first part, the languagecode, is incorrect. ",
              "See `data('languagecodes')` for valid values.",
              call. = FALSE)
       }
       if (length(lang) > 1) {
         if (!(lang[2] %in% countrycodes$code)) {
-          stop("Every `language` abbreviation must be valid.",
-               "The second part, the countrycode, is incorrect.",
+          stop("Every `language` abbreviation must be valid. ",
+               "The second part, the countrycode, is incorrect. ",
                "See `data('countrycodes')` for valid values.",
                call. = FALSE)
         }
