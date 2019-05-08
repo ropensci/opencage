@@ -71,12 +71,12 @@ xdf \%>\%
       northeast_lat
      )
    )
-}
-\dontrun{
+
 # create bbox list from a simple features bbox
+if (requireNamespace("sf", quietly = TRUE)){
   library(sf)
   bbox <- st_bbox(c(xmin = 16.1, xmax = 16.6, ymax = 48.6, ymin = 47.9),
     crs = 4326)
   oc_bbox(bbox)
-}
+}}
 }
