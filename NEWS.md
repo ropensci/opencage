@@ -1,4 +1,4 @@
-# opencage 0.1.4.9001
+# opencage 0.1.4.9002
 
 This is a major rewrite of the {opencage} package. `opencage_forward()` and `opencage_reverse()` have been deprecated and are superseded by `oc_forward()` and `oc_reverse()`, respectively. In addition there are two new functions `oc_forward_df()` and `oc_reverse_df()`, which (reverse) geocode a `placename` column (or `latitude`/`longitude` columns) in a data frame. 
 
@@ -16,6 +16,9 @@ The new features include:
 
 * `opencage_forward()`, `opencage_reverse()`, and `opencage_key()` are (soft) deprecated. `opencage_key()` has just been renamed to `oc_key()` for consistency.
 * `opencage_forward()` and `opencage_reverse()` will always output strings as characters, i.e. they won't coerce to factor depending on the `stringsAsFactor` option.
+
+## Minor changes
+
 * The column name for both `languagecodes` and `countrycodes` is now `code`, and not `alpha2` and `Code`, respectively. 
 
 # opencage 0.1.4
