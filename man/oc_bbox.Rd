@@ -30,8 +30,9 @@ oc_bbox(...)
 \item{ymax}{Maximum latitude (also known as \code{max lat},
 \code{northeast_lat}, \code{north}, or \code{top}).}
 
-\item{data}{A \code{data.frame} containing at least 4 columns with \code{xmin},
-\code{ymin}, \code{xmax}, and \code{ymax} values, respectively.}
+\item{data}{A \code{data.frame} containing at least 4 columns with
+\code{xmin}, \code{ymin}, \code{xmax}, and \code{ymax} values,
+respectively.}
 
 \item{bbox}{A \code{bbox} object, see \code{sf::st_bbox}.}
 }
@@ -73,7 +74,7 @@ xdf \%>\%
    )
 
 # create bbox list from a simple features bbox
-if (requireNamespace("sf", quietly = TRUE)){
+if (requireNamespace("sf", quietly = TRUE)) {
   library(sf)
   bbox <- st_bbox(c(xmin = 16.1, xmax = 16.6, ymax = 48.6, ymin = 47.9),
     crs = 4326)

@@ -32,7 +32,7 @@ test_that("oc_bbox works with data.frame", {
       northeast_lat = c(54.0,  42.73),
       northeast_lng = c(10.3, -78.81),
       southwest_lat = c(53.3,  42.70),
-      southwest_lng = c( 8.1, -78.86)
+      southwest_lng = c(8.1, -78.86)
     )
 
   bbox2 <-

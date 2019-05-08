@@ -8,7 +8,6 @@
 #'
 #' @keywords internal
 
-
 oc_check_query <-
   function(
     placename = NULL,

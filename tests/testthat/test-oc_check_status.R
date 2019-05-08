@@ -1,7 +1,7 @@
 library("opencage")
 context("oc_check_status")
 # keys from https://opencagedata.com/api#codes or
-# https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/library-guidelines.md nolint
+# https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/library-guidelines.md # nolint
 key_402 <- "4372eff77b8343cebfc843eb4da4ddc4" # always returns a 402 responce
 key_403 <- "2e10e5e828262eb243ec0b54681d699a" # always returns a 403 responce
 

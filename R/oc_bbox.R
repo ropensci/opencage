@@ -10,8 +10,9 @@
 #'   \code{northeast_lng}, \code{east}, or \code{right}).
 #' @param ymax Maximum latitude (also known as \code{max lat},
 #'   \code{northeast_lat}, \code{north}, or \code{top}).
-#' @param data A \code{data.frame} containing at least 4 columns with \code{xmin},
-#'   \code{ymin}, \code{xmax}, and \code{ymax} values, respectively.
+#' @param data A \code{data.frame} containing at least 4 columns with
+#'   \code{xmin}, \code{ymin}, \code{xmax}, and \code{ymax} values,
+#'   respectively.
 #' @param bbox A \code{bbox} object, see \code{sf::st_bbox}.
 #' @param ... Ignored.
 #'
@@ -50,7 +51,7 @@
 #'    )
 #'
 #' # create bbox list from a simple features bbox
-#' if (requireNamespace("sf", quietly = TRUE)){
+#' if (requireNamespace("sf", quietly = TRUE)) {
 #'   library(sf)
 #'   bbox <- st_bbox(c(xmin = 16.1, xmax = 16.6, ymax = 48.6, ymin = 47.9),
 #'     crs = 4326)
@@ -60,7 +61,7 @@ oc_bbox <- function(...) UseMethod("oc_bbox")
 
 #' @name oc_bbox
 #' @export
-oc_bbox.default <- function (xmin, ymin, xmax, ymax, ...){
+oc_bbox.default <- function(xmin, ymin, xmax, ymax, ...) {
   bbox <- function(xmin, ymin, xmax, ymax) {
     oc_check_bbox(xmin = xmin, ymin = ymin, xmax = xmax, ymax = ymax)
     structure(
@@ -85,7 +86,7 @@ oc_bbox.default <- function (xmin, ymin, xmax, ymax, ...){
 
 #' @name oc_bbox
 #' @export
-oc_bbox.data.frame <- function (data, xmin, ymin, xmax, ymax, ...){
+oc_bbox.data.frame <- function(data, xmin, ymin, xmax, ymax, ...) {
   xmin <- data[[deparse(substitute(xmin))]]
   ymin <- data[[deparse(substitute(ymin))]]
   xmax <- data[[deparse(substitute(xmax))]]
@@ -95,7 +96,7 @@ oc_bbox.data.frame <- function (data, xmin, ymin, xmax, ymax, ...){
 
 #' @name oc_bbox
 #' @export
-oc_bbox.bbox <- function (bbox, ...) {
+oc_bbox.bbox <- function(bbox, ...) {
   # check coordinate reference system (and be lenient if NA_crs_)
   crs <- attr(bbox, "crs")[["epsg"]]
   if (!is.na(crs) && crs != 4326L) {
