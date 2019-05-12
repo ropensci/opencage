@@ -27,7 +27,7 @@
 #' \dontrun{
 #' oc_reverse(latitude = 0, longitude = 0)
 #' }
-
+#'
 oc_reverse <-
   function(latitude,
            longitude,

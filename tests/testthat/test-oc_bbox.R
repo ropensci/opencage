@@ -20,7 +20,7 @@ test_that("oc_bbox works with numeric", {
     c(
       xmin = -5.6,
       ymin = 51.2,
-      xmax =  0.2,
+      xmax = 0.2,
       ymax = 51.6
     )
   )
@@ -29,18 +29,19 @@ test_that("oc_bbox works with numeric", {
 test_that("oc_bbox works with data.frame", {
   xdf <-
     data.frame(
-      northeast_lat = c(54.0,  42.73),
+      northeast_lat = c(54.0, 42.73),
       northeast_lng = c(10.3, -78.81),
-      southwest_lat = c(53.3,  42.70),
+      southwest_lat = c(53.3, 42.70),
       southwest_lng = c(8.1, -78.86)
     )
 
   bbox2 <-
-    oc_bbox(xdf,
-            southwest_lng,
-            southwest_lat,
-            northeast_lng,
-            northeast_lat
+    oc_bbox(
+      xdf,
+      southwest_lng,
+      southwest_lat,
+      northeast_lng,
+      northeast_lat
     )
   expect_type(
     bbox2,
@@ -57,7 +58,7 @@ test_that("oc_bbox works with data.frame", {
   expect_equal(
     unlist(bbox2[1]),
     c(
-      xmin =  8.1,
+      xmin = 8.1,
       ymin = 53.3,
       xmax = 10.3,
       ymax = 54.0
@@ -67,9 +68,9 @@ test_that("oc_bbox works with data.frame", {
     unlist(bbox2[2]),
     c(
       xmin = -78.86,
-      ymin =  42.70,
+      ymin = 42.70,
       xmax = -78.81,
-      ymax =  42.73
+      ymax = 42.73
     )
   )
 })
@@ -83,7 +84,8 @@ test_that("oc_bbox works with simple features bbox", {
       ymax = 48.6,
       ymin = 47.9
     ),
-    crs = 4326)
+    crs = 4326
+    )
   ocbbox <- oc_bbox(sfbbox)
 
   expect_type(

@@ -54,8 +54,10 @@ test_that("opencage_forward/opencage_reverse return what they should
   expect_is(results[["total_results"]], "integer")
   expect_is(results[["time_stamp"]], "POSIXct")
   expect_equal(length(results), 4)
-  expect_equal(sum(grepl("annotation",
-                         names(results[["results"]]))), 0)
+  expect_equal(sum(grepl(
+    "annotation",
+    names(results[["results"]])
+  )), 0)
   expect_true(dplyr::between(nrow(results[["results"]]), 1, 2))
 
   results <- opencage_reverse(
@@ -72,8 +74,10 @@ test_that("opencage_forward/opencage_reverse return what they should
   expect_is(results[["total_results"]], "integer")
   expect_is(results[["time_stamp"]], "POSIXct")
   expect_equal(length(results), 4)
-  expect_equal(sum(grepl("annotation",
-                         names(results[["results"]]))), 0)
+  expect_equal(sum(grepl(
+    "annotation",
+    names(results[["results"]])
+  )), 0)
   expect_true(dplyr::between(nrow(results[["results"]]), 1, 2))
 })
 

@@ -6,6 +6,6 @@ test_that("oc_build_url returns a string", {
       query_par = list(placename = "Haarlem"),
       endpoint = "json"
     ),
-    "character")
-  }
-)
+    "character"
+  )
+})

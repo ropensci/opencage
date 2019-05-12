@@ -40,8 +40,10 @@ opencage_forward <-
            abbrv = FALSE,
            add_request = TRUE) {
     if (length(placename) > 1) {
-      stop(call. = FALSE,
-           "`opencage_forward` is not vectorised, use `oc_forward` instead.")
+      stop(
+        call. = FALSE,
+        "`opencage_forward` is not vectorised, use `oc_forward` instead."
+      )
     }
     lst <- oc_forward(
       placename = placename,
@@ -78,8 +80,10 @@ opencage_forward <-
 #'
 #' @examples
 #' \dontrun{
-#' opencage_reverse(latitude = 0, longitude = 0,
-#' limit = 2)
+#' opencage_reverse(
+#'   latitude = 0, longitude = 0,
+#'   limit = 2
+#' )
 #' }
 opencage_reverse <-
   function(latitude,
@@ -96,8 +100,10 @@ opencage_reverse <-
            abbrv = FALSE,
            add_request = TRUE) {
     if (length(latitude) > 1) {
-      stop(call. = FALSE,
-           "`opencage_reverse` is not vectorised, use `oc_reverse` instead.")
+      stop(
+        call. = FALSE,
+        "`opencage_reverse` is not vectorised, use `oc_reverse` instead."
+      )
     }
     lst <- oc_reverse(
       latitude = latitude,

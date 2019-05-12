@@ -73,18 +73,18 @@ test_that("oc_check_query checks countrycode", {
 
 test_that("oc_check_query ok with lower case countrycode", {
   expect_silent(
-   oc_check_query(
+    oc_check_query(
       placename = "Sarzeau",
       key = "32randomlettersanddigits12345678",
       countrycode = "fr"
     )
-   )
+  )
   expect_silent(
-   oc_check_query(
-     placename = "Sarzeau",
-     key = "32randomlettersanddigits12345678",
-     countrycode = "FR"
-   )
+    oc_check_query(
+      placename = "Sarzeau",
+      key = "32randomlettersanddigits12345678",
+      countrycode = "FR"
+    )
   )
 })
 

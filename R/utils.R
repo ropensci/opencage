@@ -56,7 +56,7 @@ oc_format <- function(res_text, return, query) {
 oc_build_url <- function(query_par, endpoint) {
   query_par <- purrr::compact(query_par) # nolint
 
-  if ("countrycode" %in% names(query_par)){
+  if ("countrycode" %in% names(query_par)) {
     query_par$countrycode <-
       tolower(paste(query_par$countrycode, collapse = ","))
   }
@@ -104,18 +104,19 @@ oc_get_limited <-
 oc_get_memoise <- memoise::memoise(oc_get_limited)
 
 # initialise progress bar
-oc_init_progress <- function(vec){
-    progress::progress_bar$new(
-      format =
-        "Retrieving results from OpenCage [:spin] :percent ETA: :eta",
-      total = length(vec),
-      clear = FALSE,
-      width = 60)
+oc_init_progress <- function(vec) {
+  progress::progress_bar$new(
+    format =
+      "Retrieving results from OpenCage [:spin] :percent ETA: :eta",
+    total = length(vec),
+    clear = FALSE,
+    width = 60
+  )
 }
 
 # format to "old" style (version <= 0.1.4)
 # for opencage_forward, opencage_reverse
-opencage_format <- function(lst){
+opencage_format <- function(lst) {
   no_results <- lst[["total_results"]]
   if (no_results > 0) {
     results <- lapply(lst[["results"]], unlist)

@@ -82,7 +82,8 @@ oc_check_query <-
     if (!is.null(latitude)) {
       if (!(dplyr::between(latitude, -90, 90))) {
         stop("Every `latitude` must be numeric and between -90 and 90.",
-             call. = FALSE)
+          call. = FALSE
+        )
       }
     }
 
@@ -90,7 +91,8 @@ oc_check_query <-
     if (!is.null(longitude)) {
       if (!(dplyr::between(longitude, -180, 180))) {
         stop("Every `longitude` must be numeric and between -180 and 180.",
-             call. = FALSE)
+          call. = FALSE
+        )
       }
     }
 
@@ -118,8 +120,9 @@ oc_check_query <-
     if (!is.null(countrycode)) {
       if (!(all(toupper(unlist(countrycode)) %in% countrycodes$code))) {
         stop("Every `countrycode` must be valid. ",
-             "See `data('countrycodes')` for valid values.",
-             call. = FALSE)
+          "See `data('countrycodes')` for valid values.",
+          call. = FALSE
+        )
       }
     }
 
@@ -128,16 +131,18 @@ oc_check_query <-
       lang <- strsplit(language, "-")[[1]]
       if (!(lang[1] %in% languagecodes$code)) {
         stop("Every `language` abbreviation must be valid. ",
-             "The first part, the languagecode, is incorrect. ",
-             "See `data('languagecodes')` for valid values.",
-             call. = FALSE)
+          "The first part, the languagecode, is incorrect. ",
+          "See `data('languagecodes')` for valid values.",
+          call. = FALSE
+        )
       }
       if (length(lang) > 1) {
         if (!(lang[2] %in% countrycodes$code)) {
           stop("Every `language` abbreviation must be valid. ",
-               "The second part, the countrycode, is incorrect. ",
-               "See `data('countrycodes')` for valid values.",
-               call. = FALSE)
+            "The second part, the countrycode, is incorrect. ",
+            "See `data('countrycodes')` for valid values.",
+            call. = FALSE
+          )
         }
       }
     }
