@@ -78,7 +78,9 @@ Reverse geocoding, from latitude and longitude to placename(s).
 }
 \examples{
 \dontrun{
-opencage_reverse(latitude = 0, longitude = 0,
-limit = 2)
+opencage_reverse(
+  latitude = 0, longitude = 0,
+  limit = 2
+)
 }
 }
