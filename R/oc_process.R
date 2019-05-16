@@ -151,6 +151,6 @@ oc_process <-
     # check status message
     oc_check_status(res_env, res_text)
 
-    # done!
+    # format output
     oc_format(res_text = res_text, return = return, query = query)
     }

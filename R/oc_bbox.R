@@ -65,7 +65,7 @@ oc_bbox <- function(...) UseMethod("oc_bbox")
 
 #' @name oc_bbox
 #' @export
-oc_bbox.default <- function(xmin, ymin, xmax, ymax, ...) { # nolint
+oc_bbox.default <- function(xmin, ymin, xmax, ymax, ...) { # nolint - see lintr issue #223
   bbox <- function(xmin, ymin, xmax, ymax) {
     oc_check_bbox(xmin = xmin, ymin = ymin, xmax = xmax, ymax = ymax)
     structure(
@@ -90,7 +90,7 @@ oc_bbox.default <- function(xmin, ymin, xmax, ymax, ...) { # nolint
 
 #' @name oc_bbox
 #' @export
-oc_bbox.data.frame <- function(data, xmin, ymin, xmax, ymax, ...) { # nolint
+oc_bbox.data.frame <- function(data, xmin, ymin, xmax, ymax, ...) { # nolint - see lintr issue #223
   xmin <- data[[deparse(substitute(xmin))]]
   ymin <- data[[deparse(substitute(ymin))]]
   xmax <- data[[deparse(substitute(xmax))]]
@@ -100,7 +100,7 @@ oc_bbox.data.frame <- function(data, xmin, ymin, xmax, ymax, ...) { # nolint
 
 #' @name oc_bbox
 #' @export
-oc_bbox.bbox <- function(bbox, ...) { # nolint
+oc_bbox.bbox <- function(bbox, ...) { # nolint - see lintr issue #223
   # check coordinate reference system (and be lenient if NA_crs_)
   crs <- attr(bbox, "crs")[["epsg"]]
   if (!is.na(crs) && crs != 4326L) {

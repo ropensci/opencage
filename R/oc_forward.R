@@ -2,7 +2,7 @@
 #'
 #' Forward geocoding, from placename to latitude and longitude tuple(s).
 #'
-# nolint start
+# nolint start - link longer than 80 chars
 #' @param placename A character vector with the placename(s) to be geocoded.
 #'   Required. If the placename(s) is/are address(es), see
 #'   \href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's
