@@ -1,9 +1,0 @@
-code,message
-200,OK (zero or more results will be returned)
-400,Invalid request (bad request; a required parameter is missing)
-402,Valid request but quota exceeded (payment required)
-403,Invalid or missing api key (forbidden)
-404,Invalid API endpoint
-408,Timeout; you can try again
-410,Request too long
-503,Internal server error
