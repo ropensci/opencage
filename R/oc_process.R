@@ -140,12 +140,15 @@ oc_process <-
       }
     }
 
-    # get result
-    res <- oc_get_memoise(oc_url)
+    # get response
+    res_env <- oc_get_memoise(oc_url)
+
+    # parse response
+    res_text <- oc_parse_text(res_env)
 
     # check status message
-    oc_check_status(res)
+    oc_check_status(res_env, res_text)
 
     # done!
-    oc_parse(req = res, return = return, query = query)
+    oc_format(res_text = res_text, return = return, query = query)
     }
