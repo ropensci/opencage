@@ -16,7 +16,7 @@ test_that("oc_check_status returns 402 error if quota exceeded", {
   )
 })
 
-test_that("oc_check_status returns 403 error if wrong key", {
+test_that("oc_check_status returns 403 error if key is blocked", {
   skip_on_cran()
   expect_error(
     oc_reverse(
@@ -24,5 +24,25 @@ test_that("oc_check_status returns 403 error if wrong key", {
       key = key_403
     ),
     "HTTP failure: 403"
+  )
+})
+
+test_that("oc_check_status returns 401 error if key is invalid", {
+  skip_on_cran()
+  expect_error(
+    oc_reverse(
+      latitude = 0, longitude = 0,
+      key = "thisisaninvalidkey"
+    ),
+    "HTTP failure: 401"
+  )
+})
+
+# Shouldn't happen since we oc_check coordinates
+test_that("oc_check_status returns 400 error if coordinates are invalid", {
+  skip_on_cran()
+  expect_error(
+    oc_process(latitude = 280, longitude = 0, return = "json_list"),
+    "HTTP failure: 400"
   )
 })
