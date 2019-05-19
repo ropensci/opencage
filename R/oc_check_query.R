@@ -6,7 +6,7 @@
 #'   values between 1 and 100 are allowed.
 #' @inheritParams oc_forward
 #'
-#' @keywords internal
+#' @noRd
 
 
 oc_check_query <-

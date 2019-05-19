@@ -20,7 +20,7 @@
 #'   (\code{"url_only"}).
 #'   }
 #'
-#' @keywords internal
+#' @noRd
 
 oc_process <-
   function(
