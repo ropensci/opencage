@@ -1,21 +1,30 @@
 # status check
-oc_check_status <- function(req) {
-  if (req$status_code < 400) return(invisible())
-  message <- code_message$message[code_message$code == req$status_code]
-  stop("HTTP failure: ", req$status_code, "\n", message, call. = FALSE)
+oc_check_status <- function(res_env, res_text) {
+  if (res_env$success()) return(invisible())
+  message <-
+    jsonlite::fromJSON(
+      res_text,
+      simplifyVector = TRUE,
+      flatten = TRUE
+    )$status$message
+  stop("HTTP failure: ", res_env$status_code, "\n", message, call. = FALSE)
 }
 
 # function for parsing the response
-oc_parse <- function(req, return, query) {
-  text <- req$parse(encoding = "UTF-8")
+oc_parse_text <- function(res) {
+  text <- res$parse(encoding = "UTF-8")
   if (identical(text, "")) {
     stop(
-      "No output to parse",
+      "OpenCage returned an empty response.",
       call. = FALSE
     )
   }
+  text
+}
+
+oc_format <- function(res_text, return, query) {
   if (return == "df_list") {
-    jsn <- jsonlite::fromJSON(text, simplifyVector = TRUE, flatten = TRUE)
+    jsn <- jsonlite::fromJSON(res_text, simplifyVector = TRUE, flatten = TRUE)
     if (jsn$total_results == 0) {
       results <- tibble::tibble(lat = NA_real_, lng = NA_real_, formatted = NA)
     } else {
@@ -34,7 +43,7 @@ oc_parse <- function(req, return, query) {
     colnames(results) <- gsub("-", "_", colnames(results))
     results
   } else if (return == "json_list" || return == "geojson_list") {
-    jsn <- jsonlite::fromJSON(text, simplifyVector = FALSE)
+    jsn <- jsonlite::fromJSON(res_text, simplifyVector = FALSE)
     if (return == "geojson_list") {
       structure(jsn, class = c("geo_list"))
     } else {
@@ -78,7 +87,6 @@ oc_get <- function(oc_url) {
     url = oc_url,
     headers = list(`User-Agent` = "https://github.com/ropensci/opencage")
   )
-
   client$get()
 }
 
