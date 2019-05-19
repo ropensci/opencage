@@ -12,7 +12,7 @@ Authors@R: c(
 Description: Geocode with the OpenCage API, either from placename to longitude 
     and latitude (forward geocoding) or from longitude and latitude to 
     placename (reverse geocoding), see <https://opencagedata.com/>.
-License: GPL (>= 3.1)
+License: GPL (>= 2)
 URL: http://github.com/ropensci/opencage
 BugReports: http://github.com/ropensci/opencage/issues
 Imports: 
