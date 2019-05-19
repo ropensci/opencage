@@ -20,7 +20,7 @@ The new features include:
 ## Minor changes
 
 * The column name for both `languagecodes` and `countrycodes` is now `code`, and not `alpha2` and `Code`, respectively. 
-* HTTP error messages are returned directly from the API, not as a canned response from `code_message`. The latter has therefore been deleted. 
+* HTTP error messages are now returned directly from the API and are therefore always up-to-date. The previously used responses in `code_message`, which were stored in opencage as external data, have been deleted. For more information on OpenCage's HTTP status codes see https://opencagedata.com/api#codes.
 
 # opencage 0.1.4
 
