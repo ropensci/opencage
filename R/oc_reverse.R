@@ -27,7 +27,7 @@
 #' \dontrun{
 #' oc_reverse(latitude = 0, longitude = 0)
 #' }
-
+#'
 oc_reverse <-
   function(latitude,
            longitude,
@@ -112,6 +112,7 @@ oc_reverse_df <-
     latitude <- data[[substitute(latitude)]]
     longitude <- data[[substitute(longitude)]]
 
+    # nolint start
     language_ <- eval(substitute(alist(language)))[[1]]
     if (is.symbol(language_)) {
       language_ <- data[[deparse(language_)]]
@@ -161,6 +162,7 @@ oc_reverse_df <-
       abbrv <- eval(abbrv_)
     }
     if (!is.null(abbrv)) abbrv <- as.list(abbrv)
+    # nolint end
 
     output <- match.arg(output)
 

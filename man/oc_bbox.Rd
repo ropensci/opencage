@@ -30,8 +30,9 @@ oc_bbox(...)
 \item{ymax}{Maximum latitude (also known as \code{max lat},
 \code{northeast_lat}, \code{north}, or \code{top}).}
 
-\item{data}{A \code{data.frame} containing at least 4 columns with \code{xmin},
-\code{ymin}, \code{xmax}, and \code{ymax} values, respectively.}
+\item{data}{A \code{data.frame} containing at least 4 columns with
+\code{xmin}, \code{ymin}, \code{xmax}, and \code{ymax} values,
+respectively.}
 
 \item{bbox}{A \code{bbox} object, see \code{sf::st_bbox}.}
 }
@@ -45,13 +46,13 @@ Create a bounding box list for opencage queries.
 oc_bbox(-5.63160, 51.280430, 0.278970, 51.683979)
 
 xdf <-
-data.frame(
-  place = c("Hamburg", "Hamburg"),
-  northeast_lat = c(54.0276817, 42.7397729),
-  northeast_lng = c(10.3252805, -78.812825),
-  southwest_lat = c(53.3951118, 42.7091669),
-  southwest_lng = c(8.1053284, -78.860521)
-)
+  data.frame(
+    place = c("Hamburg", "Hamburg"),
+    northeast_lat = c(54.0276817, 42.7397729),
+    northeast_lng = c(10.3252805, -78.812825),
+    southwest_lat = c(53.3951118, 42.7091669),
+    southwest_lng = c(8.1053284, -78.860521)
+  )
 oc_bbox(
   xdf,
   southwest_lng,
@@ -63,20 +64,24 @@ oc_bbox(
 # create bbox list column with dplyr
 library(dplyr)
 xdf \%>\%
-  mutate(bbox =
-    oc_bbox(
-      southwest_lng,
-      southwest_lat,
-      northeast_lng,
-      northeast_lat
-     )
-   )
+  mutate(
+    bbox =
+      oc_bbox(
+        southwest_lng,
+        southwest_lat,
+        northeast_lng,
+        northeast_lat
+      )
+  )
 
 # create bbox list from a simple features bbox
-if (requireNamespace("sf", quietly = TRUE)){
+if (requireNamespace("sf", quietly = TRUE)) {
   library(sf)
   bbox <- st_bbox(c(xmin = 16.1, xmax = 16.6, ymax = 48.6, ymin = 47.9),
-    crs = 4326)
+    crs = 4326
+  )
   oc_bbox(bbox)
-}}
+}
+}
+
 }

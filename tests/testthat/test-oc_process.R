@@ -3,26 +3,33 @@ context("oc_process")
 
 test_that("oc_process creates meaningful URLs for single query.", {
   res <-
-    oc_process(placename = "Paris",
-               return = "url_only",
-               key = NULL)
+    oc_process(
+      placename = "Paris",
+      return = "url_only",
+      key = NULL
+    )
   expect_is(res, "list")
   expect_is(unlist(res), "character")
   expect_match(res[[1]], "q=Paris", fixed = TRUE)
 
   res <-
-    oc_process(placename = "Islington, London",
-               return = "url_only",
-               key = NULL)
+    oc_process(
+      placename = "Islington, London",
+      return = "url_only",
+      key = NULL
+    )
   expect_match(res[[1]], "q=Islington%2C%20London", fixed = TRUE)
 
   res <-
-    oc_process(placename = "Triererstr 15, 99423 Weimar, Deutschland",
-               return = "url_only",
-               key = NULL)
+    oc_process(
+      placename = "Triererstr 15, 99423 Weimar, Deutschland",
+      return = "url_only",
+      key = NULL
+    )
   expect_match(res[[1]],
-               "q=Triererstr%2015%2C%2099423%20Weimar%2C%20Deutschland",
-               fixed = TRUE)
+    "q=Triererstr%2015%2C%2099423%20Weimar%2C%20Deutschland",
+    fixed = TRUE
+  )
 
   res <-
     oc_process(
@@ -61,7 +68,7 @@ test_that("oc_process creates meaningful URLs for multiple queries.", {
 
 test_that("oc_process deals well with res being NULL", {
   skip_on_cran()
-    res <- oc_process(
+  res <- oc_process(
     placename = "thiswillgetmenoreswhichisgood",
     key = Sys.getenv("OPENCAGE_KEY"),
     limit = 2,

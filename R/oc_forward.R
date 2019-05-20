@@ -2,10 +2,12 @@
 #'
 #' Forward geocoding, from placename to latitude and longitude tuple(s).
 #'
+# nolint start - link longer than 80 chars
 #' @param placename A character vector with the placename(s) to be geocoded.
 #'   Required. If the placename(s) is/are address(es), see
 #'   \href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's
 #'    instructions} on how to format addresses for forward geocoding best.
+# nolint end
 #' @param return A character vector of length one indicating the return value of
 #'   the function, either a list of tibbles (\code{df_list}, the default), a
 #'   JSON list (\code{json_list}), a GeoJSON list (\code{geojson_list}), or the
@@ -171,6 +173,7 @@ oc_forward_df <-
 
     placename <- data[[deparse(substitute(placename))]]
 
+    # nolint start
     bounds_ <- eval(substitute(alist(bounds)))[[1]]
     if (is.symbol(bounds_)) {
       bounds_ <- data[[deparse(bounds_)]]
@@ -242,6 +245,7 @@ oc_forward_df <-
       abbrv <- eval(abbrv_)
     }
     if (!is.null(abbrv)) abbrv <- as.list(abbrv)
+    # nolint end
 
     output <- match.arg(output)
 

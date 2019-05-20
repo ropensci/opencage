@@ -10,8 +10,9 @@
 #'   \code{northeast_lng}, \code{east}, or \code{right}).
 #' @param ymax Maximum latitude (also known as \code{max lat},
 #'   \code{northeast_lat}, \code{north}, or \code{top}).
-#' @param data A \code{data.frame} containing at least 4 columns with \code{xmin},
-#'   \code{ymin}, \code{xmax}, and \code{ymax} values, respectively.
+#' @param data A \code{data.frame} containing at least 4 columns with
+#'   \code{xmin}, \code{ymin}, \code{xmax}, and \code{ymax} values,
+#'   respectively.
 #' @param bbox A \code{bbox} object, see \code{sf::st_bbox}.
 #' @param ... Ignored.
 #'
@@ -22,13 +23,13 @@
 #' oc_bbox(-5.63160, 51.280430, 0.278970, 51.683979)
 #'
 #' xdf <-
-#' data.frame(
-#'   place = c("Hamburg", "Hamburg"),
-#'   northeast_lat = c(54.0276817, 42.7397729),
-#'   northeast_lng = c(10.3252805, -78.812825),
-#'   southwest_lat = c(53.3951118, 42.7091669),
-#'   southwest_lng = c(8.1053284, -78.860521)
-#' )
+#'   data.frame(
+#'     place = c("Hamburg", "Hamburg"),
+#'     northeast_lat = c(54.0276817, 42.7397729),
+#'     northeast_lng = c(10.3252805, -78.812825),
+#'     southwest_lat = c(53.3951118, 42.7091669),
+#'     southwest_lng = c(8.1053284, -78.860521)
+#'   )
 #' oc_bbox(
 #'   xdf,
 #'   southwest_lng,
@@ -40,27 +41,31 @@
 #' # create bbox list column with dplyr
 #' library(dplyr)
 #' xdf %>%
-#'   mutate(bbox =
-#'     oc_bbox(
-#'       southwest_lng,
-#'       southwest_lat,
-#'       northeast_lng,
-#'       northeast_lat
-#'      )
-#'    )
+#'   mutate(
+#'     bbox =
+#'       oc_bbox(
+#'         southwest_lng,
+#'         southwest_lat,
+#'         northeast_lng,
+#'         northeast_lat
+#'       )
+#'   )
 #'
 #' # create bbox list from a simple features bbox
-#' if (requireNamespace("sf", quietly = TRUE)){
+#' if (requireNamespace("sf", quietly = TRUE)) {
 #'   library(sf)
 #'   bbox <- st_bbox(c(xmin = 16.1, xmax = 16.6, ymax = 48.6, ymin = 47.9),
-#'     crs = 4326)
+#'     crs = 4326
+#'   )
 #'   oc_bbox(bbox)
-#' }}
+#' }
+#' }
+#'
 oc_bbox <- function(...) UseMethod("oc_bbox")
 
 #' @name oc_bbox
 #' @export
-oc_bbox.default <- function (xmin, ymin, xmax, ymax, ...){
+oc_bbox.default <- function(xmin, ymin, xmax, ymax, ...) { # nolint - see lintr issue #223
   bbox <- function(xmin, ymin, xmax, ymax) {
     oc_check_bbox(xmin = xmin, ymin = ymin, xmax = xmax, ymax = ymax)
     structure(
@@ -85,7 +90,7 @@ oc_bbox.default <- function (xmin, ymin, xmax, ymax, ...){
 
 #' @name oc_bbox
 #' @export
-oc_bbox.data.frame <- function (data, xmin, ymin, xmax, ymax, ...){
+oc_bbox.data.frame <- function(data, xmin, ymin, xmax, ymax, ...) { # nolint - see lintr issue #223
   xmin <- data[[deparse(substitute(xmin))]]
   ymin <- data[[deparse(substitute(ymin))]]
   xmax <- data[[deparse(substitute(xmax))]]
@@ -95,7 +100,7 @@ oc_bbox.data.frame <- function (data, xmin, ymin, xmax, ymax, ...){
 
 #' @name oc_bbox
 #' @export
-oc_bbox.bbox <- function (bbox, ...) {
+oc_bbox.bbox <- function(bbox, ...) { # nolint - see lintr issue #223
   # check coordinate reference system (and be lenient if NA_crs_)
   crs <- attr(bbox, "crs")[["epsg"]]
   if (!is.na(crs) && crs != 4326L) {

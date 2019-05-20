@@ -68,12 +68,14 @@ oc_process <-
     # prevent obscure warning message from pwalk if length(arglist) == 0
     stopifnot(length(arglist) >= 1)
 
-    purrr::pmap(.l = arglist,
-                .f = .oc_process,
-                return = return,
-                key = key,
-                no_record = no_record,
-                pb = pb)
+    purrr::pmap(
+      .l = arglist,
+      .f = .oc_process,
+      return = return,
+      key = key,
+      no_record = no_record,
+      pb = pb
+    )
   }
 
 .oc_process <-
@@ -149,6 +151,6 @@ oc_process <-
     # check status message
     oc_check_status(res_env, res_text)
 
-    # done!
+    # format output
     oc_format(res_text = res_text, return = return, query = query)
     }

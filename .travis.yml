@@ -7,7 +7,6 @@ r:
 sudo: false
 cache: packages
 
-
 r_github_packages:
   - jimhester/covr
   - jimhester/lintr
@@ -18,3 +17,4 @@ notifications:
     on_failure: change
 after_success:
 - Rscript -e 'library(covr); codecov()'
+- Rscript -e 'library(lintr); lint_package()'
