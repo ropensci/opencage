@@ -57,7 +57,7 @@ opencage_parse <- function(req) {
 
 # base URL for all queries
 opencage_url <- function() {
-  "http://api.opencagedata.com/geocode/v1/json/"
+  "https://api.opencagedata.com/geocode/v1/json/"
 }
 
 # get results
