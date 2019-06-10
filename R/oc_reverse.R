@@ -27,7 +27,7 @@
 #' \dontrun{
 #' oc_reverse(latitude = 0, longitude = 0)
 #' }
-#'
+
 oc_reverse <-
   function(latitude,
            longitude,
@@ -109,62 +109,17 @@ oc_reverse_df <-
            no_record = FALSE,
            abbrv = FALSE,
            ...) {
-    latitude <- data[[substitute(latitude)]]
-    longitude <- data[[substitute(longitude)]]
 
-    # nolint start
-    language_ <- eval(substitute(alist(language)))[[1]]
-    if (is.symbol(language_)) {
-      language_ <- data[[deparse(language_)]]
-      if (!is.null(language_))
-        language <- language_
-    } else if (is.call(language_)) {
-      language <- eval(language_)
-    }
-    if (!is.null(language)) language <- as.list(language)
+    # Tidyeval to enable input from dataframe columns
+    latitude <- rlang::enquo(latitude)
+    longitude <- rlang::enquo(longitude)
+    language <- rlang::enquo(language)
+    min_confidence <- rlang::enquo(min_confidence)
+    no_annotations <- rlang::enquo(no_annotations)
+    no_dedupe <- rlang::enquo(no_dedupe)
+    abbrv <- rlang::enquo(abbrv)
 
-    min_confidence_ <- eval(substitute(alist(min_confidence)))[[1]]
-    if (is.symbol(min_confidence_)) {
-      min_confidence_ <- data[[deparse(min_confidence_)]]
-      if (!is.null(min_confidence_))
-        min_confidence <- min_confidence_
-    } else if (is.call(min_confidence_)) {
-      min_confidence <- eval(min_confidence_)
-    }
-    if (!is.null(min_confidence)) min_confidence <- as.list(min_confidence)
-
-    no_annotations_ <- eval(substitute(alist(no_annotations)))[[1]]
-    if (is.symbol(no_annotations_)) {
-      no_annotations_ <- data[[deparse(no_annotations_)]]
-      if (!is.null(no_annotations_))
-        no_annotations <- no_annotations_
-    } else if (is.call(no_annotations_)) {
-      no_annotations <- eval(no_annotations_)
-    }
-    if (!is.null(no_annotations)) no_annotations <- as.list(no_annotations)
-
-    no_dedupe_ <- eval(substitute(alist(no_dedupe)))[[1]]
-    if (is.symbol(no_dedupe_)) {
-      no_dedupe_ <- data[[deparse(no_dedupe_)]]
-      if (!is.null(no_dedupe_))
-        no_dedupe <- no_dedupe_
-    } else if (is.call(no_dedupe_)) {
-      no_dedupe <- eval(no_dedupe_)
-    }
-    if (!is.null(no_dedupe)) no_dedupe <- as.list(no_dedupe)
-
-    abbrv_ <- eval(substitute(alist(abbrv)))[[1]]
-    if (is.symbol(abbrv_)) {
-      abbrv_ <- data[[deparse(abbrv_)]]
-      if (!is.null(abbrv_))
-        abbrv <- abbrv_
-    } else if (is.call(abbrv_)) {
-      abbrv <- eval(abbrv_)
-    }
-    if (!is.null(abbrv)) abbrv <- as.list(abbrv)
-    # nolint end
-
-    output <- match.arg(output)
+    output <- rlang::arg_match(output)
 
     # Ensure that query column always exists
     add_request <- TRUE
@@ -174,16 +129,16 @@ oc_reverse_df <-
 
     if (bind_cols == FALSE) {
       results_list <- oc_reverse(
-        latitude = latitude,
-        longitude = longitude,
+        latitude = rlang::eval_tidy(latitude, data = data),
+        longitude = rlang::eval_tidy(longitude, data = data),
         key = key,
         return = "df_list",
-        language = language,
-        min_confidence = min_confidence,
-        no_annotations = no_annotations,
-        no_dedupe = no_dedupe,
+        language = rlang::eval_tidy(language, data = data),
+        min_confidence = rlang::eval_tidy(min_confidence, data = data),
+        no_annotations = rlang::eval_tidy(no_annotations, data = data),
+        no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
         no_record = no_record,
-        abbrv = abbrv,
+        abbrv = rlang::eval_tidy(abbrv, data = data),
         add_request = add_request
       )
       results <- dplyr::bind_rows(results_list)
@@ -200,16 +155,16 @@ oc_reverse_df <-
           data,
           op =
             oc_reverse(
-              latitude = latitude,
-              longitude = longitude,
+              latitude = !!latitude,
+              longitude = !!longitude,
               key = key,
               return = "df_list",
-              language = language,
-              min_confidence = min_confidence,
-              no_annotations = no_annotations,
-              no_dedupe = no_dedupe,
+              language = !!language,
+              min_confidence = !!min_confidence,
+              no_annotations = !!no_annotations,
+              no_dedupe = !!no_dedupe,
               no_record = no_record,
-              abbrv = abbrv,
+              abbrv = !!abbrv,
               add_request = add_request
             )
         )

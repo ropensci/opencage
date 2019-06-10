@@ -97,7 +97,6 @@ except \code{key}, \code{return}, and \code{no_record}.
 \dontrun{
 oc_reverse(latitude = 0, longitude = 0)
 }
-
 }
 \seealso{
 \code{\link{oc_forward}} for reverse geocoding, and the

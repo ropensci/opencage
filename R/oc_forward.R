@@ -171,83 +171,18 @@ oc_forward_df <-
            abbrv = FALSE,
            ...) {
 
-    placename <- data[[deparse(substitute(placename))]]
+    # Tidyeval to enable input from dataframe columns
+    placename <- rlang::enquo(placename)
+    bounds <- rlang::enquo(bounds)
+    countrycode <- rlang::enquo(countrycode)
+    language <- rlang::enquo(language)
+    limit <- rlang::enquo(limit)
+    min_confidence <- rlang::enquo(min_confidence)
+    no_annotations <- rlang::enquo(no_annotations)
+    no_dedupe <- rlang::enquo(no_dedupe)
+    abbrv <- rlang::enquo(abbrv)
 
-    # nolint start
-    bounds_ <- eval(substitute(alist(bounds)))[[1]]
-    if (is.symbol(bounds_)) {
-      bounds_ <- data[[deparse(bounds_)]]
-      if (!is.null(bounds_)) bounds <- bounds_
-    } else if (is.call(bounds_)) {
-      bounds <- eval(bounds_)
-    }
-    if (!is.null(bounds)) bounds <- as.list(bounds)
-
-    countrycode_ <- eval(substitute(alist(countrycode)))[[1]]
-    if (is.symbol(countrycode_)) {
-      countrycode_ <- data[[deparse(countrycode_)]]
-      if (!is.null(countrycode_)) countrycode <- countrycode_
-    } else if (is.call(countrycode_)) {
-      countrycode <- eval(countrycode_)
-    }
-    if (!is.null(countrycode)) countrycode <- as.list(countrycode)
-
-    language_ <- eval(substitute(alist(language)))[[1]]
-    if (is.symbol(language_)) {
-      language_ <- data[[deparse(language_)]]
-      if (!is.null(language_)) language <- language_
-    } else if (is.call(language_)) {
-      language <- eval(language_)
-    }
-    if (!is.null(language)) language <- as.list(language)
-
-    limit_ <- eval(substitute(alist(limit)))[[1]]
-    if (is.symbol(limit_)) {
-      limit_ <- data[[deparse(limit_)]]
-      if (!is.null(limit_)) limit <- limit_
-    } else if (is.call(limit_)) {
-      limit <- eval(limit_)
-    }
-    if (!is.null(limit)) limit <- as.list(limit)
-
-    min_confidence_ <- eval(substitute(alist(min_confidence)))[[1]]
-    if (is.symbol(min_confidence_)) {
-      min_confidence_ <- data[[deparse(min_confidence_)]]
-      if (!is.null(min_confidence_)) min_confidence <- min_confidence_
-    } else if (is.call(min_confidence_)) {
-      min_confidence <- eval(min_confidence_)
-    }
-    if (!is.null(min_confidence)) min_confidence <- as.list(min_confidence)
-
-    no_annotations_ <- eval(substitute(alist(no_annotations)))[[1]]
-    if (is.symbol(no_annotations_)) {
-      no_annotations_ <- data[[deparse(no_annotations_)]]
-      if (!is.null(no_annotations_)) no_annotations <- no_annotations_
-    } else if (is.call(no_annotations_)) {
-      no_annotations <- eval(no_annotations_)
-    }
-    if (!is.null(no_annotations)) no_annotations <- as.list(no_annotations)
-
-    no_dedupe_ <- eval(substitute(alist(no_dedupe)))[[1]]
-    if (is.symbol(no_dedupe_)) {
-      no_dedupe_ <- data[[deparse(no_dedupe_)]]
-      if (!is.null(no_dedupe_)) no_dedupe <- no_dedupe_
-    } else if (is.call(no_dedupe_)) {
-      no_dedupe <- eval(no_dedupe_)
-    }
-    if (!is.null(no_dedupe)) no_dedupe <- as.list(no_dedupe)
-
-    abbrv_ <- eval(substitute(alist(abbrv)))[[1]]
-    if (is.symbol(abbrv_)) {
-      abbrv_ <- data[[deparse(abbrv_)]]
-      if (!is.null(abbrv_)) abbrv <- abbrv_
-    } else if (is.call(abbrv_)) {
-      abbrv <- eval(abbrv_)
-    }
-    if (!is.null(abbrv)) abbrv <- as.list(abbrv)
-    # nolint end
-
-    output <- match.arg(output)
+    output <- rlang::arg_match(output)
 
     # Ensure that query column always exists
     add_request <- TRUE
@@ -258,18 +193,18 @@ oc_forward_df <-
 
     if (bind_cols == FALSE) {
       results_list <- oc_forward(
-        placename = placename,
+        placename = rlang::eval_tidy(placename, data = data),
         key = key,
         return = "df_list",
-        bounds = bounds,
-        countrycode = countrycode,
-        language = language,
-        limit = limit,
-        min_confidence = min_confidence,
-        no_annotations = no_annotations,
-        no_dedupe = no_dedupe,
+        bounds = rlang::eval_tidy(bounds, data = data),
+        countrycode = rlang::eval_tidy(countrycode, data = data),
+        language = rlang::eval_tidy(language, data = data),
+        limit = rlang::eval_tidy(limit, data = data),
+        min_confidence = rlang::eval_tidy(min_confidence, data = data),
+        no_annotations = rlang::eval_tidy(no_annotations, data = data),
+        no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
         no_record = no_record,
-        abbrv = abbrv,
+        abbrv = rlang::eval_tidy(abbrv, data = data),
         add_request = add_request
       )
       results <- dplyr::bind_rows(results_list)
@@ -286,18 +221,18 @@ oc_forward_df <-
           data,
           op =
             oc_forward(
-              placename = placename,
+              placename = !!placename,
               key = key,
               return = "df_list",
-              bounds = bounds,
-              countrycode = countrycode,
-              language = language,
-              limit = limit,
-              min_confidence = min_confidence,
-              no_annotations = no_annotations,
-              no_dedupe = no_dedupe,
+              bounds = !!bounds,
+              countrycode = !!countrycode,
+              language = !!language,
+              limit = !!limit,
+              min_confidence = !!min_confidence,
+              no_annotations = !!no_annotations,
+              no_dedupe = !!no_dedupe,
               no_record = no_record,
-              abbrv = abbrv,
+              abbrv = !!abbrv,
               add_request = add_request
             )
         )
