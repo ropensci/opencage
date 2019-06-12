@@ -1,13 +1,13 @@
 #' Reverse geocoding
 #'
-#' Reverse geocoding, from latitude and longitude to placename(s).
+#' Reverse geocoding from numeric vectors of latitude and longitude to
+#' placenames.
 #'
-#' @param latitude A numeric vector with the latitude. Required.
-#' @param longitude A numeric vector with the longitude. Required.
 #' @inheritParams oc_forward
+#' @param latitude,longitude Numeric vectors of latitude and longitude values.
 #'
-#' @return \code{oc_reverse} returns, depending on the \code{return} parameter,
-#'   a list with either
+#' @return Depending on the \code{return} argument, \code{oc_reverse} returns a
+#'   list with either
 #'   \itemize{
 #'   \item the results as tibbles (\code{"df_list"}, the default),
 #'   \item the results as JSON lists (\code{"json_list"}),
@@ -15,17 +15,32 @@
 #'   \item the URL of the OpenCage API call for debugging purposes
 #'   (\code{"url_only"}).
 #'   }
-#'   \code{oc_reverse_df} returns a tibble.
 #'
-#' @seealso \code{\link{oc_forward}} for reverse geocoding, and the
-#'   \href{https://opencagedata.com/api}{OpenCage API documentation} for more
-#'   information about the API.
+#' @seealso \code{\link{oc_reverse_df}} for inputs as a data frame, or
+#'   \code{\link{oc_forward}} and \code{\link{oc_forward}} for forward
+#'   geocoding. For more information about the API and the various parameters,
+#'   see the \href{https://opencagedata.com/api}{OpenCage API documentation}.
 #'
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' oc_reverse(latitude = 0, longitude = 0)
+#' # Reverse geocode a single location
+#' oc_reverse(latitude = -36.85007, longitude = 174.7706)
+#'
+#' # Reverse geocode multiple locations
+#' lat <- c(47.21864, 53.55034, 34.05369)
+#' lng <- c(-1.554136, 10.000654, -118.242767)
+#'
+#' oc_reverse(latitude = lat, longitude = lng)
+#'
+#' # Favor results in a specified language
+#' oc_reverse(latitude = lat, longitude = lng,
+#'            language = "fr")
+#'
+#' # Return results as a json list
+#' oc_reverse(latitude = lat, longitude = lng,
+#'            return = "json_list")
 #' }
 
 oc_reverse <-
@@ -83,18 +98,59 @@ oc_reverse <-
     )
   }
 
-#' @rdname oc_reverse
-#' @param data A data frame.
-#' @param bind_cols logical Bind source and results data frame?
-#' @param output A character vector of length one indicating whether only the
-#'   formatted address (\code{short}) or whether all results (\code{all}) should
-#'   be returned.
+#' Reverse geocoding with data frames
 #'
-#' @details
-#' \code{oc_reverse_df} also accepts unquoted column names for all arguments
-#' except \code{key}, \code{return}, and \code{no_record}.
+#' Reverse geocoding from latitude and longitude variables to placenames.
+#' @inheritParams oc_forward_df
+#' @param latitude,longitude Unquoted variable names of numeric vectors of
+#'   latitude and longitude values.
+#' @param output A character vector of length one indicating whether only
+#'   the formatted address (\code{"short"}, the default) should be returned or
+#'   all variables (\code{"all"}) variables should be returned.
+#'
+#' @return A tibble.
+#'
+#' @seealso \code{\link{oc_reverse}} for inputs as vectors, or
+#'   \code{\link{oc_forward}} and \code{\link{oc_forward}} for forward
+#'   geocoding. For more information about the API and the various parameters,
+#'   see the \href{https://opencagedata.com/api}{OpenCage API documentation}.
 #'
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' library(tibble)
+#' df <- tibble(id = 1:4,
+#'              lat = c(-36.85007, 47.21864, 53.55034, 34.05369),
+#'              lng = c(174.7706, -1.554136, 10.000654, -118.242767))
+#'
+#' # Return formatted address of lat/lng values
+#' oc_reverse_df(df, latitude = lat, longitude = lng)
+#'
+#' # Return more detailed information about the locations
+#' oc_reverse_df(df, latitude = lat, longitude = lng,
+#'               output = "all")
+#'
+#' # Favor results in a specified language
+#' oc_reverse_df(df, latitude = lat, longitude = lng,
+#'               language = "fr")
+#'
+#' # oc_reverse_df accepts unquoted column names for all
+#' # arguments except bind_cols, output, key, and no_record.
+#' # This makes it possible to build up more detailed queries
+#' # through the data frame passed to the data argument.
+#'
+#' df2 <- add_column(df,
+#'                   language = c("en", "fr", "de", "en"),
+#'                   confidence = c(8, 10, 10, 10))
+#'
+#' # Use language column to specify preferred language of results
+#' # and confidence column to allow different confidence levels
+#' oc_reverse_df(df2, latitude = lat, longitude = lng,
+#'               language = language,
+#'               min_confidence = confidence)
+#' }
+
 oc_reverse_df <-
   function(data,
            latitude,
@@ -110,7 +166,7 @@ oc_reverse_df <-
            abbrv = FALSE,
            ...) {
 
-    # Tidyeval to enable input from dataframe columns
+    # Tidyeval to enable input from data frame columns
     latitude <- rlang::enquo(latitude)
     longitude <- rlang::enquo(longitude)
     language <- rlang::enquo(language)

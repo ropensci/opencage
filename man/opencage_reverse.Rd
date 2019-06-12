@@ -10,13 +10,13 @@ opencage_reverse(latitude, longitude, key = oc_key(), bounds = NULL,
   no_record = FALSE, abbrv = FALSE, add_request = TRUE)
 }
 \arguments{
-\item{latitude}{A numeric vector with the latitude. Required.}
+\item{latitude}{Numeric vectors of latitude and longitude values.}
 
-\item{longitude}{A numeric vector with the longitude. Required.}
+\item{longitude}{Numeric vectors of latitude and longitude values.}
 
-\item{key}{Your OpenCage API key as a character vector of length one.
-Required. By default, \code{\link{oc_key}} will attempt to retrieve the key
-from the environment variable \code{OPENCAGE_KEY}.}
+\item{key}{Your OpenCage API key as a character vector of length one. By
+default, \code{\link{oc_key}} will attempt to retrieve the key the
+environment variable \code{OPENCAGE_KEY}.}
 
 \item{bounds}{Bounding box, ignored for reverse geocoding.}
 
@@ -31,34 +31,34 @@ will attempt to return results in that language. If it is not specified,
 \item{limit}{How many results should be returned (1-100), ignored for reverse
 geocoding.}
 
-\item{min_confidence}{An integer value between 0 and 10 indicating the
-precision of the returned result as defined by its geographical extent,
-(i.e. by the extent of the result's bounding box). See the
-\href{https://opencagedata.com/api#confidence}{API documentation} for
+\item{min_confidence}{Numeric vector of integer values between 0 and 10
+indicating the precision of the returned result as defined by its
+geographical extent, (i.e. by the extent of the result's bounding box). See
+the \href{https://opencagedata.com/api#confidence}{API documentation} for
 details. Only results with at least the requested confidence will be
-returned.}
+returned. Default is \code{NULL}).}
 
-\item{no_annotations}{A logical vector indicating whether additional
+\item{no_annotations}{Logical vector indicating whether additional
 information about the result location should be returned. \code{TRUE} by
 default, which means that the output will not contain annotations.}
 
-\item{no_dedupe}{A logical vector (default \code{FALSE}), when \code{TRUE}
+\item{no_dedupe}{Logical vector (default \code{FALSE}), when \code{TRUE}
 the output will not be deduplicated.}
 
-\item{no_record}{A logical vector (default \code{FALSE}), when \code{TRUE} no
-log entry of the query is created and the geocoding request is not cached
+\item{no_record}{Logical vector (default \code{FALSE}), when \code{TRUE} no
+log entry of the query is created, and the geocoding request is not cached
 by OpenCage.}
 
-\item{abbrv}{A logical vector (default \code{FALSE}), when \code{TRUE}
+\item{abbrv}{Logical vector (default \code{FALSE}), when \code{TRUE}
 addresses in the \code{formatted} field of the results are abbreviated
 (e.g. "Main St." instead of "Main Street").}
 
-\item{add_request}{A logical vector (default \code{FALSE}) indicating whether
+\item{add_request}{Logical vector (default \code{FALSE}) indicating whether
 the request is returned again with the results. If the \code{return} value
 is a \code{df_list}, the query text is added as a column to the results.
 \code{json_list} results will contain all request parameters, including the
-API key used! For \code{geojson_list} this is currently ignored by
-OpenCage.}
+API key used! This is currently ignored by OpenCage if return value is
+\code{geojson_list}.}
 }
 \value{
 A list with
