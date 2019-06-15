@@ -48,9 +48,9 @@
 #'   default, which means that the output will not contain annotations.
 #' @param no_dedupe Logical vector (default \code{FALSE}), when \code{TRUE}
 #'   the output will not be deduplicated.
-#' @param no_record Logical vector (default \code{FALSE}), when \code{TRUE} no
-#'   log entry of the query is created, and the geocoding request is not cached
-#'   by OpenCage.
+#' @param no_record Logical vector of length one (default \code{FALSE}), when
+#'   \code{TRUE} no log entry of the query is created, and the geocoding
+#'   request is not cached by OpenCage.
 #' @param abbrv Logical vector (default \code{FALSE}), when \code{TRUE}
 #'   addresses in the \code{formatted} field of the results are abbreviated
 #'   (e.g. "Main St." instead of "Main Street").
@@ -213,7 +213,7 @@ oc_forward <-
 #'   that restricts the results to the given country or countries. E.g. "AR" for
 #'   Argentina, "FR" for France, "NZ" for the New Zealand. Multiple countrycodes
 #'   per \code{placename} must be wrapped in a list. Default is \code{NULL}.
-#' @param language Character vector, or an unquoted varible name of such a
+#' @param language Character vector, or an unquoted variable name of such a
 #'   vector, of
 #'   \href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF language tags}
 #'   (such as "es" for Spanish or "pt-BR" for Brazilian Portuguese). OpenCage

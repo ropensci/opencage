@@ -27,7 +27,7 @@ all variables (\code{"all"}) variables should be returned.}
 default, \code{\link{oc_key}} will attempt to retrieve the key from the
 environment variable \code{OPENCAGE_KEY}.}
 
-\item{language}{Character vector, or an unquoted varible name of such a
+\item{language}{Character vector, or an unquoted variable name of such a
 vector, of
 \href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF language tags}
 (such as "es" for Spanish or "pt-BR" for Brazilian Portuguese). OpenCage
@@ -51,9 +51,9 @@ will not contain annotations.}
 vector. Default is \code{FALSE}. When \code{TRUE} the output will not be
 deduplicated.}
 
-\item{no_record}{Logical vector (default \code{FALSE}), when \code{TRUE} no
-log entry of the query is created, and the geocoding request is not cached
-by OpenCage.}
+\item{no_record}{Logical vector of length one (default \code{FALSE}), when
+\code{TRUE} no log entry of the query is created, and the geocoding
+request is not cached by OpenCage.}
 
 \item{abbrv}{Logical vector, or an unquoted variable name of such a
 vector. Default is \code{FALSE}. When \code{TRUE} addresses in the

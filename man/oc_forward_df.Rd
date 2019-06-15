@@ -50,7 +50,7 @@ that restricts the results to the given country or countries. E.g. "AR" for
 Argentina, "FR" for France, "NZ" for the New Zealand. Multiple countrycodes
 per \code{placename} must be wrapped in a list. Default is \code{NULL}.}
 
-\item{language}{Character vector, or an unquoted varible name of such a
+\item{language}{Character vector, or an unquoted variable name of such a
 vector, of
 \href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF language tags}
 (such as "es" for Spanish or "pt-BR" for Brazilian Portuguese). OpenCage
@@ -79,9 +79,9 @@ will not contain annotations.}
 vector. Default is \code{FALSE}. When \code{TRUE} the output will not be
 deduplicated.}
 
-\item{no_record}{Logical vector (default \code{FALSE}), when \code{TRUE} no
-log entry of the query is created, and the geocoding request is not cached
-by OpenCage.}
+\item{no_record}{Logical vector of length one (default \code{FALSE}), when
+\code{TRUE} no log entry of the query is created, and the geocoding
+request is not cached by OpenCage.}
 
 \item{abbrv}{Logical vector, or an unquoted variable name of such a
 vector. Default is \code{FALSE}. When \code{TRUE} addresses in the

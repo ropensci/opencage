@@ -58,9 +58,9 @@ default, which means that the output will not contain annotations.}
 \item{no_dedupe}{Logical vector (default \code{FALSE}), when \code{TRUE}
 the output will not be deduplicated.}
 
-\item{no_record}{Logical vector (default \code{FALSE}), when \code{TRUE} no
-log entry of the query is created, and the geocoding request is not cached
-by OpenCage.}
+\item{no_record}{Logical vector of length one (default \code{FALSE}), when
+\code{TRUE} no log entry of the query is created, and the geocoding
+request is not cached by OpenCage.}
 
 \item{abbrv}{Logical vector (default \code{FALSE}), when \code{TRUE}
 addresses in the \code{formatted} field of the results are abbreviated
