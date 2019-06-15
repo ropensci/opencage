@@ -18,7 +18,7 @@ JSON list (\code{json_list}), a GeoJSON list (\code{geojson_list}), or the
 URL with which the API would be called (\code{url_only}).}
 
 \item{key}{Your OpenCage API key as a character vector of length one. By
-default, \code{\link{oc_key}} will attempt to retrieve the key the
+default, \code{\link{oc_key}} will attempt to retrieve the key from the
 environment variable \code{OPENCAGE_KEY}.}
 
 \item{language}{An
@@ -63,8 +63,9 @@ Depending on the \code{return} argument, \code{oc_reverse} returns a
   list with either
   \itemize{
   \item the results as tibbles (\code{"df_list"}, the default),
-  \item the results as JSON lists (\code{"json_list"}),
-  \item the results as GeoJSON lists (\code{"geojson_list"}), or
+  \item the results as JSON specified as a list (\code{"json_list"}),
+  \item the results as GeoJSON specified as a list (\code{"geojson_list"}),
+  or
   \item the URL of the OpenCage API call for debugging purposes
   (\code{"url_only"}).
   }
@@ -84,7 +85,7 @@ lng <- c(-1.554136, 10.000654, -118.242767)
 
 oc_reverse(latitude = lat, longitude = lng)
 
-# Favor results in a specified language
+# Return results in a preferred language if possible
 oc_reverse(latitude = lat, longitude = lng,
            language = "fr")
 

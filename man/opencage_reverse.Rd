@@ -15,7 +15,7 @@ opencage_reverse(latitude, longitude, key = oc_key(), bounds = NULL,
 \item{longitude}{Numeric vectors of latitude and longitude values.}
 
 \item{key}{Your OpenCage API key as a character vector of length one. By
-default, \code{\link{oc_key}} will attempt to retrieve the key the
+default, \code{\link{oc_key}} will attempt to retrieve the key from the
 environment variable \code{OPENCAGE_KEY}.}
 
 \item{bounds}{Bounding box, ignored for reverse geocoding.}

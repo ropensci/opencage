@@ -10,8 +10,9 @@
 #'   list with either
 #'   \itemize{
 #'   \item the results as tibbles (\code{"df_list"}, the default),
-#'   \item the results as JSON lists (\code{"json_list"}),
-#'   \item the results as GeoJSON lists (\code{"geojson_list"}), or
+#'   \item the results as JSON specified as a list (\code{"json_list"}),
+#'   \item the results as GeoJSON specified as a list (\code{"geojson_list"}),
+#'   or
 #'   \item the URL of the OpenCage API call for debugging purposes
 #'   (\code{"url_only"}).
 #'   }
@@ -34,7 +35,7 @@
 #'
 #' oc_reverse(latitude = lat, longitude = lng)
 #'
-#' # Favor results in a specified language
+#' # Return results in a preferred language if possible
 #' oc_reverse(latitude = lat, longitude = lng,
 #'            language = "fr")
 #'
@@ -59,11 +60,11 @@ oc_reverse <-
 
     # check latitude is provided
     if (missing(latitude) || is.null(latitude)) {
-      stop(call. = FALSE, "You must provide `latitude` and `longitude`.")
+      stop(call. = FALSE, "`latitude` and `longitude` must be provided.")
     }
     # check longitude is provided
     if (missing(longitude) || is.null(longitude)) {
-      stop(call. = FALSE, "You must provide `latitude` and `longitude`.")
+      stop(call. = FALSE, "`latitude` and `longitude` must be provided.")
     }
 
     # check return
@@ -131,7 +132,7 @@ oc_reverse <-
 #' oc_reverse_df(df, latitude = lat, longitude = lng,
 #'               output = "all")
 #'
-#' # Favor results in a specified language
+#' # Return results in a preferred language if possible
 #' oc_reverse_df(df, latitude = lat, longitude = lng,
 #'               language = "fr")
 #'

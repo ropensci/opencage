@@ -24,7 +24,7 @@ the formatted address (\code{"short"}, the default) should be returned or
 all variables (\code{"all"}) variables should be returned.}
 
 \item{key}{Your OpenCage API key as a character vector of length one. By
-default, \code{\link{oc_key}} will attempt to retrieve the key the
+default, \code{\link{oc_key}} will attempt to retrieve the key from the
 environment variable \code{OPENCAGE_KEY}.}
 
 \item{language}{Character vector, or an unquoted varible name of such a
@@ -51,9 +51,9 @@ will not contain annotations.}
 vector. Default is \code{FALSE}. When \code{TRUE} the output will not be
 deduplicated.}
 
-\item{no_record}{Logical vector, or an unquoted variable name of such a
-vector. Default is \code{FALSE}. When \code{TRUE} no log entry of the
-query is created, and the geocoding request is not cached by OpenCage.}
+\item{no_record}{Logical vector (default \code{FALSE}), when \code{TRUE} no
+log entry of the query is created, and the geocoding request is not cached
+by OpenCage.}
 
 \item{abbrv}{Logical vector, or an unquoted variable name of such a
 vector. Default is \code{FALSE}. When \code{TRUE} addresses in the
@@ -82,7 +82,7 @@ oc_reverse_df(df, latitude = lat, longitude = lng)
 oc_reverse_df(df, latitude = lat, longitude = lng,
               output = "all")
 
-# Favor results in a specified language
+# Return results in a preferred language if possible
 oc_reverse_df(df, latitude = lat, longitude = lng,
               language = "fr")
 

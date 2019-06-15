@@ -31,7 +31,7 @@ default) should be returned or all variables (\code{"all"}) variables
 should be returned.}
 
 \item{key}{Your OpenCage API key as a character vector of length one. By
-default, \code{\link{oc_key}} will attempt to retrieve the key the
+default, \code{\link{oc_key}} will attempt to retrieve the key from the
 environment variable \code{OPENCAGE_KEY}.}
 
 \item{bounds}{A list, or an unquoted variable name of a list column of
@@ -79,9 +79,9 @@ will not contain annotations.}
 vector. Default is \code{FALSE}. When \code{TRUE} the output will not be
 deduplicated.}
 
-\item{no_record}{Logical vector, or an unquoted variable name of such a
-vector. Default is \code{FALSE}. When \code{TRUE} no log entry of the
-query is created, and the geocoding request is not cached by OpenCage.}
+\item{no_record}{Logical vector (default \code{FALSE}), when \code{TRUE} no
+log entry of the query is created, and the geocoding request is not cached
+by OpenCage.}
 
 \item{abbrv}{Logical vector, or an unquoted variable name of such a
 vector. Default is \code{FALSE}. When \code{TRUE} addresses in the
@@ -134,8 +134,8 @@ df2 <- add_column(df,
   countrycode = c("ca", "us", "co"),
   language = c("fr", "de", "en"))
 
-# Use the bounds column to to help return accurate results
-# and language column to favor results in specific languages
+# Use the bounds column to help return accurate results and
+# language column to specify preferred language of results
 oc_forward_df(df2, placename = locations,
               bounds = bounds,
               language = language)

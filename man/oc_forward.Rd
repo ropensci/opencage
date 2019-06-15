@@ -24,7 +24,7 @@ JSON list (\code{json_list}), a GeoJSON list (\code{geojson_list}), or the
 URL with which the API would be called (\code{url_only}).}
 
 \item{key}{Your OpenCage API key as a character vector of length one. By
-default, \code{\link{oc_key}} will attempt to retrieve the key the
+default, \code{\link{oc_key}} will attempt to retrieve the key from the
 environment variable \code{OPENCAGE_KEY}.}
 
 \item{bounds}{A list of bounding boxes, i.e. numeric vectors, each with 4
@@ -82,12 +82,13 @@ API key used! This is currently ignored by OpenCage if return value is
 \item{...}{Ignored.}
 }
 \value{
-Depending on the \code{return} argument, \code{oc_forward} returns a
-  list with either
+Depending on the \code{return} argument, \code{oc_forward} returns
+  a list with either
   \itemize{
   \item the results as tibbles (\code{"df_list"}, the default),
-  \item the results as JSON lists (\code{"json_list"}),
-  \item the results as GeoJSON lists (\code{"geojson_list"}), or
+  \item the results as JSON specified as a list (\code{"json_list"}),
+  \item the results as GeoJSON specified as a list (\code{"geojson_list"}),
+  or
   \item the URL of the OpenCage API call for debugging purposes
   (\code{"url_only"}).
   }
@@ -99,9 +100,7 @@ longitude tuple(s).
 \examples{
 \dontrun{
 # Geocode a single location, an address in this case
-oc_forward(placename = "Triererstr 15,
-                        Weimar 99423,
-                        Deutschland")
+oc_forward(placename = "Triererstr 15, 99432, Weimar, Deutschland")
 
 # Geocode multiple locations
 locations <- c("Nantes", "Hamburg", "Los Angeles")
@@ -125,7 +124,7 @@ oc_forward(placename = locations,
            countrycode = list(c("fr", "ca") , c("de", "us"), c("us", "co"))
            )
 
-# Favor results in a specified language
+# Return results in a preferred language if possible
 oc_forward(placename = c("Brugge", "Mechelen", "Antwerp"),
            language = "fr")
 

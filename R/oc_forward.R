@@ -16,7 +16,7 @@
 #'   JSON list (\code{json_list}), a GeoJSON list (\code{geojson_list}), or the
 #'   URL with which the API would be called (\code{url_only}).
 #' @param key Your OpenCage API key as a character vector of length one. By
-#'   default, \code{\link{oc_key}} will attempt to retrieve the key the
+#'   default, \code{\link{oc_key}} will attempt to retrieve the key from the
 #'   environment variable \code{OPENCAGE_KEY}.
 #' @param bounds A list of bounding boxes, i.e. numeric vectors, each with 4
 #'   coordinates forming the south-west and north-east corners of a bounding
@@ -62,12 +62,13 @@
 #'   \code{geojson_list}.
 #' @param ... Ignored.
 #'
-#' @return Depending on the \code{return} argument, \code{oc_forward} returns a
-#'   list with either
+#' @return Depending on the \code{return} argument, \code{oc_forward} returns
+#'   a list with either
 #'   \itemize{
 #'   \item the results as tibbles (\code{"df_list"}, the default),
-#'   \item the results as JSON lists (\code{"json_list"}),
-#'   \item the results as GeoJSON lists (\code{"geojson_list"}), or
+#'   \item the results as JSON specified as a list (\code{"json_list"}),
+#'   \item the results as GeoJSON specified as a list (\code{"geojson_list"}),
+#'   or
 #'   \item the URL of the OpenCage API call for debugging purposes
 #'   (\code{"url_only"}).
 #'   }
@@ -82,9 +83,7 @@
 #' @examples
 #' \dontrun{
 #' # Geocode a single location, an address in this case
-#' oc_forward(placename = "Triererstr 15,
-#'                         Weimar 99423,
-#'                         Deutschland")
+#' oc_forward(placename = "Triererstr 15, 99432, Weimar, Deutschland")
 #'
 #' # Geocode multiple locations
 #' locations <- c("Nantes", "Hamburg", "Los Angeles")
@@ -108,7 +107,7 @@
 #'            countrycode = list(c("fr", "ca") , c("de", "us"), c("us", "co"))
 #'            )
 #'
-#' # Favor results in a specified language
+#' # Return results in a preferred language if possible
 #' oc_forward(placename = c("Brugge", "Mechelen", "Antwerp"),
 #'            language = "fr")
 #'
@@ -137,7 +136,7 @@ oc_forward <-
 
     # check a placename is provided
     if (missing(placename) || is.null(placename)) {
-      stop(call. = FALSE, "You must provide a `placename`.")
+      stop(call. = FALSE, "`placename` must be provided.")
     }
 
     # check return
@@ -238,9 +237,6 @@ oc_forward <-
 #' @param no_dedupe Logical vector, or an unquoted variable name of such a
 #'   vector. Default is \code{FALSE}. When \code{TRUE} the output will not be
 #'   deduplicated.
-#' @param no_record Logical vector, or an unquoted variable name of such a
-#'   vector. Default is \code{FALSE}. When \code{TRUE} no log entry of the
-#'   query is created, and the geocoding request is not cached by OpenCage.
 #' @param abbrv Logical vector, or an unquoted variable name of such a
 #'   vector. Default is \code{FALSE}. When \code{TRUE} addresses in the
 #'   \code{formatted} variable of the results are abbreviated (e.g. "Main St."
@@ -293,8 +289,8 @@ oc_forward <-
 #'   countrycode = c("ca", "us", "co"),
 #'   language = c("fr", "de", "en"))
 #'
-#' # Use the bounds column to to help return accurate results
-#' # and language column to favor results in specific languages
+#' # Use the bounds column to help return accurate results and
+#' # language column to specify preferred language of results
 #' oc_forward_df(df2, placename = locations,
 #'               bounds = bounds,
 #'               language = language)

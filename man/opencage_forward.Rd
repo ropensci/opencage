@@ -18,7 +18,7 @@ opencage_forward(placename, key = oc_key(), bounds = NULL,
    results.}
 
 \item{key}{Your OpenCage API key as a character vector of length one. By
-default, \code{\link{oc_key}} will attempt to retrieve the key the
+default, \code{\link{oc_key}} will attempt to retrieve the key from the
 environment variable \code{OPENCAGE_KEY}.}
 
 \item{bounds}{A list of bounding boxes, i.e. numeric vectors, each with 4
