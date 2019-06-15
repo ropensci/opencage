@@ -321,6 +321,11 @@ oc_forward_df <-
            abbrv = FALSE,
            ...) {
 
+    # check a placename is provided
+    if (missing(placename) || is.null(placename)) {
+      stop(call. = FALSE, "`placename` must be provided.")
+    }
+
     # Tidyeval to enable input from data frame columns
     placename <- rlang::enquo(placename)
     bounds <- rlang::enquo(bounds)

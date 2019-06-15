@@ -167,6 +167,15 @@ oc_reverse_df <-
            abbrv = FALSE,
            ...) {
 
+    # check latitude is provided
+    if (missing(latitude) || is.null(latitude)) {
+      stop(call. = FALSE, "`latitude` and `longitude` must be provided.")
+    }
+    # check longitude is provided
+    if (missing(longitude) || is.null(longitude)) {
+      stop(call. = FALSE, "`latitude` and `longitude` must be provided.")
+    }
+
     # Tidyeval to enable input from data frame columns
     latitude <- rlang::enquo(latitude)
     longitude <- rlang::enquo(longitude)
