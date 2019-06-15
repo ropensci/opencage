@@ -91,11 +91,15 @@ oc_bbox.default <- function(xmin, ymin, xmax, ymax, ...) { # nolint - see lintr 
 #' @name oc_bbox
 #' @export
 oc_bbox.data.frame <- function(data, xmin, ymin, xmax, ymax, ...) { # nolint - see lintr issue #223
-  xmin <- data[[deparse(substitute(xmin))]]
-  ymin <- data[[deparse(substitute(ymin))]]
-  xmax <- data[[deparse(substitute(xmax))]]
-  ymax <- data[[deparse(substitute(ymax))]]
-  oc_bbox(xmin, ymin, xmax, ymax)
+  xmin <- rlang::enquo(xmin)
+  ymin <- rlang::enquo(ymin)
+  xmax <- rlang::enquo(xmax)
+  ymax <- rlang::enquo(ymax)
+
+  oc_bbox(xmin = rlang::eval_tidy(xmin, data = data),
+          ymin = rlang::eval_tidy(ymin, data = data),
+          xmax = rlang::eval_tidy(xmax, data = data),
+          ymax = rlang::eval_tidy(ymax, data = data))
 }
 
 #' @name oc_bbox
