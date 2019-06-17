@@ -322,7 +322,7 @@ oc_forward_df <-
            ...) {
 
     # check a placename is provided
-    if (missing(placename) || is.null(placename)) {
+    if (missing(placename)) {
       stop(call. = FALSE, "`placename` must be provided.")
     }
 

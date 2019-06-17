@@ -167,12 +167,8 @@ oc_reverse_df <-
            abbrv = FALSE,
            ...) {
 
-    # check latitude is provided
-    if (missing(latitude) || is.null(latitude)) {
-      stop(call. = FALSE, "`latitude` and `longitude` must be provided.")
-    }
-    # check longitude is provided
-    if (missing(longitude) || is.null(longitude)) {
+    # check latitude & longitude is provided
+    if (missing(latitude) || missing(longitude)) {
       stop(call. = FALSE, "`latitude` and `longitude` must be provided.")
     }
 
