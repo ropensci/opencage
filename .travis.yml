@@ -16,5 +16,6 @@ notifications:
     on_success: change
     on_failure: change
 after_success:
+- R CMD INSTALL $PKG_TARBALL
 - Rscript -e 'library(covr); codecov()'
 - Rscript -e 'library(lintr); lint_package()'
