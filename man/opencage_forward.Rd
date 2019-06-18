@@ -11,20 +11,22 @@ opencage_forward(placename, key = oc_key(), bounds = NULL,
 }
 \arguments{
 \item{placename}{A character vector with the placename(s) to be geocoded.
-Required. If the placename(s) is/are address(es), see
-\href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's
- instructions} on how to format addresses for forward geocoding best.}
 
-\item{key}{Your OpenCage API key as a character vector of length one.
-Required. By default, \code{\link{oc_key}} will attempt to retrieve the key
-from the environment variable \code{OPENCAGE_KEY}.}
+  If the placenames are addresses, see
+  \href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's
+   instructions} on how to format addresses for best forward geocoding
+   results.}
+
+\item{key}{Your OpenCage API key as a character vector of length one. By
+default, \code{\link{oc_key}} will attempt to retrieve the key from the
+environment variable \code{OPENCAGE_KEY}.}
 
 \item{bounds}{A list of bounding boxes, i.e. numeric vectors, each with 4
-coordinates forming the south-west and north-east corners of a bounding box
-\code{list(c(xmin, ymin, xmax, ymax))}. The \code{bounds} parameter will
-restrict the possible results to the supplied region. It can easily be
-specified with the \code{\link{oc_bbox}} helper, for example like
-\code{bounds = oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}.}
+coordinates forming the south-west and north-east corners of a bounding
+box: \code{list(c(xmin, ymin, xmax, ymax))}. \code{bounds} restricts the
+possible results to the supplied region. It can be specified with the
+\code{\link{oc_bbox}} helper. For example: \code{bounds =
+oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}.}
 
 \item{countrycode}{A two letter code as defined by the
 \href{https://www.iso.org/obp/ui/#search/code}{ISO 3166-1 Alpha 2} standard
@@ -38,38 +40,38 @@ per \code{placename} must be wrapped in a list.}
 will attempt to return results in that language. If it is not specified,
 "en" (English) will be assumed by the API.}
 
-\item{limit}{The maximum number of results that should be returned. Integer
-values between 1 and 100 are allowed, the default is 10 (\code{oc_forward})
-or 1 (\code{oc_forward_df}), respectively.}
+\item{limit}{Numeric vector of integer values to determine the maximum
+number of results returned for each \code{placename}. Integer values
+between 1 and 100 are allowed. Default is 10.}
 
-\item{min_confidence}{An integer value between 0 and 10 indicating the
-precision of the returned result as defined by its geographical extent,
-(i.e. by the extent of the result's bounding box). See the
-\href{https://opencagedata.com/api#confidence}{API documentation} for
+\item{min_confidence}{Numeric vector of integer values between 0 and 10
+indicating the precision of the returned result as defined by its
+geographical extent, (i.e. by the extent of the result's bounding box). See
+the \href{https://opencagedata.com/api#confidence}{API documentation} for
 details. Only results with at least the requested confidence will be
-returned.}
+returned. Default is \code{NULL}).}
 
-\item{no_annotations}{A logical vector indicating whether additional
+\item{no_annotations}{Logical vector indicating whether additional
 information about the result location should be returned. \code{TRUE} by
 default, which means that the output will not contain annotations.}
 
-\item{no_dedupe}{A logical vector (default \code{FALSE}), when \code{TRUE}
+\item{no_dedupe}{Logical vector (default \code{FALSE}), when \code{TRUE}
 the output will not be deduplicated.}
 
-\item{no_record}{A logical vector (default \code{FALSE}), when \code{TRUE} no
-log entry of the query is created and the geocoding request is not cached
-by OpenCage.}
+\item{no_record}{Logical vector of length one (default \code{FALSE}), when
+\code{TRUE} no log entry of the query is created, and the geocoding
+request is not cached by OpenCage.}
 
-\item{abbrv}{A logical vector (default \code{FALSE}), when \code{TRUE}
+\item{abbrv}{Logical vector (default \code{FALSE}), when \code{TRUE}
 addresses in the \code{formatted} field of the results are abbreviated
 (e.g. "Main St." instead of "Main Street").}
 
-\item{add_request}{A logical vector (default \code{FALSE}) indicating whether
+\item{add_request}{Logical vector (default \code{FALSE}) indicating whether
 the request is returned again with the results. If the \code{return} value
 is a \code{df_list}, the query text is added as a column to the results.
 \code{json_list} results will contain all request parameters, including the
-API key used! For \code{geojson_list} this is currently ignored by
-OpenCage.}
+API key used! This is currently ignored by OpenCage if return value is
+\code{geojson_list}.}
 }
 \value{
 A list with

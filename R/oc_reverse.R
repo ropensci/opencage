@@ -1,33 +1,49 @@
 #' Reverse geocoding
 #'
-#' Reverse geocoding, from latitude and longitude to placename(s).
+#' Reverse geocoding from numeric vectors of latitude and longitude to
+#' placenames.
 #'
-#' @param latitude A numeric vector with the latitude. Required.
-#' @param longitude A numeric vector with the longitude. Required.
 #' @inheritParams oc_forward
+#' @param latitude,longitude Numeric vectors of latitude and longitude values.
 #'
-#' @return \code{oc_reverse} returns, depending on the \code{return} parameter,
-#'   a list with either
+#' @return Depending on the \code{return} argument, \code{oc_reverse} returns a
+#'   list with either
 #'   \itemize{
 #'   \item the results as tibbles (\code{"df_list"}, the default),
-#'   \item the results as JSON lists (\code{"json_list"}),
-#'   \item the results as GeoJSON lists (\code{"geojson_list"}), or
+#'   \item the results as JSON specified as a list (\code{"json_list"}),
+#'   \item the results as GeoJSON specified as a list (\code{"geojson_list"}),
+#'   or
 #'   \item the URL of the OpenCage API call for debugging purposes
 #'   (\code{"url_only"}).
 #'   }
-#'   \code{oc_reverse_df} returns a tibble.
 #'
-#' @seealso \code{\link{oc_forward}} for reverse geocoding, and the
-#'   \href{https://opencagedata.com/api}{OpenCage API documentation} for more
-#'   information about the API.
+#' @seealso \code{\link{oc_reverse_df}} for inputs as a data frame, or
+#'   \code{\link{oc_forward}} and \code{\link{oc_forward}} for forward
+#'   geocoding. For more information about the API and the various parameters,
+#'   see the \href{https://opencagedata.com/api}{OpenCage API documentation}.
 #'
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' oc_reverse(latitude = 0, longitude = 0)
-#' }
+#' # Reverse geocode a single location
+#' oc_reverse(latitude = -36.85007, longitude = 174.7706)
 #'
+#' # Reverse geocode multiple locations
+#' lat <- c(47.21864, 53.55034, 34.05369)
+#' lng <- c(-1.554136, 10.000654, -118.242767)
+#'
+#' oc_reverse(latitude = lat, longitude = lng)
+#'
+#' # Return results in a preferred language if possible
+#' oc_reverse(latitude = lat, longitude = lng,
+#'            language = "fr")
+#'
+#' # Return results as a json list
+#' oc_reverse(latitude = lat, longitude = lng,
+#'            return = "json_list")
+#' }
+
 oc_reverse <-
   function(latitude,
            longitude,
@@ -44,11 +60,11 @@ oc_reverse <-
 
     # check latitude is provided
     if (missing(latitude) || is.null(latitude)) {
-      stop(call. = FALSE, "You must provide `latitude` and `longitude`.")
+      stop(call. = FALSE, "`latitude` and `longitude` must be provided.")
     }
     # check longitude is provided
     if (missing(longitude) || is.null(longitude)) {
-      stop(call. = FALSE, "You must provide `latitude` and `longitude`.")
+      stop(call. = FALSE, "`latitude` and `longitude` must be provided.")
     }
 
     # check return
@@ -83,18 +99,59 @@ oc_reverse <-
     )
   }
 
-#' @rdname oc_reverse
-#' @param data A data frame.
-#' @param bind_cols logical Bind source and results data frame?
-#' @param output A character vector of length one indicating whether only the
-#'   formatted address (\code{short}) or whether all results (\code{all}) should
-#'   be returned.
+#' Reverse geocoding with data frames
 #'
-#' @details
-#' \code{oc_reverse_df} also accepts unquoted column names for all arguments
-#' except \code{key}, \code{return}, and \code{no_record}.
+#' Reverse geocoding from latitude and longitude variables to placenames.
+#' @inheritParams oc_forward_df
+#' @param latitude,longitude Unquoted variable names of numeric vectors of
+#'   latitude and longitude values.
+#' @param output A character vector of length one indicating whether only
+#'   the formatted address (\code{"short"}, the default) should be returned or
+#'   all variables (\code{"all"}) variables should be returned.
+#'
+#' @return A tibble.
+#'
+#' @seealso \code{\link{oc_reverse}} for inputs as vectors, or
+#'   \code{\link{oc_forward}} and \code{\link{oc_forward}} for forward
+#'   geocoding. For more information about the API and the various parameters,
+#'   see the \href{https://opencagedata.com/api}{OpenCage API documentation}.
 #'
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' library(tibble)
+#' df <- tibble(id = 1:4,
+#'              lat = c(-36.85007, 47.21864, 53.55034, 34.05369),
+#'              lng = c(174.7706, -1.554136, 10.000654, -118.242767))
+#'
+#' # Return formatted address of lat/lng values
+#' oc_reverse_df(df, latitude = lat, longitude = lng)
+#'
+#' # Return more detailed information about the locations
+#' oc_reverse_df(df, latitude = lat, longitude = lng,
+#'               output = "all")
+#'
+#' # Return results in a preferred language if possible
+#' oc_reverse_df(df, latitude = lat, longitude = lng,
+#'               language = "fr")
+#'
+#' # oc_reverse_df accepts unquoted column names for all
+#' # arguments except bind_cols, output, key, and no_record.
+#' # This makes it possible to build up more detailed queries
+#' # through the data frame passed to the data argument.
+#'
+#' df2 <- add_column(df,
+#'                   language = c("en", "fr", "de", "en"),
+#'                   confidence = c(8, 10, 10, 10))
+#'
+#' # Use language column to specify preferred language of results
+#' # and confidence column to allow different confidence levels
+#' oc_reverse_df(df2, latitude = lat, longitude = lng,
+#'               language = language,
+#'               min_confidence = confidence)
+#' }
+
 oc_reverse_df <-
   function(data,
            latitude,
@@ -109,62 +166,22 @@ oc_reverse_df <-
            no_record = FALSE,
            abbrv = FALSE,
            ...) {
-    latitude <- data[[substitute(latitude)]]
-    longitude <- data[[substitute(longitude)]]
 
-    # nolint start
-    language_ <- eval(substitute(alist(language)))[[1]]
-    if (is.symbol(language_)) {
-      language_ <- data[[deparse(language_)]]
-      if (!is.null(language_))
-        language <- language_
-    } else if (is.call(language_)) {
-      language <- eval(language_)
+    # check latitude & longitude is provided
+    if (missing(latitude) || missing(longitude)) {
+      stop(call. = FALSE, "`latitude` and `longitude` must be provided.")
     }
-    if (!is.null(language)) language <- as.list(language)
 
-    min_confidence_ <- eval(substitute(alist(min_confidence)))[[1]]
-    if (is.symbol(min_confidence_)) {
-      min_confidence_ <- data[[deparse(min_confidence_)]]
-      if (!is.null(min_confidence_))
-        min_confidence <- min_confidence_
-    } else if (is.call(min_confidence_)) {
-      min_confidence <- eval(min_confidence_)
-    }
-    if (!is.null(min_confidence)) min_confidence <- as.list(min_confidence)
+    # Tidyeval to enable input from data frame columns
+    latitude <- rlang::enquo(latitude)
+    longitude <- rlang::enquo(longitude)
+    language <- rlang::enquo(language)
+    min_confidence <- rlang::enquo(min_confidence)
+    no_annotations <- rlang::enquo(no_annotations)
+    no_dedupe <- rlang::enquo(no_dedupe)
+    abbrv <- rlang::enquo(abbrv)
 
-    no_annotations_ <- eval(substitute(alist(no_annotations)))[[1]]
-    if (is.symbol(no_annotations_)) {
-      no_annotations_ <- data[[deparse(no_annotations_)]]
-      if (!is.null(no_annotations_))
-        no_annotations <- no_annotations_
-    } else if (is.call(no_annotations_)) {
-      no_annotations <- eval(no_annotations_)
-    }
-    if (!is.null(no_annotations)) no_annotations <- as.list(no_annotations)
-
-    no_dedupe_ <- eval(substitute(alist(no_dedupe)))[[1]]
-    if (is.symbol(no_dedupe_)) {
-      no_dedupe_ <- data[[deparse(no_dedupe_)]]
-      if (!is.null(no_dedupe_))
-        no_dedupe <- no_dedupe_
-    } else if (is.call(no_dedupe_)) {
-      no_dedupe <- eval(no_dedupe_)
-    }
-    if (!is.null(no_dedupe)) no_dedupe <- as.list(no_dedupe)
-
-    abbrv_ <- eval(substitute(alist(abbrv)))[[1]]
-    if (is.symbol(abbrv_)) {
-      abbrv_ <- data[[deparse(abbrv_)]]
-      if (!is.null(abbrv_))
-        abbrv <- abbrv_
-    } else if (is.call(abbrv_)) {
-      abbrv <- eval(abbrv_)
-    }
-    if (!is.null(abbrv)) abbrv <- as.list(abbrv)
-    # nolint end
-
-    output <- match.arg(output)
+    output <- rlang::arg_match(output)
 
     # Ensure that query column always exists
     add_request <- TRUE
@@ -174,16 +191,16 @@ oc_reverse_df <-
 
     if (bind_cols == FALSE) {
       results_list <- oc_reverse(
-        latitude = latitude,
-        longitude = longitude,
+        latitude = rlang::eval_tidy(latitude, data = data),
+        longitude = rlang::eval_tidy(longitude, data = data),
         key = key,
         return = "df_list",
-        language = language,
-        min_confidence = min_confidence,
-        no_annotations = no_annotations,
-        no_dedupe = no_dedupe,
+        language = rlang::eval_tidy(language, data = data),
+        min_confidence = rlang::eval_tidy(min_confidence, data = data),
+        no_annotations = rlang::eval_tidy(no_annotations, data = data),
+        no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
         no_record = no_record,
-        abbrv = abbrv,
+        abbrv = rlang::eval_tidy(abbrv, data = data),
         add_request = add_request
       )
       results <- dplyr::bind_rows(results_list)
@@ -200,16 +217,16 @@ oc_reverse_df <-
           data,
           op =
             oc_reverse(
-              latitude = latitude,
-              longitude = longitude,
+              latitude = !!latitude,
+              longitude = !!longitude,
               key = key,
               return = "df_list",
-              language = language,
-              min_confidence = min_confidence,
-              no_annotations = no_annotations,
-              no_dedupe = no_dedupe,
+              language = !!language,
+              min_confidence = !!min_confidence,
+              no_annotations = !!no_annotations,
+              no_dedupe = !!no_dedupe,
               no_record = no_record,
-              abbrv = abbrv,
+              abbrv = !!abbrv,
               add_request = add_request
             )
         )

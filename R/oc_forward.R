@@ -1,26 +1,29 @@
 #' Forward geocoding
 #'
-#' Forward geocoding, from placename to latitude and longitude tuple(s).
+#' Forward geocoding from a character vector of placenames to latitude and
+#' longitude tuple(s).
 #'
 # nolint start - link longer than 80 chars
 #' @param placename A character vector with the placename(s) to be geocoded.
-#'   Required. If the placename(s) is/are address(es), see
+#'
+#'   If the placenames are addresses, see
 #'   \href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's
-#'    instructions} on how to format addresses for forward geocoding best.
+#'    instructions} on how to format addresses for best forward geocoding
+#'    results.
 # nolint end
 #' @param return A character vector of length one indicating the return value of
 #'   the function, either a list of tibbles (\code{df_list}, the default), a
 #'   JSON list (\code{json_list}), a GeoJSON list (\code{geojson_list}), or the
 #'   URL with which the API would be called (\code{url_only}).
-#' @param key Your OpenCage API key as a character vector of length one.
-#'   Required. By default, \code{\link{oc_key}} will attempt to retrieve the key
-#'   from the environment variable \code{OPENCAGE_KEY}.
+#' @param key Your OpenCage API key as a character vector of length one. By
+#'   default, \code{\link{oc_key}} will attempt to retrieve the key from the
+#'   environment variable \code{OPENCAGE_KEY}.
 #' @param bounds A list of bounding boxes, i.e. numeric vectors, each with 4
-#'   coordinates forming the south-west and north-east corners of a bounding box
-#'   \code{list(c(xmin, ymin, xmax, ymax))}. The \code{bounds} parameter will
-#'   restrict the possible results to the supplied region. It can easily be
-#'   specified with the \code{\link{oc_bbox}} helper, for example like
-#'   \code{bounds = oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}.
+#'   coordinates forming the south-west and north-east corners of a bounding
+#'   box: \code{list(c(xmin, ymin, xmax, ymax))}. \code{bounds} restricts the
+#'   possible results to the supplied region. It can be specified with the
+#'   \code{\link{oc_bbox}} helper. For example: \code{bounds =
+#'   oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}.
 #' @param countrycode A two letter code as defined by the
 #'   \href{https://www.iso.org/obp/ui/#search/code}{ISO 3166-1 Alpha 2} standard
 #'   that restricts the results to the given country or countries. E.g. "AR" for
@@ -31,58 +34,88 @@
 #'   (such as "es" for Spanish or "pt-BR" for Brazilian Portuguese). OpenCage
 #'   will attempt to return results in that language. If it is not specified,
 #'   "en" (English) will be assumed by the API.
-#' @param limit The maximum number of results that should be returned. Integer
-#'   values between 1 and 100 are allowed, the default is 10 (\code{oc_forward})
-#'   or 1 (\code{oc_forward_df}), respectively.
-#' @param min_confidence An integer value between 0 and 10 indicating the
-#'   precision of the returned result as defined by its geographical extent,
-#'   (i.e. by the extent of the result's bounding box). See the
-#'   \href{https://opencagedata.com/api#confidence}{API documentation} for
+#' @param limit Numeric vector of integer values to determine the maximum
+#'   number of results returned for each \code{placename}. Integer values
+#'   between 1 and 100 are allowed. Default is 10.
+#' @param min_confidence Numeric vector of integer values between 0 and 10
+#'   indicating the precision of the returned result as defined by its
+#'   geographical extent, (i.e. by the extent of the result's bounding box). See
+#'   the \href{https://opencagedata.com/api#confidence}{API documentation} for
 #'   details. Only results with at least the requested confidence will be
-#'   returned.
-#' @param no_annotations A logical vector indicating whether additional
+#'   returned. Default is \code{NULL}).
+#' @param no_annotations Logical vector indicating whether additional
 #'   information about the result location should be returned. \code{TRUE} by
 #'   default, which means that the output will not contain annotations.
-#' @param no_dedupe A logical vector (default \code{FALSE}), when \code{TRUE}
+#' @param no_dedupe Logical vector (default \code{FALSE}), when \code{TRUE}
 #'   the output will not be deduplicated.
-#' @param no_record A logical vector (default \code{FALSE}), when \code{TRUE} no
-#'   log entry of the query is created and the geocoding request is not cached
-#'   by OpenCage.
-#' @param abbrv A logical vector (default \code{FALSE}), when \code{TRUE}
+#' @param no_record Logical vector of length one (default \code{FALSE}), when
+#'   \code{TRUE} no log entry of the query is created, and the geocoding
+#'   request is not cached by OpenCage.
+#' @param abbrv Logical vector (default \code{FALSE}), when \code{TRUE}
 #'   addresses in the \code{formatted} field of the results are abbreviated
 #'   (e.g. "Main St." instead of "Main Street").
-#' @param add_request A logical vector (default \code{FALSE}) indicating whether
+#' @param add_request Logical vector (default \code{FALSE}) indicating whether
 #'   the request is returned again with the results. If the \code{return} value
 #'   is a \code{df_list}, the query text is added as a column to the results.
 #'   \code{json_list} results will contain all request parameters, including the
-#'   API key used! For \code{geojson_list} this is currently ignored by
-#'   OpenCage.
+#'   API key used! This is currently ignored by OpenCage if return value is
+#'   \code{geojson_list}.
 #' @param ... Ignored.
 #'
-#' @return \code{oc_forward} returns, depending on the \code{return} parameter,
+#' @return Depending on the \code{return} argument, \code{oc_forward} returns
 #'   a list with either
 #'   \itemize{
 #'   \item the results as tibbles (\code{"df_list"}, the default),
-#'   \item the results as JSON lists (\code{"json_list"}),
-#'   \item the results as GeoJSON lists (\code{"geojson_list"}), or
+#'   \item the results as JSON specified as a list (\code{"json_list"}),
+#'   \item the results as GeoJSON specified as a list (\code{"geojson_list"}),
+#'   or
 #'   \item the URL of the OpenCage API call for debugging purposes
 #'   (\code{"url_only"}).
 #'   }
-#'   \code{oc_forward_df} returns a tibble.
 #'
-#' @seealso \code{\link{oc_reverse}} for reverse geocoding, and the
-#'   \href{https://opencagedata.com/api}{OpenCage API documentation} for more
-#'   information about the API.
+#' @seealso \code{\link{oc_forward_df}} for inputs as a data frame, or
+#'   \code{\link{oc_reverse}} and \code{\link{oc_reverse_df}} for reverse
+#'   geocoding. For more information about the API and the various parameters,
+#'   see the \href{https://opencagedata.com/api}{OpenCage API documentation}.
 #'
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' oc_forward(placename = "Sarzeau")
-#' oc_forward(placename = "Islington, London")
-#' oc_forward(placename = "Triererstr 15,
-#'                         Weimar 99423,
-#'                         Deutschland")
+#' # Geocode a single location, an address in this case
+#' oc_forward(placename = "Triererstr 15, 99432, Weimar, Deutschland")
+#'
+#' # Geocode multiple locations
+#' locations <- c("Nantes", "Hamburg", "Los Angeles")
+#' oc_forward(placename = locations)
+#'
+#' # Use bounding box to help return accurate results
+#' # for each placename
+#' bounds <- oc_bbox(xmin = c(-2, 9, -119),
+#'                   ymin = c(47, 53, 34),
+#'                   xmax = c(0, 10, -117),
+#'                   ymax = c(48, 54, 35))
+#' oc_forward(placename = locations, bounds = bounds)
+#'
+#' # Another way to help specify the desired results
+#' # is with country codes.
+#' oc_forward(placename = locations,
+#'            countrycode = c("ca", "us", "co"))
+#'
+#' # With multiple countrycodes per placename
+#' oc_forward(placename = locations,
+#'            countrycode = list(c("fr", "ca") , c("de", "us"), c("us", "co"))
+#'            )
+#'
+#' # Return results in a preferred language if possible
+#' oc_forward(placename = c("Brugge", "Mechelen", "Antwerp"),
+#'            language = "fr")
+#'
+#' # Limit the number of results per placename and return json_list
+#' oc_forward(placename = locations,
+#'            bounds = bounds,
+#'            limit = 1,
+#'            return = "json_list")
 #' }
 #'
 oc_forward <-
@@ -103,7 +136,7 @@ oc_forward <-
 
     # check a placename is provided
     if (missing(placename) || is.null(placename)) {
-      stop(call. = FALSE, "You must provide a `placename`.")
+      stop(call. = FALSE, "`placename` must be provided.")
     }
 
     # check return
@@ -142,18 +175,135 @@ oc_forward <-
     )
   }
 
-#' @rdname oc_forward
-#' @param data A data frame
-#' @param bind_cols logical Bind source and results data frame?
-#' @param output A character vector of length one indicating whether only
-#'   latitude, longitude and formatted address (\code{short}) or whether all
-#'   results (\code{all}) should be returned.
+
+#' Forward geocoding with data frames
 #'
-#' @details
-#' \code{oc_forward_df} also accepts unquoted column names for all arguments
-#' except \code{key}, \code{return}, and \code{no_record}.
+#' Forward geocoding from a placename variable to latitude and longitude
+#'   tuple(s).
+#'
+#' @inheritParams oc_forward
+#' @param data A data frame.
+# nolint start - link longer than 80 chars
+#' @param placename An unquoted variable name of a character vector with the
+#'   placenames to be geocoded.
+#'
+#'   If the placenames are addresses, see
+#'   \href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's
+#'    instructions} on how to format addresses for best forward geocoding
+#'    results.
+# nolint end
+#' @param bind_cols When \code{bind_col = TRUE}, the default, the results are
+#'   column bound to \code{data}. When \code{FALSE}, the results are returned as
+#'   a new tibble.
+#' @param output A character vector of length one indicating whether only
+#'   latitude, longitude, and formatted address variables (\code{"short"}, the
+#'   default) should be returned or all variables (\code{"all"}) variables
+#'   should be returned.
+#' @param bounds A list, or an unquoted variable name of a list column of
+#'   bounding boxes, i.e. a list of numeric vectors, each with 4 coordinates
+#'   forming the south-west and north-east corners of a bounding box:
+#'   \code{list(c(xmin, ymin, xmax, ymax))}. \code{bounds} restricts the
+#'   possible results to the supplied region. It can be specified with the
+#'   \code{\link{oc_bbox}} helper. For example: \code{bounds =
+#'   oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}. Default is
+#'   \code{NULL}.
+#' @param countrycode Character vector, or an unquoted variable name of such a
+#'   vector, of two-letter codes as defined by the
+#'   \href{https://www.iso.org/obp/ui/#search/code}{ISO 3166-1 Alpha 2} standard
+#'   that restricts the results to the given country or countries. E.g. "AR" for
+#'   Argentina, "FR" for France, "NZ" for the New Zealand. Multiple countrycodes
+#'   per \code{placename} must be wrapped in a list. Default is \code{NULL}.
+#' @param language Character vector, or an unquoted variable name of such a
+#'   vector, of
+#'   \href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF language tags}
+#'   (such as "es" for Spanish or "pt-BR" for Brazilian Portuguese). OpenCage
+#'   will attempt to return results in that language. If it is not specified,
+#'   "en" (English) will be assumed by the API.
+#' @param limit Numeric vector of integer values, or an unquoted variable name
+#'   of such a vector, to determine the maximum number of results returned for
+#'   each \code{placename}. Integer values between 1 and 100 are allowed.
+#'   Default is 1.
+#' @param min_confidence Numeric vector of integer values, or an unquoted
+#'   variable name of such a vector, between 0 and 10 indicating the precision
+#'   of the returned result as defined by its geographical extent, (i.e. by the
+#'   extent of the result's bounding box). See the
+#'   \href{https://opencagedata.com/api#confidence}{API documentation} for
+#'   details. Only results with at least the requested confidence will be
+#'   returned. Default is \code{NULL}).
+#' @param no_annotations Logical vector, or an unquoted variable name of such a
+#'   vector, indicating whether additional information about the result location
+#'   should be returned. Default is \code{TRUE}, which means that the output
+#'   will not contain annotations.
+#' @param no_dedupe Logical vector, or an unquoted variable name of such a
+#'   vector. Default is \code{FALSE}. When \code{TRUE} the output will not be
+#'   deduplicated.
+#' @param abbrv Logical vector, or an unquoted variable name of such a
+#'   vector. Default is \code{FALSE}. When \code{TRUE} addresses in the
+#'   \code{formatted} variable of the results are abbreviated (e.g. "Main St."
+#'   instead of "Main Street").
+#' @param ... Ignored.
+#'
+#' @return A tibble.
+#'
+#' @seealso \code{\link{oc_forward}} for inputs as vectors, or
+#'   \code{\link{oc_reverse}} and \code{\link{oc_reverse_df}} for reverse
+#'   geocoding. For more information about the API and the various parameters,
+#'   see the \href{https://opencagedata.com/api}{OpenCage API documentation}.
 #'
 #' @export
+#'
+#' @examples
+#'
+#' \dontrun{
+#' library(tibble)
+#' df <- tibble(id = 1:3,
+#'              locations = c("Nantes", "Hamburg", "Los Angeles"))
+#'
+#' # Return lat, lng, and formatted address
+#' oc_forward_df(df, placename = locations)
+#'
+#' # Return more detailed information about the locations
+#' oc_forward_df(df, placename = locations, output = "all")
+#'
+#' # Do not column bind results to input data frame
+#' oc_forward_df(df, placename = locations, bind_cols = FALSE)
+#'
+#' # Add more results by changing the limit from the default of 1.
+#' oc_forward_df(df, placename = locations, limit = 5)
+#'
+#' # Restrict results to a given bounding box
+#' oc_forward_df(df, placename = locations,
+#'               bounds = oc_bbox(-5, 45, 15, 55))
+#'
+#' # oc_forward_df accepts unquoted column names for all
+#' # arguments except bind_cols, output, key, and no_record.
+#' # This makes it possible to build up more detailed queries
+#' # through the data frame passed to the data argument.
+#'
+#' df2 <- add_column(df,
+#'   bounds = oc_bbox(xmin = c(-2, 9, -119),
+#'                    ymin = c(47, 53, 34),
+#'                    xmax = c(0, 10, -117),
+#'                    ymax = c(48, 54, 35)),
+#'   limit = 1:3,
+#'   countrycode = c("ca", "us", "co"),
+#'   language = c("fr", "de", "en"))
+#'
+#' # Use the bounds column to help return accurate results and
+#' # language column to specify preferred language of results
+#' oc_forward_df(df2, placename = locations,
+#'               bounds = bounds,
+#'               language = language)
+#'
+#' # Different limit of results for each placename
+#' oc_forward_df(df2, placename = locations,
+#'               limit = limit)
+#'
+#' # Specify the desired results by the countrycode column
+#' oc_forward_df(df2, placename = locations,
+#'               countrycode = countrycode)
+#' }
+
 oc_forward_df <-
   function(data,
            placename,
@@ -171,83 +321,23 @@ oc_forward_df <-
            abbrv = FALSE,
            ...) {
 
-    placename <- data[[deparse(substitute(placename))]]
-
-    # nolint start
-    bounds_ <- eval(substitute(alist(bounds)))[[1]]
-    if (is.symbol(bounds_)) {
-      bounds_ <- data[[deparse(bounds_)]]
-      if (!is.null(bounds_)) bounds <- bounds_
-    } else if (is.call(bounds_)) {
-      bounds <- eval(bounds_)
+    # check a placename is provided
+    if (missing(placename)) {
+      stop(call. = FALSE, "`placename` must be provided.")
     }
-    if (!is.null(bounds)) bounds <- as.list(bounds)
 
-    countrycode_ <- eval(substitute(alist(countrycode)))[[1]]
-    if (is.symbol(countrycode_)) {
-      countrycode_ <- data[[deparse(countrycode_)]]
-      if (!is.null(countrycode_)) countrycode <- countrycode_
-    } else if (is.call(countrycode_)) {
-      countrycode <- eval(countrycode_)
-    }
-    if (!is.null(countrycode)) countrycode <- as.list(countrycode)
+    # Tidyeval to enable input from data frame columns
+    placename <- rlang::enquo(placename)
+    bounds <- rlang::enquo(bounds)
+    countrycode <- rlang::enquo(countrycode)
+    language <- rlang::enquo(language)
+    limit <- rlang::enquo(limit)
+    min_confidence <- rlang::enquo(min_confidence)
+    no_annotations <- rlang::enquo(no_annotations)
+    no_dedupe <- rlang::enquo(no_dedupe)
+    abbrv <- rlang::enquo(abbrv)
 
-    language_ <- eval(substitute(alist(language)))[[1]]
-    if (is.symbol(language_)) {
-      language_ <- data[[deparse(language_)]]
-      if (!is.null(language_)) language <- language_
-    } else if (is.call(language_)) {
-      language <- eval(language_)
-    }
-    if (!is.null(language)) language <- as.list(language)
-
-    limit_ <- eval(substitute(alist(limit)))[[1]]
-    if (is.symbol(limit_)) {
-      limit_ <- data[[deparse(limit_)]]
-      if (!is.null(limit_)) limit <- limit_
-    } else if (is.call(limit_)) {
-      limit <- eval(limit_)
-    }
-    if (!is.null(limit)) limit <- as.list(limit)
-
-    min_confidence_ <- eval(substitute(alist(min_confidence)))[[1]]
-    if (is.symbol(min_confidence_)) {
-      min_confidence_ <- data[[deparse(min_confidence_)]]
-      if (!is.null(min_confidence_)) min_confidence <- min_confidence_
-    } else if (is.call(min_confidence_)) {
-      min_confidence <- eval(min_confidence_)
-    }
-    if (!is.null(min_confidence)) min_confidence <- as.list(min_confidence)
-
-    no_annotations_ <- eval(substitute(alist(no_annotations)))[[1]]
-    if (is.symbol(no_annotations_)) {
-      no_annotations_ <- data[[deparse(no_annotations_)]]
-      if (!is.null(no_annotations_)) no_annotations <- no_annotations_
-    } else if (is.call(no_annotations_)) {
-      no_annotations <- eval(no_annotations_)
-    }
-    if (!is.null(no_annotations)) no_annotations <- as.list(no_annotations)
-
-    no_dedupe_ <- eval(substitute(alist(no_dedupe)))[[1]]
-    if (is.symbol(no_dedupe_)) {
-      no_dedupe_ <- data[[deparse(no_dedupe_)]]
-      if (!is.null(no_dedupe_)) no_dedupe <- no_dedupe_
-    } else if (is.call(no_dedupe_)) {
-      no_dedupe <- eval(no_dedupe_)
-    }
-    if (!is.null(no_dedupe)) no_dedupe <- as.list(no_dedupe)
-
-    abbrv_ <- eval(substitute(alist(abbrv)))[[1]]
-    if (is.symbol(abbrv_)) {
-      abbrv_ <- data[[deparse(abbrv_)]]
-      if (!is.null(abbrv_)) abbrv <- abbrv_
-    } else if (is.call(abbrv_)) {
-      abbrv <- eval(abbrv_)
-    }
-    if (!is.null(abbrv)) abbrv <- as.list(abbrv)
-    # nolint end
-
-    output <- match.arg(output)
+    output <- rlang::arg_match(output)
 
     # Ensure that query column always exists
     add_request <- TRUE
@@ -258,18 +348,18 @@ oc_forward_df <-
 
     if (bind_cols == FALSE) {
       results_list <- oc_forward(
-        placename = placename,
+        placename = rlang::eval_tidy(placename, data = data),
         key = key,
         return = "df_list",
-        bounds = bounds,
-        countrycode = countrycode,
-        language = language,
-        limit = limit,
-        min_confidence = min_confidence,
-        no_annotations = no_annotations,
-        no_dedupe = no_dedupe,
+        bounds = rlang::eval_tidy(bounds, data = data),
+        countrycode = rlang::eval_tidy(countrycode, data = data),
+        language = rlang::eval_tidy(language, data = data),
+        limit = rlang::eval_tidy(limit, data = data),
+        min_confidence = rlang::eval_tidy(min_confidence, data = data),
+        no_annotations = rlang::eval_tidy(no_annotations, data = data),
+        no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
         no_record = no_record,
-        abbrv = abbrv,
+        abbrv = rlang::eval_tidy(abbrv, data = data),
         add_request = add_request
       )
       results <- dplyr::bind_rows(results_list)
@@ -286,18 +376,18 @@ oc_forward_df <-
           data,
           op =
             oc_forward(
-              placename = placename,
+              placename = !!placename,
               key = key,
               return = "df_list",
-              bounds = bounds,
-              countrycode = countrycode,
-              language = language,
-              limit = limit,
-              min_confidence = min_confidence,
-              no_annotations = no_annotations,
-              no_dedupe = no_dedupe,
+              bounds = !!bounds,
+              countrycode = !!countrycode,
+              language = !!language,
+              limit = !!limit,
+              min_confidence = !!min_confidence,
+              no_annotations = !!no_annotations,
+              no_dedupe = !!no_dedupe,
               no_record = no_record,
-              abbrv = abbrv,
+              abbrv = !!abbrv,
               add_request = add_request
             )
         )
