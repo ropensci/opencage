@@ -1,8 +1,9 @@
-library("opencage")
-context("opencage_forward")
+## Test deprecated opencage_forward ##
 
 test_that("opencage_forward/opencage_reverse return what they should.", {
   skip_on_cran()
+  skip_if_offline()
+
   results <- opencage_forward(placename = "Sarzeau")
   expect_is(results, "list")
   expect_is(results[["results"]], "tbl_df")
@@ -40,6 +41,7 @@ test_that("opencage_forward/opencage_reverse return what they should.", {
 test_that("opencage_forward/opencage_reverse return what they should
           with several parameters.", {
   skip_on_cran()
+  skip_if_offline()
 
   results <- opencage_forward(
     placename = "Paris",
@@ -82,6 +84,9 @@ test_that("opencage_forward/opencage_reverse return what they should
 })
 
 test_that("opencage_forward deals well with results being NULL", {
+  skip_on_cran()
+  skip_if_offline()
+
   results <- opencage_forward(
     placename = "thiswillgetmenoresultswichisgood",
     key = Sys.getenv("OPENCAGE_KEY"),
@@ -98,6 +103,9 @@ test_that("opencage_forward deals well with results being NULL", {
 
 
 test_that("the bounds argument is well taken into account", {
+  skip_on_cran()
+  skip_if_offline()
+
   results1 <- opencage_forward(
     placename = "Berlin",
     key = Sys.getenv("OPENCAGE_KEY")

@@ -1,5 +1,4 @@
-library("opencage")
-context("oc_check_query")
+## Test oc_check_query: error messages ##
 
 test_that("oc_check_query checks placename", {
   expect_error(

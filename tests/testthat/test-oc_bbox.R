@@ -1,5 +1,4 @@
-library("opencage")
-context("oc_bbox")
+## Test oc_bbox ##
 
 test_that("oc_bbox works with numeric", {
   bbox1 <- oc_bbox(-5.6, 51.2, 0.2, 51.6)
@@ -78,7 +77,7 @@ test_that("oc_bbox works with data.frame", {
 test_that("oc_bbox works with simple features bbox", {
   skip_if_not_installed("sf")
   sfbbox <-
-    sf::st_bbox(c(
+    st_bbox(c(
       xmin = 16.1,
       xmax = 16.6,
       ymax = 48.6,

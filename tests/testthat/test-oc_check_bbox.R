@@ -1,5 +1,4 @@
-library("opencage")
-context("oc_check_bbox")
+# Test checks for oc_bbox ##
 
 test_that("oc_check_bbox checks bbox", {
   expect_error(
