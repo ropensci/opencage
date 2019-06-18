@@ -77,7 +77,7 @@ test_that("oc_bbox works with data.frame", {
 test_that("oc_bbox works with simple features bbox", {
   skip_if_not_installed("sf")
   sfbbox <-
-    st_bbox(c(
+    sf::st_bbox(c(
       xmin = 16.1,
       xmax = 16.6,
       ymax = 48.6,
