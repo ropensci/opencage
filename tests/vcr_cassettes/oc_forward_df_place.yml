@@ -1,0 +1,146 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=Nantes&limit=1&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Wed, 19 Jun 2019 19:52:50 GMT
+      server: Apache/2.4.29 (Ubuntu)
+      access-control-allow-origin: '*'
+      x-ratelimit-limit: '2500'
+      x-ratelimit-remaining: '1838'
+      x-ratelimit-reset: '1560988800'
+      transfer-encoding: chunked
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1838,"reset":1560988800},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Nantes","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":47.2958583,"lng":-1.4788443},"southwest":{"lat":47.1805856,"lng":-1.6418115}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"city","city":"Nantes","continent":"Europe","country":"France","country_code":"fr","county":"Nantes","political_union":"European
+        Union","state":"Pays de la Loire","state_code":"PDL","state_district":"Loire-Atlantique"},"confidence":6,"formatted":"Nantes,
+        France","geometry":{"lat":47.2186371,"lng":-1.5541362}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
+        19:52:50 GMT","created_unix":1560973970},"total_results":1}'
+  recorded_at: 2019-06-19 19:52:54 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=Hamburg&limit=1&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Wed, 19 Jun 2019 19:52:51 GMT
+      server: Apache/2.4.29 (Ubuntu)
+      access-control-allow-origin: '*'
+      x-ratelimit-limit: '2500'
+      x-ratelimit-remaining: '1836'
+      x-ratelimit-reset: '1560988800'
+      transfer-encoding: chunked
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1836,"reset":1560988800},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Hamburg","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":53.710341,"lng":10.160654},"southwest":{"lat":53.390341,"lng":9.840654}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"city","city":"Hamburg","continent":"Europe","country":"Germany","country_code":"de","political_union":"European
+        Union","postcode":"20095","state":"Hamburg","state_code":"HH"},"confidence":4,"formatted":"20095
+        Hamburg, Germany","geometry":{"lat":53.550341,"lng":10.000654}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
+        19:52:51 GMT","created_unix":1560973971},"total_results":1}'
+  recorded_at: 2019-06-19 19:52:54 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=Los%20Angeles&limit=1&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Wed, 19 Jun 2019 19:52:52 GMT
+      server: Apache/2.4.29 (Ubuntu)
+      access-control-allow-origin: '*'
+      x-ratelimit-limit: '2500'
+      x-ratelimit-remaining: '1834'
+      x-ratelimit-reset: '1560988800'
+      transfer-encoding: chunked
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1834,"reset":1560988800},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Los
+        Angeles","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":34.337306,"lng":-118.1552947},"southwest":{"lat":33.7036216,"lng":-118.6681776}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"city","city":"Los
+        Angeles","continent":"North America","country":"USA","country_code":"us","county":"Los
+        Angeles County","state":"California","state_code":"CA"},"confidence":1,"formatted":"Los
+        Angeles, CA, United States of America","geometry":{"lat":34.0536909,"lng":-118.2427666}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
+        19:52:52 GMT","created_unix":1560973972},"total_results":1}'
+  recorded_at: 2019-06-19 19:52:54 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=Kyoto&limit=1&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Wed, 19 Jun 2019 19:52:54 GMT
+      server: Apache/2.4.29 (Ubuntu)
+      access-control-allow-origin: '*'
+      x-ratelimit-limit: '2500'
+      x-ratelimit-remaining: '1832'
+      x-ratelimit-reset: '1560988800'
+      transfer-encoding: chunked
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1832,"reset":1560988800},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Kyoto","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":35.321239,"lng":135.878442},"southwest":{"lat":34.874916,"lng":135.559006}},"components":{"ISO_3166-1_alpha-2":"JP","ISO_3166-1_alpha-3":"JPN","_type":"county","continent":"Asia","country":"Japan","country_code":"jp","county":"Kyoto","state":"Kyoto
+        Prefecture"},"confidence":2,"formatted":"Kyoto, Japan","geometry":{"lat":35.021041,"lng":135.7556075}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
+        19:52:54 GMT","created_unix":1560973974},"total_results":1}'
+  recorded_at: 2019-06-19 19:52:54 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4

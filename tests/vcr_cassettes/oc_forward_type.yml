@@ -1,0 +1,345 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=Nantes&limit=10&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=0&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Wed, 19 Jun 2019 19:52:41 GMT
+      server: Apache/2.4.29 (Ubuntu)
+      access-control-allow-origin: '*'
+      x-ratelimit-limit: '2500'
+      x-ratelimit-remaining: '1849'
+      x-ratelimit-reset: '1560988800'
+      transfer-encoding: chunked
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1849,"reset":1560988800},"results":[{"bounds":{"northeast":{"lat":47.2958583,"lng":-1.4788443},"southwest":{"lat":47.1805856,"lng":-1.6418115}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"city","city":"Nantes","continent":"Europe","country":"France","country_code":"fr","county":"Nantes","political_union":"European
+        Union","state":"Pays de la Loire","state_code":"PDL","state_district":"Loire-Atlantique"},"confidence":6,"formatted":"Nantes,
+        France","geometry":{"lat":47.2186371,"lng":-1.5541362}},{"bounds":{"northeast":{"lat":47.3532684,"lng":-1.1147605},"southwest":{"lat":46.8603369,"lng":-1.9393397}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"county","continent":"Europe","country":"France","country_code":"fr","county":"Nantes","political_union":"European
+        Union","state":"Pays de la Loire","state_code":"PDL","state_district":"Loire-Atlantique"},"confidence":1,"formatted":"Nantes,
+        France","geometry":{"lat":47.1064143,"lng":-1.5318723}},{"bounds":{"northeast":{"lat":-22.477,"lng":-51.099},"southwest":{"lat":-22.723,"lng":-51.298}},"components":{"ISO_3166-1_alpha-2":"BR","ISO_3166-1_alpha-3":"BRA","_type":"village","city_district":"Nantes","continent":"South
+        America","country":"Brazil","country_code":"br","county":"Regi\u00e3o Imediata
+        de Presidente Prudente","state":"S\u00e3o Paulo","state_code":"SP","state_district":"Regi\u00e3o
+        Intermedi\u00e1ria de Presidente Prudente","village":"Nantes"},"confidence":4,"formatted":"Nantes,
+        Regi\u00e3o Imediata de Presidente Prudente, Brazil","geometry":{"lat":-22.603,"lng":-51.2103177}},{"bounds":{"northeast":{"lat":41.7357881,"lng":-7.4263702},"southwest":{"lat":41.6957881,"lng":-7.4663702}},"components":{"ISO_3166-1_alpha-2":"PT","ISO_3166-1_alpha-3":"PRT","_type":"village","continent":"Europe","country":"Portugal","country_code":"pt","county":"Chaves","hamlet":"Nantes","political_union":"European
+        Union","postcode":"5400-298","state":"North","state_district":"Alto T\u00e2mega"},"confidence":7,"formatted":"5400-298
+        Nantes, Portugal","geometry":{"lat":41.7157881,"lng":-7.4463702}},{"bounds":{"northeast":{"lat":42.4475163,"lng":-8.7810341},"southwest":{"lat":42.4075163,"lng":-8.8210341}},"components":{"ISO_3166-1_alpha-2":"ES","ISO_3166-1_alpha-3":"ESP","_type":"village","continent":"Europe","country":"Spain","country_code":"es","county":"Pontevedra","county_code":"PO","hamlet":"Nantes","political_union":"European
+        Union","postcode":"36968","state":"Galicia","state_code":"GA"},"confidence":7,"formatted":"36968
+        Nantes, Spain","geometry":{"lat":42.4275163,"lng":-8.8010341}},{"bounds":{"northeast":{"lat":45.7013274,"lng":-70.8932653},"southwest":{"lat":45.568547,"lng":-71.1093148}},"components":{"ISO_3166-1_alpha-2":"CA","ISO_3166-1_alpha-3":"CAN","_type":"city","city":"Nantes","continent":"North
+        America","country":"Canada","country_code":"ca","county":"Le Granit","region":"Estrie","state":"Quebec","state_code":"QC"},"confidence":5,"formatted":"Nantes,
+        QC, Canada","geometry":{"lat":45.6303741,"lng":-71.0208502}},{"bounds":{"northeast":{"lat":-33.9572639,"lng":18.5313264},"southwest":{"lat":-33.9621003,"lng":18.5232355}},"components":{"ISO_3166-1_alpha-2":"ZA","ISO_3166-1_alpha-3":"ZAF","_type":"park","city":"Cape
+        Town","continent":"Africa","country":"RSA","country_code":"za","county":"City
+        of Cape Town","park":"Nantes","postcode":"7764","state":"Western Cape","state_code":"WC","suburb":"Silvertown"},"confidence":9,"formatted":"Nantes,
+        Silvertown, Cape Town, 7764, RSA","geometry":{"lat":-33.9596359,"lng":18.5272722}},{"bounds":{"northeast":{"lat":-34.8602854,"lng":-56.1683551},"southwest":{"lat":-34.8610425,"lng":-56.1707775}},"components":{"ISO_3166-1_alpha-2":"UY","ISO_3166-1_alpha-3":"URY","_type":"road","city":"Montevideo","continent":"South
+        America","country":"Uruguay","country_code":"uy","neighbourhood":"Cerrito","postcode":"12000","road":"Nantes","road_type":"residential","state":"Montevideo","state_code":"MO","suburb":"Brazo
+        Oriental"},"confidence":9,"formatted":"Nantes, 12000 Montevideo, Uruguay","geometry":{"lat":-34.8607099,"lng":-56.16955}},{"bounds":{"northeast":{"lat":-34.076283,"lng":18.4486897},"southwest":{"lat":-34.0763063,"lng":18.448016}},"components":{"ISO_3166-1_alpha-2":"ZA","ISO_3166-1_alpha-3":"ZAF","_type":"road","city":"Cape
+        Town","continent":"Africa","country":"RSA","country_code":"za","county":"City
+        of Cape Town","postcode":"7945","road":"Nantes","state":"Western Cape","state_code":"WC","suburb":"Kirstenhof"},"confidence":9,"formatted":"Nantes,
+        Kirstenhof, Cape Town, 7945, RSA","geometry":{"lat":-34.076283,"lng":18.448016}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
+        19:52:41 GMT","created_unix":1560973961},"total_results":9}'
+  recorded_at: 2019-06-19 19:52:49 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=Hamburg&limit=10&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=0&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Wed, 19 Jun 2019 19:52:42 GMT
+      server: Apache/2.4.29 (Ubuntu)
+      access-control-allow-origin: '*'
+      x-ratelimit-limit: '2500'
+      x-ratelimit-remaining: '1847'
+      x-ratelimit-reset: '1560988800'
+      transfer-encoding: chunked
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1847,"reset":1560988800},"results":[{"bounds":{"northeast":{"lat":53.710341,"lng":10.160654},"southwest":{"lat":53.390341,"lng":9.840654}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"city","city":"Hamburg","continent":"Europe","country":"Germany","country_code":"de","political_union":"European
+        Union","postcode":"20095","state":"Hamburg","state_code":"HH"},"confidence":4,"formatted":"20095
+        Hamburg, Germany","geometry":{"lat":53.550341,"lng":10.000654}},{"bounds":{"northeast":{"lat":56.1037641,"lng":12.5699133},"southwest":{"lat":50.9837641,"lng":7.4499133}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"city","city":"Hamburg","continent":"Europe","country":"Germany","country_code":"de","political_union":"European
+        Union","state":"Hamburg","state_code":"HH"},"confidence":1,"formatted":"Hamburg,
+        Germany","geometry":{"lat":53.5437641,"lng":10.0099133}},{"bounds":{"northeast":{"lat":54.0276817,"lng":10.3252805},"southwest":{"lat":53.3951118,"lng":8.1053284}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"city","city":"Hamburg","continent":"Europe","country":"Germany","country_code":"de","political_union":"European
+        Union","state":"Hamburg","state_code":"HH"},"confidence":1,"formatted":"Hamburg,
+        Germany","geometry":{"lat":53.5672881,"lng":9.9417262}},{"bounds":{"northeast":{"lat":42.7397729,"lng":-78.812825},"southwest":{"lat":42.7091669,"lng":-78.860521}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"city","city":"Hamburg","continent":"North
+        America","country":"USA","country_code":"us","county":"Erie County","state":"New
+        York","state_code":"NY"},"confidence":7,"formatted":"Hamburg, NY, United States
+        of America","geometry":{"lat":42.716293,"lng":-78.828717}},{"bounds":{"northeast":{"lat":40.573518,"lng":-75.969821},"southwest":{"lat":40.537232,"lng":-76.0001558}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"city","city":"Hamburg","continent":"North
+        America","country":"USA","country_code":"us","county":"Berks County","postcode":"19526","state":"Pennsylvania","state_code":"PA"},"confidence":7,"formatted":"Hamburg,
+        PA 19526, United States of America","geometry":{"lat":40.5555764,"lng":-75.9822929}},{"bounds":{"northeast":{"lat":45.1105228,"lng":-89.8651301},"southwest":{"lat":45.0705228,"lng":-89.9051301}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"village","continent":"North
+        America","country":"USA","country_code":"us","county":"Marathon County","hamlet":"Hamburg","state":"Wisconsin","state_code":"WI"},"confidence":7,"formatted":"Hamburg,
+        WI, United States of America","geometry":{"lat":45.0905228,"lng":-89.8851301}},{"bounds":{"northeast":{"lat":41.161163,"lng":-74.560975},"southwest":{"lat":41.136764,"lng":-74.58292}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"city","city":"Hamburg","continent":"North
+        America","country":"USA","country_code":"us","county":"Sussex County","postcode":"07419","state":"New
+        Jersey","state_code":"NJ"},"confidence":7,"formatted":"Hamburg, NJ 07419,
+        United States of America","geometry":{"lat":41.1534294,"lng":-74.5762713}},{"bounds":{"northeast":{"lat":50.85929,"lng":8.0325347},"southwest":{"lat":50.85919,"lng":8.0324347}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"peak","city":"Siegen","continent":"Europe","country":"Germany","country_code":"de","county":"Kreis
+        Siegen-Wittgenstein","peak":"Hamberg","political_union":"European Union","postcode":"57074","state":"North
+        Rhine-Westphalia","state_district":"Regierungsbezirk Arnsberg"},"confidence":9,"formatted":"Hamberg,
+        57074 Siegen, Germany","geometry":{"lat":50.85924,"lng":8.0324847}},{"bounds":{"northeast":{"lat":52.0635428,"lng":10.3574901},"southwest":{"lat":52.0634428,"lng":10.3573901}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"peak","city":"Salzgitter","continent":"Europe","country":"Germany","country_code":"de","county":"Salzgitter","peak":"Hamberg","political_union":"European
+        Union","postcode":"38275","state":"Lower Saxony"},"confidence":9,"formatted":"Hamberg,
+        38275 Salzgitter, Germany","geometry":{"lat":52.0634928,"lng":10.3574401}},{"bounds":{"northeast":{"lat":52.8848894,"lng":7.5581585},"southwest":{"lat":52.8847894,"lng":7.5580585}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"peak","continent":"Europe","country":"Germany","country_code":"de","county":"Samtgemeinde
+        S\u00f6gel","peak":"Hamberg","political_union":"European Union","postcode":"49751","state":"Lower
+        Saxony","village":"Spahnharrenst\u00e4tte"},"confidence":9,"formatted":"Hamberg,
+        49751 Spahnharrenst\u00e4tte, Germany","geometry":{"lat":52.8848394,"lng":7.5581085}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
+        19:52:42 GMT","created_unix":1560973962},"total_results":10}'
+  recorded_at: 2019-06-19 19:52:49 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=Los%20Angeles&limit=10&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=0&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Wed, 19 Jun 2019 19:52:44 GMT
+      server: Apache/2.4.29 (Ubuntu)
+      access-control-allow-origin: '*'
+      x-ratelimit-limit: '2500'
+      x-ratelimit-remaining: '1845'
+      x-ratelimit-reset: '1560988800'
+      transfer-encoding: chunked
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1845,"reset":1560988800},"results":[{"bounds":{"northeast":{"lat":34.337306,"lng":-118.1552947},"southwest":{"lat":33.7036216,"lng":-118.6681776}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"city","city":"Los
+        Angeles","continent":"North America","country":"USA","country_code":"us","county":"Los
+        Angeles County","state":"California","state_code":"CA"},"confidence":1,"formatted":"Los
+        Angeles, CA, United States of America","geometry":{"lat":34.0536909,"lng":-118.2427666}},{"bounds":{"northeast":{"lat":34.8232693,"lng":-117.6462406},"southwest":{"lat":32.7969287,"lng":-118.9517221}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"county","continent":"North
+        America","country":"USA","country_code":"us","county":"Los Angeles County","state":"California","state_code":"CA"},"confidence":1,"formatted":"Los
+        Angeles County, CA, United States of America","geometry":{"lat":34.3155072,"lng":-118.2096814}},{"bounds":{"northeast":{"lat":9.4022923,"lng":-75.2213977},"southwest":{"lat":9.3778767,"lng":-75.2594562}},"components":{"ISO_3166-1_alpha-2":"CO","ISO_3166-1_alpha-3":"COL","_type":"city","city":"Los
+        Angeles","continent":"South America","country":"Colombia","country_code":"co","county":"Los
+        Palmitos","state":"Sucre","state_code":"SUC"},"confidence":7,"formatted":"Los
+        Angeles, Los Palmitos, Colombia","geometry":{"lat":9.3928361,"lng":-75.2391624}},{"bounds":{"northeast":{"lat":25.2024725,"lng":55.1490527},"southwest":{"lat":25.2008463,"lng":55.1469328}},"components":{"ISO_3166-1_alpha-2":"AE","ISO_3166-1_alpha-3":"ARE","_type":"city","city":"Dubai","continent":"Asia","country":"United
+        Arab Emirates","country_code":"ae","island":"Los Angeles","state":"Dubai"},"confidence":9,"formatted":"Dubai,
+        United Arab Emirates","geometry":{"lat":25.2016547,"lng":55.1479184}},{"bounds":{"northeast":{"lat":4.8050026,"lng":-75.6898823},"southwest":{"lat":4.7967815,"lng":-75.6939554}},"components":{"ISO_3166-1_alpha-2":"CO","ISO_3166-1_alpha-3":"COL","_type":"neighbourhood","city":"Universidad","city_district":"Los
+        Angeles","continent":"South America","country":"Colombia","country_code":"co","county":"Perimetro
+        Urbano Pereira","state":"Risaralda","state_code":"RIS"},"confidence":9,"formatted":"Los
+        Angeles, Universidad, Perimetro Urbano Pereira, Colombia","geometry":{"lat":4.8009253,"lng":-75.6915001}},{"bounds":{"northeast":{"lat":2.4562108,"lng":-76.8773052},"southwest":{"lat":2.3762108,"lng":-76.9573052}},"components":{"ISO_3166-1_alpha-2":"CO","ISO_3166-1_alpha-3":"COL","_type":"city","continent":"South
+        America","country":"Colombia","country_code":"co","county":"El Tambo","postcode":"032","state":"Cauca","state_code":"CAU","town":"Los
+        Angeles"},"confidence":7,"formatted":"032 Los Angeles, CAU, Colombia","geometry":{"lat":2.4162108,"lng":-76.9173052}},{"bounds":{"northeast":{"lat":-37.1785281,"lng":-72.03901},"southwest":{"lat":-37.6629358,"lng":-72.6836424}},"components":{"ISO_3166-1_alpha-2":"CL","ISO_3166-1_alpha-3":"CHL","_type":"city","city":"Los
+        \u00c1ngeles","continent":"South America","country":"Chile","country_code":"cl","county":"Provincia
+        de B\u00edo-B\u00edo","postcode":"4440000","state":"Biob\u00edo Region"},"confidence":1,"formatted":"4440000
+        Los \u00c1ngeles, Chile","geometry":{"lat":-37.4707455,"lng":-72.351686}},{"bounds":{"northeast":{"lat":26.5981179,"lng":-98.11973},"southwest":{"lat":26.5581179,"lng":-98.15973}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"village","continent":"North
+        America","country":"USA","country_code":"us","county":"Hidalgo County","hamlet":"Los
+        Angeles","state":"Texas","state_code":"TX"},"confidence":7,"formatted":"Los
+        Angeles, TX, United States of America","geometry":{"lat":26.5781179,"lng":-98.13973}},{"bounds":{"northeast":{"lat":10.8911622,"lng":121.0600521},"southwest":{"lat":10.8511622,"lng":121.0200521}},"components":{"ISO_3166-1_alpha-2":"PH","ISO_3166-1_alpha-3":"PHL","_type":"village","continent":"Asia","country":"Philippines","country_code":"ph","county":"Magsaysay","postcode":"5319","state":"Palawan","village":"Los
+        Angeles"},"confidence":7,"formatted":"Los Angeles, 5319 Palawan, Philippines","geometry":{"lat":10.8711622,"lng":121.0400521}},{"bounds":{"northeast":{"lat":-17.9248797,"lng":-70.1841369},"southwest":{"lat":-17.9648797,"lng":-70.2241369}},"components":{"ISO_3166-1_alpha-2":"PE","ISO_3166-1_alpha-3":"PER","_type":"village","continent":"South
+        America","country":"Peru","country_code":"pe","region":"Province of Tacna","state":"Tacna","state_code":"TAC","village":"Los
+        Angeles"},"confidence":7,"formatted":"Los Angeles, Tacna, Peru","geometry":{"lat":-17.9448797,"lng":-70.2041369}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
+        19:52:44 GMT","created_unix":1560973964},"total_results":10}'
+  recorded_at: 2019-06-19 19:52:49 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/geojson?q=Nantes&limit=10&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=0&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Wed, 19 Jun 2019 19:52:45 GMT
+      server: Apache/2.4.29 (Ubuntu)
+      access-control-allow-origin: '*'
+      x-ratelimit-limit: '2500'
+      x-ratelimit-remaining: '1843'
+      x-ratelimit-reset: '1560988800'
+      transfer-encoding: chunked
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"documentation":"https://opencagedata.com/api","features":[{"geometry":{"coordinates":[-1.5541362,47.2186371],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":47.2958583,"lng":-1.4788443},"southwest":{"lat":47.1805856,"lng":-1.6418115}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"city","city":"Nantes","continent":"Europe","country":"France","country_code":"fr","county":"Nantes","political_union":"European
+        Union","state":"Pays de la Loire","state_code":"PDL","state_district":"Loire-Atlantique"},"confidence":6,"formatted":"Nantes,
+        France"},"type":"Feature"},{"geometry":{"coordinates":[-1.53187228794254,47.10641425],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":47.3532684,"lng":-1.1147605},"southwest":{"lat":46.8603369,"lng":-1.9393397}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"county","continent":"Europe","country":"France","country_code":"fr","county":"Nantes","political_union":"European
+        Union","state":"Pays de la Loire","state_code":"PDL","state_district":"Loire-Atlantique"},"confidence":1,"formatted":"Nantes,
+        France"},"type":"Feature"},{"geometry":{"coordinates":[-51.2103176691729,-22.603],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":-22.477,"lng":-51.099},"southwest":{"lat":-22.723,"lng":-51.298}},"components":{"ISO_3166-1_alpha-2":"BR","ISO_3166-1_alpha-3":"BRA","_type":"village","city_district":"Nantes","continent":"South
+        America","country":"Brazil","country_code":"br","county":"Regi\u00e3o Imediata
+        de Presidente Prudente","state":"S\u00e3o Paulo","state_code":"SP","state_district":"Regi\u00e3o
+        Intermedi\u00e1ria de Presidente Prudente","village":"Nantes"},"confidence":4,"formatted":"Nantes,
+        Regi\u00e3o Imediata de Presidente Prudente, Brazil"},"type":"Feature"},{"geometry":{"coordinates":[-7.4463702,41.7157881],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":41.7357881,"lng":-7.4263702},"southwest":{"lat":41.6957881,"lng":-7.4663702}},"components":{"ISO_3166-1_alpha-2":"PT","ISO_3166-1_alpha-3":"PRT","_type":"village","continent":"Europe","country":"Portugal","country_code":"pt","county":"Chaves","hamlet":"Nantes","political_union":"European
+        Union","postcode":"5400-298","state":"North","state_district":"Alto T\u00e2mega"},"confidence":7,"formatted":"5400-298
+        Nantes, Portugal"},"type":"Feature"},{"geometry":{"coordinates":[-8.8010341,42.4275163],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":42.4475163,"lng":-8.7810341},"southwest":{"lat":42.4075163,"lng":-8.8210341}},"components":{"ISO_3166-1_alpha-2":"ES","ISO_3166-1_alpha-3":"ESP","_type":"village","continent":"Europe","country":"Spain","country_code":"es","county":"Pontevedra","county_code":"PO","hamlet":"Nantes","political_union":"European
+        Union","postcode":"36968","state":"Galicia","state_code":"GA"},"confidence":7,"formatted":"36968
+        Nantes, Spain"},"type":"Feature"},{"geometry":{"coordinates":[-71.0208502,45.6303741],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":45.7013274,"lng":-70.8932653},"southwest":{"lat":45.568547,"lng":-71.1093148}},"components":{"ISO_3166-1_alpha-2":"CA","ISO_3166-1_alpha-3":"CAN","_type":"city","city":"Nantes","continent":"North
+        America","country":"Canada","country_code":"ca","county":"Le Granit","region":"Estrie","state":"Quebec","state_code":"QC"},"confidence":5,"formatted":"Nantes,
+        QC, Canada"},"type":"Feature"},{"geometry":{"coordinates":[18.527272183407,-33.9596359],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":-33.9572639,"lng":18.5313264},"southwest":{"lat":-33.9621003,"lng":18.5232355}},"components":{"ISO_3166-1_alpha-2":"ZA","ISO_3166-1_alpha-3":"ZAF","_type":"park","city":"Cape
+        Town","continent":"Africa","country":"RSA","country_code":"za","county":"City
+        of Cape Town","park":"Nantes","postcode":"7764","state":"Western Cape","state_code":"WC","suburb":"Silvertown"},"confidence":9,"formatted":"Nantes,
+        Silvertown, Cape Town, 7764, RSA"},"type":"Feature"},{"geometry":{"coordinates":[-56.16955,-34.8607099],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":-34.8602854,"lng":-56.1683551},"southwest":{"lat":-34.8610425,"lng":-56.1707775}},"components":{"ISO_3166-1_alpha-2":"UY","ISO_3166-1_alpha-3":"URY","_type":"road","city":"Montevideo","continent":"South
+        America","country":"Uruguay","country_code":"uy","neighbourhood":"Cerrito","postcode":"12000","road":"Nantes","road_type":"residential","state":"Montevideo","state_code":"MO","suburb":"Brazo
+        Oriental"},"confidence":9,"formatted":"Nantes, 12000 Montevideo, Uruguay"},"type":"Feature"},{"geometry":{"coordinates":[18.448016,-34.076283],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":-34.076283,"lng":18.4486897},"southwest":{"lat":-34.0763063,"lng":18.448016}},"components":{"ISO_3166-1_alpha-2":"ZA","ISO_3166-1_alpha-3":"ZAF","_type":"road","city":"Cape
+        Town","continent":"Africa","country":"RSA","country_code":"za","county":"City
+        of Cape Town","postcode":"7945","road":"Nantes","state":"Western Cape","state_code":"WC","suburb":"Kirstenhof"},"confidence":9,"formatted":"Nantes,
+        Kirstenhof, Cape Town, 7945, RSA"},"type":"Feature"}],"licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1843,"reset":1560988800},"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
+        19:52:45 GMT","created_unix":1560973965},"total_results":9,"type":"FeatureCollection"}'
+  recorded_at: 2019-06-19 19:52:49 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/geojson?q=Hamburg&limit=10&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=0&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Wed, 19 Jun 2019 19:52:47 GMT
+      server: Apache/2.4.29 (Ubuntu)
+      access-control-allow-origin: '*'
+      x-ratelimit-limit: '2500'
+      x-ratelimit-remaining: '1841'
+      x-ratelimit-reset: '1560988800'
+      transfer-encoding: chunked
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"documentation":"https://opencagedata.com/api","features":[{"geometry":{"coordinates":[10.000654,53.550341],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":53.710341,"lng":10.160654},"southwest":{"lat":53.390341,"lng":9.840654}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"city","city":"Hamburg","continent":"Europe","country":"Germany","country_code":"de","political_union":"European
+        Union","postcode":"20095","state":"Hamburg","state_code":"HH"},"confidence":4,"formatted":"20095
+        Hamburg, Germany"},"type":"Feature"},{"geometry":{"coordinates":[10.0099133,53.5437641],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":56.1037641,"lng":12.5699133},"southwest":{"lat":50.9837641,"lng":7.4499133}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"city","city":"Hamburg","continent":"Europe","country":"Germany","country_code":"de","political_union":"European
+        Union","state":"Hamburg","state_code":"HH"},"confidence":1,"formatted":"Hamburg,
+        Germany"},"type":"Feature"},{"geometry":{"coordinates":[9.9417261504116,53.5672881],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":54.0276817,"lng":10.3252805},"southwest":{"lat":53.3951118,"lng":8.1053284}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"city","city":"Hamburg","continent":"Europe","country":"Germany","country_code":"de","political_union":"European
+        Union","state":"Hamburg","state_code":"HH"},"confidence":1,"formatted":"Hamburg,
+        Germany"},"type":"Feature"},{"geometry":{"coordinates":[-78.828717,42.716293],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":42.7397729,"lng":-78.812825},"southwest":{"lat":42.7091669,"lng":-78.860521}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"city","city":"Hamburg","continent":"North
+        America","country":"USA","country_code":"us","county":"Erie County","state":"New
+        York","state_code":"NY"},"confidence":7,"formatted":"Hamburg, NY, United States
+        of America"},"type":"Feature"},{"geometry":{"coordinates":[-75.9822929,40.5555764],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":40.573518,"lng":-75.969821},"southwest":{"lat":40.537232,"lng":-76.0001558}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"city","city":"Hamburg","continent":"North
+        America","country":"USA","country_code":"us","county":"Berks County","postcode":"19526","state":"Pennsylvania","state_code":"PA"},"confidence":7,"formatted":"Hamburg,
+        PA 19526, United States of America"},"type":"Feature"},{"geometry":{"coordinates":[-89.8851301,45.0905228],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":45.1105228,"lng":-89.8651301},"southwest":{"lat":45.0705228,"lng":-89.9051301}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"village","continent":"North
+        America","country":"USA","country_code":"us","county":"Marathon County","hamlet":"Hamburg","state":"Wisconsin","state_code":"WI"},"confidence":7,"formatted":"Hamburg,
+        WI, United States of America"},"type":"Feature"},{"geometry":{"coordinates":[-74.5762713,41.1534294],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":41.161163,"lng":-74.560975},"southwest":{"lat":41.136764,"lng":-74.58292}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"city","city":"Hamburg","continent":"North
+        America","country":"USA","country_code":"us","county":"Sussex County","postcode":"07419","state":"New
+        Jersey","state_code":"NJ"},"confidence":7,"formatted":"Hamburg, NJ 07419,
+        United States of America"},"type":"Feature"},{"geometry":{"coordinates":[8.0324847,50.85924],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":50.85929,"lng":8.0325347},"southwest":{"lat":50.85919,"lng":8.0324347}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"peak","city":"Siegen","continent":"Europe","country":"Germany","country_code":"de","county":"Kreis
+        Siegen-Wittgenstein","peak":"Hamberg","political_union":"European Union","postcode":"57074","state":"North
+        Rhine-Westphalia","state_district":"Regierungsbezirk Arnsberg"},"confidence":9,"formatted":"Hamberg,
+        57074 Siegen, Germany"},"type":"Feature"},{"geometry":{"coordinates":[10.3574401,52.0634928],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":52.0635428,"lng":10.3574901},"southwest":{"lat":52.0634428,"lng":10.3573901}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"peak","city":"Salzgitter","continent":"Europe","country":"Germany","country_code":"de","county":"Salzgitter","peak":"Hamberg","political_union":"European
+        Union","postcode":"38275","state":"Lower Saxony"},"confidence":9,"formatted":"Hamberg,
+        38275 Salzgitter, Germany"},"type":"Feature"},{"geometry":{"coordinates":[7.5581085,52.8848394],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":52.8848894,"lng":7.5581585},"southwest":{"lat":52.8847894,"lng":7.5580585}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"peak","continent":"Europe","country":"Germany","country_code":"de","county":"Samtgemeinde
+        S\u00f6gel","peak":"Hamberg","political_union":"European Union","postcode":"49751","state":"Lower
+        Saxony","village":"Spahnharrenst\u00e4tte"},"confidence":9,"formatted":"Hamberg,
+        49751 Spahnharrenst\u00e4tte, Germany"},"type":"Feature"}],"licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1841,"reset":1560988800},"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
+        19:52:47 GMT","created_unix":1560973967},"total_results":10,"type":"FeatureCollection"}'
+  recorded_at: 2019-06-19 19:52:49 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/geojson?q=Los%20Angeles&limit=10&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=0&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Wed, 19 Jun 2019 19:52:48 GMT
+      server: Apache/2.4.29 (Ubuntu)
+      access-control-allow-origin: '*'
+      x-ratelimit-limit: '2500'
+      x-ratelimit-remaining: '2500'
+      x-ratelimit-reset: '1560988800'
+      transfer-encoding: chunked
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"documentation":"https://opencagedata.com/api","features":[{"geometry":{"coordinates":[-118.2427666,34.0536909],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":34.337306,"lng":-118.1552947},"southwest":{"lat":33.7036216,"lng":-118.6681776}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"city","city":"Los
+        Angeles","continent":"North America","country":"USA","country_code":"us","county":"Los
+        Angeles County","state":"California","state_code":"CA"},"confidence":1,"formatted":"Los
+        Angeles, CA, United States of America"},"type":"Feature"},{"geometry":{"coordinates":[-118.2096814,34.3155072],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":34.8232693,"lng":-117.6462406},"southwest":{"lat":32.7969287,"lng":-118.9517221}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"county","continent":"North
+        America","country":"USA","country_code":"us","county":"Los Angeles County","state":"California","state_code":"CA"},"confidence":1,"formatted":"Los
+        Angeles County, CA, United States of America"},"type":"Feature"},{"geometry":{"coordinates":[-75.2391624,9.3928361],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":9.4022923,"lng":-75.2213977},"southwest":{"lat":9.3778767,"lng":-75.2594562}},"components":{"ISO_3166-1_alpha-2":"CO","ISO_3166-1_alpha-3":"COL","_type":"city","city":"Los
+        Angeles","continent":"South America","country":"Colombia","country_code":"co","county":"Los
+        Palmitos","state":"Sucre","state_code":"SUC"},"confidence":7,"formatted":"Los
+        Angeles, Los Palmitos, Colombia"},"type":"Feature"},{"geometry":{"coordinates":[55.1479183986075,25.20165475],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":25.2024725,"lng":55.1490527},"southwest":{"lat":25.2008463,"lng":55.1469328}},"components":{"ISO_3166-1_alpha-2":"AE","ISO_3166-1_alpha-3":"ARE","_type":"city","city":"Dubai","continent":"Asia","country":"United
+        Arab Emirates","country_code":"ae","island":"Los Angeles","state":"Dubai"},"confidence":9,"formatted":"Dubai,
+        United Arab Emirates"},"type":"Feature"},{"geometry":{"coordinates":[-75.6915000929067,4.80092535],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":4.8050026,"lng":-75.6898823},"southwest":{"lat":4.7967815,"lng":-75.6939554}},"components":{"ISO_3166-1_alpha-2":"CO","ISO_3166-1_alpha-3":"COL","_type":"neighbourhood","city":"Universidad","city_district":"Los
+        Angeles","continent":"South America","country":"Colombia","country_code":"co","county":"Perimetro
+        Urbano Pereira","state":"Risaralda","state_code":"RIS"},"confidence":9,"formatted":"Los
+        Angeles, Universidad, Perimetro Urbano Pereira, Colombia"},"type":"Feature"},{"geometry":{"coordinates":[-76.9173052,2.4162108],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":2.4562108,"lng":-76.8773052},"southwest":{"lat":2.3762108,"lng":-76.9573052}},"components":{"ISO_3166-1_alpha-2":"CO","ISO_3166-1_alpha-3":"COL","_type":"city","continent":"South
+        America","country":"Colombia","country_code":"co","county":"El Tambo","postcode":"032","state":"Cauca","state_code":"CAU","town":"Los
+        Angeles"},"confidence":7,"formatted":"032 Los Angeles, CAU, Colombia"},"type":"Feature"},{"geometry":{"coordinates":[-72.351686,-37.4707455],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":-37.1785281,"lng":-72.03901},"southwest":{"lat":-37.6629358,"lng":-72.6836424}},"components":{"ISO_3166-1_alpha-2":"CL","ISO_3166-1_alpha-3":"CHL","_type":"city","city":"Los
+        \u00c1ngeles","continent":"South America","country":"Chile","country_code":"cl","county":"Provincia
+        de B\u00edo-B\u00edo","postcode":"4440000","state":"Biob\u00edo Region"},"confidence":1,"formatted":"4440000
+        Los \u00c1ngeles, Chile"},"type":"Feature"},{"geometry":{"coordinates":[-98.13973,26.5781179],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":26.5981179,"lng":-98.11973},"southwest":{"lat":26.5581179,"lng":-98.15973}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"village","continent":"North
+        America","country":"USA","country_code":"us","county":"Hidalgo County","hamlet":"Los
+        Angeles","state":"Texas","state_code":"TX"},"confidence":7,"formatted":"Los
+        Angeles, TX, United States of America"},"type":"Feature"},{"geometry":{"coordinates":[121.0400521,10.8711622],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":10.8911622,"lng":121.0600521},"southwest":{"lat":10.8511622,"lng":121.0200521}},"components":{"ISO_3166-1_alpha-2":"PH","ISO_3166-1_alpha-3":"PHL","_type":"village","continent":"Asia","country":"Philippines","country_code":"ph","county":"Magsaysay","postcode":"5319","state":"Palawan","village":"Los
+        Angeles"},"confidence":7,"formatted":"Los Angeles, 5319 Palawan, Philippines"},"type":"Feature"},{"geometry":{"coordinates":[-70.2041369,-17.9448797],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":-17.9248797,"lng":-70.1841369},"southwest":{"lat":-17.9648797,"lng":-70.2241369}},"components":{"ISO_3166-1_alpha-2":"PE","ISO_3166-1_alpha-3":"PER","_type":"village","continent":"South
+        America","country":"Peru","country_code":"pe","region":"Province of Tacna","state":"Tacna","state_code":"TAC","village":"Los
+        Angeles"},"confidence":7,"formatted":"Los Angeles, Tacna, Peru"},"type":"Feature"}],"licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2500,"reset":1560988800},"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
+        19:52:48 GMT","created_unix":1560973968},"total_results":10,"type":"FeatureCollection"}'
+  recorded_at: 2019-06-19 19:52:49 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4

@@ -47,24 +47,22 @@ test_that("oc_get returns a response object for vector countrycode", {
   expect_s3_class(res, "HttpResponse")
 })
 
-test_that("oc_get_limited is rate limited", {
-  skip_on_cran()
-  skip_if_offline()
-
-  tm <- system.time({
-    replicate(2, oc_get_limited("https://httpbin.org/get"))
+vcr::use_cassette("oc_get_rate_limited", {
+  test_that("oc_get_limited is rate limited", {
+    tm <- system.time({
+      replicate(2, oc_get_limited("https://httpbin.org/get"))
+    })
+    rate <- ratelimitr::get_rates(oc_get_limited)
+    expect_gte(tm[["elapsed"]], rate[[1]][["period"]] / rate[[1]][["n"]])
   })
-  rate <- ratelimitr::get_rates(oc_get_limited)
-  expect_gte(tm[["elapsed"]], rate[[1]][["period"]] / rate[[1]][["n"]])
 })
 
-test_that("oc_get_memoise memoises", {
-  skip_on_cran()
-  skip_if_offline()
-
-  oc_get_memoise("https://httpbin.org/get")
-  tm <- system.time({
+vcr::use_cassette("oc_get_memoise", {
+  test_that("oc_get_memoise memoises", {
     oc_get_memoise("https://httpbin.org/get")
+    tm <- system.time({
+      oc_get_memoise("https://httpbin.org/get")
+    })
+    expect_lt(tm["elapsed"], 0.5)
   })
-  expect_lt(tm["elapsed"], 0.5)
 })

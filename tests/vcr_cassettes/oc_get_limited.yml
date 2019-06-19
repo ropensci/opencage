@@ -1,0 +1,704 @@
+http_interactions:
+- request:
+    method: get
+    uri: http://httpbin.org/get
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      content-encoding: gzip
+      content-type: application/json
+      date: Wed, 19 Jun 2019 19:52:28 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: nginx
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '209'
+      connection: keep-alive
+    body:
+      encoding: UTF-8
+      string: "{\n  \"args\": {}, \n  \"headers\": {\n    \"Accept\": \"application/json,
+        text/xml, application/xml, */*\", \n    \"Accept-Encoding\": \"gzip, deflate\",
+        \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"https://github.com/ropensci/opencage\"\n
+        \ }, \n  \"origin\": \"88.130.90.239, 88.130.90.239\", \n  \"url\": \"https://httpbin.org/get\"\n}\n"
+  recorded_at: 2019-06-19 19:52:40 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: http://httpbin.org/get
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      content-encoding: gzip
+      content-type: application/json
+      date: Wed, 19 Jun 2019 19:52:30 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: nginx
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '209'
+      connection: keep-alive
+    body:
+      encoding: UTF-8
+      string: "{\n  \"args\": {}, \n  \"headers\": {\n    \"Accept\": \"application/json,
+        text/xml, application/xml, */*\", \n    \"Accept-Encoding\": \"gzip, deflate\",
+        \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"https://github.com/ropensci/opencage\"\n
+        \ }, \n  \"origin\": \"88.130.90.239, 88.130.90.239\", \n  \"url\": \"https://httpbin.org/get\"\n}\n"
+  recorded_at: 2019-06-19 19:52:40 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: http://httpbin.org/get
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      content-encoding: gzip
+      content-type: application/json
+      date: Wed, 19 Jun 2019 19:52:30 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: nginx
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '209'
+      connection: keep-alive
+    body:
+      encoding: UTF-8
+      string: "{\n  \"args\": {}, \n  \"headers\": {\n    \"Accept\": \"application/json,
+        text/xml, application/xml, */*\", \n    \"Accept-Encoding\": \"gzip, deflate\",
+        \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"https://github.com/ropensci/opencage\"\n
+        \ }, \n  \"origin\": \"88.130.90.239, 88.130.90.239\", \n  \"url\": \"https://httpbin.org/get\"\n}\n"
+  recorded_at: 2019-06-19 19:52:40 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: http://httpbin.org/get
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      content-encoding: gzip
+      content-type: application/json
+      date: Wed, 19 Jun 2019 19:52:31 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: nginx
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '209'
+      connection: keep-alive
+    body:
+      encoding: UTF-8
+      string: "{\n  \"args\": {}, \n  \"headers\": {\n    \"Accept\": \"application/json,
+        text/xml, application/xml, */*\", \n    \"Accept-Encoding\": \"gzip, deflate\",
+        \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"https://github.com/ropensci/opencage\"\n
+        \ }, \n  \"origin\": \"88.130.90.239, 88.130.90.239\", \n  \"url\": \"https://httpbin.org/get\"\n}\n"
+  recorded_at: 2019-06-19 19:52:40 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: http://httpbin.org/get
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      content-encoding: gzip
+      content-type: application/json
+      date: Wed, 19 Jun 2019 19:52:31 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: nginx
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '209'
+      connection: keep-alive
+    body:
+      encoding: UTF-8
+      string: "{\n  \"args\": {}, \n  \"headers\": {\n    \"Accept\": \"application/json,
+        text/xml, application/xml, */*\", \n    \"Accept-Encoding\": \"gzip, deflate\",
+        \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"https://github.com/ropensci/opencage\"\n
+        \ }, \n  \"origin\": \"88.130.90.239, 88.130.90.239\", \n  \"url\": \"https://httpbin.org/get\"\n}\n"
+  recorded_at: 2019-06-19 19:52:40 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: http://httpbin.org/get
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      content-encoding: gzip
+      content-type: application/json
+      date: Wed, 19 Jun 2019 19:52:32 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: nginx
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '209'
+      connection: keep-alive
+    body:
+      encoding: UTF-8
+      string: "{\n  \"args\": {}, \n  \"headers\": {\n    \"Accept\": \"application/json,
+        text/xml, application/xml, */*\", \n    \"Accept-Encoding\": \"gzip, deflate\",
+        \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"https://github.com/ropensci/opencage\"\n
+        \ }, \n  \"origin\": \"88.130.90.239, 88.130.90.239\", \n  \"url\": \"https://httpbin.org/get\"\n}\n"
+  recorded_at: 2019-06-19 19:52:40 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: http://httpbin.org/get
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      content-encoding: gzip
+      content-type: application/json
+      date: Wed, 19 Jun 2019 19:52:33 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: nginx
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '209'
+      connection: keep-alive
+    body:
+      encoding: UTF-8
+      string: "{\n  \"args\": {}, \n  \"headers\": {\n    \"Accept\": \"application/json,
+        text/xml, application/xml, */*\", \n    \"Accept-Encoding\": \"gzip, deflate\",
+        \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"https://github.com/ropensci/opencage\"\n
+        \ }, \n  \"origin\": \"88.130.90.239, 88.130.90.239\", \n  \"url\": \"https://httpbin.org/get\"\n}\n"
+  recorded_at: 2019-06-19 19:52:40 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: http://httpbin.org/get
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      content-encoding: gzip
+      content-type: application/json
+      date: Wed, 19 Jun 2019 19:52:34 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: nginx
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '209'
+      connection: keep-alive
+    body:
+      encoding: UTF-8
+      string: "{\n  \"args\": {}, \n  \"headers\": {\n    \"Accept\": \"application/json,
+        text/xml, application/xml, */*\", \n    \"Accept-Encoding\": \"gzip, deflate\",
+        \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"https://github.com/ropensci/opencage\"\n
+        \ }, \n  \"origin\": \"88.130.90.239, 88.130.90.239\", \n  \"url\": \"https://httpbin.org/get\"\n}\n"
+  recorded_at: 2019-06-19 19:52:40 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: http://httpbin.org/get
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      content-encoding: gzip
+      content-type: application/json
+      date: Wed, 19 Jun 2019 19:52:34 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: nginx
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '209'
+      connection: keep-alive
+    body:
+      encoding: UTF-8
+      string: "{\n  \"args\": {}, \n  \"headers\": {\n    \"Accept\": \"application/json,
+        text/xml, application/xml, */*\", \n    \"Accept-Encoding\": \"gzip, deflate\",
+        \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"https://github.com/ropensci/opencage\"\n
+        \ }, \n  \"origin\": \"88.130.90.239, 88.130.90.239\", \n  \"url\": \"https://httpbin.org/get\"\n}\n"
+  recorded_at: 2019-06-19 19:52:40 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: http://httpbin.org/get
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      content-encoding: gzip
+      content-type: application/json
+      date: Wed, 19 Jun 2019 19:52:35 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: nginx
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '209'
+      connection: keep-alive
+    body:
+      encoding: UTF-8
+      string: "{\n  \"args\": {}, \n  \"headers\": {\n    \"Accept\": \"application/json,
+        text/xml, application/xml, */*\", \n    \"Accept-Encoding\": \"gzip, deflate\",
+        \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"https://github.com/ropensci/opencage\"\n
+        \ }, \n  \"origin\": \"88.130.90.239, 88.130.90.239\", \n  \"url\": \"https://httpbin.org/get\"\n}\n"
+  recorded_at: 2019-06-19 19:52:40 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: http://httpbin.org/get
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      content-encoding: gzip
+      content-type: application/json
+      date: Wed, 19 Jun 2019 19:52:35 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: nginx
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '209'
+      connection: keep-alive
+    body:
+      encoding: UTF-8
+      string: "{\n  \"args\": {}, \n  \"headers\": {\n    \"Accept\": \"application/json,
+        text/xml, application/xml, */*\", \n    \"Accept-Encoding\": \"gzip, deflate\",
+        \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"https://github.com/ropensci/opencage\"\n
+        \ }, \n  \"origin\": \"88.130.90.239, 88.130.90.239\", \n  \"url\": \"https://httpbin.org/get\"\n}\n"
+  recorded_at: 2019-06-19 19:52:40 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: http://httpbin.org/get
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      content-encoding: gzip
+      content-type: application/json
+      date: Wed, 19 Jun 2019 19:52:36 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: nginx
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '209'
+      connection: keep-alive
+    body:
+      encoding: UTF-8
+      string: "{\n  \"args\": {}, \n  \"headers\": {\n    \"Accept\": \"application/json,
+        text/xml, application/xml, */*\", \n    \"Accept-Encoding\": \"gzip, deflate\",
+        \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"https://github.com/ropensci/opencage\"\n
+        \ }, \n  \"origin\": \"88.130.90.239, 88.130.90.239\", \n  \"url\": \"https://httpbin.org/get\"\n}\n"
+  recorded_at: 2019-06-19 19:52:40 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: http://httpbin.org/get
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      content-encoding: gzip
+      content-type: application/json
+      date: Wed, 19 Jun 2019 19:52:36 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: nginx
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '209'
+      connection: keep-alive
+    body:
+      encoding: UTF-8
+      string: "{\n  \"args\": {}, \n  \"headers\": {\n    \"Accept\": \"application/json,
+        text/xml, application/xml, */*\", \n    \"Accept-Encoding\": \"gzip, deflate\",
+        \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"https://github.com/ropensci/opencage\"\n
+        \ }, \n  \"origin\": \"88.130.90.239, 88.130.90.239\", \n  \"url\": \"https://httpbin.org/get\"\n}\n"
+  recorded_at: 2019-06-19 19:52:40 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: http://httpbin.org/get
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      content-encoding: gzip
+      content-type: application/json
+      date: Wed, 19 Jun 2019 19:52:37 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: nginx
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '209'
+      connection: keep-alive
+    body:
+      encoding: UTF-8
+      string: "{\n  \"args\": {}, \n  \"headers\": {\n    \"Accept\": \"application/json,
+        text/xml, application/xml, */*\", \n    \"Accept-Encoding\": \"gzip, deflate\",
+        \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"https://github.com/ropensci/opencage\"\n
+        \ }, \n  \"origin\": \"88.130.90.239, 88.130.90.239\", \n  \"url\": \"https://httpbin.org/get\"\n}\n"
+  recorded_at: 2019-06-19 19:52:40 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: http://httpbin.org/get
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      content-encoding: gzip
+      content-type: application/json
+      date: Wed, 19 Jun 2019 19:52:37 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: nginx
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '209'
+      connection: keep-alive
+    body:
+      encoding: UTF-8
+      string: "{\n  \"args\": {}, \n  \"headers\": {\n    \"Accept\": \"application/json,
+        text/xml, application/xml, */*\", \n    \"Accept-Encoding\": \"gzip, deflate\",
+        \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"https://github.com/ropensci/opencage\"\n
+        \ }, \n  \"origin\": \"88.130.90.239, 88.130.90.239\", \n  \"url\": \"https://httpbin.org/get\"\n}\n"
+  recorded_at: 2019-06-19 19:52:40 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: http://httpbin.org/get
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      content-encoding: gzip
+      content-type: application/json
+      date: Wed, 19 Jun 2019 19:52:38 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: nginx
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '209'
+      connection: keep-alive
+    body:
+      encoding: UTF-8
+      string: "{\n  \"args\": {}, \n  \"headers\": {\n    \"Accept\": \"application/json,
+        text/xml, application/xml, */*\", \n    \"Accept-Encoding\": \"gzip, deflate\",
+        \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"https://github.com/ropensci/opencage\"\n
+        \ }, \n  \"origin\": \"88.130.90.239, 88.130.90.239\", \n  \"url\": \"https://httpbin.org/get\"\n}\n"
+  recorded_at: 2019-06-19 19:52:40 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: http://httpbin.org/get
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      content-encoding: gzip
+      content-type: application/json
+      date: Wed, 19 Jun 2019 19:52:38 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: nginx
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '209'
+      connection: keep-alive
+    body:
+      encoding: UTF-8
+      string: "{\n  \"args\": {}, \n  \"headers\": {\n    \"Accept\": \"application/json,
+        text/xml, application/xml, */*\", \n    \"Accept-Encoding\": \"gzip, deflate\",
+        \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"https://github.com/ropensci/opencage\"\n
+        \ }, \n  \"origin\": \"88.130.90.239, 88.130.90.239\", \n  \"url\": \"https://httpbin.org/get\"\n}\n"
+  recorded_at: 2019-06-19 19:52:40 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: http://httpbin.org/get
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      content-encoding: gzip
+      content-type: application/json
+      date: Wed, 19 Jun 2019 19:52:40 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: nginx
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '209'
+      connection: keep-alive
+    body:
+      encoding: UTF-8
+      string: "{\n  \"args\": {}, \n  \"headers\": {\n    \"Accept\": \"application/json,
+        text/xml, application/xml, */*\", \n    \"Accept-Encoding\": \"gzip, deflate\",
+        \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"https://github.com/ropensci/opencage\"\n
+        \ }, \n  \"origin\": \"88.130.90.239, 88.130.90.239\", \n  \"url\": \"https://httpbin.org/get\"\n}\n"
+  recorded_at: 2019-06-19 19:52:40 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: http://httpbin.org/get
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      access-control-allow-credentials: 'true'
+      access-control-allow-origin: '*'
+      content-encoding: gzip
+      content-type: application/json
+      date: Wed, 19 Jun 2019 19:52:40 GMT
+      referrer-policy: no-referrer-when-downgrade
+      server: nginx
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '209'
+      connection: keep-alive
+    body:
+      encoding: UTF-8
+      string: "{\n  \"args\": {}, \n  \"headers\": {\n    \"Accept\": \"application/json,
+        text/xml, application/xml, */*\", \n    \"Accept-Encoding\": \"gzip, deflate\",
+        \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"https://github.com/ropensci/opencage\"\n
+        \ }, \n  \"origin\": \"88.130.90.239, 88.130.90.239\", \n  \"url\": \"https://httpbin.org/get\"\n}\n"
+  recorded_at: 2019-06-19 19:52:41 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4

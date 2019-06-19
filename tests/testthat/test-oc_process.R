@@ -65,22 +65,20 @@ test_that("oc_process creates meaningful URLs for multiple queries.", {
   expect_match(res[[2]], "q=37.83032%2C-122.47975", fixed = TRUE)
 })
 
-test_that("oc_process deals well with res being NULL", {
-  skip_on_cran()
-  skip_if_offline()
-
-  res <- oc_process(
-    placename = "thiswillgetmenoreswhichisgood",
-    key = Sys.getenv("OPENCAGE_KEY"),
-    limit = 2,
-    min_confidence = 5,
-    language = "pt-BR",
-    no_annotations = TRUE,
-    return = "df_list"
-  )
-  expect_null(res[["res"]])
+vcr::use_cassette("oc_process_null", {
+  test_that("oc_process deals well with res being NULL", {
+    res <- oc_process(
+      placename = "thiswillgetmenoreswhichisgood",
+      key = Sys.getenv("OPENCAGE_KEY"),
+      limit = 2,
+      min_confidence = 5,
+      language = "pt-BR",
+      no_annotations = TRUE,
+      return = "df_list"
+    )
+    expect_null(res[["res"]])
+  })
 })
-
 
 test_that("the bounds argument is well taken into account", {
   res <- oc_process(
@@ -114,26 +112,25 @@ test_that("the bounds argument is well taken into account", {
   expect_match(res[[2]], "&bounds=-78.86%2C42.7%2C-78.81%2C42.73", fixed = TRUE)
 })
 
-test_that("bounds argument is well taken into account with df_list", {
-  skip_on_cran()
-  skip_if_offline()
+vcr::use_cassette("oc_process_bounds", {
+  test_that("bounds argument is well taken into account with df_list", {
+    res1 <- oc_process(
+      placename = "Berlin",
+      key = Sys.getenv("OPENCAGE_KEY"),
+      return = "df_list"
+    )
 
-  res1 <- oc_process(
-    placename = "Berlin",
-    key = Sys.getenv("OPENCAGE_KEY"),
-    return = "df_list"
-  )
+    res2 <- oc_process(
+      placename = "Berlin",
+      bounds = list(c(-90, 38, 0, 45)),
+      key = Sys.getenv("OPENCAGE_KEY"),
+      limit = 10,
+      return = "df_list"
+    )
 
-  res2 <- oc_process(
-    placename = "Berlin",
-    bounds = list(c(-90, 38, 0, 45)),
-    key = Sys.getenv("OPENCAGE_KEY"),
-    limit = 10,
-    return = "df_list"
-  )
-
-  expect_equal(res1[[1]][["country"]], "Germany")
-  expect_true(res2[[1]][[1, "country"]] != "Germany")
+    expect_equal(res1[[1]][["country"]], "Germany")
+    expect_true(res2[[1]][[1, "country"]] != "Germany")
+  })
 })
 
 test_that("oc_process handles language argument.", {
