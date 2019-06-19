@@ -74,7 +74,8 @@ for the day and the time at which the number of remaining calls will
 }
 }
 \description{
-Reverse geocoding, from latitude and longitude to placename(s).
+Deprecated: use \code{oc_reverse} or \code{oc_reverse_df} for reverse
+geocoding.
 }
 \examples{
 \dontrun{

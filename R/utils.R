@@ -114,53 +114,6 @@ oc_init_progress <- function(vec) {
   )
 }
 
-# format to "old" style (version <= 0.1.4)
-# for opencage_forward, opencage_reverse
-opencage_format <- function(lst) {
-  no_results <- lst[["total_results"]]
-  if (no_results > 0) {
-    results <- lapply(lst[["results"]], unlist)
-    results <- lapply(results, as.data.frame)
-    results <- lapply(results, t)
-    results <- lapply(results, as.data.frame, stringsAsFactors = FALSE)
-    results <- suppressWarnings(dplyr::bind_rows(results))
-    results$"geometry.lat" <- as.numeric(results$"geometry.lat")
-    results$"geometry.lng" <- as.numeric(results$"geometry.lng")
-
-    # if requests exists in the api response add the query to results
-    if ("request" %in% names(lst)) {
-      results$query <- as.character(lst$request$query)
-    }
-  }
-  else {
-    results <- NULL
-  }
-
-  if (!is.null(lst$rate)) {
-    rate_info <- dplyr::tbl_df(data.frame(
-      limit = lst$rate$limit,
-      remaining = lst$rate$remaining,
-      reset = as.POSIXct(lst$rate$reset, origin = "1970-01-01")
-    ))
-  } else {
-    rate_info <- NULL
-  }
-
-  if (!is.null(results)) {
-    results <- dplyr::tbl_df(results)
-  }
-
-  list(
-    results = results,
-    total_results = no_results,
-    time_stamp = as.POSIXct(
-      lst$timestamp$created_unix,
-      origin = "1970-01-01"
-    ),
-    rate_info = rate_info
-  )
-}
-
 #' Retrieve OpenCage API key
 #'
 #' Retrieves the OpenCage API Key from the environment variable

@@ -1,6 +1,20 @@
+#' Deprecated functions in opencage
+#'
+#' These functions still work but will be removed (defunct) in the next version.
+#'
+#' \itemize{
+#'  \item \code{\link{opencage_forward}}
+#'  \item \code{\link{opencage_reverse}}
+#'  \item \code{\link{opencage_key}}
+#' }
+#'
+#' @name opencage-deprecated
+NULL
+
 #' Forward geocoding
 #'
-#' Forward geocoding, from placename to latitude and longitude tuple(s).
+#' Deprecated: use \code{oc_forward} or \code{oc_forward_df} for foward
+#' geocoding.
 #'
 #' @inheritParams oc_forward
 #'
@@ -42,9 +56,12 @@ opencage_forward <-
     if (length(placename) > 1) {
       stop(
         call. = FALSE,
-        "`opencage_forward` is not vectorised, use `oc_forward` instead."
+        "`opencage_forward` is not vectorised; use `oc_forward` instead."
       )
     }
+
+    .Deprecated("oc_forward")
+
     lst <- oc_forward(
       placename = placename,
       key = key,
@@ -67,7 +84,8 @@ opencage_forward <-
 
 #' Reverse geocoding
 #'
-#' Reverse geocoding, from latitude and longitude to placename(s).
+#' Deprecated: use \code{oc_reverse} or \code{oc_reverse_df} for reverse
+#' geocoding.
 #'
 #' @param bounds Bounding box, ignored for reverse geocoding.
 #' @param countrycode Country code, ignored for reverse geocoding.
@@ -105,6 +123,9 @@ opencage_reverse <-
         "`opencage_reverse` is not vectorised, use `oc_reverse` instead."
       )
     }
+
+    .Deprecated("oc_reverse")
+
     lst <- oc_reverse(
       latitude = latitude,
       longitude = longitude,
@@ -122,3 +143,62 @@ opencage_reverse <-
     lst <- lst[[1]]
     opencage_format(lst)
   }
+
+# format to "old" style (version <= 0.1.4)
+# for opencage_forward, opencage_reverse
+opencage_format <- function(lst) {
+  no_results <- lst[["total_results"]]
+  if (no_results > 0) {
+    results <- lapply(lst[["results"]], unlist)
+    results <- lapply(results, as.data.frame)
+    results <- lapply(results, t)
+    results <- lapply(results, as.data.frame, stringsAsFactors = FALSE)
+    results <- suppressWarnings(dplyr::bind_rows(results))
+    results$"geometry.lat" <- as.numeric(results$"geometry.lat")
+    results$"geometry.lng" <- as.numeric(results$"geometry.lng")
+
+    # if requests exists in the api response add the query to results
+    if ("request" %in% names(lst)) {
+      results$query <- as.character(lst$request$query)
+    }
+  }
+  else {
+    results <- NULL
+  }
+
+  if (!is.null(lst$rate)) {
+    rate_info <- dplyr::tbl_df(data.frame(
+      limit = lst$rate$limit,
+      remaining = lst$rate$remaining,
+      reset = as.POSIXct(lst$rate$reset, origin = "1970-01-01")
+    ))
+  } else {
+    rate_info <- NULL
+  }
+
+  if (!is.null(results)) {
+    results <- dplyr::tbl_df(results)
+  }
+
+  list(
+    results = results,
+    total_results = no_results,
+    time_stamp = as.POSIXct(
+      lst$timestamp$created_unix,
+      origin = "1970-01-01"
+    ),
+    rate_info = rate_info
+  )
+}
+
+#' Retrieve Opencage API key
+#'
+#' Deprecated: use \code{oc_key} to retrieve Opencage API key.
+#'
+#' @keywords internal
+#' @export
+opencage_key <- function(quiet = TRUE) {
+  .Deprecated("oc_key")
+
+  oc_key(quiet = quiet)
+}
