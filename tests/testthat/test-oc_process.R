@@ -1,5 +1,4 @@
-library("opencage")
-context("oc_process")
+## Test oc_process ##
 
 test_that("oc_process creates meaningful URLs for single query.", {
   res <-
@@ -8,8 +7,8 @@ test_that("oc_process creates meaningful URLs for single query.", {
       return = "url_only",
       key = NULL
     )
-  expect_is(res, "list")
-  expect_is(unlist(res), "character")
+  expect_type(res, "list")
+  expect_type(unlist(res), "character")
   expect_match(res[[1]], "q=Paris", fixed = TRUE)
 
   res <-
@@ -38,8 +37,8 @@ test_that("oc_process creates meaningful URLs for single query.", {
       return = "url_only",
       key = NULL
     )
-  expect_is(res, "list")
-  expect_is(unlist(res), "character")
+  expect_type(res, "list")
+  expect_type(unlist(res), "character")
   expect_match(res[[1]], "q=41.40139%2C2.1287", fixed = TRUE)
 })
 
@@ -49,8 +48,8 @@ test_that("oc_process creates meaningful URLs for multiple queries.", {
     return = "url_only",
     key = NULL
   )
-  expect_is(res, "list")
-  expect_is(unlist(res), "character")
+  expect_type(res, "list")
+  expect_type(unlist(res), "character")
   expect_match(res[[1]], "q=Paris", fixed = TRUE)
   expect_match(res[[2]], "q=Hamburg", fixed = TRUE)
 
@@ -60,14 +59,16 @@ test_that("oc_process creates meaningful URLs for multiple queries.", {
     return = "url_only",
     key = NULL
   )
-  expect_is(res, "list")
-  expect_is(unlist(res), "character")
+  expect_type(res, "list")
+  expect_type(unlist(res), "character")
   expect_match(res[[1]], "q=48.87378%2C2.295037", fixed = TRUE)
   expect_match(res[[2]], "q=37.83032%2C-122.47975", fixed = TRUE)
 })
 
 test_that("oc_process deals well with res being NULL", {
   skip_on_cran()
+  skip_if_offline()
+
   res <- oc_process(
     placename = "thiswillgetmenoreswhichisgood",
     key = Sys.getenv("OPENCAGE_KEY"),
@@ -111,6 +112,11 @@ test_that("the bounds argument is well taken into account", {
   )
   expect_match(res[[1]], "&bounds=8.1%2C53.39%2C10.32%2C54.02", fixed = TRUE)
   expect_match(res[[2]], "&bounds=-78.86%2C42.7%2C-78.81%2C42.73", fixed = TRUE)
+})
+
+test_that("bounds argument is well taken into account with df_list", {
+  skip_on_cran()
+  skip_if_offline()
 
   res1 <- oc_process(
     placename = "Berlin",

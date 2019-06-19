@@ -1,5 +1,4 @@
-library("opencage")
-context("oc_bbox")
+## Test oc_bbox ##
 
 test_that("oc_bbox works with numeric", {
   bbox1 <- oc_bbox(-5.6, 51.2, 0.2, 51.6)
