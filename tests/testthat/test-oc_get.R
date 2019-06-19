@@ -1,7 +1,7 @@
 ## Test oc_get ##
 
-test_that("oc_get returns a response object", {
-  vcr::use_cassette("oc_get_response", {
+vcr::use_cassette("oc_get_response", {
+  test_that("oc_get returns a response object", {
     withr::local_envvar(c("OPENCAGE_KEY" = key_200))
 
     expect_s3_class(
@@ -19,9 +19,8 @@ test_that("oc_get returns a response object", {
   })
 })
 
-test_that("oc_get returns a response object for Namibia NA countrycode", {
-  vcr::use_cassette("oc_get_namibia", {
-
+ vcr::use_cassette("oc_get_namibia", {
+  test_that("oc_get returns a response object for Namibia NA countrycode", {
     expect_s3_class(
       oc_get(
         oc_build_url(
@@ -38,9 +37,8 @@ test_that("oc_get returns a response object for Namibia NA countrycode", {
   })
 })
 
-test_that("oc_get returns a response object for vector countrycode", {
-  vcr::use_cassette("oc_get_countrycode", {
-
+vcr::use_cassette("oc_get_countrycode", {
+  test_that("oc_get returns a response object for vector countrycode", {
     expect_s3_class(
       oc_get(
         oc_build_url(
@@ -54,7 +52,6 @@ test_that("oc_get returns a response object for vector countrycode", {
       ),
       "HttpResponse"
     )
-
   })
 })
 

@@ -16,19 +16,20 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Thu, 10 Jan 2019 12:31:07 GMT
+      date: Wed, 19 Jun 2019 19:53:17 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '2492'
-      x-ratelimit-reset: '1547164800'
+      x-ratelimit-remaining: '1797'
+      x-ratelimit-reset: '1560988800'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
-      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"CC-BY-SA","url":"https://creativecommons.org/licenses/by-sa/3.0/"},{"name":"ODbL","url":"https://opendatacommons.org/licenses/odbl/summary/"}],"rate":{"limit":2500,"remaining":2492,"reset":1547164800},"results":[],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Thu, 10 Jan 2019
-        12:31:07 GMT","created_unix":1547123467},"total_results":0}'
-  recorded_at: 2019-01-10 12:31:07 GMT
-  recorded_with: vcr/0.2.0, webmockr/0.2.9
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1797,"reset":1560988800},"results":[],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
+        19:53:17 GMT","created_unix":1560973997},"total_results":0}'
+  recorded_at: 2019-06-19 19:53:18 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
