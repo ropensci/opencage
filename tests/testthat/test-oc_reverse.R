@@ -61,8 +61,14 @@ vcr::use_cassette("oc_reverse_df_output", {
       names(oc_reverse_df(df, lat, lng, bind_cols = FALSE)),
       c("query", "formatted")
     )
-    expect_gt(ncol(oc_reverse_df(df, lat, lng, output = "all")), 5)
-    expect_gt(ncol(oc_reverse_df(df, lat, lng, bind_cols = FALSE, output = "all")), 5)
+    expect_gt(
+      ncol(oc_reverse_df(df, lat, lng, output = "all")),
+      5
+    )
+    expect_gt(
+      ncol(oc_reverse_df(df, lat, lng, bind_cols = FALSE, output = "all")),
+      5
+    )
   })
 })
 
