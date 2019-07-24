@@ -2,6 +2,8 @@
 
 vcr::use_cassette("opencage_forward_reverse", {
   test_that("opencage_forward/opencage_reverse return what they should.", {
+    skip_if_no_key()
+
     results <- opencage_forward(placename = "Sarzeau")
     expect_is(results, "list")
     expect_is(results[["results"]], "tbl_df")
@@ -39,6 +41,8 @@ vcr::use_cassette("opencage_forward_reverse", {
 vcr::use_cassette("opencage_forward_parameters", {
   test_that("opencage_forward/opencage_reverse return what they should
           with several parameters.", {
+    skip_if_no_key()
+
     results <- opencage_forward(
       placename = "Paris",
       key = Sys.getenv("OPENCAGE_KEY"),
@@ -82,6 +86,8 @@ vcr::use_cassette("opencage_forward_parameters", {
 
 vcr::use_cassette("opencage_forward_NULL", {
   test_that("opencage_forward deals well with results being NULL", {
+    skip_if_no_key()
+
     results <- opencage_forward(
       placename = "thiswillgetmenoresultswichisgood",
       key = Sys.getenv("OPENCAGE_KEY"),
@@ -99,6 +105,8 @@ vcr::use_cassette("opencage_forward_NULL", {
 
 vcr::use_cassette("opencage_forward_bounds", {
   test_that("the bounds argument is well taken into account", {
+    skip_if_no_key()
+
     results1 <- opencage_forward(
       placename = "Berlin",
       key = Sys.getenv("OPENCAGE_KEY")

@@ -35,6 +35,8 @@ vcr::use_cassette("oc_check_status_401", {
 # Shouldn't happen since we oc_check coordinates
 vcr::use_cassette("oc_check_status_400", {
   test_that("oc_check_status returns 400 error if coordinates are invalid", {
+    skip_if_no_key()
+
     expect_error(
       oc_process(latitude = 280, longitude = 0, return = "json_list"),
       "HTTP failure: 400"

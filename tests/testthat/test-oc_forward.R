@@ -23,6 +23,8 @@ df2 <-
 # oc_forward --------------------------------------------------------------
 vcr::use_cassette("oc_forward_type", {
   test_that("oc_forward returns correct type", {
+    skip_if_no_key()
+
     # df_list
     res1 <- oc_forward(locations, return = "df_list")
     expect_type(res1, "list")
@@ -47,6 +49,8 @@ vcr::use_cassette("oc_forward_type", {
 
 vcr::use_cassette("oc_forward_df_place", {
   test_that("oc_forward_df works", {
+  skip_if_no_key()
+
     tbl1 <- oc_forward_df(df, loc)
     expect_s3_class(tbl1, c("tbl_df", "tbl", "data.frame"))
     expect_equal(nrow(tbl1), 3)
@@ -63,6 +67,8 @@ vcr::use_cassette("oc_forward_df_place", {
 
 vcr::use_cassette("oc_forward_df_output", {
   test_that("output arguments work", {
+    skip_if_no_key()
+
     expect_equal(
       names(oc_forward_df(df, loc, bind_cols = TRUE, output = "short")),
       c("id", "loc", "lat", "lng", "formatted")
@@ -84,6 +90,8 @@ vcr::use_cassette("oc_forward_df_output", {
 
 vcr::use_cassette("oc_forward_df_tidyeval", {
   test_that("tidyeval works for arguments", {
+    skip_if_no_key()
+
     noarg <- oc_forward_df(df2, loc, bind_cols = FALSE)
 
     # bounds and countrycode

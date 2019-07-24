@@ -67,6 +67,8 @@ test_that("oc_process creates meaningful URLs for multiple queries.", {
 
 vcr::use_cassette("oc_process_null", {
   test_that("oc_process deals well with res being NULL", {
+    skip_if_no_key()
+
     res <- oc_process(
       placename = "thiswillgetmenoreswhichisgood",
       key = Sys.getenv("OPENCAGE_KEY"),
@@ -114,6 +116,8 @@ test_that("the bounds argument is well taken into account", {
 
 vcr::use_cassette("oc_process_bounds", {
   test_that("bounds argument is well taken into account with df_list", {
+    skip_if_no_key()
+
     res1 <- oc_process(
       placename = "Berlin",
       key = Sys.getenv("OPENCAGE_KEY"),

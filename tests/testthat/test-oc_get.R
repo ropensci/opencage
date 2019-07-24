@@ -1,6 +1,8 @@
 ## Test oc_get ##
 
 test_that("oc_get returns a response object", {
+  skip_if_no_key()
+
   vcr::use_cassette("oc_get_response", {
     res <- oc_get(
       oc_build_url(
@@ -16,6 +18,8 @@ test_that("oc_get returns a response object", {
 })
 
 test_that("oc_get returns a response object for Namibia NA countrycode", {
+  skip_if_no_key()
+
   vcr::use_cassette("oc_get_namibia", {
     res <- oc_get(
       oc_build_url(
@@ -32,6 +36,8 @@ test_that("oc_get returns a response object for Namibia NA countrycode", {
 })
 
 test_that("oc_get returns a response object for vector countrycode", {
+  skip_if_no_key()
+
   vcr::use_cassette("oc_get_countrycode", {
     res <- oc_get(
       oc_build_url(

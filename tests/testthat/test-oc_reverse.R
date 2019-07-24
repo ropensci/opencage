@@ -17,6 +17,8 @@ df3 <- add_row(df2, id = 4, lat = 25, lng = 36, confidence = 5)
 
 vcr::use_cassette("oc_reverse_type", {
   test_that("oc_reverse returns correct type", {
+    skip_if_no_key()
+
     # df_list
     res1 <- oc_reverse(lat, lng)
     expect_type(res1, "list")
@@ -41,6 +43,8 @@ vcr::use_cassette("oc_reverse_type", {
 # oc_reverse_df -----------------------------------------------------------
 vcr::use_cassette("oc_reverse_df_lat_lon", {
   test_that("oc_reverse_df works", {
+    skip_if_no_key()
+
     tbl1 <- oc_reverse_df(df, lat, lng)
     expect_s3_class(tbl1, c("tbl_df", "tbl", "data.frame"))
     expect_equal(nrow(tbl1), 3)
@@ -53,6 +57,8 @@ vcr::use_cassette("oc_reverse_df_lat_lon", {
 
 vcr::use_cassette("oc_reverse_df_output", {
   test_that("output arguments work", {
+    skip_if_no_key()
+
     expect_equal(
       names(oc_reverse_df(df, lat, lng, bind_cols = TRUE)),
       c("id", "lat", "lng", "formatted")
@@ -74,6 +80,8 @@ vcr::use_cassette("oc_reverse_df_output", {
 
 vcr::use_cassette("oc_reverse_df_tidyeval", {
   test_that("tidyeval works for arguments", {
+    skip_if_no_key()
+
     noarg <- oc_reverse_df(df2, lat, lng)
 
     # language
