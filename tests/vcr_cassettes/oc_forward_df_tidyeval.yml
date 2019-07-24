@@ -1,6 +1,116 @@
 http_interactions:
 - request:
     method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=Nantes&limit=1&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Thu, 18 Jul 2019 09:25:03 GMT
+      server: Apache/2.4.29 (Ubuntu)
+      access-control-allow-origin: '*'
+      x-ratelimit-limit: '2500'
+      x-ratelimit-remaining: '2464'
+      x-ratelimit-reset: '1563494400'
+      transfer-encoding: chunked
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2464,"reset":1563494400},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Nantes","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":47.2958583,"lng":-1.4788443},"southwest":{"lat":47.1805856,"lng":-1.6418115}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"city","city":"Nantes","continent":"Europe","country":"France","country_code":"fr","county":"Nantes","political_union":"European
+        Union","state":"Pays de la Loire","state_code":"PDL","state_district":"Loire-Atlantique"},"confidence":6,"formatted":"Nantes,
+        France","geometry":{"lat":47.2186371,"lng":-1.5541362}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:25:03
+        GMT","created_unix":1563441903},"total_results":1}'
+  recorded_at: 2019-07-18 09:25:28 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=Hamburg&limit=1&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Thu, 18 Jul 2019 09:25:04 GMT
+      server: Apache/2.4.29 (Ubuntu)
+      access-control-allow-origin: '*'
+      x-ratelimit-limit: '2500'
+      x-ratelimit-remaining: '2462'
+      x-ratelimit-reset: '1563494400'
+      transfer-encoding: chunked
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2462,"reset":1563494400},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Hamburg","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":53.710341,"lng":10.160654},"southwest":{"lat":53.390341,"lng":9.840654}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"city","city":"Hamburg","continent":"Europe","country":"Germany","country_code":"de","political_union":"European
+        Union","postcode":"20095","state":"Hamburg","state_code":"HH"},"confidence":4,"formatted":"20095
+        Hamburg, Germany","geometry":{"lat":53.550341,"lng":10.000654}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:25:04
+        GMT","created_unix":1563441904},"total_results":1}'
+  recorded_at: 2019-07-18 09:25:28 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=Los%20Angeles&limit=1&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Thu, 18 Jul 2019 09:25:06 GMT
+      server: Apache/2.4.29 (Ubuntu)
+      access-control-allow-origin: '*'
+      x-ratelimit-limit: '2500'
+      x-ratelimit-remaining: '2460'
+      x-ratelimit-reset: '1563494400'
+      transfer-encoding: chunked
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2460,"reset":1563494400},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Los
+        Angeles","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":34.337306,"lng":-118.1552947},"southwest":{"lat":33.7036216,"lng":-118.6681776}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"city","city":"Los
+        Angeles","continent":"North America","country":"USA","country_code":"us","county":"Los
+        Angeles County","state":"California","state_code":"CA"},"confidence":1,"formatted":"Los
+        Angeles, CA, United States of America","geometry":{"lat":34.0536909,"lng":-118.2427666}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:25:06
+        GMT","created_unix":1563441906},"total_results":1}'
+  recorded_at: 2019-07-18 09:25:28 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
     uri: https://api.opencagedata.com/geocode/v1/json?q=Nantes&bounds=-72%2C45%2C-70%2C46&limit=1&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
     body:
       encoding: ''
@@ -16,24 +126,24 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:52:55 GMT
+      date: Thu, 18 Jul 2019 09:25:07 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1830'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2458'
+      x-ratelimit-reset: '1563494400'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1830,"reset":1560988800},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"bounds":"-72,45,-70,46","format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Nantes","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":45.7013274,"lng":-70.8932653},"southwest":{"lat":45.568547,"lng":-71.1093148}},"components":{"ISO_3166-1_alpha-2":"CA","ISO_3166-1_alpha-3":"CAN","_type":"city","city":"Nantes","continent":"North
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2458,"reset":1563494400},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"bounds":"-72,45,-70,46","format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Nantes","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":45.7013274,"lng":-70.8932653},"southwest":{"lat":45.568547,"lng":-71.1093148}},"components":{"ISO_3166-1_alpha-2":"CA","ISO_3166-1_alpha-3":"CAN","_type":"city","city":"Nantes","continent":"North
         America","country":"Canada","country_code":"ca","county":"Le Granit","region":"Estrie","state":"Quebec","state_code":"QC"},"confidence":5,"formatted":"Nantes,
         QC, Canada","geometry":{"lat":45.6303741,"lng":-71.0208502}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:52:55 GMT","created_unix":1560973975},"total_results":1}'
-  recorded_at: 2019-06-19 19:53:17 GMT
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:25:07
+        GMT","created_unix":1563441907},"total_results":1}'
+  recorded_at: 2019-07-18 09:25:28 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -52,25 +162,25 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:52:57 GMT
+      date: Thu, 18 Jul 2019 09:25:09 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1828'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2456'
+      x-ratelimit-reset: '1563494400'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1828,"reset":1560988800},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"bounds":"-80,42,-78,43","format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Hamburg","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":42.7397729,"lng":-78.812825},"southwest":{"lat":42.7091669,"lng":-78.860521}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"city","city":"Hamburg","continent":"North
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2456,"reset":1563494400},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"bounds":"-80,42,-78,43","format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Hamburg","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":42.7397729,"lng":-78.812825},"southwest":{"lat":42.7091669,"lng":-78.860521}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"city","city":"Hamburg","continent":"North
         America","country":"USA","country_code":"us","county":"Erie County","state":"New
         York","state_code":"NY"},"confidence":7,"formatted":"Hamburg, NY, United States
         of America","geometry":{"lat":42.716293,"lng":-78.828717}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:52:57 GMT","created_unix":1560973977},"total_results":1}'
-  recorded_at: 2019-06-19 19:53:17 GMT
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:25:09
+        GMT","created_unix":1563441909},"total_results":1}'
+  recorded_at: 2019-07-18 09:25:28 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -89,26 +199,26 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:52:58 GMT
+      date: Thu, 18 Jul 2019 09:25:10 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1826'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2454'
+      x-ratelimit-reset: '1563494400'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1826,"reset":1560988800},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"bounds":"-76,8,-74,10","format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Los
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2454,"reset":1563494400},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"bounds":"-76,8,-74,10","format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Los
         Angeles","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":9.4022923,"lng":-75.2213977},"southwest":{"lat":9.3778767,"lng":-75.2594562}},"components":{"ISO_3166-1_alpha-2":"CO","ISO_3166-1_alpha-3":"COL","_type":"city","city":"Los
         Angeles","continent":"South America","country":"Colombia","country_code":"co","county":"Los
         Palmitos","state":"Sucre","state_code":"SUC"},"confidence":7,"formatted":"Los
         Angeles, Los Palmitos, Colombia","geometry":{"lat":9.3928361,"lng":-75.2391624}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:52:58 GMT","created_unix":1560973978},"total_results":1}'
-  recorded_at: 2019-06-19 19:53:17 GMT
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:25:10
+        GMT","created_unix":1563441910},"total_results":1}'
+  recorded_at: 2019-07-18 09:25:28 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -127,24 +237,24 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:52:59 GMT
+      date: Thu, 18 Jul 2019 09:25:11 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1824'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2452'
+      x-ratelimit-reset: '1563494400'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1824,"reset":1560988800},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"countrycode":"ca","format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Nantes","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":45.7013274,"lng":-70.8932653},"southwest":{"lat":45.568547,"lng":-71.1093148}},"components":{"ISO_3166-1_alpha-2":"CA","ISO_3166-1_alpha-3":"CAN","_type":"city","city":"Nantes","continent":"North
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2452,"reset":1563494400},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"countrycode":"ca","format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Nantes","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":45.7013274,"lng":-70.8932653},"southwest":{"lat":45.568547,"lng":-71.1093148}},"components":{"ISO_3166-1_alpha-2":"CA","ISO_3166-1_alpha-3":"CAN","_type":"city","city":"Nantes","continent":"North
         America","country":"Canada","country_code":"ca","county":"Le Granit","region":"Estrie","state":"Quebec","state_code":"QC"},"confidence":5,"formatted":"Nantes,
         QC, Canada","geometry":{"lat":45.6303741,"lng":-71.0208502}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:52:59 GMT","created_unix":1560973979},"total_results":1}'
-  recorded_at: 2019-06-19 19:53:17 GMT
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:25:11
+        GMT","created_unix":1563441911},"total_results":1}'
+  recorded_at: 2019-07-18 09:25:28 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -163,25 +273,25 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:53:01 GMT
+      date: Thu, 18 Jul 2019 09:25:13 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1822'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2450'
+      x-ratelimit-reset: '1563494400'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1822,"reset":1560988800},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"countrycode":"us","format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Hamburg","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":42.7397729,"lng":-78.812825},"southwest":{"lat":42.7091669,"lng":-78.860521}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"city","city":"Hamburg","continent":"North
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2450,"reset":1563494400},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"countrycode":"us","format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Hamburg","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":42.7397729,"lng":-78.812825},"southwest":{"lat":42.7091669,"lng":-78.860521}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"city","city":"Hamburg","continent":"North
         America","country":"USA","country_code":"us","county":"Erie County","state":"New
         York","state_code":"NY"},"confidence":7,"formatted":"Hamburg, NY, United States
         of America","geometry":{"lat":42.716293,"lng":-78.828717}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:53:01 GMT","created_unix":1560973981},"total_results":1}'
-  recorded_at: 2019-06-19 19:53:17 GMT
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:25:13
+        GMT","created_unix":1563441913},"total_results":1}'
+  recorded_at: 2019-07-18 09:25:28 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -200,26 +310,26 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:53:02 GMT
+      date: Thu, 18 Jul 2019 09:25:14 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1820'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2448'
+      x-ratelimit-reset: '1563494400'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1820,"reset":1560988800},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"countrycode":"co","format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Los
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2448,"reset":1563494400},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"countrycode":"co","format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Los
         Angeles","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":9.4022923,"lng":-75.2213977},"southwest":{"lat":9.3778767,"lng":-75.2594562}},"components":{"ISO_3166-1_alpha-2":"CO","ISO_3166-1_alpha-3":"COL","_type":"city","city":"Los
         Angeles","continent":"South America","country":"Colombia","country_code":"co","county":"Los
         Palmitos","state":"Sucre","state_code":"SUC"},"confidence":7,"formatted":"Los
         Angeles, Los Palmitos, Colombia","geometry":{"lat":9.3928361,"lng":-75.2391624}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:53:02 GMT","created_unix":1560973982},"total_results":1}'
-  recorded_at: 2019-06-19 19:53:17 GMT
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:25:14
+        GMT","created_unix":1563441914},"total_results":1}'
+  recorded_at: 2019-07-18 09:25:28 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -238,24 +348,24 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:53:04 GMT
+      date: Thu, 18 Jul 2019 09:25:15 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1819'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2447'
+      x-ratelimit-reset: '1563494400'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1819,"reset":1560988800},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"de","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Nantes","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":47.2958583,"lng":-1.4788443},"southwest":{"lat":47.1805856,"lng":-1.6418115}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"city","city":"Nantes","continent":"Europe","country":"Frankreich","country_code":"fr","county":"Nantes","political_union":"European
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2447,"reset":1563494400},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"de","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Nantes","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":47.2958583,"lng":-1.4788443},"southwest":{"lat":47.1805856,"lng":-1.6418115}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"city","city":"Nantes","continent":"Europe","country":"Frankreich","country_code":"fr","county":"Nantes","political_union":"European
         Union","state":"Pays de la Loire","state_code":"PDL","state_district":"Loire-Atlantique"},"confidence":6,"formatted":"Nantes,
         Frankreich","geometry":{"lat":47.2186371,"lng":-1.5541362}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:53:04 GMT","created_unix":1560973984},"total_results":1}'
-  recorded_at: 2019-06-19 19:53:17 GMT
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:25:15
+        GMT","created_unix":1563441915},"total_results":1}'
+  recorded_at: 2019-07-18 09:25:28 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -274,24 +384,24 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:53:05 GMT
+      date: Thu, 18 Jul 2019 09:25:17 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1817'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2445'
+      x-ratelimit-reset: '1563494400'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1817,"reset":1560988800},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"fr","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Hamburg","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":53.710341,"lng":10.160654},"southwest":{"lat":53.390341,"lng":9.840654}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"city","city":"Hambourg","continent":"Europe","country":"Allemagne","country_code":"de","political_union":"European
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2445,"reset":1563494400},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"fr","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Hamburg","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":53.710341,"lng":10.160654},"southwest":{"lat":53.390341,"lng":9.840654}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"city","city":"Hambourg","continent":"Europe","country":"Allemagne","country_code":"de","political_union":"European
         Union","postcode":"20095","state":"Hambourg"},"confidence":4,"formatted":"20095
         Hambourg, Allemagne","geometry":{"lat":53.550341,"lng":10.000654}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:53:05 GMT","created_unix":1560973985},"total_results":1}'
-  recorded_at: 2019-06-19 19:53:17 GMT
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:25:17
+        GMT","created_unix":1563441917},"total_results":1}'
+  recorded_at: 2019-07-18 09:25:28 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -310,26 +420,26 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:53:06 GMT
+      date: Thu, 18 Jul 2019 09:25:18 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1815'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2443'
+      x-ratelimit-reset: '1563494400'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1815,"reset":1560988800},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"es","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Los
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2443,"reset":1563494400},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"es","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Los
         Angeles","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":34.337306,"lng":-118.1552947},"southwest":{"lat":33.7036216,"lng":-118.6681776}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"city","city":"Los
         \u00c1ngeles","continent":"North America","country":"Estados Unidos de Am\u00e9rica","country_code":"us","county":"Los
         Angeles County","state":"California","state_code":"CA"},"confidence":1,"formatted":"Los
         \u00c1ngeles, CA, Estados Unidos de Am\u00e9rica","geometry":{"lat":34.0536909,"lng":-118.2427666}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:53:06 GMT","created_unix":1560973986},"total_results":1}'
-  recorded_at: 2019-06-19 19:53:17 GMT
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:25:18
+        GMT","created_unix":1563441918},"total_results":1}'
+  recorded_at: 2019-07-18 09:25:28 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -348,26 +458,26 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:53:08 GMT
+      date: Thu, 18 Jul 2019 09:25:20 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1813'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2441'
+      x-ratelimit-reset: '1563494400'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1813,"reset":1560988800},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":2,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Hamburg","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":53.710341,"lng":10.160654},"southwest":{"lat":53.390341,"lng":9.840654}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"city","city":"Hamburg","continent":"Europe","country":"Germany","country_code":"de","political_union":"European
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2441,"reset":1563494400},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":2,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Hamburg","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":53.710341,"lng":10.160654},"southwest":{"lat":53.390341,"lng":9.840654}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"city","city":"Hamburg","continent":"Europe","country":"Germany","country_code":"de","political_union":"European
         Union","postcode":"20095","state":"Hamburg","state_code":"HH"},"confidence":4,"formatted":"20095
         Hamburg, Germany","geometry":{"lat":53.550341,"lng":10.000654}},{"bounds":{"northeast":{"lat":56.1037641,"lng":12.5699133},"southwest":{"lat":50.9837641,"lng":7.4499133}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"city","city":"Hamburg","continent":"Europe","country":"Germany","country_code":"de","political_union":"European
         Union","state":"Hamburg","state_code":"HH"},"confidence":1,"formatted":"Hamburg,
         Germany","geometry":{"lat":53.5437641,"lng":10.0099133}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:53:08 GMT","created_unix":1560973988},"total_results":2}'
-  recorded_at: 2019-06-19 19:53:17 GMT
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:25:20
+        GMT","created_unix":1563441920},"total_results":2}'
+  recorded_at: 2019-07-18 09:25:28 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -386,19 +496,19 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:53:09 GMT
+      date: Thu, 18 Jul 2019 09:25:21 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1811'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2439'
+      x-ratelimit-reset: '1563494400'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1811,"reset":1560988800},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":3,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Los
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2439,"reset":1563494400},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":3,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Los
         Angeles","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":34.337306,"lng":-118.1552947},"southwest":{"lat":33.7036216,"lng":-118.6681776}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"city","city":"Los
         Angeles","continent":"North America","country":"USA","country_code":"us","county":"Los
         Angeles County","state":"California","state_code":"CA"},"confidence":1,"formatted":"Los
@@ -408,9 +518,9 @@ http_interactions:
         Angeles","continent":"South America","country":"Colombia","country_code":"co","county":"Los
         Palmitos","state":"Sucre","state_code":"SUC"},"confidence":7,"formatted":"Los
         Angeles, Los Palmitos, Colombia","geometry":{"lat":9.3928361,"lng":-75.2391624}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:53:09 GMT","created_unix":1560973989},"total_results":3}'
-  recorded_at: 2019-06-19 19:53:17 GMT
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:25:21
+        GMT","created_unix":1563441921},"total_results":3}'
+  recorded_at: 2019-07-18 09:25:28 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -429,24 +539,24 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:53:11 GMT
+      date: Thu, 18 Jul 2019 09:25:22 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1809'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2437'
+      x-ratelimit-reset: '1563494400'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1809,"reset":1560988800},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":7,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Nantes","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":41.7357881,"lng":-7.4263702},"southwest":{"lat":41.6957881,"lng":-7.4663702}},"components":{"ISO_3166-1_alpha-2":"PT","ISO_3166-1_alpha-3":"PRT","_type":"village","continent":"Europe","country":"Portugal","country_code":"pt","county":"Chaves","hamlet":"Nantes","political_union":"European
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2437,"reset":1563494400},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":7,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Nantes","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":41.7357881,"lng":-7.4263702},"southwest":{"lat":41.6957881,"lng":-7.4663702}},"components":{"ISO_3166-1_alpha-2":"PT","ISO_3166-1_alpha-3":"PRT","_type":"village","continent":"Europe","country":"Portugal","country_code":"pt","county":"Chaves","hamlet":"Nantes","political_union":"European
         Union","postcode":"5400-298","state":"North","state_district":"Alto T\u00e2mega"},"confidence":7,"formatted":"5400-298
         Nantes, Portugal","geometry":{"lat":41.7157881,"lng":-7.4463702}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:53:11 GMT","created_unix":1560973991},"total_results":1}'
-  recorded_at: 2019-06-19 19:53:17 GMT
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:25:22
+        GMT","created_unix":1563441922},"total_results":1}'
+  recorded_at: 2019-07-18 09:25:28 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -465,25 +575,25 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:53:12 GMT
+      date: Thu, 18 Jul 2019 09:25:24 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1807'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2435'
+      x-ratelimit-reset: '1563494400'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1807,"reset":1560988800},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":5,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Hamburg","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":42.7397729,"lng":-78.812825},"southwest":{"lat":42.7091669,"lng":-78.860521}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"city","city":"Hamburg","continent":"North
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2435,"reset":1563494400},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":5,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Hamburg","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":42.7397729,"lng":-78.812825},"southwest":{"lat":42.7091669,"lng":-78.860521}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"city","city":"Hamburg","continent":"North
         America","country":"USA","country_code":"us","county":"Erie County","state":"New
         York","state_code":"NY"},"confidence":7,"formatted":"Hamburg, NY, United States
         of America","geometry":{"lat":42.716293,"lng":-78.828717}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:53:12 GMT","created_unix":1560973992},"total_results":1}'
-  recorded_at: 2019-06-19 19:53:17 GMT
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:25:24
+        GMT","created_unix":1563441924},"total_results":1}'
+  recorded_at: 2019-07-18 09:25:28 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -502,26 +612,26 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:53:13 GMT
+      date: Thu, 18 Jul 2019 09:25:25 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1805'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2433'
+      x-ratelimit-reset: '1563494400'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1805,"reset":1560988800},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":3,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Los
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2433,"reset":1563494400},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":3,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Los
         Angeles","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":9.4022923,"lng":-75.2213977},"southwest":{"lat":9.3778767,"lng":-75.2594562}},"components":{"ISO_3166-1_alpha-2":"CO","ISO_3166-1_alpha-3":"COL","_type":"city","city":"Los
         Angeles","continent":"South America","country":"Colombia","country_code":"co","county":"Los
         Palmitos","state":"Sucre","state_code":"SUC"},"confidence":7,"formatted":"Los
         Angeles, Los Palmitos, Colombia","geometry":{"lat":9.3928361,"lng":-75.2391624}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:53:13 GMT","created_unix":1560973993},"total_results":1}'
-  recorded_at: 2019-06-19 19:53:17 GMT
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:25:25
+        GMT","created_unix":1563441925},"total_results":1}'
+  recorded_at: 2019-07-18 09:25:28 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -540,25 +650,25 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:53:15 GMT
+      date: Thu, 18 Jul 2019 09:25:27 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1803'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2431'
+      x-ratelimit-reset: '1563494400'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1803,"reset":1560988800},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":0,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Nantes","roadinfo":0,"version":"v1"},"results":[{"annotations":{"DMS":{"lat":"47\u00b0
-        13'' 7.09356'''' N","lng":"1\u00b0 33'' 14.89032'''' W"},"MGRS":"30TXT0947230474","Maidenhead":"IN97ff32ml","Mercator":{"x":-173005.65,"y":5946458.772},"OSM":{"edit_url":"https://www.openstreetmap.org/edit?relation=59874#map=17/47.21864/-1.55414","url":"https://www.openstreetmap.org/?mlat=47.21864&mlon=-1.55414#map=17/47.21864/-1.55414"},"UN_M49":{"regions":{"EUROPE":"150","FR":"250","WESTERN_EUROPE":"155","WORLD":"001"},"statistical_groupings":["MEDC"]},"callingcode":33,"currency":{"alternate_symbols":[],"decimal_mark":",","html_entity":"&#x20AC;","iso_code":"EUR","iso_numeric":"978","name":"Euro","smallest_denomination":1,"subunit":"Cent","subunit_to_unit":100,"symbol":"\u20ac","symbol_first":1,"thousands_separator":"."},"flag":"\ud83c\uddeb\ud83c\uddf7","geohash":"gbquseuk6pbjcf41wyq0","qibla":113.27,"roadinfo":{"drive_on":"right","speed_in":"km/h"},"sun":{"rise":{"apparent":1560917400,"astronomical":1560906540,"civil":1560915000,"nautical":1560911640},"set":{"apparent":1560974700,"astronomical":1560985560,"civil":1560977160,"nautical":1560980460}},"timezone":{"name":"Europe/Paris","now_in_dst":1,"offset_sec":7200,"offset_string":"+0200","short_name":"CEST"},"what3words":{"words":"nozzles.notices.includes"},"wikidata":"Q12191"},"bounds":{"northeast":{"lat":47.2958583,"lng":-1.4788443},"southwest":{"lat":47.1805856,"lng":-1.6418115}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"city","city":"Nantes","continent":"Europe","country":"France","country_code":"fr","county":"Nantes","political_union":"European
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2431,"reset":1563494400},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":0,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Nantes","roadinfo":0,"version":"v1"},"results":[{"annotations":{"DMS":{"lat":"47\u00b0
+        13'' 7.09356'''' N","lng":"1\u00b0 33'' 14.89032'''' W"},"MGRS":"30TXT0947230474","Maidenhead":"IN97ff32ml","Mercator":{"x":-173005.65,"y":5946458.772},"OSM":{"edit_url":"https://www.openstreetmap.org/edit?relation=59874#map=16/47.21864/-1.55414","url":"https://www.openstreetmap.org/?mlat=47.21864&mlon=-1.55414#map=16/47.21864/-1.55414"},"UN_M49":{"regions":{"EUROPE":"150","FR":"250","WESTERN_EUROPE":"155","WORLD":"001"},"statistical_groupings":["MEDC"]},"callingcode":33,"currency":{"alternate_symbols":[],"decimal_mark":",","html_entity":"&#x20AC;","iso_code":"EUR","iso_numeric":"978","name":"Euro","smallest_denomination":1,"subunit":"Cent","subunit_to_unit":100,"symbol":"\u20ac","symbol_first":1,"thousands_separator":"."},"flag":"\ud83c\uddeb\ud83c\uddf7","geohash":"gbquseuk6pbjcf41wyq0","qibla":113.27,"roadinfo":{"drive_on":"right","speed_in":"km/h"},"sun":{"rise":{"apparent":1563424140,"astronomical":1563414900,"civil":1563421860,"nautical":1563418860},"set":{"apparent":1563479760,"astronomical":1563488880,"civil":1563481980,"nautical":1563484980}},"timezone":{"name":"Europe/Paris","now_in_dst":1,"offset_sec":7200,"offset_string":"+0200","short_name":"CEST"},"wikidata":"Q12191"},"bounds":{"northeast":{"lat":47.2958583,"lng":-1.4788443},"southwest":{"lat":47.1805856,"lng":-1.6418115}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"city","city":"Nantes","continent":"Europe","country":"France","country_code":"fr","county":"Nantes","political_union":"European
         Union","state":"Pays de la Loire","state_code":"PDL","state_district":"Loire-Atlantique"},"confidence":6,"formatted":"Nantes,
         France","geometry":{"lat":47.2186371,"lng":-1.5541362}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:53:15 GMT","created_unix":1560973995},"total_results":1}'
-  recorded_at: 2019-06-19 19:53:17 GMT
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:25:27
+        GMT","created_unix":1563441927},"total_results":1}'
+  recorded_at: 2019-07-18 09:25:28 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -577,24 +687,24 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:53:16 GMT
+      date: Thu, 18 Jul 2019 09:25:28 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1801'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2429'
+      x-ratelimit-reset: '1563494400'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1801,"reset":1560988800},"request":{"abbrv":1,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Los
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2429,"reset":1563494400},"request":{"abbrv":1,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Los
         Angeles","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":34.337306,"lng":-118.1552947},"southwest":{"lat":33.7036216,"lng":-118.6681776}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"city","city":"Los
         Angeles","continent":"North America","country":"USA","country_code":"us","county":"Los
         Angeles County","state":"California","state_code":"CA"},"confidence":1,"formatted":"Los
         Angeles, CA, USA","geometry":{"lat":34.0536909,"lng":-118.2427666}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:53:16 GMT","created_unix":1560973996},"total_results":1}'
-  recorded_at: 2019-06-19 19:53:17 GMT
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:25:28
+        GMT","created_unix":1563441928},"total_results":1}'
+  recorded_at: 2019-07-18 09:25:28 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
