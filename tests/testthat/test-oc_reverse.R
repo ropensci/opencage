@@ -25,17 +25,23 @@ vcr::use_cassette("oc_reverse_type", {
     expect_equal(length(res1), 3)
     expect_s3_class(res1[[1]], c("tbl_df", "tbl", "data.frame"))
 
+    memoise::forget(opencage:::oc_get_memoise)
+
     # json_list
     res2 <- oc_reverse(lat, lng, return = "json_list")
     expect_type(res2, "list")
     expect_equal(length(res2), 3)
     expect_type(res2[[1]], "list")
 
+    memoise::forget(opencage:::oc_get_memoise)
+
     # geojson_list
     res3 <- oc_reverse(lat, lng, return = "geojson_list")
     expect_type(res3, "list")
     expect_equal(length(res3), 3)
     expect_s3_class(res3[[1]], "geo_list")
+
+    memoise::forget(opencage:::oc_get_memoise)
   })
 })
 
@@ -52,6 +58,8 @@ vcr::use_cassette("oc_reverse_df_lat_lon", {
     tbl2 <- oc_reverse_df(df[1, ], lat, lng)
     expect_s3_class(tbl2, c("tbl_df", "tbl", "data.frame"))
     expect_equal(nrow(tbl2), 1)
+
+    memoise::forget(opencage:::oc_get_memoise)
   })
 })
 
@@ -75,6 +83,8 @@ vcr::use_cassette("oc_reverse_df_output", {
       ncol(oc_reverse_df(df, lat, lng, bind_cols = FALSE, output = "all")),
       5
     )
+
+    memoise::forget(opencage:::oc_get_memoise)
   })
 })
 
@@ -118,6 +128,8 @@ vcr::use_cassette("oc_reverse_df_tidyeval", {
     expect_true(all.equal(abbrv[1, ], noarg[1, ]))
     expect_true(all.equal(abbrv[2, ], noarg[2, ]))
     expect_false(isTRUE(all.equal(abbrv[3, ], noarg[3, ])))
+
+    memoise::forget(opencage:::oc_get_memoise)
   })
 })
 

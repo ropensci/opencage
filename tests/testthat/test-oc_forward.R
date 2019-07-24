@@ -42,6 +42,8 @@ vcr::use_cassette("oc_forward_type", {
     expect_type(res3, "list")
     expect_equal(length(res3), 3)
     expect_s3_class(res3[[1]], "geo_list")
+
+    memoise::forget(opencage:::oc_get_memoise)
   })
 })
 
@@ -62,6 +64,8 @@ vcr::use_cassette("oc_forward_df_place", {
     # Error with no placename
     expect_error(oc_forward_df(df), "`placename` must be provided.")
     expect_error(oc_forward_df(df, NULL), "`placename` must be provided.")
+
+    memoise::forget(opencage:::oc_get_memoise)
   })
 })
 
@@ -85,6 +89,8 @@ vcr::use_cassette("oc_forward_df_output", {
       ncol(oc_forward_df(df, loc, bind_cols = FALSE, output = "all")),
       5
     )
+
+    memoise::forget(opencage:::oc_get_memoise)
   })
 })
 

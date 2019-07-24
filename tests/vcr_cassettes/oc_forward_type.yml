@@ -16,19 +16,19 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:52:41 GMT
+      date: Thu, 18 Jul 2019 09:29:45 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1849'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2427'
+      x-ratelimit-reset: '1563494400'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1849,"reset":1560988800},"results":[{"bounds":{"northeast":{"lat":47.2958583,"lng":-1.4788443},"southwest":{"lat":47.1805856,"lng":-1.6418115}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"city","city":"Nantes","continent":"Europe","country":"France","country_code":"fr","county":"Nantes","political_union":"European
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2427,"reset":1563494400},"results":[{"bounds":{"northeast":{"lat":47.2958583,"lng":-1.4788443},"southwest":{"lat":47.1805856,"lng":-1.6418115}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"city","city":"Nantes","continent":"Europe","country":"France","country_code":"fr","county":"Nantes","political_union":"European
         Union","state":"Pays de la Loire","state_code":"PDL","state_district":"Loire-Atlantique"},"confidence":6,"formatted":"Nantes,
         France","geometry":{"lat":47.2186371,"lng":-1.5541362}},{"bounds":{"northeast":{"lat":47.3532684,"lng":-1.1147605},"southwest":{"lat":46.8603369,"lng":-1.9393397}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"county","continent":"Europe","country":"France","country_code":"fr","county":"Nantes","political_union":"European
         Union","state":"Pays de la Loire","state_code":"PDL","state_district":"Loire-Atlantique"},"confidence":1,"formatted":"Nantes,
@@ -47,13 +47,10 @@ http_interactions:
         of Cape Town","park":"Nantes","postcode":"7764","state":"Western Cape","state_code":"WC","suburb":"Silvertown"},"confidence":9,"formatted":"Nantes,
         Silvertown, Cape Town, 7764, RSA","geometry":{"lat":-33.9596359,"lng":18.5272722}},{"bounds":{"northeast":{"lat":-34.8602854,"lng":-56.1683551},"southwest":{"lat":-34.8610425,"lng":-56.1707775}},"components":{"ISO_3166-1_alpha-2":"UY","ISO_3166-1_alpha-3":"URY","_type":"road","city":"Montevideo","continent":"South
         America","country":"Uruguay","country_code":"uy","neighbourhood":"Cerrito","postcode":"12000","road":"Nantes","road_type":"residential","state":"Montevideo","state_code":"MO","suburb":"Brazo
-        Oriental"},"confidence":9,"formatted":"Nantes, 12000 Montevideo, Uruguay","geometry":{"lat":-34.8607099,"lng":-56.16955}},{"bounds":{"northeast":{"lat":-34.076283,"lng":18.4486897},"southwest":{"lat":-34.0763063,"lng":18.448016}},"components":{"ISO_3166-1_alpha-2":"ZA","ISO_3166-1_alpha-3":"ZAF","_type":"road","city":"Cape
-        Town","continent":"Africa","country":"RSA","country_code":"za","county":"City
-        of Cape Town","postcode":"7945","road":"Nantes","state":"Western Cape","state_code":"WC","suburb":"Kirstenhof"},"confidence":9,"formatted":"Nantes,
-        Kirstenhof, Cape Town, 7945, RSA","geometry":{"lat":-34.076283,"lng":18.448016}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:52:41 GMT","created_unix":1560973961},"total_results":9}'
-  recorded_at: 2019-06-19 19:52:49 GMT
+        Oriental"},"confidence":9,"formatted":"Nantes, 12000 Montevideo, Uruguay","geometry":{"lat":-34.8607099,"lng":-56.16955}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:29:45
+        GMT","created_unix":1563442185},"total_results":8}'
+  recorded_at: 2019-07-18 09:29:55 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -72,19 +69,19 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:52:42 GMT
+      date: Thu, 18 Jul 2019 09:29:47 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1847'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2425'
+      x-ratelimit-reset: '1563494400'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1847,"reset":1560988800},"results":[{"bounds":{"northeast":{"lat":53.710341,"lng":10.160654},"southwest":{"lat":53.390341,"lng":9.840654}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"city","city":"Hamburg","continent":"Europe","country":"Germany","country_code":"de","political_union":"European
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2425,"reset":1563494400},"results":[{"bounds":{"northeast":{"lat":53.710341,"lng":10.160654},"southwest":{"lat":53.390341,"lng":9.840654}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"city","city":"Hamburg","continent":"Europe","country":"Germany","country_code":"de","political_union":"European
         Union","postcode":"20095","state":"Hamburg","state_code":"HH"},"confidence":4,"formatted":"20095
         Hamburg, Germany","geometry":{"lat":53.550341,"lng":10.000654}},{"bounds":{"northeast":{"lat":56.1037641,"lng":12.5699133},"southwest":{"lat":50.9837641,"lng":7.4499133}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"city","city":"Hamburg","continent":"Europe","country":"Germany","country_code":"de","political_union":"European
         Union","state":"Hamburg","state_code":"HH"},"confidence":1,"formatted":"Hamburg,
@@ -109,9 +106,9 @@ http_interactions:
         S\u00f6gel","peak":"Hamberg","political_union":"European Union","postcode":"49751","state":"Lower
         Saxony","village":"Spahnharrenst\u00e4tte"},"confidence":9,"formatted":"Hamberg,
         49751 Spahnharrenst\u00e4tte, Germany","geometry":{"lat":52.8848394,"lng":7.5581085}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:52:42 GMT","created_unix":1560973962},"total_results":10}'
-  recorded_at: 2019-06-19 19:52:49 GMT
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:29:47
+        GMT","created_unix":1563442187},"total_results":10}'
+  recorded_at: 2019-07-18 09:29:55 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -130,19 +127,19 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:52:44 GMT
+      date: Thu, 18 Jul 2019 09:29:49 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1845'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2423'
+      x-ratelimit-reset: '1563494400'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1845,"reset":1560988800},"results":[{"bounds":{"northeast":{"lat":34.337306,"lng":-118.1552947},"southwest":{"lat":33.7036216,"lng":-118.6681776}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"city","city":"Los
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2423,"reset":1563494400},"results":[{"bounds":{"northeast":{"lat":34.337306,"lng":-118.1552947},"southwest":{"lat":33.7036216,"lng":-118.6681776}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"city","city":"Los
         Angeles","continent":"North America","country":"USA","country_code":"us","county":"Los
         Angeles County","state":"California","state_code":"CA"},"confidence":1,"formatted":"Los
         Angeles, CA, United States of America","geometry":{"lat":34.0536909,"lng":-118.2427666}},{"bounds":{"northeast":{"lat":34.8232693,"lng":-117.6462406},"southwest":{"lat":32.7969287,"lng":-118.9517221}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"county","continent":"North
@@ -164,12 +161,65 @@ http_interactions:
         America","country":"USA","country_code":"us","county":"Hidalgo County","hamlet":"Los
         Angeles","state":"Texas","state_code":"TX"},"confidence":7,"formatted":"Los
         Angeles, TX, United States of America","geometry":{"lat":26.5781179,"lng":-98.13973}},{"bounds":{"northeast":{"lat":10.8911622,"lng":121.0600521},"southwest":{"lat":10.8511622,"lng":121.0200521}},"components":{"ISO_3166-1_alpha-2":"PH","ISO_3166-1_alpha-3":"PHL","_type":"village","continent":"Asia","country":"Philippines","country_code":"ph","county":"Magsaysay","postcode":"5319","state":"Palawan","village":"Los
-        Angeles"},"confidence":7,"formatted":"Los Angeles, 5319 Palawan, Philippines","geometry":{"lat":10.8711622,"lng":121.0400521}},{"bounds":{"northeast":{"lat":-17.9248797,"lng":-70.1841369},"southwest":{"lat":-17.9648797,"lng":-70.2241369}},"components":{"ISO_3166-1_alpha-2":"PE","ISO_3166-1_alpha-3":"PER","_type":"village","continent":"South
-        America","country":"Peru","country_code":"pe","region":"Province of Tacna","state":"Tacna","state_code":"TAC","village":"Los
-        Angeles"},"confidence":7,"formatted":"Los Angeles, Tacna, Peru","geometry":{"lat":-17.9448797,"lng":-70.2041369}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:52:44 GMT","created_unix":1560973964},"total_results":10}'
-  recorded_at: 2019-06-19 19:52:49 GMT
+        Angeles"},"confidence":7,"formatted":"Los Angeles, 5319 Palawan, Philippines","geometry":{"lat":10.8711622,"lng":121.0400521}},{"bounds":{"northeast":{"lat":-17.148941,"lng":-70.8859186},"southwest":{"lat":-17.188941,"lng":-70.9259186}},"components":{"ISO_3166-1_alpha-2":"PE","ISO_3166-1_alpha-3":"PER","_type":"village","continent":"South
+        America","country":"Peru","country_code":"pe","county":"Mariscal Nieto","state":"Moquegua","state_code":"MOQ","village":"Los
+        Angeles"},"confidence":7,"formatted":"Los Angeles, Mariscal Nieto, Peru","geometry":{"lat":-17.168941,"lng":-70.9059186}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:29:49
+        GMT","created_unix":1563442189},"total_results":10}'
+  recorded_at: 2019-07-18 09:29:55 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=Nantes&limit=10&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=0&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Thu, 18 Jul 2019 09:29:50 GMT
+      server: Apache/2.4.29 (Ubuntu)
+      access-control-allow-origin: '*'
+      x-ratelimit-limit: '2500'
+      x-ratelimit-remaining: '2421'
+      x-ratelimit-reset: '1563494400'
+      transfer-encoding: chunked
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2421,"reset":1563494400},"results":[{"bounds":{"northeast":{"lat":47.2958583,"lng":-1.4788443},"southwest":{"lat":47.1805856,"lng":-1.6418115}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"city","city":"Nantes","continent":"Europe","country":"France","country_code":"fr","county":"Nantes","political_union":"European
+        Union","state":"Pays de la Loire","state_code":"PDL","state_district":"Loire-Atlantique"},"confidence":6,"formatted":"Nantes,
+        France","geometry":{"lat":47.2186371,"lng":-1.5541362}},{"bounds":{"northeast":{"lat":47.3532684,"lng":-1.1147605},"southwest":{"lat":46.8603369,"lng":-1.9393397}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"county","continent":"Europe","country":"France","country_code":"fr","county":"Nantes","political_union":"European
+        Union","state":"Pays de la Loire","state_code":"PDL","state_district":"Loire-Atlantique"},"confidence":1,"formatted":"Nantes,
+        France","geometry":{"lat":47.1064143,"lng":-1.5318723}},{"bounds":{"northeast":{"lat":-22.477,"lng":-51.099},"southwest":{"lat":-22.723,"lng":-51.298}},"components":{"ISO_3166-1_alpha-2":"BR","ISO_3166-1_alpha-3":"BRA","_type":"village","city_district":"Nantes","continent":"South
+        America","country":"Brazil","country_code":"br","county":"Regi\u00e3o Imediata
+        de Presidente Prudente","state":"S\u00e3o Paulo","state_code":"SP","state_district":"Regi\u00e3o
+        Intermedi\u00e1ria de Presidente Prudente","village":"Nantes"},"confidence":4,"formatted":"Nantes,
+        Regi\u00e3o Imediata de Presidente Prudente, Brazil","geometry":{"lat":-22.603,"lng":-51.2103177}},{"bounds":{"northeast":{"lat":41.7357881,"lng":-7.4263702},"southwest":{"lat":41.6957881,"lng":-7.4663702}},"components":{"ISO_3166-1_alpha-2":"PT","ISO_3166-1_alpha-3":"PRT","_type":"village","continent":"Europe","country":"Portugal","country_code":"pt","county":"Chaves","hamlet":"Nantes","political_union":"European
+        Union","postcode":"5400-298","state":"North","state_district":"Alto T\u00e2mega"},"confidence":7,"formatted":"5400-298
+        Nantes, Portugal","geometry":{"lat":41.7157881,"lng":-7.4463702}},{"bounds":{"northeast":{"lat":42.4475163,"lng":-8.7810341},"southwest":{"lat":42.4075163,"lng":-8.8210341}},"components":{"ISO_3166-1_alpha-2":"ES","ISO_3166-1_alpha-3":"ESP","_type":"village","continent":"Europe","country":"Spain","country_code":"es","county":"Pontevedra","county_code":"PO","hamlet":"Nantes","political_union":"European
+        Union","postcode":"36968","state":"Galicia","state_code":"GA"},"confidence":7,"formatted":"36968
+        Nantes, Spain","geometry":{"lat":42.4275163,"lng":-8.8010341}},{"bounds":{"northeast":{"lat":45.7013274,"lng":-70.8932653},"southwest":{"lat":45.568547,"lng":-71.1093148}},"components":{"ISO_3166-1_alpha-2":"CA","ISO_3166-1_alpha-3":"CAN","_type":"city","city":"Nantes","continent":"North
+        America","country":"Canada","country_code":"ca","county":"Le Granit","region":"Estrie","state":"Quebec","state_code":"QC"},"confidence":5,"formatted":"Nantes,
+        QC, Canada","geometry":{"lat":45.6303741,"lng":-71.0208502}},{"bounds":{"northeast":{"lat":-33.9572639,"lng":18.5313264},"southwest":{"lat":-33.9621003,"lng":18.5232355}},"components":{"ISO_3166-1_alpha-2":"ZA","ISO_3166-1_alpha-3":"ZAF","_type":"park","city":"Cape
+        Town","continent":"Africa","country":"RSA","country_code":"za","county":"City
+        of Cape Town","park":"Nantes","postcode":"7764","state":"Western Cape","state_code":"WC","suburb":"Silvertown"},"confidence":9,"formatted":"Nantes,
+        Silvertown, Cape Town, 7764, RSA","geometry":{"lat":-33.9596359,"lng":18.5272722}},{"bounds":{"northeast":{"lat":-34.8602854,"lng":-56.1683551},"southwest":{"lat":-34.8610425,"lng":-56.1707775}},"components":{"ISO_3166-1_alpha-2":"UY","ISO_3166-1_alpha-3":"URY","_type":"road","city":"Montevideo","continent":"South
+        America","country":"Uruguay","country_code":"uy","neighbourhood":"Cerrito","postcode":"12000","road":"Nantes","road_type":"residential","state":"Montevideo","state_code":"MO","suburb":"Brazo
+        Oriental"},"confidence":9,"formatted":"Nantes, 12000 Montevideo, Uruguay","geometry":{"lat":-34.8607099,"lng":-56.16955}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:29:50
+        GMT","created_unix":1563442190},"total_results":8}'
+  recorded_at: 2019-07-18 09:29:55 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -188,12 +238,12 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:52:45 GMT
+      date: Thu, 18 Jul 2019 09:29:52 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1843'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2420'
+      x-ratelimit-reset: '1563494400'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
@@ -220,12 +270,13 @@ http_interactions:
         America","country":"Uruguay","country_code":"uy","neighbourhood":"Cerrito","postcode":"12000","road":"Nantes","road_type":"residential","state":"Montevideo","state_code":"MO","suburb":"Brazo
         Oriental"},"confidence":9,"formatted":"Nantes, 12000 Montevideo, Uruguay"},"type":"Feature"},{"geometry":{"coordinates":[18.448016,-34.076283],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":-34.076283,"lng":18.4486897},"southwest":{"lat":-34.0763063,"lng":18.448016}},"components":{"ISO_3166-1_alpha-2":"ZA","ISO_3166-1_alpha-3":"ZAF","_type":"road","city":"Cape
         Town","continent":"Africa","country":"RSA","country_code":"za","county":"City
-        of Cape Town","postcode":"7945","road":"Nantes","state":"Western Cape","state_code":"WC","suburb":"Kirstenhof"},"confidence":9,"formatted":"Nantes,
+        of Cape Town","postcode":"7945","road":"Nantes","road_type":"residential","state":"Western
+        Cape","state_code":"WC","suburb":"Kirstenhof"},"confidence":9,"formatted":"Nantes,
         Kirstenhof, Cape Town, 7945, RSA"},"type":"Feature"}],"licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1843,"reset":1560988800},"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:52:45 GMT","created_unix":1560973965},"total_results":9,"type":"FeatureCollection"}'
-  recorded_at: 2019-06-19 19:52:49 GMT
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2420,"reset":1563494400},"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:29:52
+        GMT","created_unix":1563442192},"total_results":9,"type":"FeatureCollection"}'
+  recorded_at: 2019-07-18 09:29:55 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -244,12 +295,12 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:52:47 GMT
+      date: Thu, 18 Jul 2019 09:29:53 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1841'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2418'
+      x-ratelimit-reset: '1563494400'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
@@ -280,10 +331,10 @@ http_interactions:
         S\u00f6gel","peak":"Hamberg","political_union":"European Union","postcode":"49751","state":"Lower
         Saxony","village":"Spahnharrenst\u00e4tte"},"confidence":9,"formatted":"Hamberg,
         49751 Spahnharrenst\u00e4tte, Germany"},"type":"Feature"}],"licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1841,"reset":1560988800},"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:52:47 GMT","created_unix":1560973967},"total_results":10,"type":"FeatureCollection"}'
-  recorded_at: 2019-06-19 19:52:49 GMT
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2418,"reset":1563494400},"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:29:53
+        GMT","created_unix":1563442193},"total_results":10,"type":"FeatureCollection"}'
+  recorded_at: 2019-07-18 09:29:55 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -302,12 +353,12 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:52:48 GMT
+      date: Thu, 18 Jul 2019 09:29:55 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '2500'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2416'
+      x-ratelimit-reset: '1563494400'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
@@ -335,11 +386,11 @@ http_interactions:
         America","country":"USA","country_code":"us","county":"Hidalgo County","hamlet":"Los
         Angeles","state":"Texas","state_code":"TX"},"confidence":7,"formatted":"Los
         Angeles, TX, United States of America"},"type":"Feature"},{"geometry":{"coordinates":[121.0400521,10.8711622],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":10.8911622,"lng":121.0600521},"southwest":{"lat":10.8511622,"lng":121.0200521}},"components":{"ISO_3166-1_alpha-2":"PH","ISO_3166-1_alpha-3":"PHL","_type":"village","continent":"Asia","country":"Philippines","country_code":"ph","county":"Magsaysay","postcode":"5319","state":"Palawan","village":"Los
-        Angeles"},"confidence":7,"formatted":"Los Angeles, 5319 Palawan, Philippines"},"type":"Feature"},{"geometry":{"coordinates":[-70.2041369,-17.9448797],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":-17.9248797,"lng":-70.1841369},"southwest":{"lat":-17.9648797,"lng":-70.2241369}},"components":{"ISO_3166-1_alpha-2":"PE","ISO_3166-1_alpha-3":"PER","_type":"village","continent":"South
-        America","country":"Peru","country_code":"pe","region":"Province of Tacna","state":"Tacna","state_code":"TAC","village":"Los
-        Angeles"},"confidence":7,"formatted":"Los Angeles, Tacna, Peru"},"type":"Feature"}],"licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2500,"reset":1560988800},"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:52:48 GMT","created_unix":1560973968},"total_results":10,"type":"FeatureCollection"}'
-  recorded_at: 2019-06-19 19:52:49 GMT
+        Angeles"},"confidence":7,"formatted":"Los Angeles, 5319 Palawan, Philippines"},"type":"Feature"},{"geometry":{"coordinates":[-70.9059186,-17.168941],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":-17.148941,"lng":-70.8859186},"southwest":{"lat":-17.188941,"lng":-70.9259186}},"components":{"ISO_3166-1_alpha-2":"PE","ISO_3166-1_alpha-3":"PER","_type":"village","continent":"South
+        America","country":"Peru","country_code":"pe","county":"Mariscal Nieto","state":"Moquegua","state_code":"MOQ","village":"Los
+        Angeles"},"confidence":7,"formatted":"Los Angeles, Mariscal Nieto, Peru"},"type":"Feature"}],"licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2416,"reset":1563494400},"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Thu, 18 Jul 2019 09:29:55
+        GMT","created_unix":1563442195},"total_results":10,"type":"FeatureCollection"}'
+  recorded_at: 2019-07-18 09:29:55 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4

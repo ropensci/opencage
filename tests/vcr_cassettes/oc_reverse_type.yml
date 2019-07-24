@@ -16,25 +16,25 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:53:26 GMT
+      date: Wed, 17 Jul 2019 16:38:27 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1787'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2391'
+      x-ratelimit-reset: '1563408000'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1787,"reset":1560988800},"results":[{"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"building","city":"Nantes","continent":"Europe","country":"France","country_code":"fr","house_number":"5","political_union":"European
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2391,"reset":1563408000},"results":[{"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"building","city":"Nantes","continent":"Europe","country":"France","country_code":"fr","house_number":"5","political_union":"European
         Union","postcode":"44000","state":"Pays de la Loire","state_code":"PDL","state_district":"Loire-Atlantique","street":"Rue
         Garde Dieu"},"confidence":10,"formatted":"5 Rue Garde Dieu, 44000 Nantes,
         France","geometry":{"lat":47.218891,"lng":-1.554403}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:53:26 GMT","created_unix":1560974006},"total_results":1}'
-  recorded_at: 2019-06-19 19:53:33 GMT
+        using an OpenCage API","timestamp":{"created_http":"Wed, 17 Jul 2019 16:38:27
+        GMT","created_unix":1563381507},"total_results":1}'
+  recorded_at: 2019-07-17 16:38:39 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -53,25 +53,25 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:53:28 GMT
+      date: Wed, 17 Jul 2019 16:38:29 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1785'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2389'
+      x-ratelimit-reset: '1563408000'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1785,"reset":1560988800},"results":[{"bounds":{"northeast":{"lat":53.5505733,"lng":10.0012761},"southwest":{"lat":53.5501368,"lng":10.0002381}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"building","city":"Hamburg","city_district":"Hamburg-Mitte","continent":"Europe","country":"Germany","country_code":"de","house_number":"22","political_union":"European
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2389,"reset":1563408000},"results":[{"bounds":{"northeast":{"lat":53.5505733,"lng":10.0012761},"southwest":{"lat":53.5501368,"lng":10.0002381}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"building","city":"Hamburg","city_district":"Hamburg-Mitte","continent":"Europe","country":"Germany","country_code":"de","house_number":"22","political_union":"European
         Union","postcode":"20095","road":"Jakobikirchhof","state":"Hamburg","state_code":"HH","suburb":"Hamburg-Altstadt","unknown":"Evangelisch-lutherische
         Hauptkirche St. Jacobi"},"confidence":10,"formatted":"Evangelisch-lutherische
         Hauptkirche St. Jacobi, Jakobikirchhof 22, 20095 Hamburg, Germany","geometry":{"lat":53.5503571,"lng":10.0007413}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:53:28 GMT","created_unix":1560974008},"total_results":1}'
-  recorded_at: 2019-06-19 19:53:33 GMT
+        using an OpenCage API","timestamp":{"created_http":"Wed, 17 Jul 2019 16:38:29
+        GMT","created_unix":1563381509},"total_results":1}'
+  recorded_at: 2019-07-17 16:38:39 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -90,27 +90,140 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:53:29 GMT
+      date: Wed, 17 Jul 2019 16:38:30 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '2500'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2387'
+      x-ratelimit-reset: '1563408000'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2500,"reset":1560988800},"results":[{"bounds":{"northeast":{"lat":34.0543713,"lng":-118.2420052},"southwest":{"lat":34.0530141,"lng":-118.24353}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"building","building":"Los
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2387,"reset":1563408000},"results":[{"bounds":{"northeast":{"lat":34.0543713,"lng":-118.2420052},"southwest":{"lat":34.0530141,"lng":-118.24353}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"building","building":"Los
         Angeles City Hall","city":"Los Angeles","continent":"North America","country":"USA","country_code":"us","county":"Los
         Angeles County","house_number":"200","neighbourhood":"Civic Center","postcode":"90012","road":"North
         Spring Street","state":"California","state_code":"CA","suburb":"Little Tokyo
         Historic District"},"confidence":10,"formatted":"Los Angeles City Hall, 200
         North Spring Street, Los Angeles, CA 90012, United States of America","geometry":{"lat":34.053696,"lng":-118.2429212}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:53:29 GMT","created_unix":1560974009},"total_results":1}'
-  recorded_at: 2019-06-19 19:53:33 GMT
+        using an OpenCage API","timestamp":{"created_http":"Wed, 17 Jul 2019 16:38:30
+        GMT","created_unix":1563381510},"total_results":1}'
+  recorded_at: 2019-07-17 16:38:39 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=47.21864%2C-1.554136&limit=1&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=0&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Wed, 17 Jul 2019 16:38:32 GMT
+      server: Apache/2.4.29 (Ubuntu)
+      access-control-allow-origin: '*'
+      x-ratelimit-limit: '2500'
+      x-ratelimit-remaining: '2385'
+      x-ratelimit-reset: '1563408000'
+      transfer-encoding: chunked
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2385,"reset":1563408000},"results":[{"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"building","city":"Nantes","continent":"Europe","country":"France","country_code":"fr","house_number":"5","political_union":"European
+        Union","postcode":"44000","state":"Pays de la Loire","state_code":"PDL","state_district":"Loire-Atlantique","street":"Rue
+        Garde Dieu"},"confidence":10,"formatted":"5 Rue Garde Dieu, 44000 Nantes,
+        France","geometry":{"lat":47.218891,"lng":-1.554403}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Wed, 17 Jul 2019 16:38:32
+        GMT","created_unix":1563381512},"total_results":1}'
+  recorded_at: 2019-07-17 16:38:39 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=53.55034%2C10.000654&limit=1&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=0&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Wed, 17 Jul 2019 16:38:33 GMT
+      server: Apache/2.4.29 (Ubuntu)
+      access-control-allow-origin: '*'
+      x-ratelimit-limit: '2500'
+      x-ratelimit-remaining: '2383'
+      x-ratelimit-reset: '1563408000'
+      transfer-encoding: chunked
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2383,"reset":1563408000},"results":[{"bounds":{"northeast":{"lat":53.5505733,"lng":10.0012761},"southwest":{"lat":53.5501368,"lng":10.0002381}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"building","city":"Hamburg","city_district":"Hamburg-Mitte","continent":"Europe","country":"Germany","country_code":"de","house_number":"22","political_union":"European
+        Union","postcode":"20095","road":"Jakobikirchhof","state":"Hamburg","state_code":"HH","suburb":"Hamburg-Altstadt","unknown":"Evangelisch-lutherische
+        Hauptkirche St. Jacobi"},"confidence":10,"formatted":"Evangelisch-lutherische
+        Hauptkirche St. Jacobi, Jakobikirchhof 22, 20095 Hamburg, Germany","geometry":{"lat":53.5503571,"lng":10.0007413}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Wed, 17 Jul 2019 16:38:33
+        GMT","created_unix":1563381513},"total_results":1}'
+  recorded_at: 2019-07-17 16:38:39 GMT
+  recorded_with: vcr/0.2.6, webmockr/0.3.4
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=34.05369%2C-118.242767&limit=1&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=0&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Wed, 17 Jul 2019 16:38:35 GMT
+      server: Apache/2.4.29 (Ubuntu)
+      access-control-allow-origin: '*'
+      x-ratelimit-limit: '2500'
+      x-ratelimit-remaining: '2381'
+      x-ratelimit-reset: '1563408000'
+      transfer-encoding: chunked
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2381,"reset":1563408000},"results":[{"bounds":{"northeast":{"lat":34.0543713,"lng":-118.2420052},"southwest":{"lat":34.0530141,"lng":-118.24353}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"building","building":"Los
+        Angeles City Hall","city":"Los Angeles","continent":"North America","country":"USA","country_code":"us","county":"Los
+        Angeles County","house_number":"200","neighbourhood":"Civic Center","postcode":"90012","road":"North
+        Spring Street","state":"California","state_code":"CA","suburb":"Little Tokyo
+        Historic District"},"confidence":10,"formatted":"Los Angeles City Hall, 200
+        North Spring Street, Los Angeles, CA 90012, United States of America","geometry":{"lat":34.053696,"lng":-118.2429212}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Wed, 17 Jul 2019 16:38:35
+        GMT","created_unix":1563381515},"total_results":1}'
+  recorded_at: 2019-07-17 16:38:39 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -129,12 +242,12 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:53:30 GMT
+      date: Wed, 17 Jul 2019 16:38:36 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1782'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2379'
+      x-ratelimit-reset: '1563408000'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
@@ -143,10 +256,10 @@ http_interactions:
       string: '{"documentation":"https://opencagedata.com/api","features":[{"geometry":{"coordinates":[-1.554403,47.218891],"type":"Point"},"properties":{"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"building","city":"Nantes","continent":"Europe","country":"France","country_code":"fr","house_number":"5","political_union":"European
         Union","postcode":"44000","state":"Pays de la Loire","state_code":"PDL","state_district":"Loire-Atlantique","street":"Rue
         Garde Dieu"},"confidence":10,"formatted":"5 Rue Garde Dieu, 44000 Nantes,
-        France"},"type":"Feature"}],"licenses":[{"name":"see attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1782,"reset":1560988800},"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:53:30 GMT","created_unix":1560974010},"total_results":1,"type":"FeatureCollection"}'
-  recorded_at: 2019-06-19 19:53:33 GMT
+        France"},"type":"Feature"}],"licenses":[{"name":"see attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2379,"reset":1563408000},"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Wed, 17 Jul 2019 16:38:36
+        GMT","created_unix":1563381516},"total_results":1,"type":"FeatureCollection"}'
+  recorded_at: 2019-07-17 16:38:39 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -165,12 +278,12 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:53:31 GMT
+      date: Wed, 17 Jul 2019 16:38:38 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1780'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2377'
+      x-ratelimit-reset: '1563408000'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
@@ -180,10 +293,10 @@ http_interactions:
         Union","postcode":"20095","road":"Jakobikirchhof","state":"Hamburg","state_code":"HH","suburb":"Hamburg-Altstadt","unknown":"Evangelisch-lutherische
         Hauptkirche St. Jacobi"},"confidence":10,"formatted":"Evangelisch-lutherische
         Hauptkirche St. Jacobi, Jakobikirchhof 22, 20095 Hamburg, Germany"},"type":"Feature"}],"licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1780,"reset":1560988800},"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:53:31 GMT","created_unix":1560974011},"total_results":1,"type":"FeatureCollection"}'
-  recorded_at: 2019-06-19 19:53:33 GMT
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2377,"reset":1563408000},"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Wed, 17 Jul 2019 16:38:38
+        GMT","created_unix":1563381518},"total_results":1,"type":"FeatureCollection"}'
+  recorded_at: 2019-07-17 16:38:39 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
 - request:
     method: get
@@ -202,12 +315,12 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:53:33 GMT
+      date: Wed, 17 Jul 2019 16:38:39 GMT
       server: Apache/2.4.29 (Ubuntu)
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1778'
-      x-ratelimit-reset: '1560988800'
+      x-ratelimit-remaining: '2375'
+      x-ratelimit-reset: '1563408000'
       transfer-encoding: chunked
       content-type: application/json; charset=utf-8
       strict-transport-security: max-age=31536000; includeSubDomains
@@ -219,8 +332,8 @@ http_interactions:
         Spring Street","state":"California","state_code":"CA","suburb":"Little Tokyo
         Historic District"},"confidence":10,"formatted":"Los Angeles City Hall, 200
         North Spring Street, Los Angeles, CA 90012, United States of America"},"type":"Feature"}],"licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1778,"reset":1560988800},"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:53:33 GMT","created_unix":1560974013},"total_results":1,"type":"FeatureCollection"}'
-  recorded_at: 2019-06-19 19:53:33 GMT
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2375,"reset":1563408000},"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Wed, 17 Jul 2019 16:38:39
+        GMT","created_unix":1563381519},"total_results":1,"type":"FeatureCollection"}'
+  recorded_at: 2019-07-17 16:38:39 GMT
   recorded_with: vcr/0.2.6, webmockr/0.3.4
