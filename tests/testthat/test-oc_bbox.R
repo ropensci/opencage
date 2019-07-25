@@ -23,6 +23,10 @@ test_that("oc_bbox works with numeric", {
       ymax = 51.6
     )
   )
+  expect_output(
+    object = print(bbox1),
+    regexp = "xmin ymin xmax ymax \\n-5.6 51.2  0.2 51.6"
+  )
 })
 
 test_that("oc_bbox works with data.frame", {
@@ -76,6 +80,7 @@ test_that("oc_bbox works with data.frame", {
 
 test_that("oc_bbox works with simple features bbox", {
   skip_if_not_installed("sf")
+
   sfbbox <-
     sf::st_bbox(c(
       xmin = 16.1,
@@ -107,5 +112,19 @@ test_that("oc_bbox works with simple features bbox", {
       xmax = 16.6,
       ymax = 48.6
     )
+  )
+
+  sfbbox_3857 <-
+    sf::st_bbox(c(
+      xmin = 1792244,
+      ymin = 6090234,
+      xmax = 1847904,
+      ymax = 6207260
+    ),
+    crs = 3857
+    )
+  expect_error(
+    object = oc_bbox(sfbbox_3857),
+    regexp = "The coordinate reference system of `bbox` must be EPSG 4326."
   )
 })

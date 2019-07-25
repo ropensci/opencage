@@ -1,5 +1,18 @@
 ## Test oc_process ##
 
+test_that("oc_process does not reveal key with non-interactive `url_only`.", {
+  # This test (intentionally) fails in interactive mode.
+  expect_error(
+    object =
+      oc_process(
+        placename = "Paris",
+        return = "url_only",
+        key = "fakekey"
+      ),
+    regexp = "'url_only' reveals your OpenCage key"
+  )
+})
+
 test_that("oc_process creates meaningful URLs for single query.", {
   res <-
     oc_process(
@@ -25,7 +38,8 @@ test_that("oc_process creates meaningful URLs for single query.", {
       return = "url_only",
       key = NULL
     )
-  expect_match(res[[1]],
+  expect_match(
+    res[[1]],
     "q=Triererstr%2015%2C%2099423%20Weimar%2C%20Deutschland",
     fixed = TRUE
   )

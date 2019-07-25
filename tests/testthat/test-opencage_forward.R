@@ -120,3 +120,14 @@ test_that("the bounds argument is well taken into account", {
   expect_true(!("Germany" %in% results2$results$components.country))
   expect_true("Germany" %in% results1$results$components.country)
 })
+
+test_that("opencage_forward & opencage_reverse are not vectorised.", {
+  expect_error(
+    object = opencage_forward(c("Trier", "Ulm")),
+    regexp = "`opencage_forward` is not vectorised"
+  )
+  expect_error(
+    opencage_reverse(latitude = c(47, 53), longitude = c(-1.5, 10)),
+    regexp = "`opencage_reverse` is not vectorised"
+  )
+})
