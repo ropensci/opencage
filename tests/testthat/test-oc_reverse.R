@@ -66,7 +66,10 @@ test_that("output arguments work", {
   expect_equal(names(oc_reverse_df(df, lat, lng, bind_cols = FALSE)),
                c("query", "formatted"))
   expect_gt(ncol(oc_reverse_df(df, lat, lng, output = "all")), 5)
-  expect_gt(ncol(oc_reverse_df(df, lat, lng, bind_cols = FALSE, output = "all")), 5)
+  expect_gt(
+    ncol(oc_reverse_df(df, lat, lng, bind_cols = FALSE, output = "all")),
+    5
+  )
 })
 
 test_that("tidyeval works for arguments", {

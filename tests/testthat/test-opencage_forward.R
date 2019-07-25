@@ -127,7 +127,7 @@ test_that("opencage_forward & opencage_reverse are not vectorised.", {
     regexp = "`opencage_forward` is not vectorised"
   )
   expect_error(
-    opencage_reverse(latitude = c(47,53), longitude = c(-1.5, 10)),
+    opencage_reverse(latitude = c(47, 53), longitude = c(-1.5, 10)),
     regexp = "`opencage_reverse` is not vectorised"
   )
 })
