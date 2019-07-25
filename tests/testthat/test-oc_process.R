@@ -42,6 +42,35 @@ test_that("oc_process creates meaningful URLs for single query.", {
   expect_match(res[[1]], "q=41.40139%2C2.1287", fixed = TRUE)
 })
 
+test_that("oc_process creates meaningful URLs with NAs.", {
+  res <- oc_process(placename = NA_character_, return = "url_only", key = NULL)
+  expect_match(res[[1]], "q=&", fixed = TRUE)
+  res <-
+    oc_process(
+      latitude = NA_real_,
+      longitude = NA_real_,
+      return = "url_only",
+      key = NULL
+    )
+  expect_match(res[[1]], "q=&", fixed = TRUE)
+  res <-
+    oc_process(
+      latitude = 0,
+      longitude = NA_real_,
+      return = "url_only",
+      key = NULL
+    )
+  expect_match(res[[1]], "q=&", fixed = TRUE)
+  res <-
+    oc_process(
+      latitude = NA_real_,
+      longitude = 0,
+      return = "url_only",
+      key = NULL
+    )
+  expect_match(res[[1]], "q=&", fixed = TRUE)
+})
+
 test_that("oc_process creates meaningful URLs for multiple queries.", {
   res <- oc_process(
     placename = c("Paris", "Hamburg"),

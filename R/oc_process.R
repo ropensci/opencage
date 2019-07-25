@@ -105,11 +105,22 @@ oc_process <-
       endpoint <- "json"
     }
 
-    # convert NA's to NULL to not return bogus results
-    if (!is.null(placename) && is.na(placename)) placename <- NULL
-
-    if (!is.null(placename)) query <- placename
-    if (!is.null(latitude)) query <- paste(latitude, longitude, sep = ",")
+    if (!is.null(placename)) {
+      if (!is.na(placename)) {
+        query <- placename
+      } else {
+        # convert NA's to an empty query to not return bogus results
+        query <- ""
+      }
+    }
+    if (!is.null(latitude)) {
+      if (!is.na(latitude) && !is.na(longitude)) {
+        query <- paste(latitude, longitude, sep = ",")
+      } else {
+        # convert NA's to an empty query to not return bogus results
+        query <- ""
+      }
+    }
 
     # build url
     oc_url <- oc_build_url(
