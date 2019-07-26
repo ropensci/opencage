@@ -5,10 +5,10 @@
 \title{Forward geocoding with data frames}
 \usage{
 oc_forward_df(data, placename, bind_cols = TRUE, output = c("short",
-  "all"), key = oc_key(), bounds = NULL, countrycode = NULL,
-  language = NULL, limit = 1L, min_confidence = NULL,
-  no_annotations = TRUE, no_dedupe = FALSE, no_record = FALSE,
-  abbrv = FALSE, ...)
+  "all"), key = oc_key(), proximity = NULL, bounds = NULL,
+  countrycode = NULL, language = NULL, limit = 1L,
+  min_confidence = NULL, no_annotations = TRUE, no_dedupe = FALSE,
+  no_record = FALSE, abbrv = FALSE, ...)
 }
 \arguments{
 \item{data}{A data frame.}
@@ -33,6 +33,13 @@ should be returned.}
 \item{key}{Your OpenCage API key as a character vector of length one. By
 default, \code{\link{oc_key}} will attempt to retrieve the key from the
 environment variable \code{OPENCAGE_KEY}.}
+
+\item{proximity}{A list, or an unquoted variable name of a list column of
+coordinate pairs, i.e. numeric vectors of length 2, each with latitude,
+longitude coordinates in decimal format. They provide OpenCage with a hint
+to bias results in favour of those closer to the specified location. It can
+easily be specified with the \code{\link{oc_points}} helper, for example
+like \code{proximity = oc_points(41.40139, 2.12870)}.}
 
 \item{bounds}{A list, or an unquoted variable name of a list column of
 bounding boxes, i.e. a list of numeric vectors, each with 4 coordinates

@@ -24,6 +24,12 @@
 #'   possible results to the supplied region. It can be specified with the
 #'   \code{\link{oc_bbox}} helper. For example: \code{bounds =
 #'   oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}.
+#' @param proximity A list of coordinate pairs, i.e. numeric vectors of length
+#'   2, each with latitude, longitude coordinates in decimal format. They
+#'   provide OpenCage with a hint to bias results in favour of those closer to
+#'   the specified location. It can easily be specified with the
+#'   \code{\link{oc_points}} helper, for example like \code{proximity =
+#'   oc_points(41.40139, 2.12870)}.
 #' @param countrycode A two letter code as defined by the
 #'   \href{https://www.iso.org/obp/ui/#search/code}{ISO 3166-1 Alpha 2} standard
 #'   that restricts the results to the given country or countries. E.g. "AR" for
@@ -123,6 +129,7 @@ oc_forward <-
            return = c("df_list", "json_list", "geojson_list", "url_only"),
            key = oc_key(),
            bounds = NULL,
+           proximity = NULL,
            countrycode = NULL,
            language = NULL,
            limit = 10L,
@@ -147,6 +154,7 @@ oc_forward <-
       placename = placename,
       key = key,
       bounds = bounds,
+      proximity = proximity,
       countrycode = countrycode,
       language = language,
       limit = limit,
@@ -163,6 +171,7 @@ oc_forward <-
       return = return,
       key = key,
       bounds = bounds,
+      proximity = proximity,
       countrycode = countrycode,
       language = language,
       limit = limit,
@@ -207,6 +216,12 @@ oc_forward <-
 #'   \code{\link{oc_bbox}} helper. For example: \code{bounds =
 #'   oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}. Default is
 #'   \code{NULL}.
+#' @param proximity A list, or an unquoted variable name of a list column of
+#'   coordinate pairs, i.e. numeric vectors of length 2, each with latitude,
+#'   longitude coordinates in decimal format. They provide OpenCage with a hint
+#'   to bias results in favour of those closer to the specified location. It can
+#'   easily be specified with the \code{\link{oc_points}} helper, for example
+#'   like \code{proximity = oc_points(41.40139, 2.12870)}.
 #' @param countrycode Character vector, or an unquoted variable name of such a
 #'   vector, of two-letter codes as defined by the
 #'   \href{https://www.iso.org/obp/ui/#search/code}{ISO 3166-1 Alpha 2} standard
@@ -310,6 +325,7 @@ oc_forward_df <-
            bind_cols = TRUE,
            output = c("short", "all"),
            key = oc_key(),
+           proximity = NULL,
            bounds = NULL,
            countrycode = NULL,
            language = NULL,
@@ -329,6 +345,7 @@ oc_forward_df <-
     # Tidyeval to enable input from data frame columns
     placename <- rlang::enquo(placename)
     bounds <- rlang::enquo(bounds)
+    proximity <- rlang::enquo(proximity)
     countrycode <- rlang::enquo(countrycode)
     language <- rlang::enquo(language)
     limit <- rlang::enquo(limit)
@@ -352,6 +369,7 @@ oc_forward_df <-
         key = key,
         return = "df_list",
         bounds = rlang::eval_tidy(bounds, data = data),
+        proximity = rlang::eval_tidy(proximity, data = data),
         countrycode = rlang::eval_tidy(countrycode, data = data),
         language = rlang::eval_tidy(language, data = data),
         limit = rlang::eval_tidy(limit, data = data),
@@ -380,6 +398,7 @@ oc_forward_df <-
               key = key,
               return = "df_list",
               bounds = !!bounds,
+              proximity = !!proximity,
               countrycode = !!countrycode,
               language = !!language,
               limit = !!limit,
