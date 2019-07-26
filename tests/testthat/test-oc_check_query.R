@@ -109,7 +109,7 @@ test_that("oc_check_query checks language", {
   )
 
   expect_error(
-    opencage_forward(
+    oc_check_query(
       placename = "Sarzeau",
       key = "32randomlettersanddigits12345678",
       language = "fr-NOTACOUNTRYCODE"

@@ -87,7 +87,8 @@ for the day and the time at which the number of remaining calls will
 }
 }
 \description{
-Forward geocoding, from placename to latitude and longitude tuple(s).
+Deprecated: use \code{oc_forward} or \code{oc_forward_df} for foward
+geocoding.
 }
 \examples{
 \dontrun{
