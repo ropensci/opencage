@@ -105,6 +105,7 @@ oc_process <-
       endpoint <- "json"
     }
 
+    # define query
     if (!is.null(placename)) {
       if (!is.na(placename)) {
         query <- placename
@@ -141,6 +142,7 @@ oc_process <-
       endpoint = endpoint
     )
 
+    # return url only
     if (return == "url_only") {
       if (interactive() || is.null(key)) {
         return(oc_url)
