@@ -59,10 +59,6 @@ test_that("oc_forward_df works", {
   tbl2 <- oc_forward_df(tibble(loc = "Nantes"), loc)
   expect_s3_class(tbl2, c("tbl_df", "tbl", "data.frame"))
   expect_equal(nrow(tbl2), 1)
-
-  # Error with no placename
-  expect_error(oc_forward_df(df), "`placename` must be provided.")
-  expect_error(oc_forward_df(df, NULL), "`placename` must be provided.")
 })
 
 test_that("output arguments work", {
@@ -124,4 +120,16 @@ test_that("tidyeval works for arguments", {
   expect_true(all.equal(abbrv[1, ], noarg[1, ]))
   expect_true(all.equal(abbrv[2, ], noarg[2, ]))
   expect_false(isTRUE(all.equal(abbrv[3, ], noarg[3, ])))
+})
+
+# Checks ------------------------------------------------------------------
+
+test_that("Check that placename is present work", {
+  # oc_forward
+  expect_error(oc_forward(), "`placename` must be provided.")
+  expect_error(oc_forward(placename = NULL), "`placename` must be provided.")
+
+  # oc_forward_df
+  expect_error(oc_forward_df(df), "`placename` must be provided.")
+  expect_error(oc_forward_df(df, NULL), "`placename` must be provided.")
 })

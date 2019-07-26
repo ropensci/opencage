@@ -14,10 +14,7 @@ oc_check_status <- function(res_env, res_text) {
 oc_parse_text <- function(res) {
   text <- res$parse(encoding = "UTF-8")
   if (identical(text, "")) {
-    stop(
-      "OpenCage returned an empty response.",
-      call. = FALSE
-    )
+    stop("OpenCage returned an empty response.", call. = FALSE)
   }
   text
 }

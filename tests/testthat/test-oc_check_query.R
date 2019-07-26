@@ -59,6 +59,17 @@ test_that("oc_check_query checks key", {
   )
 })
 
+test_that("oc_check_query checks bounds", {
+  expect_error(
+    oc_check_query(
+      placename = "Sarzeau",
+      key = "32randomlettersanddigits12345678",
+      bounds = list(c(-5, 51, 0))
+    ),
+    "Every `bbox` must be a numeric vector of length 4."
+  )
+})
+
 test_that("oc_check_query checks countrycode", {
   expect_error(
     oc_check_query(

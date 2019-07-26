@@ -1,4 +1,4 @@
-## Test oc_forward functions ##
+## Test oc_reverse functions ##
 
 library(tibble)
 lat <- c(47.21864, 53.55034, 34.05369)
@@ -66,7 +66,10 @@ test_that("output arguments work", {
   expect_equal(names(oc_reverse_df(df, lat, lng, bind_cols = FALSE)),
                c("query", "formatted"))
   expect_gt(ncol(oc_reverse_df(df, lat, lng, output = "all")), 5)
-  expect_gt(ncol(oc_reverse_df(df, lat, lng, bind_cols = FALSE, output = "all")), 5)
+  expect_gt(
+    ncol(oc_reverse_df(df, lat, lng, bind_cols = FALSE, output = "all")),
+    5
+  )
 })
 
 test_that("tidyeval works for arguments", {
