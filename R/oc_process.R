@@ -155,16 +155,6 @@ oc_process <-
       }
     }
 
-    # if NA shortcut to oc_format
-    if ( (!is.null(placename) && is.na(placename)) ||
-         (!is.null(latitude) && (is.na(latitude) || is.na(longitude))) ) {
-      return(oc_format(
-        res_text = "{\"total_results\":0}",
-        return = return,
-        query = query
-      ))
-    }
-
     # get response
     res_env <- oc_get_memoise(oc_url)
 
