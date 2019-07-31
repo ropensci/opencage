@@ -13,11 +13,26 @@ test_that("oc_check_query checks placename", {
 test_that("oc_check_query checks latitude", {
   expect_error(
     oc_check_query(
+      latitude = "fortytwo",
+      longitude = 51.11892,
+      key = "32randomlettersanddigits12345678"
+    ),
+    "Every `latitude` must be numeric."
+  )
+  expect_error(
+    oc_check_query(
       latitude = 433,
       longitude = 51.11892,
       key = "32randomlettersanddigits12345678"
     ),
-    "Every `latitude` must be numeric and between -90 and 90."
+    "Every `latitude` must be between -90 and 90."
+  )
+  expect_silent(
+    oc_check_query(
+      latitude = NA_real_,
+      longitude = 51.11892,
+      key = "32randomlettersanddigits12345678"
+    )
   )
 })
 
@@ -25,10 +40,25 @@ test_that("oc_check_query checks longitude", {
   expect_error(
     oc_check_query(
       latitude = 43,
+      longitude = TRUE,
+      key = "32randomlettersanddigits12345678"
+    ),
+    "Every `longitude` must be numeric."
+  )
+  expect_error(
+    oc_check_query(
+      latitude = 43,
       longitude = 5111892,
       key = "32randomlettersanddigits12345678"
     ),
-    "Every `longitude` must be numeric and between -180 and 180."
+    "Every `longitude` must be between -180 and 180."
+  )
+  expect_silent(
+    oc_check_query(
+      latitude = 43,
+      longitude = NA_real_,
+      key = "32randomlettersanddigits12345678"
+    )
   )
 })
 

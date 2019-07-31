@@ -80,19 +80,23 @@ oc_check_query <-
 
     # check latitude
     if (!is.null(latitude)) {
-      if (!(dplyr::between(latitude, -90, 90))) {
-        stop("Every `latitude` must be numeric and between -90 and 90.",
-          call. = FALSE
-        )
+      if (!is.numeric(latitude)) {
+        stop("Every `latitude` must be numeric.", call. = FALSE)
+      } else if (!is.na(latitude)) {
+        if (!dplyr::between(latitude, -90, 90)) {
+          stop("Every `latitude` must be between -90 and 90.", call. = FALSE)
+        }
       }
     }
 
     # check longitude
     if (!is.null(longitude)) {
-      if (!(dplyr::between(longitude, -180, 180))) {
-        stop("Every `longitude` must be numeric and between -180 and 180.",
-          call. = FALSE
-        )
+      if (!is.numeric(longitude)) {
+        stop("Every `longitude` must be numeric.", call. = FALSE)
+      } else if (!is.na(longitude)) {
+        if (!dplyr::between(longitude, -180, 180)) {
+          stop("Every `longitude` must be between -180 and 180.", call. = FALSE)
+        }
       }
     }
 

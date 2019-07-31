@@ -22,23 +22,25 @@ oc_parse_text <- function(res) {
 oc_format <- function(res_text, return, query) {
   if (return == "df_list") {
     jsn <- jsonlite::fromJSON(res_text, simplifyVector = TRUE, flatten = TRUE)
-    if (jsn$total_results == 0) {
-      results <- tibble::tibble(lat = NA_real_, lng = NA_real_, formatted = NA)
+    if (identical(jsn$total_results, 0L)) {
+      results <- tibble::tibble(formatted = NA_character_)
     } else {
       results <- tibble::as_tibble(jsn$results)
+      # Make column names nicer
+      colnames(results) <- sub("^annotations\\.", "", colnames(results))
+      colnames(results) <- sub("^bounds\\.", "", colnames(results))
+      colnames(results) <- sub("^components\\.", "", colnames(results))
+      colnames(results) <- sub("^geometry\\.", "", colnames(results))
+      colnames(results) <- sub("^_", "", colnames(results))
+      colnames(results) <- gsub("\\.", "_", colnames(results))
+      colnames(results) <- gsub("-", "_", colnames(results))
     }
     if ("request" %in% names(jsn)) {
-      results <- tibble::add_column(results, query = query, .before = 1)
+      if (identical(query, "")) query <- NA_character_
+      tibble::add_column(results, query = query, .before = 1)
+    } else {
+      results
     }
-    # Make column names nicer
-    colnames(results) <- sub("^annotations\\.", "", colnames(results))
-    colnames(results) <- sub("^bounds\\.", "", colnames(results))
-    colnames(results) <- sub("^components\\.", "", colnames(results))
-    colnames(results) <- sub("^geometry\\.", "", colnames(results))
-    colnames(results) <- sub("^_", "", colnames(results))
-    colnames(results) <- gsub("\\.", "_", colnames(results))
-    colnames(results) <- gsub("-", "_", colnames(results))
-    results
   } else if (return == "json_list" || return == "geojson_list") {
     jsn <- jsonlite::fromJSON(res_text, simplifyVector = FALSE)
     if (return == "geojson_list") {

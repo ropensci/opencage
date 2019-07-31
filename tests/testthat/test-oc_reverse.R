@@ -41,6 +41,35 @@ test_that("oc_reverse returns correct type", {
   expect_s3_class(res3[[1]], "geo_list")
 })
 
+test_that("oc_reverse can handle NAs", {
+  skip_on_cran()
+  skip_if_offline()
+
+  res1 <- oc_reverse(0, NA_real_, return = "df_list")
+  res2 <- oc_reverse(NA_real_, 0, return = "df_list")
+  res3 <- oc_reverse(NA_real_, NA_real_, return = "df_list")
+  expect_equal(res1, res2)
+  expect_equal(res1, res3)
+  expect_s3_class(res1[[1]], "data.frame")
+  expect_equal(res1[[1]][["formatted"]], NA_character_)
+
+  res1 <- oc_reverse(0, NA_real_, return = "json_list")
+  res2 <- oc_reverse(NA_real_, 0, return = "json_list")
+  res3 <- oc_reverse(NA_real_, NA_real_, return = "json_list")
+  expect_equal(res1, res2) # fails if results are not memoised
+  expect_equal(res1, res3) # fails if results are not memoised
+  expect_equal(res1[[1]][["total_results"]], 0)
+  expect_equal(res1[[1]][["results"]], list())
+
+  res1 <- oc_reverse(0, NA_real_, return = "geojson_list")
+  res2 <- oc_reverse(NA_real_, 0, return = "geojson_list")
+  res3 <- oc_reverse(NA_real_, NA_real_, return = "geojson_list")
+  expect_equal(res1, res2) # fails if results are not memoised
+  expect_equal(res1, res3) # fails if results are not memoised
+  expect_s3_class(res1[[1]], "geo_list")
+  expect_equal(res1[[1]][["total_results"]], 0)
+  expect_equal(res1[[1]][["features"]], list())
+})
 
 # oc_reverse_df -----------------------------------------------------------
 
