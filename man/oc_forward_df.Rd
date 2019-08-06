@@ -34,16 +34,17 @@ should be returned.}
 default, \code{\link{oc_key}} will attempt to retrieve the key from the
 environment variable \code{OPENCAGE_KEY}.}
 
-\item{proximity}{A list, or an unquoted variable name of a list column of
-coordinate pairs, i.e. numeric vectors of length 2, each with latitude,
-longitude coordinates in decimal format. They provide OpenCage with a hint
-to bias results in favour of those closer to the specified location. It can
-easily be specified with the \code{\link{oc_points}} helper, for example
-like \code{proximity = oc_points(41.40139, 2.12870)}.}
 
 \item{bounds}{A list, or an unquoted variable name of a list column of
 bounding boxes, i.e. a list of numeric vectors, each with 4 coordinates
 forming the south-west and north-east corners of a bounding box:
+\item{proximity}{A list of length one, or an unquoted variable name of a list
+column of points. Points are named numeric vectors with latitude, longitude
+coordinate pairs in decimal format. \code{proximity} provides OpenCage with
+a hint to bias results in favour of those closer to the specified location.
+It can be specified with the \code{\link{oc_points}} helper, for example
+like \code{proximity = oc_points(41.40139, 2.12870)}. Default is
+\code{NULL}.}
 \code{list(c(xmin, ymin, xmax, ymax))}. \code{bounds} restricts the
 possible results to the supplied region. It can be specified with the
 \code{\link{oc_bbox}} helper. For example: \code{bounds =

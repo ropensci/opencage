@@ -12,11 +12,10 @@ oc_forward(placename, return = c("df_list", "json_list", "geojson_list",
 }
 \arguments{
 \item{placename}{A character vector with the placename(s) to be geocoded.
-
-  If the placenames are addresses, see
-  \href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's
-   instructions} on how to format addresses for best forward geocoding
-   results.}
+If the placenames are addresses, see
+\href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's
+ instructions} on how to format addresses for best forward geocoding
+ results.}
 
 \item{return}{A character vector of length one indicating the return value of
 the function, either a list of tibbles (\code{df_list}, the default), a
@@ -34,12 +33,12 @@ possible results to the supplied region. It can be specified with the
 \code{\link{oc_bbox}} helper. For example: \code{bounds =
 oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}.}
 
-\item{proximity}{A list of coordinate pairs, i.e. numeric vectors of length
-2, each with latitude, longitude coordinates in decimal format. They
-provide OpenCage with a hint to bias results in favour of those closer to
-the specified location. It can easily be specified with the
-\code{\link{oc_points}} helper, for example like \code{proximity =
-oc_points(41.40139, 2.12870)}.}
+\item{proximity}{A list of points of length one or \code{length(placename)}.
+A point is a named numeric vector of a latitude, longitude coordinate pair
+in decimal format. \code{proximity} provides OpenCage with a hint to bias
+results in favour of those closer to the specified location. It can be
+specified with the \code{\link{oc_points}} helper, for example like
+\code{proximity = oc_points(51.9526, 7.6324)}.}
 
 \item{countrycode}{A two letter code as defined by the
 \href{https://www.iso.org/obp/ui/#search/code}{ISO 3166-1 Alpha 2} standard

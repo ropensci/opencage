@@ -11,11 +11,10 @@ opencage_forward(placename, key = oc_key(), bounds = NULL,
 }
 \arguments{
 \item{placename}{A character vector with the placename(s) to be geocoded.
-
-  If the placenames are addresses, see
-  \href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's
-   instructions} on how to format addresses for best forward geocoding
-   results.}
+If the placenames are addresses, see
+\href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's
+ instructions} on how to format addresses for best forward geocoding
+ results.}
 
 \item{key}{Your OpenCage API key as a character vector of length one. By
 default, \code{\link{oc_key}} will attempt to retrieve the key from the
