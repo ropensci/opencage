@@ -13,6 +13,7 @@ The new features include:
 * A helper function `oc_points()` now makes it easier to create (lists of) point coordinates from vectors and data frames, to e.g. pass to the proximity argument. 
 * http requests are now handled by {[crul](https://ropensci.github.io/crul/)}, not {[httr](http://httr.r-lib.org/)} (#37).
 * API calls are now rate limited (#32). The default limit is set to 1 call per second as per the API limit of the [Free Trial plan](https://opencagedata.com/pricing). The rate limit can be adjusted with `oc_config()`.
+* `oc_forward` and `oc_forward_df` now support [OpenCage's `proximity` parameter](https://blog.opencagedata.com/post/new-optional-parameter-proximity). A new helper function `oc_points()` makes it easier to create (lists of) points from latitude/longitude vectors and data frames. 
 
 ## Breaking changes
 
