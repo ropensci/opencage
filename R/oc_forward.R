@@ -17,11 +17,12 @@
 #' @param key Your OpenCage API key as a character vector of length one. By
 #'   default, \code{\link{oc_key}} will attempt to retrieve the key from the
 #'   environment variable \code{OPENCAGE_KEY}.
-#' @param bounds A list of bounding boxes, i.e. numeric vectors, each with 4
-#'   coordinates forming the south-west and north-east corners of a bounding
-#'   box: \code{list(c(xmin, ymin, xmax, ymax))}. \code{bounds} restricts the
-#'   possible results to the supplied region. It can be specified with the
-#'   \code{\link{oc_bbox}} helper. For example: \code{bounds =
+#' @param bounds A list of bounding boxes of length one or
+#'   \code{length(placename)}. Bounding boxes are named numeric vectors, each
+#'   with four coordinates forming the south-west and north-east corners of the
+#'   bounding box: \code{list(c(xmin, ymin, xmax, ymax))}. \code{bounds}
+#'   restricts the possible results to the supplied region. It can be specified
+#'   with the \code{\link{oc_bbox}} helper. For example: \code{bounds =
 #'   oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}.
 #' @param proximity A list of points of length one or \code{length(placename)}.
 #'   A point is a named numeric vector of a latitude, longitude coordinate pair
@@ -207,9 +208,9 @@ oc_forward <-
 #'   latitude, longitude, and formatted address variables (\code{"short"}, the
 #'   default) should be returned or all variables (\code{"all"}) variables
 #'   should be returned.
-#' @param bounds A list, or an unquoted variable name of a list column of
-#'   bounding boxes, i.e. a list of numeric vectors, each with 4 coordinates
-#'   forming the south-west and north-east corners of a bounding box:
+#' @param bounds A list of length one, or an unquoted variable name of a list column of
+#'   bounding boxes. Bounding boxes are named numeric vectors, each with 4 coordinates
+#'   forming the south-west and north-east corners of the bounding box:
 #'   \code{list(c(xmin, ymin, xmax, ymax))}. \code{bounds} restricts the
 #'   possible results to the supplied region. It can be specified with the
 #'   \code{\link{oc_bbox}} helper. For example: \code{bounds =
