@@ -129,14 +129,15 @@ oc_check_query <-
           "Did you forget to wrap the vector(s) in a list?"
         )
       }
-      if (!hasName(proximity, "latitude") || !hasName(proximity, "longitude")){
+      if (!utils::hasName(proximity, "latitude") ||
+          !utils::hasName(proximity, "longitude")){
         stop(
           call. = FALSE,
           "The coordinates of every `proximity` point must be named ",
           "'latitude' and 'longitude'."
         )
       }
-      oc_check_query(
+      .oc_check_query(
         latitude = proximity[["latitude"]],
         longitude = proximity[["longitude"]],
         key = key
