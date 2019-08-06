@@ -1,6 +1,6 @@
-#' Bounding box list for opencage queries
+#' List of bounding boxes for opencage queries
 #'
-#' Create a bounding box list for opencage queries.
+#' Create a list of bounding boxes for opencage queries.
 #'
 #' @param xmin Minimum longitude (also known as \code{min lon},
 #'   \code{southwest_lng}, \code{west}, or \code{left}).
@@ -16,7 +16,8 @@
 #' @param bbox A \code{bbox} object, see \code{sf::st_bbox}.
 #' @param ... Ignored.
 #'
-#' @return A list of bounding boxes, each of class \code{bbox}.
+#' @return A \code{bbox_list}, i.e. a list of bounding boxes, each of class
+#'   \code{bbox}.
 #' @export
 #'
 #' @examples
@@ -63,9 +64,18 @@
 #'
 oc_bbox <- function(...) UseMethod("oc_bbox")
 
+# No @name so it does not show up in the docs.
+#' @export
+oc_bbox.default <- function(x, ...) { # nolint - see lintr issue #223
+  stop(
+    "Can't create a `bbox_list` from an object of class `", class(x)[[1]], "`.",
+    call. = FALSE
+  )
+}
+
 #' @name oc_bbox
 #' @export
-oc_bbox.default <- function(xmin, ymin, xmax, ymax, ...) { # nolint - see lintr issue #223
+oc_bbox.numeric <- function(xmin, ymin, xmax, ymax, ...) { # nolint - see lintr issue #223
   bbox <- function(xmin, ymin, xmax, ymax) {
     oc_check_bbox(xmin = xmin, ymin = ymin, xmax = xmax, ymax = ymax)
     structure(
@@ -122,13 +132,13 @@ oc_bbox.bbox <- function(bbox, ...) { # nolint - see lintr issue #223
 
 #' @export
 print.bbox_list <- function(x, ...) {
-  print(unclass(x))
+  print(purrr::map(x, ~ structure(., crs = NULL, class = NULL)))
 }
 
 # check bbox
 oc_check_bbox <- function(xmin, ymin, xmax, ymax) {
   bnds <- c(xmin, ymin, xmax, ymax)
-  if (any(is.na(bnds))) {
+  if (anyNA(bnds)) {
     stop("Every `bbox` element must be non-missing.", call. = FALSE)
   }
   if (!all(is.numeric(bnds))) {

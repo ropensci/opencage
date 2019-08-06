@@ -3,6 +3,7 @@
 S3method(oc_bbox,bbox)
 S3method(oc_bbox,data.frame)
 S3method(oc_bbox,default)
+S3method(oc_bbox,numeric)
 S3method(oc_points,data.frame)
 S3method(oc_points,default)
 S3method(oc_points,numeric)
