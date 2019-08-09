@@ -1,6 +1,6 @@
-#' List of bounding boxes for opencage queries
+#' List of bounding boxes for OpenCage queries
 #'
-#' Create a list of bounding boxes for opencage queries.
+#' Create a list of bounding boxes for OpenCage queries.
 #'
 #' @param xmin Minimum longitude (also known as \code{min lon},
 #'   \code{southwest_lng}, \code{west}, or \code{left}).

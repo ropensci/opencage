@@ -4,7 +4,7 @@
 \alias{oc_points}
 \alias{oc_points.numeric}
 \alias{oc_points.data.frame}
-\title{List of points for opencage queries}
+\title{List of points for OpenCage queries}
 \usage{
 oc_points(...)
 
@@ -25,7 +25,7 @@ A \code{point_list}, i.e. a list of points. Each point is a named
   vector of length 2 containing a latitude/longitude coordinate pair.
 }
 \description{
-Create a list of points (latitude/longitude coordinate pairs) for opencage
+Create a list of points (latitude/longitude coordinate pairs) for OpenCage
 queries.
 }
 \examples{
@@ -43,27 +43,16 @@ oc_points(
   longitude = lon
 )
 \dontrun{
-# create bbox list column with dplyr
+# create a list column with points with dplyr
 library(dplyr)
 xdf \%>\%
   mutate(
-    bbox =
+    points =
       oc_points(
-        southwest_lng,
-        southwest_lat,
-        northeast_lng,
-        northeast_lat
+        lat,
+        lon
       )
   )
-
-# create bbox list from a simple features bbox
-if (requireNamespace("sf", quietly = TRUE)) {
-  library(sf)
-  bbox <- st_bbox(c(xmin = 16.1 = 16.6, ymax = 48.6, ymin = 47.9),
-    crs = 4326
-  )
-  oc_points(bbox)
-}
 }
 
 }

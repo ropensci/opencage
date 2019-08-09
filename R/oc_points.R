@@ -1,6 +1,6 @@
-#' List of points for opencage queries
+#' List of points for OpenCage queries
 #'
-#' Create a list of points (latitude/longitude coordinate pairs) for opencage
+#' Create a list of points (latitude/longitude coordinate pairs) for OpenCage
 #' queries.
 #'
 #' @param latitude,longitude Numeric vectors of latitude and longitude values.
@@ -27,27 +27,16 @@
 #'   longitude = lon
 #' )
 #' \dontrun{
-#' # create bbox list column with dplyr
+#' # create a list column with points with dplyr
 #' library(dplyr)
 #' xdf %>%
 #'   mutate(
-#'     bbox =
+#'     points =
 #'       oc_points(
-#'         southwest_lng,
-#'         southwest_lat,
-#'         northeast_lng,
-#'         northeast_lat
+#'         lat,
+#'         lon
 #'       )
 #'   )
-#'
-#' # create bbox list from a simple features bbox
-#' if (requireNamespace("sf", quietly = TRUE)) {
-#'   library(sf)
-#'   bbox <- st_bbox(c(xmin = 16.1 = 16.6, ymax = 48.6, ymin = 47.9),
-#'     crs = 4326
-#'   )
-#'   oc_points(bbox)
-#' }
 #' }
 #'
 oc_points <- function(...) UseMethod("oc_points")

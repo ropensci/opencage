@@ -5,7 +5,7 @@
 \alias{oc_bbox.numeric}
 \alias{oc_bbox.data.frame}
 \alias{oc_bbox.bbox}
-\title{List of bounding boxes for opencage queries}
+\title{List of bounding boxes for OpenCage queries}
 \usage{
 oc_bbox(...)
 
@@ -41,7 +41,7 @@ A \code{bbox_list}, i.e. a list of bounding boxes, each of class
   \code{bbox}.
 }
 \description{
-Create a list of bounding boxes for opencage queries.
+Create a list of bounding boxes for OpenCage queries.
 }
 \examples{
 oc_bbox(-5.63160, 51.280430, 0.278970, 51.683979)
