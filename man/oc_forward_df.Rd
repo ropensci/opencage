@@ -5,10 +5,10 @@
 \title{Forward geocoding with data frames}
 \usage{
 oc_forward_df(data, placename, bind_cols = TRUE, output = c("short",
-  "all"), key = oc_key(), bounds = NULL, countrycode = NULL,
-  language = NULL, limit = 1L, min_confidence = NULL,
-  no_annotations = TRUE, no_dedupe = FALSE, no_record = FALSE,
-  abbrv = FALSE, ...)
+  "all"), key = oc_key(), proximity = NULL, bounds = NULL,
+  countrycode = NULL, language = NULL, limit = 1L,
+  min_confidence = NULL, no_annotations = TRUE, no_dedupe = FALSE,
+  no_record = FALSE, abbrv = FALSE, ...)
 }
 \arguments{
 \item{data}{A data frame.}
@@ -34,9 +34,17 @@ should be returned.}
 default, \code{\link{oc_key}} will attempt to retrieve the key from the
 environment variable \code{OPENCAGE_KEY}.}
 
-\item{bounds}{A list, or an unquoted variable name of a list column of
-bounding boxes, i.e. a list of numeric vectors, each with 4 coordinates
-forming the south-west and north-east corners of a bounding box:
+\item{proximity}{A list of length one, or an unquoted variable name of a list
+column of points. Points are named numeric vectors with latitude, longitude
+coordinate pairs in decimal format. \code{proximity} provides OpenCage with
+a hint to bias results in favour of those closer to the specified location.
+It can be specified with the \code{\link{oc_points}} helper, for example
+like \code{proximity = oc_points(41.40139, 2.12870)}. Default is
+\code{NULL}.}
+
+\item{bounds}{A list of length one, or an unquoted variable name of a list column of
+bounding boxes. Bounding boxes are named numeric vectors, each with 4 coordinates
+forming the south-west and north-east corners of the bounding box:
 \code{list(c(xmin, ymin, xmax, ymax))}. \code{bounds} restricts the
 possible results to the supplied region. It can be specified with the
 \code{\link{oc_bbox}} helper. For example: \code{bounds =

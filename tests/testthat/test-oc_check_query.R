@@ -100,6 +100,49 @@ test_that("oc_check_query checks bounds", {
   )
 })
 
+test_that("oc_check_query checks proximity", {
+  expect_error(
+    oc_check_query(
+      placename = "Sarzeau",
+      key = "32randomlettersanddigits12345678",
+      proximity = list(c(47.5, longitude = -2.7)) # latitude not named
+    ),
+    "must be named 'latitude' and 'longitude'"
+  )
+  expect_error(
+    oc_check_query(
+      placename = "Sarzeau",
+      key = "32randomlettersanddigits12345678",
+      proximity = list(c(longitude = 47.5, -2.7)) # longitude not named
+    ),
+    "must be named 'latitude' and 'longitude'"
+  )
+  expect_error(
+    oc_check_query(
+      placename = "Sarzeau",
+      key = "32randomlettersanddigits12345678",
+      proximity = list(c(1, 2, 3)) # too many coordinates
+    ),
+    "Every `proximity` point must be a numeric vector of length 2."
+  )
+  expect_error(
+    oc_check_query(
+      placename = "Sarzeau",
+      key = "32randomlettersanddigits12345678",
+      proximity = list(c(1)) # too few coordinates
+    ),
+    "Every `proximity` point must be a numeric vector of length 2."
+  )
+  expect_error(
+    oc_check_query(
+      placename = "Sarzeau",
+      key = "32randomlettersanddigits12345678",
+      proximity = c(1, 2) # not wrapped in a list
+    ),
+    "Every `proximity` point must be a numeric vector of length 2."
+  )
+})
+
 test_that("oc_check_query checks countrycode", {
   expect_error(
     oc_check_query(

@@ -2,14 +2,14 @@
 % Please edit documentation in R/oc_bbox.R
 \name{oc_bbox}
 \alias{oc_bbox}
-\alias{oc_bbox.default}
+\alias{oc_bbox.numeric}
 \alias{oc_bbox.data.frame}
 \alias{oc_bbox.bbox}
-\title{Bounding box list for opencage queries}
+\title{List of bounding boxes for OpenCage queries}
 \usage{
 oc_bbox(...)
 
-\method{oc_bbox}{default}(xmin, ymin, xmax, ymax, ...)
+\method{oc_bbox}{numeric}(xmin, ymin, xmax, ymax, ...)
 
 \method{oc_bbox}{data.frame}(data, xmin, ymin, xmax, ymax, ...)
 
@@ -37,10 +37,11 @@ respectively.}
 \item{bbox}{A \code{bbox} object, see \code{sf::st_bbox}.}
 }
 \value{
-A list of bounding boxes, each of class \code{bbox}.
+A \code{bbox_list}, i.e. a list of bounding boxes, each of class
+  \code{bbox}.
 }
 \description{
-Create a bounding box list for opencage queries.
+Create a list of bounding boxes for OpenCage queries.
 }
 \examples{
 oc_bbox(-5.63160, 51.280430, 0.278970, 51.683979)

@@ -5,18 +5,17 @@
 \title{Forward geocoding}
 \usage{
 oc_forward(placename, return = c("df_list", "json_list", "geojson_list",
-  "url_only"), key = oc_key(), bounds = NULL, countrycode = NULL,
-  language = NULL, limit = 10L, min_confidence = NULL,
-  no_annotations = TRUE, no_dedupe = FALSE, no_record = FALSE,
-  abbrv = FALSE, add_request = FALSE, ...)
+  "url_only"), key = oc_key(), bounds = NULL, proximity = NULL,
+  countrycode = NULL, language = NULL, limit = 10L,
+  min_confidence = NULL, no_annotations = TRUE, no_dedupe = FALSE,
+  no_record = FALSE, abbrv = FALSE, add_request = FALSE, ...)
 }
 \arguments{
 \item{placename}{A character vector with the placename(s) to be geocoded.
-
-  If the placenames are addresses, see
-  \href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's
-   instructions} on how to format addresses for best forward geocoding
-   results.}
+If the placenames are addresses, see
+\href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's
+ instructions} on how to format addresses for best forward geocoding
+ results.}
 
 \item{return}{A character vector of length one indicating the return value of
 the function, either a list of tibbles (\code{df_list}, the default), a
@@ -27,12 +26,20 @@ URL with which the API would be called (\code{url_only}).}
 default, \code{\link{oc_key}} will attempt to retrieve the key from the
 environment variable \code{OPENCAGE_KEY}.}
 
-\item{bounds}{A list of bounding boxes, i.e. numeric vectors, each with 4
-coordinates forming the south-west and north-east corners of a bounding
-box: \code{list(c(xmin, ymin, xmax, ymax))}. \code{bounds} restricts the
-possible results to the supplied region. It can be specified with the
-\code{\link{oc_bbox}} helper. For example: \code{bounds =
+\item{bounds}{A list of bounding boxes of length one or
+\code{length(placename)}. Bounding boxes are named numeric vectors, each
+with four coordinates forming the south-west and north-east corners of the
+bounding box: \code{list(c(xmin, ymin, xmax, ymax))}. \code{bounds}
+restricts the possible results to the supplied region. It can be specified
+with the \code{\link{oc_bbox}} helper. For example: \code{bounds =
 oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}.}
+
+\item{proximity}{A list of points of length one or \code{length(placename)}.
+A point is a named numeric vector of a latitude, longitude coordinate pair
+in decimal format. \code{proximity} provides OpenCage with a hint to bias
+results in favour of those closer to the specified location. It can be
+specified with the \code{\link{oc_points}} helper, for example like
+\code{proximity = oc_points(51.9526, 7.6324)}.}
 
 \item{countrycode}{A two letter code as defined by the
 \href{https://www.iso.org/obp/ui/#search/code}{ISO 3166-1 Alpha 2} standard

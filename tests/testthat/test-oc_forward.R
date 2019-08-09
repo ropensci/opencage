@@ -8,6 +8,8 @@ df2 <- add_column(df,
                                    ymin = c(45, 42, 8),
                                    xmax = c(-70, -78, -74),
                                    ymax = c(46, 43, 10)),
+                  proximity = oc_points(latitude = c(45.5, 42.5, 9),
+                                        longitude = c(-71, -79, -75)),
                   countrycode = c("ca", "us", "co"),
                   language = c("de", "fr", "es"),
                   limit = 1:3,
@@ -96,11 +98,14 @@ test_that("tidyeval works for arguments", {
 
   noarg <- oc_forward_df(df2, loc, bind_cols = FALSE)
 
-  ## bounds and countrycode
+  ## bounds, proximity and countrycode
   bounds <- oc_forward_df(df2, loc, bounds = bounds, bind_cols = FALSE)
+  prx <- oc_forward_df(df2, loc, proximity = proximity, bind_cols = FALSE)
   cc <- oc_forward_df(df2, loc, countrycode = countrycode, bind_cols = FALSE)
   expect_false(isTRUE(all.equal(bounds, noarg)))
+  expect_false(isTRUE(all.equal(prx, noarg)))
   expect_false(isTRUE(all.equal(cc, noarg)))
+  expect_equal(bounds, prx)
   expect_equal(bounds, cc)
 
   # language
