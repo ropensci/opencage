@@ -94,11 +94,35 @@ knitr::kable(results6)
 
 * `min_confidence`, an integer value between 0 and 10, indicates the precision of the returned result as defined by its geographical extent, (i.e. by the extent of the result's bounding box). See the \href{API documentation}{https://opencagedata.com/api#confidence} for details. Only results with at least the requested confidence will be returned.
 
-* `no_annotations`: OpenCage supplies additional information about the result location in the annotations field. The annotations include, among others, country information, time of sunset and sunrise, or the location in different geocoding formats, like Maidenhead, Mercator projection (EPSG 3857), geohash or what3words. Some annotations, like the Irish Transverse Mercator (ITM) or the US Federal Information Processing Standards (FIPS) code will only be shown when appropriate. `no_annotations` is `TRUE` by default, which means that the output will not contain annotations.
+* `roadinfo`, a logical vector, indicates whether the geocoder should attempt to match the nearest road (rather than an address) and provide additional road and driving information. It is `FALSE` by default, which means OpenCage will not attempt to match the nearest road. Some road and driving information is nevertheless provided as part of the annotations (see below), if `roadinfo` is set to `FALSE`. 
+
+```{r roadinfo, message=FALSE}
+results7 <- oc_forward(placename = "Europa Advance Rd", roadinfo = TRUE)
+knitr::kable(results7)
+
+```
+
+* `no_annotations`: OpenCage supplies additional information about the result location in the [annotations](https://opencagedata.com/api#annotations). They include, among others, country information, time of sunset and sunrise, or the location in different geocoding formats, like Maidenhead, Mercator projection (EPSG 3857), geohash or what3words. Some annotations, like the Irish Transverse Mercator (ITM) or the US Federal Information Processing Standards (FIPS) code will only be shown when appropriate. `no_annotations` is `TRUE` by default, which means that the output will not contain annotations. (Yes, the inverted argument names are confusing. We just follow OpenCage's lead here.)
 
 * `no_dedupe` is `FALSE` by default. When TRUE the output will not be deduplicated.
 
 For more information about the output and the query parameters, see the package documentation, the [API doc](https://opencagedata.com/api) and [OpenCage FAQ](https://opencagedata.com/faq).
+
+## Privacy
+
+All geocoding functions have a parameter `no_record`. It is `FALSE` by default. 
+
+* When `no_record` is `FALSE` a log of the query is made by OpenCage. These logs are used for debugging and in order to improve the service. [According to OpenCage](https://opencagedata.com/faq#legal), all logs are automatically deleted after six months. 
+
+* When `no_record` is `TRUE`, OpenCage still records that a request was made (e.g. to see whether you exceeded your quota), but not the specific content of your query. Please set `no_record` to `TRUE` if you have concerns about privacy and don't want OpenCage to have a record of your query. More information about privacy can be found on OpenCage's [GDPR page](https://opencagedata.com/gdpr).
+
+## Addresses
+
+The geocoding functions also have an `abbr` parameter, `FALSE` by default. When it is `TRUE` the addresses in the `formatted` field of the results are abbreviated (e.g. "Main St." instead of "Main Street"). For more details see [this blog post](http://blog.opencagedata.com/post/160294347883/shrtr-pls).
+
+## Return query text
+
+`oc_forward()` and `oc_reverse()` have an `add_request` argument, indicating whether the request is returned again with the results. If the `return` value is a `df_list`, the `placename` or `latitude,longitude` is added as a column to the results. `json_list` results will contain all request parameters, including the API key used! For `geojson_list` results `add_request` is currently ignored by OpenCage.
 
 ## Caching
 
@@ -111,26 +135,10 @@ system.time(oc_reverse(latitude = 10, longitude = 10))
 
 ```
 
-To clear the cache of all results, you need to call `memoise::forget(opencage:::oc_get_memoise)`.
+To clear the cache of all results, either start a new R session or call `memoise::forget(opencage:::oc_get_memoise)`.
 
 ```{r forget, message=FALSE}
 memoise::forget(opencage:::oc_get_memoise)
 system.time(oc_reverse(latitude = 10, longitude = 10))
 
 ```
-
-## Privacy
-
-All geocoding functions have a parameter `no_record`. It is `FALSE` by default. 
-
-* When `no_record` is `FALSE` a log of the query is made by OpenCage. These logs are used for debugging and in order to improve the service. [According](https://opencagedata.com/faq#legal) to OpenCage, all logs are automatically deleted after six months. 
-
-* When `no_record` is `TRUE`, OpenCage still records that a request was made (e.g. to see whether you exceeded your quota), but not the specific content of your query. Please use if you have concerns about privacy and want OpenCage to have no record of your query. More information about privacy can be found on OpenCage's [GDPR page](https://opencagedata.com/gdpr).
-
-## Addresses
-
-The geocoding functions also have an `abbr` parameter, `FALSE` by default. When it is `TRUE` the addresses in the `formatted` field of the results are abbreviated (e.g. "Main St." instead of "Main Street"). For more details see [this blog post](http://blog.opencagedata.com/post/160294347883/shrtr-pls).
-
-## Return query text
-
-`oc_forward()` and `oc_reverse()` have an `add_request` argument, indicating whether the request is returned again with the results. If the `return` value is a `df_list`, the `placename` or `latitude,longitude` is added as a column to the results. `json_list` results will contain all request parameters, including the API key used! For `geojson_list` results `add_request` is currently ignored by OpenCage.

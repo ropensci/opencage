@@ -53,12 +53,15 @@
 #'   geographical extent, (i.e. by the extent of the result's bounding box). See
 #'   the \href{https://opencagedata.com/api#confidence}{API documentation} for
 #'   details. Only results with at least the requested confidence will be
-#'   returned. Default is \code{NULL}).
+#'   returned. Default is \code{NULL}.
 #' @param no_annotations Logical vector indicating whether additional
 #'   information about the result location should be returned. \code{TRUE} by
-#'   default, which means that the output will not contain annotations.
+#'   default, which means that the results will not contain annotations.
+#' @param roadinfo Logical vector indicating whether the geocoder should attempt
+#'   to match the nearest road (rather than an address) and provide additional
+#'   road and driving information. Default is \code{FALSE}.
 #' @param no_dedupe Logical vector (default \code{FALSE}), when \code{TRUE}
-#'   the output will not be deduplicated.
+#'   the results will not be deduplicated.
 #' @param no_record Logical vector of length one (default \code{FALSE}), when
 #'   \code{TRUE} no log entry of the query is created, and the geocoding
 #'   request is not cached by OpenCage.
@@ -143,6 +146,7 @@ oc_forward <-
            limit = 10L,
            min_confidence = NULL,
            no_annotations = TRUE,
+           roadinfo = FALSE,
            no_dedupe = FALSE,
            no_record = FALSE,
            abbrv = FALSE,
@@ -168,6 +172,7 @@ oc_forward <-
       limit = limit,
       min_confidence = min_confidence,
       no_annotations = no_annotations,
+      roadinfo = roadinfo,
       no_dedupe = no_dedupe,
       no_record = no_record,
       abbrv = abbrv,
@@ -185,6 +190,7 @@ oc_forward <-
       limit = limit,
       min_confidence = min_confidence,
       no_annotations = no_annotations,
+      roadinfo = roadinfo,
       no_dedupe = no_dedupe,
       no_record = no_record,
       abbrv = abbrv,
@@ -258,10 +264,14 @@ oc_forward <-
 #'   returned. Default is \code{NULL}).
 #' @param no_annotations Logical vector, or an unquoted variable name of such a
 #'   vector, indicating whether additional information about the result location
-#'   should be returned. Default is \code{TRUE}, which means that the output
+#'   should be returned. \code{TRUE} by default, which means that the results
 #'   will not contain annotations.
+#' @param roadinfo Logical vector, or an unquoted variable name of such a
+#'   vector, indicating whether the geocoder should attempt to match the nearest
+#'   road (rather than an address) and provide additional road and driving
+#'   information. Default is \code{FALSE}.
 #' @param no_dedupe Logical vector, or an unquoted variable name of such a
-#'   vector. Default is \code{FALSE}. When \code{TRUE} the output will not be
+#'   vector. Default is \code{FALSE}. When \code{TRUE} the results will not be
 #'   deduplicated.
 #' @param abbrv Logical vector, or an unquoted variable name of such a vector.
 #'   Default is \code{FALSE}. When \code{TRUE} addresses in the
@@ -344,6 +354,7 @@ oc_forward_df <-
            limit = 1L,
            min_confidence = NULL,
            no_annotations = TRUE,
+           roadinfo = FALSE,
            no_dedupe = FALSE,
            no_record = FALSE,
            abbrv = FALSE,
@@ -363,6 +374,7 @@ oc_forward_df <-
     limit <- rlang::enquo(limit)
     min_confidence <- rlang::enquo(min_confidence)
     no_annotations <- rlang::enquo(no_annotations)
+    roadinfo <- rlang::enquo(roadinfo)
     no_dedupe <- rlang::enquo(no_dedupe)
     abbrv <- rlang::enquo(abbrv)
 
@@ -387,6 +399,7 @@ oc_forward_df <-
         limit = rlang::eval_tidy(limit, data = data),
         min_confidence = rlang::eval_tidy(min_confidence, data = data),
         no_annotations = rlang::eval_tidy(no_annotations, data = data),
+        roadinfo = rlang::eval_tidy(roadinfo, data = data),
         no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
         no_record = no_record,
         abbrv = rlang::eval_tidy(abbrv, data = data),
@@ -428,6 +441,7 @@ oc_forward_df <-
               limit = !!limit,
               min_confidence = !!min_confidence,
               no_annotations = !!no_annotations,
+              roadinfo = !!roadinfo,
               no_dedupe = !!no_dedupe,
               no_record = no_record,
               abbrv = !!abbrv,

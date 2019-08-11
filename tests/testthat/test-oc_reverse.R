@@ -8,9 +8,9 @@ df2 <- add_column(df,
                   language = c("en", "fr", "es"),
                   confidence = c(1, 1, 1),
                   annotation = c(FALSE, TRUE, TRUE),
+                  roadinfo = c(FALSE, TRUE, TRUE),
                   abbrv = c(FALSE, FALSE, TRUE))
 df3 <- add_row(df2, id = 4, lat = 25, lng = 36, confidence = 5)
-
 
 # oc_reverse --------------------------------------------------------------
 
@@ -121,12 +121,23 @@ test_that("tidyeval works for arguments", {
   expect_true(isTRUE(all.equal(confidence[3, ], no_con[3, ])))
   expect_false(isTRUE(all.equal(confidence[4, ], no_con[4, ])))
 
-  #no_annotations
+  # no_annotations
   ann <- oc_reverse_df(df2, lat, lng, output = "all",
                        bind_cols = FALSE,
                        no_annotations = annotation)
   expect_gt(ncol(ann), 40)
   expect_equal(ann$oc_currency_name, c("Euro", NA, NA))
+
+  # roadinfo
+  ri <- oc_reverse_df(
+    df2,
+    lat,
+    lng,
+    output = "all",
+    bind_cols = FALSE,
+    roadinfo = roadinfo
+  )
+  expect_equal(ri$roadinfo_speed_in, c(NA_character_, "km/h", "mph"))
 
   # abbrv
   abbrv <- oc_reverse_df(df2, lat, lng,
@@ -139,7 +150,7 @@ test_that("tidyeval works for arguments", {
 
 # Checks ------------------------------------------------------------------
 
-test_that("Checks work", {
+test_that("Check that latitude & longitude are present", {
   # oc_reverse
   expect_error(oc_reverse(latitude = lat),
                "`latitude` and `longitude` must be provided.")

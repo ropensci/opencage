@@ -21,6 +21,7 @@ oc_check_query <-
     limit = NULL,
     min_confidence = NULL,
     no_annotations = NULL,
+    roadinfo = NULL,
     no_dedupe = NULL,
     no_record = NULL,
     abbrv = NULL,
@@ -39,6 +40,7 @@ oc_check_query <-
           limit = limit,
           min_confidence = min_confidence,
           no_annotations = no_annotations,
+          roadinfo = roadinfo,
           no_dedupe = no_dedupe,
           abbrv = abbrv,
           add_request = add_request
@@ -73,6 +75,7 @@ oc_check_query <-
     limit = NULL,
     min_confidence = NULL,
     no_annotations = NULL,
+    roadinfo = NULL,
     no_dedupe = NULL,
     no_record = NULL,
     abbrv = NULL,
@@ -193,6 +196,13 @@ oc_check_query <-
     if (!is.null(no_annotations)) {
       if (!is.logical(no_annotations)) {
         stop(call. = FALSE, "`no_annotations` must be a logical vector.")
+      }
+    }
+
+    # check no_annotations
+    if (!is.null(roadinfo)) {
+      if (!is.logical(roadinfo)) {
+        stop(call. = FALSE, "`roadinfo` must be a logical vector.")
       }
     }
 

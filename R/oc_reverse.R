@@ -55,6 +55,7 @@ oc_reverse <-
            language = NULL,
            min_confidence = NULL,
            no_annotations = TRUE,
+           roadinfo = FALSE,
            no_dedupe = FALSE,
            no_record = FALSE,
            abbrv = FALSE,
@@ -81,6 +82,7 @@ oc_reverse <-
       language = language,
       min_confidence = min_confidence,
       no_annotations = no_annotations,
+      roadinfo = roadinfo,
       no_dedupe = no_dedupe,
       no_record = no_record,
       abbrv = abbrv,
@@ -95,6 +97,7 @@ oc_reverse <-
       language = language,
       min_confidence = min_confidence,
       no_annotations = no_annotations,
+      roadinfo = roadinfo,
       no_dedupe = no_dedupe,
       no_record = no_record,
       abbrv = abbrv,
@@ -165,6 +168,7 @@ oc_reverse_df <-
            key = oc_key(),
            language = NULL,
            min_confidence = NULL,
+           roadinfo = FALSE,
            no_annotations = TRUE,
            no_dedupe = FALSE,
            no_record = FALSE,
@@ -182,6 +186,7 @@ oc_reverse_df <-
     language <- rlang::enquo(language)
     min_confidence <- rlang::enquo(min_confidence)
     no_annotations <- rlang::enquo(no_annotations)
+    roadinfo <- rlang::enquo(roadinfo)
     no_dedupe <- rlang::enquo(no_dedupe)
     abbrv <- rlang::enquo(abbrv)
 
@@ -202,6 +207,7 @@ oc_reverse_df <-
         language = rlang::eval_tidy(language, data = data),
         min_confidence = rlang::eval_tidy(min_confidence, data = data),
         no_annotations = rlang::eval_tidy(no_annotations, data = data),
+        roadinfo = rlang::eval_tidy(roadinfo, data = data),
         no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
         no_record = no_record,
         abbrv = rlang::eval_tidy(abbrv, data = data),
@@ -228,6 +234,7 @@ oc_reverse_df <-
               language = !!language,
               min_confidence = !!min_confidence,
               no_annotations = !!no_annotations,
+              roadinfo = !!roadinfo,
               no_dedupe = !!no_dedupe,
               no_record = no_record,
               abbrv = !!abbrv,
