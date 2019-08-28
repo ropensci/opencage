@@ -132,9 +132,11 @@ geocoding.
     ‘[bounds-finder](https://opencagedata.com/bounds-finder)’ to
     interactively determine bounds values.
     
-Below is an example of the use of `bounds` where the rectangle given in
-the second call does not include Europe so that we don’t get results for
-Berlin in Germany.
+    Below is an example of the use of `bounds` where the rectangle given
+    in the second call does not include Europe so that we don’t get
+    results for Berlin in Germany.
+
+<!-- end list -->
 
 ``` r
 results1 <- oc_forward(placename = "Berlin")
@@ -216,11 +218,14 @@ knitr::kable(results4)
     `proximity` parameter can most easily be specified with the
     `oc_points()` helper, for example like `proximity =
     oc_points(51.9526, 7.6324)`.
+    
+    Below we provide a point near Lexington, Kentucky, USA. Note that
+    the French capital is ranked third, listed before other places in
+    the US, which are closer to the point provided. This illustrates how
+    `proximity` is only one of many factors influencing the ranking of
+    results.
 
-Below we provide a point near Lexington, Kentucky, USA. Note that the
-French capital is ranked third, listed before other places in the US,
-which are closer to the point provided. This illustrates how `proximity`
-is only one of many factors influencing the ranking of results.
+<!-- end list -->
 
 ``` r
 results5 <- oc_forward(placename = "Paris", proximity = oc_points(38.0, -84.6))
@@ -319,14 +324,14 @@ system.time(oc_reverse(latitude = 10, longitude = 10))
 ```
 
     ##    user  system elapsed 
-    ##    0.04    0.00    1.03
+    ##    0.01    0.00    1.03
 
 ``` r
 system.time(oc_reverse(latitude = 10, longitude = 10))
 ```
 
     ##    user  system elapsed 
-    ##    0.03    0.00    0.03
+    ##    0.01    0.00    0.01
 
 To clear the cache of all results, you need to call
 `memoise::forget(opencage:::oc_get_memoise)`.
@@ -342,7 +347,7 @@ system.time(oc_reverse(latitude = 10, longitude = 10))
 ```
 
     ##    user  system elapsed 
-    ##     0.0     0.0     1.1
+    ##    0.01    0.00    1.00
 
 ## Privacy
 
