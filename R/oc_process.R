@@ -84,22 +84,22 @@ oc_process <-
   function(placename = NULL,
            latitude = NULL,
            longitude = NULL,
-           key = oc_key(),
-           return = "url_only",
+           key = NULL,
+           return = NULL,
            bounds = NULL,
            proximity = NULL,
            countrycode = NULL,
            language = NULL,
-           limit = 1L,
+           limit = NULL,
            min_confidence = NULL,
-           no_annotations = TRUE,
-           no_dedupe = FALSE,
-           no_record = FALSE,
-           abbrv = FALSE,
-           add_request = FALSE,
+           no_annotations = NULL,
+           no_dedupe = NULL,
+           no_record = NULL,
+           abbrv = NULL,
+           add_request = NULL,
            pb = NULL) {
 
-    if (!is.null(pb))  pb$tick()
+    if (!is.null(pb)) pb$tick()
 
     # define endpoint
     if (return == "geojson_list") {
