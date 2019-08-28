@@ -117,7 +117,7 @@ oc_check_query <-
       if (length(bounds) != 4) {
         stop(
           call. = FALSE,
-          "Every `bbox` must be a numeric vector of length 4.",
+          "Every `bbox` must be a numeric vector of length 4.\n",
           "Did you forget to wrap the vector(s) in a list?"
         )
       }
@@ -160,22 +160,8 @@ oc_check_query <-
 
     # check language
     if (!is.null(language)) {
-      lang <- strsplit(language, "-")[[1]]
-      if (!(lang[1] %in% languagecodes$code)) {
-        stop("Every `language` abbreviation must be valid. ",
-          "The first part, the languagecode, is incorrect. ",
-          "See `data('languagecodes')` for valid values.",
-          call. = FALSE
-        )
-      }
-      if (length(lang) > 1) {
-        if (!(lang[2] %in% countrycodes$code)) {
-          stop("Every `language` abbreviation must be valid. ",
-            "The second part, the countrycode, is incorrect. ",
-            "See `data('countrycodes')` for valid values.",
-            call. = FALSE
-          )
-        }
+      if (!is.character(language)) {
+        stop(call. = FALSE, "`language` must be a character vector.")
       }
     }
 

@@ -176,18 +176,9 @@ test_that("oc_check_query checks language", {
     oc_check_query(
       placename = "Sarzeau",
       key = "32randomlettersanddigits12345678",
-      language = "notalanguagecode"
+      language = TRUE
     ),
-    "languagecode"
-  )
-
-  expect_error(
-    oc_check_query(
-      placename = "Sarzeau",
-      key = "32randomlettersanddigits12345678",
-      language = "fr-NOTACOUNTRYCODE"
-    ),
-    "countrycode"
+    "`language` must be a character vector."
   )
 })
 

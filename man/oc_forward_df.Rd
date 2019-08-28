@@ -38,16 +38,15 @@ environment variable \code{OPENCAGE_KEY}.}
 column of points. Points are named numeric vectors with latitude, longitude
 coordinate pairs in decimal format. \code{proximity} provides OpenCage with
 a hint to bias results in favour of those closer to the specified location.
-It can be specified with the \code{\link{oc_points}} helper, for example
-like \code{proximity = oc_points(41.40139, 2.12870)}. Default is
-\code{NULL}.}
+It can be specified with the \code{\link{oc_points}} helper. For example:
+\code{proximity = oc_points(41.40139, 2.12870)}. Default is \code{NULL}.}
 
-\item{bounds}{A list of length one, or an unquoted variable name of a list column of
-bounding boxes. Bounding boxes are named numeric vectors, each with 4 coordinates
-forming the south-west and north-east corners of the bounding box:
-\code{list(c(xmin, ymin, xmax, ymax))}. \code{bounds} restricts the
-possible results to the supplied region. It can be specified with the
-\code{\link{oc_bbox}} helper. For example: \code{bounds =
+\item{bounds}{A list of length one, or an unquoted variable name of a list
+column of bounding boxes. Bounding boxes are named numeric vectors, each
+with 4 coordinates forming the south-west and north-east corners of the
+bounding box: \code{list(c(xmin, ymin, xmax, ymax))}. \code{bounds}
+restricts the possible results to the supplied region. It can be specified
+with the \code{\link{oc_bbox}} helper. For example: \code{bounds =
 oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}. Default is
 \code{NULL}.}
 
@@ -59,11 +58,14 @@ Argentina, "FR" for France, "NZ" for the New Zealand. Multiple countrycodes
 per \code{placename} must be wrapped in a list. Default is \code{NULL}.}
 
 \item{language}{Character vector, or an unquoted variable name of such a
-vector, of
-\href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF language tags}
-(such as "es" for Spanish or "pt-BR" for Brazilian Portuguese). OpenCage
-will attempt to return results in that language. If it is not specified,
-"en" (English) will be assumed by the API.}
+vector, of \href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF BCP
+47 language tags} (such as "es" for Spanish or "pt-BR" for Brazilian
+Portuguese). OpenCage will attempt to return results in that language.
+Alternatively you can specify the "native" tag, in which case OpenCage will
+attempt to return the response in the "official" language(s). In case the
+`language` parameter is set to `NULL` (which is the default), the tag is
+not recognized, or OpenCage does not have a record in that language, the
+results will be returned in English.}
 
 \item{limit}{Numeric vector of integer values, or an unquoted variable name
 of such a vector, to determine the maximum number of results returned for

@@ -6,12 +6,3 @@
 #' @examples
 #' data("countrycodes")
 NULL
-
-#' Language codes
-#' @format All possible ISO 639-2 language codes.
-#' @name languagecodes
-#' @docType data
-#' @keywords data
-#' @examples
-#' data("languagecodes")
-NULL
