@@ -3,7 +3,6 @@
 test_that("oc_bbox works with numeric", {
   bbox1 <- oc_bbox(-5.6, 51.2, 0.2, 51.6)
   expect_type(bbox1, "list")
-  expect_s3_class(bbox1, "bbox_list")
   expect_s3_class(bbox1[[1]], "bbox")
   expect_equal(
     unlist(bbox1),
@@ -33,7 +32,6 @@ test_that("oc_bbox works with data.frame", {
       northeast_lat
     )
   expect_type(bbox2, "list")
-  expect_s3_class(bbox2, "bbox_list")
   expect_s3_class(bbox2[[1]], "bbox")
   expect_equal(
     unlist(bbox2[1]),
@@ -56,7 +54,6 @@ test_that("oc_bbox works with simple features bbox", {
   ocbbox <- oc_bbox(sfbbox)
 
   expect_type(ocbbox, "list")
-  expect_s3_class(ocbbox, "bbox_list")
   expect_s3_class(ocbbox[[1]], "bbox")
   expect_equal(
     unlist(ocbbox),
@@ -77,7 +74,7 @@ test_that("oc_bbox works with simple features bbox", {
 test_that("oc_bbox.default gives informative error message", {
   expect_error(
     object = oc_bbox(TRUE),
-    regexp = "Can't create a `bbox_list`",
+    regexp = "Can't create a list of bounding boxes",
     fixed = TRUE
   )
 })

@@ -16,8 +16,7 @@
 #' @param bbox A \code{bbox} object, see \code{sf::st_bbox}.
 #' @param ... Ignored.
 #'
-#' @return A \code{bbox_list}, i.e. a list of bounding boxes, each of class
-#'   \code{bbox}.
+#' @return A list of bounding boxes, each of class \code{bbox}.
 #' @export
 #'
 #' @examples
@@ -68,7 +67,9 @@ oc_bbox <- function(...) UseMethod("oc_bbox")
 #' @export
 oc_bbox.default <- function(x, ...) { # nolint - see lintr issue #223
   stop(
-    "Can't create a `bbox_list` from an object of class `", class(x)[[1]], "`.",
+    "Can't create a list of bounding boxes from an object of class `",
+    class(x)[[1]],
+    "`.",
     call. = FALSE
   )
 }
@@ -91,11 +92,7 @@ oc_bbox.numeric <- function(xmin, ymin, xmax, ymax, ...) { # nolint - see lintr 
       class = "bbox"
     )
   }
-  bbox_list <- purrr::pmap(list(xmin, ymin, xmax, ymax), bbox)
-  structure(
-    bbox_list,
-    class = c("bbox_list", "list")
-  )
+  purrr::pmap(list(xmin, ymin, xmax, ymax), bbox)
 }
 
 #' @name oc_bbox
@@ -124,15 +121,7 @@ oc_bbox.bbox <- function(bbox, ...) { # nolint - see lintr issue #223
     )
   }
   oc_check_bbox(bbox[[1]], bbox[[2]], bbox[[3]], bbox[[4]])
-  structure(
-    list(bbox),
-    class = c("bbox_list", "list")
-  )
-}
-
-#' @export
-print.bbox_list <- function(x, ...) {
-  print(purrr::map(x, ~ structure(., crs = NULL, class = NULL)))
+  list(bbox)
 }
 
 # check bbox
