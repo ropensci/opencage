@@ -3,7 +3,6 @@
 test_that("oc_points works with numeric", {
   pnts1 <- oc_points(-5.6, 51.2)
   expect_type(pnts1, "list")
-  expect_s3_class(pnts1, "point_list")
   expect_is(pnts1[[1]], "numeric")
   expect_length(pnts1[[1]], 2)
   expect_equal(unlist(pnts1), c(latitude = -5.6, longitude = 51.2))
@@ -21,8 +20,7 @@ test_that("oc_points works with data.frame", {
     )
 
   pnts2 <- oc_points(data = xdf, latitude = y, longitude = x)
-  expect_s3_class(pnts2, "list")
-  expect_s3_class(pnts2, "point_list")
+  expect_type(pnts2, "list")
   expect_is(pnts2[[1]], "numeric")
   expect_is(pnts2[[2]], "numeric")
   expect_length(pnts2[[1]], 2)
@@ -34,7 +32,7 @@ test_that("oc_points works with data.frame", {
 test_that("oc_points.default gives informative error message", {
   expect_error(
     object = oc_points("one", "two"),
-    regexp = "Can't create a `point_list`",
+    regexp = "Can't create a list of points",
     fixed = TRUE
     )
 })

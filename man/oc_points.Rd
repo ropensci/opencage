@@ -21,8 +21,8 @@ oc_points(...)
 \code{latitude} and \code{longitude} values.}
 }
 \value{
-A \code{point_list}, i.e. a list of points. Each point is a named
-  vector of length 2 containing a latitude/longitude coordinate pair.
+A list of points. Each point is a named vector of length 2 containing
+  a latitude/longitude coordinate pair.
 }
 \description{
 Create a list of points (latitude/longitude coordinate pairs) for OpenCage
