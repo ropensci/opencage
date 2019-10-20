@@ -23,21 +23,25 @@ oc_format <- function(res_text, return, query) {
   if (return == "df_list") {
     jsn <- jsonlite::fromJSON(res_text, simplifyVector = TRUE, flatten = TRUE)
     if (identical(jsn$total_results, 0L)) {
-      results <- tibble::tibble(formatted = NA_character_)
+      results <- tibble::tibble(oc_formatted = NA_character_)
     } else {
       results <- tibble::as_tibble(jsn$results)
       # Make column names nicer
-      colnames(results) <- sub("^annotations\\.", "", colnames(results))
-      colnames(results) <- sub("^bounds\\.", "", colnames(results))
-      colnames(results) <- sub("^components\\.", "", colnames(results))
-      colnames(results) <- sub("^geometry\\.", "", colnames(results))
-      colnames(results) <- sub("^_", "", colnames(results))
-      colnames(results) <- gsub("\\.", "_", colnames(results))
-      colnames(results) <- gsub("-", "_", colnames(results))
+      colnames(results) <-
+        sub(
+          "^annotations\\.|^bounds\\.|^components\\.|^geometry\\.",
+          "",
+          colnames(results)
+        )
+      colnames(results) <- sub("^_", "", colnames(results)) # components:_type
+      colnames(results) <- gsub("\\.|-", "_", colnames(results))
+      results <-
+        rlang::set_names(results, ~ tolower(paste0("oc_", .)))
     }
     if ("request" %in% names(jsn)) {
+      # add request directly, not from OpenCage roundtrip
       if (identical(query, "")) query <- NA_character_
-      tibble::add_column(results, query = query, .before = 1)
+      tibble::add_column(results, oc_query = query, .before = 1)
     } else {
       results
     }

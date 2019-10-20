@@ -3,10 +3,10 @@ globalVariables(
     "code_message",
     "countrycodes",
     # the following to avoid R CMD check note on oc_forward_df
-    "formatted",
-    "lat",
-    "lng",
+    "oc_formatted",
+    "oc_lat",
+    "oc_lng",
     "op",
-    "query"
+    "oc_query"
   )
 )

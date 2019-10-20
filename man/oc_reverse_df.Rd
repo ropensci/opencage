@@ -60,13 +60,14 @@ request is not cached by OpenCage.}
 
 \item{abbrv}{Logical vector, or an unquoted variable name of such a
 vector. Default is \code{FALSE}. When \code{TRUE} addresses in the
-\code{formatted} variable of the results are abbreviated (e.g. "Main St."
+\code{oc_formatted} variable of the results are abbreviated (e.g. "Main St."
 instead of "Main Street").}
 
 \item{...}{Ignored.}
 }
 \value{
-A tibble.
+A tibble. Column names coming from the OpenCage API are prefixed with
+  \code{"oc_"}.
 }
 \description{
 Reverse geocoding from latitude and longitude variables to placenames.

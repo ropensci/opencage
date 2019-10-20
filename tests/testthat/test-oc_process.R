@@ -174,8 +174,8 @@ test_that("bounds argument is well taken into account with df_list", {
     return = "df_list"
   )
 
-  expect_equal(res1[[1]][["country"]], "Germany")
-  expect_true(res2[[1]][[1, "country"]] != "Germany")
+  expect_equal(res1[[1]][["oc_country"]], "Germany")
+  expect_true(res2[[1]][[1, "oc_country"]] != "Germany")
 })
 
 test_that("oc_process handles proximity argument.", {

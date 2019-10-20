@@ -17,6 +17,9 @@
 #'   (\code{"url_only"}).
 #'   }
 #'
+#'   When the results are returned as (a list of) tibbles, the column names
+#'   coming from the OpenCage API are prefixed with \code{"oc_"}.
+#'
 #' @seealso \code{\link{oc_reverse_df}} for inputs as a data frame, or
 #'   \code{\link{oc_forward}} and \code{\link{oc_forward}} for forward
 #'   geocoding. For more information about the API and the various parameters,
@@ -109,7 +112,8 @@ oc_reverse <-
 #'   the formatted address (\code{"short"}, the default) should be returned or
 #'   all variables (\code{"all"}) variables should be returned.
 #'
-#' @return A tibble.
+#' @return A tibble. Column names coming from the OpenCage API are prefixed with
+#'   \code{"oc_"}.
 #'
 #' @seealso \code{\link{oc_reverse}} for inputs as vectors, or
 #'   \code{\link{oc_forward}} and \code{\link{oc_forward}} for forward
@@ -206,10 +210,10 @@ oc_reverse_df <-
       results <- dplyr::bind_rows(results_list)
       if (output == "short") {
         results <-
-          dplyr::select(results, query, formatted)
+          dplyr::select(results, oc_query, oc_formatted)
       } else {
         results <-
-          dplyr::select(results, query, dplyr::everything())
+          dplyr::select(results, oc_query, dplyr::everything())
       }
     } else {
       results_nest <-
@@ -231,16 +235,16 @@ oc_reverse_df <-
             )
         )
 
-      results <- tidyr::unnest(results_nest, op) # nolint
+      results <- tidyr::unnest(results_nest, op, names_repair = "unique") # nolint
       # `op` is necessary, so that other list columns are not unnested
       # but lintr complains about `op` not being defined
 
       if (output == "short") {
         results <-
-          dplyr::select(results, 1:query, formatted, -query)
+          dplyr::select(results, 1:oc_query, oc_formatted, -oc_query)
       } else {
         results <-
-          dplyr::select(results, 1:query, dplyr::everything(), -query)
+          dplyr::select(results, 1:oc_query, dplyr::everything(), -oc_query)
       }
     }
     results
