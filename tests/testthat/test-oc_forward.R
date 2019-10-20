@@ -143,6 +143,11 @@ test_that("tidyeval works for arguments", {
   expect_false(isTRUE(all.equal(abbrv[3, ], noarg[3, ])))
 })
 
+test_that("list columns are not dropped (by tidyr)", {
+  bnds <- oc_forward_df(df2, loc, bounds = bounds, bind_cols = TRUE)
+  expect_true(!is.null(bnds[["bounds"]]))
+})
+
 # Checks ------------------------------------------------------------------
 
 test_that("Check that placename is present work", {

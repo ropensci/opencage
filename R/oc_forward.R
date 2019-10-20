@@ -423,9 +423,15 @@ oc_forward_df <-
             )
         )
 
-      results <- tidyr::unnest(results_nest, op, names_repair = "unique") # nolint
-      # `op` is necessary, so that other list columns are not unnested
-      # but lintr complains about `op` not being defined
+      if (utils::packageVersion("tidyr") > "0.8.99") {
+        results <- tidyr::unnest(results_nest, op, names_repair = "unique") # nolint
+        # specifying `op` is necessary, so that other list columns are not
+        # unnested, but lintr complains about `op` not being defined
+      } else {
+        results <- tidyr::unnest(results_nest, op, .drop = FALSE) # nolint
+        # .drop = FALSE so other list columns are not dropped. Deprecated as of
+        # v1.0.0
+      }
 
       if (output == "short") {
         results <-
