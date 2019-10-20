@@ -67,14 +67,12 @@ API key used! This is currently ignored by OpenCage if return value is
 \value{
 A list with
 \itemize{
-\item results as a data.frame (`dplyr` `tbl_df`) called results with one line
- per results,
+\item results as a tibble/data.frame with one line per result,
 \item the number of results as an integer,
 \item the timestamp as a POSIXct object,
-\item rate_info data.frame (`dplyr` `tbl_df`) with the maximal number
-of API calls  per day for the used key, the number of remaining calls
-for the day and the time at which the number of remaining calls will
- be reset.
+\item rate_info tibble/data.frame with the maximal number of API calls  per
+day for the used key, the number of remaining calls for the day and the time
+at which the number of remaining calls will be reset.
 }
 }
 \description{
