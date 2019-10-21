@@ -135,7 +135,7 @@ test_that("oc_check_query checks proximity", {
   )
   expect_error(
     oc_check_query(
-      placename = "Sarzeau",
+      placename = c("Sarzeau", "Biarritz"),
       key = "32randomlettersanddigits12345678",
       proximity = c(1, 2) # not wrapped in a list
     ),
