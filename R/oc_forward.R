@@ -263,10 +263,10 @@ oc_forward <-
 #' @param no_dedupe Logical vector, or an unquoted variable name of such a
 #'   vector. Default is \code{FALSE}. When \code{TRUE} the output will not be
 #'   deduplicated.
-#' @param abbrv Logical vector, or an unquoted variable name of such a
-#'   vector. Default is \code{FALSE}. When \code{TRUE} addresses in the
-#'   \code{oc_formatted} variable of the results are abbreviated (e.g. "Main St."
-#'   instead of "Main Street").
+#' @param abbrv Logical vector, or an unquoted variable name of such a vector.
+#'   Default is \code{FALSE}. When \code{TRUE} addresses in the
+#'   \code{oc_formatted} variable of the results are abbreviated (e.g. "Main
+#'   St." instead of "Main Street").
 #' @param ... Ignored.
 #'
 #' @return A tibble. Column names coming from the OpenCage API are prefixed with

@@ -153,8 +153,8 @@ oc_process <-
       } else {
         stop(
           call. = FALSE,
-          "'url_only' reveals your OpenCage key.
-          It is therefore only available in interactive mode."
+          "'url_only' reveals your OpenCage key.\n",
+          "It is therefore only available in interactive mode."
         )
       }
     }

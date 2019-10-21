@@ -134,7 +134,7 @@ oc_check_query <-
         )
       }
       if (!utils::hasName(proximity, "latitude") ||
-          !utils::hasName(proximity, "longitude")){
+          !utils::hasName(proximity, "longitude")) {
         stop(
           call. = FALSE,
           "The coordinates of every `proximity` point must be named ",
