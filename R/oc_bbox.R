@@ -65,7 +65,7 @@ oc_bbox <- function(...) UseMethod("oc_bbox")
 
 # No @name so it does not show up in the docs.
 #' @export
-oc_bbox.default <- function(x, ...) { # nolint - see lintr issue #223
+oc_bbox.default <- function(x, ...) {
   stop(
     "Can't create a list of bounding boxes from an object of class `",
     class(x)[[1]],
@@ -76,7 +76,7 @@ oc_bbox.default <- function(x, ...) { # nolint - see lintr issue #223
 
 #' @name oc_bbox
 #' @export
-oc_bbox.numeric <- function(xmin, ymin, xmax, ymax, ...) { # nolint - see lintr issue #223
+oc_bbox.numeric <- function(xmin, ymin, xmax, ymax, ...) {
   bbox <- function(xmin, ymin, xmax, ymax) {
     oc_check_bbox(xmin = xmin, ymin = ymin, xmax = xmax, ymax = ymax)
     structure(
@@ -111,7 +111,7 @@ oc_bbox.data.frame <- function(data, xmin, ymin, xmax, ymax, ...) { # nolint - s
 
 #' @name oc_bbox
 #' @export
-oc_bbox.bbox <- function(bbox, ...) { # nolint - see lintr issue #223
+oc_bbox.bbox <- function(bbox, ...) {
   # check coordinate reference system (and be lenient if NA_crs_)
   crs <- attr(bbox, "crs")[["epsg"]]
   if (!is.na(crs) && crs != 4326L) {

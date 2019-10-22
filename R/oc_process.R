@@ -42,7 +42,7 @@ oc_process <-
     add_request = FALSE
   ) {
     if (length(placename) > 1) {
-      pb <- oc_init_progress(placename) # nolint
+      pb <- oc_init_progress(placename)
     } else if (length(latitude) > 1) {
       pb <- oc_init_progress(latitude)
     } else {

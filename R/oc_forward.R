@@ -395,10 +395,22 @@ oc_forward_df <-
       results <- dplyr::bind_rows(results_list)
       if (output == "short") {
         results <-
-          dplyr::select(results, oc_query, oc_lat, oc_lng, oc_formatted)
+          dplyr::select(
+            results,
+            .data$oc_query,
+            .data$oc_lat,
+            .data$oc_lng,
+            .data$oc_formatted
+          )
       } else {
         results <-
-          dplyr::select(results, oc_query, oc_lat, oc_lng, dplyr::everything())
+          dplyr::select(
+            results,
+            .data$oc_query,
+            .data$oc_lat,
+            .data$oc_lng,
+            dplyr::everything()
+          )
       }
     } else {
       results_nest <-
@@ -424,11 +436,10 @@ oc_forward_df <-
         )
 
       if (utils::packageVersion("tidyr") > "0.8.99") {
-        results <- tidyr::unnest(results_nest, op, names_repair = "unique") # nolint
-        # specifying `op` is necessary, so that other list columns are not
-        # unnested, but lintr complains about `op` not being defined
+        results <-
+          tidyr::unnest(results_nest, .data$op, names_repair = "unique")
       } else {
-        results <- tidyr::unnest(results_nest, op, .drop = FALSE) # nolint
+        results <- tidyr::unnest(results_nest, .data$op, .drop = FALSE)
         # .drop = FALSE so other list columns are not dropped. Deprecated as of
         # v1.0.0
       }
@@ -437,21 +448,21 @@ oc_forward_df <-
         results <-
           dplyr::select(
             results,
-            1:oc_query,
-            oc_lat,
-            oc_lng,
-            oc_formatted,
-            -oc_query
+            1:.data$oc_query,
+            .data$oc_lat,
+            .data$oc_lng,
+            .data$oc_formatted,
+            -.data$oc_query
           )
       } else {
         results <-
           dplyr::select(
             results,
-            1:oc_query,
-            oc_lat,
-            oc_lng,
+            1:.data$oc_query,
+            .data$oc_lat,
+            .data$oc_lng,
             dplyr::everything(),
-            -oc_query
+            -.data$oc_query
           )
       }
     }

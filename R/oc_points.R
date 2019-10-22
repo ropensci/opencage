@@ -43,7 +43,7 @@ oc_points <- function(...) UseMethod("oc_points")
 
 # No @name so it does not show up in the docs.
 #' @export
-oc_points.default <- function(x, ...) { # nolint - see lintr issue #223
+oc_points.default <- function(x, ...) {
   stop(
     "Can't create a list of points from an object of class `",
     class(x)[[1]], "`.",
@@ -53,7 +53,7 @@ oc_points.default <- function(x, ...) { # nolint - see lintr issue #223
 
 #' @name oc_points
 #' @export
-oc_points.numeric <- function(latitude, longitude, ...) { # nolint - see lintr issue #223
+oc_points.numeric <- function(latitude, longitude, ...) {
   pnts <- function(latitude, longitude) {
     oc_check_point(latitude = latitude, longitude = longitude)
     c(latitude = latitude, longitude = longitude)

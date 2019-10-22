@@ -57,7 +57,7 @@ oc_format <- function(res_text, return, query) {
 
 # build url
 oc_build_url <- function(query_par, endpoint) {
-  query_par <- purrr::compact(query_par) # nolint
+  query_par <- purrr::compact(query_par)
   query_par <- purrr::discard(query_par, .p = anyNA)
 
   if ("countrycode" %in% names(query_par)) {
