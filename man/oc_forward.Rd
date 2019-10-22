@@ -32,26 +32,31 @@ with four coordinates forming the south-west and north-east corners of the
 bounding box: \code{list(c(xmin, ymin, xmax, ymax))}. \code{bounds}
 restricts the possible results to the supplied region. It can be specified
 with the \code{\link{oc_bbox}} helper. For example: \code{bounds =
-oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}.}
+oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}. Default is
+\code{NULL}.}
 
 \item{proximity}{A list of points of length one or \code{length(placename)}.
 A point is a named numeric vector of a latitude, longitude coordinate pair
 in decimal format. \code{proximity} provides OpenCage with a hint to bias
 results in favour of those closer to the specified location. It can be
-specified with the \code{\link{oc_points}} helper, for example like
-\code{proximity = oc_points(51.9526, 7.6324)}.}
+specified with the \code{\link{oc_points}} helper. For example:
+\code{proximity = oc_points(51.9526, 7.6324)}. Default is \code{NULL}.}
 
 \item{countrycode}{A two letter code as defined by the
 \href{https://www.iso.org/obp/ui/#search/code}{ISO 3166-1 Alpha 2} standard
 that restricts the results to the given country or countries. E.g. "AR" for
 Argentina, "FR" for France, "NZ" for the New Zealand. Multiple countrycodes
-per \code{placename} must be wrapped in a list.}
+per \code{placename} must be wrapped in a list. Default is \code{NULL}.}
 
 \item{language}{An
-\href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF language tag}
-(such as "es" for Spanish or "pt-BR" for Brazilian Portuguese). OpenCage
-will attempt to return results in that language. If it is not specified,
-"en" (English) will be assumed by the API.}
+\href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF BCP 47 language
+tag} (such as "es" for Spanish or "pt-BR" for Brazilian Portuguese).
+OpenCage will attempt to return results in that language. Alternatively you
+can specify the "native" tag, in which case OpenCage will attempt to return
+the response in the "official" language(s). In case the `language`
+parameter is set to `NULL` (which is the default), the tag is not
+recognized, or OpenCage does not have a record in that language, the
+results will be returned in English.}
 
 \item{limit}{Numeric vector of integer values to determine the maximum
 number of results returned for each \code{placename}. Integer values

@@ -28,11 +28,14 @@ default, \code{\link{oc_key}} will attempt to retrieve the key from the
 environment variable \code{OPENCAGE_KEY}.}
 
 \item{language}{Character vector, or an unquoted variable name of such a
-vector, of
-\href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF language tags}
-(such as "es" for Spanish or "pt-BR" for Brazilian Portuguese). OpenCage
-will attempt to return results in that language. If it is not specified,
-"en" (English) will be assumed by the API.}
+vector, of \href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF BCP
+47 language tags} (such as "es" for Spanish or "pt-BR" for Brazilian
+Portuguese). OpenCage will attempt to return results in that language.
+Alternatively you can specify the "native" tag, in which case OpenCage will
+attempt to return the response in the "official" language(s). In case the
+`language` parameter is set to `NULL` (which is the default), the tag is
+not recognized, or OpenCage does not have a record in that language, the
+results will be returned in English.}
 
 \item{min_confidence}{Numeric vector of integer values, or an unquoted
 variable name of such a vector, between 0 and 10 indicating the precision

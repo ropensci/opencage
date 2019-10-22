@@ -131,10 +131,12 @@ geocoding.
     oc_bbox(-0.56, 51.28, 0.27, 51.68)`. OpenCage provides a
     ‘[bounds-finder](https://opencagedata.com/bounds-finder)’ to
     interactively determine bounds values.
+    
+    Below is an example of the use of `bounds` where the rectangle given
+    in the second call does not include Europe so that we don’t get
+    results for Berlin in Germany.
 
-Below is an example of the use of `bounds` where the rectangle given in
-the second call does not include Europe so that we don’t get results for
-Berlin in Germany.
+<!-- end list -->
 
 ``` r
 results1 <- oc_forward(placename = "Berlin")
@@ -149,7 +151,7 @@ knitr::kable(results1)
 |          6 | Berlin, VT, United States of America         |       44.27197 |     \-72.51979 |       44.15478 |     \-72.68368 | US                     | USA                    | city | Berlin         | North America | USA     | us            | NA               | NA       | Vermont       | VT          | Washington County | NA     | 44.21008 | \-72.60340 |
 |          7 | Berlin, CT 06037, United States of America   |       41.66149 |     \-72.70565 |       41.58149 |     \-72.78565 | US                     | USA                    | city | NA             | North America | USA     | us            | NA               | 06037    | Connecticut   | CT          | Hartford County   | Berlin | 41.62149 | \-72.74565 |
 |          7 | Berlin, NJ, United States of America         |       39.80915 |     \-74.90796 |       39.77601 |     \-74.96611 | US                     | USA                    | city | Berlin         | North America | USA     | us            | NA               | NA       | New Jersey    | NJ          | Camden County     | NA     | 39.79123 | \-74.92905 |
-|          7 | Berlin, MA 01503, United States of America   |       42.41828 |     \-71.58023 |       42.35059 |     \-71.67880 | US                     | USA                    | city | Berlin         | North America | USA     | us            | NA               | 01503    | Massachusetts | MA          | NA                | NA     | 42.38120 | \-71.63701 |
+|          7 | Berlin, MA 01503, United States of America   |       42.41828 |     \-71.58023 |       42.35059 |     \-71.67880 | US                     | USA                    | city | Berlin         | North America | USA     | us            | NA               | 01503    | Massachusetts | MA          | Worcester County  | NA     | 42.38120 | \-71.63701 |
 |          7 | Berlin, MD, United States of America         |       38.35518 |     \-75.18802 |       38.30841 |     \-75.23479 | US                     | USA                    | city | Berlin         | North America | USA     | us            | NA               | NA       | Maryland      | MD          | Worcester County  | NA     | 38.32262 | \-75.21769 |
 |          7 | City of Berlin, WI, United States of America |       43.99797 |     \-88.92073 |       43.94761 |     \-88.98085 | US                     | USA                    | city | City of Berlin | North America | USA     | us            | NA               | NA       | Wisconsin     | WI          | Green Lake County | NA     | 43.96804 | \-88.94345 |
 |          8 | Berlin, PA, United States of America         |       39.92738 |     \-78.93729 |       39.91442 |     \-78.96559 | US                     | USA                    | city | Berlin         | North America | USA     | us            | NA               | NA       | Pennsylvania  | PA          | Somerset County   | NA     | 39.92064 | \-78.95780 |
@@ -165,7 +167,7 @@ knitr::kable(results2)
 |          6 | Berlin, VT, United States of America         |       44.27197 |     \-72.51979 |       44.15478 |     \-72.68368 | US                     | USA                    | city | Berlin         | North America | USA     | us            | Washington County | NA       | Vermont       | VT          | NA     | 44.21008 | \-72.60340 |
 |          7 | Berlin, CT 06037, United States of America   |       41.66149 |     \-72.70565 |       41.58149 |     \-72.78565 | US                     | USA                    | city | NA             | North America | USA     | us            | Hartford County   | 06037    | Connecticut   | CT          | Berlin | 41.62149 | \-72.74565 |
 |          7 | Berlin, NJ, United States of America         |       39.80915 |     \-74.90796 |       39.77601 |     \-74.96611 | US                     | USA                    | city | Berlin         | North America | USA     | us            | Camden County     | NA       | New Jersey    | NJ          | NA     | 39.79123 | \-74.92905 |
-|          7 | Berlin, MA 01503, United States of America   |       42.41828 |     \-71.58023 |       42.35059 |     \-71.67880 | US                     | USA                    | city | Berlin         | North America | USA     | us            | NA                | 01503    | Massachusetts | MA          | NA     | 42.38120 | \-71.63701 |
+|          7 | Berlin, MA 01503, United States of America   |       42.41828 |     \-71.58023 |       42.35059 |     \-71.67880 | US                     | USA                    | city | Berlin         | North America | USA     | us            | Worcester County  | 01503    | Massachusetts | MA          | NA     | 42.38120 | \-71.63701 |
 |          7 | Berlin, MD, United States of America         |       38.35518 |     \-75.18802 |       38.30841 |     \-75.23479 | US                     | USA                    | city | Berlin         | North America | USA     | us            | Worcester County  | NA       | Maryland      | MD          | NA     | 38.32262 | \-75.21769 |
 |          7 | City of Berlin, WI, United States of America |       43.99797 |     \-88.92073 |       43.94761 |     \-88.98085 | US                     | USA                    | city | City of Berlin | North America | USA     | us            | Green Lake County | NA       | Wisconsin     | WI          | NA     | 43.96804 | \-88.94345 |
 |          8 | Berlin, PA, United States of America         |       39.92738 |     \-78.93729 |       39.91442 |     \-78.96559 | US                     | USA                    | city | Berlin         | North America | USA     | us            | Somerset County   | NA       | Pennsylvania  | PA          | NA     | 39.92064 | \-78.95780 |
@@ -193,7 +195,7 @@ knitr::kable(results3)
 |          7 | Paris, MO 65275, United States of America                                      |       39.48928 |     \-91.99168 |       39.46916 |     \-92.02148 | US                     | USA                    | city      | Paris | North America | USA     | us            | Monroe County  | 65275    | Missouri | MO          | NA        | NA       | NA                        | NA         | NA            | 39.48087 |  \-92.00128 |
 
 ``` r
-results4 <- oc_forward(placename = c("Paris"), countrycode = list(c("CA", "US")))
+results4 <- oc_forward(placename = "Paris", countrycode = list(c("CA", "US")))
 knitr::kable(results4)
 ```
 
@@ -216,11 +218,14 @@ knitr::kable(results4)
     `proximity` parameter can most easily be specified with the
     `oc_points()` helper, for example like `proximity =
     oc_points(51.9526, 7.6324)`.
+    
+    Below we provide a point near Lexington, Kentucky, USA. Note that
+    the French capital is ranked third, listed before other places in
+    the US, which are closer to the point provided. This illustrates how
+    `proximity` is only one of many factors influencing the ranking of
+    results.
 
-Below we provide a point near Lexington, Kentucky, USA. Note that the
-French capital is ranked third, listed before other places in the US,
-which are closer to the point provided. This illustrates how `proximity`
-is only one of many factors influencing the ranking of results.
+<!-- end list -->
 
 ``` r
 results5 <- oc_forward(placename = "Paris", proximity = oc_points(38.0, -84.6))
@@ -242,11 +247,31 @@ knitr::kable(results5)
 ## Specifying what is returned
 
   - `language`: If you would like to get your results in a specific
-    language, you can pass an [IETF language
+    language, you can pass an [IETF BCP 47 language
     tag](https://en.wikipedia.org/wiki/IETF_language_tag), such as “es”
     for Spanish or “pt-BR” for Brazilian Portuguese, to the `language`
     parameter. OpenCage will attempt to return results in that language.
-    If it is not specified, “en” (English) will be assumed by the API.
+    Alternatively you can specify the “native” tag, in which case
+    OpenCage will attempt to return the response in the “official”
+    language(s). For further details see [OpenCage’s API
+    documentation](https://opencagedata.com/api#language) on that
+    subject. In case the `language` parameter is set to `NULL` (which is
+    the default), the tag is not recognized, or OpenCage does not have a
+    record in that language, the results will be returned in English.
+    
+    To find the correct language tag for your desired language, you can
+    search for the language on the [BCP47 language subtag
+    lookup](https://r12a.github.io/app-subtags/) for example. Note
+    however, that there are some language tags in use on
+    e.g. OpenStreetMap, one of OpenCage’s main sources, that do not
+    conform with the IETF BCP 47 standard. For example OSM uses
+    [`zh_pinyin`](https://wiki.openstreetmap.org/w/index.php?title=Multilingual_names#China)
+    instead of `zh-Latn-pinyin` for [Hanyu
+    Pinyin](https://en.wikipedia.org/wiki/Pinyin). It might therefore be
+    helpful to consult the details page of e.g. the target country on
+    openstreetmap.org in order to see which language tags are actually
+    used. In any case, neither OpenCage nor the functions in this
+    package will validate the language tags you provide.
 
 <!-- end list -->
 
@@ -299,14 +324,14 @@ system.time(oc_reverse(latitude = 10, longitude = 10))
 ```
 
     ##    user  system elapsed 
-    ##    0.03    0.00    1.08
+    ##    0.01    0.00    1.03
 
 ``` r
 system.time(oc_reverse(latitude = 10, longitude = 10))
 ```
 
     ##    user  system elapsed 
-    ##    0.05    0.00    0.04
+    ##    0.01    0.00    0.01
 
 To clear the cache of all results, you need to call
 `memoise::forget(opencage:::oc_get_memoise)`.
@@ -322,7 +347,7 @@ system.time(oc_reverse(latitude = 10, longitude = 10))
 ```
 
     ##    user  system elapsed 
-    ##    0.03    0.00    0.97
+    ##    0.01    0.00    1.00
 
 ## Privacy
 
@@ -363,7 +388,7 @@ OpenCage.
 
   - Please [report any issues or
     bugs](https://github.com/ropensci/opencage/issues).
-  - License: GPL
+  - License: GPL \>= 2
   - Get citation information for `opencage` in R doing `citation(package
     = 'opencage')`
   - Please note that this project is released with a [Contributor Code

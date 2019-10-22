@@ -124,7 +124,6 @@ test_that("oc_process deals well with res being NULL", {
   expect_null(res[["res"]])
 })
 
-
 test_that("oc_process handles bounds argument.", {
   res <- oc_process(
     placename = "Sarzeau",
@@ -322,4 +321,64 @@ test_that("oc_process handles various other arguments.", {
   expect_match(res3[[2]], "&abbrv=0", fixed = TRUE)
   expect_match(res3[[1]], "&add_request=1", fixed = TRUE)
   expect_match(res3[[2]], "&add_request=0", fixed = TRUE)
+})
+
+test_that("arguments that are NULL or NA don't show up in url.", {
+  res_null <- oc_process(
+    placename = "Hamburg",
+    return = "url_only",
+    key = NULL,
+    limit = NULL,
+    bounds = NULL,
+    proximity = NULL,
+    language = NULL,
+    countrycode = NULL,
+    min_confidence = NULL,
+    no_annotations = NULL,
+    no_dedupe = NULL,
+    no_record = NULL,
+    abbrv = NULL,
+    add_request = NULL
+  )
+  expect_match(res_null[[1]], "^((?!key=).)*$", perl = TRUE)
+  expect_match(res_null[[1]], "^((?!limit=).)*$", perl = TRUE)
+  expect_match(res_null[[1]], "^((?!bounds=).)*$", perl = TRUE)
+  expect_match(res_null[[1]], "^((?!proximity=).)*$", perl = TRUE)
+  expect_match(res_null[[1]], "^((?!language=).)*$", perl = TRUE)
+  expect_match(res_null[[1]], "^((?!countrycode=).)*$", perl = TRUE)
+  expect_match(res_null[[1]], "^((?!min_confidence=).)*$", perl = TRUE)
+  expect_match(res_null[[1]], "^((?!no_annotations=).)*$", perl = TRUE)
+  expect_match(res_null[[1]], "^((?!no_dedupe=).)*$", perl = TRUE)
+  expect_match(res_null[[1]], "^((?!no_record=).)*$", perl = TRUE)
+  expect_match(res_null[[1]], "^((?!abbrv=).)*$", perl = TRUE)
+  expect_match(res_null[[1]], "^((?!add_request=).)*$", perl = TRUE)
+
+  res_na <- oc_process(
+    placename = "Hamburg",
+    return = "url_only",
+    key = NULL,
+    limit = NA_real_,
+    bounds = list(),
+    proximity = list(),
+    language = NA_character_,
+    countrycode = NA_character_,
+    min_confidence = NA,
+    no_annotations = NA,
+    no_dedupe = NA,
+    no_record = NA,
+    abbrv = NA,
+    add_request = NA
+  )
+  expect_match(res_na[[1]], "^((?!key=).)*$", perl = TRUE)
+  expect_match(res_na[[1]], "^((?!limit=).)*$", perl = TRUE)
+  expect_match(res_na[[1]], "^((?!bounds=).)*$", perl = TRUE)
+  expect_match(res_na[[1]], "^((?!proximity=).)*$", perl = TRUE)
+  expect_match(res_na[[1]], "^((?!language=).)*$", perl = TRUE)
+  expect_match(res_na[[1]], "^((?!countrycode=).)*$", perl = TRUE)
+  expect_match(res_na[[1]], "^((?!min_confidence=).)*$", perl = TRUE)
+  expect_match(res_na[[1]], "^((?!no_annotations=).)*$", perl = TRUE)
+  expect_match(res_na[[1]], "^((?!no_dedupe=).)*$", perl = TRUE)
+  expect_match(res_na[[1]], "^((?!no_record=).)*$", perl = TRUE)
+  expect_match(res_na[[1]], "^((?!abbrv=).)*$", perl = TRUE)
+  expect_match(res_na[[1]], "^((?!add_request=).)*$", perl = TRUE)
 })

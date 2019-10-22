@@ -33,9 +33,14 @@ test_that("opencage_forward/opencage_reverse return what they should.", {
   expect_equal(length(results), 4)
 
   expect_warning(
-    results <- opencage_reverse( longitude = 0, latitude = 0,
-        limit = 2, key = Sys.getenv("OPENCAGE_KEY")
-  ))
+    results <-
+      opencage_reverse(
+        longitude = 0,
+        latitude = 0,
+        limit = 2,
+        key = Sys.getenv("OPENCAGE_KEY")
+      )
+  )
   expect_is(results, "list")
   expect_is(results[["results"]], "tbl_df")
   expect_is(results[["total_results"]], "integer")
@@ -133,4 +138,20 @@ test_that("Errors with multiple inputs", {
     "`opencage_forward` is not vectorised; use `oc_forward` instead.")
   expect_error(opencage_reverse(c(5, 20), c(6, 21)),
     "`opencage_reverse` is not vectorised, use `oc_reverse` instead.")
+})
+
+
+# Test opencage_key -------------------------------------------------------
+
+test_that("`opencage_key()` returns NULL if OPENCAGE_KEY envvar not found", {
+  withr::local_envvar(c("OPENCAGE_KEY" = ""))
+  expect_null(expect_warning(opencage_key()))
+})
+
+test_that("`opencage_key(quiet = FALSE)` messages", {
+  withr::local_envvar(c("OPENCAGE_KEY" = "fakekey"))
+  expect_message(
+    object = expect_warning(opencage_key(quiet = FALSE)),
+    regexp = "Using Opencage API Key from envvar OPENCAGE_KEY"
+  )
 })

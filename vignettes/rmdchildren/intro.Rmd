@@ -47,7 +47,7 @@ The `bounds`, `countrycode` and `proximity` arguments can make the query more pr
 
 * `bounds`: The `bounds` parameter restricts the possible results to a defined bounding box. A bounding box is a named numeric vector with four coordinates specifiying its south-west and north-east corners: `(xmin, ymin, xmax, ymax)`. The bounds parameter can most easily be specified with the `oc_bbox()` helper, for example like `bounds = oc_bbox(-0.56, 51.28, 0.27, 51.68)`. OpenCage provides a '[bounds-finder](https://opencagedata.com/bounds-finder)' to interactively determine bounds values.
 
-Below is an example of the use of `bounds` where the rectangle given in the second call does not include Europe so that we don't get results for Berlin in Germany.
+  Below is an example of the use of `bounds` where the rectangle given in the second call does not include Europe so that we don't get results for Berlin in Germany.
 
 ```{r bounds, message=FALSE}
 results1 <- oc_forward(placename = "Berlin")
@@ -62,14 +62,14 @@ knitr::kable(results2)
 results3 <- oc_forward(placename = "Paris", countrycode = "US")
 knitr::kable(results3)
 
-results4 <- oc_forward(placename = c("Paris"), countrycode = list(c("CA", "US")))
+results4 <- oc_forward(placename = "Paris", countrycode = list(c("CA", "US")))
 knitr::kable(results4)
 
 ```
 
 * `proximity`: The `proximity` parameter provides OpenCage with a hint to bias results in favour of those closer to the specified location. It is just one of many factors used for ranking results, however, and (some) results may be far away from the location or point passed to the `proximity` parameter. A point is a named numeric vector of a latitude, longitude coordinate pair in decimal format. The `proximity` parameter can most easily be specified with the `oc_points()` helper, for example like `proximity = oc_points(51.9526, 7.6324)`.
 
-Below we provide a point near Lexington, Kentucky, USA. Note that the French capital is ranked third, listed before other places in the US, which are closer to the point provided. This illustrates how `proximity` is only one of many factors influencing the ranking of results.
+  Below we provide a point near Lexington, Kentucky, USA. Note that the French capital is ranked third, listed before other places in the US, which are closer to the point provided. This illustrates how `proximity` is only one of many factors influencing the ranking of results.
 
 ```{r proximity, message=FALSE}
 results5 <- oc_forward(placename = "Paris", proximity = oc_points(38.0, -84.6))
@@ -80,7 +80,9 @@ knitr::kable(results5)
 
 ## Specifying what is returned
 
-* `language`: If you would like to get your results in a specific language, you can pass an [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag), such as "es" for Spanish or "pt-BR" for Brazilian Portuguese, to the `language` parameter. OpenCage will attempt to return results in that language. If it is not specified, "en" (English) will be assumed by the API.
+* `language`: If you would like to get your results in a specific language, you can pass an [IETF BCP 47 language tag](https://en.wikipedia.org/wiki/IETF_language_tag), such as "es" for Spanish or "pt-BR" for Brazilian Portuguese, to the `language` parameter. OpenCage will attempt to return results in that language. Alternatively you can specify the "native" tag, in which case OpenCage will attempt to return the response in the "official" language(s). For further details see [OpenCage's API documentation](https://opencagedata.com/api#language) on that subject. In case the `language` parameter is set to `NULL` (which is the default), the tag is not recognized, or OpenCage does not have a record in that language, the results will be returned in English. 
+
+  To find the correct language tag for your desired language, you can search for the language on the [BCP47 language subtag lookup](https://r12a.github.io/app-subtags/) for example. Note however, that there are some language tags in use on e.g. OpenStreetMap, one of OpenCage's main sources, that do not conform with the IETF BCP 47 standard. For example OSM uses [`zh_pinyin`](https://wiki.openstreetmap.org/w/index.php?title=Multilingual_names#China) instead of `zh-Latn-pinyin` for [Hanyu Pinyin](https://en.wikipedia.org/wiki/Pinyin). It might therefore be helpful to consult the details page of e.g. the target country on openstreetmap.org in order to see which language tags are actually used. In any case, neither OpenCage nor the functions in this package will validate the language tags you provide.
 
 ```{r language, message=FALSE}
 results6 <- oc_forward(placename = "Berlin", country = "DE", language = "de")
@@ -96,7 +98,7 @@ knitr::kable(results6)
 
 * `no_dedupe` is `FALSE` by default. When TRUE the output will not be deduplicated.
 
- For more information about the output and the query parameters, see the package documentation, the [API doc](https://opencagedata.com/api) and [OpenCage FAQ](https://opencagedata.com/faq).
+For more information about the output and the query parameters, see the package documentation, the [API doc](https://opencagedata.com/api) and [OpenCage FAQ](https://opencagedata.com/faq).
 
 ## Caching
 

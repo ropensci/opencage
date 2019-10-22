@@ -23,10 +23,14 @@ environment variable \code{OPENCAGE_KEY}.}
 \item{countrycode}{Country code, ignored for reverse geocoding.}
 
 \item{language}{An
-\href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF language tag}
-(such as "es" for Spanish or "pt-BR" for Brazilian Portuguese). OpenCage
-will attempt to return results in that language. If it is not specified,
-"en" (English) will be assumed by the API.}
+\href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF BCP 47 language
+tag} (such as "es" for Spanish or "pt-BR" for Brazilian Portuguese).
+OpenCage will attempt to return results in that language. Alternatively you
+can specify the "native" tag, in which case OpenCage will attempt to return
+the response in the "official" language(s). In case the `language`
+parameter is set to `NULL` (which is the default), the tag is not
+recognized, or OpenCage does not have a record in that language, the
+results will be returned in English.}
 
 \item{limit}{How many results should be returned (1-100), ignored for reverse
 geocoding.}

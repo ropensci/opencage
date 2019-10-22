@@ -16,10 +16,15 @@ test_that("oc_config updates rate limit of oc_get_limit", {
   skip_if_offline()
 
   rps <- 5L
-  oc_config(max_rate_per_sec = rps)
-  expect_gt(timer(oc_get_limited_test(rps + 1)), 1)
+  oc_config(rate_sec = rps)
+  t <- timer(oc_get_limited_test(rps + 1))
+  expect_gt(t, 1)
+  expect_lt(t, 2)
+
 
   rps <- 3L
-  oc_config(max_rate_per_sec = rps)
-  expect_gt(timer(oc_get_limited_test(rps + 1)), 1)
+  oc_config(rate_sec = rps)
+  t <- timer(oc_get_limited_test(rps + 1))
+  expect_gt(t, 1)
+  expect_lt(t, 2)
 })
