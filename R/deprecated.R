@@ -20,14 +20,12 @@ NULL
 #'
 #' @return A list with
 #' \itemize{
-#' \item results as a data.frame (`dplyr` `tbl_df`) called results with one line
-#'  per results,
+#' \item results as a tibble with one line per result,
 #' \item the number of results as an integer,
 #' \item the timestamp as a POSIXct object,
-#' \item rate_info data.frame (`dplyr` `tbl_df`) with the maximal number
-#' of API calls  per day for the used key, the number of remaining calls
-#' for the day and the time at which the number of remaining calls will
-#'  be reset.
+#' \item rate_info tibble/data.frame with the maximal number of API calls  per
+#' day for the used key, the number of remaining calls for the day and the time
+#' at which the number of remaining calls will be reset.
 #' }
 #' @export
 #'
@@ -154,8 +152,8 @@ opencage_format <- function(lst) {
     results <- lapply(results, t)
     results <- lapply(results, as.data.frame, stringsAsFactors = FALSE)
     results <- suppressWarnings(dplyr::bind_rows(results))
-    results$"geometry.lat" <- as.numeric(results$"geometry.lat")
-    results$"geometry.lng" <- as.numeric(results$"geometry.lng")
+    results$"geometry.lat" <- as.numeric(results$"geometry.lat") # nolint snake_case not backward compatible
+    results$"geometry.lng" <- as.numeric(results$"geometry.lng") # nolint snake_case not backward compatible
 
     # if requests exists in the api response add the query to results
     if ("request" %in% names(lst)) {
@@ -167,7 +165,7 @@ opencage_format <- function(lst) {
   }
 
   if (!is.null(lst$rate)) {
-    rate_info <- dplyr::tbl_df(data.frame(
+    rate_info <- tibble::as_tibble(data.frame(
       limit = lst$rate$limit,
       remaining = lst$rate$remaining,
       reset = as.POSIXct(lst$rate$reset, origin = "1970-01-01")
@@ -177,7 +175,7 @@ opencage_format <- function(lst) {
   }
 
   if (!is.null(results)) {
-    results <- dplyr::tbl_df(results)
+    results <- tibble::as_tibble(results)
   }
 
   list(

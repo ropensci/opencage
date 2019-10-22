@@ -84,6 +84,9 @@
 #'   (\code{"url_only"}).
 #'   }
 #'
+#'   When the results are returned as (a list of) tibbles, the column names
+#'   coming from the OpenCage API are prefixed with \code{"oc_"}.
+#'
 #' @seealso \code{\link{oc_forward_df}} for inputs as a data frame, or
 #'   \code{\link{oc_reverse}} and \code{\link{oc_reverse_df}} for reverse
 #'   geocoding. For more information about the API and the various parameters,
@@ -260,13 +263,14 @@ oc_forward <-
 #' @param no_dedupe Logical vector, or an unquoted variable name of such a
 #'   vector. Default is \code{FALSE}. When \code{TRUE} the output will not be
 #'   deduplicated.
-#' @param abbrv Logical vector, or an unquoted variable name of such a
-#'   vector. Default is \code{FALSE}. When \code{TRUE} addresses in the
-#'   \code{formatted} variable of the results are abbreviated (e.g. "Main St."
-#'   instead of "Main Street").
+#' @param abbrv Logical vector, or an unquoted variable name of such a vector.
+#'   Default is \code{FALSE}. When \code{TRUE} addresses in the
+#'   \code{oc_formatted} variable of the results are abbreviated (e.g. "Main
+#'   St." instead of "Main Street").
 #' @param ... Ignored.
 #'
-#' @return A tibble.
+#' @return A tibble. Column names coming from the OpenCage API are prefixed with
+#'   \code{"oc_"}.
 #'
 #' @seealso \code{\link{oc_forward}} for inputs as vectors, or
 #'   \code{\link{oc_reverse}} and \code{\link{oc_reverse_df}} for reverse
@@ -391,10 +395,22 @@ oc_forward_df <-
       results <- dplyr::bind_rows(results_list)
       if (output == "short") {
         results <-
-          dplyr::select(results, query, lat, lng, formatted)
+          dplyr::select(
+            results,
+            .data$oc_query,
+            .data$oc_lat,
+            .data$oc_lng,
+            .data$oc_formatted
+          )
       } else {
         results <-
-          dplyr::select(results, query, lat, lng, dplyr::everything())
+          dplyr::select(
+            results,
+            .data$oc_query,
+            .data$oc_lat,
+            .data$oc_lng,
+            dplyr::everything()
+          )
       }
     } else {
       results_nest <-
@@ -419,29 +435,34 @@ oc_forward_df <-
             )
         )
 
-      results <- tidyr::unnest(results_nest, op) # nolint
-      # `op` is necessary, so that other list columns are not unnested
-      # but lintr complains about `op` not being defined
+      if (utils::packageVersion("tidyr") > "0.8.99") {
+        results <-
+          tidyr::unnest(results_nest, .data$op, names_repair = "unique")
+      } else {
+        results <- tidyr::unnest(results_nest, .data$op, .drop = FALSE)
+        # .drop = FALSE so other list columns are not dropped. Deprecated as of
+        # v1.0.0
+      }
 
       if (output == "short") {
         results <-
           dplyr::select(
             results,
-            1:query,
-            lat,
-            lng,
-            formatted,
-            -query
+            1:.data$oc_query,
+            .data$oc_lat,
+            .data$oc_lng,
+            .data$oc_formatted,
+            -.data$oc_query
           )
       } else {
         results <-
           dplyr::select(
             results,
-            1:query,
-            lat,
-            lng,
+            1:.data$oc_query,
+            .data$oc_lat,
+            .data$oc_lng,
             dplyr::everything(),
-            -query
+            -.data$oc_query
           )
       }
     }

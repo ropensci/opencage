@@ -37,8 +37,7 @@ respectively.}
 \item{bbox}{A \code{bbox} object, see \code{sf::st_bbox}.}
 }
 \value{
-A \code{bbox_list}, i.e. a list of bounding boxes, each of class
-  \code{bbox}.
+A list of bounding boxes, each of class \code{bbox}.
 }
 \description{
 Create a list of bounding boxes for OpenCage queries.

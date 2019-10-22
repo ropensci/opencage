@@ -8,8 +8,8 @@
 #'   \code{latitude} and \code{longitude} values.
 #' @param ... Ignored.
 #'
-#' @return A \code{point_list}, i.e. a list of points. Each point is a named
-#'   vector of length 2 containing a latitude/longitude coordinate pair.
+#' @return A list of points. Each point is a named vector of length 2 containing
+#'   a latitude/longitude coordinate pair.
 #' @export
 #'
 #' @examples
@@ -43,9 +43,9 @@ oc_points <- function(...) UseMethod("oc_points")
 
 # No @name so it does not show up in the docs.
 #' @export
-oc_points.default <- function(x, ...) { # nolint - see lintr issue #223
+oc_points.default <- function(x, ...) {
   stop(
-    "Can't create a `point_list` from an object of class `",
+    "Can't create a list of points from an object of class `",
     class(x)[[1]], "`.",
     call. = FALSE
   )
@@ -53,16 +53,12 @@ oc_points.default <- function(x, ...) { # nolint - see lintr issue #223
 
 #' @name oc_points
 #' @export
-oc_points.numeric <- function(latitude, longitude, ...) { # nolint - see lintr issue #223
+oc_points.numeric <- function(latitude, longitude, ...) {
   pnts <- function(latitude, longitude) {
     oc_check_point(latitude = latitude, longitude = longitude)
     c(latitude = latitude, longitude = longitude)
   }
-  pnts_list <- purrr::pmap(list(latitude, longitude), pnts)
-  structure(
-    pnts_list,
-    class = c("point_list", "list")
-  )
+  purrr::pmap(list(latitude, longitude), pnts)
 }
 
 #' @name oc_points
@@ -75,11 +71,6 @@ oc_points.data.frame <- function(data, latitude, longitude, ...) { # nolint - se
     latitude = rlang::eval_tidy(latitude, data = data),
     longitude = rlang::eval_tidy(longitude, data = data)
   )
-}
-
-#' @export
-print.point_list <- function(x, ...) {
-  print(purrr::map(x, ~ structure(., crs = NULL, class = NULL)))
 }
 
 # check points

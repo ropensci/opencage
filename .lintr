@@ -1,1 +1,1 @@
-exclusions: list()
+linters: with_defaults(cyclocomp_linter = NULL) # .oc_check_query()

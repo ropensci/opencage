@@ -73,6 +73,9 @@ Depending on the \code{return} argument, \code{oc_reverse} returns a
   \item the URL of the OpenCage API call for debugging purposes
   (\code{"url_only"}).
   }
+
+  When the results are returned as (a list of) tibbles, the column names
+  coming from the OpenCage API are prefixed with \code{"oc_"}.
 }
 \description{
 Reverse geocoding from numeric vectors of latitude and longitude to

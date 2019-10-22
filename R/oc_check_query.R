@@ -45,8 +45,12 @@ oc_check_query <-
         )
       )
 
-    # prevent obscure warning message from pwalk if length(arglist) == 0
-    stopifnot(length(arglist) >= 1)
+    # ensure arguments are length one or match length of placename/latitude
+    arglngths <- lengths(arglist)
+    if (!all(arglngths == arglngths[1] | arglngths == 1, na.rm = TRUE)) {
+      stop(call. = FALSE, "All arguments must be of length one \n",
+      "or of the same length as `placename` or `latitude`.")
+    }
 
     purrr::pwalk(
       .l = arglist,
@@ -134,7 +138,7 @@ oc_check_query <-
         )
       }
       if (!utils::hasName(proximity, "latitude") ||
-          !utils::hasName(proximity, "longitude")){
+          !utils::hasName(proximity, "longitude")) {
         stop(
           call. = FALSE,
           "The coordinates of every `proximity` point must be named ",

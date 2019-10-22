@@ -1,7 +1,7 @@
 Type: Package
 Package: opencage
 Title: Geocode with the OpenCage API
-Version: 0.1.4.9002
+Version: 0.1.4.9003
 Authors@R: c(
     person("Maëlle", "Salmon", email = "maelle.salmon@yahoo.se", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-2815-0399")), 
     person("Daniel", "Possenriede", role = "aut", comment = c(ORCID = "0000-0002-6738-9845")),
@@ -22,10 +22,10 @@ Imports:
     memoise (>= 1.1.0),
     purrr (>= 0.2.4),
     ratelimitr (>= 0.4.0),
+    rlang,
     progress (>= 1.1.2),
     tidyr (>= 0.8.0),
-    tibble (>= 1.4.2),
-    rlang
+    tibble (>= 1.4.2)
 Suggests: 
     knitr (>= 1.19),
     rmarkdown (>= 1.8),

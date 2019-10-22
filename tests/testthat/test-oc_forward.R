@@ -53,7 +53,7 @@ test_that("oc_forward can handle NAs", {
 
   res <- oc_forward(NA_character_, return = "df_list")
   expect_s3_class(res[[1]], "data.frame")
-  expect_equal(res[[1]][["formatted"]], NA_character_)
+  expect_equal(res[[1]][["oc_formatted"]], NA_character_)
 
   res <- oc_forward(NA_character_, return = "json_list")
   expect_equal(res[[1]][["total_results"]], 0)
@@ -85,9 +85,9 @@ test_that("output arguments work", {
   skip_if_offline()
 
   expect_equal(names(oc_forward_df(df, loc, bind_cols = TRUE)),
-               c("id", "loc", "lat", "lng", "formatted"))
+               c("id", "loc", "oc_lat", "oc_lng", "oc_formatted"))
   expect_equal(names(oc_forward_df(df, loc, bind_cols = FALSE)),
-               c("query", "lat", "lng", "formatted"))
+               c("oc_query", "oc_lat", "oc_lng", "oc_formatted"))
   expect_gt(ncol(oc_forward_df(df, loc, output = "all")), 5)
   expect_gt(ncol(oc_forward_df(df, loc, bind_cols = FALSE, output = "all")), 5)
 })
@@ -110,8 +110,7 @@ test_that("tidyeval works for arguments", {
 
   # language
   lang <- oc_forward_df(df2, loc, language = language, output = "all")
-  expect_equal(lang$country,
-               c("Frankreich", "Allemagne", "Estados Unidos de América"))
+  expect_equal(lang$oc_country, c("Frankreich", "Allemagne", "EE.UU."))
 
   # limit
   limit <- oc_forward_df(df2, loc, limit = limit)
@@ -132,7 +131,7 @@ test_that("tidyeval works for arguments", {
                        bind_cols = FALSE,
                        no_annotations = annotation)
   expect_gt(ncol(ann), 30)
-  expect_equal(ann$currency_name, c("Euro", NA, NA))
+  expect_equal(ann$oc_currency_name, c("Euro", NA, NA))
 
   # abbrv
   abbrv <- oc_forward_df(df2, loc,
@@ -142,6 +141,11 @@ test_that("tidyeval works for arguments", {
   expect_true(all.equal(abbrv[1, ], noarg[1, ]))
   expect_true(all.equal(abbrv[2, ], noarg[2, ]))
   expect_false(isTRUE(all.equal(abbrv[3, ], noarg[3, ])))
+})
+
+test_that("list columns are not dropped (by tidyr)", {
+  bnds <- oc_forward_df(df2, loc, bounds = bounds, bind_cols = TRUE)
+  expect_true(!is.null(bnds[["bounds"]]))
 })
 
 # Checks ------------------------------------------------------------------

@@ -51,7 +51,7 @@ test_that("oc_reverse can handle NAs", {
   expect_equal(res1, res2)
   expect_equal(res1, res3)
   expect_s3_class(res1[[1]], "data.frame")
-  expect_equal(res1[[1]][["formatted"]], NA_character_)
+  expect_equal(res1[[1]][["oc_formatted"]], NA_character_)
 
   res1 <- oc_reverse(0, NA_real_, return = "json_list")
   res2 <- oc_reverse(NA_real_, 0, return = "json_list")
@@ -91,9 +91,9 @@ test_that("output arguments work", {
   skip_if_offline()
 
   expect_equal(names(oc_reverse_df(df, lat, lng, bind_cols = TRUE)),
-               c("id", "lat", "lng", "formatted"))
+               c("id", "lat", "lng", "oc_formatted"))
   expect_equal(names(oc_reverse_df(df, lat, lng, bind_cols = FALSE)),
-               c("query", "formatted"))
+               c("oc_query", "oc_formatted"))
   expect_gt(ncol(oc_reverse_df(df, lat, lng, output = "all")), 5)
   expect_gt(
     ncol(oc_reverse_df(df, lat, lng, bind_cols = FALSE, output = "all")),
@@ -109,8 +109,7 @@ test_that("tidyeval works for arguments", {
 
   # language
   lang <- oc_reverse_df(df2, lat, lng, language = language, output = "all")
-  expect_equal(lang$country,
-               c("France", "Allemagne", "Estados Unidos de América"))
+  expect_equal(lang$oc_country, c("France", "Allemagne", "EE.UU."))
 
   # min_confidence
   confidence <- oc_reverse_df(df3, lat, lng, min_confidence = confidence)
@@ -127,7 +126,7 @@ test_that("tidyeval works for arguments", {
                        bind_cols = FALSE,
                        no_annotations = annotation)
   expect_gt(ncol(ann), 40)
-  expect_equal(ann$currency_name, c("Euro", NA, NA))
+  expect_equal(ann$oc_currency_name, c("Euro", NA, NA))
 
   # abbrv
   abbrv <- oc_reverse_df(df2, lat, lng,

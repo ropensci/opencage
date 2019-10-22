@@ -42,7 +42,7 @@ oc_process <-
     add_request = FALSE
   ) {
     if (length(placename) > 1) {
-      pb <- oc_init_progress(placename) # nolint
+      pb <- oc_init_progress(placename)
     } else if (length(latitude) > 1) {
       pb <- oc_init_progress(latitude)
     } else {
@@ -66,9 +66,6 @@ oc_process <-
           add_request = add_request
         )
       )
-
-    # prevent obscure warning message from pwalk if length(arglist) == 0
-    stopifnot(length(arglist) >= 1)
 
     purrr::pmap(
       .l = arglist,
@@ -153,8 +150,8 @@ oc_process <-
       } else {
         stop(
           call. = FALSE,
-          "'url_only' reveals your OpenCage key.
-          It is therefore only available in interactive mode."
+          "'url_only' reveals your OpenCage key.\n",
+          "It is therefore only available in interactive mode."
         )
       }
     }
