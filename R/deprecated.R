@@ -20,7 +20,7 @@ NULL
 #'
 #' @return A list with
 #' \itemize{
-#' \item results as a tibble/data.frame with one line per result,
+#' \item results as a tibble with one line per result,
 #' \item the number of results as an integer,
 #' \item the timestamp as a POSIXct object,
 #' \item rate_info tibble/data.frame with the maximal number of API calls  per
