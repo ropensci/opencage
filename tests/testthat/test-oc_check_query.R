@@ -284,3 +284,14 @@ test_that("oc_check_query checks add_request", {
     "`add_request` must be a logical vector."
   )
 })
+
+test_that("oc_check_query checks argument lengths", {
+  expect_error(
+    oc_check_query(
+      placename = "Sarzeau",
+      key = "32randomlettersanddigits12345678",
+      abbrv = c(TRUE, FALSE)
+    ),
+    "same length as `placename` or `latitude`"
+  )
+})
