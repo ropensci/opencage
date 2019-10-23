@@ -137,7 +137,7 @@ test_that("tidyeval works for arguments", {
     bind_cols = FALSE,
     roadinfo = roadinfo
   )
-  expect_equal(ri$roadinfo_speed_in, c(NA_character_, "km/h", "mph"))
+  expect_equal(ri$oc_roadinfo_speed_in, c(NA_character_, "km/h", "mph"))
 
   # abbrv
   abbrv <- oc_reverse_df(df2, lat, lng,

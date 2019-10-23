@@ -145,7 +145,7 @@ test_that("tidyeval works for arguments", {
     roadinfo = roadinfo,
     output = "all"
   )
-  expect_equal(ri$roadinfo_speed_in, c(NA_character_, "km/h", "mph"))
+  expect_equal(ri$oc_roadinfo_speed_in, c(NA_character_, "km/h", "mph"))
 
   # abbrv
   abbrv <- oc_forward_df(df2, loc,
