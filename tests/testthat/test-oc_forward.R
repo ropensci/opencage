@@ -132,8 +132,7 @@ test_that("tidyeval works for arguments", {
   expect_false(isTRUE(all.equal(confidence[3, ], noarg[3, ])))
 
   # no_annotations
-  ann <- oc_forward_df(df2, loc, output = "all",
-                       bind_cols = FALSE,
+  ann <- oc_forward_df(df2, loc, bind_cols = FALSE,
                        no_annotations = annotation)
   expect_gt(ncol(ann), 30)
   expect_equal(ann$oc_currency_name, c("Euro", NA, NA))
@@ -142,8 +141,7 @@ test_that("tidyeval works for arguments", {
   ri <- oc_forward_df(
     df3,
     loc,
-    roadinfo = roadinfo,
-    output = "all"
+    roadinfo = roadinfo
   )
   expect_equal(ri$oc_roadinfo_speed_in, c(NA_character_, "km/h", "mph"))
 

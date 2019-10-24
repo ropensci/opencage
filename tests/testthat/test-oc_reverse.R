@@ -122,8 +122,7 @@ test_that("tidyeval works for arguments", {
   expect_false(isTRUE(all.equal(confidence[4, ], no_con[4, ])))
 
   # no_annotations
-  ann <- oc_reverse_df(df2, lat, lng, output = "all",
-                       bind_cols = FALSE,
+  ann <- oc_reverse_df(df2, lat, lng, bind_cols = FALSE,
                        no_annotations = annotation)
   expect_gt(ncol(ann), 40)
   expect_equal(ann$oc_currency_name, c("Euro", NA, NA))
@@ -133,7 +132,6 @@ test_that("tidyeval works for arguments", {
     df2,
     lat,
     lng,
-    output = "all",
     bind_cols = FALSE,
     roadinfo = roadinfo
   )

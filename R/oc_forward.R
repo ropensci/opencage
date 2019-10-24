@@ -383,8 +383,9 @@ oc_forward_df <-
     # Ensure that query column always exists
     add_request <- TRUE
 
-    if (output == "short") {
-      no_annotations <- TRUE
+    if (any(rlang::eval_tidy(no_annotations, data = data) == FALSE) ||
+        any(rlang::eval_tidy(roadinfo, data = data) == TRUE)) {
+      output <- "all"
     }
 
     if (bind_cols == FALSE) {
