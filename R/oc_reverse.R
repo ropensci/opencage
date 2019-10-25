@@ -163,7 +163,7 @@ oc_reverse_df <- function(...) UseMethod("oc_reverse_df")
 
 #' @rdname oc_reverse_df
 #' @export
-oc_reverse_df.data.frame <-
+oc_reverse_df.data.frame <- # nolint - see lintr issue #223
   function(data,
            latitude,
            longitude,
@@ -308,4 +308,3 @@ oc_reverse_df.numeric <-
       abbrv = abbrv
     )
   }
-

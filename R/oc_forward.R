@@ -344,7 +344,7 @@ oc_forward_df <- function(...) UseMethod("oc_forward_df")
 
 #' @rdname oc_forward_df
 #' @export
-oc_forward_df.data.frame <-
+oc_forward_df.data.frame <- # nolint - see lintr issue #223
   function(data,
            placename,
            bind_cols = TRUE,
@@ -500,6 +500,7 @@ oc_forward_df.character <-
            limit = 1L,
            min_confidence = NULL,
            no_annotations = TRUE,
+           roadinfo = FALSE,
            no_dedupe = FALSE,
            no_record = FALSE,
            abbrv = FALSE,
@@ -523,4 +524,3 @@ oc_forward_df.character <-
       abbrv = abbrv
     )
   }
-

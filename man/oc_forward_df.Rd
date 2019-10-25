@@ -12,15 +12,18 @@ oc_forward_df(...)
   output = c("short", "all"), key = oc_key(), bounds = NULL,
   proximity = NULL, countrycode = NULL, language = NULL,
   limit = 1L, min_confidence = NULL, no_annotations = TRUE,
-  no_dedupe = FALSE, no_record = FALSE, abbrv = FALSE, ...)
+  roadinfo = FALSE, no_dedupe = FALSE, no_record = FALSE,
+  abbrv = FALSE, ...)
 
 \method{oc_forward_df}{character}(placename, output = c("short", "all"),
   key = oc_key(), bounds = NULL, proximity = NULL,
   countrycode = NULL, language = NULL, limit = 1L,
-  min_confidence = NULL, no_annotations = TRUE, no_dedupe = FALSE,
-  no_record = FALSE, abbrv = FALSE, ...)
+  min_confidence = NULL, no_annotations = TRUE, roadinfo = FALSE,
+  no_dedupe = FALSE, no_record = FALSE, abbrv = FALSE, ...)
 }
 \arguments{
+\item{...}{Ignored.}
+
 \item{data}{A data frame.}
 
 \item{placename}{An unquoted variable name of a character vector with the
@@ -44,12 +47,12 @@ should be returned.}
 default, \code{\link{oc_key}} will attempt to retrieve the key from the
 environment variable \code{OPENCAGE_KEY}.}
 
-\item{bounds}{A list of length one, or an unquoted variable name of a list column of
-bounding boxes. Bounding boxes are named numeric vectors, each with 4 coordinates
-forming the south-west and north-east corners of the bounding box:
-\code{list(c(xmin, ymin, xmax, ymax))}. \code{bounds} restricts the
-possible results to the supplied region. It can be specified with the
-\code{\link{oc_bbox}} helper. For example: \code{bounds =
+\item{bounds}{A list of length one, or an unquoted variable name of a list
+column of bounding boxes. Bounding boxes are named numeric vectors, each
+with 4 coordinates forming the south-west and north-east corners of the
+bounding box: \code{list(c(xmin, ymin, xmax, ymax))}. \code{bounds}
+restricts the possible results to the supplied region. It can be specified
+with the \code{\link{oc_bbox}} helper. For example: \code{bounds =
 oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}. Default is
 \code{NULL}.}
 
@@ -112,8 +115,6 @@ request is not cached by OpenCage.}
 Default is \code{FALSE}. When \code{TRUE} addresses in the
 \code{oc_formatted} variable of the results are abbreviated (e.g. "Main
 St." instead of "Main Street").}
-
-\item{...}{Ignored.}
 }
 \value{
 A tibble. Column names coming from the OpenCage API are prefixed with

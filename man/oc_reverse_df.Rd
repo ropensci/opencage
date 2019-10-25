@@ -10,8 +10,9 @@ oc_reverse_df(...)
 
 \method{oc_reverse_df}{data.frame}(data, latitude, longitude,
   bind_cols = TRUE, output = c("short", "all"), key = oc_key(),
-  language = NULL, min_confidence = NULL, no_annotations = TRUE,
-  no_dedupe = FALSE, no_record = FALSE, abbrv = FALSE, ...)
+  language = NULL, min_confidence = NULL, roadinfo = FALSE,
+  no_annotations = TRUE, no_dedupe = FALSE, no_record = FALSE,
+  abbrv = FALSE, ...)
 
 \method{oc_reverse_df}{numeric}(latitude, longitude, output = c("short",
   "all"), key = oc_key(), language = NULL, min_confidence = NULL,
@@ -19,6 +20,8 @@ oc_reverse_df(...)
   abbrv = FALSE, ...)
 }
 \arguments{
+\item{...}{Ignored.}
+
 \item{data}{A data frame.}
 
 \item{latitude, longitude}{Unquoted variable names of numeric vectors of
@@ -76,8 +79,6 @@ request is not cached by OpenCage.}
 Default is \code{FALSE}. When \code{TRUE} addresses in the
 \code{oc_formatted} variable of the results are abbreviated (e.g. "Main
 St." instead of "Main Street").}
-
-\item{...}{Ignored.}
 }
 \value{
 A tibble. Column names coming from the OpenCage API are prefixed with
