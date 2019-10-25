@@ -7,8 +7,8 @@
 oc_forward_df(data, placename, bind_cols = TRUE, output = c("short",
   "all"), key = oc_key(), proximity = NULL, bounds = NULL,
   countrycode = NULL, language = NULL, limit = 1L,
-  min_confidence = NULL, no_annotations = TRUE, no_dedupe = FALSE,
-  no_record = FALSE, abbrv = FALSE, ...)
+  min_confidence = NULL, no_annotations = TRUE, roadinfo = FALSE,
+  no_dedupe = FALSE, no_record = FALSE, abbrv = FALSE, ...)
 }
 \arguments{
 \item{data}{A data frame.}
@@ -82,11 +82,16 @@ returned. Default is \code{NULL}).}
 
 \item{no_annotations}{Logical vector, or an unquoted variable name of such a
 vector, indicating whether additional information about the result location
-should be returned. Default is \code{TRUE}, which means that the output
+should be returned. \code{TRUE} by default, which means that the results
 will not contain annotations.}
 
+\item{roadinfo}{Logical vector, or an unquoted variable name of such a
+vector, indicating whether the geocoder should attempt to match the nearest
+road (rather than an address) and provide additional road and driving
+information. Default is \code{FALSE}.}
+
 \item{no_dedupe}{Logical vector, or an unquoted variable name of such a
-vector. Default is \code{FALSE}. When \code{TRUE} the output will not be
+vector. Default is \code{FALSE}. When \code{TRUE} the results will not be
 deduplicated.}
 
 \item{no_record}{Logical vector of length one (default \code{FALSE}), when

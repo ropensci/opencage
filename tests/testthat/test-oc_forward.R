@@ -17,6 +17,11 @@ df2 <- add_column(df,
                   annotation = c(FALSE, TRUE, TRUE),
                   abbrv = c(FALSE, FALSE, TRUE))
 
+df3 <- tibble(
+  id = 1:3,
+  loc = c("Nantes", "Elbphilharmonie Hamburg", "Los Angeles City Hall"),
+  roadinfo = c(FALSE, TRUE, TRUE)
+)
 
 # oc_forward --------------------------------------------------------------
 
@@ -126,12 +131,19 @@ test_that("tidyeval works for arguments", {
   expect_false(isTRUE(all.equal(confidence[2, ], noarg[2, ])))
   expect_false(isTRUE(all.equal(confidence[3, ], noarg[3, ])))
 
-  #no_annotations
-  ann <- oc_forward_df(df2, loc, output = "all",
-                       bind_cols = FALSE,
+  # no_annotations
+  ann <- oc_forward_df(df2, loc, bind_cols = FALSE,
                        no_annotations = annotation)
   expect_gt(ncol(ann), 30)
   expect_equal(ann$oc_currency_name, c("Euro", NA, NA))
+
+  # roadinfo
+  ri <- oc_forward_df(
+    df3,
+    loc,
+    roadinfo = roadinfo
+  )
+  expect_equal(ri$oc_roadinfo_speed_in, c(NA_character_, "km/h", "mph"))
 
   # abbrv
   abbrv <- oc_forward_df(df2, loc,
@@ -150,7 +162,7 @@ test_that("list columns are not dropped (by tidyr)", {
 
 # Checks ------------------------------------------------------------------
 
-test_that("Check that placename is present work", {
+test_that("Check that placename is present", {
   # oc_forward
   expect_error(oc_forward(), "`placename` must be provided.")
   expect_error(oc_forward(placename = NULL), "`placename` must be provided.")

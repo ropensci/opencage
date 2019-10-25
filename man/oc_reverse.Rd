@@ -6,8 +6,9 @@
 \usage{
 oc_reverse(latitude, longitude, return = c("df_list", "json_list",
   "geojson_list", "url_only"), key = oc_key(), language = NULL,
-  min_confidence = NULL, no_annotations = TRUE, no_dedupe = FALSE,
-  no_record = FALSE, abbrv = FALSE, add_request = FALSE, ...)
+  min_confidence = NULL, no_annotations = TRUE, roadinfo = FALSE,
+  no_dedupe = FALSE, no_record = FALSE, abbrv = FALSE,
+  add_request = FALSE, ...)
 }
 \arguments{
 \item{latitude, longitude}{Numeric vectors of latitude and longitude values.}
@@ -36,14 +37,18 @@ indicating the precision of the returned result as defined by its
 geographical extent, (i.e. by the extent of the result's bounding box). See
 the \href{https://opencagedata.com/api#confidence}{API documentation} for
 details. Only results with at least the requested confidence will be
-returned. Default is \code{NULL}).}
+returned. Default is \code{NULL}.}
 
 \item{no_annotations}{Logical vector indicating whether additional
 information about the result location should be returned. \code{TRUE} by
-default, which means that the output will not contain annotations.}
+default, which means that the results will not contain annotations.}
+
+\item{roadinfo}{Logical vector indicating whether the geocoder should attempt
+to match the nearest road (rather than an address) and provide additional
+road and driving information. Default is \code{FALSE}.}
 
 \item{no_dedupe}{Logical vector (default \code{FALSE}), when \code{TRUE}
-the output will not be deduplicated.}
+the results will not be deduplicated.}
 
 \item{no_record}{Logical vector of length one (default \code{FALSE}), when
 \code{TRUE} no log entry of the query is created, and the geocoding

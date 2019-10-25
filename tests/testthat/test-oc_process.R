@@ -265,6 +265,7 @@ test_that("oc_process handles various other arguments.", {
     limit = 1L,
     min_confidence = NULL,
     no_annotations = FALSE,
+    roadinfo = FALSE,
     no_dedupe = FALSE,
     no_record = FALSE,
     abbrv = FALSE,
@@ -273,6 +274,7 @@ test_that("oc_process handles various other arguments.", {
   expect_match(res1[[1]], "&limit=1", fixed = TRUE)
   expect_false(grepl(pattern = "min_confidence", x = res1[[1]], fixed = TRUE))
   expect_match(res1[[1]], "&no_annotations=0", fixed = TRUE)
+  expect_match(res1[[1]], "&roadinfo=0", fixed = TRUE)
   expect_match(res1[[1]], "&no_dedupe=0", fixed = TRUE)
   expect_match(res1[[1]], "&no_record=0", fixed = TRUE)
   expect_match(res1[[1]], "&abbrv=0", fixed = TRUE)
@@ -285,6 +287,7 @@ test_that("oc_process handles various other arguments.", {
     limit = 10,
     min_confidence = 8,
     no_annotations = TRUE,
+    roadinfo = TRUE,
     no_dedupe = TRUE,
     no_record = TRUE,
     abbrv = TRUE,
@@ -293,6 +296,7 @@ test_that("oc_process handles various other arguments.", {
   expect_match(res2[[1]], "&limit=10", fixed = TRUE)
   expect_match(res2[[1]], "&min_confidence=8", fixed = TRUE)
   expect_match(res2[[1]], "&no_annotations=1", fixed = TRUE)
+  expect_match(res2[[1]], "&roadinfo=1", fixed = TRUE)
   expect_match(res2[[1]], "&no_dedupe=1", fixed = TRUE)
   expect_match(res2[[1]], "&no_record=1", fixed = TRUE)
   expect_match(res2[[1]], "&abbrv=1", fixed = TRUE)
@@ -305,6 +309,7 @@ test_that("oc_process handles various other arguments.", {
     limit = c(10L, 5L),
     min_confidence = c(8L, 5L),
     no_annotations = c(TRUE, FALSE),
+    roadinfo = c(TRUE, FALSE),
     no_dedupe = c(TRUE, FALSE),
     abbrv = c(TRUE, FALSE),
     add_request = c(TRUE, FALSE)
@@ -315,6 +320,8 @@ test_that("oc_process handles various other arguments.", {
   expect_match(res3[[2]], "&min_confidence=5", fixed = TRUE)
   expect_match(res3[[1]], "&no_annotations=1", fixed = TRUE)
   expect_match(res3[[2]], "&no_annotations=0", fixed = TRUE)
+  expect_match(res3[[1]], "&roadinfo=1", fixed = TRUE)
+  expect_match(res3[[2]], "&roadinfo=0", fixed = TRUE)
   expect_match(res3[[1]], "&no_dedupe=1", fixed = TRUE)
   expect_match(res3[[2]], "&no_dedupe=0", fixed = TRUE)
   expect_match(res3[[1]], "&abbrv=1", fixed = TRUE)

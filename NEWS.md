@@ -8,10 +8,11 @@ The new features include:
 * `oc_forward_df()` and `oc_reverse_df()` take a data frame as input and return a data frame with the geocoding results, optionally with the source data frame bound to the results data frame. 
 * Almost all arguments of the geocoding functions are vectorised (the exceptions being `output`, `key` and `no_record`), so it is possible to serially (reverse) geocode lists of placenames or coordinates. The geocoding functions show a progress indicator when more than one `placename` or `latitude`/`longitude` pair is provided.
 * The forward geocoding functions now support multiple `countrycode`s in accordance with the OpenCage API (#44). The `countrycode`s can now be provided in upper or lower case (#47).
-* A helper function `oc_bbox()` now makes it easier to create (lists of) bounding boxes from vectors, bbox objects and data frames. 
+* A helper function `oc_bbox()` now makes it easier to create a list of bounding boxes from numeric vectors, bbox objects or data frames. 
 * `oc_forward` and `oc_forward_df` now support [OpenCage's `proximity` parameter](https://blog.opencagedata.com/post/new-optional-parameter-proximity). The results of the geocoding request will be biased towards that location (#60).
+* A helper function `oc_points()` now makes it easier to create a list of point coordinates from numeric vectors or data frames to pass to the `proximity` argument for example. 
+* All geocoding functions now support [OpenCage's `roadinfo` parameter](https://blog.opencagedata.com/post/new-optional-parameter-roadinfo) (#65). If set to `TRUE`, OpenCage attempts to match the nearest road (rather than an address) and provides additional road and driving information.
 * Language tags passed to the `language` argument are not validated anymore, since the language tags used by OpenStreetMap and hence OpenCage do not always conform with the IETF BCP 47 standard (#90). The `languagecodes`, which were stored in opencage as external data, have therefore been omitted from the package. In addition, it is now possible to specify `language = "native"`, so OpenCage will attempt to return the [results in the "official" language](https://blog.opencagedata.com/post/support-for-local-language) of the country. 
-* A helper function `oc_points()` now makes it easier to create lists of point coordinates from vectors and data frames to pass to the `proximity` argument for example. 
 * http requests are now handled by {[crul](https://docs.ropensci.org/crul/)}, not {[httr](http://httr.r-lib.org/)} (#37).
 * API calls are now rate limited (#32). The default limit is set to 1 call per second as per the API limit of the [Free Trial plan](https://opencagedata.com/pricing). The rate limit can be adjusted with `oc_config()`.
 

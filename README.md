@@ -132,9 +132,11 @@ geocoding.
     ‘[bounds-finder](https://opencagedata.com/bounds-finder)’ to
     interactively determine bounds values.
     
-Below is an example of the use of `bounds` where the rectangle given in
-the second call does not include Europe so that we don’t get results for
-Berlin in Germany.
+    Below is an example of the use of `bounds` where the rectangle given
+    in the second call does not include Europe so that we don’t get
+    results for Berlin in Germany.
+
+<!-- end list -->
 
 ``` r
 results1 <- oc_forward(placename = "Berlin")
@@ -216,11 +218,14 @@ knitr::kable(results4)
     `proximity` parameter can most easily be specified with the
     `oc_points()` helper, for example like `proximity =
     oc_points(51.9526, 7.6324)`.
+    
+    Below we provide a point near Lexington, Kentucky, USA. Note that
+    the French capital is ranked third, listed before other places in
+    the US, which are closer to the point provided. This illustrates how
+    `proximity` is only one of many factors influencing the ranking of
+    results.
 
-Below we provide a point near Lexington, Kentucky, USA. Note that the
-French capital is ranked third, listed before other places in the US,
-which are closer to the point provided. This illustrates how `proximity`
-is only one of many factors influencing the ranking of results.
+<!-- end list -->
 
 ``` r
 results5 <- oc_forward(placename = "Paris", proximity = oc_points(38.0, -84.6))
@@ -291,15 +296,37 @@ knitr::kable(results6)
     for details. Only results with at least the requested confidence
     will be returned.
 
+  - `roadinfo`, a logical vector, indicates whether the geocoder should
+    attempt to match the nearest road (rather than an address) and
+    provide additional road and driving information. It is `FALSE` by
+    default, which means OpenCage will not attempt to match the nearest
+    road. Some road and driving information is nevertheless provided as
+    part of the annotations (see below), if `roadinfo` is set to
+    `FALSE`.
+
+<!-- end list -->
+
+``` r
+results7 <- oc_forward(placename = "Europa Advance Rd", roadinfo = TRUE)
+knitr::kable(results7)
+```
+
+| oc\_confidence | oc\_formatted                  | oc\_northeast\_lat | oc\_northeast\_lng | oc\_southwest\_lat | oc\_southwest\_lng | oc\_iso\_3166\_1\_alpha\_2 | oc\_iso\_3166\_1\_alpha\_3 | oc\_type | oc\_continent | oc\_country | oc\_country\_code | oc\_postcode | oc\_road            | oc\_road\_type | oc\_state | oc\_town  |  oc\_lat |    oc\_lng |
+| -------------: | :----------------------------- | -----------------: | -----------------: | -----------------: | -----------------: | :------------------------- | :------------------------- | :------- | :------------ | :---------- | :---------------- | :----------- | :------------------ | :------------- | :-------- | :-------- | -------: | ---------: |
+|              9 | Europa Advance Road, Gibraltar |           36.11944 |         \-5.342202 |           36.11246 |         \-5.344719 | GI                         | GIB                        | road     | Europe        | Gibraltar   | gi                | GX11 1AA     | Europa Advance Road | secondary      | Gibraltar | Gibraltar | 36.11589 | \-5.343259 |
+
   - `no_annotations`: OpenCage supplies additional information about the
-    result location in the annotations field. The annotations include,
-    among others, country information, time of sunset and sunrise, or
-    the location in different geocoding formats, like Maidenhead,
-    Mercator projection (EPSG 3857), geohash or what3words. Some
-    annotations, like the Irish Transverse Mercator (ITM) or the US
+    result location in the
+    [annotations](https://opencagedata.com/api#annotations). They
+    include, among others, country information, time of sunset and
+    sunrise, or the location in different geocoding formats, like
+    Maidenhead, Mercator projection (EPSG 3857), geohash or what3words.
+    Some annotations, like the Irish Transverse Mercator (ITM) or the US
     Federal Information Processing Standards (FIPS) code will only be
     shown when appropriate. `no_annotations` is `TRUE` by default, which
-    means that the output will not contain annotations.
+    means that the output will not contain annotations. (Yes, the
+    inverted argument names are confusing. We just follow OpenCage’s
+    lead here.)
 
   - `no_dedupe` is `FALSE` by default. When TRUE the output will not be
     deduplicated.
@@ -308,42 +335,6 @@ For more information about the output and the query parameters, see the
 package documentation, the [API doc](https://opencagedata.com/api) and
 [OpenCage FAQ](https://opencagedata.com/faq).
 
-## Caching
-
-The underlying data at OpenCage is updated about once a day. Note that
-this package uses [memoise](https://github.com/r-lib/memoise) with no
-timeout argument so that results are cached inside an active R session.
-
-``` r
-system.time(oc_reverse(latitude = 10, longitude = 10))
-```
-
-    ##    user  system elapsed 
-    ##    0.04    0.00    1.03
-
-``` r
-system.time(oc_reverse(latitude = 10, longitude = 10))
-```
-
-    ##    user  system elapsed 
-    ##    0.03    0.00    0.03
-
-To clear the cache of all results, you need to call
-`memoise::forget(opencage:::oc_get_memoise)`.
-
-``` r
-memoise::forget(opencage:::oc_get_memoise)
-```
-
-    ## [1] TRUE
-
-``` r
-system.time(oc_reverse(latitude = 10, longitude = 10))
-```
-
-    ##    user  system elapsed 
-    ##     0.0     0.0     1.1
-
 ## Privacy
 
 All geocoding functions have a parameter `no_record`. It is `FALSE` by
@@ -351,15 +342,16 @@ default.
 
   - When `no_record` is `FALSE` a log of the query is made by OpenCage.
     These logs are used for debugging and in order to improve the
-    service. [According](https://opencagedata.com/faq#legal) to
-    OpenCage, all logs are automatically deleted after six months.
+    service. [According to
+    OpenCage](https://opencagedata.com/faq#legal), all logs are
+    automatically deleted after six months.
 
   - When `no_record` is `TRUE`, OpenCage still records that a request
     was made (e.g. to see whether you exceeded your quota), but not the
-    specific content of your query. Please use if you have concerns
-    about privacy and want OpenCage to have no record of your query.
-    More information about privacy can be found on OpenCage’s [GDPR
-    page](https://opencagedata.com/gdpr).
+    specific content of your query. Please set `no_record` to `TRUE` if
+    you have concerns about privacy and don’t want OpenCage to have a
+    record of your query. More information about privacy can be found on
+    OpenCage’s [GDPR page](https://opencagedata.com/gdpr).
 
 ## Addresses
 
@@ -378,6 +370,42 @@ the `return` value is a `df_list`, the `placename` or
 results will contain all request parameters, including the API key
 used\! For `geojson_list` results `add_request` is currently ignored by
 OpenCage.
+
+## Caching
+
+The underlying data at OpenCage is updated about once a day. Note that
+this package uses [memoise](https://github.com/r-lib/memoise) with no
+timeout argument so that results are cached inside an active R session.
+
+``` r
+system.time(oc_reverse(latitude = 10, longitude = 10))
+```
+
+    ##    user  system elapsed 
+    ##    0.00    0.00    1.08
+
+``` r
+system.time(oc_reverse(latitude = 10, longitude = 10))
+```
+
+    ##    user  system elapsed 
+    ##    0.03    0.00    0.03
+
+To clear the cache of all results, either start a new R session or call
+`memoise::forget(opencage:::oc_get_memoise)`.
+
+``` r
+memoise::forget(opencage:::oc_get_memoise)
+```
+
+    ## [1] TRUE
+
+``` r
+system.time(oc_reverse(latitude = 10, longitude = 10))
+```
+
+    ##    user  system elapsed 
+    ##    0.02    0.00    1.07
 
 ## Meta
 

@@ -182,7 +182,6 @@ test_that("oc_check_query checks language", {
   )
 })
 
-
 test_that("oc_check_query checks limit", {
   expect_error(
     oc_check_query(
@@ -216,6 +215,24 @@ test_that("oc_check_query checks no_annotations", {
   )
 })
 
+test_that("oc_check_query checks roadinfo", {
+  expect_error(
+    oc_check_query(
+      placename = "Afsluitdijk",
+      key = "32randomlettersanddigits12345678",
+      roadinfo = "yes"
+    ),
+    "`roadinfo` must be a logical vector."
+  )
+  expect_silent(
+    oc_check_query(
+      placename = "Afsluitdijk",
+      key = "32randomlettersanddigits12345678",
+      roadinfo = TRUE
+    )
+  )
+})
+
 test_that("oc_check_query checks no_dedupe", {
   expect_error(
     oc_check_query(
@@ -238,7 +255,7 @@ test_that("oc_check_query checks no_record", {
   )
   expect_error(
     oc_check_query(
-      placename = "Sarzeau",
+      placename = c("Sarzeau", "Nancy"),
       key = "32randomlettersanddigits12345678",
       no_record = c(TRUE, FALSE)
     ),
@@ -265,5 +282,16 @@ test_that("oc_check_query checks add_request", {
       add_request = "yes"
     ),
     "`add_request` must be a logical vector."
+  )
+})
+
+test_that("oc_check_query checks argument lengths", {
+  expect_error(
+    oc_check_query(
+      placename = "Sarzeau",
+      key = "32randomlettersanddigits12345678",
+      abbrv = c(TRUE, FALSE)
+    ),
+    "same length as `placename` or `latitude`"
   )
 })
