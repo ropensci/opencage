@@ -84,6 +84,17 @@ test_that("oc_reverse_df works", {
   tbl2 <- oc_reverse_df(df[1, ], lat, lng)
   expect_s3_class(tbl2, c("tbl_df", "tbl", "data.frame"))
   expect_equal(nrow(tbl2), 1)
+
+  tbl3 <- oc_reverse_df(lat, lng)
+  expect_s3_class(tbl3, c("tbl_df", "tbl", "data.frame"))
+  expect_equal(nrow(tbl3), 3)
+})
+
+test_that("oc_reverse_df doesn't work for default class", {
+  expect_error(
+    oc_reverse_df("Hamburg"),
+    "Can't geocode an object of class `character`."
+  )
 })
 
 test_that("output arguments work", {
