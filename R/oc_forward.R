@@ -342,6 +342,17 @@ oc_forward <-
 #' }
 oc_forward_df <- function(...) UseMethod("oc_forward_df")
 
+# No @name so it does not show up in the docs.
+#' @export
+oc_forward_df.default <- function(x, ...) {
+  stop(
+    "Can't geocode an object of class `",
+    class(x)[[1]],
+    "`.",
+    call. = FALSE
+  )
+}
+
 #' @rdname oc_forward_df
 #' @export
 oc_forward_df.data.frame <- # nolint - see lintr issue #223

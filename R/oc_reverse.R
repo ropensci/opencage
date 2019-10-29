@@ -161,6 +161,17 @@ oc_reverse <-
 
 oc_reverse_df <- function(...) UseMethod("oc_reverse_df")
 
+# No @name so it does not show up in the docs.
+#' @export
+oc_reverse_df.default <- function(x, ...) {
+  stop(
+    "Can't geocode an object of class `",
+    class(x)[[1]],
+    "`.",
+    call. = FALSE
+  )
+}
+
 #' @rdname oc_reverse_df
 #' @export
 oc_reverse_df.data.frame <- # nolint - see lintr issue #223
