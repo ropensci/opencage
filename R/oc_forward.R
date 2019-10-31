@@ -340,15 +340,29 @@ oc_forward <-
 #' oc_forward_df(df2, placename = locations,
 #'               countrycode = countrycode)
 #' }
+oc_forward_df <- function(...) UseMethod("oc_forward_df")
 
-oc_forward_df <-
+#' @noRd
+#' @export
+oc_forward_df.default <- function(x, ...) {
+  stop(
+    "Can't geocode an object of class `",
+    class(x)[[1]],
+    "`.",
+    call. = FALSE
+  )
+}
+
+#' @rdname oc_forward_df
+#' @export
+oc_forward_df.data.frame <- # nolint - see lintr issue #223
   function(data,
            placename,
            bind_cols = TRUE,
            output = c("short", "all"),
            key = oc_key(),
-           proximity = NULL,
            bounds = NULL,
+           proximity = NULL,
            countrycode = NULL,
            language = NULL,
            limit = 1L,
@@ -482,4 +496,42 @@ oc_forward_df <-
       }
     }
     results
+  }
+
+#' @rdname oc_forward_df
+#' @export
+oc_forward_df.character <-
+  function(placename,
+           output = c("short", "all"),
+           key = oc_key(),
+           bounds = NULL,
+           proximity = NULL,
+           countrycode = NULL,
+           language = NULL,
+           limit = 1L,
+           min_confidence = NULL,
+           no_annotations = TRUE,
+           roadinfo = FALSE,
+           no_dedupe = FALSE,
+           no_record = FALSE,
+           abbrv = FALSE,
+           ...) {
+    xdf <- tibble::tibble(placename = placename)
+    oc_forward_df(
+      data = xdf,
+      placename = placename,
+      bind_cols = TRUE,
+      output = output,
+      key = key,
+      bounds = bounds,
+      proximity = proximity,
+      countrycode = countrycode,
+      language = language,
+      limit = limit,
+      min_confidence = min_confidence,
+      no_annotations = no_annotations,
+      no_dedupe = no_dedupe,
+      no_record = no_record,
+      abbrv = abbrv
+    )
   }

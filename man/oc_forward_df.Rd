@@ -2,15 +2,28 @@
 % Please edit documentation in R/oc_forward.R
 \name{oc_forward_df}
 \alias{oc_forward_df}
+\alias{oc_forward_df.data.frame}
+\alias{oc_forward_df.character}
 \title{Forward geocoding with data frames}
 \usage{
-oc_forward_df(data, placename, bind_cols = TRUE, output = c("short",
-  "all"), key = oc_key(), proximity = NULL, bounds = NULL,
+oc_forward_df(...)
+
+\method{oc_forward_df}{data.frame}(data, placename, bind_cols = TRUE,
+  output = c("short", "all"), key = oc_key(), bounds = NULL,
+  proximity = NULL, countrycode = NULL, language = NULL,
+  limit = 1L, min_confidence = NULL, no_annotations = TRUE,
+  roadinfo = FALSE, no_dedupe = FALSE, no_record = FALSE,
+  abbrv = FALSE, ...)
+
+\method{oc_forward_df}{character}(placename, output = c("short", "all"),
+  key = oc_key(), bounds = NULL, proximity = NULL,
   countrycode = NULL, language = NULL, limit = 1L,
   min_confidence = NULL, no_annotations = TRUE, roadinfo = FALSE,
   no_dedupe = FALSE, no_record = FALSE, abbrv = FALSE, ...)
 }
 \arguments{
+\item{...}{Ignored.}
+
 \item{data}{A data frame.}
 
 \item{placename}{An unquoted variable name of a character vector with the
@@ -34,13 +47,6 @@ should be returned.}
 default, \code{\link{oc_key}} will attempt to retrieve the key from the
 environment variable \code{OPENCAGE_KEY}.}
 
-\item{proximity}{A list of length one, or an unquoted variable name of a list
-column of points. Points are named numeric vectors with latitude, longitude
-coordinate pairs in decimal format. \code{proximity} provides OpenCage with
-a hint to bias results in favour of those closer to the specified location.
-It can be specified with the \code{\link{oc_points}} helper. For example:
-\code{proximity = oc_points(41.40139, 2.12870)}. Default is \code{NULL}.}
-
 \item{bounds}{A list of length one, or an unquoted variable name of a list
 column of bounding boxes. Bounding boxes are named numeric vectors, each
 with 4 coordinates forming the south-west and north-east corners of the
@@ -49,6 +55,13 @@ restricts the possible results to the supplied region. It can be specified
 with the \code{\link{oc_bbox}} helper. For example: \code{bounds =
 oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}. Default is
 \code{NULL}.}
+
+\item{proximity}{A list of length one, or an unquoted variable name of a list
+column of points. Points are named numeric vectors with latitude, longitude
+coordinate pairs in decimal format. \code{proximity} provides OpenCage with
+a hint to bias results in favour of those closer to the specified location.
+It can be specified with the \code{\link{oc_points}} helper. For example:
+\code{proximity = oc_points(41.40139, 2.12870)}. Default is \code{NULL}.}
 
 \item{countrycode}{Character vector, or an unquoted variable name of such a
 vector, of two-letter codes as defined by the
@@ -102,8 +115,6 @@ request is not cached by OpenCage.}
 Default is \code{FALSE}. When \code{TRUE} addresses in the
 \code{oc_formatted} variable of the results are abbreviated (e.g. "Main
 St." instead of "Main Street").}
-
-\item{...}{Ignored.}
 }
 \value{
 A tibble. Column names coming from the OpenCage API are prefixed with

@@ -159,7 +159,22 @@ oc_reverse <-
 #'               min_confidence = confidence)
 #' }
 
-oc_reverse_df <-
+oc_reverse_df <- function(...) UseMethod("oc_reverse_df")
+
+#' @noRd
+#' @export
+oc_reverse_df.default <- function(x, ...) {
+  stop(
+    "Can't geocode an object of class `",
+    class(x)[[1]],
+    "`.",
+    call. = FALSE
+  )
+}
+
+#' @rdname oc_reverse_df
+#' @export
+oc_reverse_df.data.frame <- # nolint - see lintr issue #223
   function(data,
            latitude,
            longitude,
@@ -272,4 +287,35 @@ oc_reverse_df <-
       }
     }
     results
+  }
+
+#' @rdname oc_reverse_df
+#' @export
+oc_reverse_df.numeric <-
+  function(latitude,
+           longitude,
+           output = c("short", "all"),
+           key = oc_key(),
+           language = NULL,
+           min_confidence = NULL,
+           no_annotations = TRUE,
+           no_dedupe = FALSE,
+           no_record = FALSE,
+           abbrv = FALSE,
+           ...) {
+    xdf <- tibble::tibble(latitude = latitude, longitude = longitude)
+    oc_reverse_df(
+      data = xdf,
+      latitude = latitude,
+      longitude = longitude,
+      bind_cols = TRUE,
+      output = output,
+      key = key,
+      language = language,
+      min_confidence = min_confidence,
+      no_annotations = no_annotations,
+      no_dedupe = no_dedupe,
+      no_record = no_record,
+      abbrv = abbrv
+    )
   }

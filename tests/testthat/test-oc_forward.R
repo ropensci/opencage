@@ -83,6 +83,17 @@ test_that("oc_forward_df works", {
   tbl2 <- oc_forward_df(tibble(loc = "Nantes"), loc)
   expect_s3_class(tbl2, c("tbl_df", "tbl", "data.frame"))
   expect_equal(nrow(tbl2), 1)
+
+  tbl3 <- oc_forward_df(locations)
+  expect_s3_class(tbl3, c("tbl_df", "tbl", "data.frame"))
+  expect_equal(nrow(tbl3), 3)
+})
+
+test_that("oc_reverse_df doesn't work for default class", {
+  expect_error(
+    oc_forward_df(53.6),
+    "Can't geocode an object of class `numeric`."
+  )
 })
 
 test_that("output arguments work", {
