@@ -342,7 +342,7 @@ oc_forward <-
 #' }
 oc_forward_df <- function(...) UseMethod("oc_forward_df")
 
-# No @name so it does not show up in the docs.
+#' @noRd
 #' @export
 oc_forward_df.default <- function(x, ...) {
   stop(

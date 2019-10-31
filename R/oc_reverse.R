@@ -161,7 +161,7 @@ oc_reverse <-
 
 oc_reverse_df <- function(...) UseMethod("oc_reverse_df")
 
-# No @name so it does not show up in the docs.
+#' @noRd
 #' @export
 oc_reverse_df.default <- function(x, ...) {
   stop(
