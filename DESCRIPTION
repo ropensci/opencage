@@ -13,7 +13,7 @@ Description: Tool for accessing the OpenCage API, which provides forward
     longitude and latitude to placename).
 License: GPL (>= 2)
 LazyData: TRUE
-URL: http://github.com/ropensci/opencage
+URL: https://docs.ropensci.org/opencage, http://github.com/ropensci/opencage
 BugReports: http://github.com/ropensci/opencage/issues
 Imports: httr,
     jsonlite,
