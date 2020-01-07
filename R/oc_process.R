@@ -27,7 +27,7 @@ oc_process <-
     placename = NULL,
     latitude = NULL,
     longitude = NULL,
-    key = oc_key(),
+    key = NULL,
     return = "url_only",
     bounds = NULL,
     proximity = NULL,

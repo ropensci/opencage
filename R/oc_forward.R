@@ -14,9 +14,6 @@
 #'   the function, either a list of tibbles (\code{df_list}, the default), a
 #'   JSON list (\code{json_list}), a GeoJSON list (\code{geojson_list}), or the
 #'   URL with which the API would be called (\code{url_only}).
-#' @param key Your OpenCage API key as a character vector of length one. By
-#'   default, \code{\link{oc_key}} will attempt to retrieve the key from the
-#'   environment variable \code{OPENCAGE_KEY}.
 #' @param bounds A list of bounding boxes of length one or
 #'   \code{length(placename)}. Bounding boxes are named numeric vectors, each
 #'   with four coordinates forming the south-west and north-east corners of the
@@ -138,7 +135,6 @@
 oc_forward <-
   function(placename,
            return = c("df_list", "json_list", "geojson_list", "url_only"),
-           key = oc_key(),
            bounds = NULL,
            proximity = NULL,
            countrycode = NULL,
@@ -161,10 +157,13 @@ oc_forward <-
     # check return
     return <- match.arg(return)
 
+    # get & check key
+    key <- Sys.getenv("OPENCAGE_KEY")
+    oc_check_key(key)
+
     # check arguments
     oc_check_query(
       placename = placename,
-      key = key,
       bounds = bounds,
       proximity = proximity,
       countrycode = countrycode,
@@ -313,7 +312,7 @@ oc_forward <-
 #'               bounds = oc_bbox(-5, 45, 15, 55))
 #'
 #' # oc_forward_df accepts unquoted column names for all
-#' # arguments except bind_cols, output, key, and no_record.
+#' # arguments except bind_cols, output, and no_record.
 #' # This makes it possible to build up more detailed queries
 #' # through the data frame passed to the data argument.
 #'
@@ -360,7 +359,6 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
            placename,
            bind_cols = TRUE,
            output = c("short", "all"),
-           key = oc_key(),
            bounds = NULL,
            proximity = NULL,
            countrycode = NULL,
@@ -405,7 +403,6 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
     if (bind_cols == FALSE) {
       results_list <- oc_forward(
         placename = rlang::eval_tidy(placename, data = data),
-        key = key,
         return = "df_list",
         bounds = rlang::eval_tidy(bounds, data = data),
         proximity = rlang::eval_tidy(proximity, data = data),
@@ -447,7 +444,6 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
           op =
             oc_forward(
               placename = !!placename,
-              key = key,
               return = "df_list",
               bounds = !!bounds,
               proximity = !!proximity,
@@ -503,7 +499,6 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
 oc_forward_df.character <-
   function(placename,
            output = c("short", "all"),
-           key = oc_key(),
            bounds = NULL,
            proximity = NULL,
            countrycode = NULL,
@@ -522,7 +517,6 @@ oc_forward_df.character <-
       placename = placename,
       bind_cols = TRUE,
       output = output,
-      key = key,
       bounds = bounds,
       proximity = proximity,
       countrycode = countrycode,

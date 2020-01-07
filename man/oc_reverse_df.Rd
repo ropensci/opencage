@@ -9,15 +9,13 @@
 oc_reverse_df(...)
 
 \method{oc_reverse_df}{data.frame}(data, latitude, longitude,
-  bind_cols = TRUE, output = c("short", "all"), key = oc_key(),
-  language = NULL, min_confidence = NULL, roadinfo = FALSE,
-  no_annotations = TRUE, no_dedupe = FALSE, no_record = FALSE,
-  abbrv = FALSE, ...)
+  bind_cols = TRUE, output = c("short", "all"), language = NULL,
+  min_confidence = NULL, roadinfo = FALSE, no_annotations = TRUE,
+  no_dedupe = FALSE, no_record = FALSE, abbrv = FALSE, ...)
 
 \method{oc_reverse_df}{numeric}(latitude, longitude, output = c("short",
-  "all"), key = oc_key(), language = NULL, min_confidence = NULL,
-  no_annotations = TRUE, no_dedupe = FALSE, no_record = FALSE,
-  abbrv = FALSE, ...)
+  "all"), language = NULL, min_confidence = NULL, no_annotations = TRUE,
+  no_dedupe = FALSE, no_record = FALSE, abbrv = FALSE, ...)
 }
 \arguments{
 \item{...}{Ignored.}
@@ -34,10 +32,6 @@ a new tibble.}
 \item{output}{A character vector of length one indicating whether only
 the formatted address (\code{"short"}, the default) should be returned or
 all variables (\code{"all"}) variables should be returned.}
-
-\item{key}{Your OpenCage API key as a character vector of length one. By
-default, \code{\link{oc_key}} will attempt to retrieve the key from the
-environment variable \code{OPENCAGE_KEY}.}
 
 \item{language}{Character vector, or an unquoted variable name of such a
 vector, of \href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF BCP
@@ -106,7 +100,7 @@ oc_reverse_df(df, latitude = lat, longitude = lng,
               language = "fr")
 
 # oc_reverse_df accepts unquoted column names for all
-# arguments except bind_cols, output, key, and no_record.
+# arguments except bind_cols, output, and no_record.
 # This makes it possible to build up more detailed queries
 # through the data frame passed to the data argument.
 

@@ -5,10 +5,9 @@
 \title{Reverse geocoding}
 \usage{
 oc_reverse(latitude, longitude, return = c("df_list", "json_list",
-  "geojson_list", "url_only"), key = oc_key(), language = NULL,
-  min_confidence = NULL, no_annotations = TRUE, roadinfo = FALSE,
-  no_dedupe = FALSE, no_record = FALSE, abbrv = FALSE,
-  add_request = FALSE, ...)
+  "geojson_list", "url_only"), language = NULL, min_confidence = NULL,
+  no_annotations = TRUE, roadinfo = FALSE, no_dedupe = FALSE,
+  no_record = FALSE, abbrv = FALSE, add_request = FALSE, ...)
 }
 \arguments{
 \item{latitude, longitude}{Numeric vectors of latitude and longitude values.}
@@ -17,10 +16,6 @@ oc_reverse(latitude, longitude, return = c("df_list", "json_list",
 the function, either a list of tibbles (\code{df_list}, the default), a
 JSON list (\code{json_list}), a GeoJSON list (\code{geojson_list}), or the
 URL with which the API would be called (\code{url_only}).}
-
-\item{key}{Your OpenCage API key as a character vector of length one. By
-default, \code{\link{oc_key}} will attempt to retrieve the key from the
-environment variable \code{OPENCAGE_KEY}.}
 
 \item{language}{An
 \href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF BCP 47 language

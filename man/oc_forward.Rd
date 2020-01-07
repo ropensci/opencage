@@ -5,11 +5,10 @@
 \title{Forward geocoding}
 \usage{
 oc_forward(placename, return = c("df_list", "json_list", "geojson_list",
-  "url_only"), key = oc_key(), bounds = NULL, proximity = NULL,
-  countrycode = NULL, language = NULL, limit = 10L,
-  min_confidence = NULL, no_annotations = TRUE, roadinfo = FALSE,
-  no_dedupe = FALSE, no_record = FALSE, abbrv = FALSE,
-  add_request = FALSE, ...)
+  "url_only"), bounds = NULL, proximity = NULL, countrycode = NULL,
+  language = NULL, limit = 10L, min_confidence = NULL,
+  no_annotations = TRUE, roadinfo = FALSE, no_dedupe = FALSE,
+  no_record = FALSE, abbrv = FALSE, add_request = FALSE, ...)
 }
 \arguments{
 \item{placename}{A character vector with the placename(s) to be geocoded.
@@ -22,10 +21,6 @@ If the placenames are addresses, see
 the function, either a list of tibbles (\code{df_list}, the default), a
 JSON list (\code{json_list}), a GeoJSON list (\code{geojson_list}), or the
 URL with which the API would be called (\code{url_only}).}
-
-\item{key}{Your OpenCage API key as a character vector of length one. By
-default, \code{\link{oc_key}} will attempt to retrieve the key from the
-environment variable \code{OPENCAGE_KEY}.}
 
 \item{bounds}{A list of bounding boxes of length one or
 \code{length(placename)}. Bounding boxes are named numeric vectors, each

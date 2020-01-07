@@ -9,17 +9,16 @@
 oc_forward_df(...)
 
 \method{oc_forward_df}{data.frame}(data, placename, bind_cols = TRUE,
-  output = c("short", "all"), key = oc_key(), bounds = NULL,
-  proximity = NULL, countrycode = NULL, language = NULL,
-  limit = 1L, min_confidence = NULL, no_annotations = TRUE,
-  roadinfo = FALSE, no_dedupe = FALSE, no_record = FALSE,
-  abbrv = FALSE, ...)
-
-\method{oc_forward_df}{character}(placename, output = c("short", "all"),
-  key = oc_key(), bounds = NULL, proximity = NULL,
+  output = c("short", "all"), bounds = NULL, proximity = NULL,
   countrycode = NULL, language = NULL, limit = 1L,
   min_confidence = NULL, no_annotations = TRUE, roadinfo = FALSE,
   no_dedupe = FALSE, no_record = FALSE, abbrv = FALSE, ...)
+
+\method{oc_forward_df}{character}(placename, output = c("short", "all"),
+  bounds = NULL, proximity = NULL, countrycode = NULL, language = NULL,
+  limit = 1L, min_confidence = NULL, no_annotations = TRUE,
+  roadinfo = FALSE, no_dedupe = FALSE, no_record = FALSE, abbrv = FALSE,
+  ...)
 }
 \arguments{
 \item{...}{Ignored.}
@@ -42,10 +41,6 @@ a new tibble.}
 latitude, longitude, and formatted address variables (\code{"short"}, the
 default) should be returned or all variables (\code{"all"}) variables
 should be returned.}
-
-\item{key}{Your OpenCage API key as a character vector of length one. By
-default, \code{\link{oc_key}} will attempt to retrieve the key from the
-environment variable \code{OPENCAGE_KEY}.}
 
 \item{bounds}{A list of length one, or an unquoted variable name of a list
 column of bounding boxes. Bounding boxes are named numeric vectors, each
@@ -148,7 +143,7 @@ oc_forward_df(df, placename = locations,
               bounds = oc_bbox(-5, 45, 15, 55))
 
 # oc_forward_df accepts unquoted column names for all
-# arguments except bind_cols, output, key, and no_record.
+# arguments except bind_cols, output, and no_record.
 # This makes it possible to build up more detailed queries
 # through the data frame passed to the data argument.
 
