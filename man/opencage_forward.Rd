@@ -4,7 +4,7 @@
 \alias{opencage_forward}
 \title{Forward geocoding}
 \usage{
-opencage_forward(placename, key = oc_key(), bounds = NULL,
+opencage_forward(placename, key = opencage_key(), bounds = NULL,
   countrycode = NULL, language = NULL, limit = 10L,
   min_confidence = NULL, no_annotations = FALSE, no_dedupe = FALSE,
   no_record = FALSE, abbrv = FALSE, add_request = TRUE)
@@ -17,7 +17,7 @@ If the placenames are addresses, see
  results.}
 
 \item{key}{Your OpenCage API key as a character vector of length one. By
-default, \code{\link{oc_key}} will attempt to retrieve the key from the
+default, \code{\link{opencage_key}} will attempt to retrieve the key from the
 environment variable \code{OPENCAGE_KEY}.}
 
 \item{bounds}{A list of bounding boxes of length one or

@@ -16,6 +16,9 @@ NULL
 #' Deprecated: use \code{oc_forward} or \code{oc_forward_df} for foward
 #' geocoding.
 #'
+#' @param key Your OpenCage API key as a character vector of length one. By
+#'   default, \code{\link{opencage_key}} will attempt to retrieve the key from the
+#'   environment variable \code{OPENCAGE_KEY}.
 #' @inheritParams oc_forward
 #'
 #' @return A list with
@@ -40,7 +43,7 @@ NULL
 #'
 opencage_forward <-
   function(placename,
-           key = oc_key(),
+           key = opencage_key(),
            bounds = NULL,
            countrycode = NULL,
            language = NULL,
@@ -60,9 +63,10 @@ opencage_forward <-
 
     .Deprecated("oc_forward")
 
+    oc_config(key = key)
+
     lst <- oc_forward(
       placename = placename,
-      key = key,
       return = "json_list",
       bounds = list(bounds),
       countrycode = countrycode,
@@ -85,6 +89,9 @@ opencage_forward <-
 #' Deprecated: use \code{oc_reverse} or \code{oc_reverse_df} for reverse
 #' geocoding.
 #'
+#' @param key Your OpenCage API key as a character vector of length one. By
+#'   default, \code{\link{opencage_key}} will attempt to retrieve the key from the
+#'   environment variable \code{OPENCAGE_KEY}.
 #' @param bounds Bounding box, ignored for reverse geocoding.
 #' @param countrycode Country code, ignored for reverse geocoding.
 #' @param limit How many results should be returned (1-100), ignored for reverse
@@ -104,7 +111,7 @@ opencage_forward <-
 opencage_reverse <-
   function(latitude,
            longitude,
-           key = oc_key(),
+           key = opencage_key(),
            bounds = NULL,
            countrycode = NULL,
            language = NULL,
@@ -124,10 +131,11 @@ opencage_reverse <-
 
     .Deprecated("oc_reverse")
 
+    oc_config(key = key)
+
     lst <- oc_reverse(
       latitude = latitude,
       longitude = longitude,
-      key = key,
       return = "json_list",
       language = language,
       limit = limit,
@@ -191,12 +199,28 @@ opencage_format <- function(lst) {
 
 #' Retrieve Opencage API key
 #'
-#' Deprecated: use \code{oc_key} to retrieve Opencage API key.
+#' @description Deprecated and will be removed from the package together with
+#'   \code{opencage_forward} and \code{opencage_reverse}.
 #'
+#'   Retrieves the OpenCage API Key from the environment variable
+#'   \code{OPENCAGE_KEY}.
+#'
+#' @param quiet Logical vector of length one indicating whether the key is
+#'   returned quietly or whether a message is printed.
 #' @keywords internal
 #' @export
 opencage_key <- function(quiet = TRUE) {
-  .Deprecated("oc_key")
+  .Deprecated()
 
-  oc_key(quiet = quiet)
+  pat <- Sys.getenv("OPENCAGE_KEY")
+
+  if (identical(pat, "")) {
+    return(NULL)
+  }
+
+  if (!quiet) {
+    message("Using OpenCage API Key from envvar OPENCAGE_KEY")
+  }
+
+  return(pat)
 }

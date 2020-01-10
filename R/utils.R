@@ -127,22 +127,3 @@ oc_init_progress <- function(vec) {
   )
 }
 
-#' Retrieve OpenCage API key
-#'
-#' Retrieves the OpenCage API Key from the environment variable
-#' \code{OPENCAGE_KEY}.
-#'
-#' @param quiet Logical vector of length one indicating whether the key is
-#'   returned quietly or whether a message is printed.
-#'
-#' @export
-oc_key <- function(quiet = TRUE) {
-  pat <- Sys.getenv("OPENCAGE_KEY")
-  if (identical(pat, "")) {
-    return(NULL)
-  }
-  if (!quiet) {
-    message("Using Opencage API Key from envvar OPENCAGE_KEY")
-  }
-  return(pat)
-}

@@ -6,7 +6,15 @@
 \usage{
 opencage_key(quiet = TRUE)
 }
+\arguments{
+\item{quiet}{Logical vector of length one indicating whether the key is
+returned quietly or whether a message is printed.}
+}
 \description{
-Deprecated: use \code{oc_key} to retrieve Opencage API key.
+Deprecated and will be removed from the package together with
+  \code{opencage_forward} and \code{opencage_reverse}.
+
+  Retrieves the OpenCage API Key from the environment variable
+  \code{OPENCAGE_KEY}.
 }
 \keyword{internal}
