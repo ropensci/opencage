@@ -11,7 +11,7 @@ df2 <- add_column(df,
                   proximity = oc_points(latitude = c(45.5, 42.5, 9),
                                         longitude = c(-71, -79, -75)),
                   countrycode = c("ca", "us", "co"),
-                  language = c("de", "fr", "es"),
+                  language = c("de", "fr", "ja"),
                   limit = 1:3,
                   confidence = c(7, 5, 3),
                   annotation = c(FALSE, TRUE, TRUE),
@@ -126,7 +126,7 @@ test_that("tidyeval works for arguments", {
 
   # language
   lang <- oc_forward_df(df2, loc, language = language, output = "all")
-  expect_equal(lang$oc_country, c("Frankreich", "Allemagne", "EE.UU."))
+  expect_equal(lang$oc_country, c("Frankreich", "Allemagne", "アメリカ合衆国"))
 
   # limit
   limit <- oc_forward_df(df2, loc, limit = limit)

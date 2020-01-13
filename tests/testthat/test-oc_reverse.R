@@ -5,7 +5,7 @@ lat <- c(47.21864, 53.55034, 34.05369)
 lng <- c(-1.554136, 10.000654, -118.242767)
 df <- tibble(id = 1:3, lat = lat, lng = lng)
 df2 <- add_column(df,
-                  language = c("en", "fr", "es"),
+                  language = c("en", "fr", "ja"),
                   confidence = c(1, 1, 1),
                   annotation = c(FALSE, TRUE, TRUE),
                   roadinfo = c(FALSE, TRUE, TRUE),
@@ -120,7 +120,7 @@ test_that("tidyeval works for arguments", {
 
   # language
   lang <- oc_reverse_df(df2, lat, lng, language = language, output = "all")
-  expect_equal(lang$oc_country, c("France", "Allemagne", "EE.UU."))
+  expect_equal(lang$oc_country, c("France", "Allemagne", "アメリカ合衆国"))
 
   # min_confidence
   confidence <- oc_reverse_df(df3, lat, lng, min_confidence = confidence)
