@@ -70,6 +70,13 @@ test_that("oc_forward can handle NAs", {
   expect_equal(res[[1]][["features"]], list())
 })
 
+test_that("oc_forward adds request with add_request", {
+  skip_on_cran()
+  skip_if_offline()
+  res <- oc_forward("Hmbg", add_request = TRUE)
+  expect_equal(res[[1]][["oc_query"]], "Hmbg")
+})
+
 # oc_forward_df -----------------------------------------------------------
 
 test_that("oc_forward_df works", {
