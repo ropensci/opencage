@@ -1,19 +1,19 @@
 ## Test oc_forward functions ##
 
 library(tibble)
-locations <- c("Nantes", "Hamburg", "Los Angeles")
+locations <- c("Nantes", "Flensburg", "Los Angeles")
 df <- tibble(id = 1:3, loc = locations)
 df2 <- add_column(df,
-                  bounds = oc_bbox(xmin = c(-72, -80, -76),
-                                   ymin = c(45, 42, 8),
-                                   xmax = c(-70, -78, -74),
-                                   ymax = c(46, 43, 10)),
-                  proximity = oc_points(latitude = c(45.5, 42.5, 9),
-                                        longitude = c(-71, -79, -75)),
+                  bounds = oc_bbox(xmin = c(-72, -98, -76),
+                                   ymin = c(45, 43, 8),
+                                   xmax = c(-70, -90, -74),
+                                   ymax = c(46, 49, 10)),
+                  proximity = oc_points(latitude = c(45.5, 46, 9),
+                                        longitude = c(-71, -95, -75)),
                   countrycode = c("ca", "us", "co"),
                   language = c("de", "fr", "ja"),
                   limit = 1:3,
-                  confidence = c(7, 5, 3),
+                  confidence = c(7, 9, 3),
                   annotation = c(FALSE, TRUE, TRUE),
                   abbrv = c(FALSE, FALSE, TRUE))
 
