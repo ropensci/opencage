@@ -7,17 +7,36 @@ test_that("oc_config sets OPENCAGE_KEY environment variable", {
   oc_config()
   expect_equal(Sys.getenv("OPENCAGE_KEY"), key_200)
 
+  # set key directly (or via keyring etc.)
+  withr::local_envvar(c("OPENCAGE_KEY" = ""))
+  oc_config(key = key_200)
+  expect_equal(Sys.getenv("OPENCAGE_KEY"), key_200)
+
+  # override previously set key
+  withr::local_envvar(c("OPENCAGE_KEY" = key_402))
+  oc_config(key = key_200)
+  expect_equal(Sys.getenv("OPENCAGE_KEY"), key_200)
+})
+
+test_that("oc_config throws error with faulty OpenCage key", {
+
   # unset key
   withr::local_envvar(c("OPENCAGE_KEY" = ""))
   expect_equal(Sys.getenv("OPENCAGE_KEY"), "")
 
-  # set key directly (or via keyring etc.)
-  oc_config(key = key_200)
-  expect_equal(Sys.getenv("OPENCAGE_KEY"), key_200)
+  # error without key in non-interactive mode
+  expect_error(oc_config(), "set the environment variable OPENCAGE_KEY")
 
   # error with empty key
-  expect_error(oc_config(key = ""), "(OpenCage API key must be a )*.( string.)")
+  expect_error(oc_config(key = ""), "An OpenCage API `key` must be provided.")
+
+  # error with key that is not 32 characters long
+  expect_error(
+    oc_config(key = "incomplete_key"),
+    "(OpenCage API key must be a )*.( string.)"
+  )
 })
+
 
 # test rate_sec argument
 

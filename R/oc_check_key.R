@@ -7,8 +7,11 @@
 #' @noRd
 
 oc_check_key <- function(key) {
-  if (is.null(key)) {
-    stop("An OpenCage API `key` must be provided.", call. = FALSE)
+  if (is.null(key) || identical(key, "")) {
+    stop(
+      "An OpenCage API `key` must be provided.\n",
+      "See help(oc_config)",
+      call. = FALSE)
   } else if (!is.character(key)) {
     stop("The OpenCage API `key` must be a character vector.", call. = FALSE)
   } else if (length(key) > 1) {
