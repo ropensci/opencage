@@ -44,13 +44,9 @@
 #' @export
 oc_config <-
   function(
-    key = NULL,
+    key = Sys.getenv("OPENCAGE_KEY"),
     rate_sec = getOption("oc_rate_sec", default = 1L),
     ...) {
-
-    # set key to environment variable
-
-    env <- Sys.getenv("OPENCAGE_KEY")
 
     key_needed <-
       c(
@@ -59,10 +55,8 @@ oc_config <-
         "\n"
       )
 
-    if (!is.null(key)) {
+    if (!identical(key, "")) {
       pat <- key
-    } else if (!identical(env, "")) {
-      pat <- env
     } else if (!interactive()) {
       stop(
         key_needed,
