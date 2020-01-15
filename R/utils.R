@@ -126,4 +126,3 @@ oc_init_progress <- function(vec) {
     width = 60
   )
 }
-

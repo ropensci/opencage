@@ -17,8 +17,8 @@ If the placenames are addresses, see
  results.}
 
 \item{key}{Your OpenCage API key as a character vector of length one. By
-default, \code{\link{opencage_key}} will attempt to retrieve the key from the
-environment variable \code{OPENCAGE_KEY}.}
+default, \code{\link{opencage_key}} will attempt to retrieve the key from
+the environment variable \code{OPENCAGE_KEY}.}
 
 \item{bounds}{A list of bounding boxes of length one or
 \code{length(placename)}. Bounding boxes are named numeric vectors, each

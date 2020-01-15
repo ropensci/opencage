@@ -17,8 +17,8 @@ NULL
 #' geocoding.
 #'
 #' @param key Your OpenCage API key as a character vector of length one. By
-#'   default, \code{\link{opencage_key}} will attempt to retrieve the key from the
-#'   environment variable \code{OPENCAGE_KEY}.
+#'   default, \code{\link{opencage_key}} will attempt to retrieve the key from
+#'   the environment variable \code{OPENCAGE_KEY}.
 #' @inheritParams oc_forward
 #'
 #' @return A list with
@@ -90,8 +90,8 @@ opencage_forward <-
 #' geocoding.
 #'
 #' @param key Your OpenCage API key as a character vector of length one. By
-#'   default, \code{\link{opencage_key}} will attempt to retrieve the key from the
-#'   environment variable \code{OPENCAGE_KEY}.
+#'   default, \code{\link{opencage_key}} will attempt to retrieve the key from
+#'   the environment variable \code{OPENCAGE_KEY}.
 #' @param bounds Bounding box, ignored for reverse geocoding.
 #' @param countrycode Country code, ignored for reverse geocoding.
 #' @param limit How many results should be returned (1-100), ignored for reverse
