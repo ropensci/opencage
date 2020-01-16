@@ -1,19 +1,19 @@
 ## Test oc_forward functions ##
 
 library(tibble)
-locations <- c("Nantes", "Hamburg", "Los Angeles")
+locations <- c("Nantes", "Flensburg", "Los Angeles")
 df <- tibble(id = 1:3, loc = locations)
 df2 <- add_column(df,
-                  bounds = oc_bbox(xmin = c(-72, -80, -76),
-                                   ymin = c(45, 42, 8),
-                                   xmax = c(-70, -78, -74),
-                                   ymax = c(46, 43, 10)),
-                  proximity = oc_points(latitude = c(45.5, 42.5, 9),
-                                        longitude = c(-71, -79, -75)),
+                  bounds = oc_bbox(xmin = c(-72, -98, -76),
+                                   ymin = c(45, 43, 8),
+                                   xmax = c(-70, -90, -74),
+                                   ymax = c(46, 49, 10)),
+                  proximity = oc_points(latitude = c(45.5, 46, 9),
+                                        longitude = c(-71, -95, -75)),
                   countrycode = c("ca", "us", "co"),
-                  language = c("de", "fr", "es"),
+                  language = c("de", "fr", "ja"),
                   limit = 1:3,
-                  confidence = c(7, 5, 3),
+                  confidence = c(7, 9, 3),
                   annotation = c(FALSE, TRUE, TRUE),
                   abbrv = c(FALSE, FALSE, TRUE))
 
@@ -50,6 +50,13 @@ test_that("oc_forward returns correct type", {
   expect_type(res3, "list")
   expect_equal(length(res3), 3)
   expect_s3_class(res3[[1]], "geo_list")
+})
+
+test_that("oc_forward adds request with add_request", {
+  skip_on_cran()
+  skip_if_offline()
+  res <- oc_forward("Hmbg", add_request = TRUE)
+  expect_equal(res[[1]][["oc_query"]], "Hmbg")
 })
 
 # oc_forward_df -----------------------------------------------------------
@@ -108,7 +115,7 @@ test_that("tidyeval works for arguments", {
 
   # language
   lang <- oc_forward_df(df2, loc, language = language, output = "all")
-  expect_equal(lang$oc_country, c("Frankreich", "Allemagne", "EE.UU."))
+  expect_equal(lang$oc_country, c("Frankreich", "Allemagne", "アメリカ合衆国"))
 
   # limit
   limit <- oc_forward_df(df2, loc, limit = limit)
