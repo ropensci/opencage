@@ -115,7 +115,7 @@ test_that("tidyeval works for arguments", {
 
   # language
   lang <- oc_forward_df(df2, loc, language = language, output = "all")
-  expect_equal(lang$oc_country, c("Frankreich", "Allemagne", "アメリカ合衆国"))
+  expect_equal(lang$oc_country, c("Frankreich", "Allemagne", "アメリカ合衆国")) # nolint
 
   # limit
   limit <- oc_forward_df(df2, loc, limit = limit)

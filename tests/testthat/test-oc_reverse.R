@@ -90,7 +90,7 @@ test_that("tidyeval works for arguments", {
 
   # language
   lang <- oc_reverse_df(df2, lat, lng, language = language, output = "all")
-  expect_equal(lang$oc_country, c("France", "Allemagne", "アメリカ合衆国"))
+  expect_equal(lang$oc_country, c("France", "Allemagne", "アメリカ合衆国")) # nolint
 
   # min_confidence
   confidence <- oc_reverse_df(df3, lat, lng, min_confidence = confidence)

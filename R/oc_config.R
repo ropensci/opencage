@@ -34,9 +34,9 @@
 #' safely pass your key in a script with a function call like this
 #' \code{oc_config(key = keyring::key_get("opencage"))}.
 #'
-#' 3. If you call \code{oc_config} in an \code{\link[base]{interactive}} session and the
-#' \code{OPENCAGE_KEY} environment variable is not set, it will prompt you to
-#' enter the key in the console.
+#' 3. If you call \code{oc_config} in an \code{\link[base]{interactive}} session
+#' and the \code{OPENCAGE_KEY} environment variable is not set, it will prompt
+#' you to enter the key in the console.
 #'
 #' @section Set your OpenCage API rate limit:
 #'
