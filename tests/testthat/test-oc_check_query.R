@@ -8,6 +8,20 @@ test_that("oc_check_query checks placename", {
     ),
     "`placename` must be a character vector."
   )
+  expect_error(
+    oc_check_query(
+      placename = NA_character_,
+      key = "32randomlettersanddigits12345678"
+    ),
+    "`placename` must not be NA or an empty string."
+  )
+  expect_error(
+    oc_check_query(
+      placename = "",
+      key = "32randomlettersanddigits12345678"
+    ),
+    "`placename` must not be NA or an empty string."
+  )
 })
 
 test_that("oc_check_query checks latitude", {
@@ -27,12 +41,13 @@ test_that("oc_check_query checks latitude", {
     ),
     "Every `latitude` must be between -90 and 90."
   )
-  expect_silent(
+  expect_error(
     oc_check_query(
       latitude = NA_real_,
       longitude = 51.11892,
       key = "32randomlettersanddigits12345678"
-    )
+    ),
+    "`latitude` must not be NA."
   )
 })
 
@@ -53,12 +68,13 @@ test_that("oc_check_query checks longitude", {
     ),
     "Every `longitude` must be between -180 and 180."
   )
-  expect_silent(
+  expect_error(
     oc_check_query(
       latitude = 43,
       longitude = NA_real_,
       key = "32randomlettersanddigits12345678"
-    )
+    ),
+    "`longitude` must not be NA."
   )
 })
 

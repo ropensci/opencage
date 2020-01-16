@@ -52,24 +52,6 @@ test_that("oc_forward returns correct type", {
   expect_s3_class(res3[[1]], "geo_list")
 })
 
-test_that("oc_forward can handle NAs", {
-  skip_on_cran()
-  skip_if_offline()
-
-  res <- oc_forward(NA_character_, return = "df_list")
-  expect_s3_class(res[[1]], "data.frame")
-  expect_equal(res[[1]][["oc_formatted"]], NA_character_)
-
-  res <- oc_forward(NA_character_, return = "json_list")
-  expect_equal(res[[1]][["total_results"]], 0)
-  expect_equal(res[[1]][["results"]], list())
-
-  res <- oc_forward(NA_character_, return = "geojson_list")
-  expect_s3_class(res[[1]], "geo_list")
-  expect_equal(res[[1]][["total_results"]], 0)
-  expect_equal(res[[1]][["features"]], list())
-})
-
 test_that("oc_forward adds request with add_request", {
   skip_on_cran()
   skip_if_offline()

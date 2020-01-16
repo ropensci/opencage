@@ -63,7 +63,7 @@ opencage_forward <-
     lst <- oc_forward(
       placename = placename,
       key = key,
-      return = c("json_list"),
+      return = "json_list",
       bounds = list(bounds),
       countrycode = countrycode,
       language = language,
@@ -128,7 +128,7 @@ opencage_reverse <-
       latitude = latitude,
       longitude = longitude,
       key = key,
-      return = c("json_list"),
+      return = "json_list",
       language = language,
       limit = limit,
       min_confidence = min_confidence,
