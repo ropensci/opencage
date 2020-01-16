@@ -90,7 +90,7 @@ at which the number of remaining calls will be reset.
 }
 }
 \description{
-Deprecated: use \code{oc_forward} or \code{oc_forward_df} for foward
+Deprecated: use \code{oc_forward} or \code{oc_forward_df} for forward
 geocoding.
 }
 \examples{

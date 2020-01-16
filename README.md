@@ -125,7 +125,7 @@ geocoding.
 
   - `bounds`: The `bounds` parameter restricts the possible results to a
     defined bounding box. A bounding box is a named numeric vector with
-    four coordinates specifiying its south-west and north-east corners:
+    four coordinates specifying its south-west and north-east corners:
     `(xmin, ymin, xmax, ymax)`. The bounds parameter can most easily be
     specified with the `oc_bbox()` helper, for example like `bounds =
     oc_bbox(-0.56, 51.28, 0.27, 51.68)`. OpenCage provides a

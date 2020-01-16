@@ -14,7 +14,7 @@
 #' \pkg{opencage} uses the environment variable \code{OPENCAGE_KEY} internally
 #' to retrieve your OpenCage key. \code{\link{oc_config}} will help to set that
 #' environment variable. Do not pass the key directly as a parameter to the
-#' function, though, as you risk exposing it via your skript or your history.
+#' function, though, as you risk exposing it via your script or your history.
 #' There are three safer ways to set your API key instead:
 #'
 # nolint start - link longer than 80 chars

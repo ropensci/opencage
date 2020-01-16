@@ -13,7 +13,7 @@ NULL
 
 #' Forward geocoding
 #'
-#' Deprecated: use \code{oc_forward} or \code{oc_forward_df} for foward
+#' Deprecated: use \code{oc_forward} or \code{oc_forward_df} for forward
 #' geocoding.
 #'
 #' @param key Your OpenCage API key as a character vector of length one. By
