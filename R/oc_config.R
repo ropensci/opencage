@@ -86,7 +86,4 @@ oc_config <-
       oc_get_limited,
       ratelimitr::rate(n = rate_sec, period = 1L)
     )
-
-    # set no_record
-    options("oc_no_record" = no_record)
   }
