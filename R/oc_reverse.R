@@ -51,7 +51,6 @@ oc_reverse <-
   function(latitude,
            longitude,
            return = c("df_list", "json_list", "geojson_list", "url_only"),
-           key = oc_key(),
            language = NULL,
            min_confidence = NULL,
            no_annotations = TRUE,
@@ -74,11 +73,14 @@ oc_reverse <-
     # check return
     return <- match.arg(return)
 
+    # get & check key
+    key <- Sys.getenv("OPENCAGE_KEY")
+    oc_check_key(key)
+
     # check arguments
     oc_check_query(
       latitude = latitude,
       longitude = longitude,
-      key = key,
       language = language,
       min_confidence = min_confidence,
       no_annotations = no_annotations,
@@ -144,7 +146,7 @@ oc_reverse <-
 #'               language = "fr")
 #'
 #' # oc_reverse_df accepts unquoted column names for all
-#' # arguments except bind_cols, output, key, and no_record.
+#' # arguments except bind_cols, output, and no_record.
 #' # This makes it possible to build up more detailed queries
 #' # through the data frame passed to the data argument.
 #'
@@ -180,7 +182,6 @@ oc_reverse_df.data.frame <- # nolint - see lintr issue #223
            longitude,
            bind_cols = TRUE,
            output = c("short", "all"),
-           key = oc_key(),
            language = NULL,
            min_confidence = NULL,
            roadinfo = FALSE,
@@ -219,7 +220,6 @@ oc_reverse_df.data.frame <- # nolint - see lintr issue #223
       results_list <- oc_reverse(
         latitude = rlang::eval_tidy(latitude, data = data),
         longitude = rlang::eval_tidy(longitude, data = data),
-        key = key,
         return = "df_list",
         language = rlang::eval_tidy(language, data = data),
         min_confidence = rlang::eval_tidy(min_confidence, data = data),
@@ -246,7 +246,6 @@ oc_reverse_df.data.frame <- # nolint - see lintr issue #223
             oc_reverse(
               latitude = !!latitude,
               longitude = !!longitude,
-              key = key,
               return = "df_list",
               language = !!language,
               min_confidence = !!min_confidence,
@@ -295,7 +294,6 @@ oc_reverse_df.numeric <-
   function(latitude,
            longitude,
            output = c("short", "all"),
-           key = oc_key(),
            language = NULL,
            min_confidence = NULL,
            no_annotations = TRUE,
@@ -310,7 +308,6 @@ oc_reverse_df.numeric <-
       longitude = longitude,
       bind_cols = TRUE,
       output = output,
-      key = key,
       language = language,
       min_confidence = min_confidence,
       no_annotations = no_annotations,

@@ -14,7 +14,8 @@ The new features include:
 * All geocoding functions now support [OpenCage's `roadinfo` parameter](https://blog.opencagedata.com/post/new-optional-parameter-roadinfo) (#65). If set to `TRUE`, OpenCage attempts to match the nearest road (rather than an address) and provides additional road and driving information.
 * Language tags passed to the `language` argument are not validated anymore, since the language tags used by OpenStreetMap and hence OpenCage do not always conform with the IETF BCP 47 standard (#90). The `languagecodes`, which were stored in opencage as external data, have therefore been omitted from the package. In addition, it is now possible to specify `language = "native"`, so OpenCage will attempt to return the [results in the "official" language](https://blog.opencagedata.com/post/support-for-local-language) of the country. 
 * http requests are now handled by {[crul](https://docs.ropensci.org/crul/)}, not {[httr](http://httr.r-lib.org/)} (#37).
-* API calls are now rate limited (#32). The default limit is set to 1 call per second as per the API limit of the [Free Trial plan](https://opencagedata.com/pricing). The rate limit can be adjusted with `oc_config()`.
+* API calls are now rate limited (#32). The default limit is set to 1 call per second as per the API limit of the [Free Trial plan](https://opencagedata.com/pricing).
+* You can configure your {opencage} settings like your OpenCage API key or the API rate limit with `oc_config()`.
 
 ## Breaking changes
 

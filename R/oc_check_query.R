@@ -13,7 +13,6 @@ oc_check_query <-
     placename = NULL,
     latitude = NULL,
     longitude = NULL,
-    key = NULL,
     bounds = NULL,
     proximity = NULL,
     countrycode = NULL,
@@ -57,7 +56,6 @@ oc_check_query <-
     purrr::pwalk(
       .l = arglist,
       .f = .oc_check_query,
-      key = key,
       no_record = no_record
     )
   }
@@ -67,7 +65,6 @@ oc_check_query <-
     placename = NULL,
     latitude = NULL,
     longitude = NULL,
-    key = NULL,
     bounds = NULL,
     proximity = NULL,
     countrycode = NULL,
@@ -112,15 +109,6 @@ oc_check_query <-
       }
     }
 
-    # check key
-    if (is.null(key)) {
-      stop(call. = FALSE, "A `key` must be provided.")
-    } else if (!is.character(key)) {
-      stop(call. = FALSE, "`key` must be a character vector.")
-    } else if (length(key) > 1) {
-      stop(call. = FALSE, "`key` must be a vector of length one.")
-    }
-
     # check bounds
     if (!is.null(bounds)) {
       if (length(bounds) != 4) {
@@ -152,8 +140,7 @@ oc_check_query <-
       }
       .oc_check_query(
         latitude = proximity[["latitude"]],
-        longitude = proximity[["longitude"]],
-        key = key
+        longitude = proximity[["longitude"]]
       )
     }
 

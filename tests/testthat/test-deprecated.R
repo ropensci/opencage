@@ -152,6 +152,6 @@ test_that("`opencage_key(quiet = FALSE)` messages", {
   withr::local_envvar(c("OPENCAGE_KEY" = "fakekey"))
   expect_message(
     object = expect_warning(opencage_key(quiet = FALSE)),
-    regexp = "Using Opencage API Key from envvar OPENCAGE_KEY"
+    regexp = "Using OpenCage API Key from envvar OPENCAGE_KEY"
   )
 })

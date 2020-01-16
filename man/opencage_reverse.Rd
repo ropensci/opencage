@@ -4,7 +4,7 @@
 \alias{opencage_reverse}
 \title{Reverse geocoding}
 \usage{
-opencage_reverse(latitude, longitude, key = oc_key(), bounds = NULL,
+opencage_reverse(latitude, longitude, key = opencage_key(), bounds = NULL,
   countrycode = NULL, language = NULL, limit = 10,
   min_confidence = NULL, no_annotations = FALSE, no_dedupe = FALSE,
   no_record = FALSE, abbrv = FALSE, add_request = TRUE)
@@ -15,8 +15,8 @@ opencage_reverse(latitude, longitude, key = oc_key(), bounds = NULL,
 \item{longitude}{Numeric vectors of latitude and longitude values.}
 
 \item{key}{Your OpenCage API key as a character vector of length one. By
-default, \code{\link{oc_key}} will attempt to retrieve the key from the
-environment variable \code{OPENCAGE_KEY}.}
+default, \code{\link{opencage_key}} will attempt to retrieve the key from
+the environment variable \code{OPENCAGE_KEY}.}
 
 \item{bounds}{Bounding box, ignored for reverse geocoding.}
 
