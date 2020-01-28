@@ -27,7 +27,6 @@ oc_process <-
     placename = NULL,
     latitude = NULL,
     longitude = NULL,
-    key = NULL,
     return = "url_only",
     bounds = NULL,
     proximity = NULL,
@@ -38,10 +37,23 @@ oc_process <-
     no_annotations = TRUE,
     roadinfo = FALSE,
     no_dedupe = FALSE,
-    no_record = FALSE,
     abbrv = FALSE,
-    add_request = FALSE
+    add_request = FALSE,
+    get_key = TRUE
   ) {
+
+    if (get_key) {
+      # get & check key
+      key <- Sys.getenv("OPENCAGE_KEY")
+      oc_check_key(key)
+    } else {
+      key <- NULL
+    }
+
+    # get & check no_record
+    no_record <- getOption("oc_no_record", default = FALSE)
+    oc_check_logical(no_record, check_length_one = TRUE)
+
     if (length(placename) > 1) {
       pb <- oc_init_progress(placename)
     } else if (length(latitude) > 1) {

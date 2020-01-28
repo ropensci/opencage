@@ -208,23 +208,6 @@ test_that("oc_check_query checks no_dedupe", {
   )
 })
 
-test_that("oc_check_query checks no_record", {
-  expect_error(
-    oc_check_query(
-      placename = "Sarzeau",
-      no_record = "yes"
-    ),
-    "`no_record` must be a logical vector."
-  )
-  expect_error(
-    oc_check_query(
-      placename = c("Sarzeau", "Nancy"),
-      no_record = c(TRUE, FALSE)
-    ),
-    "`no_record` must be a vector of length one."
-  )
-})
-
 test_that("oc_check_query checks abbrv", {
   expect_error(
     oc_check_query(
@@ -252,5 +235,35 @@ test_that("oc_check_query checks argument lengths", {
       abbrv = c(TRUE, FALSE)
     ),
     "same length as `placename` or `latitude`"
+  )
+})
+
+
+# Test oc_check_logical() -------------------------------------------------
+test_that("oc_check_logical checks no_record", {
+  no_record <- "yes"
+  expect_error(
+    oc_check_logical(
+      variable = no_record,
+      check_length_one = TRUE
+    ),
+    "`no_record` must be a logical vector."
+  )
+
+  no_record <- c(TRUE, FALSE)
+  expect_error(
+    oc_check_logical(
+      variable = no_record,
+      check_length_one = TRUE
+    ),
+    "`no_record` must be a vector of length one."
+  )
+
+  no_record <- TRUE
+  expect_silent(
+    oc_check_logical(
+      variable = no_record,
+      check_length_one = TRUE
+    )
   )
 })

@@ -56,7 +56,6 @@ oc_reverse <-
            no_annotations = TRUE,
            roadinfo = FALSE,
            no_dedupe = FALSE,
-           no_record = FALSE,
            abbrv = FALSE,
            add_request = FALSE,
            ...) {
@@ -73,10 +72,6 @@ oc_reverse <-
     # check return
     return <- match.arg(return)
 
-    # get & check key
-    key <- Sys.getenv("OPENCAGE_KEY")
-    oc_check_key(key)
-
     # check arguments
     oc_check_query(
       latitude = latitude,
@@ -86,7 +81,6 @@ oc_reverse <-
       no_annotations = no_annotations,
       roadinfo = roadinfo,
       no_dedupe = no_dedupe,
-      no_record = no_record,
       abbrv = abbrv,
       add_request = add_request
     )
@@ -95,13 +89,11 @@ oc_reverse <-
       latitude = latitude,
       longitude = longitude,
       return = return,
-      key = key,
       language = language,
       min_confidence = min_confidence,
       no_annotations = no_annotations,
       roadinfo = roadinfo,
       no_dedupe = no_dedupe,
-      no_record = no_record,
       abbrv = abbrv,
       add_request = add_request
     )
@@ -113,9 +105,9 @@ oc_reverse <-
 #' @inheritParams oc_forward_df
 #' @param latitude,longitude Unquoted variable names of numeric vectors of
 #'   latitude and longitude values.
-#' @param output A character vector of length one indicating whether only
-#'   the formatted address (\code{"short"}, the default) should be returned or
-#'   all variables (\code{"all"}) variables should be returned.
+#' @param output A character vector of length one indicating whether only the
+#'   formatted address (\code{"short"}, the default) or all variables
+#'   (\code{"all"}) variables should be returned.
 #'
 #' @return A tibble. Column names coming from the OpenCage API are prefixed with
 #'   \code{"oc_"}.
@@ -146,7 +138,7 @@ oc_reverse <-
 #'               language = "fr")
 #'
 #' # oc_reverse_df accepts unquoted column names for all
-#' # arguments except bind_cols, output, and no_record.
+#' # arguments except bind_cols, and output.
 #' # This makes it possible to build up more detailed queries
 #' # through the data frame passed to the data argument.
 #'
@@ -187,7 +179,6 @@ oc_reverse_df.data.frame <- # nolint - see lintr issue #223
            roadinfo = FALSE,
            no_annotations = TRUE,
            no_dedupe = FALSE,
-           no_record = FALSE,
            abbrv = FALSE,
            ...) {
 
@@ -226,7 +217,6 @@ oc_reverse_df.data.frame <- # nolint - see lintr issue #223
         no_annotations = rlang::eval_tidy(no_annotations, data = data),
         roadinfo = rlang::eval_tidy(roadinfo, data = data),
         no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
-        no_record = no_record,
         abbrv = rlang::eval_tidy(abbrv, data = data),
         add_request = add_request
       )
@@ -252,7 +242,6 @@ oc_reverse_df.data.frame <- # nolint - see lintr issue #223
               no_annotations = !!no_annotations,
               roadinfo = !!roadinfo,
               no_dedupe = !!no_dedupe,
-              no_record = no_record,
               abbrv = !!abbrv,
               add_request = add_request
             )
@@ -298,7 +287,6 @@ oc_reverse_df.numeric <-
            min_confidence = NULL,
            no_annotations = TRUE,
            no_dedupe = FALSE,
-           no_record = FALSE,
            abbrv = FALSE,
            ...) {
     xdf <- tibble::tibble(latitude = latitude, longitude = longitude)
@@ -312,7 +300,6 @@ oc_reverse_df.numeric <-
       min_confidence = min_confidence,
       no_annotations = no_annotations,
       no_dedupe = no_dedupe,
-      no_record = no_record,
       abbrv = abbrv
     )
   }

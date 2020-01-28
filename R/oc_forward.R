@@ -59,9 +59,6 @@
 #'   road and driving information. Default is \code{FALSE}.
 #' @param no_dedupe Logical vector (default \code{FALSE}), when \code{TRUE}
 #'   the results will not be deduplicated.
-#' @param no_record Logical vector of length one (default \code{FALSE}), when
-#'   \code{TRUE} no log entry of the query is created, and the geocoding
-#'   request is not cached by OpenCage.
 #' @param abbrv Logical vector (default \code{FALSE}), when \code{TRUE}
 #'   addresses in the \code{formatted} field of the results are abbreviated
 #'   (e.g. "Main St." instead of "Main Street").
@@ -144,7 +141,6 @@ oc_forward <-
            no_annotations = TRUE,
            roadinfo = FALSE,
            no_dedupe = FALSE,
-           no_record = FALSE,
            abbrv = FALSE,
            add_request = FALSE,
            ...) {
@@ -156,10 +152,6 @@ oc_forward <-
 
     # check return
     return <- match.arg(return)
-
-    # get & check key
-    key <- Sys.getenv("OPENCAGE_KEY")
-    oc_check_key(key)
 
     # check arguments
     oc_check_query(
@@ -173,7 +165,6 @@ oc_forward <-
       no_annotations = no_annotations,
       roadinfo = roadinfo,
       no_dedupe = no_dedupe,
-      no_record = no_record,
       abbrv = abbrv,
       add_request = add_request
     )
@@ -181,7 +172,6 @@ oc_forward <-
     oc_process(
       placename = placename,
       return = return,
-      key = key,
       bounds = bounds,
       proximity = proximity,
       countrycode = countrycode,
@@ -191,7 +181,6 @@ oc_forward <-
       no_annotations = no_annotations,
       roadinfo = roadinfo,
       no_dedupe = no_dedupe,
-      no_record = no_record,
       abbrv = abbrv,
       add_request = add_request
     )
@@ -203,7 +192,6 @@ oc_forward <-
 #' Forward geocoding from a placename variable to latitude and longitude
 #'   tuple(s).
 #'
-#' @inheritParams oc_forward
 #' @param data A data frame.
 # nolint start - link longer than 80 chars
 #' @param placename An unquoted variable name of a character vector with the
@@ -219,8 +207,7 @@ oc_forward <-
 #'   a new tibble.
 #' @param output A character vector of length one indicating whether only
 #'   latitude, longitude, and formatted address variables (\code{"short"}, the
-#'   default) should be returned or all variables (\code{"all"}) variables
-#'   should be returned.
+#'   default), or all variables (\code{"all"}) variables should be returned.
 #' @param bounds A list of length one, or an unquoted variable name of a list
 #'   column of bounding boxes. Bounding boxes are named numeric vectors, each
 #'   with 4 coordinates forming the south-west and north-east corners of the
@@ -312,7 +299,7 @@ oc_forward <-
 #'               bounds = oc_bbox(-5, 45, 15, 55))
 #'
 #' # oc_forward_df accepts unquoted column names for all
-#' # arguments except bind_cols, output, and no_record.
+#' # arguments except bind_cols and output.
 #' # This makes it possible to build up more detailed queries
 #' # through the data frame passed to the data argument.
 #'
@@ -368,7 +355,6 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
            no_annotations = TRUE,
            roadinfo = FALSE,
            no_dedupe = FALSE,
-           no_record = FALSE,
            abbrv = FALSE,
            ...) {
 
@@ -413,7 +399,6 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
         no_annotations = rlang::eval_tidy(no_annotations, data = data),
         roadinfo = rlang::eval_tidy(roadinfo, data = data),
         no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
-        no_record = no_record,
         abbrv = rlang::eval_tidy(abbrv, data = data),
         add_request = add_request
       )
@@ -454,7 +439,6 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
               no_annotations = !!no_annotations,
               roadinfo = !!roadinfo,
               no_dedupe = !!no_dedupe,
-              no_record = no_record,
               abbrv = !!abbrv,
               add_request = add_request
             )
@@ -508,7 +492,6 @@ oc_forward_df.character <-
            no_annotations = TRUE,
            roadinfo = FALSE,
            no_dedupe = FALSE,
-           no_record = FALSE,
            abbrv = FALSE,
            ...) {
     xdf <- tibble::tibble(placename = placename)
@@ -525,7 +508,6 @@ oc_forward_df.character <-
       min_confidence = min_confidence,
       no_annotations = no_annotations,
       no_dedupe = no_dedupe,
-      no_record = no_record,
       abbrv = abbrv
     )
   }

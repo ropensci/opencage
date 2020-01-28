@@ -1,3 +1,21 @@
+oc_check_logical <- function(variable, check_length_one = FALSE) {
+  if (!is.null(variable)) {
+    if (!is.logical(variable)) {
+      var_name <- deparse(substitute(variable)) # deparse only if check fails
+      stop(
+        paste0("`", var_name, "` must be a logical vector."),
+        call. = FALSE
+      )
+    } else if (check_length_one && !identical(length(variable), 1L)) {
+      var_name <- deparse(substitute(variable)) # deparse only if check fails
+      stop(
+        paste0("`", var_name, "` must be a vector of length one."),
+        call. = FALSE
+      )
+    }
+  }
+}
+
 #' Check OpenCage query arguments
 #'
 #' Function that checks the query arguments passed to OpenCage
@@ -22,7 +40,6 @@ oc_check_query <-
     no_annotations = NULL,
     roadinfo = NULL,
     no_dedupe = NULL,
-    no_record = NULL,
     abbrv = NULL,
     add_request = NULL
   ) {
@@ -55,8 +72,7 @@ oc_check_query <-
 
     purrr::pwalk(
       .l = arglist,
-      .f = .oc_check_query,
-      no_record = no_record
+      .f = .oc_check_query
     )
   }
 
@@ -74,7 +90,6 @@ oc_check_query <-
     no_annotations = NULL,
     roadinfo = NULL,
     no_dedupe = NULL,
-    no_record = NULL,
     abbrv = NULL,
     add_request = NULL
   ) {
@@ -181,47 +196,14 @@ oc_check_query <-
       }
     }
 
-    # check no_annotations
-    if (!is.null(no_annotations)) {
-      if (!is.logical(no_annotations)) {
-        stop(call. = FALSE, "`no_annotations` must be a logical vector.")
-      }
-    }
+    oc_check_logical(no_annotations)
 
-    # check no_annotations
-    if (!is.null(roadinfo)) {
-      if (!is.logical(roadinfo)) {
-        stop(call. = FALSE, "`roadinfo` must be a logical vector.")
-      }
-    }
+    oc_check_logical(roadinfo)
 
-    # check no_dedupe
-    if (!is.null(no_dedupe)) {
-      if (!is.logical(no_dedupe)) {
-        stop(call. = FALSE, "`no_dedupe` must be a logical vector.")
-      }
-    }
+    oc_check_logical(no_dedupe)
 
-    # check no_record
-    if (!is.null(no_record)) {
-      if (!is.logical(no_record)) {
-        stop(call. = FALSE, "`no_record` must be a logical vector.")
-      } else if (length(no_record) > 1) {
-        stop(call. = FALSE, "`no_record` must be a vector of length one.")
-      }
-    }
+    oc_check_logical(abbrv)
 
-    # check abbrv
-    if (!is.null(abbrv)) {
-      if (!is.logical(abbrv)) {
-        stop(call. = FALSE, "`abbrv` must be a logical vector.")
-      }
-    }
+    oc_check_logical(add_request)
 
-    # check add_request
-    if (!is.null(add_request)) {
-      if (!is.logical(add_request)) {
-        stop(call. = FALSE, "`add_request` must be a logical vector.")
-      }
-    }
   }

@@ -8,7 +8,7 @@ oc_forward(placename, return = c("df_list", "json_list", "geojson_list",
   "url_only"), bounds = NULL, proximity = NULL, countrycode = NULL,
   language = NULL, limit = 10L, min_confidence = NULL,
   no_annotations = TRUE, roadinfo = FALSE, no_dedupe = FALSE,
-  no_record = FALSE, abbrv = FALSE, add_request = FALSE, ...)
+  abbrv = FALSE, add_request = FALSE, ...)
 }
 \arguments{
 \item{placename}{A character vector with the placename(s) to be geocoded.
@@ -75,10 +75,6 @@ road and driving information. Default is \code{FALSE}.}
 
 \item{no_dedupe}{Logical vector (default \code{FALSE}), when \code{TRUE}
 the results will not be deduplicated.}
-
-\item{no_record}{Logical vector of length one (default \code{FALSE}), when
-\code{TRUE} no log entry of the query is created, and the geocoding
-request is not cached by OpenCage.}
 
 \item{abbrv}{Logical vector (default \code{FALSE}), when \code{TRUE}
 addresses in the \code{formatted} field of the results are abbreviated

@@ -12,13 +12,12 @@ oc_forward_df(...)
   output = c("short", "all"), bounds = NULL, proximity = NULL,
   countrycode = NULL, language = NULL, limit = 1L,
   min_confidence = NULL, no_annotations = TRUE, roadinfo = FALSE,
-  no_dedupe = FALSE, no_record = FALSE, abbrv = FALSE, ...)
+  no_dedupe = FALSE, abbrv = FALSE, ...)
 
 \method{oc_forward_df}{character}(placename, output = c("short", "all"),
   bounds = NULL, proximity = NULL, countrycode = NULL, language = NULL,
   limit = 1L, min_confidence = NULL, no_annotations = TRUE,
-  roadinfo = FALSE, no_dedupe = FALSE, no_record = FALSE, abbrv = FALSE,
-  ...)
+  roadinfo = FALSE, no_dedupe = FALSE, abbrv = FALSE, ...)
 }
 \arguments{
 \item{...}{Ignored.}
@@ -39,8 +38,7 @@ a new tibble.}
 
 \item{output}{A character vector of length one indicating whether only
 latitude, longitude, and formatted address variables (\code{"short"}, the
-default) should be returned or all variables (\code{"all"}) variables
-should be returned.}
+default), or all variables (\code{"all"}) variables should be returned.}
 
 \item{bounds}{A list of length one, or an unquoted variable name of a list
 column of bounding boxes. Bounding boxes are named numeric vectors, each
@@ -102,10 +100,6 @@ information. Default is \code{FALSE}.}
 vector. Default is \code{FALSE}. When \code{TRUE} the results will not be
 deduplicated.}
 
-\item{no_record}{Logical vector of length one (default \code{FALSE}), when
-\code{TRUE} no log entry of the query is created, and the geocoding
-request is not cached by OpenCage.}
-
 \item{abbrv}{Logical vector, or an unquoted variable name of such a vector.
 Default is \code{FALSE}. When \code{TRUE} addresses in the
 \code{oc_formatted} variable of the results are abbreviated (e.g. "Main
@@ -143,7 +137,7 @@ oc_forward_df(df, placename = locations,
               bounds = oc_bbox(-5, 45, 15, 55))
 
 # oc_forward_df accepts unquoted column names for all
-# arguments except bind_cols, output, and no_record.
+# arguments except bind_cols and output.
 # This makes it possible to build up more detailed queries
 # through the data frame passed to the data argument.
 

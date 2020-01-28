@@ -35,7 +35,7 @@ test_that("oc_config throws error with faulty OpenCage key", {
 })
 
 
-# test rate_sec argument
+# test rate_sec argument --------------------------------------------------
 
 timer <- function(expr) {
   system.time(expr)[["elapsed"]]
@@ -64,4 +64,28 @@ test_that("oc_config updates rate limit of oc_get_limit", {
   t <- timer(oc_get_limited_test(rps + 1))
   expect_gt(t, 1)
   expect_lt(t, 2)
+})
+
+
+# test no_record argument -------------------------------------------------
+
+test_that("oc_config sets no_record", {
+
+  # Default without envvar and oc_config: no_record = FALSE
+  withr::local_options(list(oc_no_record = NULL))
+  res <- oc_process("Hamburg", return = "url_only", get_key = FALSE)
+  expect_match(res[[1]], "&no_record=0", fixed = TRUE)
+
+  # Default with oc_config: no_record = FALSE
+  oc_config()
+  expect_equal(getOption("oc_no_record"), FALSE)
+  res <- oc_process("Hamburg", return = "url_only", get_key = FALSE)
+  expect_match(res[[1]], "&no_record=0", fixed = TRUE)
+
+  # oc_config sets no_record = TRUE
+  oc_config(no_record = TRUE)
+  expect_equal(getOption("oc_no_record"), TRUE)
+  res <- oc_process("Hamburg", return = "url_only", get_key = FALSE)
+  expect_match(res[[1]], "&no_record=1", fixed = TRUE)
+
 })

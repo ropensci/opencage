@@ -19,6 +19,9 @@ NULL
 #' @param key Your OpenCage API key as a character vector of length one. By
 #'   default, \code{\link{opencage_key}} will attempt to retrieve the key from
 #'   the environment variable \code{OPENCAGE_KEY}.
+#' @param no_record Logical vector of length one (default \code{FALSE}), when
+#'   \code{TRUE} no log entry of the query is created, and the geocoding
+#'   request is not cached by OpenCage.
 #' @inheritParams oc_forward
 #'
 #' @return A list with
@@ -63,7 +66,7 @@ opencage_forward <-
 
     .Deprecated("oc_forward")
 
-    oc_config(key = key)
+    oc_config(key = key, no_record = no_record)
 
     lst <- oc_forward(
       placename = placename,
@@ -75,7 +78,6 @@ opencage_forward <-
       min_confidence = min_confidence,
       no_annotations = no_annotations,
       no_dedupe = no_dedupe,
-      no_record = no_record,
       abbrv = abbrv,
       add_request = add_request
     )
@@ -89,14 +91,12 @@ opencage_forward <-
 #' Deprecated: use \code{oc_reverse} or \code{oc_reverse_df} for reverse
 #' geocoding.
 #'
-#' @param key Your OpenCage API key as a character vector of length one. By
-#'   default, \code{\link{opencage_key}} will attempt to retrieve the key from
-#'   the environment variable \code{OPENCAGE_KEY}.
 #' @param bounds Bounding box, ignored for reverse geocoding.
 #' @param countrycode Country code, ignored for reverse geocoding.
 #' @param limit How many results should be returned (1-100), ignored for reverse
 #'   geocoding.
 #' @inheritParams oc_reverse
+#' @inheritParams opencage_forward
 #' @inherit opencage_forward return
 #'
 #' @export
@@ -131,7 +131,7 @@ opencage_reverse <-
 
     .Deprecated("oc_reverse")
 
-    oc_config(key = key)
+    oc_config(key = key, no_record = no_record)
 
     lst <- oc_reverse(
       latitude = latitude,
@@ -142,7 +142,6 @@ opencage_reverse <-
       min_confidence = min_confidence,
       no_annotations = no_annotations,
       no_dedupe = no_dedupe,
-      no_record = no_record,
       abbrv = abbrv,
       add_request = add_request
     )

@@ -1,7 +1,7 @@
 Type: Package
 Package: opencage
 Title: Geocode with the OpenCage API
-Version: 0.1.4.9004
+Version: 0.1.4.9005
 Authors@R: c(
     person("Maëlle", "Salmon", email = "maelle.salmon@yahoo.se", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-2815-0399")), 
     person("Daniel", "Possenriede", role = "aut", comment = c(ORCID = "0000-0002-6738-9845")),
