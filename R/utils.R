@@ -103,19 +103,6 @@ oc_get <- function(oc_url) {
   client$get()
 }
 
-# limit requests per second
-oc_get_limited <-
-  ratelimitr::limit_rate(
-    oc_get,
-    # rate can be changed via oc_config()/ratelimitr::UPDATE_RATE()
-    ratelimitr::rate(
-      n = 1L,
-      period = 1L
-    )
-  )
-
-oc_get_memoise <- memoise::memoise(oc_get_limited)
-
 # initialise progress bar
 oc_init_progress <- function(vec) {
   progress::progress_bar$new(
