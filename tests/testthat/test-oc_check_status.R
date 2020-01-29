@@ -20,7 +20,6 @@ test_that("oc_check_status returns 400 error if request is invalid", {
     oc_process(
       latitude = 280,
       longitude = 0,
-      key = Sys.getenv("OPENCAGE_KEY"),
       return = "json_list"
     ),
     "HTTP failure: 400"
@@ -29,7 +28,6 @@ test_that("oc_check_status returns 400 error if request is invalid", {
   expect_error(
     oc_process(
       placename = "",
-      key = Sys.getenv("OPENCAGE_KEY"),
       return = "json_list"
     ),
     "HTTP failure: 400"

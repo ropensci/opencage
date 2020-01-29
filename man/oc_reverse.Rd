@@ -7,7 +7,7 @@
 oc_reverse(latitude, longitude, return = c("df_list", "json_list",
   "geojson_list", "url_only"), language = NULL, min_confidence = NULL,
   no_annotations = TRUE, roadinfo = FALSE, no_dedupe = FALSE,
-  no_record = FALSE, abbrv = FALSE, add_request = FALSE, ...)
+  abbrv = FALSE, add_request = FALSE, ...)
 }
 \arguments{
 \item{latitude, longitude}{Numeric vectors of latitude and longitude values.}
@@ -44,10 +44,6 @@ road and driving information. Default is \code{FALSE}.}
 
 \item{no_dedupe}{Logical vector (default \code{FALSE}), when \code{TRUE}
 the results will not be deduplicated.}
-
-\item{no_record}{Logical vector of length one (default \code{FALSE}), when
-\code{TRUE} no log entry of the query is created, and the geocoding
-request is not cached by OpenCage.}
 
 \item{abbrv}{Logical vector (default \code{FALSE}), when \code{TRUE}
 addresses in the \code{formatted} field of the results are abbreviated

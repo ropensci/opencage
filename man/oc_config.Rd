@@ -5,7 +5,8 @@
 \title{Configure settings}
 \usage{
 oc_config(key = Sys.getenv("OPENCAGE_KEY"),
-  rate_sec = getOption("oc_rate_sec", default = 1L), ...)
+  rate_sec = getOption("oc_rate_sec", default = 1L),
+  no_record = getOption("oc_no_record", default = FALSE), ...)
 }
 \arguments{
 \item{key}{Your OpenCage API key as a character vector of length one. Do not
@@ -14,6 +15,11 @@ pass the key directly as a parameter, though. See details.}
 \item{rate_sec}{Numeric vector of length one. Sets the maximum number of
 requests sent to the OpenCage API per second. Defaults to the value set in
 the \code{oc_rate_sec} option, or, in case that does not exist, to 1L.}
+
+\item{no_record}{Logical vector of length one. When \code{TRUE} OpenCage will
+not create log entries of the queries and will not cache the geocoding
+requests. Defaults to the value set in the \code{oc_no_record} option, or,
+in case that does not exist, to FALSE.}
 
 \item{...}{Ignored.}
 }
@@ -38,7 +44,10 @@ R Programming}. From there it will be fetched by all functions that call the
 OpenCage API, so you do not even have to call \code{oc_config} to set your
 key, but can start geocoding right away. If you have the \pkg{usethis}
 package installed, you can edit your \code{\link[base:Startup]{.Renviron}}
-most easily with \code{usethis::edit_r_environ()}.
+most easily with \code{usethis::edit_r_environ()}. We strongly recommend
+storing your API key in the user-level .Renviron, as opposed to the
+project-level, because this makes it less likely you will share sensitive
+information by mistake.
 
 2. If you use a package like \pkg{keyring} to store your credentials, you can
 safely pass your key in a script with a function call like this
@@ -61,5 +70,38 @@ setting the \code{oc_rate_sec} \link[base:options]{option} in your
 \code{\link[base:Startup]{.Rprofile}}. If you have the \code{usethis}
 package installed, you can edit your \code{\link[base:Startup]{.Rprofile}}
 most easily with \code{usethis::edit_r_profile()}.
+}
+
+\section{Prevent query logging and caching}{
+
+
+By default, OpenCage will store your queries in its server logs and will
+cache the forward geocoding requests on their side. They do this in order to
+speed up response times and to be able to debug errors and improve their
+service. Logs are automatically deleted after six months according to
+OpenCage's \href{https://opencagedata.com/gdpr}{page on data protection and
+GDPR}.
+
+If you set \code{no_record} to \code{TRUE}, the query contents are not logged
+nor cached. OpenCage still records that you made a request, but not the
+specific query you made. Please set \code{no_record} to \code{TRUE} if you
+have concerns about privacy and want OpenCage to have no record of your
+query.
+
+\code{oc_config} sets the \code{oc_no_record} \link[base:options]{option} for
+the active R session, so it will be used for all subsequent OpenCage queries.
+You can set the \code{oc_no_record} \link[base:options]{option} persistently
+across sessions in your \code{\link[base:Startup]{.Rprofile}}.
+
+Please note that the \pkg{opencage} package always caches the data it
+receives from the OpenCage API, but only for as long as your R session is
+alive.
+
+For more information on OpenCage's policies on privacy and data protection
+see \href{https://opencagedata.com/faq#legal}{their FAQs}, their
+\href{https://opencagedata.com/gdpr}{GDPR page}, and,
+for the \code{no_record} parameter, see the relevant
+\href{https://blog.opencagedata.com/post/145602604628/more-privacy-with-norecord-parameter}{blog
+post}.
 }
 
