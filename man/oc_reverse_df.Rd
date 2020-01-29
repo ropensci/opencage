@@ -96,7 +96,7 @@ oc_reverse_df(df, latitude = lat, longitude = lng,
               language = "fr")
 
 # oc_reverse_df accepts unquoted column names for all
-# arguments except bind_cols, and output.
+# arguments except bind_cols and output.
 # This makes it possible to build up more detailed queries
 # through the data frame passed to the data argument.
 
