@@ -8,16 +8,39 @@
 \usage{
 oc_forward_df(...)
 
-\method{oc_forward_df}{data.frame}(data, placename, bind_cols = TRUE,
-  output = c("short", "all"), bounds = NULL, proximity = NULL,
-  countrycode = NULL, language = NULL, limit = 1L,
-  min_confidence = NULL, no_annotations = TRUE, roadinfo = FALSE,
-  no_dedupe = FALSE, abbrv = FALSE, ...)
+\method{oc_forward_df}{data.frame}(
+  data,
+  placename,
+  bind_cols = TRUE,
+  output = c("short", "all"),
+  bounds = NULL,
+  proximity = NULL,
+  countrycode = NULL,
+  language = NULL,
+  limit = 1L,
+  min_confidence = NULL,
+  no_annotations = TRUE,
+  roadinfo = FALSE,
+  no_dedupe = FALSE,
+  abbrv = FALSE,
+  ...
+)
 
-\method{oc_forward_df}{character}(placename, output = c("short", "all"),
-  bounds = NULL, proximity = NULL, countrycode = NULL, language = NULL,
-  limit = 1L, min_confidence = NULL, no_annotations = TRUE,
-  roadinfo = FALSE, no_dedupe = FALSE, abbrv = FALSE, ...)
+\method{oc_forward_df}{character}(
+  placename,
+  output = c("short", "all"),
+  bounds = NULL,
+  proximity = NULL,
+  countrycode = NULL,
+  language = NULL,
+  limit = 1L,
+  min_confidence = NULL,
+  no_annotations = TRUE,
+  roadinfo = FALSE,
+  no_dedupe = FALSE,
+  abbrv = FALSE,
+  ...
+)
 }
 \arguments{
 \item{...}{Ignored.}
@@ -25,12 +48,12 @@ oc_forward_df(...)
 \item{data}{A data frame.}
 
 \item{placename}{An unquoted variable name of a character vector with the
-  placenames to be geocoded.
+placenames to be geocoded.
 
-  If the placenames are addresses, see
-  \href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's
-   instructions} on how to format addresses for best forward geocoding
-   results.}
+If the placenames are addresses, see
+\href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's
+instructions} on how to format addresses for best forward geocoding
+results.}
 
 \item{bind_cols}{When \code{bind_col = TRUE}, the default, the results are
 column bound to \code{data}. When \code{FALSE}, the results are returned as
@@ -46,7 +69,7 @@ with 4 coordinates forming the south-west and north-east corners of the
 bounding box: \code{list(c(xmin, ymin, xmax, ymax))}. \code{bounds}
 restricts the possible results to the supplied region. It can be specified
 with the \code{\link{oc_bbox}} helper. For example: \code{bounds =
-oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}. Default is
+  oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}. Default is
 \code{NULL}.}
 
 \item{proximity}{A list of length one, or an unquoted variable name of a list
@@ -69,7 +92,7 @@ vector, of \href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF BCP
 Portuguese). OpenCage will attempt to return results in that language.
 Alternatively you can specify the "native" tag, in which case OpenCage will
 attempt to return the response in the "official" language(s). In case the
-`language` parameter is set to `NULL` (which is the default), the tag is
+\code{language} parameter is set to \code{NULL} (which is the default), the tag is
 not recognized, or OpenCage does not have a record in that language, the
 results will be returned in English.}
 
@@ -107,11 +130,11 @@ St." instead of "Main Street").}
 }
 \value{
 A tibble. Column names coming from the OpenCage API are prefixed with
-  \code{"oc_"}.
+\code{"oc_"}.
 }
 \description{
 Forward geocoding from a placename variable to latitude and longitude
-  tuple(s).
+tuple(s).
 }
 \examples{
 
@@ -167,7 +190,7 @@ oc_forward_df(df2, placename = locations,
 }
 \seealso{
 \code{\link{oc_forward}} for inputs as vectors, or
-  \code{\link{oc_reverse}} and \code{\link{oc_reverse_df}} for reverse
-  geocoding. For more information about the API and the various parameters,
-  see the \href{https://opencagedata.com/api}{OpenCage API documentation}.
+\code{\link{oc_reverse}} and \code{\link{oc_reverse_df}} for reverse
+geocoding. For more information about the API and the various parameters,
+see the \href{https://opencagedata.com/api}{OpenCage API documentation}.
 }

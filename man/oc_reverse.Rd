@@ -4,10 +4,19 @@
 \alias{oc_reverse}
 \title{Reverse geocoding}
 \usage{
-oc_reverse(latitude, longitude, return = c("df_list", "json_list",
-  "geojson_list", "url_only"), language = NULL, min_confidence = NULL,
-  no_annotations = TRUE, roadinfo = FALSE, no_dedupe = FALSE,
-  abbrv = FALSE, add_request = FALSE, ...)
+oc_reverse(
+  latitude,
+  longitude,
+  return = c("df_list", "json_list", "geojson_list", "url_only"),
+  language = NULL,
+  min_confidence = NULL,
+  no_annotations = TRUE,
+  roadinfo = FALSE,
+  no_dedupe = FALSE,
+  abbrv = FALSE,
+  add_request = FALSE,
+  ...
+)
 }
 \arguments{
 \item{latitude, longitude}{Numeric vectors of latitude and longitude values.}
@@ -22,8 +31,8 @@ URL with which the API would be called (\code{url_only}).}
 tag} (such as "es" for Spanish or "pt-BR" for Brazilian Portuguese).
 OpenCage will attempt to return results in that language. Alternatively you
 can specify the "native" tag, in which case OpenCage will attempt to return
-the response in the "official" language(s). In case the `language`
-parameter is set to `NULL` (which is the default), the tag is not
+the response in the "official" language(s). In case the \code{language}
+parameter is set to \code{NULL} (which is the default), the tag is not
 recognized, or OpenCage does not have a record in that language, the
 results will be returned in English.}
 
@@ -60,18 +69,18 @@ API key used! This is currently ignored by OpenCage if return value is
 }
 \value{
 Depending on the \code{return} argument, \code{oc_reverse} returns a
-  list with either
-  \itemize{
-  \item the results as tibbles (\code{"df_list"}, the default),
-  \item the results as JSON specified as a list (\code{"json_list"}),
-  \item the results as GeoJSON specified as a list (\code{"geojson_list"}),
-  or
-  \item the URL of the OpenCage API call for debugging purposes
-  (\code{"url_only"}).
-  }
+list with either
+\itemize{
+\item the results as tibbles (\code{"df_list"}, the default),
+\item the results as JSON specified as a list (\code{"json_list"}),
+\item the results as GeoJSON specified as a list (\code{"geojson_list"}),
+or
+\item the URL of the OpenCage API call for debugging purposes
+(\code{"url_only"}).
+}
 
-  When the results are returned as (a list of) tibbles, the column names
-  coming from the OpenCage API are prefixed with \code{"oc_"}.
+When the results are returned as (a list of) tibbles, the column names
+coming from the OpenCage API are prefixed with \code{"oc_"}.
 }
 \description{
 Reverse geocoding from numeric vectors of latitude and longitude to
@@ -99,7 +108,7 @@ oc_reverse(latitude = lat, longitude = lng,
 }
 \seealso{
 \code{\link{oc_reverse_df}} for inputs as a data frame, or
-  \code{\link{oc_forward}} and \code{\link{oc_forward}} for forward
-  geocoding. For more information about the API and the various parameters,
-  see the \href{https://opencagedata.com/api}{OpenCage API documentation}.
+\code{\link{oc_forward}} and \code{\link{oc_forward}} for forward
+geocoding. For more information about the API and the various parameters,
+see the \href{https://opencagedata.com/api}{OpenCage API documentation}.
 }

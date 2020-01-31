@@ -4,10 +4,21 @@
 \alias{opencage_reverse}
 \title{Reverse geocoding}
 \usage{
-opencage_reverse(latitude, longitude, key = opencage_key(), bounds = NULL,
-  countrycode = NULL, language = NULL, limit = 10,
-  min_confidence = NULL, no_annotations = FALSE, no_dedupe = FALSE,
-  no_record = FALSE, abbrv = FALSE, add_request = TRUE)
+opencage_reverse(
+  latitude,
+  longitude,
+  key = opencage_key(),
+  bounds = NULL,
+  countrycode = NULL,
+  language = NULL,
+  limit = 10,
+  min_confidence = NULL,
+  no_annotations = FALSE,
+  no_dedupe = FALSE,
+  no_record = FALSE,
+  abbrv = FALSE,
+  add_request = TRUE
+)
 }
 \arguments{
 \item{latitude}{Numeric vectors of latitude and longitude values.}
@@ -27,8 +38,8 @@ the environment variable \code{OPENCAGE_KEY}.}
 tag} (such as "es" for Spanish or "pt-BR" for Brazilian Portuguese).
 OpenCage will attempt to return results in that language. Alternatively you
 can specify the "native" tag, in which case OpenCage will attempt to return
-the response in the "official" language(s). In case the `language`
-parameter is set to `NULL` (which is the default), the tag is not
+the response in the "official" language(s). In case the \code{language}
+parameter is set to \code{NULL} (which is the default), the tag is not
 recognized, or OpenCage does not have a record in that language, the
 results will be returned in English.}
 

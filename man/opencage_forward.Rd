@@ -4,17 +4,27 @@
 \alias{opencage_forward}
 \title{Forward geocoding}
 \usage{
-opencage_forward(placename, key = opencage_key(), bounds = NULL,
-  countrycode = NULL, language = NULL, limit = 10L,
-  min_confidence = NULL, no_annotations = FALSE, no_dedupe = FALSE,
-  no_record = FALSE, abbrv = FALSE, add_request = TRUE)
+opencage_forward(
+  placename,
+  key = opencage_key(),
+  bounds = NULL,
+  countrycode = NULL,
+  language = NULL,
+  limit = 10L,
+  min_confidence = NULL,
+  no_annotations = FALSE,
+  no_dedupe = FALSE,
+  no_record = FALSE,
+  abbrv = FALSE,
+  add_request = TRUE
+)
 }
 \arguments{
 \item{placename}{A character vector with the placename(s) to be geocoded.
 If the placenames are addresses, see
 \href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's
- instructions} on how to format addresses for best forward geocoding
- results.}
+instructions} on how to format addresses for best forward geocoding
+results.}
 
 \item{key}{Your OpenCage API key as a character vector of length one. By
 default, \code{\link{opencage_key}} will attempt to retrieve the key from
@@ -26,7 +36,7 @@ with four coordinates forming the south-west and north-east corners of the
 bounding box: \code{list(c(xmin, ymin, xmax, ymax))}. \code{bounds}
 restricts the possible results to the supplied region. It can be specified
 with the \code{\link{oc_bbox}} helper. For example: \code{bounds =
-oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}. Default is
+  oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}. Default is
 \code{NULL}.}
 
 \item{countrycode}{A two letter code as defined by the
@@ -40,8 +50,8 @@ per \code{placename} must be wrapped in a list. Default is \code{NULL}.}
 tag} (such as "es" for Spanish or "pt-BR" for Brazilian Portuguese).
 OpenCage will attempt to return results in that language. Alternatively you
 can specify the "native" tag, in which case OpenCage will attempt to return
-the response in the "official" language(s). In case the `language`
-parameter is set to `NULL` (which is the default), the tag is not
+the response in the "official" language(s). In case the \code{language}
+parameter is set to \code{NULL} (which is the default), the tag is not
 recognized, or OpenCage does not have a record in that language, the
 results will be returned in English.}
 

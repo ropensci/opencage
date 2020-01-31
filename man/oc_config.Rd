@@ -4,9 +4,12 @@
 \alias{oc_config}
 \title{Configure settings}
 \usage{
-oc_config(key = Sys.getenv("OPENCAGE_KEY"),
+oc_config(
+  key = Sys.getenv("OPENCAGE_KEY"),
   rate_sec = getOption("oc_rate_sec", default = 1L),
-  no_record = getOption("oc_no_record", default = FALSE), ...)
+  no_record = getOption("oc_no_record", default = FALSE),
+  ...
+)
 }
 \arguments{
 \item{key}{Your OpenCage API key as a character vector of length one. Do not
@@ -34,8 +37,8 @@ to retrieve your OpenCage key. \code{\link{oc_config}} will help to set that
 environment variable. Do not pass the key directly as a parameter to the
 function, though, as you risk exposing it via your script or your history.
 There are three safer ways to set your API key instead:
-
-1. Save your API key as an environment variable in
+\enumerate{
+\item Save your API key as an environment variable in
 \code{\link[base:Startup]{.Renviron}} as described in
 \href{https://rstats.wtf/r-startup.html#renviron}{What They Forgot to Teach
 You About R} or
@@ -48,14 +51,13 @@ most easily with \code{usethis::edit_r_environ()}. We strongly recommend
 storing your API key in the user-level .Renviron, as opposed to the
 project-level, because this makes it less likely you will share sensitive
 information by mistake.
-
-2. If you use a package like \pkg{keyring} to store your credentials, you can
+\item If you use a package like \pkg{keyring} to store your credentials, you can
 safely pass your key in a script with a function call like this
 \code{oc_config(key = keyring::key_get("opencage"))}.
-
-3. If you call \code{oc_config} in an \code{\link[base]{interactive}} session
+\item If you call \code{oc_config} in an \code{\link[base]{interactive}} session
 and the \code{OPENCAGE_KEY} environment variable is not set, it will prompt
 you to enter the key in the console.
+}
 }
 
 \section{Set your OpenCage API rate limit}{

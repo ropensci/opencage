@@ -1,31 +1,26 @@
 Type: Package
 Package: opencage
 Title: Geocode with the OpenCage API
-Version: 0.1.4.9005
-Authors@R: c(
-    person("Maëlle", "Salmon", email = "maelle.salmon@yahoo.se", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-2815-0399")), 
-    person("Daniel", "Possenriede", role = "aut", comment = c(ORCID = "0000-0002-6738-9845")),
-    person("Jesse", "Sadler", role = "aut", comment = c(ORCID = "0000-0001-6081-9681")),
-    person("Noam", "Ross", role = "ctb"), 
-    person("Jake", "Russ", role = "ctb"), 
-    person("Julia", "Silge", role = c("rev"), comment = "Julia Silge reviewed the package for rOpenSci, see https://github.com/ropensci/onboarding/issues/36."))
-Description: Geocode with the OpenCage API, either from placename to longitude 
-    and latitude (forward geocoding) or from longitude and latitude to 
-    placename (reverse geocoding), see <https://opencagedata.com/>.
+Version: 0.1.4.9006
+Description: Geocode with the OpenCage API, either from
+    placename to longitude and latitude (forward geocoding) or from
+    longitude and latitude to placename (reverse geocoding), see
+    <https://opencagedata.com/>.
 License: GPL (>= 2)
-URL: http://github.com/ropensci/opencage
+URL: https://docs.ropensci.org/opencage,
+    http://github.com/ropensci/opencage
 BugReports: http://github.com/ropensci/opencage/issues
 Imports: 
     crul (>= 0.5.2),
     dplyr (>= 0.7.4),
     jsonlite (>= 1.5),
     memoise (>= 1.1.0),
+    progress (>= 1.1.2),
     purrr (>= 0.2.4),
     ratelimitr (>= 0.4.0),
     rlang,
-    progress (>= 1.1.2),
-    tidyr (>= 0.8.0),
-    tibble (>= 1.4.2)
+    tibble (>= 1.4.2),
+    tidyr (>= 0.8.0)
 Suggests: 
     knitr (>= 1.19),
     rmarkdown (>= 1.8),
@@ -36,5 +31,5 @@ VignetteBuilder: knitr
 Encoding: UTF-8
 Language: en-GB
 LazyData: TRUE
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.0.2
-Roxygen: list(old_usage = TRUE)

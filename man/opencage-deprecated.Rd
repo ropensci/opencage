@@ -8,8 +8,8 @@ These functions still work but will be removed (defunct) in the next version.
 }
 \details{
 \itemize{
- \item \code{\link{opencage_forward}}
- \item \code{\link{opencage_reverse}}
- \item \code{\link{opencage_key}}
+\item \code{\link{opencage_forward}}
+\item \code{\link{opencage_reverse}}
+\item \code{\link{opencage_key}}
 }
 }

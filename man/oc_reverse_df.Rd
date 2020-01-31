@@ -8,14 +8,32 @@
 \usage{
 oc_reverse_df(...)
 
-\method{oc_reverse_df}{data.frame}(data, latitude, longitude,
-  bind_cols = TRUE, output = c("short", "all"), language = NULL,
-  min_confidence = NULL, roadinfo = FALSE, no_annotations = TRUE,
-  no_dedupe = FALSE, abbrv = FALSE, ...)
+\method{oc_reverse_df}{data.frame}(
+  data,
+  latitude,
+  longitude,
+  bind_cols = TRUE,
+  output = c("short", "all"),
+  language = NULL,
+  min_confidence = NULL,
+  roadinfo = FALSE,
+  no_annotations = TRUE,
+  no_dedupe = FALSE,
+  abbrv = FALSE,
+  ...
+)
 
-\method{oc_reverse_df}{numeric}(latitude, longitude, output = c("short",
-  "all"), language = NULL, min_confidence = NULL, no_annotations = TRUE,
-  no_dedupe = FALSE, abbrv = FALSE, ...)
+\method{oc_reverse_df}{numeric}(
+  latitude,
+  longitude,
+  output = c("short", "all"),
+  language = NULL,
+  min_confidence = NULL,
+  no_annotations = TRUE,
+  no_dedupe = FALSE,
+  abbrv = FALSE,
+  ...
+)
 }
 \arguments{
 \item{...}{Ignored.}
@@ -39,7 +57,7 @@ vector, of \href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF BCP
 Portuguese). OpenCage will attempt to return results in that language.
 Alternatively you can specify the "native" tag, in which case OpenCage will
 attempt to return the response in the "official" language(s). In case the
-`language` parameter is set to `NULL` (which is the default), the tag is
+\code{language} parameter is set to \code{NULL} (which is the default), the tag is
 not recognized, or OpenCage does not have a record in that language, the
 results will be returned in English.}
 
@@ -72,7 +90,7 @@ St." instead of "Main Street").}
 }
 \value{
 A tibble. Column names coming from the OpenCage API are prefixed with
-  \code{"oc_"}.
+\code{"oc_"}.
 }
 \description{
 Reverse geocoding from latitude and longitude variables to placenames.
@@ -113,7 +131,7 @@ oc_reverse_df(df2, latitude = lat, longitude = lng,
 }
 \seealso{
 \code{\link{oc_reverse}} for inputs as vectors, or
-  \code{\link{oc_forward}} and \code{\link{oc_forward}} for forward
-  geocoding. For more information about the API and the various parameters,
-  see the \href{https://opencagedata.com/api}{OpenCage API documentation}.
+\code{\link{oc_forward}} and \code{\link{oc_forward}} for forward
+geocoding. For more information about the API and the various parameters,
+see the \href{https://opencagedata.com/api}{OpenCage API documentation}.
 }

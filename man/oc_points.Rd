@@ -22,7 +22,7 @@ oc_points(...)
 }
 \value{
 A list of points. Each point is a named vector of length 2 containing
-  a latitude/longitude coordinate pair.
+a latitude/longitude coordinate pair.
 }
 \description{
 Create a list of points (latitude/longitude coordinate pairs) for OpenCage
