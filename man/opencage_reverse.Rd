@@ -33,15 +33,13 @@ the environment variable \code{OPENCAGE_KEY}.}
 
 \item{countrycode}{Country code, ignored for reverse geocoding.}
 
-\item{language}{An
-\href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF BCP 47 language
-tag} (such as "es" for Spanish or "pt-BR" for Brazilian Portuguese).
-OpenCage will attempt to return results in that language. Alternatively you
-can specify the "native" tag, in which case OpenCage will attempt to return
-the response in the "official" language(s). In case the \code{language}
-parameter is set to \code{NULL} (which is the default), the tag is not
-recognized, or OpenCage does not have a record in that language, the
-results will be returned in English.}
+\item{language}{An \href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF BCP 47 language tag} (such as "es" for
+Spanish or "pt-BR" for Brazilian Portuguese). OpenCage will attempt to
+return results in that language. Alternatively you can specify the "native"
+tag, in which case OpenCage will attempt to return the response in the
+"official" language(s). In case the \code{language} parameter is set to \code{NULL}
+(which is the default), the tag is not recognized, or OpenCage does not
+have a record in that language, the results will be returned in English.}
 
 \item{limit}{How many results should be returned (1-100), ignored for reverse
 geocoding.}
@@ -57,23 +55,22 @@ returned. Default is \code{NULL}.}
 information about the result location should be returned. \code{TRUE} by
 default, which means that the results will not contain annotations.}
 
-\item{no_dedupe}{Logical vector (default \code{FALSE}), when \code{TRUE}
-the results will not be deduplicated.}
+\item{no_dedupe}{Logical vector (default \code{FALSE}), when \code{TRUE} the results
+will not be deduplicated.}
 
-\item{no_record}{Logical vector of length one (default \code{FALSE}), when
-\code{TRUE} no log entry of the query is created, and the geocoding
-request is not cached by OpenCage.}
+\item{no_record}{Logical vector of length one (default \code{FALSE}), when \code{TRUE}
+no log entry of the query is created, and the geocoding request is not
+cached by OpenCage.}
 
-\item{abbrv}{Logical vector (default \code{FALSE}), when \code{TRUE}
-addresses in the \code{formatted} field of the results are abbreviated
-(e.g. "Main St." instead of "Main Street").}
+\item{abbrv}{Logical vector (default \code{FALSE}), when \code{TRUE} addresses in the
+\code{formatted} field of the results are abbreviated (e.g. "Main St." instead
+of "Main Street").}
 
-\item{add_request}{Logical vector (default \code{FALSE}) indicating whether
-the request is returned again with the results. If the \code{return} value
-is a \code{df_list}, the query text is added as a column to the results.
-\code{json_list} results will contain all request parameters, including the
-API key used! This is currently ignored by OpenCage if return value is
-\code{geojson_list}.}
+\item{add_request}{Logical vector (default \code{FALSE}) indicating whether the
+request is returned again with the results. If the \code{return} value is a
+\code{df_list}, the query text is added as a column to the results. \code{json_list}
+results will contain all request parameters, including the API key used!
+This is currently ignored by OpenCage if return value is \code{geojson_list}.}
 }
 \value{
 A list with
@@ -87,8 +84,7 @@ at which the number of remaining calls will be reset.
 }
 }
 \description{
-Deprecated: use \code{oc_reverse} or \code{oc_reverse_df} for reverse
-geocoding.
+Deprecated: use \code{oc_reverse} or \code{oc_reverse_df} for reverse geocoding.
 }
 \examples{
 \dontrun{

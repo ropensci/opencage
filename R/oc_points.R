@@ -4,8 +4,8 @@
 #' queries.
 #'
 #' @param latitude,longitude Numeric vectors of latitude and longitude values.
-#' @param data A \code{data.frame} containing at least 2 columns with
-#'   \code{latitude} and \code{longitude} values.
+#' @param data A `data.frame` containing at least 2 columns with `latitude` and
+#'   `longitude` values.
 #' @param ... Ignored.
 #'
 #' @return A list of points. Each point is a named vector of length 2 containing

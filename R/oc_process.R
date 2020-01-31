@@ -3,21 +3,21 @@
 #' This function processes all geocoding requests issued by
 #' \code{\link{oc_forward}} and \code{\link{oc_reverse}} by calling the
 #' respective functions (after the query arguments have been checked by
-#' \code{\link{oc_check_query}}). It builds the URL, fetches the results,
-#' checks the status of the returned results and finally parses them.
+#' \code{\link{oc_check_query}}). It builds the URL, fetches the results, checks
+#' the status of the returned results and finally parses them.
 #'
 #' @param limit The maximum number of results that should be returned. Integer
 #'   values between 1 and 100 are allowed, the default is 1.
 #' @inheritParams oc_forward
 #'
-#' @return \code{oc_forward} returns, depending on the \code{return} parameter,
+#' @return `oc_forward` returns, depending on the `return` parameter,
 #'   a list with either
 #'   \itemize{
-#'   \item the results as tibbles (\code{"df_list"}, the default),
-#'   \item the results as JSON lists (\code{"json_list"}),
-#'   \item the results as GeoJSON lists (\code{"geojson_list"}), or
+#'   \item the results as tibbles (`"df_list"`, the default),
+#'   \item the results as JSON lists (`"json_list"`),
+#'   \item the results as GeoJSON lists (`"geojson_list"`), or
 #'   \item the URL of the OpenCage API call for debugging purposes
-#'   (\code{"url_only"}).
+#'   (`"url_only"`).
 #'   }
 #'
 #' @noRd

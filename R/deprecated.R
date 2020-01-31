@@ -13,15 +13,14 @@ NULL
 
 #' Forward geocoding
 #'
-#' Deprecated: use \code{oc_forward} or \code{oc_forward_df} for forward
-#' geocoding.
+#' Deprecated: use `oc_forward` or `oc_forward_df` for forward geocoding.
 #'
 #' @param key Your OpenCage API key as a character vector of length one. By
 #'   default, \code{\link{opencage_key}} will attempt to retrieve the key from
-#'   the environment variable \code{OPENCAGE_KEY}.
-#' @param no_record Logical vector of length one (default \code{FALSE}), when
-#'   \code{TRUE} no log entry of the query is created, and the geocoding
-#'   request is not cached by OpenCage.
+#'   the environment variable `OPENCAGE_KEY`.
+#' @param no_record Logical vector of length one (default `FALSE`), when `TRUE`
+#'   no log entry of the query is created, and the geocoding request is not
+#'   cached by OpenCage.
 #' @inheritParams oc_forward
 #'
 #' @return A list with
@@ -88,8 +87,7 @@ opencage_forward <-
 
 #' Reverse geocoding
 #'
-#' Deprecated: use \code{oc_reverse} or \code{oc_reverse_df} for reverse
-#' geocoding.
+#' Deprecated: use `oc_reverse` or `oc_reverse_df` for reverse geocoding.
 #'
 #' @param bounds Bounding box, ignored for reverse geocoding.
 #' @param countrycode Country code, ignored for reverse geocoding.
@@ -199,10 +197,10 @@ opencage_format <- function(lst) {
 #' Retrieve Opencage API key
 #'
 #' @description Deprecated and will be removed from the package together with
-#'   \code{opencage_forward} and \code{opencage_reverse}.
+#'   `opencage_forward` and `opencage_reverse`.
 #'
 #'   Retrieves the OpenCage API Key from the environment variable
-#'   \code{OPENCAGE_KEY}.
+#'   `OPENCAGE_KEY`.
 #'
 #' @param quiet Logical vector of length one indicating whether the key is
 #'   returned quietly or whether a message is printed.

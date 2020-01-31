@@ -6,24 +6,24 @@
 #' @inheritParams oc_forward
 #' @param latitude,longitude Numeric vectors of latitude and longitude values.
 #'
-#' @return Depending on the \code{return} argument, \code{oc_reverse} returns a
-#'   list with either
+#' @return Depending on the `return` argument, `oc_reverse` returns a list with
+#'   either
 #'   \itemize{
-#'   \item the results as tibbles (\code{"df_list"}, the default),
-#'   \item the results as JSON specified as a list (\code{"json_list"}),
-#'   \item the results as GeoJSON specified as a list (\code{"geojson_list"}),
+#'   \item the results as tibbles (`"df_list"`, the default),
+#'   \item the results as JSON specified as a list (`"json_list"`),
+#'   \item the results as GeoJSON specified as a list (`"geojson_list"`),
 #'   or
 #'   \item the URL of the OpenCage API call for debugging purposes
-#'   (\code{"url_only"}).
+#'   (`"url_only"`).
 #'   }
 #'
 #'   When the results are returned as (a list of) tibbles, the column names
-#'   coming from the OpenCage API are prefixed with \code{"oc_"}.
+#'   coming from the OpenCage API are prefixed with `"oc_"`.
 #'
 #' @seealso \code{\link{oc_reverse_df}} for inputs as a data frame, or
 #'   \code{\link{oc_forward}} and \code{\link{oc_forward}} for forward
 #'   geocoding. For more information about the API and the various parameters,
-#'   see the \href{https://opencagedata.com/api}{OpenCage API documentation}.
+#'   see the [OpenCage API documentation](https://opencagedata.com/api).
 #'
 #' @export
 #'
@@ -102,20 +102,21 @@ oc_reverse <-
 #' Reverse geocoding with data frames
 #'
 #' Reverse geocoding from latitude and longitude variables to placenames.
-#' @inheritParams oc_forward_df
+#'
 #' @param latitude,longitude Unquoted variable names of numeric vectors of
 #'   latitude and longitude values.
 #' @param output A character vector of length one indicating whether only the
-#'   formatted address (\code{"short"}, the default) or all variables
-#'   (\code{"all"}) variables should be returned.
+#'   formatted address (`"short"`, the default) or all variables (`"all"`)
+#'   variables should be returned.
+#' @inheritParams oc_forward_df
 #'
 #' @return A tibble. Column names coming from the OpenCage API are prefixed with
-#'   \code{"oc_"}.
+#'   `"oc_"`.
 #'
 #' @seealso \code{\link{oc_reverse}} for inputs as vectors, or
 #'   \code{\link{oc_forward}} and \code{\link{oc_forward}} for forward
 #'   geocoding. For more information about the API and the various parameters,
-#'   see the \href{https://opencagedata.com/api}{OpenCage API documentation}.
+#'   see the [OpenCage API documentation](https://opencagedata.com/api).
 #'
 #' @export
 #'

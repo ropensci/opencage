@@ -2,21 +2,20 @@
 #'
 #' Create a list of bounding boxes for OpenCage queries.
 #'
-#' @param xmin Minimum longitude (also known as \code{min lon},
-#'   \code{southwest_lng}, \code{west}, or \code{left}).
-#' @param ymin Minimum latitude (also known as \code{min lat},
-#'   \code{southwest_lat}, \code{south}, or \code{bottom}).
-#' @param xmax Maximum longitude (also known as \code{max lon},
-#'   \code{northeast_lng}, \code{east}, or \code{right}).
-#' @param ymax Maximum latitude (also known as \code{max lat},
-#'   \code{northeast_lat}, \code{north}, or \code{top}).
-#' @param data A \code{data.frame} containing at least 4 columns with
-#'   \code{xmin}, \code{ymin}, \code{xmax}, and \code{ymax} values,
-#'   respectively.
-#' @param bbox A \code{bbox} object, see \code{sf::st_bbox}.
+#' @param xmin Minimum longitude (also known as `min_lon`, `southwest_lng`,
+#'   `west`, or `left`).
+#' @param ymin Minimum latitude (also known as `min_lat`, `southwest_lat`,
+#'   `south`, or `bottom`).
+#' @param xmax Maximum longitude (also known as `max_lon`, `northeast_lng`,
+#'   `east`, or `right`).
+#' @param ymax Maximum latitude (also known as `max_lat`, `northeast_lat`,
+#'   `north`, or `top`).
+#' @param data A `data.frame` containing at least 4 columns with `xmin`, `ymin`,
+#'   `xmax`, and `ymax` values, respectively.
+#' @param bbox A `bbox` object, see `sf::st_bbox`.
 #' @param ... Ignored.
 #'
-#' @return A list of bounding boxes, each of class \code{bbox}.
+#' @return A list of bounding boxes, each of class `bbox`.
 #' @export
 #'
 #' @examples

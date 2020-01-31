@@ -4,90 +4,86 @@
 #' longitude tuple(s).
 #'
 # nolint start - link longer than 80 chars
-#' @param placename A character vector with the placename(s) to be geocoded.
-#'   If the placenames are addresses, see
-#'   \href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's
-#'    instructions} on how to format addresses for best forward geocoding
-#'    results.
+#' @param placename A character vector with the placename(s) to be geocoded. If
+#'   the placenames are addresses, see [OpenCage's
+#'   instructions](https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md)
+#'   on how to format addresses for best forward geocoding results.
 # nolint end
 #' @param return A character vector of length one indicating the return value of
-#'   the function, either a list of tibbles (\code{df_list}, the default), a
-#'   JSON list (\code{json_list}), a GeoJSON list (\code{geojson_list}), or the
-#'   URL with which the API would be called (\code{url_only}).
-#' @param bounds A list of bounding boxes of length one or
-#'   \code{length(placename)}. Bounding boxes are named numeric vectors, each
-#'   with four coordinates forming the south-west and north-east corners of the
-#'   bounding box: \code{list(c(xmin, ymin, xmax, ymax))}. \code{bounds}
-#'   restricts the possible results to the supplied region. It can be specified
-#'   with the \code{\link{oc_bbox}} helper. For example: \code{bounds =
-#'   oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}. Default is
-#'   \code{NULL}.
-#' @param proximity A list of points of length one or \code{length(placename)}.
-#'   A point is a named numeric vector of a latitude, longitude coordinate pair
-#'   in decimal format. \code{proximity} provides OpenCage with a hint to bias
-#'   results in favour of those closer to the specified location. It can be
-#'   specified with the \code{\link{oc_points}} helper. For example:
-#'   \code{proximity = oc_points(51.9526, 7.6324)}. Default is \code{NULL}.
-#' @param countrycode A two letter code as defined by the
-#'   \href{https://www.iso.org/obp/ui/#search/code}{ISO 3166-1 Alpha 2} standard
-#'   that restricts the results to the given country or countries. E.g. "AR" for
-#'   Argentina, "FR" for France, "NZ" for the New Zealand. Multiple countrycodes
-#'   per \code{placename} must be wrapped in a list. Default is \code{NULL}.
-#' @param language An
-#'   \href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF BCP 47 language
-#'   tag} (such as "es" for Spanish or "pt-BR" for Brazilian Portuguese).
-#'   OpenCage will attempt to return results in that language. Alternatively you
-#'   can specify the "native" tag, in which case OpenCage will attempt to return
-#'   the response in the "official" language(s). In case the `language`
-#'   parameter is set to `NULL` (which is the default), the tag is not
-#'   recognized, or OpenCage does not have a record in that language, the
-#'   results will be returned in English.
-#' @param limit Numeric vector of integer values to determine the maximum
-#'   number of results returned for each \code{placename}. Integer values
-#'   between 1 and 100 are allowed. Default is 10.
+#'   the function, either a list of tibbles (`df_list`, the default), a JSON
+#'   list (`json_list`), a GeoJSON list (`geojson_list`), or the URL with which
+#'   the API would be called (`url_only`).
+#' @param bounds A list of bounding boxes of length one or `length(placename)`.
+#'   Bounding boxes are named numeric vectors, each with four coordinates
+#'   forming the south-west and north-east corners of the bounding box:
+#'   `list(c(xmin, ymin, xmax, ymax))`. `bounds` restricts the possible results
+#'   to the supplied region. It can be specified with the \code{\link{oc_bbox}}
+#'   helper. For example: `bounds = oc_bbox(-0.563160, 51.280430, 0.278970,
+#'   51.683979)`. Default is `NULL`.
+#' @param proximity A list of points of length one or `length(placename)`. A
+#'   point is a named numeric vector of a latitude, longitude coordinate pair in
+#'   decimal format. `proximity` provides OpenCage with a hint to bias results
+#'   in favour of those closer to the specified location. It can be specified
+#'   with the \code{\link{oc_points}} helper. For example: `proximity =
+#'   oc_points(51.9526, 7.6324)`. Default is `NULL`.
+#' @param countrycode A two letter code as defined by the [ISO 3166-1 Alpha
+#'   2](https://www.iso.org/obp/ui/#search/code) standard that restricts the
+#'   results to the given country or countries. E.g. "AR" for Argentina, "FR"
+#'   for France, "NZ" for the New Zealand. Multiple countrycodes per `placename`
+#'   must be wrapped in a list. Default is `NULL`.
+#' @param language An [IETF BCP 47 language
+#'   tag](https://en.wikipedia.org/wiki/IETF_language_tag) (such as "es" for
+#'   Spanish or "pt-BR" for Brazilian Portuguese). OpenCage will attempt to
+#'   return results in that language. Alternatively you can specify the "native"
+#'   tag, in which case OpenCage will attempt to return the response in the
+#'   "official" language(s). In case the `language` parameter is set to `NULL`
+#'   (which is the default), the tag is not recognized, or OpenCage does not
+#'   have a record in that language, the results will be returned in English.
+#' @param limit Numeric vector of integer values to determine the maximum number
+#'   of results returned for each `placename`. Integer values between 1 and 100
+#'   are allowed. Default is 10.
 #' @param min_confidence Numeric vector of integer values between 0 and 10
 #'   indicating the precision of the returned result as defined by its
 #'   geographical extent, (i.e. by the extent of the result's bounding box). See
-#'   the \href{https://opencagedata.com/api#confidence}{API documentation} for
+#'   the [API documentation](https://opencagedata.com/api#confidence) for
 #'   details. Only results with at least the requested confidence will be
-#'   returned. Default is \code{NULL}.
+#'   returned. Default is `NULL`.
 #' @param no_annotations Logical vector indicating whether additional
-#'   information about the result location should be returned. \code{TRUE} by
+#'   information about the result location should be returned. `TRUE` by
 #'   default, which means that the results will not contain annotations.
 #' @param roadinfo Logical vector indicating whether the geocoder should attempt
 #'   to match the nearest road (rather than an address) and provide additional
-#'   road and driving information. Default is \code{FALSE}.
-#' @param no_dedupe Logical vector (default \code{FALSE}), when \code{TRUE}
-#'   the results will not be deduplicated.
-#' @param abbrv Logical vector (default \code{FALSE}), when \code{TRUE}
-#'   addresses in the \code{formatted} field of the results are abbreviated
-#'   (e.g. "Main St." instead of "Main Street").
-#' @param add_request Logical vector (default \code{FALSE}) indicating whether
-#'   the request is returned again with the results. If the \code{return} value
-#'   is a \code{df_list}, the query text is added as a column to the results.
-#'   \code{json_list} results will contain all request parameters, including the
-#'   API key used! This is currently ignored by OpenCage if return value is
-#'   \code{geojson_list}.
+#'   road and driving information. Default is `FALSE`.
+#' @param no_dedupe Logical vector (default `FALSE`), when `TRUE` the results
+#'   will not be deduplicated.
+#' @param abbrv Logical vector (default `FALSE`), when `TRUE` addresses in the
+#'   `formatted` field of the results are abbreviated (e.g. "Main St." instead
+#'   of "Main Street").
+#' @param add_request Logical vector (default `FALSE`) indicating whether the
+#'   request is returned again with the results. If the `return` value is a
+#'   `df_list`, the query text is added as a column to the results. `json_list`
+#'   results will contain all request parameters, including the API key used!
+#'   This is currently ignored by OpenCage if return value is `geojson_list`.
 #' @param ... Ignored.
 #'
-#' @return Depending on the \code{return} argument, \code{oc_forward} returns
+#' @return Depending on the `return` argument, `oc_forward` returns
 #'   a list with either
 #'   \itemize{
-#'   \item the results as tibbles (\code{"df_list"}, the default),
-#'   \item the results as JSON specified as a list (\code{"json_list"}),
-#'   \item the results as GeoJSON specified as a list (\code{"geojson_list"}),
+#'   \item the results as tibbles (`"df_list"`, the default),
+#'   \item the results as JSON specified as a list (`"json_list"`),
+#'   \item the results as GeoJSON specified as a list (`"geojson_list"`),
 #'   or
 #'   \item the URL of the OpenCage API call for debugging purposes
-#'   (\code{"url_only"}).
+#'   (`"url_only"`).
 #'   }
 #'
 #'   When the results are returned as (a list of) tibbles, the column names
-#'   coming from the OpenCage API are prefixed with \code{"oc_"}.
+#'   coming from the OpenCage API are prefixed with `"oc_"`.
 #'
 #' @seealso \code{\link{oc_forward_df}} for inputs as a data frame, or
 #'   \code{\link{oc_reverse}} and \code{\link{oc_reverse_df}} for reverse
 #'   geocoding. For more information about the API and the various parameters,
-#'   see the \href{https://opencagedata.com/api}{OpenCage API documentation}.
+#'   see the [OpenCage API documentation](https://opencagedata.com/api).
 #'
 #' @export
 #'
@@ -190,88 +186,84 @@ oc_forward <-
 #' Forward geocoding with data frames
 #'
 #' Forward geocoding from a placename variable to latitude and longitude
-#'   tuple(s).
+#' tuple(s).
 #'
 #' @param data A data frame.
 # nolint start - link longer than 80 chars
 #' @param placename An unquoted variable name of a character vector with the
 #'   placenames to be geocoded.
 #'
-#'   If the placenames are addresses, see
-#'   \href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's
-#'    instructions} on how to format addresses for best forward geocoding
-#'    results.
+#'   If the placenames are addresses, see [OpenCage's
+#'   instructions](https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md)
+#'   on how to format addresses for best forward geocoding results.
 # nolint end
-#' @param bind_cols When \code{bind_col = TRUE}, the default, the results are
-#'   column bound to \code{data}. When \code{FALSE}, the results are returned as
-#'   a new tibble.
+#' @param bind_cols When `bind_col = TRUE`, the default, the results are column
+#'   bound to `data`. When `FALSE`, the results are returned as a new tibble.
 #' @param output A character vector of length one indicating whether only
-#'   latitude, longitude, and formatted address variables (\code{"short"}, the
-#'   default), or all variables (\code{"all"}) variables should be returned.
+#'   latitude, longitude, and formatted address variables (`"short"`, the
+#'   default), or all variables (`"all"`) variables should be returned.
 #' @param bounds A list of length one, or an unquoted variable name of a list
 #'   column of bounding boxes. Bounding boxes are named numeric vectors, each
 #'   with 4 coordinates forming the south-west and north-east corners of the
-#'   bounding box: \code{list(c(xmin, ymin, xmax, ymax))}. \code{bounds}
-#'   restricts the possible results to the supplied region. It can be specified
-#'   with the \code{\link{oc_bbox}} helper. For example: \code{bounds =
-#'   oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}. Default is
-#'   \code{NULL}.
+#'   bounding box: `list(c(xmin, ymin, xmax, ymax))`. `bounds` restricts the
+#'   possible results to the supplied region. It can be specified with the
+#'   \code{\link{oc_bbox}} helper. For example: `bounds = oc_bbox(-0.563160,
+#'   51.280430, 0.278970, 51.683979)`. Default is `NULL`.
 #' @param proximity A list of length one, or an unquoted variable name of a list
 #'   column of points. Points are named numeric vectors with latitude, longitude
-#'   coordinate pairs in decimal format. \code{proximity} provides OpenCage with
-#'   a hint to bias results in favour of those closer to the specified location.
+#'   coordinate pairs in decimal format. `proximity` provides OpenCage with a
+#'   hint to bias results in favour of those closer to the specified location.
 #'   It can be specified with the \code{\link{oc_points}} helper. For example:
-#'   \code{proximity = oc_points(41.40139, 2.12870)}. Default is \code{NULL}.
+#'   `proximity = oc_points(41.40139, 2.12870)`. Default is `NULL`.
 #' @param countrycode Character vector, or an unquoted variable name of such a
-#'   vector, of two-letter codes as defined by the
-#'   \href{https://www.iso.org/obp/ui/#search/code}{ISO 3166-1 Alpha 2} standard
-#'   that restricts the results to the given country or countries. E.g. "AR" for
-#'   Argentina, "FR" for France, "NZ" for the New Zealand. Multiple countrycodes
-#'   per \code{placename} must be wrapped in a list. Default is \code{NULL}.
+#'   vector, of two-letter codes as defined by the [ISO 3166-1 Alpha
+#'   2](https://www.iso.org/obp/ui/#search/code) standard that restricts the
+#'   results to the given country or countries. E.g. "AR" for Argentina, "FR"
+#'   for France, "NZ" for the New Zealand. Multiple countrycodes per `placename`
+#'   must be wrapped in a list. Default is `NULL`.
 #' @param language Character vector, or an unquoted variable name of such a
-#'   vector, of \href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF BCP
-#'   47 language tags} (such as "es" for Spanish or "pt-BR" for Brazilian
-#'   Portuguese). OpenCage will attempt to return results in that language.
-#'   Alternatively you can specify the "native" tag, in which case OpenCage will
-#'   attempt to return the response in the "official" language(s). In case the
-#'   `language` parameter is set to `NULL` (which is the default), the tag is
-#'   not recognized, or OpenCage does not have a record in that language, the
-#'   results will be returned in English.
+#'   vector, of [IETF BCP 47 language
+#'   tags](https://en.wikipedia.org/wiki/IETF_language_tag) (such as "es" for
+#'   Spanish or "pt-BR" for Brazilian Portuguese). OpenCage will attempt to
+#'   return results in that language. Alternatively you can specify the "native"
+#'   tag, in which case OpenCage will attempt to return the response in the
+#'   "official" language(s). In case the `language` parameter is set to `NULL`
+#'   (which is the default), the tag is not recognized, or OpenCage does not
+#'   have a record in that language, the results will be returned in English.
 #' @param limit Numeric vector of integer values, or an unquoted variable name
 #'   of such a vector, to determine the maximum number of results returned for
-#'   each \code{placename}. Integer values between 1 and 100 are allowed.
-#'   Default is 1.
+#'   each `placename`. Integer values between 1 and 100 are allowed. Default is
+#'   1.
 #' @param min_confidence Numeric vector of integer values, or an unquoted
 #'   variable name of such a vector, between 0 and 10 indicating the precision
 #'   of the returned result as defined by its geographical extent, (i.e. by the
-#'   extent of the result's bounding box). See the
-#'   \href{https://opencagedata.com/api#confidence}{API documentation} for
-#'   details. Only results with at least the requested confidence will be
-#'   returned. Default is \code{NULL}).
+#'   extent of the result's bounding box). See the [API
+#'   documentation](https://opencagedata.com/api#confidence) for details. Only
+#'   results with at least the requested confidence will be returned. Default is
+#'   `NULL`).
 #' @param no_annotations Logical vector, or an unquoted variable name of such a
 #'   vector, indicating whether additional information about the result location
-#'   should be returned. \code{TRUE} by default, which means that the results
-#'   will not contain annotations.
+#'   should be returned. `TRUE` by default, which means that the results will
+#'   not contain annotations.
 #' @param roadinfo Logical vector, or an unquoted variable name of such a
 #'   vector, indicating whether the geocoder should attempt to match the nearest
 #'   road (rather than an address) and provide additional road and driving
-#'   information. Default is \code{FALSE}.
+#'   information. Default is `FALSE`.
 #' @param no_dedupe Logical vector, or an unquoted variable name of such a
-#'   vector. Default is \code{FALSE}. When \code{TRUE} the results will not be
+#'   vector. Default is `FALSE`. When `TRUE` the results will not be
 #'   deduplicated.
 #' @param abbrv Logical vector, or an unquoted variable name of such a vector.
-#'   Default is \code{FALSE}. When \code{TRUE} addresses in the
-#'   \code{oc_formatted} variable of the results are abbreviated (e.g. "Main
-#'   St." instead of "Main Street").
+#'   Default is `FALSE`. When `TRUE` addresses in the `oc_formatted` variable of
+#'   the results are abbreviated (e.g. "Main St." instead of "Main Street").
 #' @param ... Ignored.
 #'
 #' @return A tibble. Column names coming from the OpenCage API are prefixed with
-#'   \code{"oc_"}.
+#'   `"oc_"`.
 #'
 #' @seealso \code{\link{oc_forward}} for inputs as vectors, or
 #'   \code{\link{oc_reverse}} and \code{\link{oc_reverse_df}} for reverse
 #'   geocoding. For more information about the API and the various parameters,
-#'   see the \href{https://opencagedata.com/api}{OpenCage API documentation}.
+#'   see the [OpenCage API documentation](https://opencagedata.com/api).
 #'
 #' @export
 #'

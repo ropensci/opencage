@@ -17,8 +17,8 @@ oc_points(...)
 
 \item{latitude, longitude}{Numeric vectors of latitude and longitude values.}
 
-\item{data}{A \code{data.frame} containing at least 2 columns with
-\code{latitude} and \code{longitude} values.}
+\item{data}{A \code{data.frame} containing at least 2 columns with \code{latitude} and
+\code{longitude} values.}
 }
 \value{
 A list of points. Each point is a named vector of length 2 containing

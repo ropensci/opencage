@@ -22,19 +22,17 @@ oc_reverse(
 \item{latitude, longitude}{Numeric vectors of latitude and longitude values.}
 
 \item{return}{A character vector of length one indicating the return value of
-the function, either a list of tibbles (\code{df_list}, the default), a
-JSON list (\code{json_list}), a GeoJSON list (\code{geojson_list}), or the
-URL with which the API would be called (\code{url_only}).}
+the function, either a list of tibbles (\code{df_list}, the default), a JSON
+list (\code{json_list}), a GeoJSON list (\code{geojson_list}), or the URL with which
+the API would be called (\code{url_only}).}
 
-\item{language}{An
-\href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF BCP 47 language
-tag} (such as "es" for Spanish or "pt-BR" for Brazilian Portuguese).
-OpenCage will attempt to return results in that language. Alternatively you
-can specify the "native" tag, in which case OpenCage will attempt to return
-the response in the "official" language(s). In case the \code{language}
-parameter is set to \code{NULL} (which is the default), the tag is not
-recognized, or OpenCage does not have a record in that language, the
-results will be returned in English.}
+\item{language}{An \href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF BCP 47 language tag} (such as "es" for
+Spanish or "pt-BR" for Brazilian Portuguese). OpenCage will attempt to
+return results in that language. Alternatively you can specify the "native"
+tag, in which case OpenCage will attempt to return the response in the
+"official" language(s). In case the \code{language} parameter is set to \code{NULL}
+(which is the default), the tag is not recognized, or OpenCage does not
+have a record in that language, the results will be returned in English.}
 
 \item{min_confidence}{Numeric vector of integer values between 0 and 10
 indicating the precision of the returned result as defined by its
@@ -51,25 +49,24 @@ default, which means that the results will not contain annotations.}
 to match the nearest road (rather than an address) and provide additional
 road and driving information. Default is \code{FALSE}.}
 
-\item{no_dedupe}{Logical vector (default \code{FALSE}), when \code{TRUE}
-the results will not be deduplicated.}
+\item{no_dedupe}{Logical vector (default \code{FALSE}), when \code{TRUE} the results
+will not be deduplicated.}
 
-\item{abbrv}{Logical vector (default \code{FALSE}), when \code{TRUE}
-addresses in the \code{formatted} field of the results are abbreviated
-(e.g. "Main St." instead of "Main Street").}
+\item{abbrv}{Logical vector (default \code{FALSE}), when \code{TRUE} addresses in the
+\code{formatted} field of the results are abbreviated (e.g. "Main St." instead
+of "Main Street").}
 
-\item{add_request}{Logical vector (default \code{FALSE}) indicating whether
-the request is returned again with the results. If the \code{return} value
-is a \code{df_list}, the query text is added as a column to the results.
-\code{json_list} results will contain all request parameters, including the
-API key used! This is currently ignored by OpenCage if return value is
-\code{geojson_list}.}
+\item{add_request}{Logical vector (default \code{FALSE}) indicating whether the
+request is returned again with the results. If the \code{return} value is a
+\code{df_list}, the query text is added as a column to the results. \code{json_list}
+results will contain all request parameters, including the API key used!
+This is currently ignored by OpenCage if return value is \code{geojson_list}.}
 
 \item{...}{Ignored.}
 }
 \value{
-Depending on the \code{return} argument, \code{oc_reverse} returns a
-list with either
+Depending on the \code{return} argument, \code{oc_reverse} returns a list with
+either
 \itemize{
 \item the results as tibbles (\code{"df_list"}, the default),
 \item the results as JSON specified as a list (\code{"json_list"}),
