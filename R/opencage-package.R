@@ -9,8 +9,4 @@
 #' @importFrom rlang .data
 "_PACKAGE"
 
-globalVariables(
-  c(
-    "countrycodes"
-  )
-)
+utils::globalVariables(c("countrycodes"))

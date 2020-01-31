@@ -25,15 +25,16 @@ the placenames are addresses, see \href{https://github.com/OpenCageData/opencage
 on how to format addresses for best forward geocoding results.}
 
 \item{key}{Your OpenCage API key as a character vector of length one. By
-default, \code{\link{opencage_key}} will attempt to retrieve the key from
-the environment variable \code{OPENCAGE_KEY}.}
+default, \code{\link[=opencage_key]{opencage_key()}} will attempt to retrieve the key from the
+environment variable \code{OPENCAGE_KEY}.}
 
 \item{bounds}{A list of bounding boxes of length one or \code{length(placename)}.
 Bounding boxes are named numeric vectors, each with four coordinates
 forming the south-west and north-east corners of the bounding box:
 \code{list(c(xmin, ymin, xmax, ymax))}. \code{bounds} restricts the possible results
-to the supplied region. It can be specified with the \code{\link{oc_bbox}}
-helper. For example: \code{bounds = oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}. Default is \code{NULL}.}
+to the supplied region. It can be specified with the \code{\link[=oc_bbox]{oc_bbox()}} helper.
+For example: \code{bounds = oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}.
+Default is \code{NULL}.}
 
 \item{countrycode}{A two letter code as defined by the \href{https://www.iso.org/obp/ui/#search/code}{ISO 3166-1 Alpha 2} standard that restricts the
 results to the given country or countries. E.g. "AR" for Argentina, "FR"

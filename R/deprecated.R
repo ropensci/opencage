@@ -3,9 +3,9 @@
 #' These functions still work but will be removed (defunct) in the next version.
 #'
 #' \itemize{
-#'  \item \code{\link{opencage_forward}}
-#'  \item \code{\link{opencage_reverse}}
-#'  \item \code{\link{opencage_key}}
+#'  \item [opencage_forward()]
+#'  \item [opencage_reverse()]
+#'  \item [opencage_key()]
 #' }
 #'
 #' @name opencage-deprecated
@@ -16,8 +16,8 @@ NULL
 #' Deprecated: use `oc_forward` or `oc_forward_df` for forward geocoding.
 #'
 #' @param key Your OpenCage API key as a character vector of length one. By
-#'   default, \code{\link{opencage_key}} will attempt to retrieve the key from
-#'   the environment variable `OPENCAGE_KEY`.
+#'   default, [opencage_key()] will attempt to retrieve the key from the
+#'   environment variable `OPENCAGE_KEY`.
 #' @param no_record Logical vector of length one (default `FALSE`), when `TRUE`
 #'   no log entry of the query is created, and the geocoding request is not
 #'   cached by OpenCage.

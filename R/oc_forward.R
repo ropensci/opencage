@@ -7,7 +7,7 @@
 #' @param placename A character vector with the placename(s) to be geocoded. If
 #'   the placenames are addresses, see [OpenCage's
 #'   instructions](https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md)
-#'   on how to format addresses for best forward geocoding results.
+#'    on how to format addresses for best forward geocoding results.
 # nolint end
 #' @param return A character vector of length one indicating the return value of
 #'   the function, either a list of tibbles (`df_list`, the default), a JSON
@@ -17,15 +17,15 @@
 #'   Bounding boxes are named numeric vectors, each with four coordinates
 #'   forming the south-west and north-east corners of the bounding box:
 #'   `list(c(xmin, ymin, xmax, ymax))`. `bounds` restricts the possible results
-#'   to the supplied region. It can be specified with the \code{\link{oc_bbox}}
-#'   helper. For example: `bounds = oc_bbox(-0.563160, 51.280430, 0.278970,
-#'   51.683979)`. Default is `NULL`.
+#'   to the supplied region. It can be specified with the [oc_bbox()] helper.
+#'   For example: `bounds = oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)`.
+#'   Default is `NULL`.
 #' @param proximity A list of points of length one or `length(placename)`. A
 #'   point is a named numeric vector of a latitude, longitude coordinate pair in
 #'   decimal format. `proximity` provides OpenCage with a hint to bias results
 #'   in favour of those closer to the specified location. It can be specified
-#'   with the \code{\link{oc_points}} helper. For example: `proximity =
-#'   oc_points(51.9526, 7.6324)`. Default is `NULL`.
+#'   with the [oc_points()] helper. For example: `proximity = oc_points(51.9526,
+#'   7.6324)`. Default is `NULL`.
 #' @param countrycode A two letter code as defined by the [ISO 3166-1 Alpha
 #'   2](https://www.iso.org/obp/ui/#search/code) standard that restricts the
 #'   results to the given country or countries. E.g. "AR" for Argentina, "FR"
@@ -66,8 +66,8 @@
 #'   This is currently ignored by OpenCage if return value is `geojson_list`.
 #' @param ... Ignored.
 #'
-#' @return Depending on the `return` argument, `oc_forward` returns
-#'   a list with either
+#' @return Depending on the `return` argument, `oc_forward` returns a list with
+#'   either
 #'   \itemize{
 #'   \item the results as tibbles (`"df_list"`, the default),
 #'   \item the results as JSON specified as a list (`"json_list"`),
@@ -80,10 +80,10 @@
 #'   When the results are returned as (a list of) tibbles, the column names
 #'   coming from the OpenCage API are prefixed with `"oc_"`.
 #'
-#' @seealso \code{\link{oc_forward_df}} for inputs as a data frame, or
-#'   \code{\link{oc_reverse}} and \code{\link{oc_reverse_df}} for reverse
-#'   geocoding. For more information about the API and the various parameters,
-#'   see the [OpenCage API documentation](https://opencagedata.com/api).
+#' @seealso [oc_forward_df()] for inputs as a data frame, or [oc_reverse()] and
+#'   [oc_reverse_df()] for reverse geocoding. For more information about the API
+#'   and the various parameters, see the [OpenCage API
+#'   documentation](https://opencagedata.com/api).
 #'
 #' @export
 #'
@@ -207,14 +207,14 @@ oc_forward <-
 #'   with 4 coordinates forming the south-west and north-east corners of the
 #'   bounding box: `list(c(xmin, ymin, xmax, ymax))`. `bounds` restricts the
 #'   possible results to the supplied region. It can be specified with the
-#'   \code{\link{oc_bbox}} helper. For example: `bounds = oc_bbox(-0.563160,
-#'   51.280430, 0.278970, 51.683979)`. Default is `NULL`.
+#'   [oc_bbox()] helper. For example: `bounds = oc_bbox(-0.563160, 51.280430,
+#'   0.278970, 51.683979)`. Default is `NULL`.
 #' @param proximity A list of length one, or an unquoted variable name of a list
 #'   column of points. Points are named numeric vectors with latitude, longitude
 #'   coordinate pairs in decimal format. `proximity` provides OpenCage with a
 #'   hint to bias results in favour of those closer to the specified location.
-#'   It can be specified with the \code{\link{oc_points}} helper. For example:
-#'   `proximity = oc_points(41.40139, 2.12870)`. Default is `NULL`.
+#'   It can be specified with the [oc_points()] helper. For example: `proximity
+#'   = oc_points(41.40139, 2.12870)`. Default is `NULL`.
 #' @param countrycode Character vector, or an unquoted variable name of such a
 #'   vector, of two-letter codes as defined by the [ISO 3166-1 Alpha
 #'   2](https://www.iso.org/obp/ui/#search/code) standard that restricts the
@@ -260,10 +260,10 @@ oc_forward <-
 #' @return A tibble. Column names coming from the OpenCage API are prefixed with
 #'   `"oc_"`.
 #'
-#' @seealso \code{\link{oc_forward}} for inputs as vectors, or
-#'   \code{\link{oc_reverse}} and \code{\link{oc_reverse_df}} for reverse
-#'   geocoding. For more information about the API and the various parameters,
-#'   see the [OpenCage API documentation](https://opencagedata.com/api).
+#' @seealso [oc_forward()] for inputs as vectors, or [oc_reverse()] and
+#'   [oc_reverse_df()] for reverse geocoding. For more information about the API
+#'   and the various parameters, see the [OpenCage API
+#'   documentation](https://opencagedata.com/api).
 #'
 #' @export
 #'

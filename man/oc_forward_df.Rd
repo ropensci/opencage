@@ -65,14 +65,13 @@ column of bounding boxes. Bounding boxes are named numeric vectors, each
 with 4 coordinates forming the south-west and north-east corners of the
 bounding box: \code{list(c(xmin, ymin, xmax, ymax))}. \code{bounds} restricts the
 possible results to the supplied region. It can be specified with the
-\code{\link{oc_bbox}} helper. For example: \code{bounds = oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}. Default is \code{NULL}.}
+\code{\link[=oc_bbox]{oc_bbox()}} helper. For example: \code{bounds = oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}. Default is \code{NULL}.}
 
 \item{proximity}{A list of length one, or an unquoted variable name of a list
 column of points. Points are named numeric vectors with latitude, longitude
 coordinate pairs in decimal format. \code{proximity} provides OpenCage with a
 hint to bias results in favour of those closer to the specified location.
-It can be specified with the \code{\link{oc_points}} helper. For example:
-\code{proximity = oc_points(41.40139, 2.12870)}. Default is \code{NULL}.}
+It can be specified with the \code{\link[=oc_points]{oc_points()}} helper. For example: \code{proximity = oc_points(41.40139, 2.12870)}. Default is \code{NULL}.}
 
 \item{countrycode}{Character vector, or an unquoted variable name of such a
 vector, of two-letter codes as defined by the \href{https://www.iso.org/obp/ui/#search/code}{ISO 3166-1 Alpha 2} standard that restricts the
@@ -180,8 +179,7 @@ oc_forward_df(df2, placename = locations,
 }
 }
 \seealso{
-\code{\link{oc_forward}} for inputs as vectors, or
-\code{\link{oc_reverse}} and \code{\link{oc_reverse_df}} for reverse
-geocoding. For more information about the API and the various parameters,
-see the \href{https://opencagedata.com/api}{OpenCage API documentation}.
+\code{\link[=oc_forward]{oc_forward()}} for inputs as vectors, or \code{\link[=oc_reverse]{oc_reverse()}} and
+\code{\link[=oc_reverse_df]{oc_reverse_df()}} for reverse geocoding. For more information about the API
+and the various parameters, see the \href{https://opencagedata.com/api}{OpenCage API documentation}.
 }

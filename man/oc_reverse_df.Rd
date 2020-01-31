@@ -126,8 +126,7 @@ oc_reverse_df(df2, latitude = lat, longitude = lng,
 }
 }
 \seealso{
-\code{\link{oc_reverse}} for inputs as vectors, or
-\code{\link{oc_forward}} and \code{\link{oc_forward}} for forward
-geocoding. For more information about the API and the various parameters,
-see the \href{https://opencagedata.com/api}{OpenCage API documentation}.
+\code{\link[=oc_reverse]{oc_reverse()}} for inputs as vectors, or \code{\link[=oc_forward]{oc_forward()}} and
+\code{\link[=oc_forward]{oc_forward()}} for forward geocoding. For more information about the API
+and the various parameters, see the \href{https://opencagedata.com/api}{OpenCage API documentation}.
 }

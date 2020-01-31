@@ -16,20 +16,19 @@
 #' @section Set your OpenCage API key:
 #'
 #' \pkg{opencage} uses the environment variable `OPENCAGE_KEY` internally to
-#' retrieve your OpenCage key. \code{\link{oc_config}} will help to set that
-#' environment variable. Do not pass the key directly as a parameter to the
-#' function, though, as you risk exposing it via your script or your history.
-#' There are three safer ways to set your API key instead:
+#' retrieve your OpenCage key. [oc_config()] will help to set that environment
+#' variable. Do not pass the key directly as a parameter to the function,
+#' though, as you risk exposing it via your script or your history. There are
+#' three safer ways to set your API key instead:
 #'
 #' 1. Save your API key as an environment variable in
-#' \code{\link[base:Startup]{.Renviron}} as described in [What They Forgot to
-#' Teach You About R](https://rstats.wtf/r-startup.html#renviron) or [Efficient
-#' R
+#' [`.Renviron()`][base::Startup] as described in [What They Forgot to Teach You
+#' About R](https://rstats.wtf/r-startup.html#renviron) or [Efficient R
 #' Programming](https://csgillespie.github.io/efficientR/set-up.html#renviron).
 #' From there it will be fetched by all functions that call the OpenCage API, so
 #' you do not even have to call `oc_config` to set your key, but can start
 #' geocoding right away. If you have the \pkg{usethis} package installed, you
-#' can edit your \code{\link[base:Startup]{.Renviron}} most easily with
+#' can edit your [`.Renviron()`][base::Startup] most easily with
 #' `usethis::edit_r_environ()`. We strongly recommend storing your API key in
 #' the user-level .Renviron, as opposed to the project-level, because this makes
 #' it less likely you will share sensitive information by mistake.
@@ -38,9 +37,9 @@
 #' safely pass your key in a script with a function call like this
 #' `oc_config(key = keyring::key_get("opencage"))`.
 #'
-#' 3. If you call `oc_config` in an \code{\link[base]{interactive}} session and
-#' the `OPENCAGE_KEY` environment variable is not set, it will prompt you to
-#' enter the key in the console.
+#' 3. If you call `oc_config` in an [base::interactive()] session and the
+#' `OPENCAGE_KEY` environment variable is not set, it will prompt you to enter
+#' the key in the console.
 #'
 #' @section Set your OpenCage API rate limit:
 #'
@@ -48,10 +47,10 @@
 #' and ranges from 1 request/sec for the "Free Trial" plan to 15 requests/sec
 #' for the "Medium" or "Large" plans, see <https://opencagedata.com/pricing> for
 #' details and up-to-date information. You can set the rate limit persistently
-#' across sessions by setting the `oc_rate_sec` \link[base:options]{option} in
-#' your \code{\link[base:Startup]{.Rprofile}}. If you have the `usethis` package
-#' installed, you can edit your \code{\link[base:Startup]{.Rprofile}} most
-#' easily with `usethis::edit_r_profile()`.
+#' across sessions by setting the `oc_rate_sec` [option][base::options] in your
+#' [`.Rprofile()`][base::Startup]. If you have the `usethis` package installed,
+#' you can edit your [`.Rprofile()`][base::Startup] most easily with
+#' `usethis::edit_r_profile()`.
 #'
 #' @section Prevent query logging and caching:
 #'
@@ -66,10 +65,10 @@
 #' query you made. Please set `no_record` to `TRUE` if you have concerns about
 #' privacy and want OpenCage to have no record of your query.
 #'
-#' `oc_config` sets the `oc_no_record` \link[base:options]{option} for the
-#' active R session, so it will be used for all subsequent OpenCage queries. You
-#' can set the `oc_no_record` \link[base:options]{option} persistently across
-#' sessions in your \code{\link[base:Startup]{.Rprofile}}.
+#' `oc_config` sets the `oc_no_record` [option][base::options] for the active R
+#' session, so it will be used for all subsequent OpenCage queries. You can set
+#' the `oc_no_record` [option][base::options] persistently across sessions in
+#' your [`.Rprofile()`][base::Startup].
 #'
 #' Please note that the \pkg{opencage} package always caches the data it
 #' receives from the OpenCage API, but only for as long as your R session is

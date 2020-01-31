@@ -35,14 +35,15 @@ the API would be called (\code{url_only}).}
 Bounding boxes are named numeric vectors, each with four coordinates
 forming the south-west and north-east corners of the bounding box:
 \code{list(c(xmin, ymin, xmax, ymax))}. \code{bounds} restricts the possible results
-to the supplied region. It can be specified with the \code{\link{oc_bbox}}
-helper. For example: \code{bounds = oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}. Default is \code{NULL}.}
+to the supplied region. It can be specified with the \code{\link[=oc_bbox]{oc_bbox()}} helper.
+For example: \code{bounds = oc_bbox(-0.563160, 51.280430, 0.278970, 51.683979)}.
+Default is \code{NULL}.}
 
 \item{proximity}{A list of points of length one or \code{length(placename)}. A
 point is a named numeric vector of a latitude, longitude coordinate pair in
 decimal format. \code{proximity} provides OpenCage with a hint to bias results
 in favour of those closer to the specified location. It can be specified
-with the \code{\link{oc_points}} helper. For example: \code{proximity = oc_points(51.9526, 7.6324)}. Default is \code{NULL}.}
+with the \code{\link[=oc_points]{oc_points()}} helper. For example: \code{proximity = oc_points(51.9526, 7.6324)}. Default is \code{NULL}.}
 
 \item{countrycode}{A two letter code as defined by the \href{https://www.iso.org/obp/ui/#search/code}{ISO 3166-1 Alpha 2} standard that restricts the
 results to the given country or countries. E.g. "AR" for Argentina, "FR"
@@ -92,8 +93,8 @@ This is currently ignored by OpenCage if return value is \code{geojson_list}.}
 \item{...}{Ignored.}
 }
 \value{
-Depending on the \code{return} argument, \code{oc_forward} returns
-a list with either
+Depending on the \code{return} argument, \code{oc_forward} returns a list with
+either
 \itemize{
 \item the results as tibbles (\code{"df_list"}, the default),
 \item the results as JSON specified as a list (\code{"json_list"}),
@@ -150,8 +151,7 @@ oc_forward(placename = locations,
 
 }
 \seealso{
-\code{\link{oc_forward_df}} for inputs as a data frame, or
-\code{\link{oc_reverse}} and \code{\link{oc_reverse_df}} for reverse
-geocoding. For more information about the API and the various parameters,
-see the \href{https://opencagedata.com/api}{OpenCage API documentation}.
+\code{\link[=oc_forward_df]{oc_forward_df()}} for inputs as a data frame, or \code{\link[=oc_reverse]{oc_reverse()}} and
+\code{\link[=oc_reverse_df]{oc_reverse_df()}} for reverse geocoding. For more information about the API
+and the various parameters, see the \href{https://opencagedata.com/api}{OpenCage API documentation}.
 }

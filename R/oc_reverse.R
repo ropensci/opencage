@@ -3,8 +3,8 @@
 #' Reverse geocoding from numeric vectors of latitude and longitude to
 #' placenames.
 #'
-#' @inheritParams oc_forward
 #' @param latitude,longitude Numeric vectors of latitude and longitude values.
+#' @inheritParams oc_forward
 #'
 #' @return Depending on the `return` argument, `oc_reverse` returns a list with
 #'   either
@@ -20,10 +20,10 @@
 #'   When the results are returned as (a list of) tibbles, the column names
 #'   coming from the OpenCage API are prefixed with `"oc_"`.
 #'
-#' @seealso \code{\link{oc_reverse_df}} for inputs as a data frame, or
-#'   \code{\link{oc_forward}} and \code{\link{oc_forward}} for forward
-#'   geocoding. For more information about the API and the various parameters,
-#'   see the [OpenCage API documentation](https://opencagedata.com/api).
+#' @seealso [oc_reverse_df()] for inputs as a data frame, or [oc_forward()] and
+#'   [oc_forward()] for forward geocoding. For more information about the API
+#'   and the various parameters, see the [OpenCage API
+#'   documentation](https://opencagedata.com/api).
 #'
 #' @export
 #'
@@ -113,10 +113,10 @@ oc_reverse <-
 #' @return A tibble. Column names coming from the OpenCage API are prefixed with
 #'   `"oc_"`.
 #'
-#' @seealso \code{\link{oc_reverse}} for inputs as vectors, or
-#'   \code{\link{oc_forward}} and \code{\link{oc_forward}} for forward
-#'   geocoding. For more information about the API and the various parameters,
-#'   see the [OpenCage API documentation](https://opencagedata.com/api).
+#' @seealso [oc_reverse()] for inputs as vectors, or [oc_forward()] and
+#'   [oc_forward()] for forward geocoding. For more information about the API
+#'   and the various parameters, see the [OpenCage API
+#'   documentation](https://opencagedata.com/api).
 #'
 #' @export
 #'
