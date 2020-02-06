@@ -8,14 +8,32 @@
 \usage{
 oc_reverse_df(...)
 
-\method{oc_reverse_df}{data.frame}(data, latitude, longitude,
-  bind_cols = TRUE, output = c("short", "all"), language = NULL,
-  min_confidence = NULL, roadinfo = FALSE, no_annotations = TRUE,
-  no_dedupe = FALSE, abbrv = FALSE, ...)
+\method{oc_reverse_df}{data.frame}(
+  data,
+  latitude,
+  longitude,
+  bind_cols = TRUE,
+  output = c("short", "all"),
+  language = NULL,
+  min_confidence = NULL,
+  roadinfo = FALSE,
+  no_annotations = TRUE,
+  no_dedupe = FALSE,
+  abbrv = FALSE,
+  ...
+)
 
-\method{oc_reverse_df}{numeric}(latitude, longitude, output = c("short",
-  "all"), language = NULL, min_confidence = NULL, no_annotations = TRUE,
-  no_dedupe = FALSE, abbrv = FALSE, ...)
+\method{oc_reverse_df}{numeric}(
+  latitude,
+  longitude,
+  output = c("short", "all"),
+  language = NULL,
+  min_confidence = NULL,
+  no_annotations = TRUE,
+  no_dedupe = FALSE,
+  abbrv = FALSE,
+  ...
+)
 }
 \arguments{
 \item{...}{Ignored.}
@@ -25,31 +43,28 @@ oc_reverse_df(...)
 \item{latitude, longitude}{Unquoted variable names of numeric vectors of
 latitude and longitude values.}
 
-\item{bind_cols}{When \code{bind_col = TRUE}, the default, the results are
-column bound to \code{data}. When \code{FALSE}, the results are returned as
-a new tibble.}
+\item{bind_cols}{When \code{bind_col = TRUE}, the default, the results are column
+bound to \code{data}. When \code{FALSE}, the results are returned as a new tibble.}
 
 \item{output}{A character vector of length one indicating whether only the
-formatted address (\code{"short"}, the default) or all variables
-(\code{"all"}) variables should be returned.}
+formatted address (\code{"short"}, the default) or all variables (\code{"all"})
+variables should be returned.}
 
 \item{language}{Character vector, or an unquoted variable name of such a
-vector, of \href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF BCP
-47 language tags} (such as "es" for Spanish or "pt-BR" for Brazilian
-Portuguese). OpenCage will attempt to return results in that language.
-Alternatively you can specify the "native" tag, in which case OpenCage will
-attempt to return the response in the "official" language(s). In case the
-`language` parameter is set to `NULL` (which is the default), the tag is
-not recognized, or OpenCage does not have a record in that language, the
-results will be returned in English.}
+vector, of \href{https://en.wikipedia.org/wiki/IETF_language_tag}{IETF BCP 47 language tags} (such as "es" for
+Spanish or "pt-BR" for Brazilian Portuguese). OpenCage will attempt to
+return results in that language. Alternatively you can specify the "native"
+tag, in which case OpenCage will attempt to return the response in the
+"official" language(s). In case the \code{language} parameter is set to \code{NULL}
+(which is the default), the tag is not recognized, or OpenCage does not
+have a record in that language, the results will be returned in English.}
 
 \item{min_confidence}{Numeric vector of integer values, or an unquoted
 variable name of such a vector, between 0 and 10 indicating the precision
 of the returned result as defined by its geographical extent, (i.e. by the
-extent of the result's bounding box). See the
-\href{https://opencagedata.com/api#confidence}{API documentation} for
-details. Only results with at least the requested confidence will be
-returned. Default is \code{NULL}).}
+extent of the result's bounding box). See the \href{https://opencagedata.com/api#confidence}{API documentation} for details. Only
+results with at least the requested confidence will be returned. Default is
+\code{NULL}).}
 
 \item{roadinfo}{Logical vector, or an unquoted variable name of such a
 vector, indicating whether the geocoder should attempt to match the nearest
@@ -58,21 +73,20 @@ information. Default is \code{FALSE}.}
 
 \item{no_annotations}{Logical vector, or an unquoted variable name of such a
 vector, indicating whether additional information about the result location
-should be returned. \code{TRUE} by default, which means that the results
-will not contain annotations.}
+should be returned. \code{TRUE} by default, which means that the results will
+not contain annotations.}
 
 \item{no_dedupe}{Logical vector, or an unquoted variable name of such a
 vector. Default is \code{FALSE}. When \code{TRUE} the results will not be
 deduplicated.}
 
 \item{abbrv}{Logical vector, or an unquoted variable name of such a vector.
-Default is \code{FALSE}. When \code{TRUE} addresses in the
-\code{oc_formatted} variable of the results are abbreviated (e.g. "Main
-St." instead of "Main Street").}
+Default is \code{FALSE}. When \code{TRUE} addresses in the \code{oc_formatted} variable of
+the results are abbreviated (e.g. "Main St." instead of "Main Street").}
 }
 \value{
 A tibble. Column names coming from the OpenCage API are prefixed with
-  \code{"oc_"}.
+\code{"oc_"}.
 }
 \description{
 Reverse geocoding from latitude and longitude variables to placenames.
@@ -112,8 +126,7 @@ oc_reverse_df(df2, latitude = lat, longitude = lng,
 }
 }
 \seealso{
-\code{\link{oc_reverse}} for inputs as vectors, or
-  \code{\link{oc_forward}} and \code{\link{oc_forward}} for forward
-  geocoding. For more information about the API and the various parameters,
-  see the \href{https://opencagedata.com/api}{OpenCage API documentation}.
+\code{\link[=oc_reverse]{oc_reverse()}} for inputs as vectors, or \code{\link[=oc_forward]{oc_forward()}} and
+\code{\link[=oc_forward]{oc_forward()}} for forward geocoding. For more information about the API
+and the various parameters, see the \href{https://opencagedata.com/api}{OpenCage API documentation}.
 }

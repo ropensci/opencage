@@ -18,21 +18,20 @@ oc_bbox(...)
 \arguments{
 \item{...}{Ignored.}
 
-\item{xmin}{Minimum longitude (also known as \code{min lon},
-\code{southwest_lng}, \code{west}, or \code{left}).}
+\item{xmin}{Minimum longitude (also known as \code{min_lon}, \code{southwest_lng},
+\code{west}, or \code{left}).}
 
-\item{ymin}{Minimum latitude (also known as \code{min lat},
-\code{southwest_lat}, \code{south}, or \code{bottom}).}
+\item{ymin}{Minimum latitude (also known as \code{min_lat}, \code{southwest_lat},
+\code{south}, or \code{bottom}).}
 
-\item{xmax}{Maximum longitude (also known as \code{max lon},
-\code{northeast_lng}, \code{east}, or \code{right}).}
+\item{xmax}{Maximum longitude (also known as \code{max_lon}, \code{northeast_lng},
+\code{east}, or \code{right}).}
 
-\item{ymax}{Maximum latitude (also known as \code{max lat},
-\code{northeast_lat}, \code{north}, or \code{top}).}
+\item{ymax}{Maximum latitude (also known as \code{max_lat}, \code{northeast_lat},
+\code{north}, or \code{top}).}
 
-\item{data}{A \code{data.frame} containing at least 4 columns with
-\code{xmin}, \code{ymin}, \code{xmax}, and \code{ymax} values,
-respectively.}
+\item{data}{A \code{data.frame} containing at least 4 columns with \code{xmin}, \code{ymin},
+\code{xmax}, and \code{ymax} values, respectively.}
 
 \item{bbox}{A \code{bbox} object, see \code{sf::st_bbox}.}
 }

@@ -8,23 +8,24 @@
 \description{
 Geocode with the OpenCage API, either from placename to longitude and
 latitude (forward geocoding) or from longitude and latitude to placename
-(reverse geocoding), see <https://opencagedata.com/>.
+(reverse geocoding), see \url{https://opencagedata.com/}.
 }
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://docs.ropensci.org/opencage}
   \item \url{http://github.com/ropensci/opencage}
   \item Report bugs at \url{http://github.com/ropensci/opencage/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Maëlle Salmon \email{maelle.salmon@yahoo.se} (0000-0002-2815-0399)
+\strong{Maintainer}: Maëlle Salmon \email{maelle.salmon@yahoo.se} (\href{https://orcid.org/0000-0002-2815-0399}{ORCID})
 
 Authors:
 \itemize{
-  \item Daniel Possenriede (0000-0002-6738-9845)
-  \item Jesse Sadler (0000-0001-6081-9681)
+  \item Daniel Possenriede (\href{https://orcid.org/0000-0002-6738-9845}{ORCID})
+  \item Jesse Sadler (\href{https://orcid.org/0000-0001-6081-9681}{ORCID})
 }
 
 Other contributors:
