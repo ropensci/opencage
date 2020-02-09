@@ -10,3 +10,5 @@
 datamanagement.R
 ^appveyor\.yml$
 ^cran-comments\.md$
+^doc$
+^Meta$
