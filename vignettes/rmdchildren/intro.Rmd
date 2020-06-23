@@ -31,7 +31,7 @@ Note that all coordinates sent to the OpenCage API must adhere to the [WGS 84](h
 
 ## Return type
 
-Depending on what you specify as the `return` parameter, `oc_forward()` and `oc_reverse()` will return either a list of tibbles (`df_list`, the default), JSON lists (`json_list`), GeoJSON lists (`geojson_list`), or the URL with which the API would be called (`url_only`).
+Depending on what you specify as the `return` parameter, `oc_forward()` and `oc_reverse()` will return either a nested tibble (`tibble`, the default), JSON lists (`json_list`), GeoJSON lists (`geojson_list`), or the URL with which the API would be called (`url_only`).
 
 Both `oc_forward_df()` and `oc_reverse_df()` return a single tibble. 
 
@@ -122,7 +122,7 @@ The geocoding functions also have an `abbr` parameter, `FALSE` by default. When 
 
 ## Return query text
 
-`oc_forward()` and `oc_reverse()` have an `add_request` argument, indicating whether the request is returned again with the results. If the `return` value is a `df_list`, the `placename` or `latitude,longitude` is added as a column to the results. `json_list` results will contain all request parameters, including the API key used! For `geojson_list` results `add_request` is currently ignored by OpenCage.
+`oc_forward()` and `oc_reverse()` have an `add_request` argument, indicating whether the request is returned again with the results. If the `return` value is a `tibble`, the `placename` or `latitude,longitude` is added as a column to the results. `json_list` results will contain all request parameters, including the API key used! For `geojson_list` results `add_request` is currently ignored by OpenCage.
 
 ## Caching
 
