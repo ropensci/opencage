@@ -20,7 +20,7 @@ oc_parse_text <- function(res) {
 }
 
 oc_format <- function(res_text, return, query) {
-  if (return == "df_list") {
+  if (return == "tibble") {
     jsn <- jsonlite::fromJSON(res_text, simplifyVector = TRUE, flatten = TRUE)
     if (identical(jsn$total_results, 0L)) {
       results <- tibble::tibble(oc_formatted = NA_character_)
