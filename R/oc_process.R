@@ -37,7 +37,6 @@ oc_process <-
     roadinfo = FALSE,
     no_dedupe = FALSE,
     abbrv = FALSE,
-    add_request = FALSE,
     get_key = TRUE
   ) {
 
@@ -75,8 +74,7 @@ oc_process <-
           no_annotations = no_annotations,
           roadinfo = roadinfo,
           no_dedupe = no_dedupe,
-          abbrv = abbrv,
-          add_request = add_request
+          abbrv = abbrv
         )
       )
 
@@ -107,7 +105,6 @@ oc_process <-
            no_dedupe = NULL,
            no_record = NULL,
            abbrv = NULL,
-           add_request = NULL,
            pb = NULL) {
 
     if (!is.null(pb)) pb$tick()
@@ -152,7 +149,6 @@ oc_process <-
         no_dedupe = as.integer(no_dedupe),
         no_record = as.integer(no_record),
         abbrv = as.integer(abbrv),
-        add_request = as.integer(add_request),
         key = key
       ),
       endpoint = endpoint
