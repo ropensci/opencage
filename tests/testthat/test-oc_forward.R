@@ -32,7 +32,7 @@ test_that("oc_forward works", {
   res1 <- oc_forward(locations)
   expect_type(res1, "list")
   expect_equal(length(res1), 3)
-  expect_s3_class(res1[[1]], c("tbl_df", "tbl", "data.frame"))
+  expect_s3_class(res1, c("tbl_df", "tbl", "data.frame"))
 })
 
 test_that("oc_forward returns correct type", {
