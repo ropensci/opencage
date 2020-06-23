@@ -78,7 +78,7 @@ oc_process <-
         )
       )
 
-    purrr::pmap(
+    results <- purrr::pmap(
       .l = arglist,
       .f = .oc_process,
       return = return,
@@ -86,6 +86,12 @@ oc_process <-
       no_record = no_record,
       pb = pb
     )
+
+    if(return == "tibble"){
+      results <- dplyr::bind_rows(results)
+      tidyr::nest(results, data = 2:ncol(results))
+    } else
+      results
   }
 
 .oc_process <-
