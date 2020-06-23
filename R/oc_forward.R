@@ -382,6 +382,11 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
         no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
         abbrv = rlang::eval_tidy(abbrv, data = data)
       )
+
+      print("BIND COLS FALSE just finished oc_forward")
+
+      results_list
+
       results <- dplyr::bind_rows(results_list)
       if (output == "short") {
         results <-
@@ -403,6 +408,9 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
           )
       }
     } else {
+
+
+
       results_nest <-
         dplyr::mutate(
           data,
