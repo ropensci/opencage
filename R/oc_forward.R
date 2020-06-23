@@ -59,11 +59,6 @@
 #' @param abbrv Logical vector (default `FALSE`), when `TRUE` addresses in the
 #'   `formatted` field of the results are abbreviated (e.g. "Main St." instead
 #'   of "Main Street").
-#' @param add_request Logical vector (default `FALSE`) indicating whether the
-#'   request is returned again with the results. If the `return` value is a
-#'   `df_list`, the query text is added as a column to the results. `json_list`
-#'   results will contain all request parameters, including the API key used!
-#'   This is currently ignored by OpenCage if return value is `geojson_list`.
 #' @param ... Ignored.
 #'
 #' @return Depending on the `return` argument, `oc_forward` returns a list with
@@ -137,8 +132,7 @@ oc_forward <-
            no_annotations = TRUE,
            roadinfo = FALSE,
            no_dedupe = FALSE,
-           abbrv = FALSE,
-           add_request = FALSE,
+           abbrv = FALSE
            ...) {
 
     # check a placename is provided
@@ -161,8 +155,7 @@ oc_forward <-
       no_annotations = no_annotations,
       roadinfo = roadinfo,
       no_dedupe = no_dedupe,
-      abbrv = abbrv,
-      add_request = add_request
+      abbrv = abbrv
     )
     # process request
     oc_process(
@@ -177,8 +170,7 @@ oc_forward <-
       no_annotations = no_annotations,
       roadinfo = roadinfo,
       no_dedupe = no_dedupe,
-      abbrv = abbrv,
-      add_request = add_request
+      abbrv = abbrv
     )
   }
 
@@ -370,9 +362,6 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
 
     output <- rlang::arg_match(output)
 
-    # Ensure that query column always exists
-    add_request <- TRUE
-
     if (any(rlang::eval_tidy(no_annotations, data = data) == FALSE) ||
         any(rlang::eval_tidy(roadinfo, data = data) == TRUE)) {
       output <- "all"
@@ -391,8 +380,7 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
         no_annotations = rlang::eval_tidy(no_annotations, data = data),
         roadinfo = rlang::eval_tidy(roadinfo, data = data),
         no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
-        abbrv = rlang::eval_tidy(abbrv, data = data),
-        add_request = add_request
+        abbrv = rlang::eval_tidy(abbrv, data = data)
       )
       results <- dplyr::bind_rows(results_list)
       if (output == "short") {
@@ -431,8 +419,7 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
               no_annotations = !!no_annotations,
               roadinfo = !!roadinfo,
               no_dedupe = !!no_dedupe,
-              abbrv = !!abbrv,
-              add_request = add_request
+              abbrv = !!abbrv
             )
         )
 
