@@ -203,7 +203,7 @@ oc_reverse_df.data.frame <- # nolint - see lintr issue #223
     }
 
     if (bind_cols == FALSE) {
-      results_list <- oc_reverse(
+      results <- oc_reverse(
         latitude = rlang::eval_tidy(latitude, data = data),
         longitude = rlang::eval_tidy(longitude, data = data),
         return = "tibble",
@@ -214,13 +214,19 @@ oc_reverse_df.data.frame <- # nolint - see lintr issue #223
         no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
         abbrv = rlang::eval_tidy(abbrv, data = data)
       )
-      results <- dplyr::bind_rows(results_list)
+      results <- tidyr::unnest(results, data)
       if (output == "short") {
         results <-
           dplyr::select(results, .data$oc_query, .data$oc_formatted)
+
+        results <-
+          tidyr::nest(results, data = 2:ncol(results))
       } else {
         results <-
           dplyr::select(results, .data$oc_query, dplyr::everything())
+
+        results <-
+          tidyr::nest(results, data = 2:ncol(results))
       }
     } else {
       results_nest <-
