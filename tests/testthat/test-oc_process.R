@@ -124,7 +124,7 @@ test_that("oc_process deals well with res being NULL", {
     min_confidence = 5,
     language = "pt-BR",
     no_annotations = TRUE,
-    return = "df_list"
+    return = "tibble"
   )
   expect_null(res[["res"]])
 })
@@ -161,20 +161,20 @@ test_that("oc_process handles bounds argument.", {
   expect_match(res[[2]], "&bounds=-78.86%2C42.7%2C-78.81%2C42.73", fixed = TRUE)
 })
 
-test_that("bounds argument is well taken into account with df_list", {
+test_that("bounds argument is well taken into account with tibble", {
   skip_on_cran()
   skip_if_offline()
 
   res1 <- oc_process(
     placename = "Berlin",
-    return = "df_list"
+    return = "tibble"
   )
 
   res2 <- oc_process(
     placename = "Berlin",
     bounds = list(c(-90, 38, 0, 45)),
     limit = 10,
-    return = "df_list"
+    return = "tibble"
   )
 
   expect_equal(res1[[1]][["oc_country"]], "Germany")
