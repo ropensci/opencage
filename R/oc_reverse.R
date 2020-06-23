@@ -9,7 +9,7 @@
 #' @return Depending on the `return` argument, `oc_reverse` returns a list with
 #'   either
 #'   \itemize{
-#'   \item the results as tibbles (`"df_list"`, the default),
+#'   \item the results as a tibble (`"tibble"`, the default),
 #'   \item the results as JSON specified as a list (`"json_list"`),
 #'   \item the results as GeoJSON specified as a list (`"geojson_list"`),
 #'   or
@@ -50,13 +50,13 @@
 oc_reverse <-
   function(latitude,
            longitude,
-           return = c("df_list", "json_list", "geojson_list", "url_only"),
+           return = c("tibble", "json_list", "geojson_list", "url_only"),
            language = NULL,
            min_confidence = NULL,
            no_annotations = TRUE,
            roadinfo = FALSE,
            no_dedupe = FALSE,
-           abbrv = FALSE
+           abbrv = FALSE,
            ...) {
 
     # check latitude is provided
@@ -206,7 +206,7 @@ oc_reverse_df.data.frame <- # nolint - see lintr issue #223
       results_list <- oc_reverse(
         latitude = rlang::eval_tidy(latitude, data = data),
         longitude = rlang::eval_tidy(longitude, data = data),
-        return = "df_list",
+        return = "tibble",
         language = rlang::eval_tidy(language, data = data),
         min_confidence = rlang::eval_tidy(min_confidence, data = data),
         no_annotations = rlang::eval_tidy(no_annotations, data = data),
@@ -230,7 +230,7 @@ oc_reverse_df.data.frame <- # nolint - see lintr issue #223
             oc_reverse(
               latitude = !!latitude,
               longitude = !!longitude,
-              return = "df_list",
+              return = "tibble",
               language = !!language,
               min_confidence = !!min_confidence,
               no_annotations = !!no_annotations,
