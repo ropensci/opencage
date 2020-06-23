@@ -10,7 +10,7 @@
 #'    on how to format addresses for best forward geocoding results.
 # nolint end
 #' @param return A character vector of length one indicating the return value of
-#'   the function, either a list of tibbles (`df_list`, the default), a JSON
+#'   the function, either a tibble with nested columns (`tibble`, the default), a JSON
 #'   list (`json_list`), a GeoJSON list (`geojson_list`), or the URL with which
 #'   the API would be called (`url_only`).
 #' @param bounds A list of bounding boxes of length one or `length(placename)`.
@@ -64,7 +64,7 @@
 #' @return Depending on the `return` argument, `oc_forward` returns a list with
 #'   either
 #'   \itemize{
-#'   \item the results as tibbles (`"df_list"`, the default),
+#'   \item the results a tibble (`"tibble"`, the default),
 #'   \item the results as JSON specified as a list (`"json_list"`),
 #'   \item the results as GeoJSON specified as a list (`"geojson_list"`),
 #'   or
@@ -122,7 +122,7 @@
 #'
 oc_forward <-
   function(placename,
-           return = c("df_list", "json_list", "geojson_list", "url_only"),
+           return = c("tibble", "json_list", "geojson_list", "url_only"),
            bounds = NULL,
            proximity = NULL,
            countrycode = NULL,
@@ -370,7 +370,7 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
     if (bind_cols == FALSE) {
       results_list <- oc_forward(
         placename = rlang::eval_tidy(placename, data = data),
-        return = "df_list",
+        return = "tibble",
         bounds = rlang::eval_tidy(bounds, data = data),
         proximity = rlang::eval_tidy(proximity, data = data),
         countrycode = rlang::eval_tidy(countrycode, data = data),
@@ -409,7 +409,7 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
           op =
             oc_forward(
               placename = !!placename,
-              return = "df_list",
+              return = "tibble",
               bounds = !!bounds,
               proximity = !!proximity,
               countrycode = !!countrycode,
