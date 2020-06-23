@@ -132,7 +132,7 @@ oc_forward <-
            no_annotations = TRUE,
            roadinfo = FALSE,
            no_dedupe = FALSE,
-           abbrv = FALSE
+           abbrv = FALSE,
            ...) {
 
     # check a placename is provided
