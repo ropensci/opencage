@@ -56,8 +56,7 @@ oc_reverse <-
            no_annotations = TRUE,
            roadinfo = FALSE,
            no_dedupe = FALSE,
-           abbrv = FALSE,
-           add_request = FALSE,
+           abbrv = FALSE
            ...) {
 
     # check latitude is provided
@@ -81,8 +80,7 @@ oc_reverse <-
       no_annotations = no_annotations,
       roadinfo = roadinfo,
       no_dedupe = no_dedupe,
-      abbrv = abbrv,
-      add_request = add_request
+      abbrv = abbrv
     )
     # process request
     oc_process(
@@ -94,8 +92,7 @@ oc_reverse <-
       no_annotations = no_annotations,
       roadinfo = roadinfo,
       no_dedupe = no_dedupe,
-      abbrv = abbrv,
-      add_request = add_request
+      abbrv = abbrv
     )
   }
 
@@ -200,9 +197,6 @@ oc_reverse_df.data.frame <- # nolint - see lintr issue #223
 
     output <- rlang::arg_match(output)
 
-    # Ensure that query column always exists
-    add_request <- TRUE
-
     if (any(rlang::eval_tidy(no_annotations, data = data) == FALSE) ||
         any(rlang::eval_tidy(roadinfo, data = data) == TRUE)) {
       output <- "all"
@@ -218,8 +212,7 @@ oc_reverse_df.data.frame <- # nolint - see lintr issue #223
         no_annotations = rlang::eval_tidy(no_annotations, data = data),
         roadinfo = rlang::eval_tidy(roadinfo, data = data),
         no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
-        abbrv = rlang::eval_tidy(abbrv, data = data),
-        add_request = add_request
+        abbrv = rlang::eval_tidy(abbrv, data = data)
       )
       results <- dplyr::bind_rows(results_list)
       if (output == "short") {
@@ -243,8 +236,7 @@ oc_reverse_df.data.frame <- # nolint - see lintr issue #223
               no_annotations = !!no_annotations,
               roadinfo = !!roadinfo,
               no_dedupe = !!no_dedupe,
-              abbrv = !!abbrv,
-              add_request = add_request
+              abbrv = !!abbrv
             )
         )
 
