@@ -12,6 +12,10 @@ df2 <- add_column(df,
                   abbrv = c(FALSE, FALSE, TRUE))
 df3 <- add_row(df2, id = 4, lat = 25, lng = 36, confidence = 5)
 
+equal_after_unnesting <- function(df1, df2){
+  all_equal(unnest(df1, data), unnest(df2, data))
+}
+
 # oc_reverse --------------------------------------------------------------
 
 test_that("oc_reverse works", {
@@ -20,8 +24,8 @@ test_that("oc_reverse works", {
 
   res1 <- oc_reverse(lat, lng)
   expect_type(res1, "list")
-  expect_equal(length(res1), 3)
-  expect_s3_class(res1[[1]], c("tbl_df", "tbl", "data.frame"))
+  expect_equal(nrow(res1), 3)
+  expect_s3_class(res1, c("tbl_df", "tbl", "data.frame"))
 })
 
 test_that("oc_reverse returns correct type", {
@@ -72,12 +76,12 @@ test_that("output arguments work", {
   skip_if_offline()
 
   expect_equal(names(oc_reverse_df(df, lat, lng, bind_cols = TRUE)),
-               c("id", "lat", "lng", "oc_formatted"))
+               c("id", "lat", "lng", "oc_query", "data"))
   expect_equal(names(oc_reverse_df(df, lat, lng, bind_cols = FALSE)),
-               c("oc_query", "oc_formatted"))
-  expect_gt(ncol(oc_reverse_df(df, lat, lng, output = "all")), 5)
+               c("oc_query", "data"))
+  expect_equal(ncol(oc_reverse_df(df, lat, lng, output = "all")), 5)
   expect_gt(
-    ncol(oc_reverse_df(df, lat, lng, bind_cols = FALSE, output = "all")),
+    ncol(unnest(oc_reverse_df(df, lat, lng, bind_cols = FALSE, output = "all"), data)),
     5
   )
 })
@@ -90,23 +94,23 @@ test_that("tidyeval works for arguments", {
 
   # language
   lang <- oc_reverse_df(df2, lat, lng, language = language, output = "all")
-  expect_equal(lang$oc_country, c("France", "Allemagne", "アメリカ合衆国")) # nolint
+  expect_equal(unnest(lang, data)$oc_country, c("France", "Allemagne", "アメリカ合衆国")) # nolint
 
   # min_confidence
   confidence <- oc_reverse_df(df3, lat, lng, min_confidence = confidence)
   no_con <- oc_reverse_df(df3, lat, lng)
 
-  expect_false(isTRUE(all.equal(confidence, no_con)))
-  expect_true(isTRUE(all.equal(confidence[1, ], no_con[1, ])))
-  expect_true(isTRUE(all.equal(confidence[2, ], no_con[2, ])))
-  expect_true(isTRUE(all.equal(confidence[3, ], no_con[3, ])))
-  expect_false(isTRUE(all.equal(confidence[4, ], no_con[4, ])))
+  expect_false(isTRUE(equal_after_unnesting(confidence, no_con)))
+  expect_true(isTRUE(equal_after_unnesting(confidence[1, ], no_con[1, ])))
+  expect_true(isTRUE(equal_after_unnesting(confidence[2, ], no_con[2, ])))
+  expect_true(isTRUE(equal_after_unnesting(confidence[3, ], no_con[3, ])))
+  expect_false(isTRUE(equal_after_unnesting(confidence[4, ], no_con[4, ])))
 
   # no_annotations
   ann <- oc_reverse_df(df2, lat, lng, bind_cols = FALSE,
                        no_annotations = annotation)
-  expect_gt(ncol(ann), 40)
-  expect_equal(ann$oc_currency_name, c("Euro", NA, NA))
+  expect_gt(ncol(unnest(ann, data)), 40)
+  expect_equal(unnest(ann, data)$oc_currency_name, c("Euro", NA, NA))
 
   # roadinfo
   ri <- oc_reverse_df(
@@ -116,15 +120,16 @@ test_that("tidyeval works for arguments", {
     bind_cols = FALSE,
     roadinfo = roadinfo
   )
-  expect_equal(ri$oc_roadinfo_speed_in, c(NA_character_, "km/h", "mph"))
+  expect_equal(unnest(ri, data)$oc_roadinfo_speed_in, c(NA_character_, "km/h", "mph"))
 
   # abbrv
   abbrv <- oc_reverse_df(df2, lat, lng,
                          abbrv = abbrv)
-  expect_false(isTRUE(all.equal(abbrv, noarg)))
-  expect_true(all.equal(abbrv[1, ], noarg[1, ]))
-  expect_true(all.equal(abbrv[2, ], noarg[2, ]))
-  expect_false(isTRUE(all.equal(abbrv[3, ], noarg[3, ])))
+
+  expect_false(isTRUE(equal_after_unnesting(abbrv, noarg)))
+  expect_true(isTRUE(equal_after_unnesting(abbrv[1, ], noarg[1, ])))
+  expect_true(isTRUE(equal_after_unnesting(abbrv[2, ], noarg[2, ])))
+  expect_false(isTRUE(equal_after_unnesting(abbrv[3, ], noarg[3, ])))
 })
 
 # Checks ------------------------------------------------------------------
