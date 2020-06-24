@@ -214,63 +214,55 @@ oc_reverse_df.data.frame <- # nolint - see lintr issue #223
         no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
         abbrv = rlang::eval_tidy(abbrv, data = data)
       )
-      results <- tidyr::unnest(results, data)
+
       if (output == "short") {
-        results <-
-          dplyr::select(results, .data$oc_query, .data$oc_formatted)
 
         results <-
-          tidyr::nest(results, data = 2:ncol(results))
+          dplyr::mutate(
+            results,
+            data = purrr::map(data, ~dplyr::select(.x, c("oc_formatted")))
+          )
+
       } else {
-        results <-
-          dplyr::select(results, .data$oc_query, dplyr::everything())
 
         results <-
-          tidyr::nest(results, data = 2:ncol(results))
+          dplyr::mutate(
+            results,
+            data = purrr::map(data, ~dplyr::select(.x, c("oc_formatted"), dplyr::everything()))
+          )
+
       }
     } else {
-      results_nest <-
-        dplyr::mutate(
-          data,
-          op =
-            oc_reverse(
-              latitude = !!latitude,
-              longitude = !!longitude,
-              return = "tibble",
-              language = !!language,
-              min_confidence = !!min_confidence,
-              no_annotations = !!no_annotations,
-              roadinfo = !!roadinfo,
-              no_dedupe = !!no_dedupe,
-              abbrv = !!abbrv
-            )
+      oc_results <-
+        oc_reverse(
+          latitude = rlang::eval_tidy(latitude, data = data),
+          longitude = rlang::eval_tidy(longitude, data = data),
+          return = "tibble",
+          language = rlang::eval_tidy(language, data = data),
+          min_confidence = rlang::eval_tidy(min_confidence, data = data),
+          no_annotations = rlang::eval_tidy(no_annotations, data = data),
+          roadinfo = rlang::eval_tidy(roadinfo, data = data),
+          no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
+          abbrv = rlang::eval_tidy(abbrv, data = data)
         )
 
-      if (utils::packageVersion("tidyr") > "0.8.99") {
-        results <-
-          tidyr::unnest(results_nest, .data$op, names_repair = "unique")
-      } else {
-        results <- tidyr::unnest(results_nest, .data$op, .drop = FALSE)
-        # .drop = FALSE so other list columns are not dropped. Deprecated as of
-        # v1.0.0
-      }
-
+      results <- dplyr::bind_cols(data, oc_results)
       if (output == "short") {
+
         results <-
-          dplyr::select(
+          dplyr::mutate(
             results,
-            1:.data$oc_query,
-            .data$oc_formatted,
-            -.data$oc_query
+            data = purrr::map(data, ~dplyr::select(.x, c("oc_formatted")))
           )
+
       } else {
+
         results <-
-          dplyr::select(
+          dplyr::mutate(
             results,
-            1:.data$oc_query,
-            dplyr::everything(),
-            -.data$oc_query
+            data = purrr::map(data, ~dplyr::select(.x, c("oc_formatted"), dplyr::everything()))
           )
+
       }
     }
     results
