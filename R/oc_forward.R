@@ -426,6 +426,8 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
             )
         )
 
+      results <- dplyr::bind_cols(data, oc_results$op)
+
       if (utils::packageVersion("tidyr") > "0.8.99") {
         results <-
           tidyr::unnest(results, cols = data, names_repair = "unique")
