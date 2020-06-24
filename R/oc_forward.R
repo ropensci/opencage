@@ -425,6 +425,14 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
       results <- dplyr::bind_cols(data, results)
 
       if (output == "short") {
+
+        duplicated_colnames <- colnames(data)[colnames(data) %in% c("oc_query", "oc_lat", "oc_lng", "oc_formatted")]
+
+        if(!identical(duplicated_colnames, character(0))){
+          message("Column names in `df` also appear in results from OpenCage. The columns returned by OpenCage have been renamed as follows: ",
+                  paste0(duplicated_colnames, sep = "1", collapse = ", "))
+        }
+
         results <-
           dplyr::select(
             results,
@@ -436,6 +444,14 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
           )
         results <- tidyr::nest(results, data = oc_query:ncol(results))
       } else {
+
+        duplicated_colnames <- colnames(data)[colnames(data) %in% colnames(results)]
+
+        if(!identical(duplicated_colnames, character(0))){
+          message("Column names in `df` also appear in results from OpenCage. The columns returned by OpenCage have been renamed as follows: ",
+                  paste0(duplicated_colnames, sep = "1", collapse = ", "))
+        }
+
         results <-
           dplyr::select(
             results,
