@@ -32,3 +32,18 @@ oc_check_key <- function(key) {
     )
   }
 }
+
+#' @rdname oc_check_key
+#' @export
+has_oc_key <- function(){
+
+  key <- Sys.getenv("OPENCAGE_KEY")
+
+  if (key == "") {
+    return(FALSE)
+  } else {
+    return(TRUE)
+  }
+
+}
+
