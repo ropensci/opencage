@@ -406,7 +406,7 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
       }
     } else {
 
-      results <- oc_forward(
+      oc_results <- oc_forward(
         placename = rlang::eval_tidy(placename, data = data),
         return = "tibble",
         bounds = rlang::eval_tidy(bounds, data = data),
@@ -423,6 +423,7 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
       results <- tidyr::unnest(results, data)
 
       results <- dplyr::bind_cols(data, results)
+      results <- dplyr::bind_cols(data, oc_results)
 
       if (output == "short") {
 
