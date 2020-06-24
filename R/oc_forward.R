@@ -406,7 +406,7 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
       }
     } else {
 
-      results_nest <-
+      oc_results <-
         dplyr::mutate(
           data,
           op =
