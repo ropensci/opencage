@@ -427,29 +427,17 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
       if (output == "short") {
 
         results <-
-          dplyr::select(
+          dplyr::mutate(
             results,
-            colnames(data),
-            .data$oc_query,
-            .data$oc_lat,
-            .data$oc_lng,
-            .data$oc_formatted
+            data = map(data, ~select(.x, c("oc_lat", "oc_lng", "oc_formatted")))
           )
-        results <- tidyr::nest(results, data = oc_query:ncol(results))
-      } else {
-
 
 
         results <-
-          dplyr::select(
+          dplyr::mutate(
             results,
-            colnames(data),
-            .data$oc_query,
-            .data$oc_lat,
-            .data$oc_lng,
-            dplyr::everything()
+            data = map(data, ~select(.x, c("oc_lat", "oc_lng", "oc_formatted"), everything()))
           )
-        results <- tidyr::nest(results, data = oc_query:ncol(results))
       }
     }
     results
