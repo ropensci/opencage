@@ -385,23 +385,19 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
       # results <- tidyr::unnest(results, data)
 
       if (output == "short") {
+
         results <-
-          dplyr::select(
+          dplyr::mutate(
             results,
-            .data$oc_query,
-            .data$oc_lat,
-            .data$oc_lng,
-            .data$oc_formatted
+            data = map(data, ~select(.x, c("oc_lat", "oc_lng", "oc_formatted")))
           )
 
       } else {
+
         results <-
-          dplyr::select(
+          dplyr::mutate(
             results,
-            .data$oc_query,
-            .data$oc_lat,
-            .data$oc_lng,
-            dplyr::everything()
+            data = map(data, ~select(.x, c("oc_lat", "oc_lng", "oc_formatted"), everything()))
           )
 
       }
@@ -432,6 +428,7 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
             data = map(data, ~select(.x, c("oc_lat", "oc_lng", "oc_formatted")))
           )
 
+      } else {
 
         results <-
           dplyr::mutate(
