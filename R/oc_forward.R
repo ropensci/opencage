@@ -420,9 +420,7 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
         no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
         abbrv = rlang::eval_tidy(abbrv, data = data)
       )
-      results <- tidyr::unnest(results, data)
 
-      results <- dplyr::bind_cols(data, results)
       results <- dplyr::bind_cols(data, oc_results)
 
       if (output == "short") {
