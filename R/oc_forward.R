@@ -382,7 +382,8 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
         no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
         abbrv = rlang::eval_tidy(abbrv, data = data)
       )
-      results <- tidyr::unnest(results, data)
+      # results <- tidyr::unnest(results, data)
+
       if (output == "short") {
         results <-
           dplyr::select(
@@ -392,7 +393,7 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
             .data$oc_lng,
             .data$oc_formatted
           )
-        results <- tidyr::nest(results, data = 2:ncol(results))
+
       } else {
         results <-
           dplyr::select(
@@ -402,7 +403,7 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
             .data$oc_lng,
             dplyr::everything()
           )
-        results <- tidyr::nest(results, data = 2:ncol(results))
+
       }
     } else {
 
