@@ -47,3 +47,11 @@ has_oc_key <- function(){
 
 }
 
+#' @rdname oc_check_key
+#' @export
+oc_scrub_key <- function (string, with = "xxx") {
+  gsub("(key|client|signature)=(\\w+)", paste0("\\1=", with), string)
+}
+
+#' @rdname oc_check_key
+#' @export
