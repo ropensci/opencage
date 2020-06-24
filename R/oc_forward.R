@@ -447,6 +447,7 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
             .data$oc_lng,
             .data$oc_formatted
           )
+        results <- tidyr::nest(results, data = oc_query:ncol(results))
       } else {
         results <-
           dplyr::select(
@@ -457,6 +458,7 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
             .data$oc_lng,
             dplyr::everything()
           )
+        results <- tidyr::nest(results, data = oc_query:ncol(results))
       }
     }
     results
