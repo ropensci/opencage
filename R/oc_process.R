@@ -161,7 +161,7 @@ oc_process <-
     # return url only
     if (return == "url_only") {
       if (interactive() || is.null(key)) {
-        return(oc_url)
+        return(oc_scrub_key(oc_url))
       } else {
         stop(
           call. = FALSE,
