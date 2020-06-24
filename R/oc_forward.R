@@ -389,7 +389,7 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
         results <-
           dplyr::mutate(
             results,
-            data = map(data, ~select(.x, c("oc_lat", "oc_lng", "oc_formatted")))
+            data = purrr::map(data, ~dplyr::select(.x, c("oc_lat", "oc_lng", "oc_formatted")))
           )
 
       } else {
@@ -397,7 +397,7 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
         results <-
           dplyr::mutate(
             results,
-            data = map(data, ~select(.x, c("oc_lat", "oc_lng", "oc_formatted"), everything()))
+            data = purrr::map(data, ~dplyr::select(.x, c("oc_lat", "oc_lng", "oc_formatted"), dplyr::everything()))
           )
 
       }
@@ -425,7 +425,7 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
         results <-
           dplyr::mutate(
             results,
-            data = map(data, ~select(.x, c("oc_lat", "oc_lng", "oc_formatted")))
+            data = purrr::map(data, ~dplyr::select(.x, c("oc_lat", "oc_lng", "oc_formatted")))
           )
 
       } else {
@@ -433,7 +433,7 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
         results <-
           dplyr::mutate(
             results,
-            data = map(data, ~select(.x, c("oc_lat", "oc_lng", "oc_formatted"), everything()))
+            data = purrr::map(data, ~dplyr::select(.x, c("oc_lat", "oc_lng", "oc_formatted"), dplyr::everything()))
           )
       }
     }
