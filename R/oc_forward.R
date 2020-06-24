@@ -406,37 +406,23 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
       }
     } else {
 
-      print("here")
-      oc_results <-
-        dplyr::mutate(
-          data,
-          op =
-            oc_forward(
-              placename = !!placename,
-              return = "tibble",
-              bounds = !!bounds,
-              proximity = !!proximity,
-              countrycode = !!countrycode,
-              language = !!language,
-              limit = !!limit,
-              min_confidence = !!min_confidence,
-              no_annotations = !!no_annotations,
-              roadinfo = !!roadinfo,
-              no_dedupe = !!no_dedupe,
-              abbrv = !!abbrv
-            )
-        )
+      results <- oc_forward(
+        placename = rlang::eval_tidy(placename, data = data),
+        return = "tibble",
+        bounds = rlang::eval_tidy(bounds, data = data),
+        proximity = rlang::eval_tidy(proximity, data = data),
+        countrycode = rlang::eval_tidy(countrycode, data = data),
+        language = rlang::eval_tidy(language, data = data),
+        limit = rlang::eval_tidy(limit, data = data),
+        min_confidence = rlang::eval_tidy(min_confidence, data = data),
+        no_annotations = rlang::eval_tidy(no_annotations, data = data),
+        roadinfo = rlang::eval_tidy(roadinfo, data = data),
+        no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
+        abbrv = rlang::eval_tidy(abbrv, data = data)
+      )
+      results <- tidyr::unnest(results, data)
 
-      results <- dplyr::bind_cols(data, oc_results$op)
-
-      if (utils::packageVersion("tidyr") > "0.8.99") {
-        results <-
-          tidyr::unnest(results, cols = data, names_repair = "unique")
-      } else {
-        results <- tidyr::unnest(results_nest, .data$op, .drop = FALSE)
-        # .drop = FALSE so other list columns are not dropped. Deprecated as of
-        # v1.0.0
-      }
+      results <- dplyr::bind_cols(data, results)
 
       if (output == "short") {
         results <-
