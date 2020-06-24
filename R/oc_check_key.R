@@ -55,3 +55,15 @@ oc_scrub_key <- function (string, with = "xxx") {
 
 #' @rdname oc_check_key
 #' @export
+oc_show_key <- function(){
+
+  key <- Sys.getenv("OPENCAGE_KEY")
+
+  if (key == "") {
+    return(NA_character_)
+  } else {
+    return(key)
+  }
+
+}
+
