@@ -428,7 +428,7 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
 
       if (utils::packageVersion("tidyr") > "0.8.99") {
         results <-
-          tidyr::unnest(results_nest, .data$op, names_repair = "unique")
+          tidyr::unnest(results, cols = data, names_repair = "unique")
       } else {
         results <- tidyr::unnest(results_nest, .data$op, .drop = FALSE)
         # .drop = FALSE so other list columns are not dropped. Deprecated as of
