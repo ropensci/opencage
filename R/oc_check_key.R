@@ -1,11 +1,16 @@
 #' Check OpenCage API key
 #'
-#' Function that checks the OpenCage API key
+#' This page documents tools for working with your OpenCage API keys. Use `oc_config()` to register your OpenCage API key.
 #'
 #' @param key OpenCage API key
+#' @param string a url string to be scrubbed, the following values will be scrubbed from the url and replace with the `with` argument; key, client, signature
+#' @param with a string to replace
 #'
-#' @noRd
-
+#' @details
+#'
+#' Use `oc_config()` to register your OpenCage API key. Your key will always be scrubbed in output, the only way to see your actual key is to run `oc_show_key()`
+#'
+#' @export
 oc_check_key <- function(key) {
   if (is.null(key) || identical(key, "")) {
     stop(
