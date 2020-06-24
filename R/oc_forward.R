@@ -439,21 +439,21 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
         results <-
           dplyr::select(
             results,
-            1:.data$oc_query,
+            colnames(data),
+            .data$oc_query,
             .data$oc_lat,
             .data$oc_lng,
-            .data$oc_formatted,
-            -.data$oc_query
+            .data$oc_formatted
           )
       } else {
         results <-
           dplyr::select(
             results,
-            1:.data$oc_query,
+            colnames(data),
+            .data$oc_query,
             .data$oc_lat,
             .data$oc_lng,
-            dplyr::everything(),
-            -.data$oc_query
+            dplyr::everything()
           )
       }
     }
