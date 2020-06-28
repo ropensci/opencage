@@ -350,11 +350,6 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
            abbrv = FALSE,
            ...) {
 
-    # check a placename is provided
-    if (missing(placename)) {
-      stop(call. = FALSE, "`placename` must be provided.")
-    }
-
     # Tidyeval to enable input from data frame columns
     placename <- rlang::enquo(placename)
     bounds <- rlang::enquo(bounds)
@@ -367,6 +362,10 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
     roadinfo <- rlang::enquo(roadinfo)
     no_dedupe <- rlang::enquo(no_dedupe)
     abbrv <- rlang::enquo(abbrv)
+    # check a placename is provided
+    if (rlang::quo_is_missing(placename) || rlang::quo_is_null(placename)) {
+      stop(call. = FALSE, "`placename` must be provided.")
+    }
 
     output <- rlang::arg_match(output)
 
