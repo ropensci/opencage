@@ -351,17 +351,18 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
            ...) {
 
     # Tidyeval to enable input from data frame columns
-    placename <- rlang::enquo(placename)
-    bounds <- rlang::enquo(bounds)
-    proximity <- rlang::enquo(proximity)
-    countrycode <- rlang::enquo(countrycode)
-    language <- rlang::enquo(language)
-    limit <- rlang::enquo(limit)
+    placename      <- rlang::enquo(placename)
+    bounds         <- rlang::enquo(bounds)
+    proximity      <- rlang::enquo(proximity)
+    countrycode    <- rlang::enquo(countrycode)
+    language       <- rlang::enquo(language)
+    limit          <- rlang::enquo(limit)
     min_confidence <- rlang::enquo(min_confidence)
     no_annotations <- rlang::enquo(no_annotations)
-    roadinfo <- rlang::enquo(roadinfo)
-    no_dedupe <- rlang::enquo(no_dedupe)
-    abbrv <- rlang::enquo(abbrv)
+    roadinfo       <- rlang::enquo(roadinfo)
+    no_dedupe      <- rlang::enquo(no_dedupe)
+    abbrv          <- rlang::enquo(abbrv)
+
     # check a placename is provided
     if (rlang::quo_is_missing(placename) || rlang::quo_is_null(placename)) {
       stop(call. = FALSE, "`placename` must be provided.")
@@ -372,6 +373,8 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
     # Ensure that query column always exists
     add_request <- TRUE
 
+    # we assume that the user wants the entire output when annotations or
+    # roadinfo are requested
     if (any(rlang::eval_tidy(no_annotations, data = data) == FALSE) ||
         any(rlang::eval_tidy(roadinfo, data = data) == TRUE)) {
       output <- "all"
