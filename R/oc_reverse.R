@@ -213,7 +213,7 @@ oc_reverse_df.data.frame <- # nolint - see lintr issue #223
       output <- "all"
     }
 
-    if (bind_cols == FALSE) {
+    if (isFALSE(bind_cols)) {
       results_list <- oc_reverse(
         latitude = rlang::eval_tidy(latitude, data = data),
         longitude = rlang::eval_tidy(longitude, data = data),
