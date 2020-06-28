@@ -30,7 +30,7 @@ Imports:
 Suggests: 
     knitr (>= 1.19),
     rmarkdown (>= 1.8),
-    sf (>= 0.7),
+    sf (>= 0.9),
     testthat (>= 2.1.0),
     withr (>= 2.0.0)
 VignetteBuilder: knitr
