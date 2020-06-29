@@ -1,0 +1,21 @@
+---
+title: "language"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{language}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(opencage)
+```
+
+We support many languages

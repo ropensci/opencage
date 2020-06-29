@@ -1,0 +1,23 @@
+---
+title: "shtr-pls_address-abbreviations"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{shtr-pls_address-abbreviations}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(opencage)
+```
+
+## Addresses
+
+The geocoding functions also have an `abbr` parameter, `FALSE` by default. When it is `TRUE` the addresses in the `formatted` field of the results are abbreviated (e.g. "Main St." instead of "Main Street"). For more details see [this blog post](http://blog.opencagedata.com/post/160294347883/shrtr-pls).

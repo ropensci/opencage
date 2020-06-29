@@ -22,6 +22,3 @@ knitr::opts_chunk$set(
 
 Geocode with the OpenCage API, either from placename to longitude and latitude (forward geocoding) or from longitude and latitude to placename (reverse geocoding). 
 
-```{r child='./rmdchildren/intro.Rmd'} 
-```
-

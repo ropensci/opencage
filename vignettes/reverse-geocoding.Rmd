@@ -1,0 +1,30 @@
+---
+title: "reverse-geocoding_coordinates-to-addresses"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{reverse-geocoding_coordinates-to-addresses}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(opencage)
+```
+
+## Reverse geocoding
+
+Reverse geocoding is from latitude and longitude to placename(s).
+
+```{r reverse, message=FALSE}
+output2 <- oc_reverse(latitude = 51.5034070, longitude = -0.1275920)
+knitr::kable(output2)
+```
+
+Note that all coordinates sent to the OpenCage API must adhere to the [WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System) ([EPSG:4326](http://epsg.io/4326)) [coordinate reference system](https://en.wikipedia.org/wiki/Spatial_reference_system) in decimal format. There is usually no reason to send more than six or seven digits past the decimal as that then gets down to the [precision of a centimetre](https://en.wikipedia.org/wiki/Decimal_degrees).

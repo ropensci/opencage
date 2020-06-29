@@ -1,0 +1,20 @@
+---
+title: "Free usage of OpenCage"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{free-usage-of-opencage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(opencage)
+```
+
