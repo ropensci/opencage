@@ -113,16 +113,6 @@ oc_results %>%
   knitr::kable()
 ```
 
-
-```{r}
-df <- tibble(id = 1:4,
-             lat = c(-36.85007, 47.21864, 53.55034, 34.05369),
-             lng = c(174.7706, -1.554136, 10.000654, -118.242767))
-
-oc_reverse_df(df, latitude = lat, longitude = lng, output = "all")
-
-```
-
 ## Language
 
 Address specific language is important and OpenCage combines many different datasets to support multiple languages. See `vignette("language")` for full details.
