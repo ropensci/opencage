@@ -127,6 +127,10 @@ oc_reverse_df(df, latitude = lat, longitude = lng, output = "all")
 
 Address specific language is important and OpenCage combines many different datasets to support multiple languages. See `vignette("language")` for full details.
 
+## Privacy and GDPR Compliance
+
+See `vignette("opencage-gdpr-compliance")` for details about how OpenCage processes data sent through the API and how to ensure GDPR compliance.
+
 ## Meta
 
 * Please [report any issues or bugs](https://github.com/ropensci/opencage/issues).
