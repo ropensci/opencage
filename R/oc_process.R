@@ -12,7 +12,7 @@
 #' @return `oc_forward` returns, depending on the `return` parameter, a list
 #'   with either
 #'   \itemize{
-#'   \item the results as tibbles (`"df_list"`, the default),
+#'   \item the results as a tibble (`"tibble"`, the default),
 #'   \item the results as JSON lists (`"json_list"`),
 #'   \item the results as GeoJSON lists (`"geojson_list"`), or
 #'   \item the URL of the OpenCage API call for debugging purposes
@@ -37,7 +37,6 @@ oc_process <-
     roadinfo = FALSE,
     no_dedupe = FALSE,
     abbrv = FALSE,
-    add_request = FALSE,
     get_key = TRUE
   ) {
 
@@ -75,12 +74,11 @@ oc_process <-
           no_annotations = no_annotations,
           roadinfo = roadinfo,
           no_dedupe = no_dedupe,
-          abbrv = abbrv,
-          add_request = add_request
+          abbrv = abbrv
         )
       )
 
-    purrr::pmap(
+    results <- purrr::pmap(
       .l = arglist,
       .f = .oc_process,
       return = return,
@@ -88,6 +86,12 @@ oc_process <-
       no_record = no_record,
       pb = pb
     )
+
+    if(return == "tibble"){
+      results <- dplyr::bind_rows(results)
+      tidyr::nest(results, data = 2:ncol(results))
+    } else
+      results
   }
 
 .oc_process <-
@@ -107,7 +111,6 @@ oc_process <-
            no_dedupe = NULL,
            no_record = NULL,
            abbrv = NULL,
-           add_request = NULL,
            pb = NULL) {
 
     if (!is.null(pb)) pb$tick()
@@ -152,7 +155,6 @@ oc_process <-
         no_dedupe = as.integer(no_dedupe),
         no_record = as.integer(no_record),
         abbrv = as.integer(abbrv),
-        add_request = as.integer(add_request),
         key = key
       ),
       endpoint = endpoint

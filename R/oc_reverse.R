@@ -9,7 +9,7 @@
 #' @return Depending on the `return` argument, `oc_reverse` returns a list with
 #'   either
 #'   \itemize{
-#'   \item the results as tibbles (`"df_list"`, the default),
+#'   \item the results as a tibble (`"tibble"`, the default),
 #'   \item the results as JSON specified as a list (`"json_list"`),
 #'   \item the results as GeoJSON specified as a list (`"geojson_list"`),
 #'   or
@@ -50,14 +50,13 @@
 oc_reverse <-
   function(latitude,
            longitude,
-           return = c("df_list", "json_list", "geojson_list", "url_only"),
+           return = c("tibble", "json_list", "geojson_list", "url_only"),
            language = NULL,
            min_confidence = NULL,
            no_annotations = TRUE,
            roadinfo = FALSE,
            no_dedupe = FALSE,
            abbrv = FALSE,
-           add_request = FALSE,
            ...) {
 
     # check latitude is provided
@@ -81,8 +80,7 @@ oc_reverse <-
       no_annotations = no_annotations,
       roadinfo = roadinfo,
       no_dedupe = no_dedupe,
-      abbrv = abbrv,
-      add_request = add_request
+      abbrv = abbrv
     )
     # process request
     oc_process(
@@ -94,8 +92,7 @@ oc_reverse <-
       no_annotations = no_annotations,
       roadinfo = roadinfo,
       no_dedupe = no_dedupe,
-      abbrv = abbrv,
-      add_request = add_request
+      abbrv = abbrv
     )
   }
 
@@ -200,79 +197,72 @@ oc_reverse_df.data.frame <- # nolint - see lintr issue #223
 
     output <- rlang::arg_match(output)
 
-    # Ensure that query column always exists
-    add_request <- TRUE
-
     if (any(rlang::eval_tidy(no_annotations, data = data) == FALSE) ||
         any(rlang::eval_tidy(roadinfo, data = data) == TRUE)) {
       output <- "all"
     }
 
     if (bind_cols == FALSE) {
-      results_list <- oc_reverse(
+      results <- oc_reverse(
         latitude = rlang::eval_tidy(latitude, data = data),
         longitude = rlang::eval_tidy(longitude, data = data),
-        return = "df_list",
+        return = "tibble",
         language = rlang::eval_tidy(language, data = data),
         min_confidence = rlang::eval_tidy(min_confidence, data = data),
         no_annotations = rlang::eval_tidy(no_annotations, data = data),
         roadinfo = rlang::eval_tidy(roadinfo, data = data),
         no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
-        abbrv = rlang::eval_tidy(abbrv, data = data),
-        add_request = add_request
+        abbrv = rlang::eval_tidy(abbrv, data = data)
       )
-      results <- dplyr::bind_rows(results_list)
+
       if (output == "short") {
+
         results <-
-          dplyr::select(results, .data$oc_query, .data$oc_formatted)
+          dplyr::mutate(
+            results,
+            data = purrr::map(data, ~dplyr::select(.x, c("oc_formatted")))
+          )
+
       } else {
+
         results <-
-          dplyr::select(results, .data$oc_query, dplyr::everything())
+          dplyr::mutate(
+            results,
+            data = purrr::map(data, ~dplyr::select(.x, c("oc_formatted"), dplyr::everything()))
+          )
+
       }
     } else {
-      results_nest <-
-        dplyr::mutate(
-          data,
-          op =
-            oc_reverse(
-              latitude = !!latitude,
-              longitude = !!longitude,
-              return = "df_list",
-              language = !!language,
-              min_confidence = !!min_confidence,
-              no_annotations = !!no_annotations,
-              roadinfo = !!roadinfo,
-              no_dedupe = !!no_dedupe,
-              abbrv = !!abbrv,
-              add_request = add_request
-            )
+      oc_results <-
+        oc_reverse(
+          latitude = rlang::eval_tidy(latitude, data = data),
+          longitude = rlang::eval_tidy(longitude, data = data),
+          return = "tibble",
+          language = rlang::eval_tidy(language, data = data),
+          min_confidence = rlang::eval_tidy(min_confidence, data = data),
+          no_annotations = rlang::eval_tidy(no_annotations, data = data),
+          roadinfo = rlang::eval_tidy(roadinfo, data = data),
+          no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
+          abbrv = rlang::eval_tidy(abbrv, data = data)
         )
 
-      if (utils::packageVersion("tidyr") > "0.8.99") {
-        results <-
-          tidyr::unnest(results_nest, .data$op, names_repair = "unique")
-      } else {
-        results <- tidyr::unnest(results_nest, .data$op, .drop = FALSE)
-        # .drop = FALSE so other list columns are not dropped. Deprecated as of
-        # v1.0.0
-      }
-
+      results <- dplyr::bind_cols(data, oc_results)
       if (output == "short") {
+
         results <-
-          dplyr::select(
+          dplyr::mutate(
             results,
-            1:.data$oc_query,
-            .data$oc_formatted,
-            -.data$oc_query
+            data = purrr::map(data, ~dplyr::select(.x, c("oc_formatted")))
           )
+
       } else {
+
         results <-
-          dplyr::select(
+          dplyr::mutate(
             results,
-            1:.data$oc_query,
-            dplyr::everything(),
-            -.data$oc_query
+            data = purrr::map(data, ~dplyr::select(.x, c("oc_formatted"), dplyr::everything()))
           )
+
       }
     }
     results

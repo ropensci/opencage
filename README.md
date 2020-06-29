@@ -91,7 +91,7 @@ of a centimetre](https://en.wikipedia.org/wiki/Decimal_degrees).
 ## Return type
 
 Depending on what you specify as the `return` parameter, `oc_forward()`
-and `oc_reverse()` will return either a list of tibbles (`df_list`, the
+and `oc_reverse()` will return either a nested tibble (`tibble`, the
 default), JSON lists (`json_list`), GeoJSON lists (`geojson_list`), or
 the URL with which the API would be called (`url_only`).
 
@@ -365,7 +365,7 @@ post](http://blog.opencagedata.com/post/160294347883/shrtr-pls).
 
 `oc_forward()` and `oc_reverse()` have an `add_request` argument,
 indicating whether the request is returned again with the results. If
-the `return` value is a `df_list`, the `placename` or
+the `return` value is a `tibble`, the `placename` or
 `latitude,longitude` is added as a column to the results. `json_list`
 results will contain all request parameters, including the API key
 used\! For `geojson_list` results `add_request` is currently ignored by

@@ -1,6 +1,8 @@
 ## Test oc_forward functions ##
 
 library(tibble)
+library(tidyr)
+library(dplyr)
 locations <- c("Nantes", "Flensburg", "Los Angeles")
 df <- tibble(id = 1:3, loc = locations)
 df2 <- add_column(df,
@@ -23,6 +25,10 @@ df3 <- tibble(
   roadinfo = c(FALSE, TRUE, TRUE)
 )
 
+equal_after_unnesting <- function(df1, df2){
+  all_equal(unnest(df1, data), unnest(df2, data))
+}
+
 # oc_forward --------------------------------------------------------------
 
 test_that("oc_forward works", {
@@ -31,8 +37,8 @@ test_that("oc_forward works", {
 
   res1 <- oc_forward(locations)
   expect_type(res1, "list")
-  expect_equal(length(res1), 3)
-  expect_s3_class(res1[[1]], c("tbl_df", "tbl", "data.frame"))
+  expect_equal(nrow(res1), 3)
+  expect_s3_class(res1, c("tbl_df", "tbl", "data.frame"))
 })
 
 test_that("oc_forward returns correct type", {
@@ -50,13 +56,6 @@ test_that("oc_forward returns correct type", {
   expect_type(res3, "list")
   expect_equal(length(res3), 3)
   expect_s3_class(res3[[1]], "geo_list")
-})
-
-test_that("oc_forward adds request with add_request", {
-  skip_on_cran()
-  skip_if_offline()
-  res <- oc_forward("Hmbg", add_request = TRUE)
-  expect_equal(res[[1]][["oc_query"]], "Hmbg")
 })
 
 # oc_forward_df -----------------------------------------------------------
@@ -90,11 +89,11 @@ test_that("output arguments work", {
   skip_if_offline()
 
   expect_equal(names(oc_forward_df(df, loc, bind_cols = TRUE)),
-               c("id", "loc", "oc_lat", "oc_lng", "oc_formatted"))
+               c("id", "loc", "oc_query", "data"))
   expect_equal(names(oc_forward_df(df, loc, bind_cols = FALSE)),
-               c("oc_query", "oc_lat", "oc_lng", "oc_formatted"))
-  expect_gt(ncol(oc_forward_df(df, loc, output = "all")), 5)
-  expect_gt(ncol(oc_forward_df(df, loc, bind_cols = FALSE, output = "all")), 5)
+               c("oc_query", "data"))
+  expect_equal(ncol(oc_forward_df(df, loc, output = "all")), 4)
+  expect_equal(ncol(oc_forward_df(df, loc, bind_cols = FALSE, output = "all")), 2)
 })
 
 test_that("tidyeval works for arguments", {
@@ -107,35 +106,38 @@ test_that("tidyeval works for arguments", {
   bounds <- oc_forward_df(df2, loc, bounds = bounds, bind_cols = FALSE)
   prx <- oc_forward_df(df2, loc, proximity = proximity, bind_cols = FALSE)
   cc <- oc_forward_df(df2, loc, countrycode = countrycode, bind_cols = FALSE)
-  expect_false(isTRUE(all.equal(bounds, noarg)))
-  expect_false(isTRUE(all.equal(prx, noarg)))
-  expect_false(isTRUE(all.equal(cc, noarg)))
-  expect_equal(bounds, prx)
-  expect_equal(bounds, cc)
+
+  expect_false(isTRUE(equal_after_unnesting(bounds, noarg)))
+  expect_false(isTRUE(equal_after_unnesting(prx, noarg)))
+  expect_false(isTRUE(equal_after_unnesting(cc, noarg)))
+  expect_true(isTRUE(equal_after_unnesting(bounds, prx)))
+  expect_false(isTRUE(equal_after_unnesting(bounds, cc)))
 
   # language
   lang <- oc_forward_df(df2, loc, language = language, output = "all")
-  expect_equal(lang$oc_country, c("Frankreich", "Allemagne", "アメリカ合衆国")) # nolint
+
+  expect_equal(unnest(lang, data)$oc_country, c("Frankreich", "Allemagne", "アメリカ合衆国")) # nolint
 
   # limit
   limit <- oc_forward_df(df2, loc, limit = limit)
-  expect_equal(nrow(limit), 6)
-  expect_equal(limit$id, c(1, 2, 2, 3, 3, 3))
+  expect_equal(nrow(unnest(limit, data)), 6)
+  expect_equal(unnest(limit, data)$id, c(1, 2, 2, 3, 3, 3))
 
   # min_confidence
   confidence <- oc_forward_df(df2, loc,
                               min_confidence = confidence,
                               bind_cols = FALSE)
-  expect_false(isTRUE(all.equal(confidence, noarg)))
-  expect_false(isTRUE(all.equal(confidence[1, ], noarg[1, ])))
-  expect_false(isTRUE(all.equal(confidence[2, ], noarg[2, ])))
-  expect_false(isTRUE(all.equal(confidence[3, ], noarg[3, ])))
+
+  expect_false(isTRUE(equal_after_unnesting(confidence, noarg)))
+  expect_false(isTRUE(equal_after_unnesting(confidence[1, ], noarg[1, ])))
+  expect_false(isTRUE(equal_after_unnesting(confidence[2, ], noarg[2, ])))
+  expect_false(isTRUE(equal_after_unnesting(confidence[3, ], noarg[3, ])))
 
   # no_annotations
   ann <- oc_forward_df(df2, loc, bind_cols = FALSE,
                        no_annotations = annotation)
-  expect_gt(ncol(ann), 30)
-  expect_equal(ann$oc_currency_name, c("Euro", NA, NA))
+  expect_equal(ncol(unnest(ann, data)), 71)
+  expect_equal(unnest(ann, data)$oc_currency_name, c("Euro", NA, NA))
 
   # roadinfo
   ri <- oc_forward_df(
@@ -143,16 +145,17 @@ test_that("tidyeval works for arguments", {
     loc,
     roadinfo = roadinfo
   )
-  expect_equal(ri$oc_roadinfo_speed_in, c(NA_character_, "km/h", "mph"))
+  expect_equal(unnest(ri, data)$oc_roadinfo_speed_in, c(NA_character_, "km/h", "mph"))
 
   # abbrv
   abbrv <- oc_forward_df(df2, loc,
                          abbrv = abbrv,
                          bind_cols = FALSE)
-  expect_false(isTRUE(all.equal(abbrv, noarg)))
-  expect_true(all.equal(abbrv[1, ], noarg[1, ]))
-  expect_true(all.equal(abbrv[2, ], noarg[2, ]))
-  expect_false(isTRUE(all.equal(abbrv[3, ], noarg[3, ])))
+
+  expect_false(isTRUE(equal_after_unnesting(abbrv, noarg)))
+  expect_true(isTRUE(all_equal(equal_after_unnesting(abbrv[1, ], noarg[1, ]))))
+  expect_true(isTRUE(all_equal(equal_after_unnesting(abbrv[2, ], noarg[2, ]))))
+  expect_false(isTRUE(equal_after_unnesting(abbrv[3, ], noarg[3, ])))
 })
 
 test_that("list columns are not dropped (by tidyr)", {

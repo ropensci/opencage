@@ -124,7 +124,7 @@ test_that("oc_process deals well with res being NULL", {
     min_confidence = 5,
     language = "pt-BR",
     no_annotations = TRUE,
-    return = "df_list"
+    return = "tibble"
   )
   expect_null(res[["res"]])
 })
@@ -161,24 +161,24 @@ test_that("oc_process handles bounds argument.", {
   expect_match(res[[2]], "&bounds=-78.86%2C42.7%2C-78.81%2C42.73", fixed = TRUE)
 })
 
-test_that("bounds argument is well taken into account with df_list", {
+test_that("bounds argument is well taken into account with tibble", {
   skip_on_cran()
   skip_if_offline()
 
   res1 <- oc_process(
     placename = "Berlin",
-    return = "df_list"
+    return = "tibble"
   )
 
   res2 <- oc_process(
     placename = "Berlin",
     bounds = list(c(-90, 38, 0, 45)),
     limit = 10,
-    return = "df_list"
+    return = "tibble"
   )
 
-  expect_equal(res1[[1]][["oc_country"]], "Germany")
-  expect_true(res2[[1]][[1, "oc_country"]] != "Germany")
+  expect_equal(unnest(res1, data)$oc_country, "Germany")
+  expect_false("Germany" %in% unnest(res2, data)$oc_country)
 })
 
 test_that("oc_process handles proximity argument.", {
@@ -270,8 +270,7 @@ test_that("oc_process handles various other arguments.", {
     no_annotations = FALSE,
     roadinfo = FALSE,
     no_dedupe = FALSE,
-    abbrv = FALSE,
-    add_request = FALSE
+    abbrv = FALSE
   )
   expect_match(res1[[1]], "&limit=1", fixed = TRUE)
   expect_false(grepl(pattern = "min_confidence", x = res1[[1]], fixed = TRUE))
@@ -279,7 +278,6 @@ test_that("oc_process handles various other arguments.", {
   expect_match(res1[[1]], "&roadinfo=0", fixed = TRUE)
   expect_match(res1[[1]], "&no_dedupe=0", fixed = TRUE)
   expect_match(res1[[1]], "&abbrv=0", fixed = TRUE)
-  expect_match(res1[[1]], "&add_request=0", fixed = TRUE)
 
   res2 <- oc_process(
     placename = "Hamburg",
@@ -290,8 +288,7 @@ test_that("oc_process handles various other arguments.", {
     no_annotations = TRUE,
     roadinfo = TRUE,
     no_dedupe = TRUE,
-    abbrv = TRUE,
-    add_request = TRUE
+    abbrv = TRUE
   )
   expect_match(res2[[1]], "&limit=10", fixed = TRUE)
   expect_match(res2[[1]], "&min_confidence=8", fixed = TRUE)
@@ -299,7 +296,6 @@ test_that("oc_process handles various other arguments.", {
   expect_match(res2[[1]], "&roadinfo=1", fixed = TRUE)
   expect_match(res2[[1]], "&no_dedupe=1", fixed = TRUE)
   expect_match(res2[[1]], "&abbrv=1", fixed = TRUE)
-  expect_match(res2[[1]], "&add_request=1", fixed = TRUE)
 
   res3 <- oc_process(
     placename = c("Hamburg", "Hamburg"),
@@ -310,8 +306,7 @@ test_that("oc_process handles various other arguments.", {
     no_annotations = c(TRUE, FALSE),
     roadinfo = c(TRUE, FALSE),
     no_dedupe = c(TRUE, FALSE),
-    abbrv = c(TRUE, FALSE),
-    add_request = c(TRUE, FALSE)
+    abbrv = c(TRUE, FALSE)
   )
   expect_match(res3[[1]], "&limit=10", fixed = TRUE)
   expect_match(res3[[2]], "&limit=5", fixed = TRUE)
@@ -325,8 +320,6 @@ test_that("oc_process handles various other arguments.", {
   expect_match(res3[[2]], "&no_dedupe=0", fixed = TRUE)
   expect_match(res3[[1]], "&abbrv=1", fixed = TRUE)
   expect_match(res3[[2]], "&abbrv=0", fixed = TRUE)
-  expect_match(res3[[1]], "&add_request=1", fixed = TRUE)
-  expect_match(res3[[2]], "&add_request=0", fixed = TRUE)
 })
 
 test_that("arguments that are NULL or NA don't show up in url.", {
@@ -342,8 +335,7 @@ test_that("arguments that are NULL or NA don't show up in url.", {
     min_confidence = NULL,
     no_annotations = NULL,
     no_dedupe = NULL,
-    abbrv = NULL,
-    add_request = NULL
+    abbrv = NULL
   )
   expect_match(res_null[[1]], "^((?!key=).)*$", perl = TRUE)
   expect_match(res_null[[1]], "^((?!limit=).)*$", perl = TRUE)
@@ -369,8 +361,7 @@ test_that("arguments that are NULL or NA don't show up in url.", {
     min_confidence = NA,
     no_annotations = NA,
     no_dedupe = NA,
-    abbrv = NA,
-    add_request = NA
+    abbrv = NA
   )
   expect_match(res_na[[1]], "^((?!key=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!limit=).)*$", perl = TRUE)

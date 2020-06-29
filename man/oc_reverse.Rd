@@ -7,14 +7,13 @@
 oc_reverse(
   latitude,
   longitude,
-  return = c("df_list", "json_list", "geojson_list", "url_only"),
+  return = c("tibble", "json_list", "geojson_list", "url_only"),
   language = NULL,
   min_confidence = NULL,
   no_annotations = TRUE,
   roadinfo = FALSE,
   no_dedupe = FALSE,
   abbrv = FALSE,
-  add_request = FALSE,
   ...
 )
 }
@@ -22,7 +21,7 @@ oc_reverse(
 \item{latitude, longitude}{Numeric vectors of latitude and longitude values.}
 
 \item{return}{A character vector of length one indicating the return value of
-the function, either a list of tibbles (\code{df_list}, the default), a JSON
+the function, either a tibble with nested columns (\code{tibble}, the default), a JSON
 list (\code{json_list}), a GeoJSON list (\code{geojson_list}), or the URL with which
 the API would be called (\code{url_only}).}
 
@@ -56,19 +55,13 @@ will not be deduplicated.}
 \code{formatted} field of the results are abbreviated (e.g. "Main St." instead
 of "Main Street").}
 
-\item{add_request}{Logical vector (default \code{FALSE}) indicating whether the
-request is returned again with the results. If the \code{return} value is a
-\code{df_list}, the query text is added as a column to the results. \code{json_list}
-results will contain all request parameters, including the API key used!
-This is currently ignored by OpenCage if return value is \code{geojson_list}.}
-
 \item{...}{Ignored.}
 }
 \value{
 Depending on the \code{return} argument, \code{oc_reverse} returns a list with
 either
 \itemize{
-\item the results as tibbles (\code{"df_list"}, the default),
+\item the results as a tibble (\code{"tibble"}, the default),
 \item the results as JSON specified as a list (\code{"json_list"}),
 \item the results as GeoJSON specified as a list (\code{"geojson_list"}),
 or

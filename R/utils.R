@@ -20,7 +20,7 @@ oc_parse_text <- function(res) {
 }
 
 oc_format <- function(res_text, return, query) {
-  if (return == "df_list") {
+  if (return == "tibble") {
     jsn <- jsonlite::fromJSON(res_text, simplifyVector = TRUE, flatten = TRUE)
     if (identical(jsn$total_results, 0L)) {
       results <- tibble::tibble(oc_formatted = NA_character_)
@@ -38,13 +38,10 @@ oc_format <- function(res_text, return, query) {
       results <-
         rlang::set_names(results, ~ tolower(paste0("oc_", .)))
     }
-    if ("request" %in% names(jsn)) {
-      # add request directly, not from OpenCage roundtrip
-      if (identical(query, "")) query <- NA_character_
-      tibble::add_column(results, oc_query = query, .before = 1)
-    } else {
-      results
-    }
+
+    if (identical(query, "")) query <- NA_character_
+    tibble::add_column(results, oc_query = query, .after = 0)
+
   } else if (return == "json_list" || return == "geojson_list") {
     jsn <- jsonlite::fromJSON(res_text, simplifyVector = FALSE)
     if (return == "geojson_list") {
