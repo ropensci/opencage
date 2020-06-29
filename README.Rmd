@@ -25,11 +25,6 @@ Or install the development version using [remotes](https://remotes.r-lib.org/) w
 
 ```{r, eval = FALSE}
 remotes::install_github("ropensci/opencage")
-
-```
-
-
-```{r child='vignettes/rmdchildren/intro.Rmd'} 
 ```
 
 ## Meta
