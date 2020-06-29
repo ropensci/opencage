@@ -18,6 +18,27 @@ knitr::opts_chunk$set(
 library(opencage)
 ```
 
-## Addresses
+Since 2017 OpenCage have been providing [abbreviated addresses](https://blog.opencagedata.com/post/160294347883/shrtr-pls) via their API. This might be particularly useful when displaying addresses in popups on maps.
 
-The geocoding functions also have an `abbr` parameter, `FALSE` by default. When it is `TRUE` the addresses in the `formatted` field of the results are abbreviated (e.g. "Main St." instead of "Main Street"). For more details see [this blog post](http://blog.opencagedata.com/post/160294347883/shrtr-pls).
+All forward/reverse geocoding functions in `{opencage}` include `abbrv = FALSE` by default
+
+```{r include=FALSE}
+library("tidyverse")
+```
+
+```{r}
+library("tidyverse")
+oc_reverse(44.4283569,26.0889539) %>%
+  unnest(cols = data) %>%
+  pull(oc_formatted)
+```
+
+OpenCage includes many common address abbreviations that may be combined with non-native language address requests via the `abbrv` and `language` arguments:
+
+```{r}
+oc_reverse(44.4283569,26.0889539,
+           abbrv = TRUE,
+           language = "zh") %>%
+  unnest(cols = data) %>%
+  pull(oc_formatted)
+```
