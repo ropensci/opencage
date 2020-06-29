@@ -15,6 +15,20 @@ editor_options:
 
 Geocode with the OpenCage API, either from placename to longitude and latitude (forward geocoding) or from longitude and latitude to placename (reverse geocoding). 
 
+### Package functionality
+
+There are a few R packages that provide forward and reverse geocoding, see how {opencage} compares to alternative solutions:
+
+| Task                         | [opencage](https://github.com/ropensci/opencage) | [ggmap](https://github.com/dkahle/ggmap) | [tmaptools](https://github.com/mtennekes/tmaptools) 
+|------------------------------|--------|---------|---------|
+| Available on CRAN            | ✅ | ✅ | ✅ |
+| Requires API key             | ✅ | ✅ | ❌ |
+| Underlying Geocoding service | [OpenCage Geocoder](https://opencagedata.com) |  [Google Maps Platform](https://developers.google.com/maps/documentation/geocoding/start) | [Nominatim](https://nominatim.org/release-docs/develop/api/Overview/) |
+| Requires payment details before it can be used | ❌ | ✅ | ❌ |
+| Limits on free usage | Free use limited to 2,500 requests per day. | After providing payment details, most users receive $200 of free credit per month.  | Poorly defined usage limits.<br>Unexpected geocoding failure can happen at any time and is difficult to resolve. |
+
+See `vignette("free-usage-of-opencage")` for full information about free usage of {opencage}.
+
 # Installation
 
 Install the package with:
