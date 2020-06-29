@@ -1,0 +1,27 @@
+---
+title: "opencage-gdpr-compliance"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{opencage-gdpr-compliance}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(opencage)
+```
+
+## Privacy
+
+All geocoding functions have a parameter `no_record`. It is `FALSE` by default. 
+
+* When `no_record` is `FALSE` a log of the query is made by OpenCage. These logs are used for debugging and in order to improve the service. [According to OpenCage](https://opencagedata.com/faq#legal), all logs are automatically deleted after six months. 
+
+* When `no_record` is `TRUE`, OpenCage still records that a request was made (e.g. to see whether you exceeded your quota), but not the specific content of your query. Please set `no_record` to `TRUE` if you have concerns about privacy and don't want OpenCage to have a record of your query. More information about privacy can be found on OpenCage's [GDPR page](https://opencagedata.com/gdpr).

@@ -1,0 +1,30 @@
+---
+title: "opencage-api"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{opencage-api}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(opencage)
+```
+
+# OpenCage data sources
+
+The [OpenCage](https://opencagedata.com/) API supports forward and reverse geocoding. Sources of OpenCage are open geospatial data including OpenStreetMap, Yahoo! GeoPlanet, Natural Earth Data, Thematic Mapping, Ordnance Survey OpenSpace, Statistics New Zealand, Zillow, MaxMind, GeoNames, the US Census Bureau and Flickr's shapefiles plus a whole lot more besides. Refer to [the full list of credits](https://opencagedata.com/credits).
+
+## API key
+
+To use the package, you will need to register at https://opencagedata.com/users/sign_up to get an API key. The "Free Trial" plan provides up to 2,500 API requests a day. 
+
+The geocoding functions of the package will conveniently retrieve your API key with `oc_key()` if it is saved in the environment variable `"OPENCAGE_KEY"`. For ease of use, [save your API key as an environment variable in `.Renviron`](https://happygitwithr.com/github-pat.html#step-by-step).
+
