@@ -43,6 +43,86 @@ Or install the development version using [remotes](https://remotes.r-lib.org/) w
 remotes::install_github("ropensci/opencage")
 ```
 
+# Usage
+
+You need an **OpenCage API key** to use this package, sign up for a free account and obtain your key from [https://opencagedata.com/dashboard#api-keys](https://opencagedata.com/dashboard#api-keys).
+
+Running `oc_config()` in an interactive session will request your API key. After this has been done once your API key will be stored as an environmental variable for later use. See `vignette("opencage-api")` for more details.
+
+## Forward geocoding
+
+Forward geocoding is the conversion of addresses into coordinates, and is achieved with `oc_forward()`
+
+```{r}
+library("opencage")
+oc_results <- oc_forward("221b Baker St, Marylebone, London NW1 6XE")
+oc_results
+```
+
+The `data` column contains the goecoding results from OpenCage as a nested tibble. Use `unnest()` from `{tidyr}` to extract this data:
+
+```{r include=FALSE}
+library("tidyverse")
+```
+
+```{r include=TRUE,eval=TRUE}
+library("tidyverse")
+oc_results %>%
+  unnest(cols = data)
+```
+
+`oc_forward()` can be provided with multiple addresses and restrictions on search terms, see `vignette("forward-geocoding")` for full details.
+
+```{r}
+oc_forward(c("High Street, Reading", "Main Street, Reading"),
+           countrycode = c("GB", "US"),
+           limit = 1)
+```
+
+To augment an existing `data.frame` with data from OpenCage, use `oc_forward_df()`:
+
+```{r}
+street_addresses <- tibble(
+  number = c(1, 10),
+  street = c("High Street", "Main Street"),
+  city = c("Reading", "Reading"),
+  countrycode = c("GB", "US")
+)
+
+oc_forward_df(street_addresses, placename = paste(street, city, sep = ", "), output = "all")
+```
+
+## Reverse geocoding
+
+Reverse geocoding is the process of converting geo coordinates into a street address, and is achieved with `oc_reverse()`
+
+```{r}
+oc_results <- oc_reverse(latitude = -36.85007, longitude = 174.7706)
+oc_results %>%
+  unnest(cols = data) %>%
+  pull(oc_formatted)
+```
+
+`oc_reverse()` can be provided with multiple coordinates and be instructed to attempt to return the nearest road with `roadinfo = TRUE`. See `vignette("reverse-geocoding")` for more examples.
+
+```{r}
+oc_results <- oc_reverse(latitude = -36.85007, longitude = 174.7706, roadinfo = TRUE)
+oc_results %>%
+  unnest(cols = data) %>%
+  select(oc_formatted, contains("road")) %>%
+  knitr::kable()
+```
+
+
+```{r}
+df <- tibble(id = 1:4,
+             lat = c(-36.85007, 47.21864, 53.55034, 34.05369),
+             lng = c(174.7706, -1.554136, 10.000654, -118.242767))
+
+oc_reverse_df(df, latitude = lat, longitude = lng, output = "all")
+
+```
+
 ## Meta
 
 * Please [report any issues or bugs](https://github.com/ropensci/opencage/issues).
