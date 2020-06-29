@@ -49,6 +49,12 @@ You need an **OpenCage API key** to use this package, sign up for a free account
 
 Running `oc_config()` in an interactive session will request your API key. After this has been done once your API key will be stored as an environmental variable for later use. See `vignette("opencage-api")` for more details.
 
+## Deprecated opencage_forward and opencage_reverse
+
+Version 0.2.0 was released in 2020 and deprecates the previous functions for geocoding; `opencage_forward()` and `opencage_reverse()`. These functions will continue to work, but it is highly recommended code is updated to use `oc_forward()` and `oc_reverse()`.
+
+The deprecated functions only supported geocoding one address at a time, the new `oc_*()` functions are vectorised and `oc_*_df()` functions allow for OpenCage data to be easily appended to an existing `data.frame`.
+
 ## Forward geocoding
 
 Forward geocoding is the conversion of addresses into coordinates, and is achieved with `oc_forward()`
