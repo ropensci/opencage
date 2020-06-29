@@ -121,7 +121,7 @@ Address specific language is important and OpenCage combines many different data
 
 See `vignette("opencage-gdpr-compliance")` for details about how OpenCage processes data sent through the API and how to ensure GDPR compliance.
 
-## Meta
+# Meta
 
 * Please [report any issues or bugs](https://github.com/ropensci/opencage/issues).
 * License: GPL >= 2
