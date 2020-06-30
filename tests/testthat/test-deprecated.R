@@ -1,4 +1,19 @@
 ## Test deprecated opencage_forward ##
+library("lifecycle")
+
+test_that("opencage_forward() is deprecated", {
+  skip_on_cran()
+  skip_if_offline()
+
+  expect_deprecated(opencage_forward(placename = "Sarzeau"))
+})
+
+test_that("opencage_reverse) is deprecated", {
+  skip_on_cran()
+  skip_if_offline()
+
+  expect_deprecated(opencage_reverse(latitude = 0, longitude = 0, limit = 2))
+})
 
 test_that("opencage_forward/opencage_reverse return what they should.", {
   skip_on_cran()
