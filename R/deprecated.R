@@ -129,20 +129,10 @@ opencage_reverse <-
     lst <- lst[[1]]
     opencage_format(lst)
   }
-
-#' Defunct functions
-#'
-#' \Sexpr[results=rd, stage=render]{lifecycle::badge("defunct")}
-#' Executing these functions will tell you which function replaces them.
 #' @description
 #' Use `oc_config()` instead of `opencage_key()`.
 #'
-#' @keywords internal
-#' @name defunct
-NULL
-
 #' @export
-#' @rdname defunct
 #' @keywords internal
 #' @rdname deprecated
 opencage_key <- function(quiet = TRUE) {
@@ -159,6 +149,7 @@ opencage_key <- function(quiet = TRUE) {
   }
 
   return(pat)
+}
 #' @description
 #' `opencage_format()` is no longer necessary.
 #'
