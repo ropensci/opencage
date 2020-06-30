@@ -31,14 +31,13 @@ opencage_forward <-
            abbrv = FALSE,
            add_request = TRUE) {
 
-    lifecycle::deprecate_warn("0.2.0", "opencage_forward()", "oc_forward()")
-
     if (length(placename) > 1) {
       stop(
         call. = FALSE,
         "`opencage_forward` is not vectorised; use `oc_forward` instead."
       )
     }
+    lifecycle::deprecate_warn("0.2.0", "opencage_forward()", "oc_forward()")
 
     oc_config(key = key, no_record = no_record)
 
@@ -104,14 +103,14 @@ opencage_reverse <-
            abbrv = FALSE,
            add_request = TRUE) {
 
-    lifecycle::deprecate_warn("0.2.0", "opencage_reverse()", "oc_reverse()")
-
     if (length(latitude) > 1) {
       stop(
         call. = FALSE,
         "`opencage_reverse` is not vectorised, use `oc_reverse` instead."
       )
     }
+
+    lifecycle::deprecate_warn("0.2.0", "opencage_reverse()", "oc_reverse()")
 
     oc_config(key = key, no_record = no_record)
 
