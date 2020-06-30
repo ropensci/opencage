@@ -146,6 +146,55 @@ opencage_key <- function(quiet = TRUE) {
   lifecycle::deprecate_stop("0.2.0", "opencage_key()", "oc_config()")
 }
 
+#' @description
+#' `opencage_format()` is no longer necessary.
+#'
+#' @export
+#' @keywords internal
+#' @rdname
 opencage_format <- function(lst) {
-  lifecycle::deprecate_stop("0.2.0", "opencage_format()")
+  lifecycle::deprecate_warn("0.2.0", "opencage_format()")
+
+  no_results <- lst[["total_results"]]
+  if (no_results > 0) {
+    results <- lapply(lst[["results"]], unlist)
+    results <- lapply(results, as.data.frame)
+    results <- lapply(results, t)
+    results <- lapply(results, as.data.frame, stringsAsFactors = FALSE)
+    results <- suppressWarnings(dplyr::bind_rows(results))
+    results$"geometry.lat" <- as.numeric(results$"geometry.lat") # nolint snake_case not backward compatible
+    results$"geometry.lng" <- as.numeric(results$"geometry.lng") # nolint snake_case not backward compatible
+
+    # if requests exists in the api response add the query to results
+    if ("request" %in% names(lst)) {
+      results$query <- as.character(lst$request$query)
+    }
+  }
+  else {
+    results <- NULL
+  }
+
+  if (!is.null(lst$rate)) {
+    rate_info <- tibble::as_tibble(data.frame(
+      limit = lst$rate$limit,
+      remaining = lst$rate$remaining,
+      reset = as.POSIXct(lst$rate$reset, origin = "1970-01-01")
+    ))
+  } else {
+    rate_info <- NULL
+  }
+
+  if (!is.null(results)) {
+    results <- tibble::as_tibble(results)
+  }
+
+  list(
+    results = results,
+    total_results = no_results,
+    time_stamp = as.POSIXct(
+      lst$timestamp$created_unix,
+      origin = "1970-01-01"
+    ),
+    rate_info = rate_info
+  )
 }
