@@ -1,20 +1,11 @@
 #' Deprecated functions in opencage
 #'
-#' These functions still work but will be removed (defunct) in the next version.
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #'
-#' \itemize{
-#'  \item [opencage_forward()]
-#'  \item [opencage_reverse()]
-#'  \item [opencage_key()]
-#' }
+#' Use `oc_forward()` instead of `opencage_forward()`.
 #'
-#' @name opencage-deprecated
-NULL
-
-#' Forward geocoding
-#'
-#' Deprecated: use `oc_forward` or `oc_forward_df` for forward geocoding.
-#'
+#' @param placename Placename
 #' @param key Your OpenCage API key as a character vector of length one. By
 #'   default, [opencage_key()] will attempt to retrieve the key from the
 #'   environment variable `OPENCAGE_KEY`.
@@ -43,6 +34,8 @@ NULL
 #'                               Deutschland")
 #' }
 #'
+#' @keywords internal
+#' @name deprecated
 opencage_forward <-
   function(placename,
            key = opencage_key(),
@@ -56,14 +49,15 @@ opencage_forward <-
            no_record = FALSE,
            abbrv = FALSE,
            add_request = TRUE) {
+
+    lifecycle::deprecate_warn("0.2.0", "opencage_forward()", "oc_forward()")
+
     if (length(placename) > 1) {
       stop(
         call. = FALSE,
         "`opencage_forward` is not vectorised; use `oc_forward` instead."
       )
     }
-
-    .Deprecated("oc_forward")
 
     oc_config(key = key, no_record = no_record)
 
@@ -84,10 +78,8 @@ opencage_forward <-
     opencage_format(lst)
   }
 
-
-#' Reverse geocoding
-#'
-#' Deprecated: use `oc_reverse` or `oc_reverse_df` for reverse geocoding.
+#' @description
+#' Use `oc_reverse()` instead of `opencage_reverse()`.
 #'
 #' @param bounds Bounding box, ignored for reverse geocoding.
 #' @param countrycode Country code, ignored for reverse geocoding.
@@ -101,11 +93,21 @@ opencage_forward <-
 #'
 #' @examples
 #' \dontrun{
+#' opencage_forward(placename = "Sarzeau")
+#' opencage_forward(placename = "Islington, London")
+#' opencage_forward(placename = "Triererstr 15,
+#'                               Weimar 99423,
+#'                               Deutschland")
+#'
 #' opencage_reverse(
 #'   latitude = 0, longitude = 0,
 #'   limit = 2
 #' )
 #' }
+#'
+#' @export
+#' @keywords internal
+#' @rdname deprecated
 opencage_reverse <-
   function(latitude,
            longitude,
@@ -120,14 +122,15 @@ opencage_reverse <-
            no_record = FALSE,
            abbrv = FALSE,
            add_request = TRUE) {
+
+    lifecycle::deprecate_warn("0.2.0", "opencage_reverse()", "oc_reverse()")
+
     if (length(latitude) > 1) {
       stop(
         call. = FALSE,
         "`opencage_reverse` is not vectorised, use `oc_reverse` instead."
       )
     }
-
-    .Deprecated("oc_reverse")
 
     oc_config(key = key, no_record = no_record)
 
