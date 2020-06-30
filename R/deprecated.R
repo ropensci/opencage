@@ -14,26 +14,7 @@
 #'   cached by OpenCage.
 #' @inheritParams oc_forward
 #'
-#' @return A list with
-#' \itemize{
-#' \item results as a tibble with one line per result,
-#' \item the number of results as an integer,
-#' \item the timestamp as a POSIXct object,
-#' \item rate_info tibble/data.frame with the maximal number of API calls  per
-#' day for the used key, the number of remaining calls for the day and the time
-#' at which the number of remaining calls will be reset.
-#' }
 #' @export
-#'
-#' @examples
-#' \dontrun{
-#' opencage_forward(placename = "Sarzeau")
-#' opencage_forward(placename = "Islington, London")
-#' opencage_forward(placename = "Triererstr 15,
-#'                               Weimar 99423,
-#'                               Deutschland")
-#' }
-#'
 #' @keywords internal
 #' @name deprecated
 opencage_forward <-
@@ -150,77 +131,21 @@ opencage_reverse <-
     opencage_format(lst)
   }
 
-# format to "old" style (version <= 0.1.4)
-# for opencage_forward, opencage_reverse
-opencage_format <- function(lst) {
-  no_results <- lst[["total_results"]]
-  if (no_results > 0) {
-    results <- lapply(lst[["results"]], unlist)
-    results <- lapply(results, as.data.frame)
-    results <- lapply(results, t)
-    results <- lapply(results, as.data.frame, stringsAsFactors = FALSE)
-    results <- suppressWarnings(dplyr::bind_rows(results))
-    results$"geometry.lat" <- as.numeric(results$"geometry.lat") # nolint snake_case not backward compatible
-    results$"geometry.lng" <- as.numeric(results$"geometry.lng") # nolint snake_case not backward compatible
+#' Defunct functions
+#'
+#' \Sexpr[results=rd, stage=render]{lifecycle::badge("defunct")}
+#' Executing these functions will tell you which function replaces them.
+#'
+#' @keywords internal
+#' @name defunct
+NULL
 
-    # if requests exists in the api response add the query to results
-    if ("request" %in% names(lst)) {
-      results$query <- as.character(lst$request$query)
-    }
-  }
-  else {
-    results <- NULL
-  }
-
-  if (!is.null(lst$rate)) {
-    rate_info <- tibble::as_tibble(data.frame(
-      limit = lst$rate$limit,
-      remaining = lst$rate$remaining,
-      reset = as.POSIXct(lst$rate$reset, origin = "1970-01-01")
-    ))
-  } else {
-    rate_info <- NULL
-  }
-
-  if (!is.null(results)) {
-    results <- tibble::as_tibble(results)
-  }
-
-  list(
-    results = results,
-    total_results = no_results,
-    time_stamp = as.POSIXct(
-      lst$timestamp$created_unix,
-      origin = "1970-01-01"
-    ),
-    rate_info = rate_info
-  )
+#' @export
+#' @rdname defunct
+opencage_key <- function(quiet = TRUE) {
+  lifecycle::deprecate_stop("0.2.0", "opencage_key()", "oc_config()")
 }
 
-#' Retrieve Opencage API key
-#'
-#' @description Deprecated and will be removed from the package together with
-#'   `opencage_forward` and `opencage_reverse`.
-#'
-#'   Retrieves the OpenCage API Key from the environment variable
-#'   `OPENCAGE_KEY`.
-#'
-#' @param quiet Logical vector of length one indicating whether the key is
-#'   returned quietly or whether a message is printed.
-#' @keywords internal
-#' @export
-opencage_key <- function(quiet = TRUE) {
-  .Deprecated()
-
-  pat <- Sys.getenv("OPENCAGE_KEY")
-
-  if (identical(pat, "")) {
-    return(NULL)
-  }
-
-  if (!quiet) {
-    message("Using OpenCage API Key from envvar OPENCAGE_KEY")
-  }
-
-  return(pat)
+opencage_format <- function(lst) {
+  lifecycle::deprecate_stop("0.2.0", "opencage_format()")
 }
