@@ -135,6 +135,8 @@ opencage_reverse <-
 #'
 #' \Sexpr[results=rd, stage=render]{lifecycle::badge("defunct")}
 #' Executing these functions will tell you which function replaces them.
+#' @description
+#' Use `oc_config()` instead of `opencage_key()`.
 #'
 #' @keywords internal
 #' @name defunct
@@ -142,10 +144,22 @@ NULL
 
 #' @export
 #' @rdname defunct
+#' @keywords internal
+#' @rdname deprecated
 opencage_key <- function(quiet = TRUE) {
-  lifecycle::deprecate_stop("0.2.0", "opencage_key()", "oc_config()")
-}
+  lifecycle::deprecate_warn("0.2.0", "opencage_key()", "oc_config()")
 
+  pat <- Sys.getenv("OPENCAGE_KEY")
+
+  if (identical(pat, "")) {
+    return(NULL)
+  }
+
+  if (!quiet) {
+    message("Using OpenCage API Key from envvar OPENCAGE_KEY")
+  }
+
+  return(pat)
 #' @description
 #' `opencage_format()` is no longer necessary.
 #'
