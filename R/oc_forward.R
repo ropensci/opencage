@@ -10,7 +10,7 @@
 #'    on how to format addresses for best forward geocoding results.
 # nolint end
 #' @param return A character vector of length one indicating the return value of
-#'   the function, either a list of tibbles (`df_list`, the default), a JSON
+#'   the function, either a tibble with nested columns (`tibble`, the default), a JSON
 #'   list (`json_list`), a GeoJSON list (`geojson_list`), or the URL with which
 #'   the API would be called (`url_only`).
 #' @param bounds A list of bounding boxes of length one or `length(placename)`.
@@ -59,17 +59,12 @@
 #' @param abbrv Logical vector (default `FALSE`), when `TRUE` addresses in the
 #'   `formatted` field of the results are abbreviated (e.g. "Main St." instead
 #'   of "Main Street").
-#' @param add_request Logical vector (default `FALSE`) indicating whether the
-#'   request is returned again with the results. If the `return` value is a
-#'   `df_list`, the query text is added as a column to the results. `json_list`
-#'   results will contain all request parameters, including the API key used!
-#'   This is currently ignored by OpenCage if return value is `geojson_list`.
 #' @param ... Ignored.
 #'
 #' @return Depending on the `return` argument, `oc_forward` returns a list with
 #'   either
 #'   \itemize{
-#'   \item the results as tibbles (`"df_list"`, the default),
+#'   \item the results a tibble (`"tibble"`, the default),
 #'   \item the results as JSON specified as a list (`"json_list"`),
 #'   \item the results as GeoJSON specified as a list (`"geojson_list"`),
 #'   or
@@ -127,7 +122,7 @@
 #'
 oc_forward <-
   function(placename,
-           return = c("df_list", "json_list", "geojson_list", "url_only"),
+           return = c("tibble", "json_list", "geojson_list", "url_only"),
            bounds = NULL,
            proximity = NULL,
            countrycode = NULL,
@@ -138,7 +133,6 @@ oc_forward <-
            roadinfo = FALSE,
            no_dedupe = FALSE,
            abbrv = FALSE,
-           add_request = FALSE,
            ...) {
 
     # check a placename is provided
@@ -161,8 +155,7 @@ oc_forward <-
       no_annotations = no_annotations,
       roadinfo = roadinfo,
       no_dedupe = no_dedupe,
-      abbrv = abbrv,
-      add_request = add_request
+      abbrv = abbrv
     )
     # process request
     oc_process(
@@ -177,8 +170,7 @@ oc_forward <-
       no_annotations = no_annotations,
       roadinfo = roadinfo,
       no_dedupe = no_dedupe,
-      abbrv = abbrv,
-      add_request = add_request
+      abbrv = abbrv
     )
   }
 
@@ -370,18 +362,15 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
 
     output <- rlang::arg_match(output)
 
-    # Ensure that query column always exists
-    add_request <- TRUE
-
     if (any(rlang::eval_tidy(no_annotations, data = data) == FALSE) ||
         any(rlang::eval_tidy(roadinfo, data = data) == TRUE)) {
       output <- "all"
     }
 
     if (bind_cols == FALSE) {
-      results_list <- oc_forward(
+      results <- oc_forward(
         placename = rlang::eval_tidy(placename, data = data),
-        return = "df_list",
+        return = "tibble",
         bounds = rlang::eval_tidy(bounds, data = data),
         proximity = rlang::eval_tidy(proximity, data = data),
         countrycode = rlang::eval_tidy(countrycode, data = data),
@@ -391,79 +380,60 @@ oc_forward_df.data.frame <- # nolint - see lintr issue #223
         no_annotations = rlang::eval_tidy(no_annotations, data = data),
         roadinfo = rlang::eval_tidy(roadinfo, data = data),
         no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
-        abbrv = rlang::eval_tidy(abbrv, data = data),
-        add_request = add_request
+        abbrv = rlang::eval_tidy(abbrv, data = data)
       )
-      results <- dplyr::bind_rows(results_list)
+      # results <- tidyr::unnest(results, data)
+
       if (output == "short") {
+
         results <-
-          dplyr::select(
+          dplyr::mutate(
             results,
-            .data$oc_query,
-            .data$oc_lat,
-            .data$oc_lng,
-            .data$oc_formatted
+            data = purrr::map(data, ~dplyr::select(.x, c("oc_lat", "oc_lng", "oc_formatted")))
           )
+
       } else {
+
         results <-
-          dplyr::select(
+          dplyr::mutate(
             results,
-            .data$oc_query,
-            .data$oc_lat,
-            .data$oc_lng,
-            dplyr::everything()
+            data = purrr::map(data, ~dplyr::select(.x, c("oc_lat", "oc_lng", "oc_formatted"), dplyr::everything()))
           )
+
       }
     } else {
-      results_nest <-
-        dplyr::mutate(
-          data,
-          op =
-            oc_forward(
-              placename = !!placename,
-              return = "df_list",
-              bounds = !!bounds,
-              proximity = !!proximity,
-              countrycode = !!countrycode,
-              language = !!language,
-              limit = !!limit,
-              min_confidence = !!min_confidence,
-              no_annotations = !!no_annotations,
-              roadinfo = !!roadinfo,
-              no_dedupe = !!no_dedupe,
-              abbrv = !!abbrv,
-              add_request = add_request
-            )
-        )
 
-      if (utils::packageVersion("tidyr") > "0.8.99") {
-        results <-
-          tidyr::unnest(results_nest, .data$op, names_repair = "unique")
-      } else {
-        results <- tidyr::unnest(results_nest, .data$op, .drop = FALSE)
-        # .drop = FALSE so other list columns are not dropped. Deprecated as of
-        # v1.0.0
-      }
+      oc_results <- oc_forward(
+        placename = rlang::eval_tidy(placename, data = data),
+        return = "tibble",
+        bounds = rlang::eval_tidy(bounds, data = data),
+        proximity = rlang::eval_tidy(proximity, data = data),
+        countrycode = rlang::eval_tidy(countrycode, data = data),
+        language = rlang::eval_tidy(language, data = data),
+        limit = rlang::eval_tidy(limit, data = data),
+        min_confidence = rlang::eval_tidy(min_confidence, data = data),
+        no_annotations = rlang::eval_tidy(no_annotations, data = data),
+        roadinfo = rlang::eval_tidy(roadinfo, data = data),
+        no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
+        abbrv = rlang::eval_tidy(abbrv, data = data)
+      )
+
+      results <- dplyr::bind_cols(data, oc_results)
 
       if (output == "short") {
+
         results <-
-          dplyr::select(
+          dplyr::mutate(
             results,
-            1:.data$oc_query,
-            .data$oc_lat,
-            .data$oc_lng,
-            .data$oc_formatted,
-            -.data$oc_query
+            data = purrr::map(data, ~dplyr::select(.x, c("oc_lat", "oc_lng", "oc_formatted")))
           )
+
       } else {
+
         results <-
-          dplyr::select(
+          dplyr::mutate(
             results,
-            1:.data$oc_query,
-            .data$oc_lat,
-            .data$oc_lng,
-            dplyr::everything(),
-            -.data$oc_query
+            data = purrr::map(data, ~dplyr::select(.x, c("oc_lat", "oc_lng", "oc_formatted"), dplyr::everything()))
           )
       }
     }

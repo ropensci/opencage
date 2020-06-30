@@ -1,0 +1,44 @@
+---
+title: "shtr-pls_address-abbreviations"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{shtr-pls_address-abbreviations}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(opencage)
+```
+
+Since 2017 OpenCage have been providing [abbreviated addresses](https://blog.opencagedata.com/post/160294347883/shrtr-pls) via their API. This might be particularly useful when displaying addresses in popups on maps.
+
+All forward/reverse geocoding functions in `{opencage}` include `abbrv = FALSE` by default
+
+```{r include=FALSE}
+library("tidyverse")
+```
+
+```{r}
+library("tidyverse")
+oc_reverse(44.4283569,26.0889539) %>%
+  unnest(cols = data) %>%
+  pull(oc_formatted)
+```
+
+OpenCage includes many common address abbreviations that may be combined with non-native language address requests via the `abbrv` and `language` arguments:
+
+```{r}
+oc_reverse(44.4283569,26.0889539,
+           abbrv = TRUE,
+           language = "zh") %>%
+  unnest(cols = data) %>%
+  pull(oc_formatted)
+```
