@@ -10,3 +10,7 @@
 "_PACKAGE"
 
 utils::globalVariables(c("countrycodes"))
+## usethis namespace: start
+#' @importFrom lifecycle deprecate_soft
+## usethis namespace: end
+NULL
