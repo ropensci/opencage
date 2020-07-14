@@ -112,8 +112,8 @@ oc_bbox.data.frame <- function(data, xmin, ymin, xmax, ymax, ...) { # nolint - s
 #' @export
 oc_bbox.bbox <- function(bbox, ...) {
   # check coordinate reference system (and be lenient if NA_crs_)
-  crs <- attr(bbox, "crs")[["epsg"]]
-  if (!is.na(crs) && crs != 4326L) {
+  crs <- attr(bbox, "crs")[["input"]]
+  if (!is.na(crs) && !identical(crs, "EPSG:4326")) {
     stop(
       call. = FALSE,
       "The coordinate reference system of `bbox` must be EPSG 4326."

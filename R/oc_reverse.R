@@ -183,32 +183,37 @@ oc_reverse_df.data.frame <- # nolint - see lintr issue #223
            abbrv = FALSE,
            ...) {
 
-    # check latitude & longitude is provided
-    if (missing(latitude) || missing(longitude)) {
-      stop(call. = FALSE, "`latitude` and `longitude` must be provided.")
-    }
-
     # Tidyeval to enable input from data frame columns
-    latitude <- rlang::enquo(latitude)
-    longitude <- rlang::enquo(longitude)
-    language <- rlang::enquo(language)
+    latitude       <- rlang::enquo(latitude)
+    longitude      <- rlang::enquo(longitude)
+    language       <- rlang::enquo(language)
     min_confidence <- rlang::enquo(min_confidence)
     no_annotations <- rlang::enquo(no_annotations)
-    roadinfo <- rlang::enquo(roadinfo)
-    no_dedupe <- rlang::enquo(no_dedupe)
-    abbrv <- rlang::enquo(abbrv)
+    roadinfo       <- rlang::enquo(roadinfo)
+    no_dedupe      <- rlang::enquo(no_dedupe)
+    abbrv          <- rlang::enquo(abbrv)
+
+    # check latitude & longitude is provided
+    if (rlang::quo_is_missing(latitude) ||
+        rlang::quo_is_missing(longitude) ||
+        rlang::quo_is_null(latitude) ||
+        rlang::quo_is_null(longitude)) {
+      stop(call. = FALSE, "`latitude` and `longitude` must be provided.")
+    }
 
     output <- rlang::arg_match(output)
 
     # Ensure that query column always exists
     add_request <- TRUE
 
+    # we assume that the user wants the entire output when annotations or
+    # roadinfo are requested
     if (any(rlang::eval_tidy(no_annotations, data = data) == FALSE) ||
         any(rlang::eval_tidy(roadinfo, data = data) == TRUE)) {
       output <- "all"
     }
 
-    if (bind_cols == FALSE) {
+    if (isFALSE(bind_cols)) {
       results_list <- oc_reverse(
         latitude = rlang::eval_tidy(latitude, data = data),
         longitude = rlang::eval_tidy(longitude, data = data),
