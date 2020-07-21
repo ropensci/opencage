@@ -11,12 +11,12 @@ vignette: >
 ---
 
 ```{r, echo = FALSE, warning=FALSE, message=FALSE}
-NOT_CRAN <- identical(tolower(Sys.getenv("NOT_CRAN")), "true")
+not_cran <- identical(tolower(Sys.getenv("NOT_CRAN")), "true")
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  purl = NOT_CRAN,
-  eval = NOT_CRAN
+  purl = not_cran,
+  eval = not_cran
 )
 ```
 
