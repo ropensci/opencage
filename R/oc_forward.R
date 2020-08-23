@@ -501,6 +501,7 @@ oc_forward_df.character <-
       limit = limit,
       min_confidence = min_confidence,
       no_annotations = no_annotations,
+      roadinfo = roadinfo,
       no_dedupe = no_dedupe,
       abbrv = abbrv
     )
