@@ -59,6 +59,15 @@ test_that("oc_forward adds request with add_request", {
   expect_equal(res[[1]][["oc_query"]], "Hmbg")
 })
 
+test_that("oc_forward handles response with no results", {
+  # https://opencagedata.com/api#no-results
+  nores <- oc_forward("NOWHERE-INTERESTING")
+  expect_type(nores, "list")
+  expect_equal(length(nores), 1)
+  expect_s3_class(nores[[1]], c("tbl_df", "tbl", "data.frame"))
+  expect_equal(nores[[1]][[1,"oc_lat"]], NA_real_)
+})
+
 # oc_forward_df -----------------------------------------------------------
 
 test_that("oc_forward_df works", {
@@ -78,7 +87,7 @@ test_that("oc_forward_df works", {
   expect_equal(nrow(tbl3), 3)
 })
 
-test_that("oc_reverse_df doesn't work for default class", {
+test_that("oc_forward_df doesn't work for default class", {
   expect_error(
     oc_forward_df(53.6),
     "Can't geocode an object of class `numeric`."
@@ -158,6 +167,13 @@ test_that("tidyeval works for arguments", {
 test_that("list columns are not dropped (by tidyr)", {
   bnds <- oc_forward_df(df2, loc, bounds = bounds, bind_cols = TRUE)
   expect_true(!is.null(bnds[["bounds"]]))
+})
+
+test_that("oc_forward_df handles response with no results", {
+  # https://opencagedata.com/api#no-results
+  nores_df <- oc_forward_df("NOWHERE-INTERESTING")
+  expect_s3_class(nores_df, c("tbl_df", "tbl", "data.frame"))
+  expect_equal(nores_df[[1,"oc_lat"]], NA_real_)
 })
 
 # Checks ------------------------------------------------------------------

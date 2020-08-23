@@ -23,7 +23,13 @@ oc_format <- function(res_text, return, query) {
   if (return == "df_list") {
     jsn <- jsonlite::fromJSON(res_text, simplifyVector = TRUE, flatten = TRUE)
     if (identical(jsn$total_results, 0L)) {
-      results <- tibble::tibble(oc_formatted = NA_character_)
+      # in oc_forward_df we rely on oc_lat, oc_lng, oc_formatted to be present
+      results <-
+        tibble::tibble(
+          oc_lat = NA_real_,
+          oc_lng = NA_real_,
+          oc_formatted = NA_character_
+        )
     } else {
       results <- tibble::as_tibble(jsn$results)
       # Make column names nicer
