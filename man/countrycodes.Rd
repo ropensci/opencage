@@ -4,7 +4,9 @@
 \name{countrycodes}
 \alias{countrycodes}
 \title{Country codes}
-\format{All possible ISO 3166-1 Alpha 2 standard country codes.}
+\format{
+All possible ISO 3166-1 Alpha 2 standard country codes.
+}
 \description{
 Country codes
 }
