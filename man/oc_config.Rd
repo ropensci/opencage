@@ -32,18 +32,18 @@ Configure session settings for \pkg{opencage}.
 \section{Set your OpenCage API key}{
 
 
-\pkg{opencage} uses the environment variable \code{OPENCAGE_KEY} internally to
-retrieve your OpenCage key. \code{\link[=oc_config]{oc_config()}} will help to set that environment
-variable. Do not pass the key directly as a parameter to the function,
-though, as you risk exposing it via your script or your history. There are
-three safer ways to set your API key instead:
+\pkg{opencage} will conveniently retrieve your API key if it is saved in the
+environment variable \code{"OPENCAGE_KEY"}. \code{\link[=oc_config]{oc_config()}} will help to set that
+environment variable. Do not pass the key directly as a parameter to the
+function, though, as you risk exposing it via your script or your history.
+There are three safer ways to set your API key instead:
 \enumerate{
 \item Save your API key as an environment variable in
-\code{\link[base:Startup]{.Renviron()}} as described in \href{https://rstats.wtf/r-startup.html#renviron}{What They Forgot to Teach You About R} or \href{https://csgillespie.github.io/efficientR/set-up.html#renviron}{Efficient R Programming}.
+\code{\link[base:Startup]{.Renviron}} as described in \href{https://rstats.wtf/r-startup.html#renviron}{What They Forgot to Teach You About R} or \href{https://csgillespie.github.io/efficientR/set-up.html#renviron}{Efficient R Programming}.
 From there it will be fetched by all functions that call the OpenCage API, so
 you do not even have to call \code{oc_config} to set your key, but can start
 geocoding right away. If you have the \pkg{usethis} package installed, you
-can edit your \code{\link[base:Startup]{.Renviron()}} most easily with
+can edit your \code{\link[base:Startup]{.Renviron}} most easily with
 \code{usethis::edit_r_environ()}. We strongly recommend storing your API key in
 the user-level .Renviron, as opposed to the project-level, because this makes
 it less likely you will share sensitive information by mistake.
@@ -64,8 +64,8 @@ and ranges from 1 request/sec for the "Free Trial" plan to 15 requests/sec
 for the "Medium" or "Large" plans, see \url{https://opencagedata.com/pricing} for
 details and up-to-date information. You can set the rate limit persistently
 across sessions by setting the \code{oc_rate_sec} \link[base:options]{option} in your
-\code{\link[base:Startup]{.Rprofile()}}. If you have the \code{usethis} package installed,
-you can edit your \code{\link[base:Startup]{.Rprofile()}} most easily with
+\code{\link[base:Startup]{.Rprofile}}. If you have the \code{usethis} package installed,
+you can edit your \code{\link[base:Startup]{.Rprofile}} most easily with
 \code{usethis::edit_r_profile()}.
 }
 
@@ -86,7 +86,7 @@ privacy and want OpenCage to have no record of your query.
 \code{oc_config} sets the \code{oc_no_record} \link[base:options]{option} for the active R
 session, so it will be used for all subsequent OpenCage queries. You can set
 the \code{oc_no_record} \link[base:options]{option} persistently across sessions in
-your \code{\link[base:Startup]{.Rprofile()}}.
+your \code{\link[base:Startup]{.Rprofile}}.
 
 Please note that the \pkg{opencage} package always caches the data it
 receives from the OpenCage API, but only for as long as your R session is
