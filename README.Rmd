@@ -11,9 +11,9 @@ output:
 [![codecov.io](https://codecov.io/github/ropensci/opencage/coverage.svg?branch=master)](https://codecov.io/github/ropensci/opencage?branch=master)
 [![](https://badges.ropensci.org/36_status.svg)](https://github.com/ropensci/onboarding/issues/36)
 
-Geocode with the OpenCage API, either from placename to longitude and latitude (forward geocoding) or from longitude and latitude to placename (reverse geocoding). 
+Geocode with the [OpenCage](https://opencagedata.com/) API, either from placename to longitude and latitude (forward geocoding) or from longitude and latitude to placename (reverse geocoding). 
 
-# Installation
+## Installation
 
 Install the package with:
 
@@ -28,9 +28,42 @@ remotes::install_github("ropensci/opencage")
 
 ```
 
+## Quickstart
 
-```{r child='vignettes/rmdchildren/intro.Rmd'} 
+For the best experience, we recommend that you read through the "Get started" vignette (`vignette("zzz")`), but if you are in a hurry:
+
+1. Register at [opencagedata.com/users/sign_up](https://opencagedata.com/users/sign_up).
+2. Generate an API key at the [OpenCage dashboard](https://opencagedata.com/dashboard#api-keys).
+3. Save your API key as an [environment variable](https://rstats.wtf/r-startup.html#renviron) as `OPENCAGE_KEY=yourkey` in `.Renviron`.
+
+Now you are ready to turn placenames into latitude/longitude coordinates:
+
+```{r forward}
+library(opencage)
+oc_forward_df(placename = "Sarzeau")
 ```
+
+Or turn coordinates into placenames:
+
+```{r reverse}
+oc_reverse_df(latitude = 51.5034070, longitude = -0.1275920)
+```
+
+But remember, the vignettes are really great!
+
+## About OpenCage
+
+The [OpenCage](https://opencagedata.com/) API supports forward and reverse geocoding. 
+Sources of OpenCage are open geospatial data including 
+[OpenStreetMap](https://www.openstreetmap.org/), 
+[DataScienceToolkit](http://www.datasciencetoolkit.org/), 
+[Yahoo! GeoPlanet](https://developer.yahoo.com/geo/geoplanet/data/), 
+[Natural Earth Data](https://www.naturalearthdata.com/), 
+[OpenGeoCode](http://www.opengeocode.com/), 
+[libpostal](https://github.com/openvenues/libpostal), 
+[GeoNames](https://www.geonames.org/), and 
+[Flickr's shapefiles](https://code.flickr.net/2009/05/21/flickr-shapefiles-public-dataset-10/) plus a whole lot more besides. 
+Refer to the current full [list of credits](https://opencagedata.com/credits).
 
 ## Meta
 
