@@ -109,6 +109,7 @@ All geocoding functions are vectorised, i.e. you can geocode multiple placenames
 ```r
 opera <- c("Palacio de Bellas Artes", "Scala", "Sydney Opera House")
 oc_forward_df(placename = opera)
+#> Retrieving results from OpenCage [-]  67% ETA:  1sRetrieving results from OpenCage [\] 100% ETA:  0s
 #> # A tibble: 3 x 4
 #>   placename               oc_lat oc_lng oc_formatted                                                                  
 #>   <chr>                    <dbl>  <dbl> <chr>                                                                         
@@ -144,6 +145,7 @@ You can also pass a data frame to `oc_forward_df()`.
 concert_df <- 
   data.frame(location = c("Elbphilharmonie", "Concertgebouw", "Suntory Hall"))
 oc_forward_df(data = concert_df, placename = location)
+#> Retrieving results from OpenCage [-]  67% ETA:  1sRetrieving results from OpenCage [\] 100% ETA:  0s
 #> # A tibble: 3 x 4
 #>   location        oc_lat oc_lng oc_formatted                                                                                
 #>   <chr>            <dbl>  <dbl> <chr>                                                                                       
@@ -196,21 +198,23 @@ In order to send requests to the API only when necessary, {opencage} uses {[memo
 ```r
 system.time(oc_reverse(latitude = 10, longitude = 10))
 #>    user  system elapsed 
-#>    0.01    0.00    0.02
+#>    0.04    0.02    1.61
 
 system.time(oc_reverse(latitude = 10, longitude = 10))
 #>    user  system elapsed 
-#>    0.01    0.00    0.02
+#>       0       0       0
 ```
 
 To clear the cache of all results, either start a new R session or call `oc_clear_cache()`.
 
 
 ```r
-# oc_clear_cache() # TODO need to merge #111 first
+oc_clear_cache()
+#> [1] TRUE
+
 system.time(oc_reverse(latitude = 10, longitude = 10))
 #>    user  system elapsed 
-#>    0.02    0.00    0.01
+#>    0.02    0.00    0.96
 ```
 
 As you probably know, cache invalidation is one of the harder things to do in computer science. 
