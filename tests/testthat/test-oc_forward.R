@@ -65,7 +65,7 @@ test_that("oc_forward handles response with no results", {
   expect_type(nores, "list")
   expect_equal(length(nores), 1)
   expect_s3_class(nores[[1]], c("tbl_df", "tbl", "data.frame"))
-  expect_equal(nores[[1]][[1,"oc_lat"]], NA_real_)
+  expect_equal(nores[[1]][[1, "oc_lat"]], NA_real_)
 })
 
 # oc_forward_df -----------------------------------------------------------
@@ -173,7 +173,7 @@ test_that("oc_forward_df handles response with no results", {
   # https://opencagedata.com/api#no-results
   nores_df <- oc_forward_df("NOWHERE-INTERESTING")
   expect_s3_class(nores_df, c("tbl_df", "tbl", "data.frame"))
-  expect_equal(nores_df[[1,"oc_lat"]], NA_real_)
+  expect_equal(nores_df[[1, "oc_lat"]], NA_real_)
 })
 
 # Checks ------------------------------------------------------------------
