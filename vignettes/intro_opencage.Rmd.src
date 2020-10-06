@@ -30,7 +30,7 @@ With {opencage} you can geocode using the OpenCage API, either from placename to
 
 ## Setup
 
-Before you can use the {opencage} package and query the OpenCage API you need to set up authentication, possibly want to set a rate limit (if you have a paid OpenCage plan) and maybe want to prevent OpenCage from storing the content of your queries, i.e. you need to setup {opencage}. 
+Before you can use the {opencage} package and query the OpenCage API you need to set up authentication, possibly want to set a rate limit (if you have a paid [OpenCage plan](https://opencagedata.com/pricing)) and maybe want to prevent OpenCage from storing the content of your queries, i.e. you need to setup {opencage}. 
 
 ### Authentication
 
@@ -42,6 +42,7 @@ After you have registered, you can generate an API key at the [OpenCage dashboar
 Now, you will need to pass the API key on to the functions in {opencage}.
 They will conveniently retrieve your API key if it is saved in the environment variable `"OPENCAGE_KEY"`. 
 If it is not, `oc_config()` will help to set that environment variable.
+
 Do not pass the key directly as a parameter to the function, though, as you risk exposing it via your script or your history. 
 There are three safer ways to set your API key instead:
 
@@ -79,9 +80,10 @@ OpenCage still records that you made a request, but not the specific query you m
 
 `oc_config(no_record = TRUE)` sets an `oc_no_record` option for the active R session, so it will be used for all subsequent OpenCage queries. 
 You can set the `oc_no_record` option persistently across sessions in your `.Rprofile`.
-Please note that the {opencage} package always caches the data it receives from the OpenCage API, but only for as long as your R session is alive.
 
 For more information on OpenCage's policies on privacy and data protection see the Legal section in [their FAQs](https://opencagedata.com/faq#legal), their [GDPR page](https://opencagedata.com/gdpr), and, for the `no_record` parameter specifically, see the relevant [blog post](https://blog.opencagedata.com/post/145602604628/more-privacy-with-norecord-parameter).
+
+Please note that the {opencage} package always caches the data it receives from the OpenCage API, but only for as long as your R session is alive (see below).
 
 ### Altogether now
 
@@ -120,7 +122,7 @@ Which columns you receive exactly depends on the information OpenCage returns fo
 oc_forward_df(placename = opera, output = "all")
 ```
 
-You can also pass a data frame/tibble to `oc_forward_df()`. 
+You can also pass a data frame to `oc_forward_df()`. 
 
 ```{r dataframe}
 concert_df <- 
@@ -137,7 +139,7 @@ concert_df %>% oc_forward_df(location)
 
 ## Reverse geocoding
 
-Reverse geocoding is from latitude and longitude to placename(s).
+Reverse geocoding means that we have the coordinates, latitude and longitude, and look up the most appropriate placename for those.
 
 ```{r reverse, message=FALSE}
 oc_reverse_df(latitude = 51.5034070, longitude = -0.1275920)
@@ -147,11 +149,12 @@ Note that all coordinates sent to the OpenCage API must adhere to the [WGS 84](h
 This is the coordinate reference system used by the [Global Positioning System](https://en.wikipedia.org/wiki/Global_Positioning_System).
 There is usually no reason to send more than six or seven digits past the decimal as that then gets down to the [precision of a centimetre](https://en.wikipedia.org/wiki/Decimal_degrees).
 
-`oc_reverse_df()` is vectorised, can work with numeric vectors and data frames, supports the `output = "all"` argument and can be used with the {magrittr} pipe, as well. 
+`oc_reverse_df()` is vectorised, can work with numeric vectors and data frames, supports the `output = "all"` argument and can be used with the {magrittr} pipe, as well.
+
+OpenCage always returns at most [one result](https://opencagedata.com/api#ranking) per reverse geocoding request. 
 
 ## Caching
 
-The underlying data at OpenCage is [updated daily](https://opencagedata.com/faq#general). 
 OpenCage [allows and supports caching](https://opencagedata.com/api#caching). 
 In order to send requests to the API only when necessary, {opencage} uses {[memoise](https://github.com/r-lib/memoise)} to cache results inside the active R session. 
 
@@ -173,12 +176,13 @@ system.time(oc_reverse(latitude = 10, longitude = 10))
 As you probably know, cache invalidation is one of the harder things to do in computer science. 
 Therefore {opencage} only supports invalidating the whole cache and not individual records at the moment. 
 
+The underlying data at OpenCage is [updated daily](https://opencagedata.com/faq#general). 
 
 ## Further information
 
 OpenCage supports a lot of parameters to either target your search area more specifically or to specify what additional information you need. 
-See the `vignette("customise_query")` for details.
+See the ["Customise your query"](customise_query.html) vignette for details.
 
 Besides `oc_forward_df()` and `oc_reverse_df()`, which always return a single tibble, there are also two other functions,  `oc_forward()` and `oc_reverse()`, which return other types of output. 
 Depending on what you specify as the `return` parameter, `oc_forward()` and `oc_reverse()` will return either a list of tibbles (`df_list`, the default), JSON lists (`json_list`), GeoJSON lists (`geojson_list`), or the URL with which the API would be called (`url_only`). 
-Learn more in `vignette("output-options")`. 
+Learn more in ["Output options"](output_options.html) vignette. 
