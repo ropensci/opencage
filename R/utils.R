@@ -122,7 +122,10 @@ oc_init_progress <- function(vec) {
 
 # check whether to show progress
 oc_show_progress <- function() {
-  interactive() && # an interactive session
-  !isTRUE(getOption("knitr.in.progress")) && # Not actively knitting a document
-  !isTRUE(getOption("rstudio.notebook.executing")) # Not running in an RStudio notebook chunk
+  # in an interactive session
+  interactive() &&
+  # not when actively knitting a document
+  !isTRUE(getOption("knitr.in.progress")) &&
+  # not when running in an RStudio notebook chunk
+  !isTRUE(getOption("rstudio.notebook.executing"))
 }
