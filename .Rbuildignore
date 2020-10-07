@@ -12,3 +12,5 @@ datamanagement.R
 ^cran-comments\.md$
 ^doc$
 ^Meta$
+^vignettes\/precompile.R$
+^vignettes\/.+\.Rmd\.src$
