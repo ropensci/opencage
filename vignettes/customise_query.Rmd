@@ -2,7 +2,7 @@
 title: "Customise your query"
 subtitle: "Get more and better results from OpenCage"
 author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
-date: "2020-10-06"
+date: "2020-10-07"
 description: >
   "The OpenCage API therefore supports about a dozen parameters to customise a query and here we will explain how to use them."
 output: 
@@ -313,11 +313,16 @@ It is `FALSE` by default, which means OpenCage will not attempt to match the nea
 
 ```r
 oc_forward_df(placename = c("Europa Advance Rd", "Bovoni Rd"), roadinfo = TRUE)
-#> # A tibble: 2 x 4
-#>   placename         oc_lat oc_lng oc_formatted                                                                       
-#>   <chr>              <dbl>  <dbl> <chr>                                                                              
-#> 1 Europa Advance Rd   36.1  -5.34 Europa Advance Road, Gibraltar                                                     
-#> 2 Bovoni Rd           18.3 -64.9  Bovoni Hill, Saint Thomas - Saint John District, VI 00802, United States of America
+#> # A tibble: 2 x 29
+#>   placename oc_lat oc_lng oc_confidence oc_formatted oc_roadinfo_dri~ oc_roadinfo_one~ oc_roadinfo_road oc_roadinfo_roa~
+#>   <chr>      <dbl>  <dbl>         <int> <chr>        <chr>            <chr>            <chr>            <chr>           
+#> 1 Europa A~   36.1  -5.34             9 Europa Adva~ right            no               Europa Advance ~ secondary       
+#> 2 Bovoni Rd   18.3 -64.9              9 Bovoni Hill~ left             <NA>             <NA>             <NA>            
+#> # ... with 20 more variables: oc_roadinfo_speed_in <chr>, oc_roadinfo_surface <chr>, oc_northeast_lat <dbl>,
+#> #   oc_northeast_lng <dbl>, oc_southwest_lat <dbl>, oc_southwest_lng <dbl>, oc_iso_3166_1_alpha_2 <chr>,
+#> #   oc_iso_3166_1_alpha_3 <chr>, oc_category <chr>, oc_type <chr>, oc_continent <chr>, oc_country <chr>,
+#> #   oc_country_code <chr>, oc_postcode <chr>, oc_road <chr>, oc_road_type <chr>, oc_state <chr>, oc_county <chr>,
+#> #   oc_natural <chr>, oc_state_code <chr>
 ```
 
 A [blog post](https://blog.opencagedata.com/post/new-optional-parameter-roadinfo) provides more details.

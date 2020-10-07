@@ -2,7 +2,7 @@
 title: "Introduction to opencage"
 subtitle: "Forward and Reverse Geocoding"
 author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
-date: "2020-10-06"
+date: "2020-10-07"
 description: >
   "Get started with the opencage R package to geocode with the OpenCage API, either from placename to longitude and latitude (forward geocoding) or from longitude and latitude to placename (reverse geocoding)."
 output: 
@@ -109,7 +109,6 @@ All geocoding functions are vectorised, i.e. you can geocode multiple placenames
 ```r
 opera <- c("Palacio de Bellas Artes", "Scala", "Sydney Opera House")
 oc_forward_df(placename = opera)
-#> Retrieving results from OpenCage [-]  67% ETA:  1sRetrieving results from OpenCage [\] 100% ETA:  0s
 #> # A tibble: 3 x 4
 #>   placename               oc_lat oc_lng oc_formatted                                                                  
 #>   <chr>                    <dbl>  <dbl> <chr>                                                                         
@@ -126,16 +125,16 @@ Which columns you receive exactly depends on the information OpenCage returns fo
 
 ```r
 oc_forward_df(placename = opera, output = "all")
-#> # A tibble: 3 x 29
+#> # A tibble: 3 x 30
 #>   placename oc_lat oc_lng oc_confidence oc_formatted oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng
 #>   <chr>      <dbl>  <dbl>         <int> <chr>                   <dbl>            <dbl>            <dbl>            <dbl>
 #> 1 Palacio ~   19.4 -99.1              9 Palacio de ~             19.4           -99.1              19.4           -99.1 
 #> 2 Scala       45.5   9.19             9 Teatro alla~             45.5             9.19             45.5             9.19
 #> 3 Sydney O~  -33.9 151.               9 Sydney Oper~            -33.9           151.              -33.9           151.  
-#> # ... with 20 more variables: oc_iso_3166_1_alpha_2 <chr>, oc_iso_3166_1_alpha_3 <chr>, oc_category <chr>, oc_type <chr>,
-#> #   oc_city <chr>, oc_continent <chr>, oc_country <chr>, oc_country_code <chr>, oc_neighbourhood <chr>, oc_postcode <chr>,
-#> #   oc_road <chr>, oc_tourism <chr>, oc_county <chr>, oc_political_union <chr>, oc_state <chr>, oc_suburb <chr>,
-#> #   oc_arts_centre <chr>, oc_house_number <chr>, oc_municipality <chr>, oc_state_code <chr>
+#> # ... with 21 more variables: oc_iso_3166_1_alpha_2 <chr>, oc_iso_3166_1_alpha_3 <chr>, oc_category <chr>, oc_type <chr>,
+#> #   oc_city <chr>, oc_continent <chr>, oc_country <chr>, oc_country_code <chr>, oc_museum <chr>, oc_neighbourhood <chr>,
+#> #   oc_postcode <chr>, oc_road <chr>, oc_attraction <chr>, oc_county <chr>, oc_political_union <chr>, oc_state <chr>,
+#> #   oc_suburb <chr>, oc_arts_centre <chr>, oc_house_number <chr>, oc_municipality <chr>, oc_state_code <chr>
 ```
 
 You can also pass a data frame to `oc_forward_df()`. 
@@ -145,11 +144,10 @@ You can also pass a data frame to `oc_forward_df()`.
 concert_df <- 
   data.frame(location = c("Elbphilharmonie", "Concertgebouw", "Suntory Hall"))
 oc_forward_df(data = concert_df, placename = location)
-#> Retrieving results from OpenCage [-]  67% ETA:  1sRetrieving results from OpenCage [\] 100% ETA:  0s
 #> # A tibble: 3 x 4
 #>   location        oc_lat oc_lng oc_formatted                                                                                
 #>   <chr>            <dbl>  <dbl> <chr>                                                                                       
-#> 1 Elbphilharmonie   53.5   9.98 Hamburg-Mitte, Elbe Philharmonic Hall, Platz der Deutschen Einheit 1, 20457 Hamburg, Germany
+#> 1 Elbphilharmonie   53.5   9.98 Elbe Philharmonic Hall, Hamburg-Mitte, Platz der Deutschen Einheit 1, 20457 Hamburg, Germany
 #> 2 Concertgebouw     52.4   4.88 Concertgebouw, Concertgebouwplein 2, 1071 LN Amsterdam, The Netherlands                     
 #> 3 Suntory Hall      35.7 140.   Suntory Hall, Karayan Plaza, Akasaka, Tokyo, Japan
 ```
@@ -163,7 +161,7 @@ concert_df %>% oc_forward_df(location)
 #> # A tibble: 3 x 4
 #>   location        oc_lat oc_lng oc_formatted                                                                                
 #>   <chr>            <dbl>  <dbl> <chr>                                                                                       
-#> 1 Elbphilharmonie   53.5   9.98 Hamburg-Mitte, Elbe Philharmonic Hall, Platz der Deutschen Einheit 1, 20457 Hamburg, Germany
+#> 1 Elbphilharmonie   53.5   9.98 Elbe Philharmonic Hall, Hamburg-Mitte, Platz der Deutschen Einheit 1, 20457 Hamburg, Germany
 #> 2 Concertgebouw     52.4   4.88 Concertgebouw, Concertgebouwplein 2, 1071 LN Amsterdam, The Netherlands                     
 #> 3 Suntory Hall      35.7 140.   Suntory Hall, Karayan Plaza, Akasaka, Tokyo, Japan
 ```
@@ -198,7 +196,7 @@ In order to send requests to the API only when necessary, {opencage} uses {[memo
 ```r
 system.time(oc_reverse(latitude = 10, longitude = 10))
 #>    user  system elapsed 
-#>    0.04    0.02    1.61
+#>    0.01    0.00    1.09
 
 system.time(oc_reverse(latitude = 10, longitude = 10))
 #>    user  system elapsed 
