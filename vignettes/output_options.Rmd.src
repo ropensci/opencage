@@ -5,7 +5,7 @@ author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
 date: "`r Sys.Date()`"
 description: >
   "`oc_forward()`/`oc_reverse()` return lists of various type, namely data frames, JSON, GeoJSON or URLs, depending on the `return` value you specify. The possible `return` values are `df_list`, `json_list`, `geojson_list` and `url_only`."
-output: 
+output:
   rmarkdown::html_vignette:
     df_print: kable
 vignette: >
@@ -24,19 +24,19 @@ library("opencage")
 
 ```
 
-{opencage} contains two types of main functions. 
+{opencage} contains two types of main functions.
 
 1. The `oc_forward_df()`/`oc_reverse_df()` functions, which always return a single tibble.
 2. The `oc_forward()`/`oc_reverse()` functions, which return lists of various types, depending on the `return` value you specify. The possible `return` values are `df_list`, `json_list`, `geojson_list` and `url_only`.
 
-We have shown the `oc_forward_df()`/`oc_reverse_df()` functions in the [Introduction to opencage](intro_opencage.html) and the [Customise your query](customise_query.html) vignettes. 
+We have shown the `oc_forward_df()`/`oc_reverse_df()` functions in the [Introduction to opencage](intro_opencage.html) and the [Customise your query](customise_query.html) vignettes.
 The function arguments mentioned in the other vignettes are also available with `oc_forward()`/`oc_reverse()`, in general.
-Here we will show the different return values available with `oc_forward()`/`oc_reverse()`. 
+Here we will show the different return values available with `oc_forward()`/`oc_reverse()`.
 
 ## `df_list`
 
-The default return value is `df_list`. 
-It returns a list of tibbles.  
+The default return value is `df_list`.
+It returns a list of tibbles.
 
 ```{r df_list}
 oc_forward("Casey Station", return = "df_list")
@@ -48,8 +48,8 @@ If you want to use opencage in a `dplyr::mutate()` chain you can do it like this
 ```{r mutate}
 library(dplyr, warn.conflicts = FALSE)
 
-oc_data <- 
-  tibble(place = "Casey Station") %>% 
+oc_data <-
+  tibble(place = "Casey Station") %>%
   mutate(oc_result = oc_forward(place))
 
 oc_data
@@ -65,7 +65,7 @@ oc_data %>% unnest(oc_result)
 
 ## `json_list`
 
-OpenCage's main output format is JSON. When you specify `json_list` as the return type, you get the JSON as an R `list()`. 
+OpenCage's main output format is JSON. When you specify `json_list` as the return type, you get the JSON as an R `list()`.
 
 ```{r json_list}
 oc_forward("Casey Station", return = "json_list")
@@ -89,8 +89,8 @@ class(gjsn_lst[[1]])
 
 ## `url_only`
 
-`url_only` will return the OpenCage URL for debugging purposes. 
-We won't show the output here, because the URL contains the OpenCage API key. 
+`url_only` will return the OpenCage URL for debugging purposes.
+We won't show the output here, because the URL contains the OpenCage API key.
 
 ```{r url_only, eval=FALSE, include=TRUE}
 oc_forward("Casey Station", return = "url_only")
@@ -98,12 +98,12 @@ oc_forward("Casey Station", return = "url_only")
 
 ## `xml`
 
-{opencage} does not support the XML response type at the moment. 
-Please file an [issue](https://github.com/ropensci/opencage/issues) if you have a use-case that requires this.
+{opencage} does not support the XML response type at the moment.
+Please file an [issue](https://github.com/ropensci/opencage/issues) or a [pull-request](https://github.com/ropensci/opencage/pulls) if you have a use-case that requires this.
 
 ## Return query text
 
-`oc_forward()` and `oc_reverse()` have an `add_request` argument, indicating whether the request is returned again with the results. 
+`oc_forward()` and `oc_reverse()` have an `add_request` argument, indicating whether the request is returned again with the results.
 If the `return` value is a `df_list`, the `placename` or `latitude,longitude` is added as a column to the results without a roundtrip to the API.
 `json_list` results will contain all request parameters as returned by the API, including the API key used, so handle with care!
 `add_request` is currently ignored by OpenCage for GeoJSON results.

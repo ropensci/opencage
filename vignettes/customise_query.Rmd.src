@@ -4,8 +4,8 @@ subtitle: "Get more and better results from OpenCage"
 author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
 date: "`r Sys.Date()`"
 description: >
-  "The OpenCage API therefore supports about a dozen parameters to customise a query and here we will explain how to use them."
-output: 
+  "The OpenCage API supports about a dozen parameters to customise a query and here we will explain how to use them."
+output:
   rmarkdown::html_vignette:
     df_print: kable
 vignette: >
@@ -23,17 +23,17 @@ knitr::opts_chunk$set(
 library("opencage")
 ```
 
-Geocoding is surprisingly hard. 
-Address formats and spellings differ in and between countries; administrative areas on different levels intersect; names, numbers, and boundaries change over time - you name it. 
-The OpenCage API therefore supports about a dozen parameters to customise a query and here we will explain how to use them with {opencage}.
+Geocoding is surprisingly hard.
+Address formats and spellings differ in and between countries; administrative areas on different levels intersect; names, numbers, and boundaries change over time - you name it.
+The OpenCage API therefore supports about a dozen parameters to customise a query and here we will explain how to use them with {opencage} to get better geocoding results.
 
 ## Multiple results
 
-Forward geocoding typically returns multiple results, because many places have the same or similar names. 
+Forward geocoding typically returns multiple results, because many places have the same or similar names.
 
-`oc_forward_df()` only returns one result by default. 
-To receive more results, modify the `limit` argument, which specifies the maximum number of results that should be returned. 
-Integer values between 1 and 100 are allowed. 
+`oc_forward_df()` only returns one result (the one defined as best result by OpenCage API) by default.
+To receive more results, modify the `limit` argument, which specifies the maximum number of results that should be returned.
+Integer values between 1 and 100 are allowed.
 
 ```{r limit1}
 oc_forward_df("Berlin")
@@ -45,9 +45,9 @@ oc_forward_df("Berlin", limit = 5)
 
 Reverse geocoding always returns [at most one result](https://opencagedata.com/api#ranking), therefore `oc_reverse_df()` does not support the `limit` argument.
 
-OpenCage may sometimes have more than one record of one place. 
-These are deduplicated by default. 
-If you set the `no_dedupe` argument to `TRUE` you will receive duplicated results, if available. 
+OpenCage may sometimes have more than one record of one place.
+These are deduplicated by default.
+If you set the `no_dedupe` argument to `TRUE` you will receive duplicated results, if available.
 
 ```{r dedupe}
 oc_forward_df("Berlin", limit = 5, no_dedupe = TRUE)
@@ -55,22 +55,22 @@ oc_forward_df("Berlin", limit = 5, no_dedupe = TRUE)
 
 ## Better targeted results
 
-Place names are often ambiguous. 
-The `countrycode`, `bounds`, and `proximity` arguments can make the query more precise. 
-`min_confidence` lets you limit the results to those with a specified confidence score (which is not necessarily the "best" or most "relevant" result, though). 
-They are only relevant and available for forward geocoding. 
+Place names are often ambiguous.
+The `countrycode`, `bounds`, and `proximity` arguments can make the query more precise.
+`min_confidence` lets you limit the results to those with a specified confidence score (which is not necessarily the "best" or most "relevant" result, though).
+They are only relevant and available for forward geocoding.
 
 ### `countrycode`
 
-The `countrycode` parameter restricts the results to the given country. 
-The country code is a two letter code as defined by the [ISO 3166-1 Alpha 2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) standard. 
-E.g. "AR" for Argentina, "FR" for France, "NZ" for the New Zealand. 
+The `countrycode` parameter restricts the results to the given country.
+The country code is a two letter code as defined by the [ISO 3166-1 Alpha 2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) standard.
+E.g. "AR" for Argentina, "FR" for France, "NZ" for the New Zealand.
 
 ```{r countrycode}
 oc_forward_df(placename = "Paris", countrycode = "US", limit = 5)
 ```
-Multiple countrycodes per `placename` must be wrapped in a list. 
-Here is an example with places called "Paris" in Italy and Portugal. 
+Multiple countrycodes per `placename` must be wrapped in a list.
+Here is an example with places called "Paris" in Italy and Portugal.
 
 ```{r multiple_countrycode}
 oc_forward_df(placename = "Paris", countrycode = list(c("IT", "PT")), limit = 5)
@@ -85,18 +85,18 @@ oc_forward_df("Curaçao", no_annotations = FALSE)["oc_iso_3166_1_alpha_2"]
 
 ### `bounds`
 
-The `bounds` parameter restricts the possible results to a defined [bounding box](https://wiki.openstreetmap.org/wiki/Bounding_Box). 
-A bounding box is a named numeric vector with four coordinates specifying its south-west and north-east corners: `(xmin, ymin, xmax, ymax)`. 
-The bounds parameter can most easily be specified with the `oc_bbox()` helper, for example like `bounds = oc_bbox(-0.56, 51.28, 0.27, 51.68)`. 
+The `bounds` parameter restricts the possible results to a defined [bounding box](https://wiki.openstreetmap.org/wiki/Bounding_Box).
+A bounding box is a named numeric vector with four coordinates specifying its south-west and north-east corners: `(xmin, ymin, xmax, ymax)`.
+The bounds parameter can most easily be specified with the `oc_bbox()` helper, for example like `bounds = oc_bbox(-0.56, 51.28, 0.27, 51.68)`.
 OpenCage provides a '[bounds-finder](https://opencagedata.com/bounds-finder)' to interactively determine bounds values.
 
-Below is an example of the use of `bounds` where the bbox given specifies the the South American contintent. 
+Below is an example of the use of `bounds` where the bbox given specifies the the South American contintent.
 
 ```{r bounds}
 oc_forward_df(placename = "Paris", bounds = oc_bbox(-97, -56, -32, 12), limit = 5)
 ```
 
-Again, you can also use {opencage} to determine a bounding box for subsequent queries. 
+Again, you can also use {opencage} to determine a bounding box for subsequent queries.
 If you wanted to map Hawaiian Airports for example, you could get their point coordinates like this:
 
 ```{r hawaii_airports}
@@ -118,33 +118,33 @@ Note that such a query will only give you aerodromes with "Airport" in their nam
 
 ### `proximity`
 
-The `proximity` parameter provides OpenCage with a hint to bias results in favour of those closer to the specified location. 
-It is just one of many factors used for ranking results, however, and (some) results may be far away from the location or point passed to the `proximity` parameter. 
-A point is a named numeric vector of a latitude, longitude coordinate pair in decimal format. 
+The `proximity` parameter provides OpenCage with a hint to bias results in favour of those closer to the specified location.
+It is just one of many factors used for ranking results, however, and (some) results may be far away from the location or point passed to the `proximity` parameter.
+A point is a named numeric vector of a latitude, longitude coordinate pair in decimal format.
 The `proximity` parameter can most easily be specified with the `oc_points()` helper, for example like `proximity = oc_point(38.0, -84.5)` if you happen to already know the coordinates. If not you can also look them up with {opencage}, of course:
 
 ```{r proximity}
 lx <- oc_forward_df("Lexington, Kentucky")
 
-lx_point <- oc_points(lx$oc_lat, lx$oc_lng) 
+lx_point <- oc_points(lx$oc_lat, lx$oc_lng)
 
 oc_forward_df(placename = "Paris", proximity = lx_point, limit = 5)
 ```
-Note that the French capital is listed before other places in the US, which are closer to the point provided. 
+Note that the French capital is listed before other places in the US, which are closer to the point provided.
 This illustrates how `proximity` is only one of many factors influencing the ranking of results.
 
 ### Confidence
 
-`min_confidence`, an integer value between 0 and 10, indicates the precision of the returned result as defined by its geographical extent, (i.e. by the extent of the result's bounding box). 
-When you specify `min_confidence`, only results with at least the requested confidence will be returned. 
-I.e. in the following example, the French capital is too large to be returned. 
+`min_confidence`, an integer value between 0 and 10, indicates the precision of the returned result as defined by its geographical extent, (i.e. by the extent of the result's bounding box).
+When you specify `min_confidence`, only results with at least the requested confidence will be returned.
+I.e. in the following example, the French capital is too large to be returned.
 
 ```{r confidence}
 oc_forward_df(placename = "Paris", min_confidence = 7, limit = 5)
 ```
 
 Note that confidence is not used for the [ranking of results](https://opencagedata.com/api#ranking).
-It does not tell you which result is more "correct" or "relevant", nor what type of thing the result is, but rather how small a result is, geographically speaking. 
+It does not tell you which result is more "correct" or "relevant", nor what type of thing the result is, but rather how small a result is, geographically speaking.
 See the [API documentation](https://opencagedata.com/api#confidence) for details.
 
 ## Retrieve more information from the API
@@ -153,8 +153,8 @@ Besides parameters to target your search better, OpenCage offers parameters to r
 
 ### `language`
 
-If you would like to get your results in a specific language, you can pass an [IETF BCP 47 language tag](https://en.wikipedia.org/wiki/IETF_language_tag), such as "tr" for Turkish or "pt-BR" for Brazilian Portuguese, to the `language` parameter. 
-OpenCage will attempt to return results in that language. 
+If you would like to get your results in a specific language, you can pass an [IETF BCP 47 language tag](https://en.wikipedia.org/wiki/IETF_language_tag), such as "tr" for Turkish or "pt-BR" for Brazilian Portuguese, to the `language` parameter.
+OpenCage will attempt to return results in that language.
 
 ```{r language_it}
 oc_forward_df(placename = "Munich", language = "tr")
@@ -167,28 +167,28 @@ Keep in mind, however, that some countries have more than one official language 
 oc_forward_df(placename = "Munich", language = "native")
 ```
 
-In case the `language` parameter is set to `NULL` (which is the default), the tag is not recognized, or OpenCage does not have a record in that language, the results will be returned in English. 
+In case the `language` parameter is set to `NULL` (which is the default), the tag is not recognized, or OpenCage does not have a record in that language, the results will be returned in English.
 
 ```{r language_null}
 oc_forward_df(placename = "München")
 ```
 
-To find the correct language tag for your desired language, you can search for the language on the [BCP47 language subtag lookup](https://r12a.github.io/app-subtags/) for example. 
-Note however, that there are some language tags in use on OpenStreetMap for example, one of OpenCage's main sources, that do not conform with the IETF BCP 47 standard. 
-For example OSM uses [`zh_pinyin`](https://wiki.openstreetmap.org/w/index.php?title=Multilingual_names#China) instead of `zh-Latn-pinyin` for [Hanyu Pinyin](https://en.wikipedia.org/wiki/Pinyin). 
-It might therefore be helpful to consult the details page of the target country on openstreetmap.org in order to see which language tags are actually used. 
+To find the correct language tag for your desired language, you can search for the language on the [BCP47 language subtag lookup](https://r12a.github.io/app-subtags/) for example.
+Note however, that there are some language tags in use on OpenStreetMap for example, one of OpenCage's main sources, that do not conform with the IETF BCP 47 standard.
+For example OSM uses [`zh_pinyin`](https://wiki.openstreetmap.org/w/index.php?title=Multilingual_names#China) instead of `zh-Latn-pinyin` for [Hanyu Pinyin](https://en.wikipedia.org/wiki/Pinyin).
+It might therefore be helpful to consult the details page of the target country on openstreetmap.org in order to see which language tags are actually used.
 In any case, neither the OpenCage API nor the functions in this package will validate the language tags you provide.
 
-For further details see [OpenCage's API documentation](https://opencagedata.com/api#language) on that subject. 
+For further details see [OpenCage's API documentation](https://opencagedata.com/api#language) on that subject.
 
 ### Annotations
 
-OpenCage supplies additional information about the result location in the so-called [annotations](https://opencagedata.com/api#annotations). 
+OpenCage supplies additional information about the result location in the so-called [annotations](https://opencagedata.com/api#annotations).
 They include, among others, country information, time of sunset and sunrise, [UN M49](https://en.wikipedia.org/wiki/UN_M49) codes or the location in different geocoding formats, like [Maidenhead](https://en.wikipedia.org/wiki/Maidenhead_Locator_System), [Mercator projection](https://en.wikipedia.org/wiki/Mercator_projection) ([EPSG:3857](https://epsg.io/3857)), [geohash](https://en.wikipedia.org/wiki/Geohash) or [what3words](https://en.wikipedia.org/wiki/What3words).
-Some annotations, like the [Irish Transverse Mercator](https://en.wikipedia.org/wiki/Irish_Transverse_Mercator) (ITM, [EPSG:2157](https://epsg.io/2157)) or the [Federal Information Processing Standards](https://en.wikipedia.org/wiki/Federal_Information_Processing_Standards) (FIPS) code will only be shown when appropriate. 
+Some annotations, like the [Irish Transverse Mercator](https://en.wikipedia.org/wiki/Irish_Transverse_Mercator) (ITM, [EPSG:2157](https://epsg.io/2157)) or the [Federal Information Processing Standards](https://en.wikipedia.org/wiki/Federal_Information_Processing_Standards) (FIPS) code will only be shown when appropriate.
 
-Whether the annoations are shown, is controlled by the `no_annotations` argument. 
-It is `TRUE` by default, which means that the output will _not_ contain annotations. 
+Whether the annoations are shown, is controlled by the `no_annotations` argument.
+It is `TRUE` by default, which means that the output will _not_ contain annotations.
 (Yes, inverted argument names are confusing, but we just follow OpenCage's lead here.)
 When you set `no_annotations` to `FALSE`, all columns are returned (i.e. `output` is implicitly set to `"all"`).
 
@@ -198,8 +198,8 @@ oc_forward_df("Dublin", no_annotations = FALSE)
 
 ### `roadinfo`
 
-`roadinfo` indicates whether the geocoder should attempt to match the nearest road (rather than an address) and provide additional road and driving information. 
-It is `FALSE` by default, which means OpenCage will not attempt to match the nearest road. Some road and driving information is nevertheless provided as part of the annotations (see above), if `roadinfo` is set to `FALSE`. 
+`roadinfo` indicates whether the geocoder should attempt to match the nearest road (rather than an address) and provide additional road and driving information.
+It is `FALSE` by default, which means OpenCage will not attempt to match the nearest road. Some road and driving information is nevertheless provided as part of the annotations (see above), if `roadinfo` is set to `FALSE`.
 
 ```{r roadinfo}
 oc_forward_df(placename = c("Europa Advance Rd", "Bovoni Rd"), roadinfo = TRUE)
@@ -209,8 +209,8 @@ A [blog post](https://blog.opencagedata.com/post/new-optional-parameter-roadinfo
 
 ### Abbreviated addresses
 
-The geocoding functions also have an `abbr` parameter, `FALSE` by default. 
-When it is `TRUE` the addresses in the `formatted` field of the results are abbreviated (e.g. "Main St." instead of "Main Street"). 
+The geocoding functions also have an `abbr` parameter, `FALSE` by default.
+When it is `TRUE` the addresses in the `formatted` field of the results are abbreviated (e.g. "Main St." instead of "Main Street").
 
 ```{r abbrev}
 oc_forward_df("Wall Street")
@@ -233,19 +233,25 @@ oc_forward_df(
 Or geocode placenames in a data frame:
 
 ```{r dataframe}
-for_df <- data.frame(
-  location = c("Golden Gate Bridge", "Buckingham Palace", "Eiffel Tower"),
-  ccode = c("at", "cg", "be"))
+for_df <- 
+  data.frame(
+    location = c("Golden Gate Bridge", "Buckingham Palace", "Eiffel Tower"),
+    ccode = c("at", "cg", "be")
+  )
+
+for_df
 
 oc_forward_df(for_df, placename = location, countrycode = ccode)
 ```
 
-That also works with `oc_reverse_df()`, of course. 
+That also works with `oc_reverse_df()`, of course.
 
 ```{r rev_df}
-rev_df <- data.frame(
-  lat = c(51.952659, 41.401372, 0),
-  lon = c(7.632473, 2.128685, 0))
+rev_df <- 
+  data.frame(
+    lat = c(51.952659, 41.401372),
+    lon = c(7.632473, 2.128685)
+  )
 
 oc_reverse_df(rev_df, lat, lon, language = "native")
 ```
@@ -253,7 +259,3 @@ oc_reverse_df(rev_df, lat, lon, language = "native")
 ## Further information
 
 For further information about the output and the query parameters, see the [API docs](https://opencagedata.com/api) and the [OpenCage FAQ](https://opencagedata.com/faq). When building queries, OpenCage's [best practices](https://opencagedata.com/api#bestpractices) can be very useful, as well as their guide to [geocoding accuracy](https://opencagedata.com/guides/how-to-think-about-geocoding-accuracy).
-
-- we will show examples with `_df` functions - refer to outputs vignette for other output options. All function arguments mentioned here are also available in the `oc_forward()` and `oc_reverse()` (if applicable) functions.
-- vectorised arguments of the geocoding functions
-

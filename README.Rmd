@@ -30,11 +30,11 @@ remotes::install_github("ropensci/opencage")
 
 ## Quickstart
 
-For the best experience, we recommend that you read through the "Get started" vignette (`vignette("zzz")`), but if you are in a hurry:
+For the best experience, we recommend that you read through the "Get started" vignette (`vignette("intro_opencage")`), but if you are in a hurry:
 
 1. Register at [opencagedata.com/users/sign_up](https://opencagedata.com/users/sign_up).
 2. Generate an API key at the [OpenCage dashboard](https://opencagedata.com/dashboard#api-keys).
-3. Save your API key as an [environment variable](https://rstats.wtf/r-startup.html#renviron) as `OPENCAGE_KEY=yourkey` in `.Renviron`.
+3. Save your API key as an [environment variable](https://rstats.wtf/r-startup.html#renviron) like `OPENCAGE_KEY=yourkey` in `.Renviron`. (See `help(oc_config)` for alternative ways to set your OpenCage API key.)
 
 Now you are ready to turn placenames into latitude/longitude coordinates:
 
@@ -49,7 +49,13 @@ Or turn coordinates into placenames:
 oc_reverse_df(latitude = 51.5034070, longitude = -0.1275920)
 ```
 
-But remember, the vignettes are really great!
+But remember, the vignettes are really great! We have:
+
+- "Introduction to opencage" `vignette("intro_opencage")`
+- "Customise your query" `vignette("customise_query")`
+- "Output options" `vignette("output_options")`
+
+
 
 ## About OpenCage
 

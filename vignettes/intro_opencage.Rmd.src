@@ -186,3 +186,5 @@ See the ["Customise your query"](customise_query.html) vignette for details.
 Besides `oc_forward_df()` and `oc_reverse_df()`, which always return a single tibble, there are also two other functions,  `oc_forward()` and `oc_reverse()`, which return other types of output. 
 Depending on what you specify as the `return` parameter, `oc_forward()` and `oc_reverse()` will return either a list of tibbles (`df_list`, the default), JSON lists (`json_list`), GeoJSON lists (`geojson_list`), or the URL with which the API would be called (`url_only`). 
 Learn more in ["Output options"](output_options.html) vignette. 
+
+Please report any issues or bugs on [our GitHub repository](https://github.com/ropensci/opencage/issues) and post questions on [discuss.ropensci.org](https://discuss.ropensci.org/).

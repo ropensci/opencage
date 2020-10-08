@@ -2,10 +2,10 @@
 title: "Output options"
 subtitle: "Get different kinds of output from OpenCage"
 author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
-date: "2020-10-07"
+date: "2020-10-08"
 description: >
   "`oc_forward()`/`oc_reverse()` return lists of various type, namely data frames, JSON, GeoJSON or URLs, depending on the `return` value you specify. The possible `return` values are `df_list`, `json_list`, `geojson_list` and `url_only`."
-output: 
+output:
   rmarkdown::html_vignette:
     df_print: kable
 vignette: >
@@ -16,19 +16,19 @@ vignette: >
 
 
 
-{opencage} contains two types of main functions. 
+{opencage} contains two types of main functions.
 
 1. The `oc_forward_df()`/`oc_reverse_df()` functions, which always return a single tibble.
 2. The `oc_forward()`/`oc_reverse()` functions, which return lists of various types, depending on the `return` value you specify. The possible `return` values are `df_list`, `json_list`, `geojson_list` and `url_only`.
 
-We have shown the `oc_forward_df()`/`oc_reverse_df()` functions in the [Introduction to opencage](intro_opencage.html) and the [Customise your query](customise_query.html) vignettes. 
+We have shown the `oc_forward_df()`/`oc_reverse_df()` functions in the [Introduction to opencage](intro_opencage.html) and the [Customise your query](customise_query.html) vignettes.
 The function arguments mentioned in the other vignettes are also available with `oc_forward()`/`oc_reverse()`, in general.
-Here we will show the different return values available with `oc_forward()`/`oc_reverse()`. 
+Here we will show the different return values available with `oc_forward()`/`oc_reverse()`.
 
 ## `df_list`
 
-The default return value is `df_list`. 
-It returns a list of tibbles.  
+The default return value is `df_list`.
+It returns a list of tibbles.
 
 
 ```r
@@ -48,8 +48,8 @@ If you want to use opencage in a `dplyr::mutate()` chain you can do it like this
 ```r
 library(dplyr, warn.conflicts = FALSE)
 
-oc_data <- 
-  tibble(place = "Casey Station") %>% 
+oc_data <-
+  tibble(place = "Casey Station") %>%
   mutate(oc_result = oc_forward(place))
 
 oc_data
@@ -75,7 +75,7 @@ oc_data %>% unnest(oc_result)
 
 ## `json_list`
 
-OpenCage's main output format is JSON. When you specify `json_list` as the return type, you get the JSON as an R `list()`. 
+OpenCage's main output format is JSON. When you specify `json_list` as the return type, you get the JSON as an R `list()`.
 
 
 ```r
@@ -99,10 +99,10 @@ oc_forward("Casey Station", return = "json_list")
 #> [1] 2500
 #> 
 #> [[1]]$rate$remaining
-#> [1] 2441
+#> [1] 2454
 #> 
 #> [[1]]$rate$reset
-#> [1] 1602115200
+#> [1] 1602201600
 #> 
 #> 
 #> [[1]]$results
@@ -176,10 +176,10 @@ oc_forward("Casey Station", return = "json_list")
 #> 
 #> [[1]]$timestamp
 #> [[1]]$timestamp$created_http
-#> [1] "Wed, 07 Oct 2020 07:12:44 GMT"
+#> [1] "Thu, 08 Oct 2020 20:39:41 GMT"
 #> 
 #> [[1]]$timestamp$created_unix
-#> [1] 1602054764
+#> [1] 1602189581
 #> 
 #> 
 #> [[1]]$total_results
@@ -273,10 +273,10 @@ gjsn_lst
 #> [1] 2500
 #> 
 #> $rate$remaining
-#> [1] 2429
+#> [1] 2453
 #> 
 #> $rate$reset
-#> [1] 1602115200
+#> [1] 1602201600
 #> 
 #> 
 #> $status
@@ -300,10 +300,10 @@ gjsn_lst
 #> 
 #> $timestamp
 #> $timestamp$created_http
-#> [1] "Wed, 07 Oct 2020 07:12:46 GMT"
+#> [1] "Thu, 08 Oct 2020 20:39:43 GMT"
 #> 
 #> $timestamp$created_unix
-#> [1] 1602054766
+#> [1] 1602189583
 #> 
 #> 
 #> $total_results
@@ -327,8 +327,8 @@ class(gjsn_lst[[1]])
 
 ## `url_only`
 
-`url_only` will return the OpenCage URL for debugging purposes. 
-We won't show the output here, because the URL contains the OpenCage API key. 
+`url_only` will return the OpenCage URL for debugging purposes.
+We won't show the output here, because the URL contains the OpenCage API key.
 
 
 ```r
@@ -337,12 +337,12 @@ oc_forward("Casey Station", return = "url_only")
 
 ## `xml`
 
-{opencage} does not support the XML response type at the moment. 
-Please file an [issue](https://github.com/ropensci/opencage/issues) if you have a use-case that requires this.
+{opencage} does not support the XML response type at the moment.
+Please file an [issue](https://github.com/ropensci/opencage/issues) or a [pull-request](https://github.com/ropensci/opencage/pulls) if you have a use-case that requires this.
 
 ## Return query text
 
-`oc_forward()` and `oc_reverse()` have an `add_request` argument, indicating whether the request is returned again with the results. 
+`oc_forward()` and `oc_reverse()` have an `add_request` argument, indicating whether the request is returned again with the results.
 If the `return` value is a `df_list`, the `placename` or `latitude,longitude` is added as a column to the results without a roundtrip to the API.
 `json_list` results will contain all request parameters as returned by the API, including the API key used, so handle with care!
 `add_request` is currently ignored by OpenCage for GeoJSON results.
