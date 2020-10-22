@@ -52,7 +52,8 @@ oc_format <- function(res_text, return, query) {
       results
     }
   } else if (return == "json_list" || return == "geojson_list") {
-    jsn <- jsonlite::fromJSON(res_text, simplifyVector = FALSE)
+    res_text_masked <- oc_mask_key(res_text)
+    jsn <- jsonlite::fromJSON(res_text_masked, simplifyVector = FALSE)
     if (return == "geojson_list") {
       structure(jsn, class = c("geo_list"))
     } else {

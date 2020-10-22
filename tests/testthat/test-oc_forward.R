@@ -55,8 +55,23 @@ test_that("oc_forward returns correct type", {
 test_that("oc_forward adds request with add_request", {
   skip_on_cran()
   skip_if_offline()
-  res <- oc_forward("Hmbg", add_request = TRUE)
+
+  # df_list
+  res <- oc_forward("Hmbg", return = "df_list", add_request = TRUE)
   expect_equal(res[[1]][["oc_query"]], "Hmbg")
+
+  # json_list
+  res <- oc_forward("Hmbg", return = "json_list", add_request = TRUE)
+  expect_equal(res[[1]][["request"]][["query"]], "Hmbg")
+})
+
+test_that("oc_forward masks key when add_request = TRUE", {
+  skip_on_cran()
+  skip_if_offline()
+
+  # json_list
+  res <- oc_forward("Hamburg", return = "json_list", add_request = TRUE)
+  expect_equal(res[[1]][["request"]][["key"]], "OPENCAGE_KEY")
 })
 
 test_that("oc_forward handles response with no results", {
