@@ -162,14 +162,13 @@ oc_process <-
 
     # return url only
     if (return == "url_only") {
-      if (interactive() || is.null(key)) {
+      if (
+        is.null(key) ||
+        (rlang::is_interactive() && isTRUE(getOption("oc_show_key", FALSE)))
+      ) {
         return(oc_url)
       } else {
-        stop(
-          call. = FALSE,
-          "'url_only' reveals your OpenCage key.\n",
-          "It is therefore only available in interactive mode."
-        )
+        return(oc_mask_key(oc_url))
       }
     }
 

@@ -8,6 +8,7 @@ oc_config(
   key = Sys.getenv("OPENCAGE_KEY"),
   rate_sec = getOption("oc_rate_sec", default = 1L),
   no_record = getOption("oc_no_record", default = FALSE),
+  show_key = getOption("oc_show_key", default = FALSE),
   ...
 )
 }
@@ -19,10 +20,17 @@ pass the key directly as a parameter, though. See details.}
 requests sent to the OpenCage API per second. Defaults to the value set in
 the \code{oc_rate_sec} option, or, in case that does not exist, to 1L.}
 
-\item{no_record}{Logical vector of length one. When \code{TRUE} OpenCage will not
+\item{no_record}{Logical vector of length one. When \code{TRUE}, OpenCage will not
 create log entries of the queries and will not cache the geocoding
 requests. Defaults to the value set in the \code{oc_no_record} option, or, in
-case that does not exist, to FALSE.}
+case that does not exist, to \code{FALSE}.}
+
+\item{show_key}{Logical vector of length one. This is only relevant when
+debugging \code{oc_forward()}  or \code{oc_reverse()} calls with the \code{return = "url_only"} argument. When \code{TRUE}, the result will show your OpenCage API
+key in the URL as stored in the \code{OPENCAGE_KEY} environment variable. When
+not \code{TRUE}, the API key will be replaced with the string \code{OPENCAGE_KEY}.
+\code{show_key} defaults to the value set in the \code{oc_show_key} option, or, in
+case that does not exist, to \code{FALSE}.}
 
 \item{...}{Ignored.}
 }

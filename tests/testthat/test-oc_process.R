@@ -1,17 +1,27 @@
 ## Test oc_process ##
 
-test_that("oc_process does not reveal key with non-interactive `url_only`.", {
-  # This test (intentionally) fails in interactive mode.
+test_that("oc_process(return = 'url_only') does not reveal key by default.", {
   withr::local_envvar(c("OPENCAGE_KEY" = key_200))
-  expect_error(
-    object =
+  res <-
       oc_process(
         placename = "Paris",
         return = "url_only",
         get_key = TRUE
-      ),
-    regexp = "'url_only' reveals your OpenCage key"
-  )
+      )
+  expect_match(res[[1]], "key=OPENCAGE_KEY", fixed = TRUE)
+})
+
+test_that("oc_process(return = 'url_only') shows key if desired.", {
+  rlang::local_interactive()
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
+  withr::local_options(list(oc_show_key = TRUE))
+  res <-
+    oc_process(
+      placename = "Paris",
+      return = "url_only",
+      get_key = TRUE
+    )
+  expect_match(res[[1]], paste0("key=", key_200), fixed = TRUE)
 })
 
 test_that("oc_process creates meaningful URLs for single query.", {
