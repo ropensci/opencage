@@ -4,7 +4,7 @@ test_that("opencage_forward/opencage_reverse return what they should.", {
   skip_on_cran()
   skip_if_offline()
 
-  expect_warning(
+  lifecycle::expect_deprecated(
     results <- opencage_forward(placename = "Sarzeau")
   )
   expect_is(results, "list")
@@ -13,7 +13,7 @@ test_that("opencage_forward/opencage_reverse return what they should.", {
   expect_is(results[["time_stamp"]], "POSIXct")
   expect_equal(length(results), 4)
 
-  expect_warning(
+  lifecycle::expect_deprecated(
     results <- opencage_forward(placename = "Islington, London")
   )
   expect_is(results, "list")
@@ -23,7 +23,7 @@ test_that("opencage_forward/opencage_reverse return what they should.", {
   expect_equal(length(results), 4)
 
   placename <- "Triererstr 15, Weimar 99423, Deutschland"
-  expect_warning(
+  lifecycle::expect_deprecated(
     results <- opencage_forward(placename = placename)
   )
   expect_is(results, "list")
@@ -32,7 +32,7 @@ test_that("opencage_forward/opencage_reverse return what they should.", {
   expect_is(results[["time_stamp"]], "POSIXct")
   expect_equal(length(results), 4)
 
-  expect_warning(
+  lifecycle::expect_deprecated(
     results <-
       opencage_reverse(
         longitude = 0,
@@ -53,7 +53,7 @@ test_that("opencage_forward/opencage_reverse return what they should
   skip_on_cran()
   skip_if_offline()
 
-  expect_warning(
+  lifecycle::expect_deprecated(
     results <- opencage_forward(
       placename = "Paris",
       key = Sys.getenv("OPENCAGE_KEY"),
@@ -73,7 +73,7 @@ test_that("opencage_forward/opencage_reverse return what they should
   )), 0)
   expect_true(dplyr::between(nrow(results[["results"]]), 1, 2))
 
-  expect_warning(
+  lifecycle::expect_deprecated(
     results <- opencage_reverse(
       latitude = 44,
       longitude = 44,
@@ -99,7 +99,7 @@ test_that("opencage_forward deals well with results being NULL", {
   skip_on_cran()
   skip_if_offline()
 
-  expect_warning(
+  lifecycle::expect_deprecated(
     results <- opencage_forward(
       placename = "thiswillgetmenoresultswichisgood",
       key = Sys.getenv("OPENCAGE_KEY"),
@@ -118,12 +118,12 @@ test_that("the bounds argument is well taken into account", {
   skip_on_cran()
   skip_if_offline()
 
-  expect_warning(
+  lifecycle::expect_deprecated(
     results1 <- opencage_forward(
       placename = "Berlin",
       key = Sys.getenv("OPENCAGE_KEY")
   ))
-  expect_warning(
+  lifecycle::expect_deprecated(
     results2 <- opencage_forward(
       placename = "Berlin",
       bounds = c(-90, 38, 0, 45),
@@ -145,13 +145,13 @@ test_that("Errors with multiple inputs", {
 
 test_that("`opencage_key()` returns NULL if OPENCAGE_KEY envvar not found", {
   withr::local_envvar(c("OPENCAGE_KEY" = ""))
-  expect_null(expect_warning(opencage_key()))
+  expect_null(lifecycle::expect_deprecated(opencage_key()))
 })
 
 test_that("`opencage_key(quiet = FALSE)` messages", {
   withr::local_envvar(c("OPENCAGE_KEY" = "fakekey"))
   expect_message(
-    object = expect_warning(opencage_key(quiet = FALSE)),
+    object = lifecycle::expect_deprecated(opencage_key(quiet = FALSE)),
     regexp = "Using OpenCage API Key from envvar OPENCAGE_KEY"
   )
 })
