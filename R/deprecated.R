@@ -230,5 +230,5 @@ opencage_key <- function(quiet = TRUE) {
     message("Using OpenCage API Key from envvar OPENCAGE_KEY")
   }
 
-  return(pat)
+  invisible(pat)
 }

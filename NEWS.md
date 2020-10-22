@@ -21,6 +21,7 @@ The new features include:
 
 * `opencage_forward()`, `opencage_reverse()`, and `opencage_key()` are (soft) deprecated. 
 * `opencage_forward()` and `opencage_reverse()` will always output strings as characters, i.e. they won't coerce to factor depending on the `stringsAsFactor` option.
+* `opencage_key()` returns the OpenCage API key invisibly.
 
 ## Minor changes
 
