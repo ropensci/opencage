@@ -24,3 +24,10 @@ test_that("oc_check_key checks key", {
     "32 character long, alphanumeric string"
   )
 })
+
+## Test oc_mask_key ##
+
+test_that("oc_mask_key masks key", {
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
+  expect_match(oc_mask_key(key_200), "OPENCAGE_KEY", fixed = TRUE)
+})
