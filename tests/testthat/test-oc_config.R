@@ -18,6 +18,21 @@ test_that("oc_config sets OPENCAGE_KEY environment variable", {
   expect_equal(Sys.getenv("OPENCAGE_KEY"), key_200)
 })
 
+test_that("oc_config requests key from terminal", {
+  rlang::local_interactive(TRUE)
+  withr::local_envvar(c("OPENCAGE_KEY" = ""))
+  mockery::stub(
+    oc_config,
+    'readline',
+    key_200,
+  )
+  expect_message(
+    oc_config(key = ""),
+    "Please enter your OpenCage API key and press enter:"
+  )
+  expect_equal(Sys.getenv("OPENCAGE_KEY"), key_200)
+})
+
 test_that("oc_config throws error with faulty OpenCage key", {
 
   # unset key
