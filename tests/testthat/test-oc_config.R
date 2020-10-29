@@ -44,7 +44,7 @@ timer <- function(expr) {
 oc_get_limited_test <- function(reps) {
   replicate(
     reps,
-    oc_get_limited("http://httpbin.org/get")
+    oc_get_limited("https://httpbin.org/get")
   )
 }
 

@@ -144,7 +144,7 @@ Reverse geocoding means that we have the coordinates, latitude and longitude, an
 oc_reverse_df(latitude = 51.5034070, longitude = -0.1275920)
 ```
 
-Note that all coordinates sent to the OpenCage API must adhere to the [WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System) (also known as [EPSG:4326](http://epsg.io/4326)) [coordinate reference system](https://en.wikipedia.org/wiki/Spatial_reference_system) in decimal format. 
+Note that all coordinates sent to the OpenCage API must adhere to the [WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System) (also known as [EPSG:4326](https://epsg.io/4326)) [coordinate reference system](https://en.wikipedia.org/wiki/Spatial_reference_system) in decimal format. 
 This is the coordinate reference system used by the [Global Positioning System](https://en.wikipedia.org/wiki/Global_Positioning_System).
 There is usually no reason to send more than six or seven digits past the decimal as that then gets down to the [precision of a centimetre](https://en.wikipedia.org/wiki/Decimal_degrees).
 

@@ -6,11 +6,11 @@
 <!-- badges: start -->
 
 [![CRAN
-Status](http://www.r-pkg.org/badges/version/opencage)](http://cran.r-project.org/package=opencage)
+Status](https://www.r-pkg.org/badges/version/opencage)](https://cran.r-project.org/package=opencage)
 [![CRAN
 Checks](https://cranchecks.info/badges/worst/opencage)](https://cran.r-project.org/web/checks/check_results_opencage.html)
 [![CRAN Downloads per
-Month](https://cranlogs.r-pkg.org/badges/opencage)](http://cran.r-project.org/package=opencage)
+Month](https://cranlogs.r-pkg.org/badges/opencage)](https://cran.r-project.org/package=opencage)
 [![Travis Build
 Status](https://travis-ci.org/ropensci/opencage.svg?branch=master)](https://travis-ci.org/ropensci/opencage)
 [![AppVeyor Build
@@ -91,10 +91,9 @@ But remember, the vignettes are really great\! We have:
 The [OpenCage](https://opencagedata.com/) API supports forward and
 reverse geocoding. Sources of OpenCage are open geospatial data
 including [OpenStreetMap](https://www.openstreetmap.org/),
-[DataScienceToolkit](http://www.datasciencetoolkit.org/), [Yahoo\!
+[DataScienceToolkit](https://github.com/petewarden/dstk), [Yahoo\!
 GeoPlanet](https://developer.yahoo.com/geo/geoplanet/data/), [Natural
 Earth Data](https://www.naturalearthdata.com/),
-[OpenGeoCode](http://www.opengeocode.com/),
 [libpostal](https://github.com/openvenues/libpostal),
 [GeoNames](https://www.geonames.org/), and [Flickr’s
 shapefiles](https://code.flickr.net/2009/05/21/flickr-shapefiles-public-dataset-10/)
@@ -112,4 +111,4 @@ credits](https://opencagedata.com/credits).
     of Conduct](CONDUCT.md). By participating in this project you agree
     to abide by its terms.
 
-[![ropensci\_footer](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
+[![ropensci\_footer](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
