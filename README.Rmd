@@ -5,11 +5,18 @@ output:
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 # opencage
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/opencage)](http://cran.r-project.org/package=opencage)
-[![Build Status](https://travis-ci.org/ropensci/opencage.svg?branch=master)](https://travis-ci.org/ropensci/opencage)
+<!-- badges: start -->
+
+[![CRAN Status](http://www.r-pkg.org/badges/version/opencage)](http://cran.r-project.org/package=opencage)
+[![CRAN Checks](https://cranchecks.info/badges/worst/opencage)](https://cran.r-project.org/web/checks/check_results_opencage.html)
+[![CRAN Downloads per Month](https://cranlogs.r-pkg.org/badges/opencage)](http://cran.r-project.org/package=opencage)
+[![Travis Build Status](https://travis-ci.org/ropensci/opencage.svg?branch=master)](https://travis-ci.org/ropensci/opencage)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/opencage?branch=master&svg=true)](https://ci.appveyor.com/project/maelle/opencage)
 [![codecov.io](https://codecov.io/github/ropensci/opencage/coverage.svg?branch=master)](https://codecov.io/github/ropensci/opencage?branch=master)
-[![](https://badges.ropensci.org/36_status.svg)](https://github.com/ropensci/onboarding/issues/36)
+[![rOpenSci Peer-Review](https://badges.ropensci.org/36_status.svg)](https://github.com/ropensci/software-review/issues/36)
+[![License](https://img.shields.io/cran/l/opencage)](https://opensource.org/licenses/gpl-license)
+
+<!-- badges: end -->
 
 Geocode with the [OpenCage](https://opencagedata.com/) API, either from placename to longitude and latitude (forward geocoding) or from longitude and latitude to placename (reverse geocoding). 
 
