@@ -13,9 +13,9 @@ Description: Geocode with the OpenCage API, either from placename to longitude
     and latitude (forward geocoding) or from longitude and latitude to 
     placename (reverse geocoding), see <https://opencagedata.com/>.
 License: GPL (>= 2)
-URL: https://docs.ropensci.org/opencage,
-    http://github.com/ropensci/opencage
-BugReports: http://github.com/ropensci/opencage/issues
+URL: https://docs.ropensci.org/opencage/,
+    https://github.com/ropensci/opencage
+BugReports: https://github.com/ropensci/opencage/issues
 Imports: 
     crul (>= 0.5.2),
     dplyr (>= 0.7.4),

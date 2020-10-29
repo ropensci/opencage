@@ -13,9 +13,9 @@ latitude (forward geocoding) or from longitude and latitude to placename
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://docs.ropensci.org/opencage}
-  \item \url{http://github.com/ropensci/opencage}
-  \item Report bugs at \url{http://github.com/ropensci/opencage/issues}
+  \item \url{https://docs.ropensci.org/opencage/}
+  \item \url{https://github.com/ropensci/opencage}
+  \item Report bugs at \url{https://github.com/ropensci/opencage/issues}
 }
 
 }
