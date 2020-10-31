@@ -2,7 +2,7 @@
 title: "Output options"
 subtitle: "Get different kinds of output from OpenCage"
 author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
-date: "2020-10-08"
+date: "2020-10-31"
 description: >
   "`oc_forward()`/`oc_reverse()` return lists of various type, namely data frames, JSON, GeoJSON or URLs, depending on the `return` value you specify. The possible `return` values are `df_list`, `json_list`, `geojson_list` and `url_only`."
 output:
@@ -16,13 +16,14 @@ vignette: >
 
 
 
-{opencage} contains two types of main functions.
+{opencage} contains two main types of main functions distinguished by the manner in which the results are returned:
 
-1. The `oc_forward_df()`/`oc_reverse_df()` functions, which always return a single tibble.
-2. The `oc_forward()`/`oc_reverse()` functions, which return lists of various types, depending on the `return` value you specify. The possible `return` values are `df_list`, `json_list`, `geojson_list` and `url_only`.
+1. The `oc_forward_df()`/`oc_reverse_df()` functions always return a single tibble.
+2. The `oc_forward()`/`oc_reverse()` functions return a list of various types, depending on the `return` value you specify. 
+The possible `return` values are `df_list`, `json_list`, `geojson_list` and `url_only`.
 
-We have shown the `oc_forward_df()`/`oc_reverse_df()` functions in the [Introduction to opencage](intro_opencage.html) and the [Customise your query](customise_query.html) vignettes.
-The function arguments mentioned in the other vignettes are also available with `oc_forward()`/`oc_reverse()`, in general.
+Use of the `oc_forward_df()`/`oc_reverse_df()` functions is demonstrated in the [Introduction to opencage](intro_opencage.html) and the [Customise your query](customise_query.html) vignettes.
+The function arguments mentioned in these other vignettes are also generally available with `oc_forward()`/`oc_reverse()`.
 Here we will show the different return values available with `oc_forward()`/`oc_reverse()`.
 
 ## `df_list`
@@ -32,45 +33,58 @@ It returns a list of tibbles.
 
 
 ```r
-oc_forward("Casey Station", return = "df_list")
+stations <- c("Casey Station", "McMurdo Station")
+oc_forward(stations, return = "df_list")
 #> [[1]]
 #> # A tibble: 1 x 12
-#>   oc_confidence oc_formatted oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng oc_category oc_type
-#>           <int> <chr>                   <dbl>            <dbl>            <dbl>            <dbl> <chr>       <chr>  
-#> 1             7 Casey Stati~            -66.3             111.            -66.3             111. place       village
-#> # ... with 4 more variables: oc_continent <chr>, oc_hamlet <chr>, oc_lat <dbl>, oc_lng <dbl>
+#>   oc_confidence oc_formatted oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng
+#>           <int> <chr>                   <dbl>            <dbl>            <dbl>            <dbl>
+#> 1             7 Casey Stati~            -66.3             111.            -66.3             111.
+#> # ... with 6 more variables: oc_category <chr>, oc_type <chr>, oc_continent <chr>, oc_hamlet <chr>,
+#> #   oc_lat <dbl>, oc_lng <dbl>
+#> 
+#> [[2]]
+#> # A tibble: 1 x 12
+#>   oc_confidence oc_formatted oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng
+#>           <int> <chr>                   <dbl>            <dbl>            <dbl>            <dbl>
+#> 1             7 McMurdo Sta~            -77.8             167.            -77.9             167.
+#> # ... with 6 more variables: oc_category <chr>, oc_type <chr>, oc_continent <chr>, oc_town <chr>,
+#> #   oc_lat <dbl>, oc_lng <dbl>
 ```
 
 The `df_list` type drives the `oc_forward_df()`/`oc_reverse_df()` functions.
-If you want to use opencage in a `dplyr::mutate()` chain you can do it like this:
+You can use the `df_list` output in a `dplyr::mutate()` chain to replicate the functionality of `oc_forward_df()`:
 
 
 ```r
 library(dplyr, warn.conflicts = FALSE)
 
 oc_data <-
-  tibble(place = "Casey Station") %>%
+  tibble(place = stations) %>%
   mutate(oc_result = oc_forward(place))
 
 oc_data
-#> # A tibble: 1 x 2
-#>   place         oc_result        
-#>   <chr>         <list>           
-#> 1 Casey Station <tibble [1 x 12]>
+#> # A tibble: 2 x 2
+#>   place           oc_result        
+#>   <chr>           <list>           
+#> 1 Casey Station   <tibble [1 x 12]>
+#> 2 McMurdo Station <tibble [1 x 12]>
 ```
 
-This creates the list column `oc_result`, which can be easily unnested with `tidyr::unnest()`
+This creates a list column `oc_result`, which can be easily unnested with `tidyr::unnest()`:
 
 
 ```r
 library(tidyr, warn.conflicts = FALSE)
 
 oc_data %>% unnest(oc_result)
-#> # A tibble: 1 x 13
-#>   place oc_confidence oc_formatted oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng oc_category oc_type
-#>   <chr>         <int> <chr>                   <dbl>            <dbl>            <dbl>            <dbl> <chr>       <chr>  
-#> 1 Case~             7 Casey Stati~            -66.3             111.            -66.3             111. place       village
-#> # ... with 4 more variables: oc_continent <chr>, oc_hamlet <chr>, oc_lat <dbl>, oc_lng <dbl>
+#> # A tibble: 2 x 14
+#>   place oc_confidence oc_formatted oc_northeast_lat oc_northeast_lng oc_southwest_lat
+#>   <chr>         <int> <chr>                   <dbl>            <dbl>            <dbl>
+#> 1 Case~             7 Casey Stati~            -66.3             111.            -66.3
+#> 2 McMu~             7 McMurdo Sta~            -77.8             167.            -77.9
+#> # ... with 8 more variables: oc_southwest_lng <dbl>, oc_category <chr>, oc_type <chr>,
+#> #   oc_continent <chr>, oc_hamlet <chr>, oc_lat <dbl>, oc_lng <dbl>, oc_town <chr>
 ```
 
 ## `json_list`
@@ -99,10 +113,10 @@ oc_forward("Casey Station", return = "json_list")
 #> [1] 2500
 #> 
 #> [[1]]$rate$remaining
-#> [1] 2454
+#> [1] 2458
 #> 
 #> [[1]]$rate$reset
-#> [1] 1602201600
+#> [1] 1604188800
 #> 
 #> 
 #> [[1]]$results
@@ -176,10 +190,10 @@ oc_forward("Casey Station", return = "json_list")
 #> 
 #> [[1]]$timestamp
 #> [[1]]$timestamp$created_http
-#> [1] "Thu, 08 Oct 2020 20:39:41 GMT"
+#> [1] "Sat, 31 Oct 2020 20:24:20 GMT"
 #> 
 #> [[1]]$timestamp$created_unix
-#> [1] 1602189581
+#> [1] 1604175860
 #> 
 #> 
 #> [[1]]$total_results
@@ -273,10 +287,10 @@ gjsn_lst
 #> [1] 2500
 #> 
 #> $rate$remaining
-#> [1] 2453
+#> [1] 2456
 #> 
 #> $rate$reset
-#> [1] 1602201600
+#> [1] 1604188800
 #> 
 #> 
 #> $status
@@ -300,10 +314,10 @@ gjsn_lst
 #> 
 #> $timestamp
 #> $timestamp$created_http
-#> [1] "Thu, 08 Oct 2020 20:39:43 GMT"
+#> [1] "Sat, 31 Oct 2020 20:24:22 GMT"
 #> 
 #> $timestamp$created_unix
-#> [1] 1602189583
+#> [1] 1604175862
 #> 
 #> 
 #> $total_results
@@ -327,8 +341,8 @@ class(gjsn_lst[[1]])
 
 ## `url_only`
 
-`url_only` will return the OpenCage URL for debugging purposes.
-We won't show the output here, because the URL contains the OpenCage API key.
+`url_only` returns the OpenCage URL for debugging purposes.
+We won't show the output here because the URL contains the OpenCage API key.
 
 
 ```r

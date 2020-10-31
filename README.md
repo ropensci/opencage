@@ -23,8 +23,8 @@ Peer-Review](https://badges.ropensci.org/36_status.svg)](https://github.com/rope
 <!-- badges: end -->
 
 Geocode with the [OpenCage](https://opencagedata.com/) API, either from
-placename to longitude and latitude (forward geocoding) or from
-longitude and latitude to placename (reverse geocoding).
+place name to longitude and latitude (forward geocoding) or from
+longitude and latitude to the location name (reverse geocoding).
 
 ## Installation
 
@@ -53,10 +53,10 @@ hurry:
     dashboard](https://opencagedata.com/dashboard#api-keys).
 3.  Save your API key as an [environment
     variable](https://rstats.wtf/r-startup.html#renviron) like
-    `OPENCAGE_KEY=yourkey` in `.Renviron`. (See `help(oc_config)` for
-    alternative ways to set your OpenCage API key.)
+    `OPENCAGE_KEY=yourkey` in `.Renviron`. See `help(oc_config)` for
+    alternative ways to set your OpenCage API key.
 
-Now you are ready to turn placenames into latitude/longitude
+Now you are ready to turn place names into latitude and longitude
 coordinates:
 
 ``` r
@@ -69,7 +69,7 @@ oc_forward_df(placename = "Sarzeau")
     ##   <chr>      <dbl>  <dbl> <chr>                
     ## 1 Sarzeau     47.5  -2.76 56370 Sarzeau, France
 
-Or turn coordinates into placenames:
+Or turn a set of coordinates into the name and address of the location:
 
 ``` r
 oc_reverse_df(latitude = 51.5034070, longitude = -0.1275920)

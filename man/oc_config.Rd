@@ -40,13 +40,13 @@ There are three safer ways to set your API key instead:
 \enumerate{
 \item Save your API key as an environment variable in
 \code{\link[base:Startup]{.Renviron}} as described in \href{https://rstats.wtf/r-startup.html#renviron}{What They Forgot to Teach You About R} or \href{https://csgillespie.github.io/efficientR/set-up.html#renviron}{Efficient R Programming}.
-From there it will be fetched by all functions that call the OpenCage API, so
-you do not even have to call \code{oc_config()} to set your key, but can start
+From there it will be fetched by all functions that call the OpenCage API.
+You do not even have to call \code{oc_config()} to set your key; you can start
 geocoding right away. If you have the \pkg{usethis} package installed, you
-can edit your \code{\link[base:Startup]{.Renviron}} most easily with
-\code{usethis::edit_r_environ()}. We strongly recommend storing your API key in
-the user-level .Renviron, as opposed to the project-level, because this makes
-it less likely you will share sensitive information by mistake.
+can edit your \code{\link[base:Startup]{.Renviron}} with \code{usethis::edit_r_environ()}.
+We strongly recommend storing your API key in the user-level .Renviron, as
+opposed to the project-level. This makes it less likely you will share
+sensitive information by mistake.
 \item If you use a package like \pkg{keyring} to store your credentials, you can
 safely pass your key in a script with a function call like this
 \code{oc_config(key = keyring::key_get("opencage"))}.
@@ -65,7 +65,7 @@ for the "Medium" or "Large" plans, see \url{https://opencagedata.com/pricing} fo
 details and up-to-date information. You can set the rate limit persistently
 across sessions by setting an \code{oc_rate_sec} \link[base:options]{option} in your
 \code{\link[base:Startup]{.Rprofile}}. If you have the \pkg{usethis} package
-installed, you can edit your \code{\link[base:Startup]{.Rprofile}} most easily with
+installed, you can edit your \code{\link[base:Startup]{.Rprofile}} with
 \code{usethis::edit_r_profile()}.
 }
 
@@ -89,7 +89,7 @@ queries. You can set the \code{oc_no_record} \link[base:options]{option} persist
 across sessions in your \code{\link[base:Startup]{.Rprofile}}.
 
 Please note that the \pkg{opencage} package always caches the data it
-receives from the OpenCage API, but only for as long as your R session is
+receives from the OpenCage API but only for as long as your R session is
 alive.
 
 For more information on OpenCage's policies on privacy and data protection

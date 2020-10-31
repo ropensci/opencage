@@ -24,13 +24,14 @@ library("opencage")
 
 ```
 
-{opencage} contains two types of main functions.
+{opencage} contains two main types of main functions distinguished by the manner in which the results are returned:
 
-1. The `oc_forward_df()`/`oc_reverse_df()` functions, which always return a single tibble.
-2. The `oc_forward()`/`oc_reverse()` functions, which return lists of various types, depending on the `return` value you specify. The possible `return` values are `df_list`, `json_list`, `geojson_list` and `url_only`.
+1. The `oc_forward_df()`/`oc_reverse_df()` functions always return a single tibble.
+2. The `oc_forward()`/`oc_reverse()` functions return a list of various types, depending on the `return` value you specify. 
+The possible `return` values are `df_list`, `json_list`, `geojson_list` and `url_only`.
 
-We have shown the `oc_forward_df()`/`oc_reverse_df()` functions in the [Introduction to opencage](intro_opencage.html) and the [Customise your query](customise_query.html) vignettes.
-The function arguments mentioned in the other vignettes are also available with `oc_forward()`/`oc_reverse()`, in general.
+Use of the `oc_forward_df()`/`oc_reverse_df()` functions is demonstrated in the [Introduction to opencage](intro_opencage.html) and the [Customise your query](customise_query.html) vignettes.
+The function arguments mentioned in these other vignettes are also generally available with `oc_forward()`/`oc_reverse()`.
 Here we will show the different return values available with `oc_forward()`/`oc_reverse()`.
 
 ## `df_list`
@@ -39,23 +40,24 @@ The default return value is `df_list`.
 It returns a list of tibbles.
 
 ```{r df_list}
-oc_forward("Casey Station", return = "df_list")
+stations <- c("Casey Station", "McMurdo Station")
+oc_forward(stations, return = "df_list")
 ```
 
 The `df_list` type drives the `oc_forward_df()`/`oc_reverse_df()` functions.
-If you want to use opencage in a `dplyr::mutate()` chain you can do it like this:
+You can use the `df_list` output in a `dplyr::mutate()` chain to replicate the functionality of `oc_forward_df()`:
 
 ```{r mutate}
 library(dplyr, warn.conflicts = FALSE)
 
 oc_data <-
-  tibble(place = "Casey Station") %>%
+  tibble(place = stations) %>%
   mutate(oc_result = oc_forward(place))
 
 oc_data
 ```
 
-This creates the list column `oc_result`, which can be easily unnested with `tidyr::unnest()`
+This creates a list column `oc_result`, which can be easily unnested with `tidyr::unnest()`:
 
 ```{r unnest}
 library(tidyr, warn.conflicts = FALSE)
@@ -89,8 +91,8 @@ class(gjsn_lst[[1]])
 
 ## `url_only`
 
-`url_only` will return the OpenCage URL for debugging purposes.
-We won't show the output here, because the URL contains the OpenCage API key.
+`url_only` returns the OpenCage URL for debugging purposes.
+We won't show the output here because the URL contains the OpenCage API key.
 
 ```{r url_only, eval=FALSE, include=TRUE}
 oc_forward("Casey Station", return = "url_only")

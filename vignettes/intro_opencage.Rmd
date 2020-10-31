@@ -2,10 +2,10 @@
 title: "Introduction to opencage"
 subtitle: "Forward and Reverse Geocoding"
 author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
-date: "2020-10-08"
+date: "2020-10-31"
 description: >
-  "Get started with the opencage R package to geocode with the OpenCage API, either from placename to longitude and latitude (forward geocoding) or from longitude and latitude to placename (reverse geocoding)."
-output: 
+  "Get started with the opencage R package to geocode with the OpenCage API, either from place name to longitude and latitude (forward geocoding) or from longitude and latitude to the name and address of a location (reverse geocoding)."
+output:
   rmarkdown::html_vignette:
     df_print: kable
 vignette: >
@@ -16,65 +16,73 @@ vignette: >
 
 
 
-Geocoding is the process of converting placenames or addresses into geographic coordinates, like latitude and longitude, or vice versa. 
-With {opencage} you can geocode using the OpenCage API, either from placename to longitude and latitude (forward geocoding) or from longitude and latitude to placename (reverse geocoding). 
+Geocoding is the process of converting place names or addresses into geographic coordinates – like latitude and longitude – or vice versa.
+With {opencage} you can geocode using the OpenCage API, either from place name to longitude and latitude (forward geocoding) or from longitude and latitude to the name and address of a location (reverse geocoding).
+
+This vignette covers the setup process for working with {opencage} and basic workflows for both forward and reverse geocoding. Make sure to also check out "[Customise your query](customise_query.html)" if you want a deeper dive into customizing the various parameters available through the OpenCage API. The "[Output options](output_options.html)" vignette shows additional workflows by modifying the form in which the geocoding results are returned.
 
 ## Setup
 
-Before you can use the {opencage} package and query the OpenCage API you need to set up authentication, possibly want to set a rate limit (if you have a paid [OpenCage plan](https://opencagedata.com/pricing)) and maybe want to prevent OpenCage from storing the content of your queries, i.e. you need to setup {opencage}. 
+Before you can use the {opencage} package and query the OpenCage API you need to first register with OpenCage.
+Additionally, you may want to set a rate limit (if you have a paid [OpenCage plan](https://opencagedata.com/pricing)), and you might want to prevent OpenCage from storing the content of your queries.
+In other words, you need to setup {opencage}, so let's go through the process.
 
 ### Authentication
 
-To use the package and authenticate yourself against the OpenCage API, you will need to register at [opencagedata.com/users/sign_up](https://opencagedata.com/users/sign_up) to get an API key. 
-The "Free Trial" plan provides up to 2,500 API requests a day. 
+To use the package and authenticate yourself with the OpenCage API, you will need to register at [opencagedata.com/users/sign_up](https://opencagedata.com/users/sign_up) to get an API key.
+The "Free Trial" plan provides up to 2,500 API requests a day.
 There are paid plans available, if you need to run more API requests.
-After you have registered, you can generate an API key at the [OpenCage dashboard](https://opencagedata.com/dashboard#api-keys).
+After you have registered, you can generate an API key with the [OpenCage dashboard](https://opencagedata.com/dashboard#api-keys).
 
-Now, you will need to pass the API key on to the functions in {opencage}.
-They will conveniently retrieve your API key if it is saved in the environment variable `"OPENCAGE_KEY"`. 
+Now we need to ensure that the functions in {opencage} can access your API key.
+{opencage} will conveniently retrieve your API key if it is saved in the environment variable `"OPENCAGE_KEY"`.
 If it is not, `oc_config()` will help to set that environment variable.
 
-Do not pass the key directly as a parameter to the function, though, as you risk exposing it via your script or your history. 
+Do not pass the key directly as a parameter to the function.
+Doing so risks exposing your API key via your script or your history.
 There are three safer ways to set your API key instead:
 
 1. Save your API key as an environment variable in `.Renviron` as described in [What They Forgot to Teach You About R](https://rstats.wtf/r-startup.html#renviron) or [Efficient R Programming](https://csgillespie.github.io/efficientR/set-up.html#renviron).
-From there it will be fetched by all functions that call the OpenCage API, so you do not even have to call `oc_config()` to set your key, but can start geocoding right away. 
-If you have the {[usethis](https://usethis.r-lib.org/)} package installed, you can edit your `.Renviron` most easily with `usethis::edit_r_environ()`.
-We strongly recommend storing your API key in the user-level `.Renviron`, as opposed to the project-level, because this makes it less likely you will share sensitive information by mistake.
+From there it will be fetched by all functions that call the OpenCage API.
+You do not even have to call `oc_config()` to set your key;
+you can start geocoding right away.
+If you have the {[usethis](https://usethis.r-lib.org/)} package installed, you can edit your `.Renviron` with `usethis::edit_r_environ()`.
+We strongly recommend storing your API key in the user-level `.Renviron`, as opposed to the project-level.
+This makes it less likely you will share sensitive information by mistake.
 
-2. If you use a package like {[keyring](https://github.com/r-lib/keyring)} to store your credentials, you can safely pass your key in a script with a function call like this `oc_config(key = keyring::key_get("opencage"))`.
+2. If you use a package like {[keyring](https://github.com/r-lib/keyring)} to store your credentials, you can safely pass your key in a script with a function call like `oc_config(key = keyring::key_get("opencage"))`.
 
 3. If you call `oc_config()` in an `interactive()` session and the `OPENCAGE_KEY` environment variable is not set, it will prompt you to enter the key in the console.
 
-Whatever method you choose, keep your API key secret. OpenCage also features [best practices for keeping your API key safe](https://opencagedata.com/protecting-your-api-key). 
+Whatever method you choose, keep your API key secret. OpenCage also features [best practices for keeping your API key safe](https://opencagedata.com/protecting-your-api-key).
 
 ### Rate limit
 
 A rate limit is used to control the rate of requests sent, so legitimate requests do not lead to an unintended Denial of Service attack.
-The rate limit allowed by the API depends on the OpenCage plan you purchased and ranges from 1 request/sec for the "Free Trial" plan to 15 requests/sec for the "Medium" or "Large" plans. 
-See [opencagedata.com/pricing](https://opencagedata.com/pricing) for details and up-to-date information. 
+The rate limit allowed by the API depends on the OpenCage plan you have and ranges from 1 request/sec for the "Free Trial" plan to 15 requests/sec for the "Medium" or "Large" plans.
+See [opencagedata.com/pricing](https://opencagedata.com/pricing) for details and up-to-date information.
 
-If you have a "Free Trial" account with OpenCage, you can skip to the next section, because the rate limit is already set correctly for you at 1 request/sec.  
+If you have a "Free Trial" account with OpenCage, you can skip to the next section, because the rate limit is already set correctly for you at 1 request/sec.
 
-If you have a paid account, you can set the rate limit for the active R session with `oc_config(rate_sec = n)` (where `n` is the appropriate rate limit). 
-You can set the rate limit persistently across sessions by setting an `oc_rate_sec` option in your `.Rprofile`. 
-If you have the {[usethis](https://usethis.r-lib.org/)} package installed, you can edit your `.Rprofile` most easily with `usethis::edit_r_profile()`.
+If you have a paid account, you can set the rate limit for the active R session with `oc_config(rate_sec = n)` where `n` is the appropriate rate limit.
+You can set the rate limit persistently across sessions by setting an `oc_rate_sec` option in your `.Rprofile`.
+If you have the {[usethis](https://usethis.r-lib.org/)} package installed, you can edit your `.Rprofile` with `usethis::edit_r_profile()`.
 
 ### Privacy
 
-By default, OpenCage will store your queries in its server logs and will cache the forward geocoding requests on their side.
-They do this in order to speed up response times and to be able to debug errors and improve their service. 
+By default, OpenCage will store your queries on its server logs and will cache the forward geocoding requests on their side.
+They do this to speed up response times and to be able to debug errors and improve their service.
 Logs are automatically deleted after six months according to OpenCage's [page on data protection and GDPR](https://opencagedata.com/gdpr).
 
-If you have concerns about privacy and want OpenCage to have no record of your query, i.e. the placename or latitude/longitude coordinates you want to geocode, you can set a `no_record` parameter to `TRUE` and the query contents are no longer logged nor cached. 
-OpenCage still records that you made a request, but not the specific query you made. 
+If you have concerns about privacy and want OpenCage to have no record of your query, i.e. the place name or latitude and longitude coordinates you want to geocode, you can set a `no_record` parameter to `TRUE`, which tells the API to not log    nor cache the queries.
+OpenCage still records that you made a request, but not the specific queries you made.
 
-`oc_config(no_record = TRUE)` sets an `oc_no_record` option for the active R session, so it will be used for all subsequent OpenCage queries. 
+`oc_config(no_record = TRUE)` sets an `oc_no_record` option for the active R session, so it will be used for all subsequent OpenCage queries.
 You can set the `oc_no_record` option persistently across sessions in your `.Rprofile`.
 
 For more information on OpenCage's policies on privacy and data protection see the Legal section in [their FAQs](https://opencagedata.com/faq#legal), their [GDPR page](https://opencagedata.com/gdpr), and, for the `no_record` parameter specifically, see the relevant [blog post](https://blog.opencagedata.com/post/145602604628/more-privacy-with-norecord-parameter).
 
-Please note that the {opencage} package always caches the data it receives from the OpenCage API, but only for as long as your R session is alive (see below).
+Please note that the {opencage} package always caches the data it receives from the OpenCage API but only for as long as your R session is alive (see below).
 
 ### Altogether now
 
@@ -92,118 +100,128 @@ oc_config(
 
 ## Forward geocoding
 
-Now you can start to geocode. Forward geocoding is from placename to latitude and longitude tuple(s).
+Now you can start to geocode. Forward geocoding is from location name(s) to latitude and longitude tuple(s).
 
 
 ```r
 oc_forward_df(placename = "Sarzeau")
 #> # A tibble: 1 x 4
-#>   placename oc_lat oc_lng oc_formatted             
-#>   <chr>      <dbl>  <dbl> <chr>                    
-#> 1 Sarzeau     47.5  -2.76 Sarzeau, Morbihan, France
+#>   placename oc_lat oc_lng oc_formatted         
+#>   <chr>      <dbl>  <dbl> <chr>                
+#> 1 Sarzeau     47.5  -2.76 56370 Sarzeau, France
 ```
 
-All geocoding functions are vectorised, i.e. you can geocode multiple placenames with one function call, even though the requests are still sent to and results received from the API one-by-one.
+All geocoding functions are vectorised, i.e. you can geocode multiple locations with one function call.
+Note that behind the scenes the requests are still sent to the API one-by-one.
 
 
 ```r
 opera <- c("Palacio de Bellas Artes", "Scala", "Sydney Opera House")
 oc_forward_df(placename = opera)
+#> Retrieving results from OpenCage [-]  67% ETA:  0sRetrieving results from OpenCage [\] 100% ETA:  0s
 #> # A tibble: 3 x 4
-#>   placename               oc_lat oc_lng oc_formatted                                                                  
-#>   <chr>                    <dbl>  <dbl> <chr>                                                                         
-#> 1 Palacio de Bellas Artes   19.4 -99.1  Palacio de Bellas Artes, Avenida Juárez, Cuauhtémoc, 06050 Mexico City, Mexico
-#> 2 Scala                     45.5   9.19 Teatro alla Scala, Piazza Paolo Ferrari, 20121 Milan Milan, Italy             
-#> 3 Sydney Opera House       -33.9 151.   Sydney Opera House, 2 Macquarie Street, Sydney NSW 2000, Australia
+#>   placename            oc_lat oc_lng oc_formatted                                                   
+#>   <chr>                 <dbl>  <dbl> <chr>                                                          
+#> 1 Palacio de Bellas A~   19.4 -99.1  Palacio de Bellas Artes, Avenida Juárez, Cuauhtémoc, 06050 Mex~
+#> 2 Scala                  45.5   9.19 Teatro alla Scala, Via Giuseppe Verdi, 20121 Milan Milan, Italy
+#> 3 Sydney Opera House    -33.9 151.   Sydney Opera House, 2 Macquarie Street, Sydney NSW 2000, Austr~
 ```
 
-By default, `oc_forward_df()` only returns three results columns: `oc_lat` (for latitude), `oc_lon` (for longitude), and  `oc_formatted` (the formatted address). 
-As you can see, the results columns are all prefixed with `oc_`. 
-If you specify `oc_forward_df(output = all)`, you will receive all result columns.
-Which columns you receive exactly depends on the information OpenCage returns for a specific request.
+By default, `oc_forward_df()` only returns three results columns: `oc_lat` (for latitude), `oc_lon` (for longitude), and  `oc_formatted` (the formatted address).
+As you can see, the results columns are all prefixed with `oc_`.
+If you specify `oc_forward_df(output = all)`, you will receive all result columns, which are often quite extensive.
+Which columns you receive exactly depends on the information OpenCage returns for each specific request.
 
 
 ```r
 oc_forward_df(placename = opera, output = "all")
 #> # A tibble: 3 x 30
-#>   placename oc_lat oc_lng oc_confidence oc_formatted oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng
-#>   <chr>      <dbl>  <dbl>         <int> <chr>                   <dbl>            <dbl>            <dbl>            <dbl>
-#> 1 Palacio ~   19.4 -99.1              9 Palacio de ~             19.4           -99.1              19.4           -99.1 
-#> 2 Scala       45.5   9.19             9 Teatro alla~             45.5             9.19             45.5             9.19
-#> 3 Sydney O~  -33.9 151.               9 Sydney Oper~            -33.9           151.              -33.9           151.  
-#> # ... with 21 more variables: oc_iso_3166_1_alpha_2 <chr>, oc_iso_3166_1_alpha_3 <chr>, oc_category <chr>, oc_type <chr>,
-#> #   oc_city <chr>, oc_continent <chr>, oc_country <chr>, oc_country_code <chr>, oc_museum <chr>, oc_neighbourhood <chr>,
-#> #   oc_postcode <chr>, oc_road <chr>, oc_attraction <chr>, oc_county <chr>, oc_political_union <chr>, oc_state <chr>,
-#> #   oc_suburb <chr>, oc_arts_centre <chr>, oc_house_number <chr>, oc_municipality <chr>, oc_state_code <chr>
+#>   placename oc_lat oc_lng oc_confidence oc_formatted oc_northeast_lat oc_northeast_lng
+#>   <chr>      <dbl>  <dbl>         <int> <chr>                   <dbl>            <dbl>
+#> 1 Palacio ~   19.4 -99.1              9 Palacio de ~             19.4           -99.1 
+#> 2 Scala       45.5   9.19             9 Teatro alla~             45.5             9.19
+#> 3 Sydney O~  -33.9 151.               9 Sydney Oper~            -33.9           151.  
+#> # ... with 23 more variables: oc_southwest_lat <dbl>, oc_southwest_lng <dbl>,
+#> #   oc_iso_3166_1_alpha_2 <chr>, oc_iso_3166_1_alpha_3 <chr>, oc_category <chr>, oc_type <chr>,
+#> #   oc_city <chr>, oc_continent <chr>, oc_country <chr>, oc_country_code <chr>, oc_museum <chr>,
+#> #   oc_neighbourhood <chr>, oc_postcode <chr>, oc_road <chr>, oc_attraction <chr>, oc_county <chr>,
+#> #   oc_political_union <chr>, oc_state <chr>, oc_suburb <chr>, oc_arts_centre <chr>,
+#> #   oc_house_number <chr>, oc_municipality <chr>, oc_state_code <chr>
 ```
 
-You can also pass a data frame to `oc_forward_df()`. 
+You can also pass a data frame to `oc_forward_df()`.
+By default the results columns are added to the input data frame, which is useful for keeping information associated with the place names that are in separate columns.
+If you want a data frame with only the geocoding results, set `bind_cols = FALSE`.
 
 
 ```r
-concert_df <- 
+concert_df <-
   data.frame(location = c("Elbphilharmonie", "Concertgebouw", "Suntory Hall"))
 oc_forward_df(data = concert_df, placename = location)
+#> Retrieving results from OpenCage [-]  67% ETA:  0sRetrieving results from OpenCage [\] 100% ETA:  0s
 #> # A tibble: 3 x 4
-#>   location        oc_lat oc_lng oc_formatted                                                                                
-#>   <chr>            <dbl>  <dbl> <chr>                                                                                       
-#> 1 Elbphilharmonie   53.5   9.98 Elbe Philharmonic Hall, Hamburg-Mitte, Platz der Deutschen Einheit 1, 20457 Hamburg, Germany
-#> 2 Concertgebouw     52.4   4.88 Concertgebouw, Concertgebouwplein 2, 1071 LN Amsterdam, The Netherlands                     
-#> 3 Suntory Hall      35.7 140.   Suntory Hall, Karayan Plaza, Akasaka, Tokyo, Japan
+#>   location        oc_lat oc_lng oc_formatted                                                        
+#>   <chr>            <dbl>  <dbl> <chr>                                                               
+#> 1 Elbphilharmonie   53.5   9.98 Elbe Philharmonic Hall, Platz der Deutschen Einheit 1, 20457 Hambur~
+#> 2 Concertgebouw     52.4   4.88 Concertgebouw, Concertgebouwplein 2, 1071 LN Amsterdam, The Netherl~
+#> 3 Suntory Hall      35.7 140.   Suntory Hall, Karayan Plaza, Akasaka, Minato, Japan
 ```
 
-You can use it in a piped workflow, as well.
+You can use it in a piped workflow as well.
 
 
 ```r
 library(dplyr, warn.conflicts = FALSE)
 concert_df %>% oc_forward_df(location)
 #> # A tibble: 3 x 4
-#>   location        oc_lat oc_lng oc_formatted                                                                                
-#>   <chr>            <dbl>  <dbl> <chr>                                                                                       
-#> 1 Elbphilharmonie   53.5   9.98 Elbe Philharmonic Hall, Hamburg-Mitte, Platz der Deutschen Einheit 1, 20457 Hamburg, Germany
-#> 2 Concertgebouw     52.4   4.88 Concertgebouw, Concertgebouwplein 2, 1071 LN Amsterdam, The Netherlands                     
-#> 3 Suntory Hall      35.7 140.   Suntory Hall, Karayan Plaza, Akasaka, Tokyo, Japan
+#>   location        oc_lat oc_lng oc_formatted                                                        
+#>   <chr>            <dbl>  <dbl> <chr>                                                               
+#> 1 Elbphilharmonie   53.5   9.98 Elbe Philharmonic Hall, Platz der Deutschen Einheit 1, 20457 Hambur~
+#> 2 Concertgebouw     52.4   4.88 Concertgebouw, Concertgebouwplein 2, 1071 LN Amsterdam, The Netherl~
+#> 3 Suntory Hall      35.7 140.   Suntory Hall, Karayan Plaza, Akasaka, Minato, Japan
 ```
 
 ## Reverse geocoding
 
-Reverse geocoding means that we have the coordinates, latitude and longitude, and look up the most appropriate placename for those.
+Reverse geocoding works in the opposite direction of forward geocoding: from a pair of coordinates to the name and address most appropriate for the coordinates.
 
 
 ```r
 oc_reverse_df(latitude = 51.5034070, longitude = -0.1275920)
 #> # A tibble: 1 x 3
-#>   latitude longitude oc_formatted                                                                            
-#>      <dbl>     <dbl> <chr>                                                                                   
-#> 1     51.5    -0.128 Prime Minister’s Office, Westminster, 10 Downing Street, London SW1A 2AA, United Kingdom
+#>   latitude longitude oc_formatted                                                                   
+#>      <dbl>     <dbl> <chr>                                                                          
+#> 1     51.5    -0.128 Prime Minister’s Office, Westminster, 10 Downing Street, London SW1A 2AA, Unit~
 ```
 
-Note that all coordinates sent to the OpenCage API must adhere to the [WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System) (also known as [EPSG:4326](http://epsg.io/4326)) [coordinate reference system](https://en.wikipedia.org/wiki/Spatial_reference_system) in decimal format. 
+Note that all coordinates sent to the OpenCage API must adhere to the [WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System) (also known as [EPSG:4326](https://epsg.io/4326)) [coordinate reference system](https://en.wikipedia.org/wiki/Spatial_reference_system) in decimal format.
 This is the coordinate reference system used by the [Global Positioning System](https://en.wikipedia.org/wiki/Global_Positioning_System).
-There is usually no reason to send more than six or seven digits past the decimal as that then gets down to the [precision of a centimetre](https://en.wikipedia.org/wiki/Decimal_degrees).
+There is usually no reason to send more than six or seven digits past the decimal.
+Any further precision gets to the [level of a centimeter](https://en.wikipedia.org/wiki/Decimal_degrees).
 
-`oc_reverse_df()` is vectorised, can work with numeric vectors and data frames, supports the `output = "all"` argument and can be used with the {magrittr} pipe, as well.
+Like `oc_forward_df()`, `oc_reverse_df()` is vectorised, can work with numeric vectors and data frames, supports the `output = "all"` argument and can be used with the {magrittr} pipe.
 
-OpenCage always returns at most [one result](https://opencagedata.com/api#ranking) per reverse geocoding request. 
+OpenCage only returns at most [one result](https://opencagedata.com/api#ranking) per reverse geocoding request.
 
 ## Caching
 
-OpenCage [allows and supports caching](https://opencagedata.com/api#caching). 
-In order to send requests to the API only when necessary, {opencage} uses {[memoise](https://github.com/r-lib/memoise)} to cache results inside the active R session. 
+OpenCage [allows and supports caching](https://opencagedata.com/api#caching).
+To minimize the number of requests sent to the API {opencage} uses {[memoise](https://github.com/r-lib/memoise)} to cache results inside the active R session.
+
+
 
 
 ```r
 system.time(oc_reverse(latitude = 10, longitude = 10))
 #>    user  system elapsed 
-#>    0.04    0.00    0.97
+#>    0.03    0.00    0.78
 
 system.time(oc_reverse(latitude = 10, longitude = 10))
 #>    user  system elapsed 
-#>    0.01    0.00    0.01
+#>       0       0       0
 ```
 
-To clear the cache of all results, either start a new R session or call `oc_clear_cache()`.
+To clear the cache of all results either start a new R session or call `oc_clear_cache()`.
 
 
 ```r
@@ -212,21 +230,21 @@ oc_clear_cache()
 
 system.time(oc_reverse(latitude = 10, longitude = 10))
 #>    user  system elapsed 
-#>    0.00    0.00    0.83
+#>    0.02    0.00    0.87
 ```
 
-As you probably know, cache invalidation is one of the harder things to do in computer science. 
-Therefore {opencage} only supports invalidating the whole cache and not individual records at the moment. 
+As you probably know, cache invalidation is one of the harder things to do in computer science.
+Therefore {opencage} only supports invalidating the whole cache and not individual records at the moment.
 
-The underlying data at OpenCage is [updated daily](https://opencagedata.com/faq#general). 
+The underlying data at OpenCage is [updated daily](https://opencagedata.com/faq#general).
 
 ## Further information
 
-OpenCage supports a lot of parameters to either target your search area more specifically or to specify what additional information you need. 
+OpenCage supports a lot of parameters to either target your search area more specifically or to specify what additional information you need.
 See the ["Customise your query"](customise_query.html) vignette for details.
 
-Besides `oc_forward_df()` and `oc_reverse_df()`, which always return a single tibble, there are also two other functions,  `oc_forward()` and `oc_reverse()`, which return other types of output. 
-Depending on what you specify as the `return` parameter, `oc_forward()` and `oc_reverse()` will return either a list of tibbles (`df_list`, the default), JSON lists (`json_list`), GeoJSON lists (`geojson_list`), or the URL with which the API would be called (`url_only`). 
-Learn more in ["Output options"](output_options.html) vignette. 
+Besides `oc_forward_df()` and `oc_reverse_df()`, which always return a single tibble, {opencage} has two sibling functions — `oc_forward()` and `oc_reverse()` — which can be used to return types of output.
+Depending on what you specify as the `return` parameter, `oc_forward()` and `oc_reverse()` will return either a list of tibbles (`df_list`, the default), JSON lists (`json_list`), GeoJSON lists (`geojson_list`), or the URL with which the API would be called (`url_only`).
+Learn more in the ["Output options"](output_options.html) vignette.
 
 Please report any issues or bugs on [our GitHub repository](https://github.com/ropensci/opencage/issues) and post questions on [discuss.ropensci.org](https://discuss.ropensci.org/).

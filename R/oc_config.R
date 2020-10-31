@@ -25,13 +25,13 @@
 #' [`.Renviron`][base::Startup] as described in [What They Forgot to Teach You
 #' About R](https://rstats.wtf/r-startup.html#renviron) or [Efficient R
 #' Programming](https://csgillespie.github.io/efficientR/set-up.html#renviron).
-#' From there it will be fetched by all functions that call the OpenCage API, so
-#' you do not even have to call `oc_config()` to set your key, but can start
+#' From there it will be fetched by all functions that call the OpenCage API.
+#' You do not even have to call `oc_config()` to set your key; you can start
 #' geocoding right away. If you have the \pkg{usethis} package installed, you
-#' can edit your [`.Renviron`][base::Startup] most easily with
-#' `usethis::edit_r_environ()`. We strongly recommend storing your API key in
-#' the user-level .Renviron, as opposed to the project-level, because this makes
-#' it less likely you will share sensitive information by mistake.
+#' can edit your [`.Renviron`][base::Startup] with `usethis::edit_r_environ()`.
+#' We strongly recommend storing your API key in the user-level .Renviron, as
+#' opposed to the project-level. This makes it less likely you will share
+#' sensitive information by mistake.
 #'
 #' 2. If you use a package like \pkg{keyring} to store your credentials, you can
 #' safely pass your key in a script with a function call like this
@@ -49,7 +49,7 @@
 #' details and up-to-date information. You can set the rate limit persistently
 #' across sessions by setting an `oc_rate_sec` [option][base::options] in your
 #' [`.Rprofile`][base::Startup]. If you have the \pkg{usethis} package
-#' installed, you can edit your [`.Rprofile`][base::Startup] most easily with
+#' installed, you can edit your [`.Rprofile`][base::Startup] with
 #' `usethis::edit_r_profile()`.
 #'
 #' @section Prevent query logging and caching:
@@ -71,7 +71,7 @@
 #' across sessions in your [`.Rprofile`][base::Startup].
 #'
 #' Please note that the \pkg{opencage} package always caches the data it
-#' receives from the OpenCage API, but only for as long as your R session is
+#' receives from the OpenCage API but only for as long as your R session is
 #' alive.
 #'
 # nolint start - link longer than 80 chars
