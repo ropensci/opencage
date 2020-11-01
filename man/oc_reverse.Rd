@@ -80,8 +80,8 @@ When the results are returned as (a list of) tibbles, the column names
 coming from the OpenCage API are prefixed with \code{"oc_"}.
 }
 \description{
-Reverse geocoding from numeric vectors of latitude and longitude to
-placenames.
+Reverse geocoding from numeric vectors of latitude and longitude pairs to
+the names and addresses of a location.
 }
 \examples{
 \dontrun{

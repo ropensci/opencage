@@ -6,9 +6,9 @@
 \alias{opencage-package}
 \title{opencage: Geocode with the OpenCage API.}
 \description{
-Geocode with the OpenCage API, either from placename to longitude and
-latitude (forward geocoding) or from longitude and latitude to placename
-(reverse geocoding), see \url{https://opencagedata.com/}.
+Geocode with the OpenCage API, either from place name to longitude and
+latitude (forward geocoding) or from longitude and latitude to the name and
+address of a location (reverse geocoding), see \url{https://opencagedata.com/}.
 }
 \seealso{
 Useful links:

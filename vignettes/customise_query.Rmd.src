@@ -193,7 +193,7 @@ OpenCage supplies additional information about the result location in what it ca
 Annotations include, among a variety of other types of information, country information, time of sunset and sunrise, [UN M49](https://en.wikipedia.org/wiki/UN_M49) codes or the location in different geocoding formats, like [Maidenhead](https://en.wikipedia.org/wiki/Maidenhead_Locator_System), [Mercator projection](https://en.wikipedia.org/wiki/Mercator_projection) ([EPSG:3857](https://epsg.io/3857)), [geohash](https://en.wikipedia.org/wiki/Geohash) or [what3words](https://en.wikipedia.org/wiki/What3words).
 Some annotations, like the [Irish Transverse Mercator](https://en.wikipedia.org/wiki/Irish_Transverse_Mercator) (ITM, [EPSG:2157](https://epsg.io/2157)) or the [Federal Information Processing Standards](https://en.wikipedia.org/wiki/Federal_Information_Processing_Standards) (FIPS) code will only be shown when appropriate.
 
-Whether the annoations are shown, is controlled by the `no_annotations` argument.
+Whether the annotations are shown, is controlled by the `no_annotations` argument.
 It is `TRUE` by default, which means that the output will _not_ contain annotations.
 (Yes, inverted argument names are confusing, but we just follow OpenCage's lead here.)
 When you set `no_annotations` to `FALSE`, all columns are returned (i.e. `output` is implicitly set to `"all"`).
