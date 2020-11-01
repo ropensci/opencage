@@ -1,4 +1,4 @@
-# opencage 0.1.4.9005
+# opencage 0.1.4.9006
 
 This is a major rewrite of the {opencage} package. `opencage_forward()` and `opencage_reverse()` have been deprecated and are superseded by `oc_forward()` and `oc_reverse()`, respectively. In addition there are two new functions `oc_forward_df()` and `oc_reverse_df()`, which geocode place names or addresses into geographic coordinates (latitude and longitude) or vice versa, and return a data frame. 
 
@@ -19,8 +19,10 @@ The new features include:
 
 ## Breaking changes
 
-* `opencage_forward()`, `opencage_reverse()`, and `opencage_key()` are (soft) deprecated. 
+* `opencage_forward()`, `opencage_reverse()`, and `opencage_key()` are [soft-deprecated](https://lifecycle.r-lib.org/reference/deprecate_soft.html). 
 * `opencage_forward()` and `opencage_reverse()` will always output strings as characters, i.e. they won't coerce to factor depending on the `stringsAsFactor` option.
+* `opencage_key()` returns the OpenCage API key invisibly.
+* `NA` values are not allowed anymore for the `placename` or `latitude`/`longitude` arguments, because OpenCage throws a HTTP 400 ‘bad query’ error when the query is empty (#98). 
 
 ## Minor changes
 

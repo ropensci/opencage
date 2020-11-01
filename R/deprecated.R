@@ -13,7 +13,11 @@ NULL
 
 #' Forward geocoding
 #'
-#' Deprecated: use `oc_forward` or `oc_forward_df` for forward geocoding.
+#' @description
+#'
+#' \lifecycle{soft-deprecated}
+#'
+#' Soft deprecated: use `oc_forward` or `oc_forward_df` for forward geocoding.
 #'
 #' @param key Your OpenCage API key as a character vector of length one. By
 #'   default, [opencage_key()] will attempt to retrieve the key from the
@@ -63,7 +67,7 @@ opencage_forward <-
       )
     }
 
-    .Deprecated("oc_forward")
+    lifecycle::deprecate_soft("0.2.0", "opencage_forward()", "oc_forward()")
 
     oc_config(key = key, no_record = no_record)
 
@@ -87,7 +91,11 @@ opencage_forward <-
 
 #' Reverse geocoding
 #'
-#' Deprecated: use `oc_reverse` or `oc_reverse_df` for reverse geocoding.
+#' @description
+#'
+#' \lifecycle{soft-deprecated}
+#'
+#' Soft deprecated: use `oc_reverse` or `oc_reverse_df` for reverse geocoding.
 #'
 #' @param bounds Bounding box, ignored for reverse geocoding.
 #' @param countrycode Country code, ignored for reverse geocoding.
@@ -127,7 +135,7 @@ opencage_reverse <-
       )
     }
 
-    .Deprecated("oc_reverse")
+    lifecycle::deprecate_soft("0.2.0", "opencage_reverse()", "oc_reverse()")
 
     oc_config(key = key, no_record = no_record)
 
@@ -196,18 +204,21 @@ opencage_format <- function(lst) {
 
 #' Retrieve Opencage API key
 #'
-#' @description Deprecated and will be removed from the package together with
-#'   `opencage_forward` and `opencage_reverse`.
+#' @description
 #'
-#'   Retrieves the OpenCage API Key from the environment variable
-#'   `OPENCAGE_KEY`.
+#' \lifecycle{soft-deprecated}
+#'
+#' Soft-deprecated and will be removed from the package together with
+#' `opencage_forward()` and `opencage_reverse()`.
+#'
+#' Retrieves the OpenCage API Key from the environment variable `OPENCAGE_KEY`.
 #'
 #' @param quiet Logical vector of length one indicating whether the key is
 #'   returned quietly or whether a message is printed.
 #' @keywords internal
 #' @export
 opencage_key <- function(quiet = TRUE) {
-  .Deprecated()
+  lifecycle::deprecate_soft("0.2.0", "opencage_key()")
 
   pat <- Sys.getenv("OPENCAGE_KEY")
 
@@ -219,5 +230,5 @@ opencage_key <- function(quiet = TRUE) {
     message("Using OpenCage API Key from envvar OPENCAGE_KEY")
   }
 
-  return(pat)
+  invisible(pat)
 }

@@ -11,10 +11,11 @@ opencage_key(quiet = TRUE)
 returned quietly or whether a message is printed.}
 }
 \description{
-Deprecated and will be removed from the package together with
-\code{opencage_forward} and \code{opencage_reverse}.
+\lifecycle{soft-deprecated}
 
-Retrieves the OpenCage API Key from the environment variable
-\code{OPENCAGE_KEY}.
+Soft-deprecated and will be removed from the package together with
+\code{opencage_forward()} and \code{opencage_reverse()}.
+
+Retrieves the OpenCage API Key from the environment variable \code{OPENCAGE_KEY}.
 }
 \keyword{internal}

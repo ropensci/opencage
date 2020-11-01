@@ -20,6 +20,7 @@ BugReports: https://github.com/ropensci/opencage/issues
 Imports: 
     crul (>= 0.5.2),
     dplyr (>= 0.7.4),
+    lifecycle, 
     jsonlite (>= 1.5),
     memoise (>= 1.1.0),
     progress (>= 1.1.2),
@@ -40,3 +41,4 @@ Language: en-GB
 LazyData: TRUE
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+RdMacros: lifecycle
