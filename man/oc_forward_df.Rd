@@ -47,10 +47,10 @@ oc_forward_df(...)
 
 \item{data}{A data frame.}
 
-\item{placename}{An unquoted variable name of a character vector with the
-placenames to be geocoded.
+\item{placename}{An unquoted variable name of a character column or vector
+with the location names or addresses to be geocoded.
 
-If the placenames are addresses, see \href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's instructions}
+If the locations are addresses, see \href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's instructions}
 on how to format addresses for best forward geocoding results.}
 
 \item{bind_cols}{When \code{bind_col = TRUE}, the default, the results are column
@@ -123,8 +123,8 @@ A tibble. Column names coming from the OpenCage API are prefixed with
 \code{"oc_"}.
 }
 \description{
-Forward geocoding from a placename variable to latitude and longitude
-tuple(s).
+Forward geocoding from a column or vector of location names to latitude and
+longitude tuples.
 }
 \examples{
 

@@ -22,8 +22,10 @@ oc_forward(
 )
 }
 \arguments{
-\item{placename}{A character vector with the placename(s) to be geocoded. If
-the placenames are addresses, see \href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's instructions}
+\item{placename}{A character vector with the location names or addresses to
+be geocoded.
+
+If the locations are addresses, see \href{https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md}{OpenCage's instructions}
 on how to format addresses for best forward geocoding results.}
 
 \item{return}{A character vector of length one indicating the return value of
@@ -108,8 +110,8 @@ When the results are returned as (a list of) tibbles, the column names
 coming from the OpenCage API are prefixed with \code{"oc_"}.
 }
 \description{
-Forward geocoding from a character vector of placenames to latitude and
-longitude tuple(s).
+Forward geocoding from a character vector of location names to latitude and
+longitude tuples.
 }
 \examples{
 \dontrun{

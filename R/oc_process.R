@@ -53,13 +53,15 @@ oc_process <-
     no_record <- getOption("oc_no_record", default = FALSE)
     oc_check_logical(no_record, check_length_one = TRUE)
 
-    if (length(placename) > 1) {
+    # show progress?
+    if (length(placename) > 1 && oc_show_progress()) {
       pb <- oc_init_progress(placename)
-    } else if (length(latitude) > 1) {
+    } else if (length(latitude) > 1 && oc_show_progress()) {
       pb <- oc_init_progress(latitude)
     } else {
       pb <- NULL
     }
+
     arglist <-
       purrr::compact(
         list(

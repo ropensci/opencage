@@ -1,7 +1,7 @@
 #' Reverse geocoding
 #'
-#' Reverse geocoding from numeric vectors of latitude and longitude to
-#' placenames.
+#' Reverse geocoding from numeric vectors of latitude and longitude pairs to
+#' the names and addresses of a location.
 #'
 #' @param latitude,longitude Numeric vectors of latitude and longitude values.
 #' @inheritParams oc_forward
@@ -101,10 +101,11 @@ oc_reverse <-
 
 #' Reverse geocoding with data frames
 #'
-#' Reverse geocoding from latitude and longitude variables to placenames.
+#' Reverse geocoding from latitude and longitude pairs to the names and
+#' addresses of a location.
 #'
-#' @param latitude,longitude Unquoted variable names of numeric vectors of
-#'   latitude and longitude values.
+#' @param latitude,longitude Unquoted variable names of numeric columns or
+#'   vectors of latitude and longitude values.
 #' @param output A character vector of length one indicating whether only the
 #'   formatted address (`"short"`, the default) or all variables (`"all"`)
 #'   variables should be returned.

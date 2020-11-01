@@ -40,8 +40,8 @@ oc_reverse_df(...)
 
 \item{data}{A data frame.}
 
-\item{latitude, longitude}{Unquoted variable names of numeric vectors of
-latitude and longitude values.}
+\item{latitude, longitude}{Unquoted variable names of numeric columns or
+vectors of latitude and longitude values.}
 
 \item{bind_cols}{When \code{bind_col = TRUE}, the default, the results are column
 bound to \code{data}. When \code{FALSE}, the results are returned as a new tibble.}
@@ -89,7 +89,8 @@ A tibble. Column names coming from the OpenCage API are prefixed with
 \code{"oc_"}.
 }
 \description{
-Reverse geocoding from latitude and longitude variables to placenames.
+Reverse geocoding from latitude and longitude pairs to the names and
+addresses of a location.
 }
 \examples{
 \dontrun{

@@ -1,11 +1,13 @@
 #' Forward geocoding
 #'
-#' Forward geocoding from a character vector of placenames to latitude and
-#' longitude tuple(s).
+#' Forward geocoding from a character vector of location names to latitude and
+#' longitude tuples.
 #'
 # nolint start - link longer than 80 chars
-#' @param placename A character vector with the placename(s) to be geocoded. If
-#'   the placenames are addresses, see [OpenCage's
+#' @param placename A character vector with the location names or addresses to
+#'   be geocoded.
+#'
+#'   If the locations are addresses, see [OpenCage's
 #'   instructions](https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md)
 #'    on how to format addresses for best forward geocoding results.
 # nolint end
@@ -185,15 +187,15 @@ oc_forward <-
 
 #' Forward geocoding with data frames
 #'
-#' Forward geocoding from a placename variable to latitude and longitude
-#' tuple(s).
+#' Forward geocoding from a column or vector of location names to latitude and
+#' longitude tuples.
 #'
 #' @param data A data frame.
 # nolint start - link longer than 80 chars
-#' @param placename An unquoted variable name of a character vector with the
-#'   placenames to be geocoded.
+#' @param placename An unquoted variable name of a character column or vector
+#'   with the location names or addresses to be geocoded.
 #'
-#'   If the placenames are addresses, see [OpenCage's
+#'   If the locations are addresses, see [OpenCage's
 #'   instructions](https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/query-formatting.md)
 #'   on how to format addresses for best forward geocoding results.
 # nolint end
