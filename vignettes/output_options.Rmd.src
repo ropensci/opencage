@@ -88,15 +88,22 @@ In fact, {opencage} returns a list of results in `geo_list` format, which should
 class(gjsn_lst[[1]])
 ```
 
-
 ## `url_only`
 
 `url_only` returns the OpenCage URL for debugging purposes.
-We won't show the output here because the URL contains the OpenCage API key.
 
-```{r url_only, eval=FALSE, include=TRUE}
+```{r url_only}
 oc_forward("Casey Station", return = "url_only")
 ```
+
+Your OpenCage API key is masked with the `OPENCAGE_KEY` string, by default. 
+If you really want {opencage} to display your API key with the URL, set the `show_key` argument in `oc_config()` to `TRUE`. 
+
+```{r show_key, include=TRUE, eval=FALSE}
+oc_config(show_key = TRUE)
+```
+
+Note that the API key will only be returned with the URL in `base::interactive()` mode.
 
 ## `xml`
 
@@ -107,5 +114,6 @@ Please file an [issue](https://github.com/ropensci/opencage/issues) or a [pull-r
 
 `oc_forward()` and `oc_reverse()` have an `add_request` argument, indicating whether the request is returned again with the results.
 If the `return` value is a `df_list`, the `placename` or `latitude,longitude` is added as a column to the results without a roundtrip to the API.
-`json_list` results will contain all request parameters as returned by the API, including the API key used, so handle with care!
+`json_list` results will contain all request parameters as returned by the API. 
+This would normally include your OpenCage API key, but {opencage} masks the key and replaces it with the `OPENCAGE_KEY` string in the output. 
 `add_request` is currently ignored by OpenCage for GeoJSON results.
