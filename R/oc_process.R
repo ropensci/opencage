@@ -37,17 +37,11 @@ oc_process <-
     roadinfo = FALSE,
     no_dedupe = FALSE,
     abbrv = FALSE,
-    add_request = FALSE,
-    get_key = TRUE
+    add_request = FALSE
   ) {
 
-    if (get_key) {
-      # get & check key
-      key <- Sys.getenv("OPENCAGE_KEY")
-      oc_check_key(key)
-    } else {
-      key <- NULL
-    }
+    # get key
+    key <- Sys.getenv("OPENCAGE_KEY")
 
     # get & check no_record
     no_record <- getOption("oc_no_record", default = FALSE)
