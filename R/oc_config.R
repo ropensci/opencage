@@ -99,7 +99,7 @@ oc_config <-
 
     if (!identical(key, "")) {
       pat <- key
-    } else if (!interactive()) {
+    } else if (!rlang::is_interactive()) {
       stop(
         key_needed,
         "Please set the environment variable OPENCAGE_KEY to your OpenCage API key.", # nolint
