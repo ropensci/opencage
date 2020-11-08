@@ -12,7 +12,7 @@
 #'   requests. Defaults to the value set in the `oc_no_record` option, or, in
 #'   case that does not exist, to `FALSE`.
 #' @param show_key Logical vector of length one. This is only relevant when
-#'   debugging `oc_forward()`  or `oc_reverse()` calls with the `return =
+#'   debugging `oc_forward()` or `oc_reverse()` calls with the `return =
 #'   "url_only"` argument. When `TRUE`, the result will show your OpenCage API
 #'   key in the URL as stored in the `OPENCAGE_KEY` environment variable. When
 #'   not `TRUE`, the API key will be replaced with the string `OPENCAGE_KEY`.
