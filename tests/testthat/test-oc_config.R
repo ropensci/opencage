@@ -23,7 +23,7 @@ test_that("oc_config requests key from terminal", {
   withr::local_envvar(c("OPENCAGE_KEY" = ""))
   mockery::stub(
     oc_config,
-    'readline',
+    "readline",
     key_200,
   )
   expect_message(
