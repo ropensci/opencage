@@ -37,17 +37,11 @@ oc_process <-
     roadinfo = FALSE,
     no_dedupe = FALSE,
     abbrv = FALSE,
-    add_request = FALSE,
-    get_key = TRUE
+    add_request = FALSE
   ) {
 
-    if (get_key) {
-      # get & check key
-      key <- Sys.getenv("OPENCAGE_KEY")
-      oc_check_key(key)
-    } else {
-      key <- NULL
-    }
+    # get key
+    key <- Sys.getenv("OPENCAGE_KEY")
 
     # get & check no_record
     no_record <- getOption("oc_no_record", default = FALSE)
@@ -162,14 +156,13 @@ oc_process <-
 
     # return url only
     if (return == "url_only") {
-      if (interactive() || is.null(key)) {
+      if (
+        is.null(key) ||
+        (rlang::is_interactive() && isTRUE(getOption("oc_show_key", FALSE)))
+      ) {
         return(oc_url)
       } else {
-        stop(
-          call. = FALSE,
-          "'url_only' reveals your OpenCage key.\n",
-          "It is therefore only available in interactive mode."
-        )
+        return(oc_mask_key(oc_url))
       }
     }
 

@@ -92,6 +92,11 @@ For more information on OpenCage's policies on privacy and data protection see t
 
 Please note that the {opencage} package always caches the data it receives from the OpenCage API but only for as long as your R session is alive (see below).
 
+### (Don't) show API key
+
+`oc_config()` has another argument, `show_key`. This is only used for debugging and we will explain it in more detail in `vignette("output_options")`. 
+For now suffice it to say that your OpenCage API key will not be shown in any {opencage} output, unless you change this setting. 
+
 ### Altogether now
 
 In sum, if you want to set your API key with {keyring}, set the rate limit to 10 (only do this if you have a paid account, please!), and do not want OpenCage to have records of your queries, you would configure {opencage} for the active session like this:

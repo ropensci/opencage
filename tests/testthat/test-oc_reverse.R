@@ -41,6 +41,29 @@ test_that("oc_reverse returns correct type", {
   expect_s3_class(res3[[1]], "geo_list")
 })
 
+test_that("oc_reverse adds request with add_request", {
+  skip_on_cran()
+  skip_if_offline()
+
+  expected <- paste(lat[1], lng[1], sep = ",")
+
+  # df_list
+  res <- oc_reverse(lat[1], lng[1], return = "df_list", add_request = TRUE)
+  expect_equal(res[[1]][["oc_query"]], expected)
+
+  # json_list
+  res <- oc_reverse(lat[1], lng[1], return = "json_list", add_request = TRUE)
+  expect_equal(res[[1]][["request"]][["query"]], expected)
+})
+
+test_that("oc_reverse masks key when add_request = TRUE", {
+  skip_on_cran()
+  skip_if_offline()
+
+  res <- oc_reverse(lat[1], lng[1], return = "json_list", add_request = TRUE)
+  expect_equal(res[[1]][["request"]][["key"]], "OPENCAGE_KEY")
+})
+
 # oc_reverse_df -----------------------------------------------------------
 
 test_that("oc_reverse_df works", {

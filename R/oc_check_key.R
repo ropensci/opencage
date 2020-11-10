@@ -27,3 +27,21 @@ oc_check_key <- function(key) {
     )
   }
 }
+
+#' Mask OpenCage API key
+#'
+#' Function that masks the OpenCage API key. It looks up the environment
+#' variable `OPENCAGE_KEY` and replaces the key in a string with by replacing it
+#' with "OPENCAGE_KEY".
+#'
+#' @param string Character string, which may contain an OpenCage API key
+#'
+#' @noRd
+
+oc_mask_key <- function(string) {
+  gsub(
+    x = string,
+    pattern = Sys.getenv("OPENCAGE_KEY"),
+    replacement = "OPENCAGE_KEY"
+  )
+}

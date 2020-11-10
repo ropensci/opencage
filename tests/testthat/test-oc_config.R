@@ -71,36 +71,50 @@ test_that("oc_config updates rate limit of oc_get_limit", {
   oc_config(rate_sec = rps)
   t <- timer(oc_get_limited_test(rps + 1))
   expect_gt(t, 1)
-  expect_lt(t, 2)
-
+  expect_lt(t, 3)
 
   rps <- 3L
   oc_config(rate_sec = rps)
   t <- timer(oc_get_limited_test(rps + 1))
   expect_gt(t, 1)
-  expect_lt(t, 2)
+  expect_lt(t, 3)
 })
 
 
 # test no_record argument -------------------------------------------------
 
-test_that("oc_config sets no_record", {
+test_that("oc_config sets no_record option", {
 
-  # Default without envvar and oc_config: no_record = FALSE
+  # Default without envvar and oc_config(no_record = FALSE)
   withr::local_options(list(oc_no_record = NULL))
-  res <- oc_process("Hamburg", return = "url_only", get_key = FALSE)
+  res <- oc_process("Hamburg", return = "url_only")
   expect_match(res[[1]], "&no_record=0", fixed = TRUE)
 
-  # Default with oc_config: no_record = FALSE
+  # Default with oc_config(no_record = FALSE)
   oc_config()
   expect_equal(getOption("oc_no_record"), FALSE)
-  res <- oc_process("Hamburg", return = "url_only", get_key = FALSE)
+  res <- oc_process("Hamburg", return = "url_only")
   expect_match(res[[1]], "&no_record=0", fixed = TRUE)
 
-  # oc_config sets no_record = TRUE
+  # Set oc_config(no_record = TRUE)
   oc_config(no_record = TRUE)
   expect_equal(getOption("oc_no_record"), TRUE)
-  res <- oc_process("Hamburg", return = "url_only", get_key = FALSE)
+  res <- oc_process("Hamburg", return = "url_only")
   expect_match(res[[1]], "&no_record=1", fixed = TRUE)
+
+})
+
+# test show_key argument --------------------------------------------------
+
+test_that("oc_config sets show_key option", {
+
+  # Default with oc_config(show_key = FALSE)
+  oc_config()
+  expect_equal(getOption("oc_show_key"), FALSE)
+
+  # Set oc_config(show_key = TRUE)
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
+  oc_config(show_key = TRUE)
+  expect_equal(getOption("oc_show_key"), TRUE)
 
 })

@@ -2,7 +2,7 @@
 title: "Output options"
 subtitle: "Get different kinds of output from OpenCage"
 author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
-date: "2020-10-31"
+date: "2020-11-04"
 description: >
   "`oc_forward()`/`oc_reverse()` return lists of various type, namely data frames, JSON, GeoJSON or URLs, depending on the `return` value you specify. The possible `return` values are `df_list`, `json_list`, `geojson_list` and `url_only`."
 output:
@@ -113,10 +113,10 @@ oc_forward("Casey Station", return = "json_list")
 #> [1] 2500
 #> 
 #> [[1]]$rate$remaining
-#> [1] 2458
+#> [1] 2482
 #> 
 #> [[1]]$rate$reset
-#> [1] 1604188800
+#> [1] 1604534400
 #> 
 #> 
 #> [[1]]$results
@@ -190,10 +190,10 @@ oc_forward("Casey Station", return = "json_list")
 #> 
 #> [[1]]$timestamp
 #> [[1]]$timestamp$created_http
-#> [1] "Sat, 31 Oct 2020 20:24:20 GMT"
+#> [1] "Wed, 04 Nov 2020 21:52:16 GMT"
 #> 
 #> [[1]]$timestamp$created_unix
-#> [1] 1604175860
+#> [1] 1604526736
 #> 
 #> 
 #> [[1]]$total_results
@@ -287,10 +287,10 @@ gjsn_lst
 #> [1] 2500
 #> 
 #> $rate$remaining
-#> [1] 2456
+#> [1] 2480
 #> 
 #> $rate$reset
-#> [1] 1604188800
+#> [1] 1604534400
 #> 
 #> 
 #> $status
@@ -314,10 +314,10 @@ gjsn_lst
 #> 
 #> $timestamp
 #> $timestamp$created_http
-#> [1] "Sat, 31 Oct 2020 20:24:22 GMT"
+#> [1] "Wed, 04 Nov 2020 21:52:19 GMT"
 #> 
 #> $timestamp$created_unix
-#> [1] 1604175862
+#> [1] 1604526739
 #> 
 #> 
 #> $total_results
@@ -338,16 +338,26 @@ class(gjsn_lst[[1]])
 #> [1] "geo_list"
 ```
 
-
 ## `url_only`
 
 `url_only` returns the OpenCage URL for debugging purposes.
-We won't show the output here because the URL contains the OpenCage API key.
 
 
 ```r
 oc_forward("Casey Station", return = "url_only")
+#> [[1]]
+#> [1] "https://api.opencagedata.com/geocode/v1/json?q=Casey%20Station&limit=10&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=0&abbrv=0&add_request=0&key=OPENCAGE_KEY"
 ```
+
+Your OpenCage API key is masked with the `OPENCAGE_KEY` string, by default. 
+If you really want {opencage} to display your API key with the URL, set the `show_key` argument in `oc_config()` to `TRUE`. 
+
+
+```r
+oc_config(show_key = TRUE)
+```
+
+Note that the API key will only be returned with the URL in `base::interactive()` mode.
 
 ## `xml`
 
@@ -358,5 +368,6 @@ Please file an [issue](https://github.com/ropensci/opencage/issues) or a [pull-r
 
 `oc_forward()` and `oc_reverse()` have an `add_request` argument, indicating whether the request is returned again with the results.
 If the `return` value is a `df_list`, the `placename` or `latitude,longitude` is added as a column to the results without a roundtrip to the API.
-`json_list` results will contain all request parameters as returned by the API, including the API key used, so handle with care!
+`json_list` results will contain all request parameters as returned by the API. 
+This would normally include your OpenCage API key, but {opencage} masks the key and replaces it with the `OPENCAGE_KEY` string in the output. 
 `add_request` is currently ignored by OpenCage for GeoJSON results.

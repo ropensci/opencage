@@ -24,7 +24,8 @@ Peer-Review](https://badges.ropensci.org/36_status.svg)](https://github.com/rope
 
 Geocode with the [OpenCage](https://opencagedata.com/) API, either from
 place name to longitude and latitude (forward geocoding) or from
-longitude and latitude to the location name (reverse geocoding).
+longitude and latitude to the name and address of the location (reverse
+geocoding).
 
 ## Installation
 
@@ -107,8 +108,6 @@ credits](https://opencagedata.com/credits).
   - License: GPL \>= 2
   - Get citation information for `opencage` in R doing `citation(package
     = 'opencage')`
-  - Please note that this project is released with a [Contributor Code
-    of Conduct](CONDUCT.md). By participating in this project you agree
-    to abide by its terms.
-
-[![ropensci\_footer](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
+  - Please note that this package is released with a [Contributor Code
+    of Conduct](https://ropensci.org/code-of-conduct/). By contributing
+    to this project, you agree to abide by its terms.

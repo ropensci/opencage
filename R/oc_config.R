@@ -7,10 +7,17 @@
 #' @param rate_sec Numeric vector of length one. Sets the maximum number of
 #'   requests sent to the OpenCage API per second. Defaults to the value set in
 #'   the `oc_rate_sec` option, or, in case that does not exist, to 1L.
-#' @param no_record Logical vector of length one. When `TRUE` OpenCage will not
+#' @param no_record Logical vector of length one. When `TRUE`, OpenCage will not
 #'   create log entries of the queries and will not cache the geocoding
 #'   requests. Defaults to the value set in the `oc_no_record` option, or, in
-#'   case that does not exist, to FALSE.
+#'   case that does not exist, to `FALSE`.
+#' @param show_key Logical vector of length one. This is only relevant when
+#'   debugging `oc_forward()` or `oc_reverse()` calls with the `return =
+#'   "url_only"` argument. When `TRUE`, the result will show your OpenCage API
+#'   key in the URL as stored in the `OPENCAGE_KEY` environment variable. When
+#'   not `TRUE`, the API key will be replaced with the string `OPENCAGE_KEY`.
+#'   `show_key` defaults to the value set in the `oc_show_key` option, or, in
+#'   case that does not exist, to `FALSE`.
 #' @param ... Ignored.
 #'
 #' @section Set your OpenCage API key:
@@ -88,6 +95,7 @@ oc_config <-
     key = Sys.getenv("OPENCAGE_KEY"),
     rate_sec = getOption("oc_rate_sec", default = 1L),
     no_record = getOption("oc_no_record", default = FALSE),
+    show_key = getOption("oc_show_key", default = FALSE),
     ...) {
 
     key_needed <-
@@ -123,4 +131,7 @@ oc_config <-
     # set no_record
     oc_check_logical(no_record, check_length_one = TRUE)
     options("oc_no_record" = no_record)
+
+    # set show_key
+    options("oc_show_key" = show_key)
   }

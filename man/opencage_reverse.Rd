@@ -86,7 +86,7 @@ at which the number of remaining calls will be reset.
 \description{
 \lifecycle{soft-deprecated}
 
-Deprecated: use \code{oc_reverse} or \code{oc_reverse_df} for reverse geocoding.
+Soft deprecated: use \code{oc_reverse} or \code{oc_reverse_df} for reverse geocoding.
 }
 \examples{
 \dontrun{

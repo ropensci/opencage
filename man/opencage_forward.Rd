@@ -97,7 +97,7 @@ at which the number of remaining calls will be reset.
 \description{
 \lifecycle{soft-deprecated}
 
-Deprecated: use \code{oc_forward} or \code{oc_forward_df} for forward geocoding.
+Soft deprecated: use \code{oc_forward} or \code{oc_forward_df} for forward geocoding.
 }
 \examples{
 \dontrun{

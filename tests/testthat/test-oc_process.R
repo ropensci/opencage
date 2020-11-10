@@ -1,25 +1,32 @@
 ## Test oc_process ##
 
-test_that("oc_process does not reveal key with non-interactive `url_only`.", {
-  # This test (intentionally) fails in interactive mode.
+test_that("oc_process(return = 'url_only') does not reveal key by default.", {
   withr::local_envvar(c("OPENCAGE_KEY" = key_200))
-  expect_error(
-    object =
+  res <-
       oc_process(
         placename = "Paris",
-        return = "url_only",
-        get_key = TRUE
-      ),
-    regexp = "'url_only' reveals your OpenCage key"
-  )
+        return = "url_only"
+      )
+  expect_match(res[[1]], "key=OPENCAGE_KEY", fixed = TRUE)
+})
+
+test_that("oc_process(return = 'url_only') shows key if desired.", {
+  rlang::local_interactive()
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
+  withr::local_options(list(oc_show_key = TRUE))
+  res <-
+    oc_process(
+      placename = "Paris",
+      return = "url_only"
+    )
+  expect_match(res[[1]], paste0("key=", key_200), fixed = TRUE)
 })
 
 test_that("oc_process creates meaningful URLs for single query.", {
   res <-
     oc_process(
       placename = "Paris",
-      return = "url_only",
-      get_key = FALSE
+      return = "url_only"
     )
   expect_type(res, "list")
   expect_type(unlist(res), "character")
@@ -28,16 +35,14 @@ test_that("oc_process creates meaningful URLs for single query.", {
   res <-
     oc_process(
       placename = "Islington, London",
-      return = "url_only",
-      get_key = FALSE
+      return = "url_only"
     )
   expect_match(res[[1]], "q=Islington%2C%20London", fixed = TRUE)
 
   res <-
     oc_process(
       placename = "Triererstr 15, 99423 Weimar, Deutschland",
-      return = "url_only",
-      get_key = FALSE
+      return = "url_only"
     )
   expect_match(
     res[[1]],
@@ -49,8 +54,7 @@ test_that("oc_process creates meaningful URLs for single query.", {
     oc_process(
       latitude = 41.40139,
       longitude = 2.12870,
-      return = "url_only",
-      get_key = FALSE
+      return = "url_only"
     )
   expect_type(res, "list")
   expect_type(unlist(res), "character")
@@ -61,32 +65,28 @@ test_that("oc_process creates meaningful URLs with NAs.", {
   res <-
     oc_process(
       placename = NA_character_,
-      return = "url_only",
-      get_key = FALSE
+      return = "url_only"
     )
   expect_match(res[[1]], "q=&", fixed = TRUE)
   res <-
     oc_process(
       latitude = NA_real_,
       longitude = NA_real_,
-      return = "url_only",
-      get_key = FALSE
+      return = "url_only"
     )
   expect_match(res[[1]], "q=&", fixed = TRUE)
   res <-
     oc_process(
       latitude = 0,
       longitude = NA_real_,
-      return = "url_only",
-      get_key = FALSE
+      return = "url_only"
     )
   expect_match(res[[1]], "q=&", fixed = TRUE)
   res <-
     oc_process(
       latitude = NA_real_,
       longitude = 0,
-      return = "url_only",
-      get_key = FALSE
+      return = "url_only"
     )
   expect_match(res[[1]], "q=&", fixed = TRUE)
 })
@@ -94,8 +94,7 @@ test_that("oc_process creates meaningful URLs with NAs.", {
 test_that("oc_process creates meaningful URLs for multiple queries.", {
   res <- oc_process(
     placename = c("Paris", "Hamburg"),
-    return = "url_only",
-    get_key = FALSE
+    return = "url_only"
   )
   expect_type(res, "list")
   expect_type(unlist(res), "character")
@@ -105,8 +104,7 @@ test_that("oc_process creates meaningful URLs for multiple queries.", {
   res <- oc_process(
     latitude = c(48.87378, 37.83032),
     longitude = c(2.295037, -122.47975),
-    return = "url_only",
-    get_key = FALSE
+    return = "url_only"
   )
   expect_type(res, "list")
   expect_type(unlist(res), "character")
@@ -132,7 +130,6 @@ test_that("oc_process deals well with res being NULL", {
 test_that("oc_process handles bounds argument.", {
   res <- oc_process(
     placename = "Sarzeau",
-    get_key = FALSE,
     bounds = list(c(-5.5, 51.2, 0.2, 51.6)),
     return = "url_only"
   )
@@ -140,7 +137,6 @@ test_that("oc_process handles bounds argument.", {
 
   res <- oc_process(
     placename = "Sarzeau",
-    get_key = FALSE,
     bounds = oc_bbox(-5.6, 51.2, 0.2, 51.6),
     return = "url_only"
   )
@@ -148,7 +144,6 @@ test_that("oc_process handles bounds argument.", {
 
   res <- oc_process(
     place = c("Hamburg", "Hamburg"),
-    get_key = FALSE,
     bounds = oc_bbox(
       ymax = c(54.02, 42.73),
       xmax = c(10.32, -78.81),
@@ -184,7 +179,6 @@ test_that("bounds argument is well taken into account with df_list", {
 test_that("oc_process handles proximity argument.", {
   res <- oc_process(
     placename = "Warsaw",
-    get_key = FALSE,
     proximity = list(c(latitude = 41.2, longitude = -85.8)),
     return = "url_only"
   )
@@ -192,7 +186,6 @@ test_that("oc_process handles proximity argument.", {
 
   res <- oc_process(
     placename = "Warsaw",
-    get_key = FALSE,
     proximity = oc_points(latitude = 41.2, longitude = -85.8),
     return = "url_only"
   )
@@ -200,7 +193,6 @@ test_that("oc_process handles proximity argument.", {
 
   res <- oc_process(
     place = c("Warsaw", "Warsaw"),
-    get_key = FALSE,
     proximity = oc_points(
       longitude = c(-85.8, 19.0),
       latitude = c(41.2, 52.0)
@@ -215,8 +207,7 @@ test_that("oc_process handles language argument.", {
   res1 <- oc_process(
     placename = c("New York", "Rio", "Tokyo"),
     language = "ja",
-    return = "url_only",
-    get_key = FALSE
+    return = "url_only"
   )
   expect_match(res1[[1]], "&language=ja", fixed = TRUE)
   expect_match(res1[[2]], "&language=ja", fixed = TRUE)
@@ -224,8 +215,7 @@ test_that("oc_process handles language argument.", {
   res2 <- oc_process(
     placename = c("Paris", "Hamburg"),
     language = c("de", "fr"),
-    return = "url_only",
-    get_key = FALSE
+    return = "url_only"
   )
   expect_match(res2[[1]], "&language=de", fixed = TRUE)
   expect_match(res2[[2]], "&language=fr", fixed = TRUE)
@@ -235,8 +225,7 @@ test_that("oc_process handles countrycode argument.", {
   res1 <- oc_process(
     placename = c("Hamburg", "Paris"),
     countrycode = "DE",
-    return = "url_only",
-    get_key = FALSE
+    return = "url_only"
   )
   expect_match(res1[[1]], "&countrycode=de", fixed = TRUE)
   expect_match(res1[[2]], "&countrycode=de", fixed = TRUE)
@@ -244,8 +233,7 @@ test_that("oc_process handles countrycode argument.", {
   res2 <- oc_process(
     placename = c("Hamburg", "Paris"),
     countrycode = list(c("US", "FR"), "DE"),
-    return = "url_only",
-    get_key = FALSE
+    return = "url_only"
   )
   expect_match(res2[[1]], "&countrycode=us%2Cfr", fixed = TRUE)
   expect_match(res2[[2]], "&countrycode=de", fixed = TRUE)
@@ -253,8 +241,7 @@ test_that("oc_process handles countrycode argument.", {
   res3 <- oc_process(
     placename = c("Hamburg", "Paris"),
     countrycode = list("US", "DE"),
-    return = "url_only",
-    get_key = FALSE
+    return = "url_only"
   )
   expect_match(res3[[1]], "&countrycode=us", fixed = TRUE)
   expect_match(res3[[2]], "&countrycode=de", fixed = TRUE)
@@ -264,7 +251,6 @@ test_that("oc_process handles various other arguments.", {
   res1 <- oc_process(
     placename = "Hamburg",
     return = "url_only",
-    get_key = FALSE,
     limit = 1L,
     min_confidence = NULL,
     no_annotations = FALSE,
@@ -284,7 +270,6 @@ test_that("oc_process handles various other arguments.", {
   res2 <- oc_process(
     placename = "Hamburg",
     return = "url_only",
-    get_key = FALSE,
     limit = 10,
     min_confidence = 8,
     no_annotations = TRUE,
@@ -304,7 +289,6 @@ test_that("oc_process handles various other arguments.", {
   res3 <- oc_process(
     placename = c("Hamburg", "Hamburg"),
     return = "url_only",
-    get_key = FALSE,
     limit = c(10L, 5L),
     min_confidence = c(8L, 5L),
     no_annotations = c(TRUE, FALSE),
@@ -333,7 +317,6 @@ test_that("arguments that are NULL or NA don't show up in url.", {
   res_null <- oc_process(
     placename = "Hamburg",
     return = "url_only",
-    get_key = FALSE,
     limit = NULL,
     bounds = NULL,
     proximity = NULL,
@@ -345,7 +328,6 @@ test_that("arguments that are NULL or NA don't show up in url.", {
     abbrv = NULL,
     add_request = NULL
   )
-  expect_match(res_null[[1]], "^((?!key=).)*$", perl = TRUE)
   expect_match(res_null[[1]], "^((?!limit=).)*$", perl = TRUE)
   expect_match(res_null[[1]], "^((?!bounds=).)*$", perl = TRUE)
   expect_match(res_null[[1]], "^((?!proximity=).)*$", perl = TRUE)
@@ -360,7 +342,6 @@ test_that("arguments that are NULL or NA don't show up in url.", {
   res_na <- oc_process(
     placename = "Hamburg",
     return = "url_only",
-    get_key = FALSE,
     limit = NA_real_,
     bounds = list(),
     proximity = list(),
@@ -372,7 +353,6 @@ test_that("arguments that are NULL or NA don't show up in url.", {
     abbrv = NA,
     add_request = NA
   )
-  expect_match(res_na[[1]], "^((?!key=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!limit=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!bounds=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!proximity=).)*$", perl = TRUE)
