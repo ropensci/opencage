@@ -45,3 +45,19 @@ oc_mask_key <- function(string) {
     replacement = "OPENCAGE_KEY"
   )
 }
+
+#' Is an OpenCage API key present?
+#'
+#' Checks whether a potential OpenCage API key, i.e. a 32 character long,
+#' alphanumeric string, is stored in the environment variable `OPENCAGE_KEY`.
+#'
+#' @return A single logical value, `TRUE` or `FALSE`.
+#'
+#' @export
+#'
+#' @examples
+#' oc_key_present()
+
+oc_key_present <- function() {
+  identical(nchar(Sys.getenv("OPENCAGE_KEY")), 32L)
+}
