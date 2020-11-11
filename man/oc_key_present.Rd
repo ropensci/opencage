@@ -13,6 +13,4 @@ A single logical value, \code{TRUE} or \code{FALSE}.
 Checks whether a potential OpenCage API key, i.e. a 32 character long,
 alphanumeric string, is stored in the environment variable \code{OPENCAGE_KEY}.
 }
-\examples{
-oc_key_present()
-}
+\keyword{internal}

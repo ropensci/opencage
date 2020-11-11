@@ -15,6 +15,4 @@ A single logical value, \code{TRUE} or \code{FALSE}.
 \description{
 Checks whether the OpenCage API can be reached.
 }
-\examples{
-oc_api_ok()
-}
+\keyword{internal}

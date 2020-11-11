@@ -7,9 +7,7 @@
 #' @return A single logical value, `TRUE` or `FALSE`.
 #'
 #' @export
-#'
-#' @examples
-#' oc_api_ok()
+#' @keywords internal
 
 oc_api_ok <- function(url = "https://api.opencagedata.com") {
   crul::ok(url, useragent = "https://github.com/ropensci/opencage")

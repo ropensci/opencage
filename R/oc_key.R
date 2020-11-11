@@ -54,9 +54,7 @@ oc_mask_key <- function(string) {
 #' @return A single logical value, `TRUE` or `FALSE`.
 #'
 #' @export
-#'
-#' @examples
-#' oc_key_present()
+#' @keywords internal
 
 oc_key_present <- function() {
   identical(nchar(Sys.getenv("OPENCAGE_KEY")), 32L)
