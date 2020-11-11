@@ -2,7 +2,7 @@
 
 test_that("opencage_forward/opencage_reverse return what they should.", {
   skip_on_cran()
-  skip_if_offline()
+  skip_if_oc_offline()
 
   lifecycle::expect_deprecated(
     results <- opencage_forward(placename = "Sarzeau")
@@ -51,7 +51,7 @@ test_that("opencage_forward/opencage_reverse return what they should.", {
 test_that("opencage_forward/opencage_reverse return what they should
           with several parameters.", {
   skip_on_cran()
-  skip_if_offline()
+  skip_if_oc_offline()
 
   lifecycle::expect_deprecated(
     results <- opencage_forward(
@@ -97,7 +97,7 @@ test_that("opencage_forward/opencage_reverse return what they should
 
 test_that("opencage_forward deals well with results being NULL", {
   skip_on_cran()
-  skip_if_offline()
+  skip_if_oc_offline()
 
   lifecycle::expect_deprecated(
     results <- opencage_forward(
@@ -116,7 +116,7 @@ test_that("opencage_forward deals well with results being NULL", {
 
 test_that("the bounds argument is well taken into account", {
   skip_on_cran()
-  skip_if_offline()
+  skip_if_oc_offline()
 
   lifecycle::expect_deprecated(
     results1 <- opencage_forward(

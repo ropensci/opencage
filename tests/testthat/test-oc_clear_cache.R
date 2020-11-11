@@ -1,6 +1,6 @@
 test_that("oc_clear_cache clears cache", {
   skip_on_cran()
-  skip_if_offline()
+  skip_if_offline("httpbin.org")
 
   # until a memoise >v.1.1 is released, we need to run oc_get_memoise() twice to
   # have it really cache results
