@@ -58,7 +58,7 @@ test_that("oc_get returns a response object for vector countrycode", {
 
 test_that("oc_get_limited is rate limited", {
   skip_on_cran()
-  skip_if_oc_offline()
+  skip_if_offline("httpbin.org")
 
   tm <- system.time({
     replicate(2, oc_get_limited("https://httpbin.org/get"))
@@ -69,7 +69,7 @@ test_that("oc_get_limited is rate limited", {
 
 test_that("oc_get_memoise memoises", {
   skip_on_cran()
-  skip_if_oc_offline()
+  skip_if_offline("httpbin.org")
 
   oc_get_memoise("https://httpbin.org/get")
   tm <- system.time({
