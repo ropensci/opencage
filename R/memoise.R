@@ -1,6 +1,6 @@
 #' Clear the opencage cache
 #'
-#' Forget past results and resets the \pkg{opencage} cache.
+#' Forget past results and reset the \pkg{opencage} cache.
 #'
 #' @examples
 #' \dontrun{
