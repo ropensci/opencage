@@ -42,7 +42,7 @@ oc_points(
   latitude = lat,
   longitude = lon
 )
-\dontrun{
+
 # create a list column with points with dplyr
 library(dplyr)
 xdf \%>\%
@@ -53,6 +53,5 @@ xdf \%>\%
         lon
       )
   )
-}
 
 }
