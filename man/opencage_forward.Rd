@@ -100,12 +100,11 @@ at which the number of remaining calls will be reset.
 Soft deprecated: use \code{oc_forward} or \code{oc_forward_df} for forward geocoding.
 }
 \examples{
-\dontrun{
+\dontshow{if (oc_key_present() && oc_api_ok()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 opencage_forward(placename = "Sarzeau")
 opencage_forward(placename = "Islington, London")
 opencage_forward(placename = "Triererstr 15,
                               Weimar 99423,
                               Deutschland")
-}
-
+\dontshow{\}) # examplesIf}
 }

@@ -36,16 +36,15 @@ NULL
 #' day for the used key, the number of remaining calls for the day and the time
 #' at which the number of remaining calls will be reset.
 #' }
+#'
 #' @export
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf oc_key_present() && oc_api_ok()
 #' opencage_forward(placename = "Sarzeau")
 #' opencage_forward(placename = "Islington, London")
 #' opencage_forward(placename = "Triererstr 15,
 #'                               Weimar 99423,
 #'                               Deutschland")
-#' }
 #'
 opencage_forward <-
   function(placename,
@@ -107,13 +106,13 @@ opencage_forward <-
 #'
 #' @export
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf oc_key_present() && oc_api_ok()
+#'
 #' opencage_reverse(
 #'   latitude = 0, longitude = 0,
 #'   limit = 2
 #' )
-#' }
+#'
 opencage_reverse <-
   function(latitude,
            longitude,

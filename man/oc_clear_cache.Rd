@@ -7,13 +7,14 @@
 oc_clear_cache()
 }
 \description{
-Forget past results and resets the \pkg{opencage} cache.
+Forget past results and reset the \pkg{opencage} cache.
 }
 \examples{
-\dontrun{
+\dontshow{if (oc_key_present() && oc_api_ok()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+
 system.time(oc_reverse(latitude = 10, longitude = 10))
 system.time(oc_reverse(latitude = 10, longitude = 10))
 oc_clear_cache()
 system.time(oc_reverse(latitude = 10, longitude = 10))
-}
+\dontshow{\}) # examplesIf}
 }

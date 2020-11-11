@@ -93,7 +93,8 @@ Reverse geocoding from latitude and longitude pairs to the names and
 addresses of a location.
 }
 \examples{
-\dontrun{
+\dontshow{if (oc_key_present() && oc_api_ok()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+
 library(tibble)
 df <- tibble(id = 1:4,
              lat = c(-36.85007, 47.21864, 53.55034, 34.05369),
@@ -124,7 +125,7 @@ df2 <- add_column(df,
 oc_reverse_df(df2, latitude = lat, longitude = lng,
               language = language,
               min_confidence = confidence)
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=oc_reverse]{oc_reverse()}} for inputs as vectors, or \code{\link[=oc_forward]{oc_forward()}} and

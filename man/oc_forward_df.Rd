@@ -127,8 +127,8 @@ Forward geocoding from a column or vector of location names to latitude and
 longitude tuples.
 }
 \examples{
+\dontshow{if (oc_key_present() && oc_api_ok()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
-\dontrun{
 library(tibble)
 df <- tibble(id = 1:3,
              locations = c("Nantes", "Hamburg", "Los Angeles"))
@@ -176,7 +176,7 @@ oc_forward_df(df2, placename = locations,
 # Specify the desired results by the countrycode column
 oc_forward_df(df2, placename = locations,
               countrycode = countrycode)
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=oc_forward]{oc_forward()}} for inputs as vectors, or \code{\link[=oc_reverse]{oc_reverse()}} and
