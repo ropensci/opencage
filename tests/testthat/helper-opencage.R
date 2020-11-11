@@ -7,5 +7,13 @@ key_429 <- "d6d0f0065f4348a4bdfe4587ba02714b" # always returns a 429 responce
 
 # skip if API offline
 skip_if_oc_offline <- function(host = "api.opencagedata.com") {
-  skip_if_offline(host = host)
+  testthat::skip_if_offline(host = host)
+}
+
+# skip if API key is missing
+skip_if_no_key <- function() {
+  testthat::skip_if_not(
+    condition = oc_key_present(),
+    message = "OpenCage API key is missing"
+  )
 }

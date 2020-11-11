@@ -15,7 +15,7 @@ df3 <- add_row(df2, id = 4, lat = 25, lng = 36, confidence = 5)
 # oc_reverse --------------------------------------------------------------
 
 test_that("oc_reverse works", {
-  skip_on_cran()
+  skip_if_no_key()
   skip_if_oc_offline()
 
   res1 <- oc_reverse(lat, lng)
@@ -25,7 +25,7 @@ test_that("oc_reverse works", {
 })
 
 test_that("oc_reverse returns correct type", {
-  skip_on_cran()
+  skip_if_no_key()
   skip_if_oc_offline()
 
   # json_list
@@ -42,7 +42,7 @@ test_that("oc_reverse returns correct type", {
 })
 
 test_that("oc_reverse adds request with add_request", {
-  skip_on_cran()
+  skip_if_no_key()
   skip_if_oc_offline()
 
   expected <- paste(lat[1], lng[1], sep = ",")
@@ -57,7 +57,7 @@ test_that("oc_reverse adds request with add_request", {
 })
 
 test_that("oc_reverse masks key when add_request = TRUE", {
-  skip_on_cran()
+  skip_if_no_key()
   skip_if_oc_offline()
 
   res <- oc_reverse(lat[1], lng[1], return = "json_list", add_request = TRUE)
@@ -67,7 +67,7 @@ test_that("oc_reverse masks key when add_request = TRUE", {
 # oc_reverse_df -----------------------------------------------------------
 
 test_that("oc_reverse_df works", {
-  skip_on_cran()
+  skip_if_no_key()
   skip_if_oc_offline()
 
   tbl1 <- oc_reverse_df(df, lat, lng)
@@ -91,7 +91,7 @@ test_that("oc_reverse_df doesn't work for default class", {
 })
 
 test_that("output arguments work", {
-  skip_on_cran()
+  skip_if_no_key()
   skip_if_oc_offline()
 
   expect_equal(names(oc_reverse_df(df, lat, lng, bind_cols = TRUE)),
@@ -106,7 +106,7 @@ test_that("output arguments work", {
 })
 
 test_that("tidyeval works for arguments", {
-  skip_on_cran()
+  skip_if_no_key()
   skip_if_oc_offline()
 
   noarg <- oc_reverse_df(df2, lat, lng)
