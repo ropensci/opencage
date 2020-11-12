@@ -59,7 +59,7 @@ oc_bbox(
   northeast_lng,
   northeast_lat
 )
-\dontrun{
+
 # create bbox list column with dplyr
 library(dplyr)
 xdf \%>\%
@@ -80,7 +80,6 @@ if (requireNamespace("sf", quietly = TRUE)) {
     crs = 4326
   )
   oc_bbox(bbox)
-}
 }
 
 }

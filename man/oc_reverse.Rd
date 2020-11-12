@@ -84,7 +84,8 @@ Reverse geocoding from numeric vectors of latitude and longitude pairs to
 the names and addresses of a location.
 }
 \examples{
-\dontrun{
+\dontshow{if (oc_key_present() && oc_api_ok()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+
 # Reverse geocode a single location
 oc_reverse(latitude = -36.85007, longitude = 174.7706)
 
@@ -101,7 +102,7 @@ oc_reverse(latitude = lat, longitude = lng,
 # Return results as a json list
 oc_reverse(latitude = lat, longitude = lng,
            return = "json_list")
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=oc_reverse_df]{oc_reverse_df()}} for inputs as a data frame, or \code{\link[=oc_forward]{oc_forward()}} and

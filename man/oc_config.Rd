@@ -26,7 +26,7 @@ requests. Defaults to the value set in the \code{oc_no_record} option, or, in
 case that does not exist, to \code{FALSE}.}
 
 \item{show_key}{Logical vector of length one. This is only relevant when
-debugging \code{oc_forward()}  or \code{oc_reverse()} calls with the \code{return = "url_only"} argument. When \code{TRUE}, the result will show your OpenCage API
+debugging \code{oc_forward()} or \code{oc_reverse()} calls with the \code{return = "url_only"} argument. When \code{TRUE}, the result will show your OpenCage API
 key in the URL as stored in the \code{OPENCAGE_KEY} environment variable. When
 not \code{TRUE}, the API key will be replaced with the string \code{OPENCAGE_KEY}.
 \code{show_key} defaults to the value set in the \code{oc_show_key} option, or, in

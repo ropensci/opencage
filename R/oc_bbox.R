@@ -36,7 +36,7 @@
 #'   northeast_lng,
 #'   northeast_lat
 #' )
-#' \dontrun{
+#'
 #' # create bbox list column with dplyr
 #' library(dplyr)
 #' xdf %>%
@@ -57,7 +57,6 @@
 #'     crs = 4326
 #'   )
 #'   oc_bbox(bbox)
-#' }
 #' }
 #'
 oc_bbox <- function(...) UseMethod("oc_bbox")

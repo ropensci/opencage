@@ -113,8 +113,8 @@ test_that("oc_process creates meaningful URLs for multiple queries.", {
 })
 
 test_that("oc_process deals well with res being NULL", {
-  skip_on_cran()
-  skip_if_offline()
+  skip_if_no_key()
+  skip_if_oc_offline()
 
   res <- oc_process(
     placename = "thiswillgetmenoreswhichisgood",
@@ -157,8 +157,8 @@ test_that("oc_process handles bounds argument.", {
 })
 
 test_that("bounds argument is well taken into account with df_list", {
-  skip_on_cran()
-  skip_if_offline()
+  skip_if_no_key()
+  skip_if_oc_offline()
 
   res1 <- oc_process(
     placename = "Berlin",

@@ -26,8 +26,8 @@ df3 <- tibble(
 # oc_forward --------------------------------------------------------------
 
 test_that("oc_forward works", {
-  skip_on_cran()
-  skip_if_offline()
+  skip_if_no_key()
+  skip_if_oc_offline()
 
   res1 <- oc_forward(locations)
   expect_type(res1, "list")
@@ -36,8 +36,8 @@ test_that("oc_forward works", {
 })
 
 test_that("oc_forward returns correct type", {
-  skip_on_cran()
-  skip_if_offline()
+  skip_if_no_key()
+  skip_if_oc_offline()
 
   # json_list
   res2 <- oc_forward(locations, return = "json_list")
@@ -53,8 +53,8 @@ test_that("oc_forward returns correct type", {
 })
 
 test_that("oc_forward adds request with add_request", {
-  skip_on_cran()
-  skip_if_offline()
+  skip_if_no_key()
+  skip_if_oc_offline()
 
   # df_list
   res <- oc_forward("Hmbg", return = "df_list", add_request = TRUE)
@@ -66,8 +66,8 @@ test_that("oc_forward adds request with add_request", {
 })
 
 test_that("oc_forward masks key when add_request = TRUE", {
-  skip_on_cran()
-  skip_if_offline()
+  skip_if_no_key()
+  skip_if_oc_offline()
 
   # json_list
   res <- oc_forward("Hamburg", return = "json_list", add_request = TRUE)
@@ -75,6 +75,9 @@ test_that("oc_forward masks key when add_request = TRUE", {
 })
 
 test_that("oc_forward handles response with no results", {
+  skip_if_no_key()
+  skip_if_oc_offline()
+
   # https://opencagedata.com/api#no-results
   nores <- oc_forward("NOWHERE-INTERESTING")
   expect_type(nores, "list")
@@ -86,8 +89,8 @@ test_that("oc_forward handles response with no results", {
 # oc_forward_df -----------------------------------------------------------
 
 test_that("oc_forward_df works", {
-  skip_on_cran()
-  skip_if_offline()
+  skip_if_no_key()
+  skip_if_oc_offline()
 
   tbl1 <- oc_forward_df(df, loc)
   expect_s3_class(tbl1, c("tbl_df", "tbl", "data.frame"))
@@ -110,8 +113,8 @@ test_that("oc_forward_df doesn't work for default class", {
 })
 
 test_that("output arguments work", {
-  skip_on_cran()
-  skip_if_offline()
+  skip_if_no_key()
+  skip_if_oc_offline()
 
   expect_equal(names(oc_forward_df(df, loc, bind_cols = TRUE)),
                c("id", "loc", "oc_lat", "oc_lng", "oc_formatted"))
@@ -122,8 +125,8 @@ test_that("output arguments work", {
 })
 
 test_that("tidyeval works for arguments", {
-  skip_on_cran()
-  skip_if_offline()
+  skip_if_no_key()
+  skip_if_oc_offline()
 
   noarg <- oc_forward_df(df2, loc, bind_cols = FALSE)
 
@@ -180,11 +183,17 @@ test_that("tidyeval works for arguments", {
 })
 
 test_that("list columns are not dropped (by tidyr)", {
+  skip_if_no_key()
+  skip_if_oc_offline()
+
   bnds <- oc_forward_df(df2, loc, bounds = bounds, bind_cols = TRUE)
   expect_true(!is.null(bnds[["bounds"]]))
 })
 
 test_that("oc_forward_df handles response with no results", {
+  skip_if_no_key()
+  skip_if_oc_offline()
+
   # https://opencagedata.com/api#no-results
   nores_df <- oc_forward_df("NOWHERE-INTERESTING")
   expect_s3_class(nores_df, c("tbl_df", "tbl", "data.frame"))

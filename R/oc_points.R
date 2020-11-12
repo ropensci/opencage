@@ -26,7 +26,7 @@
 #'   latitude = lat,
 #'   longitude = lon
 #' )
-#' \dontrun{
+#'
 #' # create a list column with points with dplyr
 #' library(dplyr)
 #' xdf %>%
@@ -37,7 +37,6 @@
 #'         lon
 #'       )
 #'   )
-#' }
 #'
 oc_points <- function(...) UseMethod("oc_points")
 

@@ -89,8 +89,8 @@
 #'
 #' @export
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf oc_key_present() && oc_api_ok()
+#'
 #' # Geocode a single location, an address in this case
 #' oc_forward(placename = "Triererstr 15, 99432, Weimar, Deutschland")
 #'
@@ -125,7 +125,6 @@
 #'            bounds = bounds,
 #'            limit = 1,
 #'            return = "json_list")
-#' }
 #'
 oc_forward <-
   function(placename,
@@ -269,9 +268,8 @@ oc_forward <-
 #'
 #' @export
 #'
-#' @examples
+#' @examplesIf oc_key_present() && oc_api_ok()
 #'
-#' \dontrun{
 #' library(tibble)
 #' df <- tibble(id = 1:3,
 #'              locations = c("Nantes", "Hamburg", "Los Angeles"))
@@ -319,7 +317,7 @@ oc_forward <-
 #' # Specify the desired results by the countrycode column
 #' oc_forward_df(df2, placename = locations,
 #'               countrycode = countrycode)
-#' }
+#'
 oc_forward_df <- function(...) UseMethod("oc_forward_df")
 
 #' @noRd

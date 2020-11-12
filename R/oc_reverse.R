@@ -27,8 +27,8 @@
 #'
 #' @export
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf oc_key_present() && oc_api_ok()
+#'
 #' # Reverse geocode a single location
 #' oc_reverse(latitude = -36.85007, longitude = 174.7706)
 #'
@@ -45,8 +45,7 @@
 #' # Return results as a json list
 #' oc_reverse(latitude = lat, longitude = lng,
 #'            return = "json_list")
-#' }
-
+#'
 oc_reverse <-
   function(latitude,
            longitude,
@@ -121,8 +120,8 @@ oc_reverse <-
 #'
 #' @export
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf oc_key_present() && oc_api_ok()
+#'
 #' library(tibble)
 #' df <- tibble(id = 1:4,
 #'              lat = c(-36.85007, 47.21864, 53.55034, 34.05369),
@@ -153,7 +152,7 @@ oc_reverse <-
 #' oc_reverse_df(df2, latitude = lat, longitude = lng,
 #'               language = language,
 #'               min_confidence = confidence)
-#' }
+#'
 
 oc_reverse_df <- function(...) UseMethod("oc_reverse_df")
 

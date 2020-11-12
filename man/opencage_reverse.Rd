@@ -89,10 +89,11 @@ at which the number of remaining calls will be reset.
 Soft deprecated: use \code{oc_reverse} or \code{oc_reverse_df} for reverse geocoding.
 }
 \examples{
-\dontrun{
+\dontshow{if (oc_key_present() && oc_api_ok()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+
 opencage_reverse(
   latitude = 0, longitude = 0,
   limit = 2
 )
-}
+\dontshow{\}) # examplesIf}
 }

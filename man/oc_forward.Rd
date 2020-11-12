@@ -114,7 +114,8 @@ Forward geocoding from a character vector of location names to latitude and
 longitude tuples.
 }
 \examples{
-\dontrun{
+\dontshow{if (oc_key_present() && oc_api_ok()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+
 # Geocode a single location, an address in this case
 oc_forward(placename = "Triererstr 15, 99432, Weimar, Deutschland")
 
@@ -149,8 +150,7 @@ oc_forward(placename = locations,
            bounds = bounds,
            limit = 1,
            return = "json_list")
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=oc_forward_df]{oc_forward_df()}} for inputs as a data frame, or \code{\link[=oc_reverse]{oc_reverse()}} and
