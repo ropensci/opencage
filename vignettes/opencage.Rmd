@@ -2,7 +2,7 @@
 title: "Introduction to opencage"
 subtitle: "Forward and Reverse Geocoding"
 author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
-date: "2020-11-04"
+date: "2020-11-13"
 description: >
   "Get started with the opencage R package to geocode with the OpenCage API, either from place name to longitude and latitude (forward geocoding) or from longitude and latitude to the name and address of a location (reverse geocoding)."
 output:
@@ -127,7 +127,7 @@ oc_forward_df(placename = opera)
 #>   placename            oc_lat oc_lng oc_formatted                                                   
 #>   <chr>                 <dbl>  <dbl> <chr>                                                          
 #> 1 Palacio de Bellas A~   19.4 -99.1  Palacio de Bellas Artes, Avenida Juárez, Cuauhtémoc, 06050 Mex~
-#> 2 Scala                  45.5   9.19 Teatro alla Scala, Via Giuseppe Verdi, 20121 Milan Milan, Italy
+#> 2 Scala                  45.5   9.19 Teatro alla Scala, Piazza della Scala, Milan Milan, Italy      
 #> 3 Sydney Opera House    -33.9 151.   Sydney Opera House, 2 Macquarie Street, Sydney NSW 2000, Austr~
 ```
 
@@ -139,18 +139,18 @@ Which columns you receive exactly depends on the information OpenCage returns fo
 
 ```r
 oc_forward_df(placename = opera, output = "all")
-#> # A tibble: 3 x 30
+#> # A tibble: 3 x 31
 #>   placename oc_lat oc_lng oc_confidence oc_formatted oc_northeast_lat oc_northeast_lng
 #>   <chr>      <dbl>  <dbl>         <int> <chr>                   <dbl>            <dbl>
 #> 1 Palacio ~   19.4 -99.1              9 Palacio de ~             19.4           -99.1 
 #> 2 Scala       45.5   9.19             9 Teatro alla~             45.5             9.19
 #> 3 Sydney O~  -33.9 151.               9 Sydney Oper~            -33.9           151.  
-#> # ... with 23 more variables: oc_southwest_lat <dbl>, oc_southwest_lng <dbl>,
+#> # ... with 24 more variables: oc_southwest_lat <dbl>, oc_southwest_lng <dbl>,
 #> #   oc_iso_3166_1_alpha_2 <chr>, oc_iso_3166_1_alpha_3 <chr>, oc_category <chr>, oc_type <chr>,
 #> #   oc_city <chr>, oc_continent <chr>, oc_country <chr>, oc_country_code <chr>, oc_museum <chr>,
 #> #   oc_neighbourhood <chr>, oc_postcode <chr>, oc_road <chr>, oc_attraction <chr>, oc_county <chr>,
-#> #   oc_political_union <chr>, oc_state <chr>, oc_suburb <chr>, oc_arts_centre <chr>,
-#> #   oc_house_number <chr>, oc_municipality <chr>, oc_state_code <chr>
+#> #   oc_political_union <chr>, oc_square <chr>, oc_state <chr>, oc_suburb <chr>,
+#> #   oc_arts_centre <chr>, oc_house_number <chr>, oc_municipality <chr>, oc_state_code <chr>
 ```
 
 You can also pass a data frame to `oc_forward_df()`.
@@ -217,7 +217,7 @@ To minimize the number of requests sent to the API {opencage} uses {[memoise](ht
 ```r
 system.time(oc_reverse(latitude = 10, longitude = 10))
 #>    user  system elapsed 
-#>    0.04    0.00    0.86
+#>    0.18    0.23    0.95
 
 system.time(oc_reverse(latitude = 10, longitude = 10))
 #>    user  system elapsed 
@@ -233,7 +233,7 @@ oc_clear_cache()
 
 system.time(oc_reverse(latitude = 10, longitude = 10))
 #>    user  system elapsed 
-#>    0.04    0.00    0.51
+#>    0.05    0.00    0.73
 ```
 
 As you probably know, cache invalidation is one of the harder things to do in computer science.

@@ -44,9 +44,9 @@ remotes::install_github("ropensci/opencage")
 
 ## Quickstart
 
-For the best experience, we recommend that you read through the “Get
-started” vignette (`vignette("intro_opencage")`), but if you are in a
-hurry:
+For the best experience, we recommend that you read through the
+“Introduction to opencage” vignette (`vignette("opencage")`), but if
+you are in a hurry:
 
 1.  Register at
     [opencagedata.com/users/sign\_up](https://opencagedata.com/users/sign_up).
@@ -83,7 +83,7 @@ oc_reverse_df(latitude = 51.5034070, longitude = -0.1275920)
 
 But remember, the vignettes are really great\! We have:
 
-  - “Introduction to opencage” `vignette("intro_opencage")`
+  - “Introduction to opencage” `vignette("opencage")`
   - “Customise your query” `vignette("customise_query")`
   - “Output options” `vignette("output_options")`
 

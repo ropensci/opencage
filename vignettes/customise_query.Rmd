@@ -2,7 +2,7 @@
 title: "Customise your query"
 subtitle: "Get more and better results from OpenCage"
 author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
-date: "2020-11-01"
+date: "2020-11-13"
 description: >
   "The OpenCage API supports about a dozen parameters to customise a query and here we will explain how to use them."
 output:
@@ -41,14 +41,13 @@ oc_forward_df("Berlin")
 
 ```r
 oc_forward_df("Berlin", limit = 5)
-#> # A tibble: 5 x 4
-#>   placename oc_lat oc_lng oc_formatted                                                
-#>   <chr>      <dbl>  <dbl> <chr>                                                       
-#> 1 Berlin      52.5   13.4 Berlin, Germany                                             
-#> 2 Berlin      44.5  -71.2 Berlin, New Hampshire, United States of America             
-#> 3 Berlin      39.8  -89.9 Berlin, Sangamon County, Illinois, United States of America 
-#> 4 Berlin      41.6  -72.7 Berlin, Connecticut, United States of America               
-#> 5 Berlin      38.3  -75.2 Berlin, Worcester County, Maryland, United States of America
+#> # A tibble: 4 x 4
+#>   placename oc_lat oc_lng oc_formatted                                               
+#>   <chr>      <dbl>  <dbl> <chr>                                                      
+#> 1 Berlin      52.5   13.4 Berlin, Germany                                            
+#> 2 Berlin      44.5  -71.2 Berlin, New Hampshire, United States of America            
+#> 3 Berlin      39.8  -89.9 Berlin, Sangamon County, Illinois, United States of America
+#> 4 Berlin      41.6  -72.7 Berlin, Connecticut, United States of America
 ```
 
 
@@ -63,13 +62,13 @@ If you set the `no_dedupe` argument to `TRUE`, you will receive duplicated resul
 ```r
 oc_forward_df("Berlin", limit = 5, no_dedupe = TRUE)
 #> # A tibble: 5 x 4
-#>   placename oc_lat oc_lng oc_formatted                                                
-#>   <chr>      <dbl>  <dbl> <chr>                                                       
-#> 1 Berlin      52.5   13.4 Berlin, Germany                                             
-#> 2 Berlin      44.5  -71.2 Berlin, New Hampshire, United States of America             
-#> 3 Berlin      39.8  -89.9 Berlin, Sangamon County, Illinois, United States of America 
-#> 4 Berlin      41.6  -72.7 Berlin, Connecticut, United States of America               
-#> 5 Berlin      38.3  -75.2 Berlin, Worcester County, Maryland, United States of America
+#>   placename oc_lat oc_lng oc_formatted                                               
+#>   <chr>      <dbl>  <dbl> <chr>                                                      
+#> 1 Berlin      52.5   13.4 Berlin, Germany                                            
+#> 2 Berlin      52.5   13.4 Berlin, Germany                                            
+#> 3 Berlin      44.5  -71.2 Berlin, New Hampshire, United States of America            
+#> 4 Berlin      39.8  -89.9 Berlin, Sangamon County, Illinois, United States of America
+#> 5 Berlin      41.6  -72.7 Berlin, Connecticut, United States of America
 ```
 
 ## Better targeted results
@@ -139,13 +138,13 @@ Below is an example of the use of `bounds` where the bounding box specifies the 
 ```r
 oc_forward_df(placename = "Paris", bounds = oc_bbox(-97, -56, -32, 12), limit = 5)
 #> # A tibble: 5 x 4
-#>   placename oc_lat oc_lng oc_formatted                                                  
-#>   <chr>      <dbl>  <dbl> <chr>                                                         
-#> 1 Paris      -6.71  -69.9 Eirunepé, Região Geográfica Intermediária de Tefé, Brazil     
-#> 2 Paris      -3.99  -79.2 110108, Loja, Ecuador                                         
-#> 3 Paris     -13.5   -62.5 Canton Motegua, Municipio Baures, Provincia de Iténez, Bolivia
-#> 4 Paris      10.6   -74.3 Paris, El Retén, MAG, Colombia                                
-#> 5 Paris       6.31  -75.6 París, 051052 Bello, ANT, Colombia
+#>   placename oc_lat oc_lng oc_formatted                                                     
+#>   <chr>      <dbl>  <dbl> <chr>                                                            
+#> 1 Paris      -6.71  -69.9 Eirunepé, Região Geográfica Intermediária de Tefé, Brazil        
+#> 2 Paris      -3.99  -79.2 110108, Loja, Ecuador                                            
+#> 3 Paris     -13.5   -62.5 Canton Motegua, Municipio Baures, Provincia de Iténez, Bolivia   
+#> 4 Paris      10.6   -74.3 Paris, El Retén, MAG, Colombia                                   
+#> 5 Paris     -23.5   -47.5 Jardim Isaura, Sorocaba, Região Metropolitana de Sorocaba, Brazil
 ```
 
 Again, you can also use {opencage} to determine a bounding box for subsequent queries.

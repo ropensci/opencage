@@ -2,7 +2,7 @@
 title: "Output options"
 subtitle: "Get different kinds of output from OpenCage"
 author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
-date: "2020-11-04"
+date: "2020-11-13"
 description: >
   "`oc_forward()`/`oc_reverse()` return lists of various type, namely data frames, JSON, GeoJSON or URLs, depending on the `return` value you specify. The possible `return` values are `df_list`, `json_list`, `geojson_list` and `url_only`."
 output:
@@ -22,7 +22,7 @@ vignette: >
 2. The `oc_forward()`/`oc_reverse()` functions return a list of various types, depending on the `return` value you specify. 
 The possible `return` values are `df_list`, `json_list`, `geojson_list` and `url_only`.
 
-Use of the `oc_forward_df()`/`oc_reverse_df()` functions is demonstrated in the [Introduction to opencage](intro_opencage.html) and the [Customise your query](customise_query.html) vignettes.
+Use of the `oc_forward_df()`/`oc_reverse_df()` functions is demonstrated in the "Introduction to opencage" and the "Customise your query" vignettes (`vignette("opencage")` and `vignette("customise_query")`, respectively) .
 The function arguments mentioned in these other vignettes are also generally available with `oc_forward()`/`oc_reverse()`.
 Here we will show the different return values available with `oc_forward()`/`oc_reverse()`.
 
@@ -113,10 +113,10 @@ oc_forward("Casey Station", return = "json_list")
 #> [1] 2500
 #> 
 #> [[1]]$rate$remaining
-#> [1] 2482
+#> [1] 2459
 #> 
 #> [[1]]$rate$reset
-#> [1] 1604534400
+#> [1] 1605312000
 #> 
 #> 
 #> [[1]]$results
@@ -190,10 +190,10 @@ oc_forward("Casey Station", return = "json_list")
 #> 
 #> [[1]]$timestamp
 #> [[1]]$timestamp$created_http
-#> [1] "Wed, 04 Nov 2020 21:52:16 GMT"
+#> [1] "Fri, 13 Nov 2020 16:14:17 GMT"
 #> 
 #> [[1]]$timestamp$created_unix
-#> [1] 1604526736
+#> [1] 1605284057
 #> 
 #> 
 #> [[1]]$total_results
@@ -287,10 +287,10 @@ gjsn_lst
 #> [1] 2500
 #> 
 #> $rate$remaining
-#> [1] 2480
+#> [1] 2457
 #> 
 #> $rate$reset
-#> [1] 1604534400
+#> [1] 1605312000
 #> 
 #> 
 #> $status
@@ -314,10 +314,10 @@ gjsn_lst
 #> 
 #> $timestamp
 #> $timestamp$created_http
-#> [1] "Wed, 04 Nov 2020 21:52:19 GMT"
+#> [1] "Fri, 13 Nov 2020 16:14:20 GMT"
 #> 
 #> $timestamp$created_unix
-#> [1] 1604526739
+#> [1] 1605284060
 #> 
 #> 
 #> $total_results
