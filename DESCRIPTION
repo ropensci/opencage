@@ -1,28 +1,45 @@
-Package: opencage
 Type: Package
-Title: Interface to the OpenCage API
-Version: 0.1.4
+Package: opencage
+Title: Geocode with the OpenCage API
+Version: 0.1.4.9006
 Authors@R: c(
-    person("Maëlle", "Salmon", email = "maelle.salmon@yahoo.se", role = c("aut", "cre")), 
+    person("Maëlle", "Salmon", email = "maelle.salmon@yahoo.se", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-2815-0399")), 
+    person("Daniel", "Possenriede", role = "aut", comment = c(ORCID = "0000-0002-6738-9845")),
+    person("Jesse", "Sadler", role = "aut", comment = c(ORCID = "0000-0001-6081-9681")),
     person("Noam", "Ross", role = "ctb"), 
-    person("Julia", "Silge", role = c("rev"), comment = "Julia Silge reviewed the package for rOpenSci, see https://github.com/ropensci/onboarding/issues/36."), 
     person("Jake", "Russ", role = "ctb"), 
-    person("Daniel", "Possenriede", role = "ctb"))
-Description: Tool for accessing the OpenCage API, which provides forward
-    geocoding (from placename to longitude and latitude) and reverse geocoding (from
-    longitude and latitude to placename).
+    person("Julia", "Silge", role = c("rev"), comment = "Julia Silge reviewed the package for rOpenSci, see https://github.com/ropensci/onboarding/issues/36."))
+Description: Geocode with the OpenCage API, either from place name to longitude 
+    and latitude (forward geocoding) or from longitude and latitude to the name 
+    and address of a location (reverse geocoding), see 
+    <https://opencagedata.com/>.
 License: GPL (>= 2)
-LazyData: TRUE
-URL: https://docs.ropensci.org/opencage, http://github.com/ropensci/opencage
-BugReports: http://github.com/ropensci/opencage/issues
-Imports: httr,
-    jsonlite,
-    dplyr,
-    memoise
-RoxygenNote: 6.0.1
-Suggests: testthat,
-    lintr,
-    knitr,
-    rmarkdown
+URL: https://docs.ropensci.org/opencage/,
+    https://github.com/ropensci/opencage
+BugReports: https://github.com/ropensci/opencage/issues
+Imports: 
+    crul (>= 0.5.2),
+    dplyr (>= 0.7.4),
+    lifecycle, 
+    jsonlite (>= 1.5),
+    memoise (>= 1.1.0),
+    progress (>= 1.1.2),
+    purrr (>= 0.2.4),
+    ratelimitr (>= 0.4.0),
+    rlang,
+    tibble (>= 1.4.2),
+    tidyr (>= 0.8.0)
+Suggests: 
+    knitr (>= 1.19),
+    mockery,
+    rmarkdown (>= 1.8),
+    sf (>= 0.9),
+    testthat (>= 2.1.0),
+    withr (>= 2.0.0)
 VignetteBuilder: knitr
 Encoding: UTF-8
+Language: en-GB
+LazyData: TRUE
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1.9000
+RdMacros: lifecycle
