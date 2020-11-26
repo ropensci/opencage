@@ -39,11 +39,15 @@ oc_check_key <- function(key) {
 #' @noRd
 
 oc_mask_key <- function(string) {
-  gsub(
-    x = string,
-    pattern = Sys.getenv("OPENCAGE_KEY"),
-    replacement = "OPENCAGE_KEY"
-  )
+  if (oc_key_present()) {
+    gsub(
+      x = string,
+      pattern = Sys.getenv("OPENCAGE_KEY"),
+      replacement = "OPENCAGE_KEY"
+    )
+  } else {
+    return(string)
+  }
 }
 
 #' Is an OpenCage API key present?
