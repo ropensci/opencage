@@ -64,8 +64,9 @@ oc_get_limited_test <- function(reps) {
 }
 
 test_that("oc_config updates rate limit of oc_get_limit", {
-  skip_on_cran()
   skip_if_offline("httpbin.org")
+  # make sure there is a key present
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
 
   rps <- 5L
   oc_config(rate_sec = rps)
@@ -84,8 +85,10 @@ test_that("oc_config updates rate limit of oc_get_limit", {
 # test no_record argument -------------------------------------------------
 
 test_that("oc_config sets no_record option", {
+  # make sure there is a key present
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
 
-  # Default without envvar and oc_config(no_record = FALSE)
+  # Default without envvar set and oc_config(no_record = FALSE)
   withr::local_options(list(oc_no_record = NULL))
   res <- oc_process("Hamburg", return = "url_only")
   expect_match(res[[1]], "&no_record=0", fixed = TRUE)
@@ -107,6 +110,8 @@ test_that("oc_config sets no_record option", {
 # test show_key argument --------------------------------------------------
 
 test_that("oc_config sets show_key option", {
+  # make sure there is a key present
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
 
   # Default with oc_config(show_key = FALSE)
   oc_config()

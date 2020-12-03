@@ -32,6 +32,15 @@ test_that("oc_mask_key masks key", {
   expect_match(oc_mask_key(key_200), "OPENCAGE_KEY", fixed = TRUE)
 })
 
+test_that("oc_mask_key does nothing if no key present", {
+  withr::local_envvar(c("OPENCAGE_KEY" = ""))
+  expect_match(
+    oc_mask_key("no_key_available"),
+    "no_key_available",
+    fixed = TRUE
+  )
+})
+
 ## Test oc_key_present ##
 
 test_that("oc_key_present detects if key is present", {

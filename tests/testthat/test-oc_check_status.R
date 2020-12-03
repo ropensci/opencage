@@ -12,7 +12,7 @@ test_that("oc_check_status returns no error if HTTP status 200", {
 })
 
 test_that("oc_check_status returns 400 error if request is invalid", {
-  skip_on_cran()
+  skip_if_no_key()
   skip_if_oc_offline()
 
   # Both shouldn't happen since we oc_check_query
