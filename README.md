@@ -11,10 +11,7 @@ Status](https://www.r-pkg.org/badges/version/opencage)](https://cran.r-project.o
 Checks](https://cranchecks.info/badges/worst/opencage)](https://cran.r-project.org/web/checks/check_results_opencage.html)
 [![CRAN Downloads per
 Month](https://cranlogs.r-pkg.org/badges/opencage)](https://cran.r-project.org/package=opencage)
-[![Travis Build
-Status](https://travis-ci.org/ropensci/opencage.svg?branch=master)](https://travis-ci.org/ropensci/opencage)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/ropensci/opencage?branch=master&svg=true)](https://ci.appveyor.com/project/maelle/opencage)
+[![R-CMD-check](https://github.com/ropensci/opencage/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/opencage/actions?query=workflow%3AR-CMD-check)
 [![codecov.io](https://codecov.io/github/ropensci/opencage/coverage.svg?branch=master)](https://codecov.io/github/ropensci/opencage?branch=master)
 [![rOpenSci
 Peer-Review](https://badges.ropensci.org/36_status.svg)](https://github.com/ropensci/software-review/issues/36)
@@ -45,8 +42,8 @@ remotes::install_github("ropensci/opencage")
 ## Quickstart
 
 For the best experience, we recommend that you read through the
-“Introduction to opencage” vignette (`vignette("opencage")`), but if
-you are in a hurry:
+“Introduction to opencage” vignette (`vignette("opencage")`), but if you
+are in a hurry:
 
 1.  Register at
     [opencagedata.com/users/sign\_up](https://opencagedata.com/users/sign_up).
@@ -81,18 +78,18 @@ oc_reverse_df(latitude = 51.5034070, longitude = -0.1275920)
     ##      <dbl>     <dbl> <chr>                                                      
     ## 1     51.5    -0.128 Prime Minister’s Office, Westminster, 10 Downing Street, L~
 
-But remember, the vignettes are really great\! We have:
+But remember, the vignettes are really great! We have:
 
-  - “Introduction to opencage” `vignette("opencage")`
-  - “Customise your query” `vignette("customise_query")`
-  - “Output options” `vignette("output_options")`
+-   “Introduction to opencage” `vignette("opencage")`
+-   “Customise your query” `vignette("customise_query")`
+-   “Output options” `vignette("output_options")`
 
 ## About OpenCage
 
 The [OpenCage](https://opencagedata.com/) API supports forward and
 reverse geocoding. Sources of OpenCage are open geospatial data
 including [OpenStreetMap](https://www.openstreetmap.org/),
-[DataScienceToolkit](https://github.com/petewarden/dstk), [Yahoo\!
+[DataScienceToolkit](https://github.com/petewarden/dstk), [Yahoo!
 GeoPlanet](https://developer.yahoo.com/geo/geoplanet/data/), [Natural
 Earth Data](https://www.naturalearthdata.com/),
 [libpostal](https://github.com/openvenues/libpostal),
@@ -103,11 +100,11 @@ credits](https://opencagedata.com/credits).
 
 ## Meta
 
-  - Please [report any issues or
+-   Please [report any issues or
     bugs](https://github.com/ropensci/opencage/issues).
-  - License: GPL \>= 2
-  - Get citation information for `opencage` in R doing `citation(package
-    = 'opencage')`
-  - Please note that this package is released with a [Contributor Code
+-   License: GPL &gt;= 2
+-   Get citation information for `opencage` in R doing
+    `citation(package = 'opencage')`
+-   Please note that this package is released with a [Contributor Code
     of Conduct](https://ropensci.org/code-of-conduct/). By contributing
     to this project, you agree to abide by its terms.
