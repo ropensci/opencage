@@ -2,7 +2,7 @@
 title: "Output options"
 subtitle: "Get different kinds of output from OpenCage"
 author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
-date: "2020-11-13"
+date: "2020-12-03"
 description: >
   "`oc_forward()`/`oc_reverse()` return lists of various type, namely data frames, JSON, GeoJSON or URLs, depending on the `return` value you specify. The possible `return` values are `df_list`, `json_list`, `geojson_list` and `url_only`."
 output:
@@ -113,10 +113,10 @@ oc_forward("Casey Station", return = "json_list")
 #> [1] 2500
 #> 
 #> [[1]]$rate$remaining
-#> [1] 2459
+#> [1] 2271
 #> 
 #> [[1]]$rate$reset
-#> [1] 1605312000
+#> [1] 1607040000
 #> 
 #> 
 #> [[1]]$results
@@ -190,10 +190,10 @@ oc_forward("Casey Station", return = "json_list")
 #> 
 #> [[1]]$timestamp
 #> [[1]]$timestamp$created_http
-#> [1] "Fri, 13 Nov 2020 16:14:17 GMT"
+#> [1] "Thu, 03 Dec 2020 18:02:47 GMT"
 #> 
 #> [[1]]$timestamp$created_unix
-#> [1] 1605284057
+#> [1] 1607018567
 #> 
 #> 
 #> [[1]]$total_results
@@ -287,10 +287,10 @@ gjsn_lst
 #> [1] 2500
 #> 
 #> $rate$remaining
-#> [1] 2457
+#> [1] 2269
 #> 
 #> $rate$reset
-#> [1] 1605312000
+#> [1] 1607040000
 #> 
 #> 
 #> $status
@@ -314,10 +314,10 @@ gjsn_lst
 #> 
 #> $timestamp
 #> $timestamp$created_http
-#> [1] "Fri, 13 Nov 2020 16:14:20 GMT"
+#> [1] "Thu, 03 Dec 2020 18:02:49 GMT"
 #> 
 #> $timestamp$created_unix
-#> [1] 1605284060
+#> [1] 1607018569
 #> 
 #> 
 #> $total_results
@@ -346,7 +346,7 @@ class(gjsn_lst[[1]])
 ```r
 oc_forward("Casey Station", return = "url_only")
 #> [[1]]
-#> [1] "https://api.opencagedata.com/geocode/v1/json?q=Casey%20Station&limit=10&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=0&abbrv=0&add_request=0&key=OPENCAGE_KEY"
+#> [1] "https://api.opencagedata.com/geocode/v1/json?q=Casey%20Station&limit=10&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=0&key=OPENCAGE_KEY"
 ```
 
 Your OpenCage API key is masked with the `OPENCAGE_KEY` string, by default. 
