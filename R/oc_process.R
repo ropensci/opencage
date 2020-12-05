@@ -44,7 +44,7 @@ oc_process <-
     key <- Sys.getenv("OPENCAGE_KEY")
 
     # get & check no_record
-    no_record <- getOption("oc_no_record", default = FALSE)
+    no_record <- getOption("oc_no_record", default = TRUE)
     oc_check_logical(no_record, check_length_one = TRUE)
 
     # show progress?

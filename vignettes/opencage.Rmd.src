@@ -90,7 +90,8 @@ You can set the `oc_no_record` option persistently across sessions in your `.Rpr
 
 For more information on OpenCage's policies on privacy and data protection see the Legal section in [their FAQs](https://opencagedata.com/faq#legal), their [GDPR page](https://opencagedata.com/gdpr), and, for the `no_record` parameter specifically, see the relevant [blog post](https://blog.opencagedata.com/post/145602604628/more-privacy-with-norecord-parameter).
 
-Please note that the {opencage} package always caches the data it receives from the OpenCage API but only for as long as your R session is alive (see below).
+For increased privacy, {opencage} sets `no_record` to `TRUE`, by default. 
+Please note, however, that \pkg{opencage} always caches the data it receives from the OpenCage API locally, but only for as long as your R session is alive (see below).
 
 ### (Don't) show API key
 

@@ -7,7 +7,7 @@
 oc_config(
   key = Sys.getenv("OPENCAGE_KEY"),
   rate_sec = getOption("oc_rate_sec", default = 1L),
-  no_record = getOption("oc_no_record", default = FALSE),
+  no_record = getOption("oc_no_record", default = TRUE),
   show_key = getOption("oc_show_key", default = FALSE),
   ...
 )
@@ -23,7 +23,7 @@ the \code{oc_rate_sec} option, or, in case that does not exist, to 1L.}
 \item{no_record}{Logical vector of length one. When \code{TRUE}, OpenCage will not
 create log entries of the queries and will not cache the geocoding
 requests. Defaults to the value set in the \code{oc_no_record} option, or, in
-case that does not exist, to \code{FALSE}.}
+case that does not exist, to \code{TRUE}.}
 
 \item{show_key}{Logical vector of length one. This is only relevant when
 debugging \code{oc_forward()} or \code{oc_reverse()} calls with the \code{return = "url_only"} argument. When \code{TRUE}, the result will show your OpenCage API
@@ -88,16 +88,15 @@ OpenCage's \href{https://opencagedata.com/gdpr}{page on data protection and GDPR
 
 If you set \code{no_record} to \code{TRUE}, the query contents are not logged nor
 cached. OpenCage still records that you made a request, but not the specific
-query you made. Please set \code{no_record} to \code{TRUE} if you have concerns about
-privacy and want OpenCage to have no record of your query.
+query you made. \code{oc_config(no_record = TRUE)} sets the \code{oc_no_record}
+\link[base:options]{option} for the active R session, so it will be used for all
+subsequent OpenCage queries. You can set the \code{oc_no_record}
+\link[base:options]{option} persistently across sessions in your
+\code{\link[base:Startup]{.Rprofile}}.
 
-\code{oc_config(no_record = TRUE)} sets the \code{oc_no_record} \link[base:options]{option}
-for the active R session, so it will be used for all subsequent OpenCage
-queries. You can set the \code{oc_no_record} \link[base:options]{option} persistently
-across sessions in your \code{\link[base:Startup]{.Rprofile}}.
-
-Please note that the \pkg{opencage} package always caches the data it
-receives from the OpenCage API but only for as long as your R session is
+For increased privacy \pkg{opencage} sets \code{no_record} to \code{TRUE}, by default.
+Please note, however, that \pkg{opencage} always caches the data it receives
+from the OpenCage API locally, but only for as long as your R session is
 alive.
 
 For more information on OpenCage's policies on privacy and data protection

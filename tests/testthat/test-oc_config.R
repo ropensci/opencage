@@ -88,13 +88,19 @@ test_that("oc_config sets no_record option", {
   # make sure there is a key present
   withr::local_envvar(c("OPENCAGE_KEY" = key_200))
 
-  # Default without envvar set and oc_config(no_record = FALSE)
+  # Default without envvar
   withr::local_options(list(oc_no_record = NULL))
   res <- oc_process("Hamburg", return = "url_only")
-  expect_match(res[[1]], "&no_record=0", fixed = TRUE)
+  expect_match(res[[1]], "&no_record=1", fixed = TRUE)
 
-  # Default with oc_config(no_record = FALSE)
+  # Default with oc_config(no_record = TRUE)
   oc_config()
+  expect_equal(getOption("oc_no_record"), TRUE)
+  res <- oc_process("Hamburg", return = "url_only")
+  expect_match(res[[1]], "&no_record=1", fixed = TRUE)
+
+  # Set oc_config(no_record = FALSE)
+  oc_config(no_record = FALSE)
   expect_equal(getOption("oc_no_record"), FALSE)
   res <- oc_process("Hamburg", return = "url_only")
   expect_match(res[[1]], "&no_record=0", fixed = TRUE)
