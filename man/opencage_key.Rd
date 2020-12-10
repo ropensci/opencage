@@ -11,7 +11,7 @@ opencage_key(quiet = TRUE)
 returned quietly or whether a message is printed.}
 }
 \description{
-\lifecycle{soft-deprecated}
+\ifelse{html}{\figure{lifecycle-soft-deprecated.svg}{options: alt='Soft-deprecated lifecycle'}}{\strong{Soft-deprecated}}
 
 Soft-deprecated and will be removed from the package together with
 \code{opencage_forward()} and \code{opencage_reverse()}.
