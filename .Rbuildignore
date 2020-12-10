@@ -14,3 +14,5 @@ datamanagement.R
 ^Meta$
 ^vignettes\/precompile.R$
 ^vignettes\/.+\.Rmd\.src$
+^\.github$
+^revdep$
