@@ -15,7 +15,7 @@ NULL
 #'
 #' @description
 #'
-#' \lifecycle{soft-deprecated}
+#' `r lifecycle::badge("soft-deprecated")`
 #'
 #' Soft deprecated: use `oc_forward` or `oc_forward_df` for forward geocoding.
 #'
@@ -92,7 +92,7 @@ opencage_forward <-
 #'
 #' @description
 #'
-#' \lifecycle{soft-deprecated}
+#' `r lifecycle::badge("soft-deprecated")`
 #'
 #' Soft deprecated: use `oc_reverse` or `oc_reverse_df` for reverse geocoding.
 #'
@@ -205,7 +205,7 @@ opencage_format <- function(lst) {
 #'
 #' @description
 #'
-#' \lifecycle{soft-deprecated}
+#' `r lifecycle::badge("soft-deprecated")`
 #'
 #' Soft-deprecated and will be removed from the package together with
 #' `opencage_forward()` and `opencage_reverse()`.

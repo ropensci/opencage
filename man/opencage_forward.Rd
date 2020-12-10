@@ -95,7 +95,7 @@ at which the number of remaining calls will be reset.
 }
 }
 \description{
-\lifecycle{soft-deprecated}
+\ifelse{html}{\figure{lifecycle-soft-deprecated.svg}{options: alt='Soft-deprecated lifecycle'}}{\strong{Soft-deprecated}}
 
 Soft deprecated: use \code{oc_forward} or \code{oc_forward_df} for forward geocoding.
 }
