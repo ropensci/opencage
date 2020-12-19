@@ -36,7 +36,7 @@ vcr::use_cassette("oc_check_status_400", {
 vcr::use_cassette("oc_check_status_401", {
   test_that("oc_check_status returns 401 error if key is invalid", {
 
-    withr::local_envvar(c("OPENCAGE_KEY" = "32charactersandnumbers1234567890"))
+    withr::local_envvar(c("OPENCAGE_KEY" = key_401))
     expect_error(
       oc_reverse(latitude = 0, longitude = 0),
       "HTTP failure: 401"
