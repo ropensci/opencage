@@ -82,21 +82,6 @@ test_that("oc_process creates meaningful URLs for multiple queries.", {
   expect_match(res[[2]], "q=37.83032%2C-122.47975", fixed = TRUE)
 })
 
-test_that("oc_process deals well with res being NULL", {
-  skip_if_no_key()
-  skip_if_oc_offline()
-
-  res <- oc_process(
-    placename = "thiswillgetmenoreswhichisgood",
-    limit = 2,
-    min_confidence = 5,
-    language = "pt-BR",
-    no_annotations = TRUE,
-    return = "df_list"
-  )
-  expect_null(res[["res"]])
-})
-
 test_that("oc_process handles bounds argument.", {
   res <- oc_process(
     placename = "Sarzeau",
