@@ -102,10 +102,19 @@ oc_build_url <- function(query_par, endpoint) {
 }
 
 # get results
+
+# user-agent string: this is set at build-time, but that should be okay,
+# since the version number is too.
+oc_ua_string <-
+  paste0(
+    "<https://github.com/ropensci/opencage>, version ",
+    packageVersion("opencage")
+  )
+
 oc_get <- function(oc_url) {
   client <- crul::HttpClient$new(
     url = oc_url,
-    headers = list(`User-Agent` = "https://github.com/ropensci/opencage")
+    headers = list(`User-Agent` = oc_ua_string)
   )
   client$get()
 }
