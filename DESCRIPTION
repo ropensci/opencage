@@ -28,14 +28,14 @@ Imports:
     ratelimitr (>= 0.4.0),
     rlang,
     tibble (>= 1.4.2),
-    tidyr (>= 0.8.0)
+    tidyr (>= 0.8.0),
+    withr (>= 2.0.0)
 Suggests: 
     knitr (>= 1.19),
     mockery,
     rmarkdown (>= 1.8),
     sf (>= 0.9),
-    testthat (>= 2.1.0),
-    withr (>= 2.0.0)
+    testthat (>= 2.1.0)
 VignetteBuilder: knitr
 Encoding: UTF-8
 Language: en-GB

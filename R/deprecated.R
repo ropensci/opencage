@@ -68,7 +68,10 @@ opencage_forward <-
 
     lifecycle::deprecate_soft("0.2.0", "opencage_forward()", "oc_forward()")
 
-    oc_config(key = key, no_record = no_record)
+    # set key and no_record option locally,
+    # i.e. go back to default after function is finished
+    withr::local_envvar(list("OPENCAGE_KEY" = key))
+    withr::local_options(list(oc_no_record = no_record))
 
     lst <- oc_forward(
       placename = placename,
@@ -136,7 +139,10 @@ opencage_reverse <-
 
     lifecycle::deprecate_soft("0.2.0", "opencage_reverse()", "oc_reverse()")
 
-    oc_config(key = key, no_record = no_record)
+    # set key and no_record option locally,
+    # i.e. go back to default after function is finished
+    withr::local_envvar(list("OPENCAGE_KEY" = key))
+    withr::local_options(list(oc_no_record = no_record))
 
     lst <- oc_reverse(
       latitude = latitude,
