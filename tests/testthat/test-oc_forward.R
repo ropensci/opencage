@@ -66,11 +66,11 @@ test_that("oc_forward adds request with add_request", {
 })
 
 test_that("oc_forward masks key when add_request = TRUE", {
-  skip_if_no_key()
   skip_if_oc_offline()
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
 
   # json_list
-  res <- oc_forward("Hamburg", return = "json_list", add_request = TRUE)
+  res <- oc_forward("irrelevant", return = "json_list", add_request = TRUE)
   expect_equal(res[[1]][["request"]][["key"]], "OPENCAGE_KEY")
 })
 

@@ -57,8 +57,8 @@ test_that("oc_reverse adds request with add_request", {
 })
 
 test_that("oc_reverse masks key when add_request = TRUE", {
-  skip_if_no_key()
   skip_if_oc_offline()
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
 
   res <- oc_reverse(lat[1], lng[1], return = "json_list", add_request = TRUE)
   expect_equal(res[[1]][["request"]][["key"]], "OPENCAGE_KEY")

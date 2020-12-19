@@ -23,6 +23,7 @@ test_that("oc_process(return = 'url_only') shows key if desired.", {
 })
 
 test_that("oc_process creates meaningful URLs for single query.", {
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   res <-
     oc_process(
       placename = "Paris",
@@ -62,6 +63,7 @@ test_that("oc_process creates meaningful URLs for single query.", {
 })
 
 test_that("oc_process creates meaningful URLs for multiple queries.", {
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   res <- oc_process(
     placename = c("Paris", "Hamburg"),
     return = "url_only"
@@ -83,6 +85,7 @@ test_that("oc_process creates meaningful URLs for multiple queries.", {
 })
 
 test_that("oc_process handles bounds argument.", {
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   res <- oc_process(
     placename = "Sarzeau",
     bounds = list(c(-5.5, 51.2, 0.2, 51.6)),
@@ -132,6 +135,7 @@ test_that("bounds argument is well taken into account with df_list", {
 })
 
 test_that("oc_process handles proximity argument.", {
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   res <- oc_process(
     placename = "Warsaw",
     proximity = list(c(latitude = 41.2, longitude = -85.8)),
@@ -159,6 +163,7 @@ test_that("oc_process handles proximity argument.", {
 })
 
 test_that("oc_process handles language argument.", {
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   res1 <- oc_process(
     placename = c("New York", "Rio", "Tokyo"),
     language = "ja",
@@ -177,6 +182,7 @@ test_that("oc_process handles language argument.", {
 })
 
 test_that("oc_process handles countrycode argument.", {
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   res1 <- oc_process(
     placename = c("Hamburg", "Paris"),
     countrycode = "DE",
@@ -203,6 +209,7 @@ test_that("oc_process handles countrycode argument.", {
 })
 
 test_that("oc_process handles various other arguments.", {
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   res1 <- oc_process(
     placename = "Hamburg",
     return = "url_only",
@@ -269,6 +276,7 @@ test_that("oc_process handles various other arguments.", {
 })
 
 test_that("arguments that are NULL or NA don't show up in url.", {
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   res_null <- oc_process(
     placename = "Hamburg",
     return = "url_only",
