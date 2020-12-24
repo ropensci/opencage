@@ -117,7 +117,9 @@ vcr::use_cassette("oc_forward_df_output", {
     expect_equal(names(oc_forward_df(df, loc, bind_cols = FALSE)),
                  c("oc_query", "oc_lat", "oc_lng", "oc_formatted"))
     expect_gt(ncol(oc_forward_df(df, loc, output = "all")), 5)
-    expect_gt(ncol(oc_forward_df(df, loc, bind_cols = FALSE, output = "all")), 5)
+    expect_gt(
+      ncol(oc_forward_df(df, loc, bind_cols = FALSE, output = "all")), 5
+    )
   })
 })
 

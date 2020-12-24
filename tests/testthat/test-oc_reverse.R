@@ -53,7 +53,7 @@ vcr::use_cassette("oc_reverse_add_request", {
 vcr::use_cassette("oc_reverse_add_request_mask_key", {
   test_that("oc_reverse masks key when add_request = TRUE", {
     withr::local_envvar(c("OPENCAGE_KEY" = key_200))
-    
+
     res <- oc_reverse(lat[1], lng[1], return = "json_list", add_request = TRUE)
     expect_equal(res[[1]][["request"]][["key"]], "OPENCAGE_KEY")
   })
