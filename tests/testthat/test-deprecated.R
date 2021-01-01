@@ -1,9 +1,7 @@
 ## Test deprecated opencage_forward ##
 
 test_that("opencage_forward/opencage_reverse return what they should.", {
-  skip_if_no_key()
-  skip_if_oc_offline()
-
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   lifecycle::expect_deprecated(
     results <- opencage_forward(placename = "Sarzeau")
   )
@@ -14,32 +12,7 @@ test_that("opencage_forward/opencage_reverse return what they should.", {
   expect_equal(length(results), 4)
 
   lifecycle::expect_deprecated(
-    results <- opencage_forward(placename = "Islington, London")
-  )
-  expect_is(results, "list")
-  expect_is(results[["results"]], "tbl_df")
-  expect_is(results[["total_results"]], "integer")
-  expect_is(results[["time_stamp"]], "POSIXct")
-  expect_equal(length(results), 4)
-
-  placename <- "Triererstr 15, Weimar 99423, Deutschland"
-  lifecycle::expect_deprecated(
-    results <- opencage_forward(placename = placename)
-  )
-  expect_is(results, "list")
-  expect_is(results[["results"]], "tbl_df")
-  expect_is(results[["total_results"]], "integer")
-  expect_is(results[["time_stamp"]], "POSIXct")
-  expect_equal(length(results), 4)
-
-  lifecycle::expect_deprecated(
-    results <-
-      opencage_reverse(
-        longitude = 0,
-        latitude = 0,
-        limit = 2,
-        key = Sys.getenv("OPENCAGE_KEY")
-      )
+    results <- opencage_reverse(longitude = 0, latitude = 0)
   )
   expect_is(results, "list")
   expect_is(results[["results"]], "tbl_df")
@@ -50,13 +23,11 @@ test_that("opencage_forward/opencage_reverse return what they should.", {
 
 test_that("opencage_forward/opencage_reverse return what they should
           with several parameters.", {
-  skip_if_no_key()
-  skip_if_oc_offline()
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
 
   lifecycle::expect_deprecated(
     results <- opencage_forward(
       placename = "Paris",
-      key = Sys.getenv("OPENCAGE_KEY"),
       limit = 2,
       min_confidence = 5,
       language = "fr",
@@ -77,8 +48,6 @@ test_that("opencage_forward/opencage_reverse return what they should
     results <- opencage_reverse(
       latitude = 44,
       longitude = 44,
-      key = Sys.getenv("OPENCAGE_KEY"),
-      limit = 2,
       min_confidence = 5,
       language = "pt-BR",
       no_annotations = TRUE)
@@ -99,9 +68,11 @@ test_that("opencage_forward deals well with results being NULL", {
   skip_if_no_key()
   skip_if_oc_offline()
 
+  # the query NOWHERE-INTERESTING will return a valid response with 0 results
+  # https://opencagedata.com/api#no-results
   lifecycle::expect_deprecated(
     results <- opencage_forward(
-      placename = "thiswillgetmenoresultswichisgood",
+      placename = "NOWHERE-INTERESTING",
       key = Sys.getenv("OPENCAGE_KEY"),
       limit = 2,
       min_confidence = 5,
@@ -134,6 +105,8 @@ test_that("the bounds argument is well taken into account", {
 })
 
 test_that("Errors with multiple inputs", {
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
+
   expect_error(opencage_forward(c("Hamburg", "Los Angeles")),
     "`opencage_forward` is not vectorised; use `oc_forward` instead.")
   expect_error(opencage_reverse(c(5, 20), c(6, 21)),
