@@ -23,6 +23,7 @@ test_that("oc_process(return = 'url_only') shows key if desired.", {
 })
 
 test_that("oc_process creates meaningful URLs for single query.", {
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   res <-
     oc_process(
       placename = "Paris",
@@ -61,37 +62,8 @@ test_that("oc_process creates meaningful URLs for single query.", {
   expect_match(res[[1]], "q=41.40139%2C2.1287", fixed = TRUE)
 })
 
-test_that("oc_process creates meaningful URLs with NAs.", {
-  res <-
-    oc_process(
-      placename = NA_character_,
-      return = "url_only"
-    )
-  expect_match(res[[1]], "q=&", fixed = TRUE)
-  res <-
-    oc_process(
-      latitude = NA_real_,
-      longitude = NA_real_,
-      return = "url_only"
-    )
-  expect_match(res[[1]], "q=&", fixed = TRUE)
-  res <-
-    oc_process(
-      latitude = 0,
-      longitude = NA_real_,
-      return = "url_only"
-    )
-  expect_match(res[[1]], "q=&", fixed = TRUE)
-  res <-
-    oc_process(
-      latitude = NA_real_,
-      longitude = 0,
-      return = "url_only"
-    )
-  expect_match(res[[1]], "q=&", fixed = TRUE)
-})
-
 test_that("oc_process creates meaningful URLs for multiple queries.", {
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   res <- oc_process(
     placename = c("Paris", "Hamburg"),
     return = "url_only"
@@ -112,22 +84,8 @@ test_that("oc_process creates meaningful URLs for multiple queries.", {
   expect_match(res[[2]], "q=37.83032%2C-122.47975", fixed = TRUE)
 })
 
-test_that("oc_process deals well with res being NULL", {
-  skip_if_no_key()
-  skip_if_oc_offline()
-
-  res <- oc_process(
-    placename = "thiswillgetmenoreswhichisgood",
-    limit = 2,
-    min_confidence = 5,
-    language = "pt-BR",
-    no_annotations = TRUE,
-    return = "df_list"
-  )
-  expect_null(res[["res"]])
-})
-
 test_that("oc_process handles bounds argument.", {
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   res <- oc_process(
     placename = "Sarzeau",
     bounds = list(c(-5.5, 51.2, 0.2, 51.6)),
@@ -177,6 +135,7 @@ test_that("bounds argument is well taken into account with df_list", {
 })
 
 test_that("oc_process handles proximity argument.", {
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   res <- oc_process(
     placename = "Warsaw",
     proximity = list(c(latitude = 41.2, longitude = -85.8)),
@@ -204,6 +163,7 @@ test_that("oc_process handles proximity argument.", {
 })
 
 test_that("oc_process handles language argument.", {
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   res1 <- oc_process(
     placename = c("New York", "Rio", "Tokyo"),
     language = "ja",
@@ -222,6 +182,7 @@ test_that("oc_process handles language argument.", {
 })
 
 test_that("oc_process handles countrycode argument.", {
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   res1 <- oc_process(
     placename = c("Hamburg", "Paris"),
     countrycode = "DE",
@@ -248,6 +209,7 @@ test_that("oc_process handles countrycode argument.", {
 })
 
 test_that("oc_process handles various other arguments.", {
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   res1 <- oc_process(
     placename = "Hamburg",
     return = "url_only",
@@ -314,6 +276,7 @@ test_that("oc_process handles various other arguments.", {
 })
 
 test_that("arguments that are NULL or NA don't show up in url.", {
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   res_null <- oc_process(
     placename = "Hamburg",
     return = "url_only",

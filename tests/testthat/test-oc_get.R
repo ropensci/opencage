@@ -1,14 +1,14 @@
 ## Test oc_get ##
 
 test_that("oc_get returns a response object", {
-  skip_if_no_key()
   skip_if_oc_offline()
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
 
   expect_s3_class(
     oc_get(
       oc_build_url(
         query_par = list(
-          placename = "Sarzeau",
+          placename = "irrelevant",
           key = Sys.getenv("OPENCAGE_KEY")
         ),
         endpoint = "json"

@@ -19,6 +19,7 @@ test_that("oc_config sets OPENCAGE_KEY environment variable", {
 })
 
 test_that("oc_config requests key from terminal", {
+  skip_if_not_installed("mockery")
   rlang::local_interactive(TRUE)
   withr::local_envvar(c("OPENCAGE_KEY" = ""))
   mockery::stub(
