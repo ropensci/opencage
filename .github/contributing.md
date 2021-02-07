@@ -80,7 +80,8 @@ You should also consider the following:
 Most importantly only address one issue per PR. 
 This makes it easier for us to review and merge your PR. 
 * We mostly follow the tidyverse [style guide](http://style.tidyverse.org).
-You can use the [styler](https://styler.r-lib.org/) package to apply these styles, but please do not restyle code that has nothing to do with your PR.  
+You can use the [styler](https://styler.r-lib.org/) package to apply these styles, but please do not restyle code that has nothing to do with your PR. 
+* We use [lintr](https://github.com/jimhester/lintr) for [static code analysis](https://github.com/jimhester/lintr).
 * We use [roxygen2](https://roxygen2.r-lib.org/), with [Markdown syntax](https://roxygen2.r-lib.org/articles/rd-formatting.html), for documentation.
 * We would prefer it if your PR also included unit tests. 
 Contributions with test cases included are easier to accept and unit tests ensure that the functionality you just added will not break in the future.
