@@ -20,12 +20,12 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Maëlle Salmon \email{maelle.salmon@yahoo.se} (\href{https://orcid.org/0000-0002-2815-0399}{ORCID})
+\strong{Maintainer}: Daniel Possenriede \email{possenriede+r@gmail.com} (\href{https://orcid.org/0000-0002-6738-9845}{ORCID})
 
 Authors:
 \itemize{
-  \item Daniel Possenriede (\href{https://orcid.org/0000-0002-6738-9845}{ORCID})
   \item Jesse Sadler (\href{https://orcid.org/0000-0001-6081-9681}{ORCID})
+  \item Maëlle Salmon (\href{https://orcid.org/0000-0002-2815-0399}{ORCID})
 }
 
 Other contributors:
