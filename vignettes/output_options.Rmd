@@ -2,7 +2,7 @@
 title: "Output options"
 subtitle: "Get different kinds of output from OpenCage"
 author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
-date: "2020-12-03"
+date: "2021-02-11"
 description: >
   "`oc_forward()`/`oc_reverse()` return lists of various type, namely data frames, JSON, GeoJSON or URLs, depending on the `return` value you specify. The possible `return` values are `df_list`, `json_list`, `geojson_list` and `url_only`."
 output:
@@ -36,20 +36,20 @@ It returns a list of tibbles.
 stations <- c("Casey Station", "McMurdo Station")
 oc_forward(stations, return = "df_list")
 #> [[1]]
-#> # A tibble: 1 x 12
-#>   oc_confidence oc_formatted oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng
-#>           <int> <chr>                   <dbl>            <dbl>            <dbl>            <dbl>
-#> 1             7 Casey Stati~            -66.3             111.            -66.3             111.
-#> # ... with 6 more variables: oc_category <chr>, oc_type <chr>, oc_continent <chr>, oc_hamlet <chr>,
-#> #   oc_lat <dbl>, oc_lng <dbl>
+#> # A tibble: 2 x 18
+#>   oc_confidence oc_formatted oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng oc_category oc_type oc_continent oc_hamlet
+#>           <int> <chr>                   <dbl>            <dbl>            <dbl>            <dbl> <chr>       <chr>   <chr>        <chr>    
+#> 1             9 Casey Stati~            -66.3             111.            -66.3             111. commerce    office  Antarctica   Casey St~
+#> 2             9 Casey Stati~             NA                NA              NA                NA  travel/tou~ point_~ Antarctica   <NA>     
+#> # ... with 8 more variables: oc_office <chr>, oc_iso_3166_1_alpha_2 <chr>, oc_iso_3166_1_alpha_3 <chr>, oc_country <chr>,
+#> #   oc_country_code <chr>, oc_point_of_interest <chr>, oc_lat <dbl>, oc_lng <dbl>
 #> 
 #> [[2]]
 #> # A tibble: 1 x 12
-#>   oc_confidence oc_formatted oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng
-#>           <int> <chr>                   <dbl>            <dbl>            <dbl>            <dbl>
-#> 1             7 McMurdo Sta~            -77.8             167.            -77.9             167.
-#> # ... with 6 more variables: oc_category <chr>, oc_type <chr>, oc_continent <chr>, oc_town <chr>,
-#> #   oc_lat <dbl>, oc_lng <dbl>
+#>   oc_confidence oc_formatted oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng oc_category oc_type oc_continent oc_town
+#>           <int> <chr>                   <dbl>            <dbl>            <dbl>            <dbl> <chr>       <chr>   <chr>        <chr>  
+#> 1             7 McMurdo Sta~            -77.8             167.            -77.9             167. place       city    Antarctica   McMurd~
+#> # ... with 2 more variables: oc_lat <dbl>, oc_lng <dbl>
 ```
 
 The `df_list` type drives the `oc_forward_df()`/`oc_reverse_df()` functions.
@@ -67,7 +67,7 @@ oc_data
 #> # A tibble: 2 x 2
 #>   place           oc_result        
 #>   <chr>           <list>           
-#> 1 Casey Station   <tibble [1 x 12]>
+#> 1 Casey Station   <tibble [2 x 18]>
 #> 2 McMurdo Station <tibble [1 x 12]>
 ```
 
@@ -78,13 +78,14 @@ This creates a list column `oc_result`, which can be easily unnested with `tidyr
 library(tidyr, warn.conflicts = FALSE)
 
 oc_data %>% unnest(oc_result)
-#> # A tibble: 2 x 14
-#>   place oc_confidence oc_formatted oc_northeast_lat oc_northeast_lng oc_southwest_lat
-#>   <chr>         <int> <chr>                   <dbl>            <dbl>            <dbl>
-#> 1 Case~             7 Casey Stati~            -66.3             111.            -66.3
-#> 2 McMu~             7 McMurdo Sta~            -77.8             167.            -77.9
-#> # ... with 8 more variables: oc_southwest_lng <dbl>, oc_category <chr>, oc_type <chr>,
-#> #   oc_continent <chr>, oc_hamlet <chr>, oc_lat <dbl>, oc_lng <dbl>, oc_town <chr>
+#> # A tibble: 3 x 20
+#>   place oc_confidence oc_formatted oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng oc_category oc_type oc_continent
+#>   <chr>         <int> <chr>                   <dbl>            <dbl>            <dbl>            <dbl> <chr>       <chr>   <chr>       
+#> 1 Case~             9 Casey Stati~            -66.3             111.            -66.3             111. commerce    office  Antarctica  
+#> 2 Case~             9 Casey Stati~             NA                NA              NA                NA  travel/tou~ point_~ Antarctica  
+#> 3 McMu~             7 McMurdo Sta~            -77.8             167.            -77.9             167. place       city    Antarctica  
+#> # ... with 10 more variables: oc_hamlet <chr>, oc_office <chr>, oc_iso_3166_1_alpha_2 <chr>, oc_iso_3166_1_alpha_3 <chr>,
+#> #   oc_country <chr>, oc_country_code <chr>, oc_point_of_interest <chr>, oc_lat <dbl>, oc_lng <dbl>, oc_town <chr>
 ```
 
 ## `json_list`
@@ -108,43 +109,32 @@ oc_forward("Casey Station", return = "json_list")
 #> 
 #> 
 #> 
-#> [[1]]$rate
-#> [[1]]$rate$limit
-#> [1] 2500
-#> 
-#> [[1]]$rate$remaining
-#> [1] 2271
-#> 
-#> [[1]]$rate$reset
-#> [1] 1607040000
-#> 
-#> 
 #> [[1]]$results
 #> [[1]]$results[[1]]
 #> [[1]]$results[[1]]$bounds
 #> [[1]]$results[[1]]$bounds$northeast
 #> [[1]]$results[[1]]$bounds$northeast$lat
-#> [1] -66.26249
+#> [1] -66.28255
 #> 
 #> [[1]]$results[[1]]$bounds$northeast$lng
-#> [1] 110.5468
+#> [1] 110.5267
 #> 
 #> 
 #> [[1]]$results[[1]]$bounds$southwest
 #> [[1]]$results[[1]]$bounds$southwest$lat
-#> [1] -66.30249
+#> [1] -66.28265
 #> 
 #> [[1]]$results[[1]]$bounds$southwest$lng
-#> [1] 110.5068
+#> [1] 110.5266
 #> 
 #> 
 #> 
 #> [[1]]$results[[1]]$components
 #> [[1]]$results[[1]]$components$`_category`
-#> [1] "place"
+#> [1] "commerce"
 #> 
 #> [[1]]$results[[1]]$components$`_type`
-#> [1] "village"
+#> [1] "office"
 #> 
 #> [[1]]$results[[1]]$components$continent
 #> [1] "Antarctica"
@@ -152,19 +142,64 @@ oc_forward("Casey Station", return = "json_list")
 #> [[1]]$results[[1]]$components$hamlet
 #> [1] "Casey Station"
 #> 
+#> [[1]]$results[[1]]$components$office
+#> [1] "Casey Station"
+#> 
 #> 
 #> [[1]]$results[[1]]$confidence
-#> [1] 7
+#> [1] 9
 #> 
 #> [[1]]$results[[1]]$formatted
 #> [1] "Casey Station"
 #> 
 #> [[1]]$results[[1]]$geometry
 #> [[1]]$results[[1]]$geometry$lat
-#> [1] -66.28249
+#> [1] -66.2826
 #> 
 #> [[1]]$results[[1]]$geometry$lng
-#> [1] 110.5268
+#> [1] 110.5266
+#> 
+#> 
+#> 
+#> [[1]]$results[[2]]
+#> [[1]]$results[[2]]$components
+#> [[1]]$results[[2]]$components$`ISO_3166-1_alpha-2`
+#> [1] "AQ"
+#> 
+#> [[1]]$results[[2]]$components$`ISO_3166-1_alpha-3`
+#> [1] "ATA"
+#> 
+#> [[1]]$results[[2]]$components$`_category`
+#> [1] "travel/tourism"
+#> 
+#> [[1]]$results[[2]]$components$`_type`
+#> [1] "point_of_interest"
+#> 
+#> [[1]]$results[[2]]$components$continent
+#> [1] "Antarctica"
+#> 
+#> [[1]]$results[[2]]$components$country
+#> [1] "Antarctica"
+#> 
+#> [[1]]$results[[2]]$components$country_code
+#> [1] "aq"
+#> 
+#> [[1]]$results[[2]]$components$point_of_interest
+#> [1] "Casey Station"
+#> 
+#> 
+#> [[1]]$results[[2]]$confidence
+#> [1] 9
+#> 
+#> [[1]]$results[[2]]$formatted
+#> [1] "Casey Station, Antarctica"
+#> 
+#> [[1]]$results[[2]]$geometry
+#> [[1]]$results[[2]]$geometry$lat
+#> [1] -66.28225
+#> 
+#> [[1]]$results[[2]]$geometry$lng
+#> [1] 110.5278
 #> 
 #> 
 #> 
@@ -190,14 +225,14 @@ oc_forward("Casey Station", return = "json_list")
 #> 
 #> [[1]]$timestamp
 #> [[1]]$timestamp$created_http
-#> [1] "Thu, 03 Dec 2020 18:02:47 GMT"
+#> [1] "Thu, 11 Feb 2021 16:23:40 GMT"
 #> 
 #> [[1]]$timestamp$created_unix
-#> [1] 1607018567
+#> [1] 1613060620
 #> 
 #> 
 #> [[1]]$total_results
-#> [1] 1
+#> [1] 2
 ```
 
 ## `geojson_list`
@@ -217,10 +252,10 @@ gjsn_lst
 #> $features[[1]]$geometry
 #> $features[[1]]$geometry$coordinates
 #> $features[[1]]$geometry$coordinates[[1]]
-#> [1] 110.5268
+#> [1] 110.5266
 #> 
 #> $features[[1]]$geometry$coordinates[[2]]
-#> [1] -66.28249
+#> [1] -66.2826
 #> 
 #> 
 #> $features[[1]]$geometry$type
@@ -231,27 +266,27 @@ gjsn_lst
 #> $features[[1]]$properties$bounds
 #> $features[[1]]$properties$bounds$northeast
 #> $features[[1]]$properties$bounds$northeast$lat
-#> [1] -66.26249
+#> [1] -66.28255
 #> 
 #> $features[[1]]$properties$bounds$northeast$lng
-#> [1] 110.5468
+#> [1] 110.5267
 #> 
 #> 
 #> $features[[1]]$properties$bounds$southwest
 #> $features[[1]]$properties$bounds$southwest$lat
-#> [1] -66.30249
+#> [1] -66.28265
 #> 
 #> $features[[1]]$properties$bounds$southwest$lng
-#> [1] 110.5068
+#> [1] 110.5266
 #> 
 #> 
 #> 
 #> $features[[1]]$properties$components
 #> $features[[1]]$properties$components$`_category`
-#> [1] "place"
+#> [1] "commerce"
 #> 
 #> $features[[1]]$properties$components$`_type`
-#> [1] "village"
+#> [1] "office"
 #> 
 #> $features[[1]]$properties$components$continent
 #> [1] "Antarctica"
@@ -259,15 +294,70 @@ gjsn_lst
 #> $features[[1]]$properties$components$hamlet
 #> [1] "Casey Station"
 #> 
+#> $features[[1]]$properties$components$office
+#> [1] "Casey Station"
+#> 
 #> 
 #> $features[[1]]$properties$confidence
-#> [1] 7
+#> [1] 9
 #> 
 #> $features[[1]]$properties$formatted
 #> [1] "Casey Station"
 #> 
 #> 
 #> $features[[1]]$type
+#> [1] "Feature"
+#> 
+#> 
+#> $features[[2]]
+#> $features[[2]]$geometry
+#> $features[[2]]$geometry$coordinates
+#> $features[[2]]$geometry$coordinates[[1]]
+#> [1] 110.5278
+#> 
+#> $features[[2]]$geometry$coordinates[[2]]
+#> [1] -66.28225
+#> 
+#> 
+#> $features[[2]]$geometry$type
+#> [1] "Point"
+#> 
+#> 
+#> $features[[2]]$properties
+#> $features[[2]]$properties$components
+#> $features[[2]]$properties$components$`ISO_3166-1_alpha-2`
+#> [1] "AQ"
+#> 
+#> $features[[2]]$properties$components$`ISO_3166-1_alpha-3`
+#> [1] "ATA"
+#> 
+#> $features[[2]]$properties$components$`_category`
+#> [1] "travel/tourism"
+#> 
+#> $features[[2]]$properties$components$`_type`
+#> [1] "point_of_interest"
+#> 
+#> $features[[2]]$properties$components$continent
+#> [1] "Antarctica"
+#> 
+#> $features[[2]]$properties$components$country
+#> [1] "Antarctica"
+#> 
+#> $features[[2]]$properties$components$country_code
+#> [1] "aq"
+#> 
+#> $features[[2]]$properties$components$point_of_interest
+#> [1] "Casey Station"
+#> 
+#> 
+#> $features[[2]]$properties$confidence
+#> [1] 9
+#> 
+#> $features[[2]]$properties$formatted
+#> [1] "Casey Station, Antarctica"
+#> 
+#> 
+#> $features[[2]]$type
 #> [1] "Feature"
 #> 
 #> 
@@ -283,15 +373,7 @@ gjsn_lst
 #> 
 #> 
 #> $rate
-#> $rate$limit
-#> [1] 2500
-#> 
-#> $rate$remaining
-#> [1] 2269
-#> 
-#> $rate$reset
-#> [1] 1607040000
-#> 
+#> named list()
 #> 
 #> $status
 #> $status$code
@@ -314,14 +396,14 @@ gjsn_lst
 #> 
 #> $timestamp
 #> $timestamp$created_http
-#> [1] "Thu, 03 Dec 2020 18:02:49 GMT"
+#> [1] "Thu, 11 Feb 2021 16:23:43 GMT"
 #> 
 #> $timestamp$created_unix
-#> [1] 1607018569
+#> [1] 1613060623
 #> 
 #> 
 #> $total_results
-#> [1] 1
+#> [1] 2
 #> 
 #> $type
 #> [1] "FeatureCollection"
