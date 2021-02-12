@@ -1,4 +1,4 @@
-# opencage 0.1.4.9006
+# opencage 0.2.0
 
 This is a major rewrite of the {opencage} package. `opencage_forward()` and `opencage_reverse()` have been deprecated and are superseded by `oc_forward()` and `oc_reverse()`, respectively. In addition there are two new functions `oc_forward_df()` and `oc_reverse_df()`, which geocode place names or addresses into geographic coordinates (latitude and longitude) or vice versa, and return a data frame. 
 
@@ -27,7 +27,7 @@ The new features include:
 ## Minor changes
 
 * The column name for `countrycodes` is now `code`, not `Code`. 
-* HTTP error messages are now returned directly from the API and are therefore always up-to-date. The previously used responses in `code_message`, which were stored in opencage as external data, have been deleted. For more information on OpenCage's HTTP status codes see https://opencagedata.com/api#codes.
+* HTTP error messages are now returned directly from the API and are therefore always up-to-date. The previously used responses in `code_message`, which were stored in {opencage} as external data, have been deleted. For more information on OpenCage's HTTP status codes see https://opencagedata.com/api#codes.
 
 # opencage 0.1.4
 
