@@ -16,3 +16,4 @@ datamanagement.R
 ^vignettes\/.+\.Rmd\.src$
 ^\.github$
 ^revdep$
+^CRAN-RELEASE$
