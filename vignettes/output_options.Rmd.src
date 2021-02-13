@@ -27,7 +27,7 @@ library("opencage")
 {opencage} contains two main types of main functions distinguished by the manner in which the results are returned:
 
 1. The `oc_forward_df()`/`oc_reverse_df()` functions always return a single tibble.
-2. The `oc_forward()`/`oc_reverse()` functions return a list of various types, depending on the `return` value you specify. 
+2. The `oc_forward()`/`oc_reverse()` functions return a list of various types, depending on the `return` value you specify.
 The possible `return` values are `df_list`, `json_list`, `geojson_list` and `url_only`.
 
 Use of the `oc_forward_df()`/`oc_reverse_df()` functions is demonstrated in the "Introduction to opencage" and the "Customise your query" vignettes (`vignette("opencage")` and `vignette("customise_query")`, respectively) .
@@ -82,7 +82,7 @@ gjsn_lst <- oc_forward("Casey Station", return = "geojson_list")
 gjsn_lst
 ```
 
-In fact, {opencage} returns a list of results in `geo_list` format, which should be compatible with the {[geojsonio](https://docs.ropensci.org/geojsonio)} package.
+In fact, {opencage} returns a list of results in `geo_list` format, which should be compatible with the {[geojsonio](https://docs.ropensci.org/geojsonio/)} package.
 
 ```{r geo_list}
 class(gjsn_lst[[1]])
@@ -96,8 +96,8 @@ class(gjsn_lst[[1]])
 oc_forward("Casey Station", return = "url_only")
 ```
 
-Your OpenCage API key is masked with the `OPENCAGE_KEY` string, by default. 
-If you really want {opencage} to display your API key with the URL, set the `show_key` argument in `oc_config()` to `TRUE`. 
+Your OpenCage API key is masked with the `OPENCAGE_KEY` string, by default.
+If you really want {opencage} to display your API key with the URL, set the `show_key` argument in `oc_config()` to `TRUE`.
 
 ```{r show_key, include=TRUE, eval=FALSE}
 oc_config(show_key = TRUE)
@@ -114,6 +114,6 @@ Please file an [issue](https://github.com/ropensci/opencage/issues) or a [pull-r
 
 `oc_forward()` and `oc_reverse()` have an `add_request` argument, indicating whether the request is returned again with the results.
 If the `return` value is a `df_list`, the `placename` or `latitude,longitude` is added as a column to the results without a roundtrip to the API.
-`json_list` results will contain all request parameters as returned by the API. 
-This would normally include your OpenCage API key, but {opencage} masks the key and replaces it with the `OPENCAGE_KEY` string in the output. 
+`json_list` results will contain all request parameters as returned by the API.
+This would normally include your OpenCage API key, but {opencage} masks the key and replaces it with the `OPENCAGE_KEY` string in the output.
 `add_request` is currently ignored by OpenCage for GeoJSON results.

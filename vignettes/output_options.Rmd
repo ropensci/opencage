@@ -2,7 +2,7 @@
 title: "Output options"
 subtitle: "Get different kinds of output from OpenCage"
 author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
-date: "2021-02-11"
+date: "2021-02-13"
 description: >
   "`oc_forward()`/`oc_reverse()` return lists of various type, namely data frames, JSON, GeoJSON or URLs, depending on the `return` value you specify. The possible `return` values are `df_list`, `json_list`, `geojson_list` and `url_only`."
 output:
@@ -19,7 +19,7 @@ vignette: >
 {opencage} contains two main types of main functions distinguished by the manner in which the results are returned:
 
 1. The `oc_forward_df()`/`oc_reverse_df()` functions always return a single tibble.
-2. The `oc_forward()`/`oc_reverse()` functions return a list of various types, depending on the `return` value you specify. 
+2. The `oc_forward()`/`oc_reverse()` functions return a list of various types, depending on the `return` value you specify.
 The possible `return` values are `df_list`, `json_list`, `geojson_list` and `url_only`.
 
 Use of the `oc_forward_df()`/`oc_reverse_df()` functions is demonstrated in the "Introduction to opencage" and the "Customise your query" vignettes (`vignette("opencage")` and `vignette("customise_query")`, respectively) .
@@ -225,10 +225,10 @@ oc_forward("Casey Station", return = "json_list")
 #> 
 #> [[1]]$timestamp
 #> [[1]]$timestamp$created_http
-#> [1] "Thu, 11 Feb 2021 16:23:40 GMT"
+#> [1] "Sat, 13 Feb 2021 14:24:57 GMT"
 #> 
 #> [[1]]$timestamp$created_unix
-#> [1] 1613060620
+#> [1] 1613226297
 #> 
 #> 
 #> [[1]]$total_results
@@ -396,10 +396,10 @@ gjsn_lst
 #> 
 #> $timestamp
 #> $timestamp$created_http
-#> [1] "Thu, 11 Feb 2021 16:23:43 GMT"
+#> [1] "Sat, 13 Feb 2021 14:24:59 GMT"
 #> 
 #> $timestamp$created_unix
-#> [1] 1613060623
+#> [1] 1613226299
 #> 
 #> 
 #> $total_results
@@ -412,7 +412,7 @@ gjsn_lst
 #> [1] "geo_list"
 ```
 
-In fact, {opencage} returns a list of results in `geo_list` format, which should be compatible with the {[geojsonio](https://docs.ropensci.org/geojsonio)} package.
+In fact, {opencage} returns a list of results in `geo_list` format, which should be compatible with the {[geojsonio](https://docs.ropensci.org/geojsonio/)} package.
 
 
 ```r
@@ -431,8 +431,8 @@ oc_forward("Casey Station", return = "url_only")
 #> [1] "https://api.opencagedata.com/geocode/v1/json?q=Casey%20Station&limit=10&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=0&key=OPENCAGE_KEY"
 ```
 
-Your OpenCage API key is masked with the `OPENCAGE_KEY` string, by default. 
-If you really want {opencage} to display your API key with the URL, set the `show_key` argument in `oc_config()` to `TRUE`. 
+Your OpenCage API key is masked with the `OPENCAGE_KEY` string, by default.
+If you really want {opencage} to display your API key with the URL, set the `show_key` argument in `oc_config()` to `TRUE`.
 
 
 ```r
@@ -450,6 +450,6 @@ Please file an [issue](https://github.com/ropensci/opencage/issues) or a [pull-r
 
 `oc_forward()` and `oc_reverse()` have an `add_request` argument, indicating whether the request is returned again with the results.
 If the `return` value is a `df_list`, the `placename` or `latitude,longitude` is added as a column to the results without a roundtrip to the API.
-`json_list` results will contain all request parameters as returned by the API. 
-This would normally include your OpenCage API key, but {opencage} masks the key and replaces it with the `OPENCAGE_KEY` string in the output. 
+`json_list` results will contain all request parameters as returned by the API.
+This would normally include your OpenCage API key, but {opencage} masks the key and replaces it with the `OPENCAGE_KEY` string in the output.
 `add_request` is currently ignored by OpenCage for GeoJSON results.
