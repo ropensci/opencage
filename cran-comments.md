@@ -1,5 +1,9 @@
 ## Release summary
 
+### v0.2.1
+* Fixed two URLs, one of which was rejected on the v0.2.0 submission.
+
+### v0.2.0 (unreleased)
 * Rewrite of the package, see NEWS.md for details.
 * Change of maintainer:
   * New Maintainer: Daniel Possenriede <possenriede+r@gmail.com>
