@@ -62,7 +62,7 @@ This makes it less likely you will share sensitive information by mistake.
 
 3. If you call `oc_config()` in an `interactive()` session and the `OPENCAGE_KEY` environment variable is not set, it will prompt you to enter the key in the console.
 
-Whatever method you choose, keep your API key secret. OpenCage also features [best practices for keeping your API key safe](https://opencagedata.com/protecting-your-api-key).
+Whatever method you choose, keep your API key secret. OpenCage also features [best practices for keeping your API key safe](https://opencagedata.com/guides/how-to-protect-your-api-key).
 
 ### Rate limit
 
@@ -90,13 +90,13 @@ You can set the `oc_no_record` option persistently across sessions in your `.Rpr
 
 For more information on OpenCage's policies on privacy and data protection see the Legal section in [their FAQs](https://opencagedata.com/faq#legal), their [GDPR page](https://opencagedata.com/gdpr), and, for the `no_record` parameter specifically, see the relevant [blog post](https://blog.opencagedata.com/post/145602604628/more-privacy-with-norecord-parameter).
 
-For increased privacy, {opencage} sets `no_record` to `TRUE`, by default. 
+For increased privacy, {opencage} sets `no_record` to `TRUE`, by default.
 Please note, however, that \pkg{opencage} always caches the data it receives from the OpenCage API locally, but only for as long as your R session is alive (see below).
 
 ### (Don't) show API key
 
-`oc_config()` has another argument, `show_key`. This is only used for debugging and we will explain it in more detail in `vignette("output_options")`. 
-For now suffice it to say that your OpenCage API key will not be shown in any {opencage} output, unless you change this setting. 
+`oc_config()` has another argument, `show_key`. This is only used for debugging and we will explain it in more detail in `vignette("output_options")`.
+For now suffice it to say that your OpenCage API key will not be shown in any {opencage} output, unless you change this setting.
 
 ### Altogether now
 

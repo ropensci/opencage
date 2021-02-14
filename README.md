@@ -89,9 +89,9 @@ But remember, the vignettes are really great! We have:
 The [OpenCage](https://opencagedata.com/) API supports forward and
 reverse geocoding. Sources of OpenCage are open geospatial data
 including [OpenStreetMap](https://www.openstreetmap.org/),
-[DataScienceToolkit](https://github.com/petewarden/dstk), [Yahoo!
-GeoPlanet](https://developer.yahoo.com/geo/geoplanet/data/), [Natural
-Earth Data](https://www.naturalearthdata.com/),
+[DataScienceToolkit](https://github.com/petewarden/dstk),
+[GeoPlanet](https://en.wikipedia.org/wiki/GeoPlanet), [Natural Earth
+Data](https://www.naturalearthdata.com/),
 [libpostal](https://github.com/openvenues/libpostal),
 [GeoNames](https://www.geonames.org/), and [Flickr’s
 shapefiles](https://code.flickr.net/2009/05/21/flickr-shapefiles-public-dataset-10/)
