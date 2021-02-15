@@ -1,8 +1,9 @@
 
-# Prevent build-time dependencies on {ratelimitr} and {memoise}
-# The functions do not get ratelimited/memoised at build-time, but when the
-# package is loaded.
-# cf. https://github.com/r-lib/memoise/issues/76
+# We use `<<-` below to modify the package's namespace.
+# It doesn't modify the global environment.
+# We do this to prevent build time dependencies on {memoise} and {ratelimitr},
+# as recommended in <http://memoise.r-lib.org/reference/memoise.html#details>.
+# Cf. <https://github.com/r-lib/memoise/issues/76> for further details.
 
 # First make sure that the functions are defined at build time
 oc_get_limited <- oc_get

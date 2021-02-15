@@ -68,7 +68,7 @@ The [OpenCage](https://opencagedata.com/) API supports forward and reverse geoco
 Sources of OpenCage are open geospatial data including 
 [OpenStreetMap](https://www.openstreetmap.org/), 
 [DataScienceToolkit](https://github.com/petewarden/dstk), 
-[Yahoo! GeoPlanet](https://developer.yahoo.com/geo/geoplanet/data/), 
+[GeoPlanet](https://en.wikipedia.org/wiki/GeoPlanet), 
 [Natural Earth Data](https://www.naturalearthdata.com/), 
 [libpostal](https://github.com/openvenues/libpostal), 
 [GeoNames](https://www.geonames.org/), and 
