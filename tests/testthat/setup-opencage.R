@@ -6,11 +6,11 @@ key_403 <- "2e10e5e828262eb243ec0b54681d699a" # always returns a 403 responce
 key_429 <- "d6d0f0065f4348a4bdfe4587ba02714b" # always returns a 429 responce
 key_401 <- "32charactersandnumbers1234567890" # invalid key returns 401 response
 
-# setup vcrs
-library("vcr")
+# setup vcr ----------------------------------------------------------------
+library("vcr") # *Required* as vcr is set up on loading
 invisible(
   vcr::vcr_configure(
-    dir = "../vcr_cassettes",
+    dir = vcr::vcr_test_path("vcr_cassettes"),
     match_requests_on = "uri", # method not necessary, we only make GET requests
     filter_sensitive_data =
       list(
@@ -23,13 +23,14 @@ invisible(
       )
   )
 )
+vcr::check_cassette_names()
 
-# skip if API offline
+# skip if OpenCage API offline --------------------------------------------
 skip_if_oc_offline <- function(host = "api.opencagedata.com") {
   testthat::skip_if_offline(host = host)
 }
 
-# skip if API key is missing
+# skip if API key is missing ----------------------------------------------
 skip_if_no_key <- function() {
   testthat::skip_if_not(
     condition = oc_key_present(),
