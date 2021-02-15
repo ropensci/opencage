@@ -1,14 +1,14 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.opencagedata.com/geocode/v1/json?q=0%2C0&limit=1&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=0&key=4372eff77b8343cebfc843eb4da4ddc4
+    uri: https://api.opencagedata.com/geocode/v1/json?q=0%2C0&limit=1&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=0&key=<<<oc_402_key>>>
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: https://github.com/ropensci/opencage
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.1.9000
   response:
     status:
       status_code: '402'
@@ -16,21 +16,26 @@ http_interactions:
       explanation: No payment -- see charging schemes
     headers:
       status: HTTP/1.1 402 Payment Required
-      date: Wed, 19 Jun 2019 19:52:24 GMT
-      server: Apache/2.4.29 (Ubuntu)
+      date: Mon, 15 Feb 2021 20:27:43 GMT
+      server: Apache
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
       x-ratelimit-remaining: '0'
-      x-ratelimit-reset: '1560988800'
-      transfer-encoding: chunked
+      x-ratelimit-reset: '1613433600'
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '337'
       content-type: application/json; charset=utf-8
-      strict-transport-security: max-age=31536000; includeSubDomains
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
     body:
       encoding: UTF-8
+      file: no
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":0,"reset":1560988800},"results":[],"status":{"become_a_customer":"https://opencagedata.com/pricing","code":402,"message":"quota
-        exceeded"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:52:24 GMT","created_unix":1560973944},"total_results":0}'
-  recorded_at: 2019-06-19 19:52:25 GMT
-  recorded_with: vcr/0.2.6, webmockr/0.3.4
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":0,"reset":1613433600},"results":[],"status":{"become_a_customer":"https://opencagedata.com/pricing","code":402,"message":"quota
+        exceeded"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Mon, 15 Feb 2021 20:27:43
+        GMT","created_unix":1613420863},"total_results":0}'
+  recorded_at: 2021-02-15 20:27:43 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4

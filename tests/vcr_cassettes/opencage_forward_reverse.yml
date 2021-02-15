@@ -1,14 +1,14 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.opencagedata.com/geocode/v1/json?q=Sarzeau&limit=10&no_annotations=0&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    uri: https://api.opencagedata.com/geocode/v1/json?q=Sarzeau&limit=10&no_annotations=0&roadinfo=0&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_200_key>>>
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: https://github.com/ropensci/opencage
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.1.9000
   response:
     status:
       status_code: '200'
@@ -16,40 +16,42 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:53:51 GMT
-      server: Apache/2.4.29 (Ubuntu)
+      date: Mon, 15 Feb 2021 20:47:38 GMT
+      server: Apache
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1751'
-      x-ratelimit-reset: '1560988800'
-      transfer-encoding: chunked
+      x-ratelimit-remaining: '2499'
+      x-ratelimit-reset: '1613433600'
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '1458'
       content-type: application/json; charset=utf-8
-      strict-transport-security: max-age=31536000; includeSubDomains
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
     body:
       encoding: UTF-8
+      file: no
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1751,"reset":1560988800},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":10,"min_confidence":0,"no_annotations":0,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Sarzeau","roadinfo":0,"version":"v1"},"results":[{"annotations":{"DMS":{"lat":"47\u00b0
-        31'' 43.56984'''' N","lng":"2\u00b0 45'' 51.11892'''' W"},"MGRS":"30TWT1774963954","Maidenhead":"IN87om86hv","Mercator":{"x":-307709.303,"y":5997281.031},"OSM":{"edit_url":"https://www.openstreetmap.org/edit?relation=959447#map=17/47.52877/-2.76420","url":"https://www.openstreetmap.org/?mlat=47.52877&mlon=-2.76420#map=17/47.52877/-2.76420"},"UN_M49":{"regions":{"EUROPE":"150","FR":"250","WESTERN_EUROPE":"155","WORLD":"001"},"statistical_groupings":["MEDC"]},"callingcode":33,"currency":{"alternate_symbols":[],"decimal_mark":",","html_entity":"&#x20AC;","iso_code":"EUR","iso_numeric":"978","name":"Euro","smallest_denomination":1,"subunit":"Cent","subunit_to_unit":100,"symbol":"\u20ac","symbol_first":1,"thousands_separator":"."},"flag":"\ud83c\uddeb\ud83c\uddf7","geohash":"gbqn3h75jkz3413tdw1f","qibla":112.34,"roadinfo":{"drive_on":"right","speed_in":"km/h"},"sun":{"rise":{"apparent":1560917580,"astronomical":1560906420,"civil":1560915180,"nautical":1560911760},"set":{"apparent":1560975120,"astronomical":1560986280,"civil":1560977520,"nautical":1560980940}},"timezone":{"name":"Europe/Paris","now_in_dst":1,"offset_sec":7200,"offset_string":"+0200","short_name":"CEST"},"what3words":{"words":"gasp.jiggle.creamier"},"wikidata":"Q128716"},"bounds":{"northeast":{"lat":47.5666788,"lng":-2.6631197},"southwest":{"lat":47.4840815,"lng":-2.853616}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"city","city":"Sarzeau","continent":"Europe","country":"France","country_code":"fr","county":"Vannes","political_union":"European
-        Union","postcode":"56370","state":"Brittany","state_district":"Morbihan"},"confidence":6,"formatted":"56370
-        Sarzeau, France","geometry":{"lat":47.5287694,"lng":-2.7641997}},{"annotations":{"DMS":{"lat":"47\u00b0
-        31'' 40.75680'''' N","lng":"2\u00b0 46'' 7.87116'''' W"},"MGRS":"30TWT1739963866","Maidenhead":"IN87om76rr","Mercator":{"x":-308227.317,"y":5997152.602},"OSM":{"edit_url":"https://www.openstreetmap.org/edit?node=846574100#map=17/47.52799/-2.76885","url":"https://www.openstreetmap.org/?mlat=47.52799&mlon=-2.76885#map=17/47.52799/-2.76885"},"UN_M49":{"regions":{"EUROPE":"150","FR":"250","WESTERN_EUROPE":"155","WORLD":"001"},"statistical_groupings":["MEDC"]},"callingcode":33,"currency":{"alternate_symbols":[],"decimal_mark":",","html_entity":"&#x20AC;","iso_code":"EUR","iso_numeric":"978","name":"Euro","smallest_denomination":1,"subunit":"Cent","subunit_to_unit":100,"symbol":"\u20ac","symbol_first":1,"thousands_separator":"."},"flag":"\ud83c\uddeb\ud83c\uddf7","geohash":"gbqn2upy9517z9gpwc3y","qibla":112.34,"roadinfo":{"drive_on":"right","road":"Rue
-        de la Poste","speed_in":"km/h"},"sun":{"rise":{"apparent":1560917580,"astronomical":1560906420,"civil":1560915180,"nautical":1560911760},"set":{"apparent":1560975120,"astronomical":1560986280,"civil":1560977520,"nautical":1560980940}},"timezone":{"name":"Europe/Paris","now_in_dst":1,"offset_sec":7200,"offset_string":"+0200","short_name":"CEST"},"what3words":{"words":"classics.catacomb.shop"}},"bounds":{"northeast":{"lat":47.528038,"lng":-2.7688031},"southwest":{"lat":47.527938,"lng":-2.7689031}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"post_office","continent":"Europe","country":"France","country_code":"fr","county":"Vannes","political_union":"European
-        Union","post_office":"Sarzeau","postcode":"56370","road":"Rue de la Poste","state":"Brittany","state_district":"Morbihan","suburb":"Kerjolis","village":"Sarzeau"},"confidence":9,"formatted":"Sarzeau,
-        Rue de la Poste, 56370 Sarzeau, France","geometry":{"lat":47.527988,"lng":-2.7688531}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:53:51 GMT","created_unix":1560974031},"total_results":2}'
-  recorded_at: 2019-06-19 19:53:55 GMT
-  recorded_with: vcr/0.2.6, webmockr/0.3.4
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2499,"reset":1613433600},"request":{"abbrv":0,"add_request":1,"format":"json","key":"<<<oc_200_key>>>","language":"en","limit":10,"min_confidence":0,"no_annotations":0,"no_dedupe":0,"no_record":0,"pretty":0,"proximity":"","query":"51.952659,7.632473","roadinfo":0,"version":"v1"},"results":[{"annotations":{"DMS":{"lat":"51\u00b0
+        57'' 9.57564'''' N","lng":"7\u00b0 37'' 56.90280'''' E"},"MGRS":"32UMC0602156656","Maidenhead":"JO31tw58vp","Mercator":{"x":849643.007,"y":6757899.137},"OSM":{"edit_url":"https://www.openstreetmap.org/edit?way=125838041#map=17/51.95266/7.63247","note_url":"https://www.openstreetmap.org/note/new#map=17/51.95266/7.63247&layers=N","url":"https://www.openstreetmap.org/?mlat=51.95266&mlon=7.63247#map=17/51.95266/7.63247"},"UN_M49":{"regions":{"DE":"276","EUROPE":"150","WESTERN_EUROPE":"155","WORLD":"001"},"statistical_groupings":["MEDC"]},"callingcode":49,"currency":{"alternate_symbols":[],"decimal_mark":",","html_entity":"&#x20AC;","iso_code":"EUR","iso_numeric":"978","name":"Euro","smallest_denomination":1,"subunit":"Cent","subunit_to_unit":100,"symbol":"\u20ac","symbol_first":0,"thousands_separator":"."},"flag":"\ud83c\udde9\ud83c\uddea","geohash":"u1jrt9ty1t8rg3r5wttm","qibla":128.55,"roadinfo":{"drive_on":"right","road":"Friedrich-Ebert-Stra\u00dfe","speed_in":"km/h"},"sun":{"rise":{"apparent":1613371500,"astronomical":1613364720,"civil":1613369400,"nautical":1613367060},"set":{"apparent":1613407380,"astronomical":1613414160,"civil":1613409480,"nautical":1613411820}},"timezone":{"name":"Europe/Berlin","now_in_dst":0,"offset_sec":3600,"offset_string":"+0100","short_name":"CET"},"what3words":{"words":"episodes.mass.below"}},"bounds":{"northeast":{"lat":51.9528202,"lng":7.6325938},"southwest":{"lat":51.9525445,"lng":7.6323594}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_category":"building","_type":"building","city":"M\u00fcnster","city_district":"M\u00fcnster-Mitte","continent":"Europe","country":"Germany","country_code":"de","house_number":"7","neighbourhood":"Josef","political_union":"European
+        Union","postcode":"48153","road":"Friedrich-Ebert-Stra\u00dfe","state":"North
+        Rhine-Westphalia","state_code":"NW","suburb":"Innenstadtring"},"confidence":10,"formatted":"Friedrich-Ebert-Stra\u00dfe
+        7, 48153 M\u00fcnster, Germany","geometry":{"lat":51.9526599,"lng":7.632473}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Mon, 15 Feb 2021 20:47:38
+        GMT","created_unix":1613422058},"total_results":1}'
+  recorded_at: 2021-02-15 20:47:39 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
 - request:
     method: get
-    uri: https://api.opencagedata.com/geocode/v1/json?q=Islington%2C%20London&limit=10&no_annotations=0&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    uri: https://api.opencagedata.com/geocode/v1/json?q=0%2C0&limit=1&no_annotations=0&roadinfo=0&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_200_key>>>
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: https://github.com/ropensci/opencage
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.1.9000
   response:
     status:
       status_code: '200'
@@ -57,112 +59,29 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:53:52 GMT
-      server: Apache/2.4.29 (Ubuntu)
+      date: Mon, 15 Feb 2021 20:47:39 GMT
+      server: Apache
       access-control-allow-origin: '*'
       x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1749'
-      x-ratelimit-reset: '1560988800'
-      transfer-encoding: chunked
+      x-ratelimit-remaining: '2499'
+      x-ratelimit-reset: '1613433600'
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '1457'
       content-type: application/json; charset=utf-8
-      strict-transport-security: max-age=31536000; includeSubDomains
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
     body:
       encoding: UTF-8
+      file: no
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1749,"reset":1560988800},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":10,"min_confidence":0,"no_annotations":0,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Islington,
-        London","roadinfo":0,"version":"v1"},"results":[{"annotations":{"DMS":{"lat":"51\u00b0
-        32'' 18.34332'''' N","lng":"0\u00b0 5'' 59.65836'''' E"},"MGRS":"30UYC0111413689","Maidenhead":"IO91wm89af","Mercator":{"x":-11121.385,"y":6683614.668},"OSGB":{"easting":531873.107,"gridref":"TQ
-        318 838","northing":183880.193},"OSM":{"edit_url":"https://www.openstreetmap.org/edit?node=27365020#map=17/51.53843/-0.09991","url":"https://www.openstreetmap.org/?mlat=51.53843&mlon=-0.09991#map=17/51.53843/-0.09991"},"UN_M49":{"regions":{"EUROPE":"150","GB":"826","NORTHERN_EUROPE":"154","WORLD":"001"},"statistical_groupings":["MEDC"]},"callingcode":44,"currency":{"alternate_symbols":[],"decimal_mark":".","html_entity":"&#x00A3;","iso_code":"GBP","iso_numeric":"826","name":"British
-        Pound","smallest_denomination":1,"subunit":"Penny","subunit_to_unit":100,"symbol":"\u00a3","symbol_first":1,"thousands_separator":","},"flag":"\ud83c\uddec\ud83c\udde7","geohash":"gcpvjwr3053q7mywpn0e","qibla":119.05,"roadinfo":{"drive_on":"left","speed_in":"mph"},"sun":{"rise":{"apparent":1560915780,"astronomical":0,"civil":1560912900,"nautical":1560908400},"set":{"apparent":1560975660,"astronomical":0,"civil":1560978540,"nautical":1560983040}},"timezone":{"name":"Europe/London","now_in_dst":1,"offset_sec":3600,"offset_string":"+0100","short_name":"BST"},"what3words":{"words":"milk.strong.funded"},"wikidata":"Q125163"},"bounds":{"northeast":{"lat":51.5584287,"lng":-0.0799051},"southwest":{"lat":51.5184287,"lng":-0.1199051}},"components":{"ISO_3166-1_alpha-2":"GB","ISO_3166-1_alpha-3":"GBR","_type":"neighbourhood","city":"London","continent":"Europe","country":"United
-        Kingdom","country_code":"gb","political_union":"European Union","postcode":"N1","state":"England","state_code":"ENG","state_district":"Greater
-        London","suburb":"Islington"},"confidence":7,"formatted":"London N1, United
-        Kingdom","geometry":{"lat":51.5384287,"lng":-0.0999051}},{"annotations":{"DMS":{"lat":"51\u00b0
-        32'' 3.95628'''' N","lng":"0\u00b0 6'' 31.32288'''' E"},"MGRS":"30UYC0052213221","Maidenhead":"IO91wm68wg","Mercator":{"x":-12100.518,"y":6682901.311},"OSGB":{"easting":"531274.650","gridref":"TQ
-        312 834","northing":183419.973},"OSM":{"edit_url":"https://www.openstreetmap.org/edit?node=25597580#map=17/51.53443/-0.10870","url":"https://www.openstreetmap.org/?mlat=51.53443&mlon=-0.10870#map=17/51.53443/-0.10870"},"UN_M49":{"regions":{"EUROPE":"150","GB":"826","NORTHERN_EUROPE":"154","WORLD":"001"},"statistical_groupings":["MEDC"]},"callingcode":44,"currency":{"alternate_symbols":[],"decimal_mark":".","html_entity":"&#x00A3;","iso_code":"GBP","iso_numeric":"826","name":"British
-        Pound","smallest_denomination":1,"subunit":"Penny","subunit_to_unit":100,"symbol":"\u00a3","symbol_first":1,"thousands_separator":","},"flag":"\ud83c\uddec\ud83c\udde7","geohash":"gcpvjt8cg46yczkk8q0p","qibla":119.03,"roadinfo":{"drive_on":"left","road":"Tolpuddle
-        Street","speed_in":"mph"},"sun":{"rise":{"apparent":1560915780,"astronomical":0,"civil":1560912900,"nautical":1560908400},"set":{"apparent":1560975660,"astronomical":0,"civil":1560978540,"nautical":1560983040}},"timezone":{"name":"Europe/London","now_in_dst":1,"offset_sec":3600,"offset_string":"+0100","short_name":"BST"},"what3words":{"words":"hired.broad.exam"},"wikidata":"Q19462549"},"bounds":{"northeast":{"lat":51.5344823,"lng":-0.1086508},"southwest":{"lat":51.5343823,"lng":-0.1087508}},"components":{"ISO_3166-1_alpha-2":"GB","ISO_3166-1_alpha-3":"GBR","_type":"pub","city":"London","continent":"Europe","country":"United
-        Kingdom","country_code":"gb","county":"London Borough of Islington","neighbourhood":"Angel","political_union":"European
-        Union","postcode":"N1 0XU","pub":"The Islington","road":"Tolpuddle Street","state":"England","state_code":"ENG","state_district":"Greater
-        London","suburb":"Pentonville"},"confidence":9,"formatted":"The Islington,
-        Tolpuddle Street, London N1 0XU, United Kingdom","geometry":{"lat":51.5344323,"lng":-0.1087008}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:53:52 GMT","created_unix":1560974032},"total_results":2}'
-  recorded_at: 2019-06-19 19:53:55 GMT
-  recorded_with: vcr/0.2.6, webmockr/0.3.4
-- request:
-    method: get
-    uri: https://api.opencagedata.com/geocode/v1/json?q=Triererstr%2015%2C%20Weimar%2099423%2C%20Deutschland&limit=10&no_annotations=0&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
-    body:
-      encoding: ''
-      string: ''
-    headers:
-      Accept-Encoding: gzip, deflate
-      Accept: application/json, text/xml, application/xml, */*
-      User-Agent: https://github.com/ropensci/opencage
-  response:
-    status:
-      status_code: '200'
-      message: OK
-      explanation: Request fulfilled, document follows
-    headers:
-      status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:53:54 GMT
-      server: Apache/2.4.29 (Ubuntu)
-      access-control-allow-origin: '*'
-      x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1747'
-      x-ratelimit-reset: '1560988800'
-      transfer-encoding: chunked
-      content-type: application/json; charset=utf-8
-      strict-transport-security: max-age=31536000; includeSubDomains
-    body:
-      encoding: UTF-8
-      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1747,"reset":1560988800},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":10,"min_confidence":0,"no_annotations":0,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"Triererstr
-        15, Weimar 99423, Deutschland","roadinfo":0,"version":"v1"},"results":[{"annotations":{"DMS":{"lat":"50\u00b0
-        58'' 33.07080'''' N","lng":"11\u00b0 19'' 17.34312'''' E"},"MGRS":"32UPB6297249705","Maidenhead":"JO50px84ne","Mercator":{"x":1260301.851,"y":6583807.738},"OSM":{"edit_url":"https://www.openstreetmap.org/edit?way=198136774#map=16/50.97585/11.32148","url":"https://www.openstreetmap.org/?mlat=50.97585&mlon=11.32148#map=16/50.97585/11.32148"},"UN_M49":{"regions":{"DE":"276","EUROPE":"150","WESTERN_EUROPE":"155","WORLD":"001"},"statistical_groupings":["MEDC"]},"callingcode":49,"currency":{"alternate_symbols":[],"decimal_mark":",","html_entity":"&#x20AC;","iso_code":"EUR","iso_numeric":"978","name":"Euro","smallest_denomination":1,"subunit":"Cent","subunit_to_unit":100,"symbol":"\u20ac","symbol_first":1,"thousands_separator":"."},"flag":"\ud83c\udde9\ud83c\uddea","geohash":"u301cxu5cewryqvm14c3","qibla":132.39,"roadinfo":{"drive_on":"right","road":"Trierer
-        Stra\u00dfe","speed_in":"km/h"},"sun":{"rise":{"apparent":1560913200,"astronomical":0,"civil":1560910380,"nautical":1560906120},"set":{"apparent":1560972780,"astronomical":0,"civil":1560975540,"nautical":1560979800}},"timezone":{"name":"Europe/Berlin","now_in_dst":1,"offset_sec":7200,"offset_string":"+0200","short_name":"CEST"},"what3words":{"words":"supplied.reader.trucked"}},"bounds":{"northeast":{"lat":50.975925,"lng":11.3216029},"southwest":{"lat":50.9757656,"lng":11.3213671}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"building","city":"Weimar","continent":"Europe","country":"Germany","country_code":"de","house_number":"15","political_union":"European
-        Union","postcode":"99423","road":"Trierer Stra\u00dfe","state":"Thuringia","suburb":"Westvorstadt","town":"Weimar"},"confidence":10,"formatted":"Trierer
-        Stra\u00dfe 15, 99423 Weimar, Germany","geometry":{"lat":50.975853,"lng":11.3214842}},{"annotations":{"DMS":{"lat":"50\u00b0
-        58'' 49.44000'''' N","lng":"11\u00b0 19'' 34.68000'''' E"},"MGRS":"32UPB6329550221","Maidenhead":"JO50px95dh","Mercator":{"x":1260837.949,"y":6584609.52},"OSM":{"url":"https://www.openstreetmap.org/?mlat=50.98040&mlon=11.32630#map=16/50.98040/11.32630"},"UN_M49":{"regions":{"DE":"276","EUROPE":"150","WESTERN_EUROPE":"155","WORLD":"001"},"statistical_groupings":["MEDC"]},"callingcode":49,"currency":{"alternate_symbols":[],"decimal_mark":",","html_entity":"&#x20AC;","iso_code":"EUR","iso_numeric":"978","name":"Euro","smallest_denomination":1,"subunit":"Cent","subunit_to_unit":100,"symbol":"\u20ac","symbol_first":1,"thousands_separator":"."},"flag":"\ud83c\udde9\ud83c\uddea","geohash":"u30418xw3gm7sft30f5c","qibla":132.4,"roadinfo":{"drive_on":"right","speed_in":"km/h"},"sun":{"rise":{"apparent":1560913200,"astronomical":0,"civil":1560910380,"nautical":1560906120},"set":{"apparent":1560972780,"astronomical":0,"civil":1560975540,"nautical":1560979800}},"timezone":{"name":"Europe/Berlin","now_in_dst":1,"offset_sec":7200,"offset_string":"+0200","short_name":"CEST"},"what3words":{"words":"divisions.crass.slicing"}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"postcode","continent":"Europe","country":"Germany","country_code":"de","political_union":"European
-        Union","postcode":"99423"},"confidence":7,"formatted":"99423, Germany","geometry":{"lat":50.9804,"lng":11.3263}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:53:54 GMT","created_unix":1560974034},"total_results":2}'
-  recorded_at: 2019-06-19 19:53:55 GMT
-  recorded_with: vcr/0.2.6, webmockr/0.3.4
-- request:
-    method: get
-    uri: https://api.opencagedata.com/geocode/v1/json?q=0%2C0&limit=1&no_annotations=0&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
-    body:
-      encoding: ''
-      string: ''
-    headers:
-      Accept-Encoding: gzip, deflate
-      Accept: application/json, text/xml, application/xml, */*
-      User-Agent: https://github.com/ropensci/opencage
-  response:
-    status:
-      status_code: '200'
-      message: OK
-      explanation: Request fulfilled, document follows
-    headers:
-      status: HTTP/1.1 200 OK
-      date: Wed, 19 Jun 2019 19:53:55 GMT
-      server: Apache/2.4.29 (Ubuntu)
-      access-control-allow-origin: '*'
-      x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '1745'
-      x-ratelimit-reset: '1560988800'
-      transfer-encoding: chunked
-      content-type: application/json; charset=utf-8
-      strict-transport-security: max-age=31536000; includeSubDomains
-    body:
-      encoding: UTF-8
-      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":1745,"reset":1560988800},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":0,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"0,0","roadinfo":0,"version":"v1"},"results":[{"annotations":{"DMS":{"lat":"0\u00b0
-        0'' 0.00000'''' N","lng":"0\u00b0 0'' 0.00000'''' E"},"MGRS":"31NAA660210","Maidenhead":"JJ00aa00aa","Mercator":{"x":0,"y":0},"OSM":{"url":"https://www.openstreetmap.org/?mlat=0.00000&mlon=0.00000#map=16/0.00000/0.00000"},"geohash":"s0000000000000000000","qibla":58.51,"roadinfo":{"drive_on":"right","speed_in":"km/h"},"sun":{"rise":{"apparent":1560923880,"astronomical":1560919380,"civil":1560922500,"nautical":1560920940},"set":{"apparent":1560967500,"astronomical":1560972000,"civil":1560968880,"nautical":1560970440}},"timezone":{"name":"UTC","now_in_dst":0,"offset_sec":0,"offset_string":0,"short_name":"UTC"},"what3words":{"words":"prosecuted.amplification.showings"}},"components":{"_type":"ficticious"},"confidence":10,"formatted":"Null
-        Island","geometry":{"lat":0.0,"lng":0.0}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage Data API","timestamp":{"created_http":"Wed, 19 Jun 2019
-        19:53:55 GMT","created_unix":1560974035},"total_results":1}'
-  recorded_at: 2019-06-19 19:53:55 GMT
-  recorded_with: vcr/0.2.6, webmockr/0.3.4
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2499,"reset":1613433600},"request":{"abbrv":0,"add_request":1,"format":"json","key":"<<<oc_200_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":0,"no_dedupe":0,"no_record":0,"pretty":0,"proximity":"","query":"51.952659,7.632473","roadinfo":0,"version":"v1"},"results":[{"annotations":{"DMS":{"lat":"51\u00b0
+        57'' 9.57564'''' N","lng":"7\u00b0 37'' 56.90280'''' E"},"MGRS":"32UMC0602156656","Maidenhead":"JO31tw58vp","Mercator":{"x":849643.007,"y":6757899.137},"OSM":{"edit_url":"https://www.openstreetmap.org/edit?way=125838041#map=16/51.95266/7.63247","note_url":"https://www.openstreetmap.org/note/new#map=16/51.95266/7.63247&layers=N","url":"https://www.openstreetmap.org/?mlat=51.95266&mlon=7.63247#map=16/51.95266/7.63247"},"UN_M49":{"regions":{"DE":"276","EUROPE":"150","WESTERN_EUROPE":"155","WORLD":"001"},"statistical_groupings":["MEDC"]},"callingcode":49,"currency":{"alternate_symbols":[],"decimal_mark":",","html_entity":"&#x20AC;","iso_code":"EUR","iso_numeric":"978","name":"Euro","smallest_denomination":1,"subunit":"Cent","subunit_to_unit":100,"symbol":"\u20ac","symbol_first":0,"thousands_separator":"."},"flag":"\ud83c\udde9\ud83c\uddea","geohash":"u1jrt9ty1t8rg3r5wttm","qibla":128.55,"roadinfo":{"drive_on":"right","road":"Friedrich-Ebert-Stra\u00dfe","speed_in":"km/h"},"sun":{"rise":{"apparent":1613371500,"astronomical":1613364720,"civil":1613369400,"nautical":1613367060},"set":{"apparent":1613407380,"astronomical":1613414160,"civil":1613409480,"nautical":1613411820}},"timezone":{"name":"Europe/Berlin","now_in_dst":0,"offset_sec":3600,"offset_string":"+0100","short_name":"CET"},"what3words":{"words":"episodes.mass.below"}},"bounds":{"northeast":{"lat":51.9528202,"lng":7.6325938},"southwest":{"lat":51.9525445,"lng":7.6323594}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_category":"building","_type":"building","city":"M\u00fcnster","city_district":"M\u00fcnster-Mitte","continent":"Europe","country":"Germany","country_code":"de","house_number":"7","neighbourhood":"Josef","political_union":"European
+        Union","postcode":"48153","road":"Friedrich-Ebert-Stra\u00dfe","state":"North
+        Rhine-Westphalia","state_code":"NW","suburb":"Innenstadtring"},"confidence":10,"formatted":"Friedrich-Ebert-Stra\u00dfe
+        7, 48153 M\u00fcnster, Germany","geometry":{"lat":51.9526599,"lng":7.632473}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Mon, 15 Feb 2021 20:47:39
+        GMT","created_unix":1613422059},"total_results":1}'
+  recorded_at: 2021-02-15 20:47:39 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4

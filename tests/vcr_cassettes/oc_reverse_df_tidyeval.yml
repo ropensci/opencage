@@ -1,14 +1,14 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.opencagedata.com/geocode/v1/json?q=47.21864%2C-1.554136&limit=1&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    uri: https://api.opencagedata.com/geocode/v1/json?q=47.21864%2C-1.554136&language=en&limit=1&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=1&key=<<<oc_api_key>>>
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: https://github.com/ropensci/opencage
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.1.9000
   response:
     status:
       status_code: '200'
@@ -16,36 +16,38 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 17 Jul 2019 13:30:18 GMT
-      server: Apache/2.4.29 (Ubuntu)
+      date: Mon, 15 Feb 2021 20:28:12 GMT
+      server: Apache
       access-control-allow-origin: '*'
-      x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '2466'
-      x-ratelimit-reset: '1563408000'
-      transfer-encoding: chunked
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '777'
       content-type: application/json; charset=utf-8
-      strict-transport-security: max-age=31536000; includeSubDomains
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
     body:
       encoding: UTF-8
+      file: no
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2466,"reset":1563408000},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"47.21864,-1.554136","roadinfo":0,"version":"v1"},"results":[{"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"building","city":"Nantes","continent":"Europe","country":"France","country_code":"fr","house_number":"5","political_union":"European
-        Union","postcode":"44000","state":"Pays de la Loire","state_code":"PDL","state_district":"Loire-Atlantique","street":"Rue
-        Garde Dieu"},"confidence":10,"formatted":"5 Rue Garde Dieu, 44000 Nantes,
-        France","geometry":{"lat":47.218891,"lng":-1.554403}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage API","timestamp":{"created_http":"Wed, 17 Jul 2019 13:30:18
-        GMT","created_unix":1563370218},"total_results":1}'
-  recorded_at: 2019-07-17 13:30:36 GMT
-  recorded_with: vcr/0.2.6, webmockr/0.3.4
+        attribution guide","url":"https://opencagedata.com/credits"}],"request":{"abbrv":0,"add_request":1,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":1,"pretty":0,"proximity":"","query":"47.21864,-1.554136","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":47.2189524,"lng":-1.5534363},"southwest":{"lat":47.2177951,"lng":-1.5554196}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_category":"government","_type":"townhall","city":"Nantes","continent":"Europe","country":"France","country_code":"fr","county":"Loire-Atlantique","municipality":"Nantes","neighbourhood":"Cath\u00e9drale","political_union":"European
+        Union","postcode":"44000","road":"Rue Saint-Vincent","state":"Pays de la Loire","state_code":"PDL","suburb":"Centre
+        Ville","townhall":"H\u00f4tel de ville de Nantes"},"confidence":9,"formatted":"H\u00f4tel
+        de ville de Nantes, Rue Saint-Vincent, 44000 Nantes, France","geometry":{"lat":47.2183802,"lng":-1.5543889}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Mon, 15 Feb 2021 20:28:12
+        GMT","created_unix":1613420892},"total_results":1}'
+  recorded_at: 2021-02-15 20:28:26 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
 - request:
     method: get
-    uri: https://api.opencagedata.com/geocode/v1/json?q=53.55034%2C10.000654&limit=1&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    uri: https://api.opencagedata.com/geocode/v1/json?q=53.55034%2C10.000654&language=fr&limit=1&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=1&key=<<<oc_api_key>>>
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: https://github.com/ropensci/opencage
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.1.9000
   response:
     status:
       status_code: '200'
@@ -53,36 +55,37 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 17 Jul 2019 13:30:20 GMT
-      server: Apache/2.4.29 (Ubuntu)
+      date: Mon, 15 Feb 2021 20:28:14 GMT
+      server: Apache
       access-control-allow-origin: '*'
-      x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '2464'
-      x-ratelimit-reset: '1563408000'
-      transfer-encoding: chunked
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '754'
       content-type: application/json; charset=utf-8
-      strict-transport-security: max-age=31536000; includeSubDomains
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
     body:
       encoding: UTF-8
+      file: no
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2464,"reset":1563408000},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"53.55034,10.000654","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":53.5505733,"lng":10.0012761},"southwest":{"lat":53.5501368,"lng":10.0002381}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"building","city":"Hamburg","city_district":"Hamburg-Mitte","continent":"Europe","country":"Germany","country_code":"de","house_number":"22","political_union":"European
-        Union","postcode":"20095","road":"Jakobikirchhof","state":"Hamburg","state_code":"HH","suburb":"Hamburg-Altstadt","unknown":"Evangelisch-lutherische
-        Hauptkirche St. Jacobi"},"confidence":10,"formatted":"Evangelisch-lutherische
-        Hauptkirche St. Jacobi, Jakobikirchhof 22, 20095 Hamburg, Germany","geometry":{"lat":53.5503571,"lng":10.0007413}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage API","timestamp":{"created_http":"Wed, 17 Jul 2019 13:30:20
-        GMT","created_unix":1563370220},"total_results":1}'
-  recorded_at: 2019-07-17 13:30:36 GMT
-  recorded_with: vcr/0.2.6, webmockr/0.3.4
+        attribution guide","url":"https://opencagedata.com/credits"}],"request":{"abbrv":0,"add_request":1,"format":"json","key":"<<<oc_api_key>>>","language":"fr","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":1,"pretty":0,"proximity":"","query":"53.55034,10.000654","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":53.5505733,"lng":10.0012761},"southwest":{"lat":53.5501368,"lng":10.0002381}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_category":"travel/tourism","_type":"historic","borough":"Hamburg-Mitte","continent":"Europe","country":"Allemagne","country_code":"de","historic":"Evangelisch-lutherische
+        Hauptkirche St. Jacobi","house_number":"22","political_union":"European Union","postcode":"20095","road":"Jakobikirchhof","state":"Hambourg","suburb":"Altstadt"},"confidence":9,"formatted":"Evangelisch-lutherische
+        Hauptkirche St. Jacobi, Jakobikirchhof 22, 20095 Hambourg, Allemagne","geometry":{"lat":53.5503571,"lng":10.0007413}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Mon, 15 Feb 2021 20:28:14
+        GMT","created_unix":1613420894},"total_results":1}'
+  recorded_at: 2021-02-15 20:28:26 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
 - request:
     method: get
-    uri: https://api.opencagedata.com/geocode/v1/json?q=34.05369%2C-118.242767&limit=1&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    uri: https://api.opencagedata.com/geocode/v1/json?q=34.05369%2C-118.242767&language=ja&limit=1&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=1&key=<<<oc_api_key>>>
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: https://github.com/ropensci/opencage
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.1.9000
   response:
     status:
       status_code: '200'
@@ -90,38 +93,41 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 17 Jul 2019 13:30:21 GMT
-      server: Apache/2.4.29 (Ubuntu)
+      date: Mon, 15 Feb 2021 20:28:15 GMT
+      server: Apache
       access-control-allow-origin: '*'
-      x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '2462'
-      x-ratelimit-reset: '1563408000'
-      transfer-encoding: chunked
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '789'
       content-type: application/json; charset=utf-8
-      strict-transport-security: max-age=31536000; includeSubDomains
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
     body:
       encoding: UTF-8
+      file: no
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2462,"reset":1563408000},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"34.05369,-118.242767","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":34.0543713,"lng":-118.2420052},"southwest":{"lat":34.0530141,"lng":-118.24353}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"building","building":"Los
-        Angeles City Hall","city":"Los Angeles","continent":"North America","country":"USA","country_code":"us","county":"Los
+        attribution guide","url":"https://opencagedata.com/credits"}],"request":{"abbrv":0,"add_request":1,"format":"json","key":"<<<oc_api_key>>>","language":"ja","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":1,"pretty":0,"proximity":"","query":"34.05369,-118.242767","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":34.0543713,"lng":-118.2420052},"southwest":{"lat":34.0530141,"lng":-118.24353}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_category":"building","_type":"building","building":"Los
+        Angeles City Hall","city":"\u30ed\u30b5\u30f3\u30bc\u30eb\u30b9","continent":"North
+        America","country":"\u30a2\u30e1\u30ea\u30ab\u5408\u8846\u56fd","country_code":"us","county":"Los
         Angeles County","house_number":"200","neighbourhood":"Civic Center","postcode":"90012","road":"North
-        Spring Street","state":"California","state_code":"CA","suburb":"Little Tokyo
-        Historic District"},"confidence":10,"formatted":"Los Angeles City Hall, 200
-        North Spring Street, Los Angeles, CA 90012, United States of America","geometry":{"lat":34.053696,"lng":-118.2429212}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage API","timestamp":{"created_http":"Wed, 17 Jul 2019 13:30:21
-        GMT","created_unix":1563370221},"total_results":1}'
-  recorded_at: 2019-07-17 13:30:36 GMT
-  recorded_with: vcr/0.2.6, webmockr/0.3.4
+        Spring Street","state":"\u30ab\u30ea\u30d5\u30a9\u30eb\u30cb\u30a2\u5dde","suburb":"Downtown"},"confidence":10,"formatted":"Los
+        Angeles City Hall, 200 North Spring Street, \u30ed\u30b5\u30f3\u30bc\u30eb\u30b9,
+        \u30ab\u30ea\u30d5\u30a9\u30eb\u30cb\u30a2\u5dde 90012, \u30a2\u30e1\u30ea\u30ab\u5408\u8846\u56fd","geometry":{"lat":34.053696,"lng":-118.2429212}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Mon, 15 Feb 2021 20:28:15
+        GMT","created_unix":1613420895},"total_results":1}'
+  recorded_at: 2021-02-15 20:28:26 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
 - request:
     method: get
-    uri: https://api.opencagedata.com/geocode/v1/json?q=47.21864%2C-1.554136&language=en&limit=1&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    uri: https://api.opencagedata.com/geocode/v1/json?q=47.21864%2C-1.554136&limit=1&min_confidence=1&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=1&key=<<<oc_api_key>>>
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: https://github.com/ropensci/opencage
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.1.9000
   response:
     status:
       status_code: '200'
@@ -129,36 +135,38 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 17 Jul 2019 13:30:23 GMT
-      server: Apache/2.4.29 (Ubuntu)
+      date: Mon, 15 Feb 2021 20:28:16 GMT
+      server: Apache
       access-control-allow-origin: '*'
-      x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '2460'
-      x-ratelimit-reset: '1563408000'
-      transfer-encoding: chunked
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '776'
       content-type: application/json; charset=utf-8
-      strict-transport-security: max-age=31536000; includeSubDomains
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
     body:
       encoding: UTF-8
+      file: no
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2460,"reset":1563408000},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"47.21864,-1.554136","roadinfo":0,"version":"v1"},"results":[{"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"building","city":"Nantes","continent":"Europe","country":"France","country_code":"fr","house_number":"5","political_union":"European
-        Union","postcode":"44000","state":"Pays de la Loire","state_code":"PDL","state_district":"Loire-Atlantique","street":"Rue
-        Garde Dieu"},"confidence":10,"formatted":"5 Rue Garde Dieu, 44000 Nantes,
-        France","geometry":{"lat":47.218891,"lng":-1.554403}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage API","timestamp":{"created_http":"Wed, 17 Jul 2019 13:30:23
-        GMT","created_unix":1563370223},"total_results":1}'
-  recorded_at: 2019-07-17 13:30:36 GMT
-  recorded_with: vcr/0.2.6, webmockr/0.3.4
+        attribution guide","url":"https://opencagedata.com/credits"}],"request":{"abbrv":0,"add_request":1,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":1,"no_annotations":1,"no_dedupe":0,"no_record":1,"pretty":0,"proximity":"","query":"47.21864,-1.554136","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":47.2189524,"lng":-1.5534363},"southwest":{"lat":47.2177951,"lng":-1.5554196}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_category":"government","_type":"townhall","city":"Nantes","continent":"Europe","country":"France","country_code":"fr","county":"Loire-Atlantique","municipality":"Nantes","neighbourhood":"Cath\u00e9drale","political_union":"European
+        Union","postcode":"44000","road":"Rue Saint-Vincent","state":"Pays de la Loire","state_code":"PDL","suburb":"Centre
+        Ville","townhall":"H\u00f4tel de ville de Nantes"},"confidence":9,"formatted":"H\u00f4tel
+        de ville de Nantes, Rue Saint-Vincent, 44000 Nantes, France","geometry":{"lat":47.2183802,"lng":-1.5543889}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Mon, 15 Feb 2021 20:28:16
+        GMT","created_unix":1613420896},"total_results":1}'
+  recorded_at: 2021-02-15 20:28:26 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
 - request:
     method: get
-    uri: https://api.opencagedata.com/geocode/v1/json?q=53.55034%2C10.000654&language=fr&limit=1&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    uri: https://api.opencagedata.com/geocode/v1/json?q=53.55034%2C10.000654&limit=1&min_confidence=1&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=1&key=<<<oc_api_key>>>
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: https://github.com/ropensci/opencage
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.1.9000
   response:
     status:
       status_code: '200'
@@ -166,36 +174,37 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 17 Jul 2019 13:30:24 GMT
-      server: Apache/2.4.29 (Ubuntu)
+      date: Mon, 15 Feb 2021 20:28:17 GMT
+      server: Apache
       access-control-allow-origin: '*'
-      x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '2458'
-      x-ratelimit-reset: '1563408000'
-      transfer-encoding: chunked
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '761'
       content-type: application/json; charset=utf-8
-      strict-transport-security: max-age=31536000; includeSubDomains
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
     body:
       encoding: UTF-8
+      file: no
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2458,"reset":1563408000},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"fr","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"53.55034,10.000654","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":53.5505733,"lng":10.0012761},"southwest":{"lat":53.5501368,"lng":10.0002381}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"building","city":"Hambourg","city_district":"Hamburg-Mitte","continent":"Europe","country":"Allemagne","country_code":"de","house_number":"22","political_union":"European
-        Union","postcode":"20095","road":"Jakobikirchhof","state":"Hambourg","suburb":"Hamburg-Altstadt","unknown":"Evangelisch-lutherische
-        Hauptkirche St. Jacobi"},"confidence":10,"formatted":"Evangelisch-lutherische
-        Hauptkirche St. Jacobi, Jakobikirchhof 22, 20095 Hambourg, Allemagne","geometry":{"lat":53.5503571,"lng":10.0007413}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage API","timestamp":{"created_http":"Wed, 17 Jul 2019 13:30:24
-        GMT","created_unix":1563370224},"total_results":1}'
-  recorded_at: 2019-07-17 13:30:36 GMT
-  recorded_with: vcr/0.2.6, webmockr/0.3.4
+        attribution guide","url":"https://opencagedata.com/credits"}],"request":{"abbrv":0,"add_request":1,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":1,"no_annotations":1,"no_dedupe":0,"no_record":1,"pretty":0,"proximity":"","query":"53.55034,10.000654","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":53.5505733,"lng":10.0012761},"southwest":{"lat":53.5501368,"lng":10.0002381}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_category":"place_of_worship","_type":"place_of_worship","borough":"Hamburg-Mitte","city":"Hamburg","continent":"Europe","country":"Germany","country_code":"de","house_number":"22","place_of_worship":"Evangelisch-lutherische
+        Hauptkirche St. Jacobi","political_union":"European Union","postcode":"20095","road":"Jakobikirchhof","state":"Hamburg","state_code":"HH","suburb":"Altstadt"},"confidence":9,"formatted":"Evangelisch-lutherische
+        Hauptkirche St. Jacobi, Jakobikirchhof 22, 20095 Hamburg, Germany","geometry":{"lat":53.5503571,"lng":10.0007413}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Mon, 15 Feb 2021 20:28:17
+        GMT","created_unix":1613420897},"total_results":1}'
+  recorded_at: 2021-02-15 20:28:26 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
 - request:
     method: get
-    uri: https://api.opencagedata.com/geocode/v1/json?q=34.05369%2C-118.242767&language=es&limit=1&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    uri: https://api.opencagedata.com/geocode/v1/json?q=34.05369%2C-118.242767&limit=1&min_confidence=1&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=1&key=<<<oc_api_key>>>
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: https://github.com/ropensci/opencage
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.1.9000
   response:
     status:
       status_code: '200'
@@ -203,38 +212,40 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 17 Jul 2019 13:30:26 GMT
-      server: Apache/2.4.29 (Ubuntu)
+      date: Mon, 15 Feb 2021 20:28:18 GMT
+      server: Apache
       access-control-allow-origin: '*'
-      x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '2456'
-      x-ratelimit-reset: '1563408000'
-      transfer-encoding: chunked
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '754'
       content-type: application/json; charset=utf-8
-      strict-transport-security: max-age=31536000; includeSubDomains
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
     body:
       encoding: UTF-8
+      file: no
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2456,"reset":1563408000},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"es","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"34.05369,-118.242767","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":34.0543713,"lng":-118.2420052},"southwest":{"lat":34.0530141,"lng":-118.24353}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"building","building":"Los
-        Angeles City Hall","city":"Los \u00c1ngeles","continent":"North America","country":"Estados
-        Unidos de Am\u00e9rica","country_code":"us","county":"Los Angeles County","house_number":"200","neighbourhood":"Civic
-        Center","postcode":"90012","road":"North Spring Street","state":"California","state_code":"CA","suburb":"Little
-        Tokyo Historic District"},"confidence":10,"formatted":"Los Angeles City Hall,
-        200 North Spring Street, Los \u00c1ngeles, CA 90012, Estados Unidos de Am\u00e9rica","geometry":{"lat":34.053696,"lng":-118.2429212}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage API","timestamp":{"created_http":"Wed, 17 Jul 2019 13:30:26
-        GMT","created_unix":1563370226},"total_results":1}'
-  recorded_at: 2019-07-17 13:30:36 GMT
-  recorded_with: vcr/0.2.6, webmockr/0.3.4
+        attribution guide","url":"https://opencagedata.com/credits"}],"request":{"abbrv":0,"add_request":1,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":1,"no_annotations":1,"no_dedupe":0,"no_record":1,"pretty":0,"proximity":"","query":"34.05369,-118.242767","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":34.0543713,"lng":-118.2420052},"southwest":{"lat":34.0530141,"lng":-118.24353}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_category":"building","_type":"building","building":"Los
+        Angeles City Hall","city":"Los Angeles","continent":"North America","country":"United
+        States","country_code":"us","county":"Los Angeles County","house_number":"200","neighbourhood":"Civic
+        Center","postcode":"90012","road":"North Spring Street","state":"California","state_code":"CA","suburb":"Downtown"},"confidence":10,"formatted":"Los
+        Angeles City Hall, 200 North Spring Street, Los Angeles, CA 90012, United
+        States of America","geometry":{"lat":34.053696,"lng":-118.2429212}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Mon, 15 Feb 2021 20:28:18
+        GMT","created_unix":1613420898},"total_results":1}'
+  recorded_at: 2021-02-15 20:28:26 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
 - request:
     method: get
-    uri: https://api.opencagedata.com/geocode/v1/json?q=47.21864%2C-1.554136&limit=1&min_confidence=1&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    uri: https://api.opencagedata.com/geocode/v1/json?q=25%2C36&limit=1&min_confidence=5&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=1&key=<<<oc_api_key>>>
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: https://github.com/ropensci/opencage
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.1.9000
   response:
     status:
       status_code: '200'
@@ -242,36 +253,35 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 17 Jul 2019 13:30:27 GMT
-      server: Apache/2.4.29 (Ubuntu)
+      date: Mon, 15 Feb 2021 20:28:20 GMT
+      server: Apache
       access-control-allow-origin: '*'
-      x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '2454'
-      x-ratelimit-reset: '1563408000'
-      transfer-encoding: chunked
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '429'
       content-type: application/json; charset=utf-8
-      strict-transport-security: max-age=31536000; includeSubDomains
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
     body:
       encoding: UTF-8
+      file: no
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2454,"reset":1563408000},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":1,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"47.21864,-1.554136","roadinfo":0,"version":"v1"},"results":[{"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"building","city":"Nantes","continent":"Europe","country":"France","country_code":"fr","house_number":"5","political_union":"European
-        Union","postcode":"44000","state":"Pays de la Loire","state_code":"PDL","state_district":"Loire-Atlantique","street":"Rue
-        Garde Dieu"},"confidence":10,"formatted":"5 Rue Garde Dieu, 44000 Nantes,
-        France","geometry":{"lat":47.218891,"lng":-1.554403}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage API","timestamp":{"created_http":"Wed, 17 Jul 2019 13:30:27
-        GMT","created_unix":1563370227},"total_results":1}'
-  recorded_at: 2019-07-17 13:30:36 GMT
-  recorded_with: vcr/0.2.6, webmockr/0.3.4
+        attribution guide","url":"https://opencagedata.com/credits"}],"request":{"abbrv":0,"add_request":1,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":5,"no_annotations":1,"no_dedupe":0,"no_record":1,"pretty":0,"proximity":"","query":"25,36","roadinfo":0,"version":"v1"},"results":[],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Mon, 15 Feb 2021 20:28:20
+        GMT","created_unix":1613420900},"total_results":0}'
+  recorded_at: 2021-02-15 20:28:26 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
 - request:
     method: get
-    uri: https://api.opencagedata.com/geocode/v1/json?q=53.55034%2C10.000654&limit=1&min_confidence=1&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    uri: https://api.opencagedata.com/geocode/v1/json?q=25%2C36&limit=1&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=1&key=<<<oc_api_key>>>
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: https://github.com/ropensci/opencage
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.1.9000
   response:
     status:
       status_code: '200'
@@ -279,36 +289,36 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 17 Jul 2019 13:30:28 GMT
-      server: Apache/2.4.29 (Ubuntu)
+      date: Mon, 15 Feb 2021 20:28:21 GMT
+      server: Apache
       access-control-allow-origin: '*'
-      x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '2452'
-      x-ratelimit-reset: '1563408000'
-      transfer-encoding: chunked
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '564'
       content-type: application/json; charset=utf-8
-      strict-transport-security: max-age=31536000; includeSubDomains
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
     body:
       encoding: UTF-8
+      file: no
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2452,"reset":1563408000},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":1,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"53.55034,10.000654","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":53.5505733,"lng":10.0012761},"southwest":{"lat":53.5501368,"lng":10.0002381}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_type":"building","city":"Hamburg","city_district":"Hamburg-Mitte","continent":"Europe","country":"Germany","country_code":"de","house_number":"22","political_union":"European
-        Union","postcode":"20095","road":"Jakobikirchhof","state":"Hamburg","state_code":"HH","suburb":"Hamburg-Altstadt","unknown":"Evangelisch-lutherische
-        Hauptkirche St. Jacobi"},"confidence":10,"formatted":"Evangelisch-lutherische
-        Hauptkirche St. Jacobi, Jakobikirchhof 22, 20095 Hamburg, Germany","geometry":{"lat":53.5503571,"lng":10.0007413}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage API","timestamp":{"created_http":"Wed, 17 Jul 2019 13:30:29
-        GMT","created_unix":1563370229},"total_results":1}'
-  recorded_at: 2019-07-17 13:30:36 GMT
-  recorded_with: vcr/0.2.6, webmockr/0.3.4
+        attribution guide","url":"https://opencagedata.com/credits"}],"request":{"abbrv":0,"add_request":1,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":1,"pretty":0,"proximity":"","query":"25,36","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":27.8973492,"lng":43.3300781},"southwest":{"lat":12.7903748,"lng":34.1455078}},"components":{"_category":"natural/water","_type":"body_of_water","body_of_water":"Red
+        Sea"},"confidence":1,"formatted":"Red Sea","geometry":{"lat":25.0,"lng":36.0}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Mon, 15 Feb 2021 20:28:21
+        GMT","created_unix":1613420901},"total_results":1}'
+  recorded_at: 2021-02-15 20:28:26 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
 - request:
     method: get
-    uri: https://api.opencagedata.com/geocode/v1/json?q=34.05369%2C-118.242767&limit=1&min_confidence=1&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    uri: https://api.opencagedata.com/geocode/v1/json?q=47.21864%2C-1.554136&limit=1&no_annotations=0&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=1&key=<<<oc_api_key>>>
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: https://github.com/ropensci/opencage
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.1.9000
   response:
     status:
       status_code: '200'
@@ -316,38 +326,40 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 17 Jul 2019 13:30:30 GMT
-      server: Apache/2.4.29 (Ubuntu)
+      date: Mon, 15 Feb 2021 20:28:22 GMT
+      server: Apache
       access-control-allow-origin: '*'
-      x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '2450'
-      x-ratelimit-reset: '1563408000'
-      transfer-encoding: chunked
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '1465'
       content-type: application/json; charset=utf-8
-      strict-transport-security: max-age=31536000; includeSubDomains
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
     body:
       encoding: UTF-8
+      file: no
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2450,"reset":1563408000},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":1,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"34.05369,-118.242767","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":34.0543713,"lng":-118.2420052},"southwest":{"lat":34.0530141,"lng":-118.24353}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"building","building":"Los
-        Angeles City Hall","city":"Los Angeles","continent":"North America","country":"USA","country_code":"us","county":"Los
-        Angeles County","house_number":"200","neighbourhood":"Civic Center","postcode":"90012","road":"North
-        Spring Street","state":"California","state_code":"CA","suburb":"Little Tokyo
-        Historic District"},"confidence":10,"formatted":"Los Angeles City Hall, 200
-        North Spring Street, Los Angeles, CA 90012, United States of America","geometry":{"lat":34.053696,"lng":-118.2429212}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage API","timestamp":{"created_http":"Wed, 17 Jul 2019 13:30:30
-        GMT","created_unix":1563370230},"total_results":1}'
-  recorded_at: 2019-07-17 13:30:36 GMT
-  recorded_with: vcr/0.2.6, webmockr/0.3.4
+        attribution guide","url":"https://opencagedata.com/credits"}],"request":{"abbrv":0,"add_request":1,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":0,"no_dedupe":0,"no_record":1,"pretty":0,"proximity":"","query":"47.21864,-1.554136","roadinfo":0,"version":"v1"},"results":[{"annotations":{"DMS":{"lat":"47\u00b0
+        13'' 6.16872'''' N","lng":"1\u00b0 33'' 15.80004'''' W"},"MGRS":"30TXT0945330445","Maidenhead":"IN97ff32lj","Mercator":{"x":-173033.78,"y":5946416.806},"OSM":{"edit_url":"https://www.openstreetmap.org/edit?way=142870516#map=16/47.21838/-1.55439","note_url":"https://www.openstreetmap.org/note/new#map=16/47.21838/-1.55439&layers=N","url":"https://www.openstreetmap.org/?mlat=47.21838&mlon=-1.55439#map=16/47.21838/-1.55439"},"UN_M49":{"regions":{"EUROPE":"150","FR":"250","WESTERN_EUROPE":"155","WORLD":"001"},"statistical_groupings":["MEDC"]},"callingcode":33,"currency":{"alternate_symbols":[],"decimal_mark":",","html_entity":"&#x20AC;","iso_code":"EUR","iso_numeric":"978","name":"Euro","smallest_denomination":1,"subunit":"Cent","subunit_to_unit":100,"symbol":"\u20ac","symbol_first":0,"thousands_separator":"."},"flag":"\ud83c\uddeb\ud83c\uddf7","geohash":"gbquseu5h059sk879jfr","qibla":113.27,"roadinfo":{"drive_on":"right","road":"Rue
+        Saint-Vincent","speed_in":"km/h"},"sun":{"rise":{"apparent":1613373120,"astronomical":1613366940,"civil":1613371200,"nautical":1613369100},"set":{"apparent":1613410200,"astronomical":1613416320,"civil":1613412060,"nautical":1613414220}},"timezone":{"name":"Europe/Paris","now_in_dst":0,"offset_sec":3600,"offset_string":"+0100","short_name":"CET"},"what3words":{"words":"elastic.packet.rails"},"wikidata":"Q3146168"},"bounds":{"northeast":{"lat":47.2189524,"lng":-1.5534363},"southwest":{"lat":47.2177951,"lng":-1.5554196}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_category":"government","_type":"townhall","city":"Nantes","continent":"Europe","country":"France","country_code":"fr","county":"Loire-Atlantique","municipality":"Nantes","neighbourhood":"Cath\u00e9drale","political_union":"European
+        Union","postcode":"44000","road":"Rue Saint-Vincent","state":"Pays de la Loire","state_code":"PDL","suburb":"Centre
+        Ville","townhall":"H\u00f4tel de ville de Nantes"},"confidence":9,"formatted":"H\u00f4tel
+        de ville de Nantes, Rue Saint-Vincent, 44000 Nantes, France","geometry":{"lat":47.2183802,"lng":-1.5543889}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Mon, 15 Feb 2021 20:28:22
+        GMT","created_unix":1613420902},"total_results":1}'
+  recorded_at: 2021-02-15 20:28:26 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
 - request:
     method: get
-    uri: https://api.opencagedata.com/geocode/v1/json?q=25%2C36&limit=1&min_confidence=5&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    uri: https://api.opencagedata.com/geocode/v1/json?q=53.55034%2C10.000654&limit=1&no_annotations=1&roadinfo=1&no_dedupe=0&no_record=1&abbrv=0&add_request=1&key=<<<oc_api_key>>>
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: https://github.com/ropensci/opencage
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.1.9000
   response:
     status:
       status_code: '200'
@@ -355,33 +367,37 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 17 Jul 2019 13:30:31 GMT
-      server: Apache/2.4.29 (Ubuntu)
+      date: Mon, 15 Feb 2021 20:28:23 GMT
+      server: Apache
       access-control-allow-origin: '*'
-      x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '2448'
-      x-ratelimit-reset: '1563408000'
-      transfer-encoding: chunked
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '739'
       content-type: application/json; charset=utf-8
-      strict-transport-security: max-age=31536000; includeSubDomains
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
     body:
       encoding: UTF-8
+      file: no
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2448,"reset":1563408000},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":5,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"25,36","roadinfo":0,"version":"v1"},"results":[],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage API","timestamp":{"created_http":"Wed, 17 Jul 2019 13:30:31
-        GMT","created_unix":1563370231},"total_results":0}'
-  recorded_at: 2019-07-17 13:30:36 GMT
-  recorded_with: vcr/0.2.6, webmockr/0.3.4
+        attribution guide","url":"https://opencagedata.com/credits"}],"request":{"abbrv":0,"add_request":1,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":1,"pretty":0,"proximity":"","query":"53.55034,10.000654","roadinfo":1,"version":"v1"},"results":[{"annotations":{"roadinfo":{"drive_on":"right","maxspeed":50,"road":"Jakobikirchhof","speed_in":"km/h","surface":"sett"}},"bounds":{"northeast":{"lat":53.5506664,"lng":10.0011428},"southwest":{"lat":53.5500117,"lng":10.000136}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_category":"road","_type":"road","borough":"Hamburg-Mitte","city":"Hamburg","continent":"Europe","country":"Germany","country_code":"de","political_union":"European
+        Union","postcode":"20095","road":"Jakobikirchhof","state":"Hamburg","state_code":"HH","suburb":"Altstadt"},"confidence":9,"formatted":"Jakobikirchhof,
+        20095 Hamburg, Germany","geometry":{"lat":53.550609,"lng":10.0006242}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Mon, 15 Feb 2021 20:28:23
+        GMT","created_unix":1613420903},"total_results":1}'
+  recorded_at: 2021-02-15 20:28:26 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
 - request:
     method: get
-    uri: https://api.opencagedata.com/geocode/v1/json?q=25%2C36&limit=1&no_annotations=1&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    uri: https://api.opencagedata.com/geocode/v1/json?q=34.05369%2C-118.242767&limit=1&no_annotations=1&roadinfo=1&no_dedupe=0&no_record=1&abbrv=0&add_request=1&key=<<<oc_api_key>>>
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: https://github.com/ropensci/opencage
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.1.9000
   response:
     status:
       status_code: '200'
@@ -389,34 +405,40 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 17 Jul 2019 13:30:33 GMT
-      server: Apache/2.4.29 (Ubuntu)
+      date: Mon, 15 Feb 2021 20:28:25 GMT
+      server: Apache
       access-control-allow-origin: '*'
-      x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '2446'
-      x-ratelimit-reset: '1563408000'
-      transfer-encoding: chunked
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '774'
       content-type: application/json; charset=utf-8
-      strict-transport-security: max-age=31536000; includeSubDomains
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
     body:
       encoding: UTF-8
+      file: no
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2446,"reset":1563408000},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"25,36","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":27.8973492,"lng":43.3300781},"southwest":{"lat":12.7903748,"lng":34.1455078}},"components":{"_type":"body_of_water","body_of_water":"Red
-        Sea"},"confidence":1,"formatted":"Red Sea","geometry":{"lat":25.0,"lng":36.0}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage API","timestamp":{"created_http":"Wed, 17 Jul 2019 13:30:33
-        GMT","created_unix":1563370233},"total_results":1}'
-  recorded_at: 2019-07-17 13:30:36 GMT
-  recorded_with: vcr/0.2.6, webmockr/0.3.4
+        attribution guide","url":"https://opencagedata.com/credits"}],"request":{"abbrv":0,"add_request":1,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":1,"pretty":0,"proximity":"","query":"34.05369,-118.242767","roadinfo":1,"version":"v1"},"results":[{"annotations":{"roadinfo":{"drive_on":"right","lanes":4,"oneway":"yes","road":"North
+        Main Street","road_type":"primary","speed_in":"mph"}},"bounds":{"northeast":{"lat":34.0540751,"lng":-118.2416725},"southwest":{"lat":34.0522135,"lng":-118.243389}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_category":"road","_type":"road","city":"Los
+        Angeles","continent":"North America","country":"United States","country_code":"us","county":"Los
+        Angeles County","neighbourhood":"Civic Center","postcode":"90012","road":"North
+        Main Street","road_type":"primary","state":"California","state_code":"CA","suburb":"Downtown"},"confidence":9,"formatted":"North
+        Main Street, Los Angeles, CA 90012, United States of America","geometry":{"lat":34.0533229,"lng":-118.2423693}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Mon, 15 Feb 2021 20:28:25
+        GMT","created_unix":1613420905},"total_results":1}'
+  recorded_at: 2021-02-15 20:28:26 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
 - request:
     method: get
-    uri: https://api.opencagedata.com/geocode/v1/json?q=47.21864%2C-1.554136&limit=1&no_annotations=0&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    uri: https://api.opencagedata.com/geocode/v1/json?q=34.05369%2C-118.242767&limit=1&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=1&add_request=1&key=<<<oc_api_key>>>
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: https://github.com/ropensci/opencage
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.1.9000
   response:
     status:
       status_code: '200'
@@ -424,63 +446,26 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       status: HTTP/1.1 200 OK
-      date: Wed, 17 Jul 2019 13:30:34 GMT
-      server: Apache/2.4.29 (Ubuntu)
+      date: Mon, 15 Feb 2021 20:28:26 GMT
+      server: Apache
       access-control-allow-origin: '*'
-      x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '2444'
-      x-ratelimit-reset: '1563408000'
-      transfer-encoding: chunked
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '749'
       content-type: application/json; charset=utf-8
-      strict-transport-security: max-age=31536000; includeSubDomains
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
     body:
       encoding: UTF-8
+      file: no
       string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2444,"reset":1563408000},"request":{"abbrv":0,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":0,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"47.21864,-1.554136","roadinfo":0,"version":"v1"},"results":[{"annotations":{"DMS":{"lat":"47\u00b0
-        13'' 8.00760'''' N","lng":"1\u00b0 33'' 15.85080'''' W"},"MGRS":"30TXT0945130502","Maidenhead":"IN97ff32lm","Mercator":{"x":-173035.35,"y":5946500.257},"OSM":{"url":"https://www.openstreetmap.org/?mlat=47.21889&mlon=-1.55440#map=16/47.21889/-1.55440"},"UN_M49":{"regions":{"EUROPE":"150","FR":"250","WESTERN_EUROPE":"155","WORLD":"001"},"statistical_groupings":["MEDC"]},"callingcode":33,"currency":{"alternate_symbols":[],"decimal_mark":",","html_entity":"&#x20AC;","iso_code":"EUR","iso_numeric":"978","name":"Euro","smallest_denomination":1,"subunit":"Cent","subunit_to_unit":100,"symbol":"\u20ac","symbol_first":1,"thousands_separator":"."},"flag":"\ud83c\uddeb\ud83c\uddf7","geohash":"gbquseujgz307sr5utv3","qibla":113.27,"roadinfo":{"drive_on":"right","speed_in":"km/h"},"sun":{"rise":{"apparent":1563337680,"astronomical":1563328320,"civil":1563335400,"nautical":1563332340},"set":{"apparent":1563393420,"astronomical":1563402660,"civil":1563395640,"nautical":1563398700}},"timezone":{"name":"Europe/Paris","now_in_dst":1,"offset_sec":7200,"offset_string":"+0200","short_name":"CEST"},"what3words":{"words":"husband.breath.massing"}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_type":"building","city":"Nantes","continent":"Europe","country":"France","country_code":"fr","house_number":"5","political_union":"European
-        Union","postcode":"44000","state":"Pays de la Loire","state_code":"PDL","state_district":"Loire-Atlantique","street":"Rue
-        Garde Dieu"},"confidence":10,"formatted":"5 Rue Garde Dieu, 44000 Nantes,
-        France","geometry":{"lat":47.218891,"lng":-1.554403}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage API","timestamp":{"created_http":"Wed, 17 Jul 2019 13:30:34
-        GMT","created_unix":1563370234},"total_results":1}'
-  recorded_at: 2019-07-17 13:30:36 GMT
-  recorded_with: vcr/0.2.6, webmockr/0.3.4
-- request:
-    method: get
-    uri: https://api.opencagedata.com/geocode/v1/json?q=34.05369%2C-118.242767&limit=1&no_annotations=1&no_dedupe=0&no_record=0&abbrv=1&add_request=1&key=<<<oc_api_key>>>
-    body:
-      encoding: ''
-      string: ''
-    headers:
-      Accept-Encoding: gzip, deflate
-      Accept: application/json, text/xml, application/xml, */*
-      User-Agent: https://github.com/ropensci/opencage
-  response:
-    status:
-      status_code: '200'
-      message: OK
-      explanation: Request fulfilled, document follows
-    headers:
-      status: HTTP/1.1 200 OK
-      date: Wed, 17 Jul 2019 13:30:36 GMT
-      server: Apache/2.4.29 (Ubuntu)
-      access-control-allow-origin: '*'
-      x-ratelimit-limit: '2500'
-      x-ratelimit-remaining: '2442'
-      x-ratelimit-reset: '1563408000'
-      transfer-encoding: chunked
-      content-type: application/json; charset=utf-8
-      strict-transport-security: max-age=31536000; includeSubDomains
-    body:
-      encoding: UTF-8
-      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
-        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{"limit":2500,"remaining":2442,"reset":1563408000},"request":{"abbrv":1,"add_request":1,"autocomplete":0,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":0,"only_nominatim":0,"pretty":0,"proximity":"","query":"34.05369,-118.242767","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":34.0543713,"lng":-118.2420052},"southwest":{"lat":34.0530141,"lng":-118.24353}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_type":"building","building":"Los
-        Angeles City Hall","city":"Los Angeles","continent":"North America","country":"USA","country_code":"us","county":"Los
-        Angeles County","house_number":"200","neighbourhood":"Civic Center","postcode":"90012","road":"North
-        Spring Street","state":"California","state_code":"CA","suburb":"Little Tokyo
-        Historic District"},"confidence":10,"formatted":"Los Angeles City Hall, 200
-        North Spring St, Los Angeles, CA 90012, USA","geometry":{"lat":34.053696,"lng":-118.2429212}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/opencagedata"},"thanks":"For
-        using an OpenCage API","timestamp":{"created_http":"Wed, 17 Jul 2019 13:30:36
-        GMT","created_unix":1563370236},"total_results":1}'
-  recorded_at: 2019-07-17 13:30:36 GMT
-  recorded_with: vcr/0.2.6, webmockr/0.3.4
+        attribution guide","url":"https://opencagedata.com/credits"}],"request":{"abbrv":1,"add_request":1,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":1,"pretty":0,"proximity":"","query":"34.05369,-118.242767","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":34.0543713,"lng":-118.2420052},"southwest":{"lat":34.0530141,"lng":-118.24353}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_category":"building","_type":"building","building":"Los
+        Angeles City Hall","city":"Los Angeles","continent":"North America","country":"United
+        States","country_code":"us","county":"Los Angeles County","house_number":"200","neighbourhood":"Civic
+        Center","postcode":"90012","road":"North Spring Street","state":"California","state_code":"CA","suburb":"Downtown"},"confidence":10,"formatted":"Los
+        Angeles City Hall, 200 North Spring St, Los Angeles, CA 90012, USA","geometry":{"lat":34.053696,"lng":-118.2429212}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Mon, 15 Feb 2021 20:28:26
+        GMT","created_unix":1613420906},"total_results":1}'
+  recorded_at: 2021-02-15 20:28:26 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
