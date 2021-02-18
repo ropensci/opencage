@@ -2,7 +2,7 @@
 title: "Customise your query"
 subtitle: "Get more and better results from OpenCage"
 author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
-date: "2021-02-11"
+date: "2021-02-18"
 description: >
   "The OpenCage API supports about a dozen parameters to customise a query and here we will explain how to use them."
 output:

@@ -19,7 +19,7 @@ Peer-Review](https://badges.ropensci.org/36_status.svg)](https://github.com/rope
 
 <!-- badges: end -->
 
-Geocode with the [OpenCage](https://opencagedata.com/) API, either from
+Geocode with the [OpenCage](https://opencagedata.com) API, either from
 place name to longitude and latitude (forward geocoding) or from
 longitude and latitude to the name and address of the location (reverse
 geocoding).
@@ -33,7 +33,7 @@ install.packages("opencage")
 ```
 
 Or install the development version using
-[remotes](https://remotes.r-lib.org/) with:
+[remotes](https://remotes.r-lib.org) with:
 
 ``` r
 remotes::install_github("ropensci/opencage")
@@ -86,14 +86,14 @@ But remember, the vignettes are really great! We have:
 
 ## About OpenCage
 
-The [OpenCage](https://opencagedata.com/) API supports forward and
+The [OpenCage](https://opencagedata.com) API supports forward and
 reverse geocoding. Sources of OpenCage are open geospatial data
-including [OpenStreetMap](https://www.openstreetmap.org/),
+including [OpenStreetMap](https://www.openstreetmap.org),
 [DataScienceToolkit](https://github.com/petewarden/dstk),
 [GeoPlanet](https://en.wikipedia.org/wiki/GeoPlanet), [Natural Earth
-Data](https://www.naturalearthdata.com/),
+Data](https://www.naturalearthdata.com),
 [libpostal](https://github.com/openvenues/libpostal),
-[GeoNames](https://www.geonames.org/), and [Flickr’s
+[GeoNames](https://www.geonames.org), and [Flickr’s
 shapefiles](https://code.flickr.net/2009/05/21/flickr-shapefiles-public-dataset-10/)
 plus a whole lot more besides. Refer to the current full [list of
 credits](https://opencagedata.com/credits).

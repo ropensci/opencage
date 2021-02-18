@@ -2,7 +2,7 @@
 title: "Introduction to opencage"
 subtitle: "Forward and Reverse Geocoding"
 author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
-date: "2021-02-14"
+date: "2021-02-18"
 description: >
   "Get started with the opencage R package to geocode with the OpenCage API, either from place name to longitude and latitude (forward geocoding) or from longitude and latitude to the name and address of a location (reverse geocoding)."
 output:
@@ -46,7 +46,7 @@ There are three safer ways to set your API key instead:
 From there it will be fetched by all functions that call the OpenCage API.
 You do not even have to call `oc_config()` to set your key;
 you can start geocoding right away.
-If you have the {[usethis](https://usethis.r-lib.org/)} package installed, you can edit your `.Renviron` with `usethis::edit_r_environ()`.
+If you have the {[usethis](https://usethis.r-lib.org)} package installed, you can edit your `.Renviron` with `usethis::edit_r_environ()`.
 We strongly recommend storing your API key in the user-level `.Renviron`, as opposed to the project-level.
 This makes it less likely you will share sensitive information by mistake.
 
@@ -66,7 +66,7 @@ If you have a "Free Trial" account with OpenCage, you can skip to the next secti
 
 If you have a paid account, you can set the rate limit for the active R session with `oc_config(rate_sec = n)` where `n` is the appropriate rate limit.
 You can set the rate limit persistently across sessions by setting an `oc_rate_sec` option in your `.Rprofile`.
-If you have the {[usethis](https://usethis.r-lib.org/)} package installed, you can edit your `.Rprofile` with `usethis::edit_r_profile()`.
+If you have the {[usethis](https://usethis.r-lib.org)} package installed, you can edit your `.Rprofile` with `usethis::edit_r_profile()`.
 
 ### Privacy
 
@@ -128,7 +128,7 @@ oc_forward_df(placename = opera)
 #>   placename               oc_lat oc_lng oc_formatted                                                                     
 #>   <chr>                    <dbl>  <dbl> <chr>                                                                            
 #> 1 Palacio de Bellas Artes   19.4 -99.1  Palacio de Bellas Artes, Avenida Juárez, Centro Urbano, 06050 Mexico City, Mexico
-#> 2 Scala                     45.5   9.19 Teatro alla Scala, Via Giuseppe Verdi, 20121 Milan Milan, Italy                  
+#> 2 Scala                     45.5   9.19 Teatro alla Scala, Largo Antonio Ghiringhelli, Milan Milan, Italy                
 #> 3 Sydney Opera House       -33.9 151.   Sydney Opera House, 2 Macquarie Street, Sydney NSW 2000, Australia
 ```
 
@@ -216,11 +216,11 @@ To minimize the number of requests sent to the API {opencage} uses {[memoise](ht
 ```r
 system.time(oc_reverse(latitude = 10, longitude = 10))
 #>    user  system elapsed 
-#>    0.00    0.00    0.81
+#>    0.03    0.00    0.92
 
 system.time(oc_reverse(latitude = 10, longitude = 10))
 #>    user  system elapsed 
-#>       0       0       0
+#>    0.01    0.00    0.02
 ```
 
 To clear the cache of all results either start a new R session or call `oc_clear_cache()`.
@@ -232,7 +232,7 @@ oc_clear_cache()
 
 system.time(oc_reverse(latitude = 10, longitude = 10))
 #>    user  system elapsed 
-#>    0.03    0.00    0.74
+#>    0.00    0.00    0.92
 ```
 
 As you probably know, cache invalidation is one of the harder things to do in computer science.
@@ -249,4 +249,4 @@ Besides `oc_forward_df()` and `oc_reverse_df()`, which always return a single ti
 Depending on what you specify as the `return` parameter, `oc_forward()` and `oc_reverse()` will return either a list of tibbles (`df_list`, the default), JSON lists (`json_list`), GeoJSON lists (`geojson_list`), or the URL with which the API would be called (`url_only`).
 Learn more in the ["Output options"](output_options.html) vignette.
 
-Please report any issues or bugs on [our GitHub repository](https://github.com/ropensci/opencage/issues) and post questions on [discuss.ropensci.org](https://discuss.ropensci.org/).
+Please report any issues or bugs on [our GitHub repository](https://github.com/ropensci/opencage/issues) and post questions on [discuss.ropensci.org](https://discuss.ropensci.org).
