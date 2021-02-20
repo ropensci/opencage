@@ -53,35 +53,22 @@ test_that("oc_config throws error with faulty OpenCage key", {
 
 # test rate_sec argument --------------------------------------------------
 
-timer <- function(expr) {
-  system.time(expr)[["elapsed"]]
-}
-
-oc_get_limited_test <- function(reps) {
-  replicate(
-    reps,
-    oc_get_limited("https://httpbin.org/get")
-  )
-}
-
 test_that("oc_config updates rate limit of oc_get_limit", {
-  skip_if_offline("httpbin.org")
   # make sure there is a key present
   withr::local_envvar(c("OPENCAGE_KEY" = key_200))
 
   rps <- 5L
   oc_config(rate_sec = rps)
-  t <- timer(oc_get_limited_test(rps + 1))
-  expect_gt(t, 1)
-  expect_lt(t, 3)
+  expect_equal(ratelimitr::get_rates(oc_get_limited)[[1]][["n"]], rps)
 
   rps <- 3L
   oc_config(rate_sec = rps)
-  t <- timer(oc_get_limited_test(rps + 1))
-  expect_gt(t, 1)
-  expect_lt(t, 3)
-})
+  expect_equal(ratelimitr::get_rates(oc_get_limited)[[1]][["n"]], rps)
 
+  # set rate_sec back to default: 1L/sec
+  oc_config()
+  expect_equal(ratelimitr::get_rates(oc_get_limited)[[1]][["n"]], 1L)
+})
 
 # test no_record argument -------------------------------------------------
 
@@ -111,7 +98,6 @@ test_that("oc_config sets no_record option", {
   expect_equal(getOption("oc_no_record"), TRUE)
   res <- oc_process("Hamburg", return = "url_only")
   expect_match(res[[1]], "&no_record=1", fixed = TRUE)
-
 })
 
 # test show_key argument --------------------------------------------------
@@ -128,5 +114,4 @@ test_that("oc_config sets show_key option", {
   withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   oc_config(show_key = TRUE)
   expect_equal(getOption("oc_show_key"), TRUE)
-
 })

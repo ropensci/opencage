@@ -1,16 +1,10 @@
 ## Release summary
 
-### v0.2.1
-* Fixed two URLs, one of which was rejected on the v0.2.0 submission.
-
-### v0.2.0 (unreleased)
-* Rewrite of the package, see NEWS.md for details.
-* Change of maintainer:
-  * New Maintainer: Daniel Possenriede <possenriede+r@gmail.com>
-  * Old maintainer: Maëlle Salmon <maelle.salmon@yahoo.se>
+### v0.2.2
+This patch version fixes a test that caused an error on CRAN's Solaris (<https://github.com/ropensci/opencage/pull/131>, <https://www.r-project.org/nosvn/R.check/r-patched-solaris-x86/opencage-00check.html>).
 
 ## Test environments
-* local x86_64-w64-mingw32/x64 install, R 4.0.3
+* local x86_64-w64-mingw32/x64, R 4.0.4
 * GitHub Actions <https://github.com/ropensci/opencage/actions?query=workflow%3AR-CMD-check>:
   * Ubuntu 20.04, R devel, release and oldrel
   * windows-latest, R release
@@ -21,17 +15,14 @@
   * Windows Server 2008 R2 SP1, R-devel, 32/64 bit
 * win-builder (devel)
 
-## R CMD check results
+## R CMD check results (local)
 
-Duration: 2m 1.9s
+Duration: 2m 10.8s
 
 > checking CRAN incoming feasibility ... NOTE
   Maintainer: 'Daniel Possenriede <possenriede+r@gmail.com>'
   
-  New maintainer:
-    Daniel Possenriede <possenriede+r@gmail.com>
-  Old maintainer(s):
-    Maëlle Salmon <maelle.salmon@yahoo.se>
+  Days since last update: 4
 
 0 errors √ | 0 warnings √ | 1 note x
 
