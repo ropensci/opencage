@@ -1,5 +1,7 @@
 # opencage (development version)
 
+* The geocoding functions will not send a query to the API anymore if no API key is present (#133).
+
 # opencage 0.2.2
 
 * Fixed a test that caused an error on CRAN's Solaris (#131).

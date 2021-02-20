@@ -12,7 +12,6 @@ test_that("oc_process throws error without a key.", {
   )
 })
 
-
 test_that("oc_process(return = 'url_only') does not reveal key by default.", {
   withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   res <-
