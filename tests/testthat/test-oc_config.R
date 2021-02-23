@@ -14,6 +14,7 @@ test_that("oc_config sets OPENCAGE_KEY environment variable", {
 
   # override previously set key
   withr::local_envvar(c("OPENCAGE_KEY" = key_402))
+  expect_equal(Sys.getenv("OPENCAGE_KEY"), key_402)
   oc_config(key = key_200)
   expect_equal(Sys.getenv("OPENCAGE_KEY"), key_200)
 })
@@ -65,9 +66,12 @@ test_that("oc_config updates rate limit of oc_get_limit", {
   oc_config(rate_sec = rps)
   expect_equal(ratelimitr::get_rates(oc_get_limited)[[1]][["n"]], rps)
 
-  # set rate_sec back to default: 1L/sec
+  # set rate_sec back to default
   oc_config()
-  expect_equal(ratelimitr::get_rates(oc_get_limited)[[1]][["n"]], 1L)
+  expect_equal(
+    ratelimitr::get_rates(oc_get_limited)[[1]][["n"]],
+    getOption("oc_rate_sec", default = 1L)
+  )
 })
 
 # test no_record argument -------------------------------------------------
