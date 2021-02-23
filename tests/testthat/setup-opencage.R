@@ -49,17 +49,3 @@ invisible(
   )
 )
 vcr::check_cassette_names()
-
-# skip if OpenCage API offline --------------------------------------------
-skip_if_oc_offline <- function(host = "api.opencagedata.com") {
-  testthat::skip_if_offline(host = host)
-}
-
-# skip if API key is missing ----------------------------------------------
-skip_if_no_key <- function() {
-  testthat::skip_if_not(
-    condition = oc_key_present(),
-    # re message see https://github.com/r-lib/testthat/issues/1247
-    message = "OpenCage API key is missing"
-  )
-}

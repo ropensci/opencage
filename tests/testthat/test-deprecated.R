@@ -70,9 +70,6 @@ vcr::use_cassette("opencage_forward_parameters", {
 
 vcr::use_cassette("opencage_forward_NULL", {
   test_that("opencage_forward deals well with results being NULL", {
-    skip_if_no_key()
-    skip_if_oc_offline()
-
     # the query NOWHERE-INTERESTING will return a valid response with 0 results
     # https://opencagedata.com/api#no-results
     lifecycle::expect_deprecated(
@@ -93,9 +90,6 @@ vcr::use_cassette("opencage_forward_NULL", {
 
 vcr::use_cassette("opencage_forward_bounds", {
   test_that("the bounds argument is well taken into account", {
-    skip_if_no_key()
-    skip_if_oc_offline()
-
     lifecycle::expect_deprecated(
       results1 <- opencage_forward(
         placename = "Berlin",
