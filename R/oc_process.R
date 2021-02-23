@@ -42,6 +42,7 @@ oc_process <-
 
     # get key
     key <- Sys.getenv("OPENCAGE_KEY")
+    oc_check_key(key)
 
     # get & check no_record
     no_record <- getOption("oc_no_record", default = TRUE)

@@ -1,5 +1,17 @@
 ## Test oc_process ##
 
+test_that("oc_process throws error without a key.", {
+  withr::local_envvar(c("OPENCAGE_KEY" = ""))
+  expect_error(
+    oc_process(
+      placename = "Paris",
+      return = "url_only"
+    ),
+    "An OpenCage API `key` must be provided.",
+    fixed = TRUE
+  )
+})
+
 test_that("oc_process(return = 'url_only') does not reveal key by default.", {
   withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   res <-
