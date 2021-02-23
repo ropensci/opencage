@@ -56,23 +56,22 @@ vcr::use_cassette("oc_get_countrycode", {
 })
 
 test_that("oc_get_limited is rate limited", {
-  skip_on_cran()
-  skip_if_offline("httpbin.org")
-
   tm <- system.time({
-    replicate(2, oc_get_limited("https://httpbin.org/get"))
+    replicate(
+      2,
+      vcr::use_cassette(
+        "oc_get_limited",
+        {oc_get_limited("https://httpbin.org/get")}
+      )
+    )
   })
   rate <- ratelimitr::get_rates(oc_get_limited)
   expect_gte(tm[["elapsed"]], rate[[1]][["period"]] / rate[[1]][["n"]])
 })
 
 test_that("oc_get_memoise memoises", {
-  skip_on_cran()
-  skip_if_offline("httpbin.org")
-
-  oc_get_memoise("https://httpbin.org/get")
-  tm <- system.time({
+  vcr::use_cassette("oc_get_memoise", {
     oc_get_memoise("https://httpbin.org/get")
   })
-  expect_lt(tm["elapsed"], 0.5)
+  expect_true(memoise::has_cache(oc_get_memoise)("https://httpbin.org/get"))
 })
