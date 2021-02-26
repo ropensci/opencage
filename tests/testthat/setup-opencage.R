@@ -10,26 +10,22 @@ key_401 <- "32charactersandnumbers1234567890" # invalid key returns 401 response
 # setup vcr ----------------------------------------------------------------
 library("vcr") # *Required* as vcr is set up on loading
 
-# where are cassettes stored?
+# where are cassettes stored (and what does "fixtures" even mean)?
 vcr_dir <- vcr::vcr_test_path("vcr_cassettes")
 
 # check for key and configure rate limit
-if (!nzchar(Sys.getenv("OPENCAGE_KEY"))) {
-  if (dir.exists(vcr_dir)) {
+if (dir.exists(vcr_dir)) {
+
+  if (!nzchar(Sys.getenv("OPENCAGE_KEY"))) {
     # Set fake API key, so key checks do not throw an error
     Sys.setenv("OPENCAGE_KEY" = "fakekey01fakekey10fakekey01fake0")
-    # reduce rate-limit for faster tests
-    # set rate-limit via option, so default stays the same after oc_config tests
-    options(oc_rate_sec = 15L)
-    oc_config()#
-  } else {
-    # If there are neither mock files nor an API token, it's impossible to run
-    # tests
-    stop(
-      "There are no API key nor {vcr} cassettes, hence tests cannot be run.",
-      call. = FALSE
-    )
   }
+
+  # reduce rate-limit for faster tests when using vcr
+  # set rate-limit via option, so default stays the same after oc_config tests
+  options(oc_rate_sec = 15L)
+  oc_config() # set rate limit from option per default
+
 }
 
 # configure vcr
