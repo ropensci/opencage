@@ -111,7 +111,9 @@ test_that("tidyeval works for arguments", {
   vcr::use_cassette("oc_reverse_df_confidence", {
     confidence <- oc_reverse_df(df3, lat, lng, min_confidence = confidence)
   })
-  no_con <- oc_reverse_df(df3, lat, lng)
+  vcr::use_cassette("oc_reverse_df_default_confidence", {
+    no_con <- oc_reverse_df(df3, lat, lng)
+  })
 
   expect_false(isTRUE(all.equal(confidence, no_con)))
   expect_true(isTRUE(all.equal(confidence[1, ], no_con[1, ])))

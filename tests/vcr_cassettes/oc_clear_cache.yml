@@ -1,0 +1,35 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://httpbin.org/get
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.2.9000
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Fri, 26 Feb 2021 16:49:10 GMT
+      content-type: application/json
+      content-length: '389'
+      connection: keep-alive
+      server: gunicorn/19.9.0
+      access-control-allow-origin: '*'
+      access-control-allow-credentials: 'true'
+    body:
+      encoding: UTF-8
+      file: no
+      string: "{\n  \"args\": {}, \n  \"headers\": {\n    \"Accept\": \"application/json,
+        text/xml, application/xml, */*\", \n    \"Accept-Encoding\": \"gzip, deflate\",
+        \n    \"Host\": \"httpbin.org\", \n    \"User-Agent\": \"<https://github.com/ropensci/opencage>,
+        version 0.2.2.9000\", \n    \"X-Amzn-Trace-Id\": \"Root=1-60392686-42f2d5704039139b15fd9d03\"\n
+        \ }, \n  \"origin\": \"84.158.172.182\", \n  \"url\": \"https://httpbin.org/get\"\n}\n"
+  recorded_at: 2021-02-26 16:49:10 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4

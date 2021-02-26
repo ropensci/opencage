@@ -1,0 +1,34 @@
+http_interactions:
+- request:
+    method: head
+    uri: https://api.opencagedata.com/
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Fri, 26 Feb 2021 16:52:25 GMT
+      server: Apache
+      last-modified: Thu, 11 Feb 2021 18:46:11 GMT
+      etag: '"3ac-5bb13eef7c3da-gzip"'
+      accept-ranges: bytes
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '307'
+      content-type: text/html
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      file: no
+      string: ''
+  recorded_at: 2021-02-26 16:52:26 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
