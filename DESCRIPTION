@@ -22,7 +22,7 @@ Imports:
     dplyr (>= 0.7.4),
     lifecycle, 
     jsonlite (>= 1.5),
-    memoise (>= 1.1.0),
+    memoise (>= 2.0.0),
     progress (>= 1.1.2),
     purrr (>= 0.2.4),
     ratelimitr (>= 0.4.0),
