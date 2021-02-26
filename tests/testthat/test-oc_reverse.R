@@ -76,13 +76,11 @@ vcr::use_cassette("oc_reverse_df_lat_lon", {
   })
 })
 
-vcr::use_cassette("oc_reverse_df_default", {
-  test_that("oc_reverse_df doesn't work for default class", {
-    expect_error(
-      oc_reverse_df("Hamburg"),
-      "Can't geocode an object of class `character`."
-    )
-  })
+test_that("oc_reverse_df doesn't work for default class", {
+  expect_error(
+    oc_reverse_df("Hamburg"),
+    "Can't geocode an object of class `character`."
+  )
 })
 
 vcr::use_cassette("oc_reverse_df_output", {
@@ -100,48 +98,48 @@ vcr::use_cassette("oc_reverse_df_output", {
   })
 })
 
-vcr::use_cassette("oc_reverse_df_tidyeval", {
-  test_that("tidyeval works for arguments", {
-    noarg <- oc_reverse_df(df2, lat, lng)
+test_that("tidyeval works for arguments", {
+  noarg <- oc_reverse_df(df2, lat, lng)
 
-    # language
+  # language
+  vcr::use_cassette("oc_reverse_df_language", {
     lang <- oc_reverse_df(df2, lat, lng, language = language, output = "all")
-    expect_equal(lang$oc_country, c("France", "Allemagne", "アメリカ合衆国")) # nolint
-
-    # min_confidence
-    confidence <- oc_reverse_df(df3, lat, lng, min_confidence = confidence)
-    no_con <- oc_reverse_df(df3, lat, lng)
-
-    expect_false(isTRUE(all.equal(confidence, no_con)))
-    expect_true(isTRUE(all.equal(confidence[1, ], no_con[1, ])))
-    expect_true(isTRUE(all.equal(confidence[2, ], no_con[2, ])))
-    expect_true(isTRUE(all.equal(confidence[3, ], no_con[3, ])))
-    expect_false(isTRUE(all.equal(confidence[4, ], no_con[4, ])))
-
-    # no_annotations
-    ann <- oc_reverse_df(df2, lat, lng, bind_cols = FALSE,
-                         no_annotations = annotation)
-    expect_gt(ncol(ann), 40)
-    expect_equal(ann$oc_currency_name, c("Euro", NA, NA))
-
-    # roadinfo
-    ri <- oc_reverse_df(
-      df2,
-      lat,
-      lng,
-      bind_cols = FALSE,
-      roadinfo = roadinfo
-    )
-    expect_equal(ri$oc_roadinfo_speed_in, c(NA_character_, "km/h", "mph"))
-
-    # abbrv
-    abbrv <- oc_reverse_df(df2, lat, lng,
-                           abbrv = abbrv)
-    expect_false(isTRUE(all.equal(abbrv, noarg)))
-    expect_true(all.equal(abbrv[1, ], noarg[1, ]))
-    expect_true(all.equal(abbrv[2, ], noarg[2, ]))
-    expect_false(isTRUE(all.equal(abbrv[3, ], noarg[3, ])))
   })
+  expect_equal(lang$oc_country, c("France", "Allemagne", "アメリカ合衆国")) # nolint
+
+  # min_confidence
+  vcr::use_cassette("oc_reverse_df_confidence", {
+    confidence <- oc_reverse_df(df3, lat, lng, min_confidence = confidence)
+  })
+  no_con <- oc_reverse_df(df3, lat, lng)
+
+  expect_false(isTRUE(all.equal(confidence, no_con)))
+  expect_true(isTRUE(all.equal(confidence[1, ], no_con[1, ])))
+  expect_true(isTRUE(all.equal(confidence[2, ], no_con[2, ])))
+  expect_true(isTRUE(all.equal(confidence[3, ], no_con[3, ])))
+  expect_false(isTRUE(all.equal(confidence[4, ], no_con[4, ])))
+
+  # no_annotations
+  vcr::use_cassette("oc_reverse_df_annotations", {
+    ann <- oc_reverse_df(df2, lat, lng, no_annotations = annotation)
+  })
+  expect_gt(ncol(ann), 40)
+  expect_equal(ann$oc_currency_name, c("Euro", NA, NA))
+
+  # roadinfo
+  vcr::use_cassette("oc_reverse_df_roadinfo", {
+    ri <- oc_reverse_df(df2, lat, lng, roadinfo = roadinfo)
+  })
+  expect_equal(ri$oc_roadinfo_speed_in, c(NA_character_, "km/h", "mph"))
+
+  # abbrv
+  vcr::use_cassette("oc_reverse_df_abbrv", {
+    abbrv <- oc_reverse_df(df2, lat, lng, abbrv = abbrv)
+  })
+  expect_false(isTRUE(all.equal(abbrv, noarg)))
+  expect_true(all.equal(abbrv[1, ], noarg[1, ]))
+  expect_true(all.equal(abbrv[2, ], noarg[2, ]))
+  expect_false(isTRUE(all.equal(abbrv[3, ], noarg[3, ])))
 })
 
 # Checks ------------------------------------------------------------------

@@ -59,10 +59,9 @@ test_that("oc_get_limited is rate limited", {
   tm <- system.time({
     replicate(
       2,
-      vcr::use_cassette(
-        "oc_get_limited",
-        {oc_get_limited("https://httpbin.org/get")}
-      )
+      vcr::use_cassette("oc_get_limited", {
+        oc_get_limited("https://httpbin.org/get")
+      })
     )
   })
   rate <- ratelimitr::get_rates(oc_get_limited)

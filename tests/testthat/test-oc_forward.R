@@ -33,21 +33,23 @@ vcr::use_cassette("oc_forward_type_df_list", {
   })
 })
 
-vcr::use_cassette("oc_forward_type_json_list", {
-  test_that("oc_forward returns correct type", {
+test_that("oc_forward returns correct type", {
 
-    # json_list
+  # json_list
+  vcr::use_cassette("oc_forward_type_json_list", {
     res2 <- oc_forward(locations, return = "json_list")
-    expect_type(res2, "list")
-    expect_equal(length(res2), 3)
-    expect_type(res2[[1]], "list")
-
-    # geojson_list
-    res3 <- oc_forward(locations, return = "geojson_list")
-    expect_type(res3, "list")
-    expect_equal(length(res3), 3)
-    expect_s3_class(res3[[1]], "geo_list")
   })
+  expect_type(res2, "list")
+  expect_equal(length(res2), 3)
+  expect_type(res2[[1]], "list")
+
+  # geojson_list
+  vcr::use_cassette("oc_forward_type_geojson_list", {
+    res3 <- oc_forward(locations, return = "geojson_list")
+  })
+  expect_type(res3, "list")
+  expect_equal(length(res3), 3)
+  expect_s3_class(res3[[1]], "geo_list")
 })
 
 vcr::use_cassette("oc_forward_add_request", {
@@ -123,67 +125,78 @@ vcr::use_cassette("oc_forward_df_output", {
   })
 })
 
-vcr::use_cassette("oc_forward_df_tidyeval", {
-  test_that("tidyeval works for arguments", {
-
-    noarg <- oc_forward_df(df2, loc, bind_cols = FALSE)
-
-    ## bounds, proximity and countrycode
-    bounds <- oc_forward_df(df2, loc, bounds = bounds, bind_cols = FALSE)
-    prx <- oc_forward_df(df2, loc, proximity = proximity, bind_cols = FALSE)
-    cc <- oc_forward_df(df2, loc, countrycode = countrycode, bind_cols = FALSE)
-    expect_false(isTRUE(all.equal(bounds, noarg)))
-    expect_false(isTRUE(all.equal(prx, noarg)))
-    expect_false(isTRUE(all.equal(cc, noarg)))
-    expect_equal(bounds, prx)
-    expect_equal(bounds, cc)
-
-    # language
-    lang <- oc_forward_df(df2, loc, language = language, output = "all")
-    expect_equal(lang$oc_country, c("Frankreich", "Allemagne", "アメリカ合衆国")) # nolint
-
-    # limit
-    limit <- oc_forward_df(df2, loc, limit = limit)
-    expect_equal(nrow(limit), 6)
-    expect_equal(limit$id, c(1, 2, 2, 3, 3, 3))
-
-    # min_confidence
-    confidence <- oc_forward_df(df2, loc,
-                                min_confidence = confidence,
-                                bind_cols = FALSE)
-    expect_false(isTRUE(all.equal(confidence, noarg)))
-    expect_false(isTRUE(all.equal(confidence[1, ], noarg[1, ])))
-    expect_false(isTRUE(all.equal(confidence[2, ], noarg[2, ])))
-    expect_false(isTRUE(all.equal(confidence[3, ], noarg[3, ])))
-
-    # no_annotations
-    ann <- oc_forward_df(df2, loc, bind_cols = FALSE,
-                         no_annotations = annotation)
-    expect_gt(ncol(ann), 30)
-    expect_equal(ann$oc_currency_name, c("Euro", NA, NA))
-
-    # roadinfo
-    ri <- oc_forward_df(
-      df3,
-      loc,
-      roadinfo = roadinfo
-    )
-    expect_equal(ri$oc_roadinfo_speed_in, c(NA_character_, "km/h", "mph"))
-
-    # abbrv
-    abbrv <- oc_forward_df(df2, loc,
-                           abbrv = abbrv,
-                           bind_cols = FALSE)
-    expect_false(isTRUE(all.equal(abbrv, noarg)))
-    expect_true(all.equal(abbrv[1, ], noarg[1, ]))
-    expect_true(all.equal(abbrv[2, ], noarg[2, ]))
-    expect_false(isTRUE(all.equal(abbrv[3, ], noarg[3, ])))
+test_that("tidyeval works for arguments", {
+  ## query without arguments to test against
+  vcr::use_cassette("oc_forward_df_noarg", {
+    noarg <- oc_forward_df(df2, loc)
   })
+
+  ## bounds, proximity and countrycode
+  vcr::use_cassette("oc_forward_df_bounds", {
+    bounds <- oc_forward_df(df2, loc, bounds = bounds)
+  })
+  vcr::use_cassette("oc_forward_df_proximity", {
+    prx <- oc_forward_df(df2, loc, proximity = proximity)
+  })
+  vcr::use_cassette("oc_forward_df_countrycode", {
+    cc <- oc_forward_df(df2, loc, countrycode = countrycode)
+  })
+  expect_false(isTRUE(all.equal(bounds, noarg)))
+  expect_false(isTRUE(all.equal(prx, noarg)))
+  expect_false(isTRUE(all.equal(cc, noarg)))
+  expect_equal(bounds, prx)
+  expect_equal(bounds, cc)
+
+  # language
+  vcr::use_cassette("oc_forward_df_language", {
+    lang <- oc_forward_df(df2, loc, language = language, output = "all")
+  })
+  expect_equal(lang$oc_country, c("Frankreich", "Allemagne", "アメリカ合衆国")) # nolint
+
+  # limit
+  vcr::use_cassette("oc_forward_df_limit", {
+    limit <- oc_forward_df(df2, loc, limit = limit)
+  })
+  expect_equal(nrow(limit), 6)
+  expect_equal(limit$id, c(1, 2, 2, 3, 3, 3))
+
+  # min_confidence
+  vcr::use_cassette("oc_forward_df_confidence", {
+    confidence <-
+      oc_forward_df(df2, loc, min_confidence = confidence)
+  })
+  expect_false(isTRUE(all.equal(confidence, noarg)))
+  expect_false(isTRUE(all.equal(confidence[1, ], noarg[1, ])))
+  expect_false(isTRUE(all.equal(confidence[2, ], noarg[2, ])))
+  expect_false(isTRUE(all.equal(confidence[3, ], noarg[3, ])))
+
+  # no_annotations
+  vcr::use_cassette("oc_forward_df_annotations", {
+    ann <-
+      oc_forward_df(df2, loc, no_annotations = annotation)
+  })
+  expect_gt(ncol(ann), 30)
+  expect_equal(ann$oc_currency_name, c("Euro", NA, NA))
+
+  # roadinfo
+  vcr::use_cassette("oc_forward_df_roadinfo", {
+    ri <- oc_forward_df(df3, loc, roadinfo = roadinfo)
+  })
+  expect_equal(ri$oc_roadinfo_speed_in, c(NA_character_, "km/h", "mph"))
+
+  # abbrv
+  vcr::use_cassette("oc_forward_df_abbrv", {
+    abbrv <- oc_forward_df(df2, loc, abbrv = abbrv)
+  })
+  expect_false(isTRUE(all.equal(abbrv, noarg)))
+  expect_true(all.equal(abbrv[1, ], noarg[1, ]))
+  expect_true(all.equal(abbrv[2, ], noarg[2, ]))
+  expect_false(isTRUE(all.equal(abbrv[3, ], noarg[3, ])))
 })
 
 vcr::use_cassette("oc_forward_df_listcols_not_dropped", {
   test_that("list columns are not dropped (by tidyr)", {
-    bnds <- oc_forward_df(df2, loc, bounds = bounds, bind_cols = TRUE)
+    bnds <- oc_forward_df(df2, loc, bounds = bounds)
     expect_true(!is.null(bnds[["bounds"]]))
   })
 })

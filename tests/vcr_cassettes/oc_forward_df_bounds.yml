@@ -1,0 +1,118 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=Nantes&bounds=-72%2C45%2C-70%2C46&limit=1&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.2.9000
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Fri, 26 Feb 2021 13:37:36 GMT
+      server: Apache
+      access-control-allow-origin: '*'
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '671'
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"request":{"abbrv":0,"add_request":1,"bounds":"-72,45,-70,46","format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":1,"pretty":0,"proximity":"","query":"Nantes","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":45.7013274,"lng":-70.8932653},"southwest":{"lat":45.568547,"lng":-71.1093148}},"components":{"ISO_3166-1_alpha-2":"CA","ISO_3166-1_alpha-3":"CAN","_category":"place","_type":"village","continent":"North
+        America","country":"Canada","country_code":"ca","county":"Le Granit","region":"Estrie","state":"Quebec","state_code":"QC","village":"Nantes"},"confidence":5,"formatted":"Nantes,
+        QC, Canada","geometry":{"lat":45.6303741,"lng":-71.0208502}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Fri, 26 Feb 2021 13:37:36
+        GMT","created_unix":1614346656},"total_results":1}'
+  recorded_at: 2021-02-26 13:37:39 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=Flensburg&bounds=-98%2C43%2C-90%2C49&limit=1&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.2.9000
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Fri, 26 Feb 2021 13:37:37 GMT
+      server: Apache
+      access-control-allow-origin: '*'
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '684'
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"request":{"abbrv":0,"add_request":1,"bounds":"-98,43,-90,49","format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":1,"pretty":0,"proximity":"","query":"Flensburg","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":45.96263,"lng":-94.49328},"southwest":{"lat":45.933386,"lng":-94.566634}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_category":"place","_type":"village","continent":"North
+        America","country":"United States","country_code":"us","county":"Morrison
+        County","postcode":"56328","state":"Minnesota","state_code":"MN","village":"Flensburg"},"confidence":7,"formatted":"Flensburg,
+        MN 56328, United States of America","geometry":{"lat":45.9552432,"lng":-94.5350089}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Fri, 26 Feb 2021 13:37:37
+        GMT","created_unix":1614346657},"total_results":1}'
+  recorded_at: 2021-02-26 13:37:39 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=Los%20Angeles&bounds=-73%2C-38%2C-71%2C-36&limit=1&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.2.9000
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Fri, 26 Feb 2021 13:37:39 GMT
+      server: Apache
+      access-control-allow-origin: '*'
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '683'
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"request":{"abbrv":0,"add_request":1,"bounds":"-73,-38,-71,-36","format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":1,"pretty":0,"proximity":"","query":"Los
+        Angeles","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":-37.1785281,"lng":-72.03901},"southwest":{"lat":-37.6629358,"lng":-72.6836424}},"components":{"ISO_3166-1_alpha-2":"CL","ISO_3166-1_alpha-3":"CHL","_category":"place","_type":"city","city":"Los
+        \u00c1ngeles","continent":"South America","country":"Chile","country_code":"cl","county":"Provincia
+        de B\u00edo-B\u00edo","state":"Biob\u00edo Region"},"confidence":1,"formatted":"Los
+        \u00c1ngeles, Provincia de B\u00edo-B\u00edo, Chile","geometry":{"lat":-37.4707455,"lng":-72.351686}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Fri, 26 Feb 2021 13:37:39
+        GMT","created_unix":1614346659},"total_results":1}'
+  recorded_at: 2021-02-26 13:37:39 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4

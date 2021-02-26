@@ -1,0 +1,183 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/geojson?q=Nantes&limit=10&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=0&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.2.9000
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Fri, 26 Feb 2021 13:53:27 GMT
+      server: Apache
+      access-control-allow-origin: '*'
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '1681'
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"documentation":"https://opencagedata.com/api","features":[{"geometry":{"coordinates":[-1.5541362,47.2186371],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":47.2958583,"lng":-1.4788443},"southwest":{"lat":47.1805856,"lng":-1.6418115}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_category":"place","_type":"city","city":"Nantes","continent":"Europe","country":"France","country_code":"fr","county":"Loire-Atlantique","municipality":"Nantes","political_union":"European
+        Union","state":"Pays de la Loire","state_code":"PDL"},"confidence":6,"formatted":"Nantes,
+        Loire-Atlantique, France"},"type":"Feature"},{"geometry":{"coordinates":[-51.2382255,-22.6191472],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":-22.477,"lng":-51.099},"southwest":{"lat":-22.723,"lng":-51.298}},"components":{"ISO_3166-1_alpha-2":"BR","ISO_3166-1_alpha-3":"BRA","_category":"place","_type":"village","continent":"South
+        America","country":"Brazil","country_code":"br","municipality":"Regi\u00e3o
+        Imediata de Presidente Prudente","region":"Southeast Region","state":"S\u00e3o
+        Paulo","state_code":"SP","state_district":"Regi\u00e3o Geogr\u00e1fica Intermedi\u00e1ria
+        de Presidente Prudente","village":"Nantes"},"confidence":4,"formatted":"Nantes,
+        Regi\u00e3o Geogr\u00e1fica Intermedi\u00e1ria de Presidente Prudente, Brazil"},"type":"Feature"},{"geometry":{"coordinates":[-71.0208502,45.6303741],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":45.7013274,"lng":-70.8932653},"southwest":{"lat":45.568547,"lng":-71.1093148}},"components":{"ISO_3166-1_alpha-2":"CA","ISO_3166-1_alpha-3":"CAN","_category":"place","_type":"village","continent":"North
+        America","country":"Canada","country_code":"ca","county":"Le Granit","region":"Estrie","state":"Quebec","state_code":"QC","village":"Nantes"},"confidence":5,"formatted":"Nantes,
+        QC, Canada"},"type":"Feature"},{"geometry":{"coordinates":[-1.541423,47.2170954],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":47.2220954,"lng":-1.536423},"southwest":{"lat":47.2120954,"lng":-1.546423}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_category":"transportation","_type":"railway","city":"Nantes","continent":"Europe","country":"France","country_code":"fr","county":"Loire-Atlantique","municipality":"Nantes","neighbourhood":"Pr\u00e9-Gauchet","political_union":"European
+        Union","postcode":"44021","railway":"Nantes","road":"Voies 10-11","state":"Pays
+        de la Loire","state_code":"PDL","suburb":"Malakoff - Saint-Donatien"},"confidence":9,"formatted":"Nantes,
+        Voies 10-11, 44021 Nantes, France"},"type":"Feature"},{"geometry":{"coordinates":[-1.53187228794254,47.10641425],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":47.3532684,"lng":-1.1147605},"southwest":{"lat":46.8603369,"lng":-1.9393397}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_category":"place","_type":"municipality","continent":"Europe","country":"France","country_code":"fr","county":"Loire-Atlantique","municipality":"Nantes","political_union":"European
+        Union","state":"Pays de la Loire","state_code":"PDL"},"confidence":1,"formatted":"Nantes,
+        Loire-Atlantique, France"},"type":"Feature"},{"geometry":{"coordinates":[-7.4463702,41.7157881],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":41.7357881,"lng":-7.4263702},"southwest":{"lat":41.6957881,"lng":-7.4663702}},"components":{"ISO_3166-1_alpha-2":"PT","ISO_3166-1_alpha-3":"PRT","_category":"place","_type":"village","continent":"Europe","country":"Portugal","country_code":"pt","county":"Vila
+        Real","county_code":"VRL","hamlet":"Nantes","political_union":"European Union","postcode":"5400-252","state":"North","state_district":"Alto
+        T\u00e2mega","town":"Chaves","village":"Vilar de Nantes"},"confidence":7,"formatted":"5400-252
+        Chaves, Portugal"},"type":"Feature"},{"geometry":{"coordinates":[-8.8010341,42.4275163],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":42.4475163,"lng":-8.7810341},"southwest":{"lat":42.4075163,"lng":-8.8210341}},"components":{"ISO_3166-1_alpha-2":"ES","ISO_3166-1_alpha-3":"ESP","_category":"place","_type":"village","continent":"Europe","country":"Spain","country_code":"es","hamlet":"Nantes","municipality":"Sanxenxo","political_union":"European
+        Union","postcode":"36969","province":"Pontevedra","state":"Galicia","state_code":"GA"},"confidence":7,"formatted":"36969
+        Nantes, Spain"},"type":"Feature"},{"geometry":{"coordinates":[18.5272854541266,-33.9596359],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":-33.9572639,"lng":18.5313264},"southwest":{"lat":-33.9621003,"lng":18.5232355}},"components":{"ISO_3166-1_alpha-2":"ZA","ISO_3166-1_alpha-3":"ZAF","_category":"unknown","_type":"leisure","city":"Cape
+        Town","continent":"Africa","country":"South Africa","country_code":"za","county":"City
+        of Cape Town","leisure":"Nantes","postcode":"7764","state":"Western Cape","state_code":"WC","suburb":"Cape
+        Town Ward 49"},"confidence":9,"formatted":"Nantes, Cape Town Ward 49, Cape
+        Town, 7764, South Africa"},"type":"Feature"},{"geometry":{"coordinates":[-56.1715938,-34.8608325],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":-34.8608325,"lng":-56.1707775},"southwest":{"lat":-34.8610298,"lng":-56.171787}},"components":{"ISO_3166-1_alpha-2":"UY","ISO_3166-1_alpha-3":"URY","_category":"road","_type":"road","city":"Montevideo","continent":"South
+        America","country":"Uruguay","country_code":"uy","postcode":"12000","road":"Nantes","road_type":"residential","state":"Montevideo","state_code":"MO","suburb":"Brazo
+        Oriental"},"confidence":9,"formatted":"Nantes, 12000 Montevideo, Uruguay"},"type":"Feature"}],"licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{},"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Fri, 26 Feb 2021 13:53:27
+        GMT","created_unix":1614347607},"total_results":9,"type":"FeatureCollection"}'
+  recorded_at: 2021-02-26 13:53:30 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/geojson?q=Flensburg&limit=10&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=0&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.2.9000
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Fri, 26 Feb 2021 13:53:29 GMT
+      server: Apache
+      access-control-allow-origin: '*'
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '1522'
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"documentation":"https://opencagedata.com/api","features":[{"geometry":{"coordinates":[9.4333264,54.7833021],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":54.8370717,"lng":9.5068117},"southwest":{"lat":54.7517986,"lng":9.3573409}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_category":"place","_type":"city","continent":"Europe","country":"Germany","country_code":"de","political_union":"European
+        Union","state":"Schleswig-Holstein","state_code":"SH","town":"Flensburg"},"confidence":7,"formatted":"Flensburg,
+        Schleswig-Holstein, Germany"},"type":"Feature"},{"geometry":{"coordinates":[-94.5350089,45.9552432],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":45.96263,"lng":-94.49328},"southwest":{"lat":45.933386,"lng":-94.566634}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_category":"place","_type":"village","continent":"North
+        America","country":"United States","country_code":"us","county":"Morrison
+        County","postcode":"56328","state":"Minnesota","state_code":"MN","village":"Flensburg"},"confidence":7,"formatted":"Flensburg,
+        MN 56328, United States of America"},"type":"Feature"},{"geometry":{"coordinates":[13.002187245492,55.58230755],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":55.5865402,"lng":13.0067099},"southwest":{"lat":55.5787775,"lng":12.9967029}},"components":{"ISO_3166-1_alpha-2":"SE","ISO_3166-1_alpha-3":"SWE","_category":"place","_type":"neighbourhood","city":"Malmo","city_district":"Innerstaden","continent":"Europe","country":"Sweden","country_code":"se","county":"Sk\u00e5ne
+        County","municipality":"Malm\u00f6 kommun","political_union":"European Union","suburb":"Flensburg"},"confidence":9,"formatted":"Flensburg,
+        Malmo, Sk\u00e5ne County, Sweden"},"type":"Feature"},{"geometry":{"coordinates":[9.4365273,54.7741124],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":54.7791124,"lng":9.4415273},"southwest":{"lat":54.7691124,"lng":9.4315273}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_category":"transportation","_type":"railway","continent":"Europe","country":"Germany","country_code":"de","political_union":"European
+        Union","postcode":"24941","railway":"Flensburg / Flensborg","road":"Valentinerallee","state":"Schleswig-Holstein","state_code":"SH","suburb":"Rude","town":"Flensburg"},"confidence":9,"formatted":"Flensburg
+        / Flensborg, Valentinerallee, 24941 Flensburg, Germany"},"type":"Feature"},{"geometry":{"coordinates":[9.43720787620071,54.7738699],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":54.7748437,"lng":9.4390518},"southwest":{"lat":54.7731705,"lng":9.4341469}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_category":"unknown","_type":"landuse","continent":"Europe","country":"Germany","country_code":"de","landuse":"Flensburg","political_union":"European
+        Union","postcode":"24937","state":"Schleswig-Holstein","state_code":"SH","suburb":"Rude","town":"Flensburg"},"confidence":9,"formatted":"Flensburg,
+        24937 Flensburg, Germany"},"type":"Feature"},{"geometry":{"coordinates":[15.9337186,51.111643],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":51.111693,"lng":15.9337686},"southwest":{"lat":51.111593,"lng":15.9336686}},"components":{"ISO_3166-1_alpha-2":"PL","ISO_3166-1_alpha-3":"POL","_category":"natural/water","_type":"peak","continent":"Europe","country":"Poland","country_code":"pl","county":"Z\u0142otoryja
+        County","peak":"Kostrza","political_union":"European Union","postcode":"59-500","state":"Lower
+        Silesian Voivodeship","state_code":"02","town":"Z\u0142otoryja"},"confidence":9,"formatted":"Kostrza,
+        59-500 Z\u0142otoryja, Poland"},"type":"Feature"},{"geometry":{"coordinates":[15.9233858,51.1198549],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":51.1298549,"lng":15.9333858},"southwest":{"lat":51.1098549,"lng":15.9133858}},"components":{"ISO_3166-1_alpha-2":"PL","ISO_3166-1_alpha-3":"POL","_category":"place","_type":"neighbourhood","continent":"Europe","country":"Poland","country_code":"pl","county":"Z\u0142otoryja
+        County","neighbourhood":"Gorze\u0144","political_union":"European Union","postcode":"59-500","state":"Lower
+        Silesian Voivodeship","state_code":"02","suburb":"Gorze\u0144","town":"Z\u0142otoryja"},"confidence":8,"formatted":"59-500
+        Z\u0142otoryja, Poland"},"type":"Feature"},{"geometry":{"coordinates":[15.9239116783961,51.1197677],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":51.1223748,"lng":15.9331739},"southwest":{"lat":51.1174351,"lng":15.918134}},"components":{"ISO_3166-1_alpha-2":"PL","ISO_3166-1_alpha-3":"POL","_category":"place","_type":"neighbourhood","continent":"Europe","country":"Poland","country_code":"pl","county":"Z\u0142otoryja
+        County","political_union":"European Union","state":"Lower Silesian Voivodeship","state_code":"02","suburb":"Gorze\u0144","town":"Z\u0142otoryja"},"confidence":9,"formatted":"Gorze\u0144,
+        Z\u0142otoryja, Z\u0142otoryja County, Poland"},"type":"Feature"},{"geometry":{"coordinates":[4.5129485,51.8566135],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":51.8566676,"lng":4.5131854},"southwest":{"lat":51.8566022,"lng":4.5118152}},"components":{"ISO_3166-1_alpha-2":"NL","ISO_3166-1_alpha-3":"NLD","_category":"road","_type":"road","continent":"Europe","country":"Netherlands","country_code":"nl","industrial":"Vaanpark","political_union":"European
+        Union","postcode":"2993 LS","region":"Netherlands","road":"Flensburg","state":"South
+        Holland","state_code":"ZH","suburb":"Carnisselande","town":"Barendrecht"},"confidence":9,"formatted":"Flensburg,
+        2993 LS Barendrecht, Netherlands"},"type":"Feature"}],"licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"rate":{},"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Fri, 26 Feb 2021 13:53:29
+        GMT","created_unix":1614347609},"total_results":9,"type":"FeatureCollection"}'
+  recorded_at: 2021-02-26 13:53:30 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/geojson?q=Los%20Angeles&limit=10&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=0&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.2.9000
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Fri, 26 Feb 2021 13:53:30 GMT
+      server: Apache
+      access-control-allow-origin: '*'
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '1678'
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"documentation":"https://opencagedata.com/api","features":[{"geometry":{"coordinates":[-118.242766,34.0536909],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":34.337306,"lng":-118.1552947},"southwest":{"lat":33.659541,"lng":-118.6681776}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_category":"place","_type":"city","city":"Los
+        Angeles","continent":"North America","country":"United States","country_code":"us","county":"Los
+        Angeles County","state":"California","state_code":"CA"},"confidence":1,"formatted":"Los
+        Angeles, California, United States of America"},"type":"Feature"},{"geometry":{"coordinates":[-118.2096814,34.3155072],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":34.8233121,"lng":-117.64627},"southwest":{"lat":32.7969287,"lng":-118.9517221}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_category":"place","_type":"county","continent":"North
+        America","country":"United States","country_code":"us","county":"Los Angeles
+        County","state":"California","state_code":"CA"},"confidence":1,"formatted":"Los
+        Angeles County, California, United States of America"},"type":"Feature"},{"geometry":{"coordinates":[-75.2389229384263,9.3900639],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":9.4022923,"lng":-75.2213977},"southwest":{"lat":9.3778767,"lng":-75.2594562}},"components":{"ISO_3166-1_alpha-2":"CO","ISO_3166-1_alpha-3":"COL","_category":"place","_type":"city","city":"Los
+        Angeles","continent":"South America","country":"Colombia","country_code":"co","county":"Los
+        Palmitos","region":"Caribe","state":"Sucre","state_code":"SUC","state_district":"Montes
+        de Mar\u00eda"},"confidence":7,"formatted":"Los Angeles, Los Palmitos, Colombia"},"type":"Feature"},{"geometry":{"coordinates":[-82.2026253,8.5243664],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":8.5744293,"lng":-82.1248326},"southwest":{"lat":8.4737289,"lng":-82.2441543}},"components":{"ISO_3166-1_alpha-2":"PA","ISO_3166-1_alpha-3":"PAN","_category":"place","_type":"village","continent":"North
+        America","country":"Panama","country_code":"pa","county":"Distrito Gualaca","state":"Chiriqu\u00ed","village":"Los
+        Angeles"},"confidence":6,"formatted":"Los Angeles, Distrito Gualaca, Panama"},"type":"Feature"},{"geometry":{"coordinates":[-72.351686,-37.4707455],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":-37.1785281,"lng":-72.03901},"southwest":{"lat":-37.6629358,"lng":-72.6836424}},"components":{"ISO_3166-1_alpha-2":"CL","ISO_3166-1_alpha-3":"CHL","_category":"place","_type":"city","city":"Los
+        \u00c1ngeles","continent":"South America","country":"Chile","country_code":"cl","county":"Provincia
+        de B\u00edo-B\u00edo","state":"Biob\u00edo Region"},"confidence":1,"formatted":"Los
+        \u00c1ngeles, Provincia de B\u00edo-B\u00edo, Chile"},"type":"Feature"},{"geometry":{"coordinates":[55.1479183986075,25.20165475],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":25.2024725,"lng":55.1490527},"southwest":{"lat":25.2008463,"lng":55.1469328}},"components":{"ISO_3166-1_alpha-2":"AE","ISO_3166-1_alpha-3":"ARE","_category":"road","_type":"road","continent":"Asia","country":"United
+        Arab Emirates","country_code":"ae","place":"Los Angeles","state":"Dubai","state_code":"DU"},"confidence":9,"formatted":"Los
+        Angeles, Dubai, United Arab Emirates"},"type":"Feature"},{"geometry":{"coordinates":[-76.9173052,2.4162108],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":2.4562108,"lng":-76.8773052},"southwest":{"lat":2.3762108,"lng":-76.9573052}},"components":{"ISO_3166-1_alpha-2":"CO","ISO_3166-1_alpha-3":"COL","_category":"place","_type":"city","continent":"South
+        America","country":"Colombia","country_code":"co","county":"El Tambo","region":"Pac\u00edfica","state":"Cauca","state_code":"CAU","state_district":"Centro","town":"Los
+        Angeles"},"confidence":7,"formatted":"Los Angeles, El Tambo, Colombia"},"type":"Feature"},{"geometry":{"coordinates":[-75.6914965813369,4.80088935],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":4.8050026,"lng":-75.6898823},"southwest":{"lat":4.7967815,"lng":-75.6939554}},"components":{"ISO_3166-1_alpha-2":"CO","ISO_3166-1_alpha-3":"COL","_category":"place","_type":"neighbourhood","city":"Universidad","city_district":"Los
+        Angeles","continent":"South America","country":"Colombia","country_code":"co","municipality":"Perimetro
+        Urbano Pereira","region":"Regi\u00f3n Andina","state":"Risaralda","state_code":"RIS"},"confidence":9,"formatted":"Los
+        Angeles, Universidad, Risaralda, Colombia"},"type":"Feature"},{"geometry":{"coordinates":[-3.6996388,40.3562217],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":40.3645348,"lng":-3.6930263},"southwest":{"lat":40.3456815,"lng":-3.7070704}},"components":{"ISO_3166-1_alpha-2":"ES","ISO_3166-1_alpha-3":"ESP","_category":"place","_type":"neighbourhood","city":"Madrid","continent":"Europe","country":"Spain","country_code":"es","municipality":"\u00c1rea
+        metropolitana de Madrid y Corredor del Henares","political_union":"European
+        Union","postcode":"28001","quarter":"Los \u00c1ngeles","state":"Community
+        of Madrid","state_code":"MD","suburb":"Villaverde"},"confidence":8,"formatted":"28001
+        Madrid, Spain"},"type":"Feature"},{"geometry":{"coordinates":[-70.9059186,-17.168941],"type":"Point"},"properties":{"bounds":{"northeast":{"lat":-17.148941,"lng":-70.8859186},"southwest":{"lat":-17.188941,"lng":-70.9259186}},"components":{"ISO_3166-1_alpha-2":"PE","ISO_3166-1_alpha-3":"PER","_category":"place","_type":"village","city":"Moquegua","continent":"South
+        America","country":"Peru","country_code":"pe","region":"Province of Mariscal
+        Nieto","state":"Moquegua","state_code":"MOQ","village":"Los Angeles"},"confidence":7,"formatted":"Moquegua,
+        Peru"},"type":"Feature"}],"licenses":[{"name":"see attribution guide","url":"https://opencagedata.com/credits"}],"rate":{},"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Fri, 26 Feb 2021 13:53:30
+        GMT","created_unix":1614347610},"total_results":10,"type":"FeatureCollection"}'
+  recorded_at: 2021-02-26 13:53:30 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4

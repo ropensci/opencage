@@ -34,7 +34,8 @@ vcr::use_cassette("opencage_forward_parameters", {
         limit = 2,
         min_confidence = 5,
         language = "fr",
-        no_annotations = TRUE)
+        no_annotations = TRUE
+      )
     )
     expect_is(results, "list")
     expect_is(results[["results"]], "tbl_df")
@@ -53,7 +54,8 @@ vcr::use_cassette("opencage_forward_parameters", {
         longitude = 44,
         min_confidence = 5,
         language = "pt-BR",
-        no_annotations = TRUE)
+        no_annotations = TRUE
+      )
     )
     expect_is(results, "list")
     expect_is(results[["results"]], "tbl_df")
@@ -79,7 +81,8 @@ vcr::use_cassette("opencage_forward_NULL", {
         limit = 2,
         min_confidence = 5,
         language = "pt-BR",
-        no_annotations = TRUE)
+        no_annotations = TRUE
+      )
     )
     expect_is(results, "list")
     expect_null(results[["results"]])
@@ -94,27 +97,27 @@ vcr::use_cassette("opencage_forward_bounds", {
       results1 <- opencage_forward(
         placename = "Berlin",
         key = Sys.getenv("OPENCAGE_KEY")
-    ))
+      )
+    )
     lifecycle::expect_deprecated(
       results2 <- opencage_forward(
         placename = "Berlin",
         bounds = c(-90, 38, 0, 45),
         key = Sys.getenv("OPENCAGE_KEY")
-    ))
+      )
+    )
     expect_true(!("Germany" %in% results2$results$components.country))
     expect_true("Germany" %in% results1$results$components.country)
   })
 })
 
-vcr::use_cassette("opencage_forward_multiple", {
-  test_that("Errors with multiple inputs", {
-    withr::local_envvar(c("OPENCAGE_KEY" = key_200))
+test_that("Errors with multiple inputs", {
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
 
-    expect_error(opencage_forward(c("Hamburg", "Los Angeles")),
-      "`opencage_forward` is not vectorised; use `oc_forward` instead.")
-    expect_error(opencage_reverse(c(5, 20), c(6, 21)),
-      "`opencage_reverse` is not vectorised, use `oc_reverse` instead.")
-  })
+  expect_error(opencage_forward(c("Hamburg", "Los Angeles")),
+    "`opencage_forward` is not vectorised; use `oc_forward` instead.")
+  expect_error(opencage_reverse(c(5, 20), c(6, 21)),
+    "`opencage_reverse` is not vectorised, use `oc_reverse` instead.")
 })
 
 # Test opencage_key -------------------------------------------------------
