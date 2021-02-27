@@ -2,7 +2,7 @@
 title: "Introduction to opencage"
 subtitle: "Forward and Reverse Geocoding"
 author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
-date: "2021-02-18"
+date: "2021-02-27"
 description: >
   "Get started with the opencage R package to geocode with the OpenCage API, either from place name to longitude and latitude (forward geocoding) or from longitude and latitude to the name and address of a location (reverse geocoding)."
 output:
@@ -83,7 +83,7 @@ You can set the `oc_no_record` option persistently across sessions in your `.Rpr
 For more information on OpenCage's policies on privacy and data protection see the Legal section in [their FAQs](https://opencagedata.com/faq#legal), their [GDPR page](https://opencagedata.com/gdpr), and, for the `no_record` parameter specifically, see the relevant [blog post](https://blog.opencagedata.com/post/145602604628/more-privacy-with-norecord-parameter).
 
 For increased privacy, {opencage} sets `no_record` to `TRUE`, by default.
-Please note, however, that \pkg{opencage} always caches the data it receives from the OpenCage API locally, but only for as long as your R session is alive (see below).
+Please note, however, that {opencage} always caches the data it receives from the OpenCage API locally, but only for as long as your R session is alive (see below).
 
 ### (Don't) show API key
 
@@ -141,11 +141,11 @@ Which columns you receive exactly depends on the information OpenCage returns fo
 ```r
 oc_forward_df(placename = opera, output = "all")
 #> # A tibble: 3 x 30
-#>   placename oc_lat oc_lng oc_confidence oc_formatted oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng oc_iso_3166_1_a~
-#>   <chr>      <dbl>  <dbl>         <int> <chr>                   <dbl>            <dbl>            <dbl>            <dbl> <chr>           
-#> 1 Palacio ~   19.4 -99.1              9 Palacio de ~             19.4           -99.1              19.4           -99.1  MX              
-#> 2 Scala       45.5   9.19             9 Teatro alla~             45.5             9.19             45.5             9.19 IT              
-#> 3 Sydney O~  -33.9 151.               9 Sydney Oper~            -33.9           151.              -33.9           151.   AU              
+#>   placename  oc_lat oc_lng oc_confidence oc_formatted  oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng oc_iso_3166_1_a~
+#>   <chr>       <dbl>  <dbl>         <int> <chr>                    <dbl>            <dbl>            <dbl>            <dbl> <chr>           
+#> 1 Palacio d~   19.4 -99.1              9 Palacio de B~             19.4           -99.1              19.4           -99.1  MX              
+#> 2 Scala        45.5   9.19             9 Teatro alla ~             45.5             9.19             45.5             9.19 IT              
+#> 3 Sydney Op~  -33.9 151.               9 Sydney Opera~            -33.9           151.              -33.9           151.   AU              
 #> # ... with 20 more variables: oc_iso_3166_1_alpha_3 <chr>, oc_category <chr>, oc_type <chr>, oc_city <chr>, oc_continent <chr>,
 #> #   oc_country <chr>, oc_country_code <chr>, oc_museum <chr>, oc_neighbourhood <chr>, oc_postcode <chr>, oc_road <chr>,
 #> #   oc_attraction <chr>, oc_county <chr>, oc_political_union <chr>, oc_state <chr>, oc_suburb <chr>, oc_arts_centre <chr>,
@@ -216,11 +216,11 @@ To minimize the number of requests sent to the API {opencage} uses {[memoise](ht
 ```r
 system.time(oc_reverse(latitude = 10, longitude = 10))
 #>    user  system elapsed 
-#>    0.03    0.00    0.92
+#>    0.00    0.00    0.86
 
 system.time(oc_reverse(latitude = 10, longitude = 10))
 #>    user  system elapsed 
-#>    0.01    0.00    0.02
+#>    0.01    0.00    0.01
 ```
 
 To clear the cache of all results either start a new R session or call `oc_clear_cache()`.
@@ -232,7 +232,7 @@ oc_clear_cache()
 
 system.time(oc_reverse(latitude = 10, longitude = 10))
 #>    user  system elapsed 
-#>    0.00    0.00    0.92
+#>    0.03    0.00    0.63
 ```
 
 As you probably know, cache invalidation is one of the harder things to do in computer science.

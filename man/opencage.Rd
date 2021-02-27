@@ -32,7 +32,7 @@ Other contributors:
 \itemize{
   \item Noam Ross [contributor]
   \item Jake Russ [contributor]
-  \item Julia Silge (Julia Silge reviewed the package for rOpenSci, see https://github.com/ropensci/onboarding/issues/36.) [reviewer]
+  \item Julia Silge (Julia Silge reviewed the package for rOpenSci, see <https://github.com/ropensci/onboarding/issues/36>.) [reviewer]
 }
 
 }
