@@ -10,10 +10,11 @@ vcr::use_cassette("oc_check_status_200", {
     )
   })
 })
+
 vcr::use_cassette("oc_check_status_400", {
   test_that("oc_check_status returns 400 error if request is invalid", {
 
-    # Both shouldn't happen since we oc_check_query
+    # This shouldn't happen since we oc_check_query
     expect_error(
       oc_process(
         latitude = 280,
@@ -23,9 +24,10 @@ vcr::use_cassette("oc_check_status_400", {
       "HTTP failure: 400"
     )
 
+    # We don't send queries with nchar(query) <= 1 to the API, see .oc_process()
     expect_error(
       oc_process(
-        placename = "",
+        placename = "  ",
         return = "json_list"
       ),
       "HTTP failure: 400"

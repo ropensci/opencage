@@ -46,7 +46,6 @@ oc_format <- function(res_text, return, query) {
     }
     if ("request" %in% names(jsn)) {
       # add request directly, not from OpenCage roundtrip
-      if (identical(query, "")) query <- NA_character_
       tibble::add_column(results, oc_query = query, .before = 1)
     } else {
       results

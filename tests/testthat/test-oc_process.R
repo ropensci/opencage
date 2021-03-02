@@ -290,7 +290,7 @@ test_that("oc_process handles various other arguments.", {
 test_that("arguments that are NULL or NA don't show up in url.", {
   withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   res_null <- oc_process(
-    placename = "Hamburg",
+    placename = "",
     return = "url_only",
     limit = NULL,
     bounds = NULL,
@@ -298,11 +298,13 @@ test_that("arguments that are NULL or NA don't show up in url.", {
     language = NULL,
     countrycode = NULL,
     min_confidence = NULL,
+    roadinfo = NULL,
     no_annotations = NULL,
     no_dedupe = NULL,
     abbrv = NULL,
     add_request = NULL
   )
+  expect_match(res_null[[1]], "q=&", perl = TRUE) # contains 'q=' but no query
   expect_match(res_null[[1]], "^((?!limit=).)*$", perl = TRUE)
   expect_match(res_null[[1]], "^((?!bounds=).)*$", perl = TRUE)
   expect_match(res_null[[1]], "^((?!proximity=).)*$", perl = TRUE)
@@ -310,12 +312,13 @@ test_that("arguments that are NULL or NA don't show up in url.", {
   expect_match(res_null[[1]], "^((?!countrycode=).)*$", perl = TRUE)
   expect_match(res_null[[1]], "^((?!min_confidence=).)*$", perl = TRUE)
   expect_match(res_null[[1]], "^((?!no_annotations=).)*$", perl = TRUE)
+  expect_match(res_null[[1]], "^((?!roadinfo=).)*$", perl = TRUE)
   expect_match(res_null[[1]], "^((?!no_dedupe=).)*$", perl = TRUE)
   expect_match(res_null[[1]], "^((?!abbrv=).)*$", perl = TRUE)
   expect_match(res_null[[1]], "^((?!add_request=).)*$", perl = TRUE)
 
   res_na <- oc_process(
-    placename = "Hamburg",
+    placename = NA_character_,
     return = "url_only",
     limit = NA_real_,
     bounds = list(),
@@ -324,10 +327,12 @@ test_that("arguments that are NULL or NA don't show up in url.", {
     countrycode = NA_character_,
     min_confidence = NA,
     no_annotations = NA,
+    roadinfo = NA,
     no_dedupe = NA,
     abbrv = NA,
     add_request = NA
   )
+  expect_match(res_na[[1]], "^((?!q=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!limit=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!bounds=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!proximity=).)*$", perl = TRUE)
@@ -335,6 +340,7 @@ test_that("arguments that are NULL or NA don't show up in url.", {
   expect_match(res_na[[1]], "^((?!countrycode=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!min_confidence=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!no_annotations=).)*$", perl = TRUE)
+  expect_match(res_na[[1]], "^((?!roadinfo=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!no_dedupe=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!abbrv=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!add_request=).)*$", perl = TRUE)

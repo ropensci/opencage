@@ -59,6 +59,24 @@ vcr::use_cassette("oc_reverse_add_request_mask_key", {
   })
 })
 
+test_that("oc_reverse handles NAs", {
+  vcr::use_cassette("oc_reverse_longitude_na", {
+    res1 <- oc_reverse(latitude = 0, longitude = NA_real_)
+  })
+  expect_type(res1, "list")
+  expect_equal(length(res1), 1)
+  expect_s3_class(res1[[1]], c("tbl_df", "tbl", "data.frame"))
+  expect_equal(res1[[1]][[1, "oc_lat"]], NA_real_)
+
+  vcr::use_cassette("oc_reverse_latitude_empty", {
+    res2 <- oc_reverse(latitude = NA_real_, longitude = 0)
+  })
+  expect_type(res2, "list")
+  expect_equal(length(res2), 1)
+  expect_s3_class(res2[[1]], c("tbl_df", "tbl", "data.frame"))
+  expect_equal(res2[[1]][[1, "oc_lng"]], NA_real_)
+})
+
 # oc_reverse_df -----------------------------------------------------------
 vcr::use_cassette("oc_reverse_df_lat_lon", {
   test_that("oc_reverse_df works", {
@@ -74,6 +92,37 @@ vcr::use_cassette("oc_reverse_df_lat_lon", {
     expect_s3_class(tbl3, c("tbl_df", "tbl", "data.frame"))
     expect_equal(nrow(tbl3), 3)
   })
+})
+
+test_that("oc_reverse_df works with NA", {
+  lt <- c(0, NA_real_)
+  ln <- c(NA_real_, 0)
+  vcr::use_cassette("oc_reverse_df_na_tbl1", {
+    tbl1 <- oc_reverse_df(lt, ln)
+  })
+  expect_equal(nrow(tbl1), 2)
+  expect_equal(tbl1$latitude, lt)
+  expect_equal(tbl1$longitude, ln)
+  expect_true(all(is.na(tbl1$oc_formatted)))
+
+  vcr::use_cassette("oc_reverse_df_na_tbl2", {
+    tbl2 <- oc_reverse_df(data.frame(lt, ln), lt, ln)
+  })
+  expect_equal(nrow(tbl2), 2)
+  expect_equal(tbl2$lt, lt)
+  expect_equal(tbl2$ln, ln)
+  expect_true(all(is.na(tbl2$oc_formatted)))
+
+  vcr::use_cassette("oc_reverse_df_na_tbl3", {
+    tbl3 <- oc_reverse_df(data.frame(lt, ln), lt, ln, bind_cols = FALSE)
+  })
+  expect_equal(nrow(tbl3), 2)
+  expect_true(
+    all(
+      is.na(tbl3$oc_query),
+      is.na(tbl3$oc_formatted)
+    )
+  )
 })
 
 test_that("oc_reverse_df doesn't work for default class", {

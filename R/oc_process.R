@@ -100,7 +100,7 @@ oc_process <-
            limit = NULL,
            min_confidence = NULL,
            no_annotations = NULL,
-           roadinfo = FALSE,
+           roadinfo = NULL,
            no_dedupe = NULL,
            no_record = NULL,
            abbrv = NULL,
@@ -118,19 +118,15 @@ oc_process <-
 
     # define query
     if (!is.null(placename)) {
-      if (!is.na(placename)) {
-        query <- placename
-      } else {
-        # convert NA's to an empty query to not return bogus results
-        query <- ""
-      }
+      query <- placename
     }
     if (!is.null(latitude)) {
       if (!is.na(latitude) && !is.na(longitude)) {
         query <- paste(latitude, longitude, sep = ",")
       } else {
-        # convert NA's to an empty query to not return bogus results
-        query <- ""
+        # set query to NA (and do not send it to the API)
+        # if either latitude or longitude is NA
+        query <- NA_character_
       }
     }
 
@@ -167,15 +163,34 @@ oc_process <-
       }
     }
 
-    # get response
-    res_env <- oc_get_memoise(oc_url)
+    # send query to API if not NA, else return (fake) empty res_text
+    if (!is.na(query) && nchar(query) >= 2) {
 
-    # parse response
-    res_text <- oc_parse_text(res_env)
+      # get response
+      res_env <- oc_get_memoise(oc_url)
 
-    # check status message
-    oc_check_status(res_env, res_text)
+      # parse response
+      res_text <- oc_parse_text(res_env)
+
+      # check status message
+      oc_check_status(res_env, res_text)
+
+    } else {
+
+      if (identical(return, "geojson_list")) {
+        res_text <-
+          "{\"features\":[],\"total_results\":0,\"type\":\"FeatureCollection\"}"
+      } else {
+        if (add_request) {
+          request_json <- "\"request\":{\"add_request\":1,\"query\":[]}, "
+        } else request_json <- ""
+        res_text <-
+          paste0("{", request_json, "\"results\":[],\"total_results\":0}")
+      }
+
+    }
 
     # format output
     oc_format(res_text = res_text, return = return, query = query)
-    }
+
+  }

@@ -85,6 +85,26 @@ vcr::use_cassette("oc_forward_no_result", {
   })
 })
 
+test_that("oc_forward handles NAs", {
+  vcr::use_cassette("oc_forward_placename_na", {
+    res <- oc_forward(NA_character_)
+  })
+  expect_type(res, "list")
+  expect_equal(length(res), 1)
+  expect_s3_class(res[[1]], c("tbl_df", "tbl", "data.frame"))
+  expect_equal(res[[1]][[1, "oc_lat"]], NA_real_)
+})
+
+test_that("oc_forward handles empty strings", {
+  vcr::use_cassette("oc_forward_placename_empty", {
+    res <- oc_forward("")
+  })
+  expect_type(res, "list")
+  expect_equal(length(res), 1)
+  expect_s3_class(res[[1]], c("tbl_df", "tbl", "data.frame"))
+  expect_equal(res[[1]][[1, "oc_lat"]], NA_real_)
+})
+
 # oc_forward_df -----------------------------------------------------------
 
 vcr::use_cassette("oc_forward_df_works", {
@@ -102,6 +122,48 @@ vcr::use_cassette("oc_forward_df_works", {
     expect_s3_class(tbl3, c("tbl_df", "tbl", "data.frame"))
     expect_equal(nrow(tbl3), 3)
   })
+})
+
+test_that("oc_forward_df works with NA and empty strings", {
+  q <- c(NA_character_, "")
+  vcr::use_cassette("oc_forward_df_na_tbl1", {
+    tbl1 <- oc_forward_df(q)
+  })
+  expect_equal(nrow(tbl1), 2)
+  expect_equal(tbl1$placename, q)
+  expect_true(
+    all(
+      is.na(tbl1$oc_formatted),
+      is.na(tbl1$oc_lat),
+      is.na(tbl1$oc_lng)
+      )
+    )
+
+  vcr::use_cassette("oc_forward_df_na_tbl2", {
+    tbl2 <- oc_forward_df(data.frame(q), q)
+  })
+  expect_equal(nrow(tbl2), 2)
+  expect_equal(tbl2$q, q)
+  expect_true(
+    all(
+      is.na(tbl2$oc_formatted),
+      is.na(tbl2$oc_lat),
+      is.na(tbl2$oc_lng)
+    )
+  )
+
+  vcr::use_cassette("oc_forward_df_na_tbl3", {
+    tbl3 <- oc_forward_df(data.frame(q), q, bind_cols = FALSE)
+  })
+  expect_equal(nrow(tbl3), 2)
+  expect_equal(tbl3$oc_query, q)
+  expect_true(
+    all(
+      is.na(tbl3$oc_formatted),
+      is.na(tbl3$oc_lat),
+      is.na(tbl3$oc_lng)
+    )
+  )
 })
 
 test_that("oc_forward_df doesn't work for default class", {
