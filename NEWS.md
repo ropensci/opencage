@@ -1,6 +1,9 @@
 # opencage (development version)
 
 * The geocoding functions will not send a query to the API anymore if no API key is present (#133).
+* `NA`s are allowed again for the `placename` or `latitude`/`longitude` arguments (also empty strings for `placename`). 
+These queries are not sent to the API. 
+An empty/`NA` response will be returned depending on the specific query (#134).
 * {opencage} now uses {[vcr](https://docs.ropensci.org/vcr/)} for tests that make API requests (#48, #87, #130, #137).
 
 # opencage 0.2.2
