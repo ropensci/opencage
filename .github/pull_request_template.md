@@ -18,23 +18,23 @@ Provide a general summary of your changes in the Title above.
 Please describe your changes in detail. 
 -->
 
-[ ] example included
+- [ ] example included
 <!--- 
 If you are introducing a new feature or changing behaviour of existing
 methods/functions, please include a brief example if possible! 
 -->
-[ ] related issue mentioned
+- [ ] related issue mentioned
 <!--- 
 If this closes an issue make sure include e.g., "fixes #4" or similar - 
 or if it just relates to an issue make sure to mention it like "#4" 
 -->
-[ ] documentation included
+- [ ] documentation included
 <!--- 
 If you are introducing a new feature or changing behaviour of existing
 methods/functions, please document the new behaviour and features!
 This ideally includes the README and/or vignettes, if appropriate.
 -->
-[ ] tests included
+- [ ] tests included
 <!--- 
 Please include tests if you made changes to the package code! 
 -->
