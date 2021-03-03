@@ -63,18 +63,23 @@ test_that("oc_reverse handles NAs", {
   vcr::use_cassette("oc_reverse_longitude_na", {
     res1 <- oc_reverse(latitude = 0, longitude = NA_real_)
   })
-  expect_type(res1, "list")
-  expect_equal(length(res1), 1)
-  expect_s3_class(res1[[1]], c("tbl_df", "tbl", "data.frame"))
   expect_equal(res1[[1]][[1, "oc_lat"]], NA_real_)
 
-  vcr::use_cassette("oc_reverse_latitude_empty", {
+  vcr::use_cassette("oc_reverse_latitude_na", {
     res2 <- oc_reverse(latitude = NA_real_, longitude = 0)
   })
-  expect_type(res2, "list")
-  expect_equal(length(res2), 1)
-  expect_s3_class(res2[[1]], c("tbl_df", "tbl", "data.frame"))
   expect_equal(res2[[1]][[1, "oc_lng"]], NA_real_)
+
+  vcr::use_cassette("oc_reverse_latitude_na_json", {
+    res3 <- oc_reverse(latitude = NA_real_, longitude = 0, return = "json_list")
+  })
+  expect_equal(res3[[1]][["results"]], list())
+
+  vcr::use_cassette("oc_reverse_latitude_na_geojson", {
+    res4 <-
+      oc_reverse(latitude = NA_real_, longitude = 0, return = "geojson_list")
+  })
+  expect_equal(res4[[1]][["features"]], list())
 })
 
 # oc_reverse_df -----------------------------------------------------------

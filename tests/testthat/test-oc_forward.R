@@ -86,13 +86,23 @@ vcr::use_cassette("oc_forward_no_result", {
 })
 
 test_that("oc_forward handles NAs", {
+  # df_list
   vcr::use_cassette("oc_forward_placename_na", {
     res <- oc_forward(NA_character_)
   })
-  expect_type(res, "list")
-  expect_equal(length(res), 1)
-  expect_s3_class(res[[1]], c("tbl_df", "tbl", "data.frame"))
   expect_equal(res[[1]][[1, "oc_lat"]], NA_real_)
+
+  # json_list
+  vcr::use_cassette("oc_forward_placename_na_json", {
+    res2 <- oc_forward(NA_character_, return = "json_list")
+  })
+  expect_equal(res2[[1]][["results"]], list())
+
+  # geojson_list
+  vcr::use_cassette("oc_forward_placename_na_geojson", {
+    res3 <- oc_forward(NA_character_, return = "geojson_list")
+  })
+  expect_equal(res3[[1]][["features"]], list())
 })
 
 test_that("oc_forward handles empty strings", {
