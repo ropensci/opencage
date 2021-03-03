@@ -140,7 +140,7 @@ test_that("oc_forward_df works with NA and empty strings", {
     )
 
   vcr::use_cassette("oc_forward_df_na_tbl2", {
-    tbl2 <- oc_forward_df(data.frame(q), q)
+    tbl2 <- oc_forward_df(data.frame(q, stringsAsFactors = FALSE), q)
   })
   expect_equal(nrow(tbl2), 2)
   expect_equal(tbl2$q, q)
@@ -153,7 +153,12 @@ test_that("oc_forward_df works with NA and empty strings", {
   )
 
   vcr::use_cassette("oc_forward_df_na_tbl3", {
-    tbl3 <- oc_forward_df(data.frame(q), q, bind_cols = FALSE)
+    tbl3 <-
+      oc_forward_df(
+        data.frame(q, stringsAsFactors = FALSE),
+        q,
+        bind_cols = FALSE
+      )
   })
   expect_equal(nrow(tbl3), 2)
   expect_equal(tbl3$oc_query, q)

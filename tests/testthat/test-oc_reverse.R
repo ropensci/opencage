@@ -106,7 +106,7 @@ test_that("oc_reverse_df works with NA", {
   expect_true(all(is.na(tbl1$oc_formatted)))
 
   vcr::use_cassette("oc_reverse_df_na_tbl2", {
-    tbl2 <- oc_reverse_df(data.frame(lt, ln), lt, ln)
+    tbl2 <- oc_reverse_df(data.frame(lt, ln, stringsAsFactors = FALSE), lt, ln)
   })
   expect_equal(nrow(tbl2), 2)
   expect_equal(tbl2$lt, lt)
@@ -114,7 +114,13 @@ test_that("oc_reverse_df works with NA", {
   expect_true(all(is.na(tbl2$oc_formatted)))
 
   vcr::use_cassette("oc_reverse_df_na_tbl3", {
-    tbl3 <- oc_reverse_df(data.frame(lt, ln), lt, ln, bind_cols = FALSE)
+    tbl3 <-
+      oc_reverse_df(
+        data.frame(lt, ln, stringsAsFactors = FALSE),
+        lt,
+        ln,
+        bind_cols = FALSE
+      )
   })
   expect_equal(nrow(tbl3), 2)
   expect_true(
