@@ -3,7 +3,7 @@
 test_that("oc_points works with numeric", {
   pnts1 <- oc_points(-5.6, 51.2)
   expect_type(pnts1, "list")
-  expect_is(pnts1[[1]], "numeric")
+  expect_type(pnts1[[1]], "double")
   expect_length(pnts1[[1]], 2)
   expect_equal(unlist(pnts1), c(latitude = -5.6, longitude = 51.2))
   expect_output(
@@ -21,8 +21,8 @@ test_that("oc_points works with data.frame", {
 
   pnts2 <- oc_points(data = xdf, latitude = y, longitude = x)
   expect_type(pnts2, "list")
-  expect_is(pnts2[[1]], "numeric")
-  expect_is(pnts2[[2]], "numeric")
+  expect_type(pnts2[[1]], "double")
+  expect_type(pnts2[[2]], "double")
   expect_length(pnts2[[1]], 2)
   expect_length(pnts2[[2]], 2)
   expect_equal(unlist(pnts2[1]), c(latitude = 54.0, longitude = 10.3))

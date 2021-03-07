@@ -6,21 +6,21 @@ vcr::use_cassette("opencage_forward_reverse", {
     lifecycle::expect_deprecated(
       results <- opencage_forward(placename = "Sarzeau")
     )
-    expect_is(results, "list")
-    expect_is(results[["results"]], "tbl_df")
-    expect_is(results[["total_results"]], "integer")
-    expect_is(results[["time_stamp"]], "POSIXct")
-    expect_equal(length(results), 4)
 
     lifecycle::expect_deprecated(
       results <- opencage_reverse(longitude = 0, latitude = 0)
     )
-    expect_is(results, "list")
-    expect_is(results[["results"]], "tbl_df")
-    expect_is(results[["total_results"]], "integer")
-    expect_is(results[["time_stamp"]], "POSIXct")
-    expect_equal(length(results), 4)
   })
+  expect_type(results, "list")
+  expect_s3_class(results[["results"]], "tbl_df")
+  expect_type(results[["total_results"]], "integer")
+  expect_s3_class(results[["time_stamp"]], "POSIXct")
+  expect_equal(length(results), 4)
+  expect_type(results, "list")
+  expect_s3_class(results[["results"]], "tbl_df")
+  expect_type(results[["total_results"]], "integer")
+  expect_s3_class(results[["time_stamp"]], "POSIXct")
+  expect_equal(length(results), 4)
 })
 
 vcr::use_cassette("opencage_forward_parameters", {
@@ -37,10 +37,10 @@ vcr::use_cassette("opencage_forward_parameters", {
         no_annotations = TRUE
       )
     )
-    expect_is(results, "list")
-    expect_is(results[["results"]], "tbl_df")
-    expect_is(results[["total_results"]], "integer")
-    expect_is(results[["time_stamp"]], "POSIXct")
+    expect_type(results, "list")
+    expect_s3_class(results[["results"]], "tbl_df")
+    expect_type(results[["total_results"]], "integer")
+    expect_s3_class(results[["time_stamp"]], "POSIXct")
     expect_equal(length(results), 4)
     expect_equal(sum(grepl(
       "annotation",
@@ -57,10 +57,10 @@ vcr::use_cassette("opencage_forward_parameters", {
         no_annotations = TRUE
       )
     )
-    expect_is(results, "list")
-    expect_is(results[["results"]], "tbl_df")
-    expect_is(results[["total_results"]], "integer")
-    expect_is(results[["time_stamp"]], "POSIXct")
+    expect_type(results, "list")
+    expect_s3_class(results[["results"]], "tbl_df")
+    expect_type(results[["total_results"]], "integer")
+    expect_s3_class(results[["time_stamp"]], "POSIXct")
     expect_equal(length(results), 4)
     expect_equal(sum(grepl(
       "annotation",
@@ -84,11 +84,11 @@ vcr::use_cassette("opencage_forward_NULL", {
         no_annotations = TRUE
       )
     )
-    expect_is(results, "list")
-    expect_null(results[["results"]])
-    expect_is(results[["total_results"]], "integer")
-    expect_is(results[["time_stamp"]], "POSIXct")
   })
+  expect_type(results, "list")
+  expect_null(results[["results"]])
+  expect_type(results[["total_results"]], "integer")
+  expect_s3_class(results[["time_stamp"]], "POSIXct")
 })
 
 vcr::use_cassette("opencage_forward_bounds", {
