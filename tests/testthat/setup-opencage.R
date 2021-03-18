@@ -7,6 +7,10 @@ key_403 <- "2e10e5e828262eb243ec0b54681d699a" # always returns a 403 responce
 key_429 <- "d6d0f0065f4348a4bdfe4587ba02714b" # always returns a 429 responce
 key_401 <- "32charactersandnumbers1234567890" # invalid key returns 401 response
 
+
+# clear cache before running tests ----------------------------------------
+oc_clear_cache()
+
 # setup vcr ----------------------------------------------------------------
 library("vcr") # *Required* as vcr is set up on loading
 
