@@ -36,7 +36,7 @@ vcr::use_cassette("oc_forward_type_df_list", {
 test_that("oc_forward returns correct type", {
 
   # json_list
-  vcr::use_cassette("oc_forward_type_json_list", {
+  vcr::use_cassette("oc_forward_type_df_list", {
     res2 <- oc_forward(locations, return = "json_list")
   })
   expect_type(res2, "list")
@@ -111,7 +111,7 @@ test_that("oc_forward_df doesn't work for default class", {
   )
 })
 
-vcr::use_cassette("oc_forward_df_output", {
+vcr::use_cassette("oc_forward_df_works", {
   test_that("output arguments work", {
 
     expect_equal(names(oc_forward_df(df, loc, bind_cols = TRUE)),
@@ -127,7 +127,7 @@ vcr::use_cassette("oc_forward_df_output", {
 
 test_that("tidyeval works for arguments", {
   ## query without arguments to test against
-  vcr::use_cassette("oc_forward_df_noarg", {
+  vcr::use_cassette("oc_forward_df_works", {
     noarg <- oc_forward_df(df2, loc)
   })
 
@@ -194,7 +194,7 @@ test_that("tidyeval works for arguments", {
   expect_false(isTRUE(all.equal(abbrv[3, ], noarg[3, ])))
 })
 
-vcr::use_cassette("oc_forward_df_listcols_not_dropped", {
+vcr::use_cassette("oc_forward_df_bounds", {
   test_that("list columns are not dropped (by tidyr)", {
     bnds <- oc_forward_df(df2, loc, bounds = bounds)
     expect_true(!is.null(bnds[["bounds"]]))

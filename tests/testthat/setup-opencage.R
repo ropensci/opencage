@@ -44,4 +44,12 @@ invisible(
       )
   )
 )
-vcr::check_cassette_names()
+vcr::check_cassette_names(
+  allowed_duplicates =
+    c(
+      "oc_forward_type_df_list",
+      "oc_forward_df_bounds",
+      "oc_forward_df_works",
+      "oc_reverse_df_lat_lon"
+    )
+)

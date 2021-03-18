@@ -83,7 +83,7 @@ test_that("oc_reverse_df doesn't work for default class", {
   )
 })
 
-vcr::use_cassette("oc_reverse_df_output", {
+vcr::use_cassette("oc_reverse_df_lat_lon", {
   test_that("output arguments work", {
 
     expect_equal(names(oc_reverse_df(df, lat, lng, bind_cols = TRUE)),
