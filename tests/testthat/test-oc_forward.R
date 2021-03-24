@@ -13,7 +13,7 @@ df2 <- add_column(df,
                   countrycode = c("ca", "us", "cl"),
                   language = c("de", "fr", "ja"),
                   limit = 1:3,
-                  confidence = c(7, 9, 3),
+                  confidence = c(7, 9, 5),
                   annotation = c(FALSE, TRUE, TRUE),
                   abbrv = c(FALSE, FALSE, TRUE))
 
@@ -153,6 +153,10 @@ test_that("tidyeval works for arguments", {
   confidence <- oc_forward_df(df2, loc,
                               min_confidence = confidence,
                               bind_cols = FALSE)
+
+  # make sure we get actual results, not only NA
+  expect_false(any(is.na(confidence$oc_formatted)))
+
   expect_false(isTRUE(all.equal(confidence, noarg)))
   expect_false(isTRUE(all.equal(confidence[1, ], noarg[1, ])))
   expect_false(isTRUE(all.equal(confidence[2, ], noarg[2, ])))
