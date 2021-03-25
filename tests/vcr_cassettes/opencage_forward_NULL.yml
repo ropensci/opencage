@@ -1,0 +1,37 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=NOWHERE-INTERESTING&language=pt-BR&limit=2&min_confidence=5&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=0&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.1.9000
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Mon, 15 Feb 2021 20:47:43 GMT
+      server: Apache
+      access-control-allow-origin: '*'
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '453'
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"request":{"abbrv":0,"add_request":1,"format":"json","key":"<<<oc_api_key>>>","language":"pt-BR","limit":2,"min_confidence":5,"no_annotations":1,"no_dedupe":0,"no_record":0,"pretty":0,"proximity":"","query":"NOWHERE-INTERESTING","roadinfo":0,"version":"v1"},"results":[],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Mon, 15 Feb 2021 20:47:43
+        GMT","created_unix":1613422063},"total_results":0}'
+  recorded_at: 2021-02-15 20:47:43 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4

@@ -1,3 +1,6 @@
+# Based on
+# https://github.com/r-lib/actions/blob/master/examples/lint.yaml
+# but using [pak](https://pak.r-lib.org/)
 on:
   push:
     branches:
@@ -10,10 +13,15 @@ name: lint
 
 jobs:
   lint:
-    runs-on: ubuntu-20.04
+    runs-on: ${{ matrix.config.os }}
+
+    strategy:
+      matrix:
+        config:
+          - {os: ubuntu-20.04, rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
 
     env:
-      RSPM: https://packagemanager.rstudio.com/cran/__linux__/focal/latest
+      RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
@@ -34,8 +42,8 @@ jobs:
           path: |
             ${{ env.R_LIBS_USER }}
             !${{ env.R_LIBS_USER }}/pak
-          key: ${{ runner.os }}-${{ steps.install-r.outputs.installed-r-version }}-1-${{ hashFiles('.github/r-depends.rds') }}
-          restore-keys: ${{ runner.os }}-${{ steps.install-r.outputs.installed-r-version }}-1-
+          key: ${{ matrix.config.os }}-${{ steps.install-r.outputs.installed-r-version }}-1-${{ hashFiles('.github/r-depends.rds') }}
+          restore-keys: ${{ matrix.config.os }}-${{ steps.install-r.outputs.installed-r-version }}-1-
 
       - name: Install system dependencies
         if: runner.os == 'Linux'

@@ -126,24 +126,24 @@ test_that("oc_process handles bounds argument.", {
   expect_match(res[[2]], "&bounds=-78.86%2C42.7%2C-78.81%2C42.73", fixed = TRUE)
 })
 
-test_that("bounds argument is well taken into account with df_list", {
-  skip_if_no_key()
-  skip_if_oc_offline()
+vcr::use_cassette("oc_process_bounds", {
+  test_that("bounds argument is well taken into account with df_list", {
 
-  res1 <- oc_process(
-    placename = "Berlin",
-    return = "df_list"
-  )
+    res1 <- oc_process(
+      placename = "Berlin",
+      return = "df_list"
+    )
 
-  res2 <- oc_process(
-    placename = "Berlin",
-    bounds = list(c(-90, 38, 0, 45)),
-    limit = 10,
-    return = "df_list"
-  )
+    res2 <- oc_process(
+      placename = "Berlin",
+      bounds = list(c(-90, 38, 0, 45)),
+      limit = 10,
+      return = "df_list"
+    )
 
-  expect_equal(res1[[1]][["oc_country"]], "Germany")
-  expect_true(res2[[1]][[1, "oc_country"]] != "Germany")
+    expect_equal(res1[[1]][["oc_country"]], "Germany")
+    expect_true(res2[[1]][[1, "oc_country"]] != "Germany")
+  })
 })
 
 test_that("oc_process handles proximity argument.", {

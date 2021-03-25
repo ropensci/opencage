@@ -22,7 +22,7 @@ Imports:
     dplyr (>= 0.7.4),
     lifecycle, 
     jsonlite (>= 1.5),
-    memoise (>= 1.1.0),
+    memoise (>= 2.0.0),
     progress (>= 1.1.2),
     purrr (>= 0.2.4),
     ratelimitr (>= 0.4.0),
@@ -35,7 +35,8 @@ Suggests:
     mockery,
     rmarkdown (>= 1.8),
     sf (>= 0.9),
-    testthat (>= 2.1.0)
+    testthat (>= 2.1.0),
+    vcr (>= 0.6.5.93)
 VignetteBuilder: knitr
 Encoding: UTF-8
 Language: en-GB
@@ -43,3 +44,5 @@ LazyData: TRUE
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9000
 RdMacros: lifecycle
+Remotes: 
+    ropensci/vcr

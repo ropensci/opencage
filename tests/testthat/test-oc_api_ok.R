@@ -1,10 +1,13 @@
 test_that("oc_api_ok", {
-  skip_on_cran()
-  skip_if_offline("httpbin.org")
-
   # API ok
-  expect_true(oc_api_ok())
+  vcr::use_cassette("oc_api_ok", {
+    ok <- oc_api_ok()
+  })
+  expect_true(ok)
 
   # not ok
-  expect_false(oc_api_ok("https://httpbin.org/status/500"))
+  vcr::use_cassette("oc_api_not_ok", {
+    not_ok <- oc_api_ok("https://httpbin.org/status/500")
+  })
+  expect_false(not_ok)
 })

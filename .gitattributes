@@ -1,0 +1,2 @@
+* text=auto
+tests/vcr_cassettes/**/* -diff

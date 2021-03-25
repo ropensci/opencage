@@ -1,0 +1,118 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=Nantes&limit=1&min_confidence=7&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.2.9000
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Thu, 25 Mar 2021 09:39:38 GMT
+      server: Apache
+      access-control-allow-origin: '*'
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '753'
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"request":{"abbrv":0,"add_request":1,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":7,"no_annotations":1,"no_dedupe":0,"no_record":1,"pretty":0,"proximity":"","query":"Nantes","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":47.2220954,"lng":-1.536423},"southwest":{"lat":47.2120954,"lng":-1.546423}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_category":"transportation","_type":"railway","city":"Nantes","continent":"Europe","country":"France","country_code":"fr","county":"Loire-Atlantique","municipality":"Nantes","neighbourhood":"Pr\u00e9-Gauchet","political_union":"European
+        Union","postcode":"44021","railway":"Nantes","road":"Voies 10-11","state":"Pays
+        de la Loire","state_code":"PDL","suburb":"Malakoff - Saint-Donatien"},"confidence":9,"formatted":"Nantes,
+        Voies 10-11, 44021 Nantes, France","geometry":{"lat":47.2170954,"lng":-1.541423}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Thu, 25 Mar 2021 09:39:38
+        GMT","created_unix":1616665178},"total_results":1}'
+  recorded_at: 2021-03-25 09:39:39 GMT
+  recorded_with: vcr/0.6.5.93, webmockr/0.8.0
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=Flensburg&limit=1&min_confidence=9&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.2.9000
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Thu, 25 Mar 2021 09:39:38 GMT
+      server: Apache
+      access-control-allow-origin: '*'
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '703'
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"request":{"abbrv":0,"add_request":1,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":9,"no_annotations":1,"no_dedupe":0,"no_record":1,"pretty":0,"proximity":"","query":"Flensburg","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":55.5865402,"lng":13.0067099},"southwest":{"lat":55.5787775,"lng":12.9967029}},"components":{"ISO_3166-1_alpha-2":"SE","ISO_3166-1_alpha-3":"SWE","_category":"place","_type":"neighbourhood","city":"Malmo","city_district":"Innerstaden","continent":"Europe","country":"Sweden","country_code":"se","county":"Sk\u00e5ne
+        County","municipality":"Malm\u00f6 kommun","political_union":"European Union","suburb":"Flensburg"},"confidence":9,"formatted":"Flensburg,
+        Malmo, Sk\u00e5ne County, Sweden","geometry":{"lat":55.5823075,"lng":13.0021872}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Thu, 25 Mar 2021 09:39:38
+        GMT","created_unix":1616665178},"total_results":1}'
+  recorded_at: 2021-03-25 09:39:39 GMT
+  recorded_with: vcr/0.6.5.93, webmockr/0.8.0
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=Los%20Angeles&limit=1&min_confidence=5&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.2.9000
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Thu, 25 Mar 2021 09:39:39 GMT
+      server: Apache
+      access-control-allow-origin: '*'
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '681'
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"request":{"abbrv":0,"add_request":1,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":5,"no_annotations":1,"no_dedupe":0,"no_record":1,"pretty":0,"proximity":"","query":"Los
+        Angeles","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":9.4022923,"lng":-75.2213977},"southwest":{"lat":9.3778767,"lng":-75.2594562}},"components":{"ISO_3166-1_alpha-2":"CO","ISO_3166-1_alpha-3":"COL","_category":"place","_type":"city","city":"Los
+        Angeles","continent":"South America","country":"Colombia","country_code":"co","county":"Los
+        Palmitos","region":"Caribe","state":"Sucre","state_code":"SUC","state_district":"Montes
+        de Mar\u00eda"},"confidence":7,"formatted":"Los Angeles, Los Palmitos, Colombia","geometry":{"lat":9.3900639,"lng":-75.2389229}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Thu, 25 Mar 2021 09:39:39
+        GMT","created_unix":1616665179},"total_results":1}'
+  recorded_at: 2021-03-25 09:39:39 GMT
+  recorded_with: vcr/0.6.5.93, webmockr/0.8.0

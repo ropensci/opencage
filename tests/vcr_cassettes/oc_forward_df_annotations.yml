@@ -1,0 +1,40 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=Nantes&limit=1&no_annotations=0&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.2.9000
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Fri, 26 Feb 2021 13:37:57 GMT
+      server: Apache
+      access-control-allow-origin: '*'
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '1371'
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"request":{"abbrv":0,"add_request":1,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":0,"no_dedupe":0,"no_record":1,"pretty":0,"proximity":"","query":"Nantes","roadinfo":0,"version":"v1"},"results":[{"annotations":{"DMS":{"lat":"47\u00b0
+        13'' 7.09356'''' N","lng":"1\u00b0 33'' 14.89032'''' W"},"MGRS":"30TXT0947230474","Maidenhead":"IN97ff32ml","Mercator":{"x":-173005.65,"y":5946458.772},"OSM":{"edit_url":"https://www.openstreetmap.org/edit?relation=59874#map=16/47.21864/-1.55414","note_url":"https://www.openstreetmap.org/note/new#map=16/47.21864/-1.55414&layers=N","url":"https://www.openstreetmap.org/?mlat=47.21864&mlon=-1.55414#map=16/47.21864/-1.55414"},"UN_M49":{"regions":{"EUROPE":"150","FR":"250","WESTERN_EUROPE":"155","WORLD":"001"},"statistical_groupings":["MEDC"]},"callingcode":33,"currency":{"alternate_symbols":[],"decimal_mark":",","html_entity":"&#x20AC;","iso_code":"EUR","iso_numeric":"978","name":"Euro","smallest_denomination":1,"subunit":"Cent","subunit_to_unit":100,"symbol":"\u20ac","symbol_first":0,"thousands_separator":"."},"flag":"\ud83c\uddeb\ud83c\uddf7","geohash":"gbquseuk6pbjcf41wyq0","qibla":113.27,"roadinfo":{"drive_on":"right","speed_in":"km/h"},"sun":{"rise":{"apparent":1614322380,"astronomical":1614316260,"civil":1614320520,"nautical":1614318420},"set":{"apparent":1614361560,"astronomical":1614367680,"civil":1614363420,"nautical":1614365520}},"timezone":{"name":"Europe/Paris","now_in_dst":0,"offset_sec":3600,"offset_string":"+0100","short_name":"CET"},"what3words":{"words":"nozzles.notices.includes"},"wikidata":"Q12191"},"bounds":{"northeast":{"lat":47.2958583,"lng":-1.4788443},"southwest":{"lat":47.1805856,"lng":-1.6418115}},"components":{"ISO_3166-1_alpha-2":"FR","ISO_3166-1_alpha-3":"FRA","_category":"place","_type":"city","city":"Nantes","continent":"Europe","country":"France","country_code":"fr","county":"Loire-Atlantique","municipality":"Nantes","political_union":"European
+        Union","state":"Pays de la Loire","state_code":"PDL"},"confidence":6,"formatted":"Nantes,
+        Loire-Atlantique, France","geometry":{"lat":47.2186371,"lng":-1.5541362}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Fri, 26 Feb 2021 13:37:57
+        GMT","created_unix":1614346677},"total_results":1}'
+  recorded_at: 2021-02-26 13:37:57 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4

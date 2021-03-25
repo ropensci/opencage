@@ -1,0 +1,29 @@
+http_interactions:
+- request:
+    method: head
+    uri: https://httpbin.org/status/500
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: https://github.com/ropensci/opencage
+  response:
+    status:
+      status_code: '500'
+      message: Internal Server Error
+      explanation: Server got itself in trouble
+    headers:
+      status: HTTP/1.1 500 INTERNAL SERVER ERROR
+      date: Fri, 26 Feb 2021 16:52:26 GMT
+      content-type: text/html; charset=utf-8
+      content-length: '0'
+      connection: keep-alive
+      server: gunicorn/19.9.0
+      access-control-allow-origin: '*'
+      access-control-allow-credentials: 'true'
+    body:
+      encoding: UTF-8
+      file: no
+      string: ''
+  recorded_at: 2021-02-26 16:52:26 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4

@@ -1,0 +1,104 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=Berlin&limit=1&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=0&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.1.9000
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Mon, 15 Feb 2021 20:27:58 GMT
+      server: Apache
+      access-control-allow-origin: '*'
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '508'
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"results":[{"bounds":{"northeast":{"lat":52.6770365,"lng":13.5488599},"southwest":{"lat":52.3570365,"lng":13.2288599}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_category":"place","_type":"city","city":"Berlin","continent":"Europe","country":"Germany","country_code":"de","political_union":"European
+        Union","postcode":"10117","state":"Berlin","state_code":"BE"},"confidence":4,"formatted":"Berlin,
+        Germany","geometry":{"lat":52.5170365,"lng":13.3888599}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Mon, 15 Feb 2021 20:27:58
+        GMT","created_unix":1613420878},"total_results":1}'
+  recorded_at: 2021-02-15 20:27:59 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=Berlin&bounds=-90%2C38%2C0%2C45&limit=10&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=0&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.1.9000
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Mon, 15 Feb 2021 20:27:59 GMT
+      server: Apache
+      access-control-allow-origin: '*'
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '1261'
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"results":[{"bounds":{"northeast":{"lat":44.528436,"lng":-71.123642},"southwest":{"lat":44.445057,"lng":-71.397858}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_category":"place","_type":"city","city":"Berlin","continent":"North
+        America","country":"United States","country_code":"us","county":"Coos County","postcode":"03570","state":"New
+        Hampshire","state_code":"NH"},"confidence":5,"formatted":"Berlin, New Hampshire,
+        United States of America","geometry":{"lat":44.469071,"lng":-71.185226}},{"bounds":{"northeast":{"lat":39.764932,"lng":-89.893165},"southwest":{"lat":39.750371,"lng":-89.912101}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_category":"place","_type":"village","continent":"North
+        America","country":"United States","country_code":"us","county":"Sangamon
+        County","state":"Illinois","state_code":"IL","village":"Berlin"},"confidence":8,"formatted":"Berlin,
+        Sangamon County, Illinois, United States of America","geometry":{"lat":39.7589387,"lng":-89.9031635}},{"bounds":{"northeast":{"lat":41.6527197,"lng":-72.7111349},"southwest":{"lat":41.554197,"lng":-72.8402567}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_category":"place","_type":"city","continent":"North
+        America","country":"United States","country_code":"us","county":"Hartford
+        County","state":"Connecticut","state_code":"CT","town":"Berlin"},"confidence":6,"formatted":"Berlin,
+        Connecticut, United States of America","geometry":{"lat":41.621488,"lng":-72.7456519}},{"bounds":{"northeast":{"lat":38.355184,"lng":-75.1879942},"southwest":{"lat":38.308406,"lng":-75.234794}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_category":"place","_type":"village","continent":"North
+        America","country":"United States","country_code":"us","county":"Worcester
+        County","state":"Maryland","state_code":"MD","village":"Berlin"},"confidence":7,"formatted":"Berlin,
+        Worcester County, Maryland, United States of America","geometry":{"lat":38.3226154,"lng":-75.2176892}},{"bounds":{"northeast":{"lat":44.2719667,"lng":-72.5197921},"southwest":{"lat":44.1547824,"lng":-72.6836842}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_category":"place","_type":"city","city":"Berlin","continent":"North
+        America","country":"United States","country_code":"us","county":"Washington
+        County","state":"Vermont","state_code":"VT"},"confidence":6,"formatted":"Berlin,
+        Vermont, United States of America","geometry":{"lat":44.2100759,"lng":-72.6034049}},{"bounds":{"northeast":{"lat":39.8091498,"lng":-74.907959},"southwest":{"lat":39.77601,"lng":-74.966113}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_category":"place","_type":"village","continent":"North
+        America","country":"United States","country_code":"us","county":"Camden County","state":"New
+        Jersey","state_code":"NJ","village":"Berlin"},"confidence":7,"formatted":"Berlin,
+        Camden County, New Jersey, United States of America","geometry":{"lat":39.7912262,"lng":-74.9290536}},{"bounds":{"northeast":{"lat":42.4182323,"lng":-71.5801342},"southwest":{"lat":42.3504652,"lng":-71.6787662}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_category":"place","_type":"city","continent":"North
+        America","country":"United States","country_code":"us","county":"Worcester
+        County","postcode":"01503","state":"Massachusetts","state_code":"MA","town":"Berlin"},"confidence":7,"formatted":"Berlin,
+        MA 01503, United States of America","geometry":{"lat":42.3839025,"lng":-71.6325435}},{"bounds":{"northeast":{"lat":39.92738,"lng":-78.937285},"southwest":{"lat":39.914422,"lng":-78.965592}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_category":"place","_type":"village","continent":"North
+        America","country":"United States","country_code":"us","county":"Somerset
+        County","state":"Pennsylvania","state_code":"PA","village":"Berlin"},"confidence":8,"formatted":"Berlin,
+        Somerset County, Pennsylvania, United States of America","geometry":{"lat":39.9206363,"lng":-78.9578022}},{"bounds":{"northeast":{"lat":42.7131351,"lng":-73.3520549},"southwest":{"lat":42.6731351,"lng":-73.3920549}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_category":"place","_type":"village","continent":"North
+        America","country":"United States","country_code":"us","county":"Rensselaer
+        County","municipality":"Town of Berlin","postcode":"12022","state":"New York","state_code":"NY","village":"Berlin"},"confidence":7,"formatted":"Berlin,
+        NY 12022, United States of America","geometry":{"lat":42.6931351,"lng":-73.3720549}},{"bounds":{"northeast":{"lat":40.581178,"lng":-81.7743353},"southwest":{"lat":40.541178,"lng":-81.8143353}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_category":"place","_type":"village","continent":"North
+        America","country":"United States","country_code":"us","county":"Holmes County","postcode":"44610","state":"Ohio","state_code":"OH","village":"Berlin"},"confidence":7,"formatted":"Berlin,
+        OH 44610, United States of America","geometry":{"lat":40.561178,"lng":-81.7943353}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Mon, 15 Feb 2021 20:27:59
+        GMT","created_unix":1613420879},"total_results":10}'
+  recorded_at: 2021-02-15 20:27:59 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4

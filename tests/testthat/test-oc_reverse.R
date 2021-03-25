@@ -14,73 +14,66 @@ df3 <- add_row(df2, id = 4, lat = 25, lng = 36, confidence = 5)
 
 # oc_reverse --------------------------------------------------------------
 
-test_that("oc_reverse works", {
-  skip_if_no_key()
-  skip_if_oc_offline()
+vcr::use_cassette("oc_reverse_type", {
+  test_that("oc_reverse returns correct type", {
+    # df_list
+    res1 <- oc_reverse(lat, lng)
+    expect_type(res1, "list")
+    expect_equal(length(res1), 3)
+    expect_s3_class(res1[[1]], c("tbl_df", "tbl", "data.frame"))
 
-  res1 <- oc_reverse(lat, lng)
-  expect_type(res1, "list")
-  expect_equal(length(res1), 3)
-  expect_s3_class(res1[[1]], c("tbl_df", "tbl", "data.frame"))
+    # json_list
+    res2 <- oc_reverse(lat, lng, return = "json_list")
+    expect_type(res2, "list")
+    expect_equal(length(res2), 3)
+    expect_type(res2[[1]], "list")
+
+    # geojson_list
+    res3 <- oc_reverse(lat, lng, return = "geojson_list")
+    expect_type(res3, "list")
+    expect_equal(length(res3), 3)
+    expect_s3_class(res3[[1]], "geo_list")
+  })
 })
 
-test_that("oc_reverse returns correct type", {
-  skip_if_no_key()
-  skip_if_oc_offline()
+vcr::use_cassette("oc_reverse_add_request", {
+  test_that("oc_reverse adds request with add_request", {
+    expected <- paste(lat[1], lng[1], sep = ",")
 
-  # json_list
-  res2 <- oc_reverse(lat, lng, return = "json_list")
-  expect_type(res2, "list")
-  expect_equal(length(res2), 3)
-  expect_type(res2[[1]], "list")
+    # df_list
+    res <- oc_reverse(lat[1], lng[1], return = "df_list", add_request = TRUE)
+    expect_equal(res[[1]][["oc_query"]], expected)
 
-  # geojson_list
-  res3 <- oc_reverse(lat, lng, return = "geojson_list")
-  expect_type(res3, "list")
-  expect_equal(length(res3), 3)
-  expect_s3_class(res3[[1]], "geo_list")
+    # json_list
+    res <- oc_reverse(lat[1], lng[1], return = "json_list", add_request = TRUE)
+    expect_equal(res[[1]][["request"]][["query"]], expected)
+  })
 })
 
-test_that("oc_reverse adds request with add_request", {
-  skip_if_no_key()
-  skip_if_oc_offline()
+vcr::use_cassette("oc_reverse_add_request_mask_key", {
+  test_that("oc_reverse masks key when add_request = TRUE", {
+    withr::local_envvar(c("OPENCAGE_KEY" = key_200))
 
-  expected <- paste(lat[1], lng[1], sep = ",")
-
-  # df_list
-  res <- oc_reverse(lat[1], lng[1], return = "df_list", add_request = TRUE)
-  expect_equal(res[[1]][["oc_query"]], expected)
-
-  # json_list
-  res <- oc_reverse(lat[1], lng[1], return = "json_list", add_request = TRUE)
-  expect_equal(res[[1]][["request"]][["query"]], expected)
-})
-
-test_that("oc_reverse masks key when add_request = TRUE", {
-  skip_if_oc_offline()
-  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
-
-  res <- oc_reverse(lat[1], lng[1], return = "json_list", add_request = TRUE)
-  expect_equal(res[[1]][["request"]][["key"]], "OPENCAGE_KEY")
+    res <- oc_reverse(lat[1], lng[1], return = "json_list", add_request = TRUE)
+    expect_equal(res[[1]][["request"]][["key"]], "OPENCAGE_KEY")
+  })
 })
 
 # oc_reverse_df -----------------------------------------------------------
+vcr::use_cassette("oc_reverse_df_lat_lon", {
+  test_that("oc_reverse_df works", {
+    tbl1 <- oc_reverse_df(df, lat, lng)
+    expect_s3_class(tbl1, c("tbl_df", "tbl", "data.frame"))
+    expect_equal(nrow(tbl1), 3)
 
-test_that("oc_reverse_df works", {
-  skip_if_no_key()
-  skip_if_oc_offline()
+    tbl2 <- oc_reverse_df(df[1, ], lat, lng)
+    expect_s3_class(tbl2, c("tbl_df", "tbl", "data.frame"))
+    expect_equal(nrow(tbl2), 1)
 
-  tbl1 <- oc_reverse_df(df, lat, lng)
-  expect_s3_class(tbl1, c("tbl_df", "tbl", "data.frame"))
-  expect_equal(nrow(tbl1), 3)
-
-  tbl2 <- oc_reverse_df(df[1, ], lat, lng)
-  expect_s3_class(tbl2, c("tbl_df", "tbl", "data.frame"))
-  expect_equal(nrow(tbl2), 1)
-
-  tbl3 <- oc_reverse_df(lat, lng)
-  expect_s3_class(tbl3, c("tbl_df", "tbl", "data.frame"))
-  expect_equal(nrow(tbl3), 3)
+    tbl3 <- oc_reverse_df(lat, lng)
+    expect_s3_class(tbl3, c("tbl_df", "tbl", "data.frame"))
+    expect_equal(nrow(tbl3), 3)
+  })
 })
 
 test_that("oc_reverse_df doesn't work for default class", {
@@ -90,34 +83,37 @@ test_that("oc_reverse_df doesn't work for default class", {
   )
 })
 
-test_that("output arguments work", {
-  skip_if_no_key()
-  skip_if_oc_offline()
+vcr::use_cassette("oc_reverse_df_lat_lon", {
+  test_that("output arguments work", {
 
-  expect_equal(names(oc_reverse_df(df, lat, lng, bind_cols = TRUE)),
-               c("id", "lat", "lng", "oc_formatted"))
-  expect_equal(names(oc_reverse_df(df, lat, lng, bind_cols = FALSE)),
-               c("oc_query", "oc_formatted"))
-  expect_gt(ncol(oc_reverse_df(df, lat, lng, output = "all")), 5)
-  expect_gt(
-    ncol(oc_reverse_df(df, lat, lng, bind_cols = FALSE, output = "all")),
-    5
-  )
+    expect_equal(names(oc_reverse_df(df, lat, lng, bind_cols = TRUE)),
+                 c("id", "lat", "lng", "oc_formatted"))
+    expect_equal(names(oc_reverse_df(df, lat, lng, bind_cols = FALSE)),
+                 c("oc_query", "oc_formatted"))
+    expect_gt(ncol(oc_reverse_df(df, lat, lng, output = "all")), 5)
+    expect_gt(
+      ncol(oc_reverse_df(df, lat, lng, bind_cols = FALSE, output = "all")),
+      5
+    )
+  })
 })
 
 test_that("tidyeval works for arguments", {
-  skip_if_no_key()
-  skip_if_oc_offline()
-
   noarg <- oc_reverse_df(df2, lat, lng)
 
   # language
-  lang <- oc_reverse_df(df2, lat, lng, language = language, output = "all")
+  vcr::use_cassette("oc_reverse_df_language", {
+    lang <- oc_reverse_df(df2, lat, lng, language = language, output = "all")
+  })
   expect_equal(lang$oc_country, c("France", "Allemagne", "アメリカ合衆国")) # nolint
 
   # min_confidence
-  confidence <- oc_reverse_df(df3, lat, lng, min_confidence = confidence)
-  no_con <- oc_reverse_df(df3, lat, lng)
+  vcr::use_cassette("oc_reverse_df_confidence", {
+    confidence <- oc_reverse_df(df3, lat, lng, min_confidence = confidence)
+  })
+  vcr::use_cassette("oc_reverse_df_default_confidence", {
+    no_con <- oc_reverse_df(df3, lat, lng)
+  })
 
   expect_false(isTRUE(all.equal(confidence, no_con)))
   expect_true(isTRUE(all.equal(confidence[1, ], no_con[1, ])))
@@ -126,24 +122,22 @@ test_that("tidyeval works for arguments", {
   expect_false(isTRUE(all.equal(confidence[4, ], no_con[4, ])))
 
   # no_annotations
-  ann <- oc_reverse_df(df2, lat, lng, bind_cols = FALSE,
-                       no_annotations = annotation)
+  vcr::use_cassette("oc_reverse_df_annotations", {
+    ann <- oc_reverse_df(df2, lat, lng, no_annotations = annotation)
+  })
   expect_gt(ncol(ann), 40)
   expect_equal(ann$oc_currency_name, c("Euro", NA, NA))
 
   # roadinfo
-  ri <- oc_reverse_df(
-    df2,
-    lat,
-    lng,
-    bind_cols = FALSE,
-    roadinfo = roadinfo
-  )
+  vcr::use_cassette("oc_reverse_df_roadinfo", {
+    ri <- oc_reverse_df(df2, lat, lng, roadinfo = roadinfo)
+  })
   expect_equal(ri$oc_roadinfo_speed_in, c(NA_character_, "km/h", "mph"))
 
   # abbrv
-  abbrv <- oc_reverse_df(df2, lat, lng,
-                         abbrv = abbrv)
+  vcr::use_cassette("oc_reverse_df_abbrv", {
+    abbrv <- oc_reverse_df(df2, lat, lng, abbrv = abbrv)
+  })
   expect_false(isTRUE(all.equal(abbrv, noarg)))
   expect_true(all.equal(abbrv[1, ], noarg[1, ]))
   expect_true(all.equal(abbrv[2, ], noarg[2, ]))

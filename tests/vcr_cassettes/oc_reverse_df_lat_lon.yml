@@ -1,0 +1,80 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=53.55034%2C10.000654&limit=1&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.1.9000
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Mon, 15 Feb 2021 20:28:10 GMT
+      server: Apache
+      access-control-allow-origin: '*'
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '761'
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"request":{"abbrv":0,"add_request":1,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":1,"pretty":0,"proximity":"","query":"53.55034,10.000654","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":53.5505733,"lng":10.0012761},"southwest":{"lat":53.5501368,"lng":10.0002381}},"components":{"ISO_3166-1_alpha-2":"DE","ISO_3166-1_alpha-3":"DEU","_category":"place_of_worship","_type":"place_of_worship","borough":"Hamburg-Mitte","city":"Hamburg","continent":"Europe","country":"Germany","country_code":"de","house_number":"22","place_of_worship":"Evangelisch-lutherische
+        Hauptkirche St. Jacobi","political_union":"European Union","postcode":"20095","road":"Jakobikirchhof","state":"Hamburg","state_code":"HH","suburb":"Altstadt"},"confidence":9,"formatted":"Evangelisch-lutherische
+        Hauptkirche St. Jacobi, Jakobikirchhof 22, 20095 Hamburg, Germany","geometry":{"lat":53.5503571,"lng":10.0007413}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Mon, 15 Feb 2021 20:28:10
+        GMT","created_unix":1613420890},"total_results":1}'
+  recorded_at: 2021-02-15 20:28:11 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
+- request:
+    method: get
+    uri: https://api.opencagedata.com/geocode/v1/json?q=34.05369%2C-118.242767&limit=1&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=1&key=<<<oc_api_key>>>
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: <https://github.com/ropensci/opencage>, version 0.2.1.9000
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      date: Mon, 15 Feb 2021 20:28:11 GMT
+      server: Apache
+      access-control-allow-origin: '*'
+      vary: Accept-Encoding
+      content-encoding: gzip
+      x-frame-options: DENY
+      x-xss-protection: 1; mode=block
+      content-length: '754'
+      content-type: application/json; charset=utf-8
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"documentation":"https://opencagedata.com/api","licenses":[{"name":"see
+        attribution guide","url":"https://opencagedata.com/credits"}],"request":{"abbrv":0,"add_request":1,"format":"json","key":"<<<oc_api_key>>>","language":"en","limit":1,"min_confidence":0,"no_annotations":1,"no_dedupe":0,"no_record":1,"pretty":0,"proximity":"","query":"34.05369,-118.242767","roadinfo":0,"version":"v1"},"results":[{"bounds":{"northeast":{"lat":34.0543713,"lng":-118.2420052},"southwest":{"lat":34.0530141,"lng":-118.24353}},"components":{"ISO_3166-1_alpha-2":"US","ISO_3166-1_alpha-3":"USA","_category":"building","_type":"building","building":"Los
+        Angeles City Hall","city":"Los Angeles","continent":"North America","country":"United
+        States","country_code":"us","county":"Los Angeles County","house_number":"200","neighbourhood":"Civic
+        Center","postcode":"90012","road":"North Spring Street","state":"California","state_code":"CA","suburb":"Downtown"},"confidence":10,"formatted":"Los
+        Angeles City Hall, 200 North Spring Street, Los Angeles, CA 90012, United
+        States of America","geometry":{"lat":34.053696,"lng":-118.2429212}}],"status":{"code":200,"message":"OK"},"stay_informed":{"blog":"https://blog.opencagedata.com","twitter":"https://twitter.com/OpenCage"},"thanks":"For
+        using an OpenCage API","timestamp":{"created_http":"Mon, 15 Feb 2021 20:28:11
+        GMT","created_unix":1613420891},"total_results":1}'
+  recorded_at: 2021-02-15 20:28:11 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
