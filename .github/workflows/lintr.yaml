@@ -5,9 +5,11 @@ on:
   push:
     branches:
       - main
+      - devel
   pull_request:
     branches:
       - main
+      - devel
 
 name: lint
 
