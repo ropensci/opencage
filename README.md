@@ -12,7 +12,7 @@ Checks](https://cranchecks.info/badges/worst/opencage)](https://cran.r-project.o
 [![CRAN Downloads per
 Month](https://cranlogs.r-pkg.org/badges/opencage)](https://cran.r-project.org/package=opencage)
 [![R-CMD-check](https://github.com/ropensci/opencage/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/opencage/actions?query=workflow%3AR-CMD-check)
-[![codecov.io](https://codecov.io/github/ropensci/opencage/coverage.svg?branch=master)](https://codecov.io/github/ropensci/opencage?branch=master)
+[![codecov.io](https://codecov.io/github/ropensci/opencage/coverage.svg?branch=main)](https://codecov.io/github/ropensci/opencage?branch=main)
 [![rOpenSci
 Peer-Review](https://badges.ropensci.org/36_status.svg)](https://github.com/ropensci/software-review/issues/36)
 [![License](https://img.shields.io/cran/l/opencage)](https://opensource.org/licenses/gpl-license)
@@ -76,7 +76,7 @@ oc_reverse_df(latitude = 51.5034070, longitude = -0.1275920)
     ## # A tibble: 1 x 3
     ##   latitude longitude oc_formatted                                               
     ##      <dbl>     <dbl> <chr>                                                      
-    ## 1     51.5    -0.128 Prime Minister’s Office, Westminster, 10 Downing Street, L~
+    ## 1     51.5    -0.128 Prime Minister’s Office, 10 Downing Street, Westminster, L~
 
 But remember, the vignettes are really great! We have:
 

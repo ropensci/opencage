@@ -1,5 +1,4 @@
-# keys from https://opencagedata.com/api#codes or
-# https://github.com/OpenCageData/opencagedata-misc-docs/blob/master/library-guidelines.md # nolint
+# keys from https://opencagedata.com/api#testingkeys
 key_200 <- "6d0e711d72d74daeb2b0bfd2a5cdfdba" # always returns a 200 response
 key_402 <- "4372eff77b8343cebfc843eb4da4ddc4" # always returns a 402 responce
 key_403 <- "2e10e5e828262eb243ec0b54681d699a" # always returns a 403 responce
@@ -14,7 +13,6 @@ skip_if_oc_offline <- function(host = "api.opencagedata.com") {
 skip_if_no_key <- function() {
   testthat::skip_if_not(
     condition = oc_key_present(),
-    # re message see https://github.com/r-lib/testthat/issues/1247
     message = "OpenCage API key is missing"
   )
 }
