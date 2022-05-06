@@ -108,7 +108,7 @@ oc_build_url <- function(query_par, endpoint) {
 oc_ua_string <-
   paste0(
     "<https://github.com/ropensci/opencage>, version ",
-    packageVersion("opencage")
+    utils::packageVersion("opencage")
   )
 
 oc_get <- function(oc_url) {

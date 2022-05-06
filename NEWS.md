@@ -1,6 +1,7 @@
 # opencage (development version)
 
 * The geocoding functions will not send a query to the API anymore if no API key is present (#133).
+* {opencage} now uses [{testthat} 3e](https://testthat.r-lib.org/articles/third-edition.html) for unit tests. 
 
 # opencage 0.2.2
 
