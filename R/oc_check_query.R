@@ -108,7 +108,7 @@ oc_check_query <-
         stop("Every `latitude` must be numeric.", call. = FALSE)
       } else if (is.na(latitude)) {
         stop("`latitude` must not be NA.", call. = FALSE)
-      } else if (!dplyr::between(latitude, -90, 90)) {
+      } else if (isTRUE(latitude < -90 || latitude > 90)) {
         stop("Every `latitude` must be between -90 and 90.", call. = FALSE)
       }
     }
@@ -119,7 +119,7 @@ oc_check_query <-
         stop("Every `longitude` must be numeric.", call. = FALSE)
       } else if (is.na(longitude)) {
         stop("`longitude` must not be NA.", call. = FALSE)
-      } else if (!dplyr::between(longitude, -180, 180)) {
+      } else if (isTRUE(longitude < -180 || longitude > 180)) {
         stop("Every `longitude` must be between -180 and 180.", call. = FALSE)
       }
     }

@@ -131,16 +131,16 @@ oc_check_bbox <- function(xmin, ymin, xmax, ymax) {
   if (!all(is.numeric(bnds))) {
     stop("Every `bbox` must be a numeric vector.", call. = FALSE)
   }
-  if (!dplyr::between(xmin, -180, 180)) {
+  if (isTRUE(xmin < -180 || xmin > 180)) {
     stop("Every `xmin` must be between -180 and 180.", call. = FALSE)
   }
-  if (!dplyr::between(ymin, -90, 90)) {
+  if (isTRUE(ymin < -90 || ymin > 90)) {
     stop("Every `ymin` must be between -90 and 90.", call. = FALSE)
   }
-  if (!dplyr::between(xmax, -180, 180)) {
+  if (isTRUE(xmax < -180 || xmax > 180)) {
     stop("Every `xmax` must be between -180 and 180.", call. = FALSE)
   }
-  if (!dplyr::between(ymax, -90, 90)) {
+  if (isTRUE(ymax < -90 || ymax > 90)) {
     stop("Every `ymax` must be between -90 and 90.", call. = FALSE)
   }
   if (xmin > xmax) {

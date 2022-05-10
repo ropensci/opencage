@@ -81,10 +81,10 @@ oc_check_point <- function(latitude, longitude) {
   if (!all(is.numeric(pnt))) {
     stop("Every `point` must be a numeric vector.", call. = FALSE)
   }
-  if (!dplyr::between(latitude, -90, 90)) {
+  if (isTRUE(latitude < -90 || latitude > 90)) {
     stop("Every `latitude` must be between -90 and 90.", call. = FALSE)
   }
-  if (!dplyr::between(longitude, -180, 180)) {
+  if (isTRUE(longitude < -180 || longitude > 180)) {
     stop("Every `longitude` must be between -180 and 180.", call. = FALSE)
   }
 }
