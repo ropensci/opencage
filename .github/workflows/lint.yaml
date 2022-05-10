@@ -1,20 +1,17 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
 on:
   push:
-    branches:
-      - main
+    branches: main
   pull_request:
-    branches:
-      - main
+    branches: main
 
-name: test-coverage
+name: lint
 
 jobs:
-  test-coverage:
+  lint:
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-
     steps:
       - uses: actions/checkout@v2
 
@@ -24,11 +21,9 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::covr
-          needs: coverage
+          extra-packages: any::lintr, local::.
+          needs: lint
 
-      - name: Test coverage
-        env:
-          OPENCAGE_KEY: ${{ secrets.OPENCAGE_KEY }}
-        run: covr::codecov(quiet = FALSE)
+      - name: Lint
+        run: lintr::lint_package()
         shell: Rscript {0}
