@@ -298,6 +298,7 @@ test_that("arguments that are NULL or NA don't show up in url.", {
     language = NULL,
     countrycode = NULL,
     min_confidence = NULL,
+    roadinfo = NULL,
     no_annotations = NULL,
     no_dedupe = NULL,
     abbrv = NULL,
@@ -311,6 +312,7 @@ test_that("arguments that are NULL or NA don't show up in url.", {
   expect_match(res_null[[1]], "^((?!countrycode=).)*$", perl = TRUE)
   expect_match(res_null[[1]], "^((?!min_confidence=).)*$", perl = TRUE)
   expect_match(res_null[[1]], "^((?!no_annotations=).)*$", perl = TRUE)
+  expect_match(res_null[[1]], "^((?!roadinfo=).)*$", perl = TRUE)
   expect_match(res_null[[1]], "^((?!no_dedupe=).)*$", perl = TRUE)
   expect_match(res_null[[1]], "^((?!abbrv=).)*$", perl = TRUE)
   expect_match(res_null[[1]], "^((?!add_request=).)*$", perl = TRUE)
@@ -325,6 +327,7 @@ test_that("arguments that are NULL or NA don't show up in url.", {
     countrycode = NA_character_,
     min_confidence = NA,
     no_annotations = NA,
+    roadinfo = NA,
     no_dedupe = NA,
     abbrv = NA,
     add_request = NA
@@ -337,6 +340,7 @@ test_that("arguments that are NULL or NA don't show up in url.", {
   expect_match(res_na[[1]], "^((?!countrycode=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!min_confidence=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!no_annotations=).)*$", perl = TRUE)
+  expect_match(res_na[[1]], "^((?!roadinfo=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!no_dedupe=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!abbrv=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!add_request=).)*$", perl = TRUE)

@@ -100,7 +100,7 @@ oc_process <-
            limit = NULL,
            min_confidence = NULL,
            no_annotations = NULL,
-           roadinfo = FALSE,
+           roadinfo = NULL,
            no_dedupe = NULL,
            no_record = NULL,
            abbrv = NULL,
