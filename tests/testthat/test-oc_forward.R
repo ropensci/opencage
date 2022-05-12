@@ -86,6 +86,34 @@ test_that("oc_forward handles response with no results", {
   expect_equal(nores[[1]][[1, "oc_lat"]], NA_real_)
 })
 
+test_that("oc_forward handles NAs", {
+  skip_if_no_key()
+  skip_if_oc_offline()
+
+  # df_list
+  res <- oc_forward(NA_character_)
+  expect_equal(res[[1]][[1, "oc_lat"]], NA_real_)
+
+  # json_list
+  res2 <- oc_forward(NA_character_, return = "json_list")
+  expect_equal(res2[[1]][["results"]], list())
+
+  # geojson_list
+  res3 <- oc_forward(NA_character_, return = "geojson_list")
+  expect_equal(res3[[1]][["features"]], list())
+})
+
+test_that("oc_forward handles empty strings", {
+  skip_if_no_key()
+  skip_if_oc_offline()
+
+  res <- oc_forward("")
+  expect_type(res, "list")
+  expect_equal(length(res), 1)
+  expect_s3_class(res[[1]], c("tbl_df", "tbl", "data.frame"))
+  expect_equal(res[[1]][[1, "oc_lat"]], NA_real_)
+})
+
 # oc_forward_df -----------------------------------------------------------
 
 test_that("oc_forward_df works", {
@@ -103,6 +131,49 @@ test_that("oc_forward_df works", {
   tbl3 <- oc_forward_df(locations)
   expect_s3_class(tbl3, c("tbl_df", "tbl", "data.frame"))
   expect_equal(nrow(tbl3), 3)
+})
+
+test_that("oc_forward_df works with NA and empty strings", {
+  skip_if_no_key()
+  skip_if_oc_offline()
+
+  q <- c(NA_character_, "")
+
+  tbl1 <- oc_forward_df(q)
+
+  expect_equal(nrow(tbl1), 2)
+  expect_equal(tbl1$placename, q)
+  expect_true(
+    all(
+      is.na(tbl1$oc_formatted),
+      is.na(tbl1$oc_lat),
+      is.na(tbl1$oc_lng)
+    )
+  )
+
+  tbl2 <- oc_forward_df(data.frame(q_col = q), q_col)
+
+  expect_equal(nrow(tbl2), 2)
+  expect_equal(tbl2$q_col, q)
+  expect_true(
+    all(
+      is.na(tbl2$oc_formatted),
+      is.na(tbl2$oc_lat),
+      is.na(tbl2$oc_lng)
+    )
+  )
+
+  tbl3 <- oc_forward_df(data.frame(q_col = q), q_col, bind_cols = FALSE)
+
+  expect_equal(nrow(tbl3), 2)
+  expect_equal(tbl3$oc_query, q)
+  expect_true(
+    all(
+      is.na(tbl3$oc_formatted),
+      is.na(tbl3$oc_lat),
+      is.na(tbl3$oc_lng)
+    )
+  )
 })
 
 test_that("oc_forward_df doesn't work for default class", {
