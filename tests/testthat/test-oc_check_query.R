@@ -89,6 +89,22 @@ test_that("oc_check_query checks proximity", {
     ),
     "Every `proximity` point must be a numeric vector of length 2."
   )
+  expect_error(
+    oc_check_query(
+      placename = "Sarzeau",
+      proximity = list(c(latitude = -91, longitude = 2)) # latitude < -90
+    ),
+    "Every `latitude` must be between -90 and 90.",
+    fixed = TRUE
+  )
+  expect_error(
+    oc_check_query(
+      placename = "Sarzeau",
+      proximity = list(c(latitude = 0, longitude = 181)) # longitude > 180
+    ),
+    "Every `longitude` must be between -180 and 180.",
+    fixed = TRUE
+  )
 })
 
 test_that("oc_check_query checks countrycode", {
