@@ -46,7 +46,7 @@ test_that("oc_point checks point", {
   )
   expect_error(
     oc_points(-0.563160, "51.280430"),
-    "Every `point` must be a numeric vector."
+    "Every `longitude` must be numeric."
   )
   expect_error(
     oc_points(-0.563160, 51280430),

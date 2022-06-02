@@ -124,25 +124,15 @@ oc_bbox.bbox <- function(bbox, ...) {
 
 # check bbox
 oc_check_bbox <- function(xmin, ymin, xmax, ymax) {
-  bnds <- c(xmin, ymin, xmax, ymax)
-  if (anyNA(bnds)) {
+  if (anyNA(c(xmin, ymin, xmax, ymax))) {
     stop("Every `bbox` element must be non-missing.", call. = FALSE)
   }
-  if (!all(is.numeric(bnds))) {
-    stop("Every `bbox` must be a numeric vector.", call. = FALSE)
-  }
-  if (isTRUE(xmin < -180 || xmin > 180)) {
-    stop("Every `xmin` must be between -180 and 180.", call. = FALSE)
-  }
-  if (isTRUE(ymin < -90 || ymin > 90)) {
-    stop("Every `ymin` must be between -90 and 90.", call. = FALSE)
-  }
-  if (isTRUE(xmax < -180 || xmax > 180)) {
-    stop("Every `xmax` must be between -180 and 180.", call. = FALSE)
-  }
-  if (isTRUE(ymax < -90 || ymax > 90)) {
-    stop("Every `ymax` must be between -90 and 90.", call. = FALSE)
-  }
+
+  oc_check_between(xmin, -180, 180)
+  oc_check_between(xmax, -180, 180)
+  oc_check_between(ymin, -90, 90)
+  oc_check_between(ymax, -90, 90)
+
   if (xmin > xmax) {
     stop("`xmin` must always be smaller than `xmax`", call. = FALSE)
   }
