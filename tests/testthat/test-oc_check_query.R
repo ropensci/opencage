@@ -260,14 +260,39 @@ test_that("oc_check_logical checks no_record", {
 
 # Test oc_check_between() -------------------------------------------------
 test_that("oc_check_logical checks no_record", {
-  # numeric()
   symbol <- 11
-  expect_error(oc_check_between(symbol, 0, 10))
-  expect_error(oc_check_between(symbol, 11.0001, 11.0002))
+  expect_error(
+    oc_check_between(symbol, 0, 10),
+    "Every `symbol` must be between 0 and 10."
+  )
+  expect_error(
+    oc_check_between(symbol, 11.0001, 11.0002),
+    "Every `symbol` must be between 11.0001 and 11.0002."
+  )
   expect_null(oc_check_between(symbol, 0, 11))
-  # integer()
+
+  # integer
   symbol <- 11L
-  expect_error(oc_check_between(symbol, 0L, 10L))
-  expect_error(oc_check_between(symbol, 11.0001, 11.0002))
+  expect_error(
+    oc_check_between(symbol, 0L, 10L),
+    "Every `symbol` must be between 0 and 10."
+  )
+  expect_error(
+    oc_check_between(symbol, 11.0001, 11.0002),
+    "Every `symbol` must be between 11.0001 and 11.0002."
+  )
   expect_null(oc_check_between(symbol, 0L, 11L))
+
+  # non-numeric
+  symbol <- "11"
+  expect_error(
+    oc_check_between(symbol, 0, 11),
+    "Every `symbol` must be numeric."
+  )
+
+  symbol <- "TRUE"
+  expect_error(
+    oc_check_between(symbol, 0, 11),
+    "Every `symbol` must be numeric."
+  )
 })
