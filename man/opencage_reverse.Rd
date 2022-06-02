@@ -21,9 +21,7 @@ opencage_reverse(
 )
 }
 \arguments{
-\item{latitude}{Numeric vectors of latitude and longitude values.}
-
-\item{longitude}{Numeric vectors of latitude and longitude values.}
+\item{latitude, longitude}{Numeric vectors of latitude and longitude values.}
 
 \item{key}{Your OpenCage API key as a character vector of length one. By
 default, \code{\link[=opencage_key]{opencage_key()}} will attempt to retrieve the key from the
