@@ -88,7 +88,7 @@ test_that("oc_bbox checks bbox", {
   )
   expect_error(
     oc_bbox(-0.563160, "51.280430", 0.278970, 51.683979),
-    "Every `bbox` must be a numeric vector."
+    "Every `ymin` must be numeric."
   )
   expect_error(
     oc_bbox(-563160, 51.280430, 0.278970, 51.683979),

@@ -94,35 +94,15 @@ oc_check_query <-
     add_request = NULL
   ) {
     # check placename
-    if (!is.null(placename)) {
-      if (!is.character(placename)) {
-        stop("`placename` must be a character vector.", call. = FALSE)
-      } else if (is.na(placename) || placename == "") {
-        stop("`placename` must not be NA or an empty string.", call. = FALSE)
-      }
+    if (!is.null(placename) && !is.character(placename)) {
+      stop("`placename` must be a character vector.", call. = FALSE)
     }
 
     # check latitude
-    if (!is.null(latitude)) {
-      if (!is.numeric(latitude)) {
-        stop("Every `latitude` must be numeric.", call. = FALSE)
-      } else if (is.na(latitude)) {
-        stop("`latitude` must not be NA.", call. = FALSE)
-      } else if (!dplyr::between(latitude, -90, 90)) {
-        stop("Every `latitude` must be between -90 and 90.", call. = FALSE)
-      }
-    }
+    if (!is.null(latitude)) oc_check_between(latitude, -90, 90)
 
     # check longitude
-    if (!is.null(longitude)) {
-      if (!is.numeric(longitude)) {
-        stop("Every `longitude` must be numeric.", call. = FALSE)
-      } else if (is.na(longitude)) {
-        stop("`longitude` must not be NA.", call. = FALSE)
-      } else if (!dplyr::between(longitude, -180, 180)) {
-        stop("Every `longitude` must be between -180 and 180.", call. = FALSE)
-      }
-    }
+    if (!is.null(longitude)) oc_check_between(longitude, -180, 180)
 
     # check bounds
     if (!is.null(bounds)) {
@@ -153,7 +133,7 @@ oc_check_query <-
           "'latitude' and 'longitude'."
         )
       }
-      .oc_check_query(
+      oc_check_point(
         latitude = proximity[["latitude"]],
         longitude = proximity[["longitude"]]
       )
@@ -207,3 +187,21 @@ oc_check_query <-
     oc_check_logical(add_request)
 
   }
+
+oc_check_between <- function(x, left, right) {
+  if (!is.numeric(x)) {
+    stop("Every `", deparse(substitute(x)), "` must be numeric.", call. = FALSE)
+  }
+  if (isTRUE(x < left || x > right)) {
+    stop(
+      "Every `",
+      deparse(substitute(x)),
+      "` must be between ",
+      left,
+       " and ",
+       right,
+       ".",
+       call. = FALSE
+    )
+  }
+}

@@ -21,9 +21,7 @@ opencage_reverse(
 )
 }
 \arguments{
-\item{latitude}{Numeric vectors of latitude and longitude values.}
-
-\item{longitude}{Numeric vectors of latitude and longitude values.}
+\item{latitude, longitude}{Numeric vectors of latitude and longitude values.}
 
 \item{key}{Your OpenCage API key as a character vector of length one. By
 default, \code{\link[=opencage_key]{opencage_key()}} will attempt to retrieve the key from the
@@ -84,7 +82,7 @@ at which the number of remaining calls will be reset.
 }
 }
 \description{
-\ifelse{html}{\figure{lifecycle-soft-deprecated.svg}{options: alt='Soft-deprecated lifecycle'}}{\strong{Soft-deprecated}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#soft-deprecated}{\figure{lifecycle-soft-deprecated.svg}{options: alt='[Soft-deprecated]'}}}{\strong{[Soft-deprecated]}}
 
 Soft deprecated: use \code{oc_reverse} or \code{oc_reverse_df} for reverse geocoding.
 }

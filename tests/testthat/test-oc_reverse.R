@@ -64,6 +64,27 @@ test_that("oc_reverse masks key when add_request = TRUE", {
   expect_equal(res[[1]][["request"]][["key"]], "OPENCAGE_KEY")
 })
 
+test_that("oc_reverse handles NAs", {
+  skip_if_no_key()
+  skip_if_oc_offline()
+
+  # df_list
+  res1 <- oc_reverse(latitude = 0, longitude = NA_real_)
+  expect_equal(res1[[1]][[1, "oc_lat"]], NA_real_)
+
+  res2 <- oc_reverse(latitude = NA_real_, longitude = 0)
+  expect_equal(res2[[1]][[1, "oc_lng"]], NA_real_)
+
+  # json_list
+  res3 <- oc_reverse(latitude = NA_real_, longitude = 0, return = "json_list")
+  expect_equal(res3[[1]][["results"]], list())
+
+  # geojson_list
+  res4 <-
+    oc_reverse(latitude = NA_real_, longitude = 0, return = "geojson_list")
+  expect_equal(res4[[1]][["features"]], list())
+})
+
 # oc_reverse_df -----------------------------------------------------------
 
 test_that("oc_reverse_df works", {
@@ -81,6 +102,41 @@ test_that("oc_reverse_df works", {
   tbl3 <- oc_reverse_df(lat, lng)
   expect_s3_class(tbl3, c("tbl_df", "tbl", "data.frame"))
   expect_equal(nrow(tbl3), 3)
+})
+
+test_that("oc_reverse_df works with NA", {
+  skip_if_no_key()
+  skip_if_oc_offline()
+
+  lt <- c(0, NA_real_)
+  ln <- c(NA_real_, 0)
+
+  tbl1 <- oc_reverse_df(lt, ln)
+
+  expect_equal(nrow(tbl1), 2)
+  expect_equal(tbl1$latitude, lt)
+  expect_equal(tbl1$longitude, ln)
+  expect_true(all(is.na(tbl1$oc_formatted)))
+
+  tbl2 <- oc_reverse_df(data.frame(lt_col = lt, ln_col = ln), lt_col, ln_col)
+
+  expect_equal(nrow(tbl2), 2)
+  expect_equal(tbl2$lt_col, lt)
+  expect_equal(tbl2$ln_col, ln)
+  expect_true(all(is.na(tbl2$oc_formatted)))
+
+  tbl3 <-
+    oc_reverse_df(
+      data.frame(lt_col = lt, ln_col = ln), lt_col, ln_col, bind_cols = FALSE
+    )
+
+  expect_equal(nrow(tbl3), 2)
+  expect_true(
+    all(
+      is.na(tbl3$oc_query),
+      is.na(tbl3$oc_formatted)
+    )
+  )
 })
 
 test_that("oc_reverse_df doesn't work for default class", {

@@ -1,17 +1,18 @@
 ---
 output:
-  github_document
+  github_document:
+    df_print: kable
 ---
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 # opencage
 
 <!-- badges: start -->
 
-[![CRAN Status](https://www.r-pkg.org/badges/version/opencage)](https://cran.r-project.org/package=opencage)
-[![CRAN Checks](https://cranchecks.info/badges/worst/opencage)](https://cran.r-project.org/web/checks/check_results_opencage.html)
+[![CRAN Version](https://www.r-pkg.org/badges/version/opencage)](https://cran.r-project.org/package=opencage)
+[![CRAN Checks Status](https://badges.cranchecks.info/worst/opencage.svg)](https://cran.r-project.org/web/checks/check_results_opencage.html)
 [![CRAN Downloads per Month](https://cranlogs.r-pkg.org/badges/opencage)](https://cran.r-project.org/package=opencage)
-[![R-CMD-check](https://github.com/ropensci/opencage/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/opencage/actions?query=workflow%3AR-CMD-check)
-[![codecov.io](https://codecov.io/github/ropensci/opencage/coverage.svg?branch=main)](https://codecov.io/github/ropensci/opencage?branch=main)
+[![R-CMD-check Status on GitHub Actions](https://github.com/ropensci/opencage/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/opencage/actions?query=workflow%3AR-CMD-check)
+[![codecov.io Status](https://codecov.io/github/ropensci/opencage/coverage.svg?branch=main)](https://codecov.io/github/ropensci/opencage?branch=main)
 [![rOpenSci Peer-Review](https://badges.ropensci.org/36_status.svg)](https://github.com/ropensci/software-review/issues/36)
 [![License](https://img.shields.io/cran/l/opencage)](https://opensource.org/licenses/gpl-license)
 

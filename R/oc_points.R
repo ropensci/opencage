@@ -74,17 +74,9 @@ oc_points.data.frame <- function(data, latitude, longitude, ...) { # nolint - se
 
 # check points
 oc_check_point <- function(latitude, longitude) {
-  pnt <- c(latitude, longitude)
-  if (anyNA(pnt)) {
+  if (anyNA(c(latitude, longitude))) {
     stop("Every `point` element must be non-missing.", call. = FALSE)
   }
-  if (!all(is.numeric(pnt))) {
-    stop("Every `point` must be a numeric vector.", call. = FALSE)
-  }
-  if (!dplyr::between(latitude, -90, 90)) {
-    stop("Every `latitude` must be between -90 and 90.", call. = FALSE)
-  }
-  if (!dplyr::between(longitude, -180, 180)) {
-    stop("Every `longitude` must be between -180 and 180.", call. = FALSE)
-  }
+  oc_check_between(latitude, -90, 90)
+  oc_check_between(longitude, -180, 180)
 }

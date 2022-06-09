@@ -6,13 +6,15 @@
 <!-- badges: start -->
 
 [![CRAN
-Status](https://www.r-pkg.org/badges/version/opencage)](https://cran.r-project.org/package=opencage)
-[![CRAN
-Checks](https://cranchecks.info/badges/worst/opencage)](https://cran.r-project.org/web/checks/check_results_opencage.html)
+Version](https://www.r-pkg.org/badges/version/opencage)](https://cran.r-project.org/package=opencage)
+[![CRAN Checks
+Status](https://badges.cranchecks.info/worst/opencage.svg)](https://cran.r-project.org/web/checks/check_results_opencage.html)
 [![CRAN Downloads per
 Month](https://cranlogs.r-pkg.org/badges/opencage)](https://cran.r-project.org/package=opencage)
-[![R-CMD-check](https://github.com/ropensci/opencage/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/opencage/actions?query=workflow%3AR-CMD-check)
-[![codecov.io](https://codecov.io/github/ropensci/opencage/coverage.svg?branch=main)](https://codecov.io/github/ropensci/opencage?branch=main)
+[![R-CMD-check Status on GitHub
+Actions](https://github.com/ropensci/opencage/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/opencage/actions?query=workflow%3AR-CMD-check)
+[![codecov.io
+Status](https://codecov.io/github/ropensci/opencage/coverage.svg?branch=main)](https://codecov.io/github/ropensci/opencage?branch=main)
 [![rOpenSci
 Peer-Review](https://badges.ropensci.org/36_status.svg)](https://github.com/ropensci/software-review/issues/36)
 [![License](https://img.shields.io/cran/l/opencage)](https://opensource.org/licenses/gpl-license)
@@ -46,7 +48,7 @@ For the best experience, we recommend that you read through the
 are in a hurry:
 
 1.  Register at
-    [opencagedata.com/users/sign\_up](https://opencagedata.com/users/sign_up).
+    [opencagedata.com/users/sign_up](https://opencagedata.com/users/sign_up).
 2.  Generate an API key at the [OpenCage
     dashboard](https://opencagedata.com/dashboard#api-keys).
 3.  Save your API key as an [environment
@@ -62,10 +64,9 @@ library(opencage)
 oc_forward_df(placename = "Sarzeau")
 ```
 
-    ## # A tibble: 1 x 4
-    ##   placename oc_lat oc_lng oc_formatted         
-    ##   <chr>      <dbl>  <dbl> <chr>                
-    ## 1 Sarzeau     47.5  -2.76 56370 Sarzeau, France
+| placename |   oc_lat |  oc_lng | oc_formatted          |
+|:----------|---------:|--------:|:----------------------|
+| Sarzeau   | 47.52877 | -2.7642 | 56370 Sarzeau, France |
 
 Or turn a set of coordinates into the name and address of the location:
 
@@ -73,10 +74,9 @@ Or turn a set of coordinates into the name and address of the location:
 oc_reverse_df(latitude = 51.5034070, longitude = -0.1275920)
 ```
 
-    ## # A tibble: 1 x 3
-    ##   latitude longitude oc_formatted                                               
-    ##      <dbl>     <dbl> <chr>                                                      
-    ## 1     51.5    -0.128 Prime Minister’s Office, 10 Downing Street, Westminster, L~
+| latitude | longitude | oc_formatted                                                                              |
+|---------:|----------:|:------------------------------------------------------------------------------------------|
+| 51.50341 | -0.127592 | Prime Minister’s Office, 10 Downing Street, Westminster, London, SW1A 2AA, United Kingdom |
 
 But remember, the vignettes are really great! We have:
 
@@ -102,7 +102,7 @@ credits](https://opencagedata.com/credits).
 
 -   Please [report any issues or
     bugs](https://github.com/ropensci/opencage/issues).
--   License: GPL &gt;= 2
+-   License: GPL \>= 2
 -   Get citation information for `opencage` in R doing
     `citation(package = 'opencage')`
 -   Please note that this package is released with a [Contributor Code
