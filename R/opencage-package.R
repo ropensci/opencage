@@ -2,4 +2,4 @@
 #' @importFrom rlang .data
 "_PACKAGE"
 
-utils::globalVariables(c("countrycodes"))
+utils::globalVariables("countrycodes")

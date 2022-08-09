@@ -25,7 +25,7 @@ test_that("oc_config requests key from terminal", {
   mockery::stub(
     oc_config,
     "readline",
-    key_200,
+    key_200
   )
   expect_message(
     oc_config(key = ""),

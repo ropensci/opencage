@@ -226,7 +226,7 @@ test_that("tidyeval works for arguments", {
                               bind_cols = FALSE)
 
   # make sure we get actual results, not only NA
-  expect_false(any(is.na(confidence$oc_formatted)))
+  expect_false(anyNA(confidence$oc_formatted))
 
   expect_false(isTRUE(all.equal(confidence, noarg)))
   expect_false(isTRUE(all.equal(confidence[1, ], noarg[1, ])))

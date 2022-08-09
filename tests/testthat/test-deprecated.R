@@ -38,7 +38,7 @@ test_that("opencage_forward/opencage_reverse return what they should
   expect_type(results[["total_results"]], "integer")
   expect_s3_class(results[["time_stamp"]], "POSIXct")
   expect_length(results, 4L)
-  expect_identical(sum(grepl("annotation", names(results[["results"]]))), 0L)
+  expect_no_match(colnames(results[["results"]]), "annotation", fixed = TRUE)
   expect_true(dplyr::between(nrow(results[["results"]]), 1, 2))
 
   results <- opencage_reverse(
@@ -54,7 +54,7 @@ test_that("opencage_forward/opencage_reverse return what they should
   expect_type(results[["total_results"]], "integer")
   expect_s3_class(results[["time_stamp"]], "POSIXct")
   expect_length(results, 4L)
-  expect_identical(sum(grepl("annotation", names(results[["results"]]))), 0L)
+  expect_no_match(colnames(results[["results"]]), "annotation", fixed = TRUE)
 })
 
 test_that("opencage_forward deals well with results being NULL", {

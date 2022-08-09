@@ -54,7 +54,7 @@ oc_format <- function(res_text, return, query) {
     res_text_masked <- oc_mask_key(res_text)
     jsn <- jsonlite::fromJSON(res_text_masked, simplifyVector = FALSE)
     if (return == "geojson_list") {
-      structure(jsn, class = c("geo_list"))
+      structure(jsn, class = "geo_list")
     } else {
       jsn
     }

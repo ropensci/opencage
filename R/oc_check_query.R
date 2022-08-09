@@ -2,16 +2,10 @@ oc_check_logical <- function(variable, check_length_one = FALSE) {
   if (!is.null(variable)) {
     if (!is.logical(variable)) {
       var_name <- deparse(substitute(variable)) # deparse only if check fails
-      stop(
-        paste0("`", var_name, "` must be a logical vector."),
-        call. = FALSE
-      )
+      stop("`", var_name, "` must be a logical vector.", call. = FALSE)
     } else if (check_length_one && !identical(length(variable), 1L)) {
       var_name <- deparse(substitute(variable)) # deparse only if check fails
-      stop(
-        paste0("`", var_name, "` must be a vector of length one."),
-        call. = FALSE
-      )
+      stop("`", var_name, "` must be a vector of length one.", call. = FALSE)
     }
   }
 }
@@ -158,7 +152,7 @@ oc_check_query <-
 
     # check limit
     if (!is.null(limit)) {
-      if (!(limit %in% c(1:100))) {
+      if (!(limit %in% 1:100)) {
         stop(
           call. = FALSE,
           "Every `limit` must be an integer between 1 and 100."
@@ -168,7 +162,7 @@ oc_check_query <-
 
     # check min_confidence
     if (!is.null(min_confidence)) {
-      if (!(min_confidence %in% c(1:10))) {
+      if (!(min_confidence %in% 1:10)) {
         stop(
           call. = FALSE,
           "Every `min_confidence` must be an integer between 1 and 10."
