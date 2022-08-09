@@ -1,1 +1,1 @@
-linters: linters_with_defaults(cyclocomp_linter = NULL) # .oc_check_query()
+linters: linters_with_tags(c("package_development", "default"), cyclocomp_linter = NULL) # .oc_check_query()

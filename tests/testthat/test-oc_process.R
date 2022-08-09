@@ -142,7 +142,7 @@ test_that("bounds argument is well taken into account with df_list", {
     return = "df_list"
   )
 
-  expect_equal(res1[[1]][["oc_country"]], "Germany")
+  expect_identical(res1[[1]][["oc_country"]], "Germany")
   expect_true(res2[[1]][[1, "oc_country"]] != "Germany")
 })
 

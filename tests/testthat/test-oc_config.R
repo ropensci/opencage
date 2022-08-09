@@ -5,17 +5,17 @@ test_that("oc_config sets OPENCAGE_KEY environment variable", {
   # default envvar
   withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   oc_config()
-  expect_equal(Sys.getenv("OPENCAGE_KEY"), key_200)
+  expect_identical(Sys.getenv("OPENCAGE_KEY"), key_200)
 
   # set key directly (or via keyring etc.)
   withr::local_envvar(c("OPENCAGE_KEY" = ""))
   oc_config(key = key_200)
-  expect_equal(Sys.getenv("OPENCAGE_KEY"), key_200)
+  expect_identical(Sys.getenv("OPENCAGE_KEY"), key_200)
 
   # override previously set key
   withr::local_envvar(c("OPENCAGE_KEY" = key_402))
   oc_config(key = key_200)
-  expect_equal(Sys.getenv("OPENCAGE_KEY"), key_200)
+  expect_identical(Sys.getenv("OPENCAGE_KEY"), key_200)
 })
 
 test_that("oc_config requests key from terminal", {
@@ -31,14 +31,14 @@ test_that("oc_config requests key from terminal", {
     oc_config(key = ""),
     "Please enter your OpenCage API key and press enter:"
   )
-  expect_equal(Sys.getenv("OPENCAGE_KEY"), key_200)
+  expect_identical(Sys.getenv("OPENCAGE_KEY"), key_200)
 })
 
 test_that("oc_config throws error with faulty OpenCage key", {
 
   # unset key
   withr::local_envvar(c("OPENCAGE_KEY" = ""))
-  expect_equal(Sys.getenv("OPENCAGE_KEY"), "")
+  expect_identical(Sys.getenv("OPENCAGE_KEY"), "")
 
   # error without key in non-interactive mode
   expect_error(oc_config(key = ""), "set the environment variable OPENCAGE_KEY")
@@ -59,15 +59,15 @@ test_that("oc_config updates rate limit of oc_get_limit", {
 
   rps <- 5L
   oc_config(rate_sec = rps)
-  expect_equal(ratelimitr::get_rates(oc_get_limited)[[1]][["n"]], rps)
+  expect_identical(ratelimitr::get_rates(oc_get_limited)[[1]][["n"]], rps)
 
   rps <- 3L
   oc_config(rate_sec = rps)
-  expect_equal(ratelimitr::get_rates(oc_get_limited)[[1]][["n"]], rps)
+  expect_identical(ratelimitr::get_rates(oc_get_limited)[[1]][["n"]], rps)
 
   # set rate_sec back to default: 1L/sec
   oc_config()
-  expect_equal(ratelimitr::get_rates(oc_get_limited)[[1]][["n"]], 1L)
+  expect_identical(ratelimitr::get_rates(oc_get_limited)[[1]][["n"]], 1L)
 })
 
 # test no_record argument -------------------------------------------------
@@ -83,19 +83,19 @@ test_that("oc_config sets no_record option", {
 
   # Default with oc_config(no_record = TRUE)
   oc_config()
-  expect_equal(getOption("oc_no_record"), TRUE)
+  expect_true(getOption("oc_no_record"))
   res <- oc_process("Hamburg", return = "url_only")
   expect_match(res[[1]], "&no_record=1", fixed = TRUE)
 
   # Set oc_config(no_record = FALSE)
   oc_config(no_record = FALSE)
-  expect_equal(getOption("oc_no_record"), FALSE)
+  expect_false(getOption("oc_no_record"))
   res <- oc_process("Hamburg", return = "url_only")
   expect_match(res[[1]], "&no_record=0", fixed = TRUE)
 
   # Set oc_config(no_record = TRUE)
   oc_config(no_record = TRUE)
-  expect_equal(getOption("oc_no_record"), TRUE)
+  expect_true(getOption("oc_no_record"))
   res <- oc_process("Hamburg", return = "url_only")
   expect_match(res[[1]], "&no_record=1", fixed = TRUE)
 })
@@ -108,10 +108,10 @@ test_that("oc_config sets show_key option", {
 
   # Default with oc_config(show_key = FALSE)
   oc_config()
-  expect_equal(getOption("oc_show_key"), FALSE)
+  expect_false(getOption("oc_show_key"))
 
   # Set oc_config(show_key = TRUE)
   withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   oc_config(show_key = TRUE)
-  expect_equal(getOption("oc_show_key"), TRUE)
+  expect_true(getOption("oc_show_key"))
 })
