@@ -11,7 +11,7 @@ oc_get_memoise <- oc_get_limited
 
 # Then modify them at load-time
 # nocov start
-.onLoad <- function(libname, pkgname) { # nolint because snake_case
+.onLoad <- function(libname, pkgname) {
   # limit requests per second
   oc_get_limited <<-
     ratelimitr::limit_rate(

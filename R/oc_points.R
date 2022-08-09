@@ -62,7 +62,7 @@ oc_points.numeric <- function(latitude, longitude, ...) {
 
 #' @name oc_points
 #' @export
-oc_points.data.frame <- function(data, latitude, longitude, ...) { # nolint - see lintr issue #223
+oc_points.data.frame <- function(data, latitude, longitude, ...) {
   latitude <- rlang::enquo(latitude)
   longitude <- rlang::enquo(longitude)
 
