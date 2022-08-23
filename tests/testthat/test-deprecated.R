@@ -8,7 +8,7 @@ test_that("opencage_forward/opencage_reverse return what they should.", {
   expect_s3_class(results[["results"]], "tbl_df")
   expect_type(results[["total_results"]], "integer")
   expect_s3_class(results[["time_stamp"]], "POSIXct")
-  expect_equal(length(results), 4)
+  expect_length(results, 4L)
 
   lifecycle::expect_deprecated(
     results <- opencage_reverse(longitude = 0, latitude = 0, key = key_200)
@@ -17,7 +17,7 @@ test_that("opencage_forward/opencage_reverse return what they should.", {
   expect_s3_class(results[["results"]], "tbl_df")
   expect_type(results[["total_results"]], "integer")
   expect_s3_class(results[["time_stamp"]], "POSIXct")
-  expect_equal(length(results), 4)
+  expect_length(results, 4L)
 })
 
 test_that("opencage_forward/opencage_reverse return what they should
@@ -37,11 +37,8 @@ test_that("opencage_forward/opencage_reverse return what they should
   expect_s3_class(results[["results"]], "tbl_df")
   expect_type(results[["total_results"]], "integer")
   expect_s3_class(results[["time_stamp"]], "POSIXct")
-  expect_equal(length(results), 4)
-  expect_equal(sum(grepl(
-    "annotation",
-    names(results[["results"]])
-  )), 0)
+  expect_length(results, 4L)
+  expect_no_match(colnames(results[["results"]]), "annotation", fixed = TRUE)
   expect_true(dplyr::between(nrow(results[["results"]]), 1, 2))
 
   results <- opencage_reverse(
@@ -56,11 +53,8 @@ test_that("opencage_forward/opencage_reverse return what they should
   expect_s3_class(results[["results"]], "tbl_df")
   expect_type(results[["total_results"]], "integer")
   expect_s3_class(results[["time_stamp"]], "POSIXct")
-  expect_equal(length(results), 4)
-  expect_equal(sum(grepl(
-    "annotation",
-    names(results[["results"]])
-  )), 0)
+  expect_length(results, 4L)
+  expect_no_match(colnames(results[["results"]]), "annotation", fixed = TRUE)
 })
 
 test_that("opencage_forward deals well with results being NULL", {
@@ -94,15 +88,14 @@ test_that("the bounds argument is well taken into account", {
     placename = "Berlin",
     key = Sys.getenv("OPENCAGE_KEY")
   )
+  expect_true("Germany" %in% results1$results$components.country)
 
   results2 <- opencage_forward(
     placename = "Berlin",
     bounds = c(-90, 38, 0, 45),
     key = Sys.getenv("OPENCAGE_KEY")
   )
-
-  expect_true(!("Germany" %in% results2$results$components.country))
-  expect_true("Germany" %in% results1$results$components.country)
+  expect_false("Germany" %in% results2$results$components.country)
 })
 
 test_that("Errors with multiple inputs", {
@@ -128,8 +121,5 @@ test_that("`opencage_key(quiet = FALSE)` messages", {
   withr::local_envvar(c("OPENCAGE_KEY" = "fakekey"))
   withr::local_options(lifecycle_verbosity = "quiet")
 
-  expect_message(
-    object = opencage_key(quiet = FALSE),
-    regexp = "Using OpenCage API Key from envvar OPENCAGE_KEY"
-  )
+  expect_snapshot(x = opencage_key(quiet = FALSE))
 })

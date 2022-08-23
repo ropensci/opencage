@@ -92,7 +92,7 @@ test_that("oc_check_query checks proximity", {
   expect_error(
     oc_check_query(
       placename = "Sarzeau",
-      proximity = list(c(latitude = -91, longitude = 2)) # lat < -90 nolint
+      proximity = list(c(latitude = -91, longitude = 2))
     ),
     "Every `latitude` must be between -90 and 90.",
     fixed = TRUE
@@ -100,7 +100,7 @@ test_that("oc_check_query checks proximity", {
   expect_error(
     oc_check_query(
       placename = "Sarzeau",
-      proximity = list(c(latitude = 0, longitude = 181)) # lon > 180 nolint
+      proximity = list(c(latitude = 0, longitude = 181))
     ),
     "Every `longitude` must be between -180 and 180.",
     fixed = TRUE

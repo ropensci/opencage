@@ -3,7 +3,7 @@
 #' Forward geocoding from a character vector of location names to latitude and
 #' longitude tuples.
 #'
-# nolint start - link longer than 80 chars
+# nolint start: line_length_linter.
 #' @param placename A character vector with the location names or addresses to
 #'   be geocoded.
 #'
@@ -190,7 +190,7 @@ oc_forward <-
 #' longitude tuples.
 #'
 #' @param data A data frame.
-# nolint start - link longer than 80 chars
+# nolint start: line_length_linter.
 #' @param placename An unquoted variable name of a character column or vector
 #'   with the location names or addresses to be geocoded.
 #'
@@ -333,7 +333,7 @@ oc_forward_df.default <- function(x, ...) {
 
 #' @rdname oc_forward_df
 #' @export
-oc_forward_df.data.frame <- # nolint - see lintr issue #223
+oc_forward_df.data.frame <-
   function(data,
            placename,
            bind_cols = TRUE,

@@ -95,7 +95,7 @@ oc_bbox.numeric <- function(xmin, ymin, xmax, ymax, ...) {
 
 #' @name oc_bbox
 #' @export
-oc_bbox.data.frame <- function(data, xmin, ymin, xmax, ymax, ...) { # nolint - see lintr issue #223
+oc_bbox.data.frame <- function(data, xmin, ymin, xmax, ymax, ...) {
   xmin <- rlang::enquo(xmin)
   ymin <- rlang::enquo(ymin)
   xmax <- rlang::enquo(xmax)

@@ -6,7 +6,7 @@ lng <- c(-1.554136, 10.000654, -118.242767)
 df <- tibble(id = 1:3, lat = lat, lng = lng)
 df2 <- add_column(df,
                   language = c("en", "fr", "ja"),
-                  confidence = c(1, 1, 1),
+                  confidence = rep(1L, 3L),
                   annotation = c(FALSE, TRUE, TRUE),
                   roadinfo = c(FALSE, TRUE, TRUE),
                   abbrv = c(FALSE, FALSE, TRUE))
@@ -20,7 +20,7 @@ test_that("oc_reverse works", {
 
   res1 <- oc_reverse(lat, lng)
   expect_type(res1, "list")
-  expect_equal(length(res1), 3)
+  expect_length(res1, 3L)
   expect_s3_class(res1[[1]], c("tbl_df", "tbl", "data.frame"))
 })
 
@@ -31,13 +31,13 @@ test_that("oc_reverse returns correct type", {
   # json_list
   res2 <- oc_reverse(lat, lng, return = "json_list")
   expect_type(res2, "list")
-  expect_equal(length(res2), 3)
+  expect_length(res2, 3L)
   expect_type(res2[[1]], "list")
 
   # geojson_list
   res3 <- oc_reverse(lat, lng, return = "geojson_list")
   expect_type(res3, "list")
-  expect_equal(length(res3), 3)
+  expect_length(res3, 3L)
   expect_s3_class(res3[[1]], "geo_list")
 })
 
@@ -49,11 +49,11 @@ test_that("oc_reverse adds request with add_request", {
 
   # df_list
   res <- oc_reverse(lat[1], lng[1], return = "df_list", add_request = TRUE)
-  expect_equal(res[[1]][["oc_query"]], expected)
+  expect_identical(res[[1]][["oc_query"]], expected)
 
   # json_list
   res <- oc_reverse(lat[1], lng[1], return = "json_list", add_request = TRUE)
-  expect_equal(res[[1]][["request"]][["query"]], expected)
+  expect_identical(res[[1]][["request"]][["query"]], expected)
 })
 
 test_that("oc_reverse masks key when add_request = TRUE", {
@@ -61,7 +61,7 @@ test_that("oc_reverse masks key when add_request = TRUE", {
   withr::local_envvar(c("OPENCAGE_KEY" = key_200))
 
   res <- oc_reverse(lat[1], lng[1], return = "json_list", add_request = TRUE)
-  expect_equal(res[[1]][["request"]][["key"]], "OPENCAGE_KEY")
+  expect_identical(res[[1]][["request"]][["key"]], "OPENCAGE_KEY")
 })
 
 test_that("oc_reverse handles NAs", {
@@ -70,19 +70,19 @@ test_that("oc_reverse handles NAs", {
 
   # df_list
   res1 <- oc_reverse(latitude = 0, longitude = NA_real_)
-  expect_equal(res1[[1]][[1, "oc_lat"]], NA_real_)
+  expect_identical(res1[[1]][[1, "oc_lat"]], NA_real_)
 
   res2 <- oc_reverse(latitude = NA_real_, longitude = 0)
-  expect_equal(res2[[1]][[1, "oc_lng"]], NA_real_)
+  expect_identical(res2[[1]][[1, "oc_lng"]], NA_real_)
 
   # json_list
   res3 <- oc_reverse(latitude = NA_real_, longitude = 0, return = "json_list")
-  expect_equal(res3[[1]][["results"]], list())
+  expect_identical(res3[[1]][["results"]], list())
 
   # geojson_list
   res4 <-
     oc_reverse(latitude = NA_real_, longitude = 0, return = "geojson_list")
-  expect_equal(res4[[1]][["features"]], list())
+  expect_identical(res4[[1]][["features"]], list())
 })
 
 # oc_reverse_df -----------------------------------------------------------
@@ -93,15 +93,15 @@ test_that("oc_reverse_df works", {
 
   tbl1 <- oc_reverse_df(df, lat, lng)
   expect_s3_class(tbl1, c("tbl_df", "tbl", "data.frame"))
-  expect_equal(nrow(tbl1), 3)
+  expect_identical(nrow(tbl1), 3L)
 
   tbl2 <- oc_reverse_df(df[1, ], lat, lng)
   expect_s3_class(tbl2, c("tbl_df", "tbl", "data.frame"))
-  expect_equal(nrow(tbl2), 1)
+  expect_identical(nrow(tbl2), 1L)
 
   tbl3 <- oc_reverse_df(lat, lng)
   expect_s3_class(tbl3, c("tbl_df", "tbl", "data.frame"))
-  expect_equal(nrow(tbl3), 3)
+  expect_identical(nrow(tbl3), 3L)
 })
 
 test_that("oc_reverse_df works with NA", {
@@ -113,16 +113,16 @@ test_that("oc_reverse_df works with NA", {
 
   tbl1 <- oc_reverse_df(lt, ln)
 
-  expect_equal(nrow(tbl1), 2)
-  expect_equal(tbl1$latitude, lt)
-  expect_equal(tbl1$longitude, ln)
+  expect_identical(nrow(tbl1), 2L)
+  expect_identical(tbl1$latitude, lt)
+  expect_identical(tbl1$longitude, ln)
   expect_true(all(is.na(tbl1$oc_formatted)))
 
   tbl2 <- oc_reverse_df(data.frame(lt_col = lt, ln_col = ln), lt_col, ln_col)
 
-  expect_equal(nrow(tbl2), 2)
-  expect_equal(tbl2$lt_col, lt)
-  expect_equal(tbl2$ln_col, ln)
+  expect_identical(nrow(tbl2), 2L)
+  expect_identical(tbl2$lt_col, lt)
+  expect_identical(tbl2$ln_col, ln)
   expect_true(all(is.na(tbl2$oc_formatted)))
 
   tbl3 <-
@@ -130,7 +130,7 @@ test_that("oc_reverse_df works with NA", {
       data.frame(lt_col = lt, ln_col = ln), lt_col, ln_col, bind_cols = FALSE
     )
 
-  expect_equal(nrow(tbl3), 2)
+  expect_identical(nrow(tbl3), 2L)
   expect_true(
     all(
       is.na(tbl3$oc_query),
@@ -150,14 +150,14 @@ test_that("output arguments work", {
   skip_if_no_key()
   skip_if_oc_offline()
 
-  expect_equal(names(oc_reverse_df(df, lat, lng, bind_cols = TRUE)),
+  expect_named(oc_reverse_df(df, lat, lng, bind_cols = TRUE),
                c("id", "lat", "lng", "oc_formatted"))
-  expect_equal(names(oc_reverse_df(df, lat, lng, bind_cols = FALSE)),
+  expect_named(oc_reverse_df(df, lat, lng, bind_cols = FALSE),
                c("oc_query", "oc_formatted"))
-  expect_gt(ncol(oc_reverse_df(df, lat, lng, output = "all")), 5)
+  expect_gt(ncol(oc_reverse_df(df, lat, lng, output = "all")), 5L)
   expect_gt(
     ncol(oc_reverse_df(df, lat, lng, bind_cols = FALSE, output = "all")),
-    5
+    5L
   )
 })
 
@@ -169,7 +169,7 @@ test_that("tidyeval works for arguments", {
 
   # language
   lang <- oc_reverse_df(df2, lat, lng, language = language, output = "all")
-  expect_equal(lang$oc_country, c("France", "Allemagne", "アメリカ合衆国")) # nolint
+  expect_identical(lang$oc_country, c("France", "Allemagne", "アメリカ合衆国"))
 
   # min_confidence
   confidence <- oc_reverse_df(df3, lat, lng, min_confidence = confidence)
@@ -185,7 +185,7 @@ test_that("tidyeval works for arguments", {
   ann <- oc_reverse_df(df2, lat, lng, bind_cols = FALSE,
                        no_annotations = annotation)
   expect_gt(ncol(ann), 40)
-  expect_equal(ann$oc_currency_name, c("Euro", NA, NA))
+  expect_identical(ann$oc_currency_name, c("Euro", NA, NA))
 
   # roadinfo
   ri <- oc_reverse_df(
@@ -195,11 +195,10 @@ test_that("tidyeval works for arguments", {
     bind_cols = FALSE,
     roadinfo = roadinfo
   )
-  expect_equal(ri$oc_roadinfo_speed_in, c(NA_character_, "km/h", "mph"))
+  expect_identical(ri$oc_roadinfo_speed_in, c(NA_character_, "km/h", "mph"))
 
   # abbrv
-  abbrv <- oc_reverse_df(df2, lat, lng,
-                         abbrv = abbrv)
+  abbrv <- oc_reverse_df(df2, lat, lng, abbrv = abbrv)
   expect_false(isTRUE(all.equal(abbrv, noarg)))
   expect_true(all.equal(abbrv[1, ], noarg[1, ]))
   expect_true(all.equal(abbrv[2, ], noarg[2, ]))

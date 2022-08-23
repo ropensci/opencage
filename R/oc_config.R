@@ -80,7 +80,7 @@
 #' from the OpenCage API locally, but only for as long as your R session is
 #' alive.
 #'
-# nolint start - link longer than 80 chars
+# nolint start: line_length_linter.
 #' For more information on OpenCage's policies on privacy and data protection
 #' see [their FAQs](https://opencagedata.com/faq#legal), their [GDPR
 #' page](https://opencagedata.com/gdpr), and, for the `no_record` parameter, see
@@ -109,7 +109,7 @@ oc_config <-
     } else if (!rlang::is_interactive()) {
       stop(
         key_needed,
-        "Please set the environment variable OPENCAGE_KEY to your OpenCage API key.", # nolint
+        "Please set the environment variable OPENCAGE_KEY to your OpenCage API key.", # nolint: line_length_linter.
         call. = FALSE
       )
     } else {

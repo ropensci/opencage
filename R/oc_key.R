@@ -21,7 +21,7 @@ oc_check_key <- function(key) {
     )
   } else if (!identical(nchar(key), 32L)) {
     stop(
-      "The OpenCage API key must be a 32 character long, alphanumeric string.\n", # nolint
+      "The OpenCage API key must be a 32 character long, alphanumeric string.\n", # nolint: line_length_linter.
       "See <https://opencagedata.com/api#forward>",
       call. = FALSE
     )

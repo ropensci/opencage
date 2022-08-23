@@ -169,7 +169,7 @@ oc_reverse_df.default <- function(x, ...) {
 
 #' @rdname oc_reverse_df
 #' @export
-oc_reverse_df.data.frame <- # nolint - see lintr issue #223
+oc_reverse_df.data.frame <-
   function(data,
            latitude,
            longitude,
