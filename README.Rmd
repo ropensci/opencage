@@ -94,9 +94,7 @@ Sources of OpenCage are open geospatial data including
 [Flickr's shapefiles](https://code.flickr.net/2009/05/21/flickr-shapefiles-public-dataset-10/) plus a whole lot more besides. 
 Refer to the current full [list of credits](https://opencagedata.com/credits).
 
-## Meta
+## Code of Conduct
 
-* Please [report any issues or bugs](https://github.com/ropensci/opencage/issues).
-* License: GPL >= 2
-* Get citation information for `opencage` in R doing `citation(package = 'opencage')`
-* Please note that this package is released with a [Contributor Code of Conduct](https://ropensci.org/code-of-conduct/). By contributing to this project, you agree to abide by its terms.
+Please note that this package is released with a [Contributor Code of Conduct](https://ropensci.org/code-of-conduct/). 
+By contributing to this project, you agree to abide by its terms.
