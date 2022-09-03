@@ -55,7 +55,7 @@ You can install {opencage} from [CRAN](https://cran.r-project.org/package=openca
 
 ## Quickstart
 
-For the best experience, we recommend that you read through the "Introduction to opencage" vignette (`vignette("opencage")`), but if you are in a hurry:
+For the best experience, we recommend that you read through the "[Introduction to opencage](https://docs.ropensci.org/opencage/articles/opencage.html)" vignette (`vignette("opencage")`), but if you are in a hurry:
 
 1. Register at [opencagedata.com/users/sign_up](https://opencagedata.com/users/sign_up).
 2. Generate an API key at the [OpenCage dashboard](https://opencagedata.com/dashboard#api-keys).
@@ -77,9 +77,9 @@ oc_reverse_df(latitude = 51.5034070, longitude = -0.1275920)
 
 But remember, the vignettes are really great! We have:
 
-- "Introduction to opencage" `vignette("opencage")`
-- "Customise your query" `vignette("customise_query")`
-- "Output options" `vignette("output_options")`
+- "[Introduction to opencage](https://docs.ropensci.org/opencage/articles/opencage.html)" `vignette("opencage")`
+- "[Customise your query](https://docs.ropensci.org/opencage/articles/customise_query.html)" `vignette("customise_query")`
+- "[Output options](https://docs.ropensci.org/opencage/articles/output_options.html)" `vignette("output_options")`
 
 ## About OpenCage
 
