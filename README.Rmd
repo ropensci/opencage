@@ -24,18 +24,34 @@ Geocode with the [OpenCage](https://opencagedata.com) API, either from place nam
 
 ## Installation
 
-Install the package with:
+You can install {opencage} from [CRAN](https://cran.r-project.org/package=opencage), [R-universe](https://ropensci.r-universe.dev/ui#package:opencage) or [GitHub](https://github.com/ropensci/opencage) like this:
 
-```{r eval = FALSE}
-install.packages("opencage")
-```
+- Release version from CRAN
 
-Or install the development version using [remotes](https://remotes.r-lib.org) with:
+  ```r
+  install.packages("opencage")
+  ```
 
-```{r, eval = FALSE}
-remotes::install_github("ropensci/opencage")
+- Development version from R-universe
+  
+  ```r
+  install.packages(
+    "opencage", 
+    repos = c("https://ropensci.r-universe.dev", getOption("repos"))
+  )
+  ```
 
-```
+- Development version from GitHub with {[pak](https://github.com/r-lib/pak/)}
+  
+  ```r
+  pak::pak("ropensci/opencage")
+  ```
+  
+  or with {[remotes](https://github.com/r-lib/remotes/)}
+  
+  ```r
+  remotes::install_github("ropensci/opencage")
+  ```
 
 ## Quickstart
 
