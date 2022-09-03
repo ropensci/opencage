@@ -1,0 +1,45 @@
+# -----------------------------------------------------------
+# CITATION file created with {cffr} R package, v0.2.3.9000
+# See also: https://docs.ropensci.org/cffr/
+# -----------------------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "opencage" in publications use:'
+type: software
+license: GPL-2.0-or-later
+title: 'opencage: Geocode with the OpenCage API'
+version: 0.2.2.9000
+abstract: Geocode with the OpenCage API, either from place name to longitude and latitude
+  (forward geocoding) or from longitude and latitude to the name and address of a
+  location (reverse geocoding), see <https://opencagedata.com>.
+authors:
+- family-names: Possenriede
+  given-names: Daniel
+  email: possenriede+r@gmail.com
+  orcid: https://orcid.org/0000-0002-6738-9845
+- family-names: Sadler
+  given-names: Jesse
+  orcid: https://orcid.org/0000-0001-6081-9681
+- family-names: Salmon
+  given-names: Maëlle
+  orcid: https://orcid.org/0000-0002-2815-0399
+repository: https://CRAN.R-project.org/package=opencage
+repository-code: https://github.com/ropensci/opencage
+url: https://docs.ropensci.org/opencage/
+contact:
+- family-names: Possenriede
+  given-names: Daniel
+  email: possenriede+r@gmail.com
+  orcid: https://orcid.org/0000-0002-6738-9845
+keywords:
+- geocode
+- geocoder
+- opencage
+- opencage-api
+- opencage-geocoder
+- peer-reviewed
+- placenames
+- r
+- r-package
+- rspatial
+- rstats
