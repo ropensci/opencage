@@ -11,6 +11,11 @@ Version](https://www.r-pkg.org/badges/version/opencage)](https://cran.r-project.
 Status](https://badges.cranchecks.info/worst/opencage.svg)](https://cran.r-project.org/web/checks/check_results_opencage.html)
 [![CRAN Downloads per
 Month](https://cranlogs.r-pkg.org/badges/opencage)](https://cran.r-project.org/package=opencage)
+[![R-universe
+status](https://ropensci.r-universe.dev/badges/opencage)](https://ropensci.r-universe.dev/ui#package:opencage)
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![R-CMD-check Status on GitHub
 Actions](https://github.com/ropensci/opencage/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/opencage/actions?query=workflow%3AR-CMD-check)
 [![codecov.io
@@ -28,24 +33,45 @@ geocoding).
 
 ## Installation
 
-Install the package with:
+You can install {opencage} from
+[CRAN](https://cran.r-project.org/package=opencage),
+[R-universe](https://ropensci.r-universe.dev/ui#package:opencage) or
+[GitHub](https://github.com/ropensci/opencage) like this:
 
-``` r
-install.packages("opencage")
-```
+- Release version from CRAN
 
-Or install the development version using
-[remotes](https://remotes.r-lib.org) with:
+  ``` r
+  install.packages("opencage")
+  ```
 
-``` r
-remotes::install_github("ropensci/opencage")
-```
+- Development version from R-universe
+
+  ``` r
+  install.packages(
+    "opencage", 
+    repos = c("https://ropensci.r-universe.dev", getOption("repos"))
+  )
+  ```
+
+- Development version from GitHub with
+  {[pak](https://github.com/r-lib/pak/)}
+
+  ``` r
+  pak::pak("ropensci/opencage")
+  ```
+
+  or with {[remotes](https://github.com/r-lib/remotes/)}
+
+  ``` r
+  remotes::install_github("ropensci/opencage")
+  ```
 
 ## Quickstart
 
 For the best experience, we recommend that you read through the
-“Introduction to opencage” vignette (`vignette("opencage")`), but if you
-are in a hurry:
+“[Introduction to
+opencage](https://docs.ropensci.org/opencage/articles/opencage.html)”
+vignette (`vignette("opencage")`), but if you are in a hurry:
 
 1.  Register at
     [opencagedata.com/users/sign_up](https://opencagedata.com/users/sign_up).
@@ -74,15 +100,21 @@ Or turn a set of coordinates into the name and address of the location:
 oc_reverse_df(latitude = 51.5034070, longitude = -0.1275920)
 ```
 
-| latitude | longitude | oc_formatted                                                                              |
-|---------:|----------:|:------------------------------------------------------------------------------------------|
-| 51.50341 | -0.127592 | Prime Minister’s Office, 10 Downing Street, Westminster, London, SW1A 2AA, United Kingdom |
+| latitude | longitude | oc_formatted                                        |
+|---------:|----------:|:----------------------------------------------------|
+| 51.50341 | -0.127592 | 10 Downing Street, London, SW1A 2AA, United Kingdom |
 
 But remember, the vignettes are really great! We have:
 
--   “Introduction to opencage” `vignette("opencage")`
--   “Customise your query” `vignette("customise_query")`
--   “Output options” `vignette("output_options")`
+- “[Introduction to
+  opencage](https://docs.ropensci.org/opencage/articles/opencage.html)”
+  `vignette("opencage")`
+- “[Customise your
+  query](https://docs.ropensci.org/opencage/articles/customise_query.html)”
+  `vignette("customise_query")`
+- “[Output
+  options](https://docs.ropensci.org/opencage/articles/output_options.html)”
+  `vignette("output_options")`
 
 ## About OpenCage
 
@@ -98,13 +130,8 @@ shapefiles](https://code.flickr.net/2009/05/21/flickr-shapefiles-public-dataset-
 plus a whole lot more besides. Refer to the current full [list of
 credits](https://opencagedata.com/credits).
 
-## Meta
+## Code of Conduct
 
--   Please [report any issues or
-    bugs](https://github.com/ropensci/opencage/issues).
--   License: GPL \>= 2
--   Get citation information for `opencage` in R doing
-    `citation(package = 'opencage')`
--   Please note that this package is released with a [Contributor Code
-    of Conduct](https://ropensci.org/code-of-conduct/). By contributing
-    to this project, you agree to abide by its terms.
+Please note that this package is released with a [Contributor Code of
+Conduct](https://ropensci.org/code-of-conduct/). By contributing to this
+project, you agree to abide by its terms.
