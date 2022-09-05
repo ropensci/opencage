@@ -67,7 +67,7 @@ Whatever method you choose, keep your API key secret. OpenCage also features [be
 ### Rate limit
 
 A rate limit is used to control the rate of requests sent, so legitimate requests do not lead to an unintended Denial of Service attack.
-The rate limit allowed by the API depends on the OpenCage plan you have and ranges from 1 request/sec for the "Free Trial" plan to 15 requests/sec for the "Medium" or "Large" plans.
+The rate limit allowed by the API depends on the OpenCage plan you have and ranges from 1 request/sec for the "Free Trial" plan to 40 requests/sec for "Large" plan.
 See [opencagedata.com/pricing](https://opencagedata.com/pricing) for details and up-to-date information.
 
 If you have a "Free Trial" account with OpenCage, you can skip to the next section, because the rate limit is already set correctly for you at 1 request/sec.
