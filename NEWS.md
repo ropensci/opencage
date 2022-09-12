@@ -9,6 +9,7 @@
 
 * {opencage} now uses [{testthat} 3e](https://testthat.r-lib.org/articles/third-edition.html) for unit tests ([#141](https://github.com/ropensci/opencage/issues/141)).
 * GitHub actions workflows updated ([#142](https://github.com/ropensci/opencage/issues/142)).
+* Use [{lintr} version 3.0](https://www.tidyverse.org/blog/2022/07/lintr-3-0-0/) and add "package development" linters ([#144](https://github.com/ropensci/opencage/pull/144)).
 
 # opencage 0.2.2
 
