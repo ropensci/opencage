@@ -44,3 +44,5 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.0
 RdMacros: lifecycle
 Config/testthat/edition: 3
+Depends: 
+    R (>= 3.4.0)
