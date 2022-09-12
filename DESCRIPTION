@@ -3,25 +3,32 @@ Package: opencage
 Title: Geocode with the OpenCage API
 Version: 0.2.2.9000
 Authors@R: c(
-    person("Daniel", "Possenriede", email = "possenriede+r@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6738-9845")),
-    person("Jesse", "Sadler", role = "aut", comment = c(ORCID = "0000-0001-6081-9681")),
-    person("Maëlle", "Salmon", role = "aut", comment = c(ORCID = "0000-0002-2815-0399")), 
-    person("Noam", "Ross", role = "ctb"), 
-    person("Jake", "Russ", role = "ctb"), 
-    person("Julia", "Silge", role = c("rev"), comment = "Julia Silge reviewed the package for rOpenSci, see <https://github.com/ropensci/onboarding/issues/36>."))
-Description: Geocode with the OpenCage API, either from place name to longitude 
-    and latitude (forward geocoding) or from longitude and latitude to the name 
-    and address of a location (reverse geocoding), see 
-    <https://opencagedata.com>.
+    person("Daniel", "Possenriede", , "possenriede+r@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-6738-9845")),
+    person("Jesse", "Sadler", role = "aut",
+           comment = c(ORCID = "0000-0001-6081-9681")),
+    person("Maëlle", "Salmon", role = "aut",
+           comment = c(ORCID = "0000-0002-2815-0399")),
+    person("Noam", "Ross", role = "ctb"),
+    person("Jake", "Russ", role = "ctb"),
+    person("Julia", "Silge", role = "rev",
+           comment = "Julia Silge reviewed the package for rOpenSci, see <https://github.com/ropensci/onboarding/issues/36>.")
+  )
+Description: Geocode with the OpenCage API, either from place name to
+    longitude and latitude (forward geocoding) or from longitude and
+    latitude to the name and address of a location (reverse geocoding),
+    see <https://opencagedata.com>.
 License: GPL (>= 2)
 URL: https://docs.ropensci.org/opencage/,
     https://github.com/ropensci/opencage
 BugReports: https://github.com/ropensci/opencage/issues
+Depends: 
+    R (>= 3.4.0)
 Imports: 
     crul (>= 0.5.2),
     dplyr (>= 0.7.4),
-    lifecycle, 
     jsonlite (>= 1.5),
+    lifecycle,
     memoise (>= 1.1.0),
     progress (>= 1.1.2),
     purrr (>= 0.2.4),
@@ -36,13 +43,13 @@ Suggests:
     rmarkdown (>= 1.8),
     sf (>= 0.9),
     testthat (>= 3.1.0)
-VignetteBuilder: knitr
+VignetteBuilder: 
+    knitr
+RdMacros: 
+    lifecycle
+Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-GB
 LazyData: TRUE
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.0
-RdMacros: lifecycle
-Config/testthat/edition: 3
-Depends: 
-    R (>= 3.4.0)
