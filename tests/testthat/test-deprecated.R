@@ -1,4 +1,4 @@
-## Test deprecated opencage_forward ##
+# Test deprecated opencage_forward ----------------------------------------
 
 test_that("opencage_forward/opencage_reverse return what they should.", {
   lifecycle::expect_deprecated(
