@@ -4,6 +4,7 @@
 * `NA`s are allowed again for the `placename` or `latitude`/`longitude` arguments (also empty strings for `placename`). 
   These queries are not sent to the API. 
   An empty/`NA` response will be returned depending on the specific query ([#143](https://github.com/ropensci/opencage/issues/143)).
+* `opencage_forward()`, `opencage_reverse()`, and `opencage_key()` are now deprecated (leveling up from soft-deprecated, [#147](https://github.com/ropensci/opencage/pull/147)).
 
 ## Internals
 
