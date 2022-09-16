@@ -11,9 +11,9 @@ opencage_key(quiet = TRUE)
 returned quietly or whether a message is printed.}
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#soft-deprecated}{\figure{lifecycle-soft-deprecated.svg}{options: alt='[Soft-deprecated]'}}}{\strong{[Soft-deprecated]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-Soft-deprecated and will be removed from the package together with
+Deprecated and will be removed from the package together with
 \code{opencage_forward()} and \code{opencage_reverse()}.
 
 Retrieves the OpenCage API Key from the environment variable \code{OPENCAGE_KEY}.
