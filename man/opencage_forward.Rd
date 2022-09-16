@@ -95,9 +95,9 @@ at which the number of remaining calls will be reset.
 }
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#soft-deprecated}{\figure{lifecycle-soft-deprecated.svg}{options: alt='[Soft-deprecated]'}}}{\strong{[Soft-deprecated]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-Soft deprecated: use \code{oc_forward} or \code{oc_forward_df} for forward geocoding.
+Deprecated: use \code{oc_forward} or \code{oc_forward_df} for forward geocoding.
 }
 \examples{
 \dontshow{if (oc_key_present() && oc_api_ok()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
