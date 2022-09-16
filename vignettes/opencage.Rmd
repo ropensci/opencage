@@ -2,7 +2,7 @@
 title: "Introduction to opencage"
 subtitle: "Forward and Reverse Geocoding"
 author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
-date: "2021-02-27"
+date: "2022-09-05"
 description: >
   "Get started with the opencage R package to geocode with the OpenCage API, either from place name to longitude and latitude (forward geocoding) or from longitude and latitude to the name and address of a location (reverse geocoding)."
 output:
@@ -59,7 +59,7 @@ Whatever method you choose, keep your API key secret. OpenCage also features [be
 ### Rate limit
 
 A rate limit is used to control the rate of requests sent, so legitimate requests do not lead to an unintended Denial of Service attack.
-The rate limit allowed by the API depends on the OpenCage plan you have and ranges from 1 request/sec for the "Free Trial" plan to 15 requests/sec for the "Medium" or "Large" plans.
+The rate limit allowed by the API depends on the OpenCage plan you have and ranges from 1 request/sec for the "Free Trial" plan to 40 requests/sec for "Large" plan.
 See [opencagedata.com/pricing](https://opencagedata.com/pricing) for details and up-to-date information.
 
 If you have a "Free Trial" account with OpenCage, you can skip to the next section, because the rate limit is already set correctly for you at 1 request/sec.
@@ -111,7 +111,7 @@ Now you can start to geocode. Forward geocoding is from location name(s) to lati
 
 ```r
 oc_forward_df(placename = "Sarzeau")
-#> # A tibble: 1 x 4
+#> # A tibble: 1 × 4
 #>   placename oc_lat oc_lng oc_formatted         
 #>   <chr>      <dbl>  <dbl> <chr>                
 #> 1 Sarzeau     47.5  -2.76 56370 Sarzeau, France
@@ -124,12 +124,12 @@ Note that behind the scenes the requests are still sent to the API one-by-one.
 ```r
 opera <- c("Palacio de Bellas Artes", "Scala", "Sydney Opera House")
 oc_forward_df(placename = opera)
-#> # A tibble: 3 x 4
-#>   placename               oc_lat oc_lng oc_formatted                                                                     
-#>   <chr>                    <dbl>  <dbl> <chr>                                                                            
-#> 1 Palacio de Bellas Artes   19.4 -99.1  Palacio de Bellas Artes, Avenida Juárez, Centro Urbano, 06050 Mexico City, Mexico
-#> 2 Scala                     45.5   9.19 Teatro alla Scala, Largo Antonio Ghiringhelli, Milan Milan, Italy                
-#> 3 Sydney Opera House       -33.9 151.   Sydney Opera House, 2 Macquarie Street, Sydney NSW 2000, Australia
+#> # A tibble: 3 × 4
+#>   placename               oc_lat oc_lng oc_formatted                                                              
+#>   <chr>                    <dbl>  <dbl> <chr>                                                                     
+#> 1 Palacio de Bellas Artes   19.4  -99.1 Palacio de Bellas Artes, Avenida Juárez, Centro Urbano, 06050, CMX, Mexico
+#> 2 Scala                     40.7   14.6 Scala, Salerno, Italy                                                     
+#> 3 Sydney Opera House       -33.9  151.  Sydney Opera House, 2 Macquarie Street, Sydney NSW 2000, Australia
 ```
 
 By default, `oc_forward_df()` only returns three results columns: `oc_lat` (for latitude), `oc_lon` (for longitude), and  `oc_formatted` (the formatted address).
@@ -140,16 +140,18 @@ Which columns you receive exactly depends on the information OpenCage returns fo
 
 ```r
 oc_forward_df(placename = opera, output = "all")
-#> # A tibble: 3 x 30
-#>   placename  oc_lat oc_lng oc_confidence oc_formatted  oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng oc_iso_3166_1_a~
-#>   <chr>       <dbl>  <dbl>         <int> <chr>                    <dbl>            <dbl>            <dbl>            <dbl> <chr>           
-#> 1 Palacio d~   19.4 -99.1              9 Palacio de B~             19.4           -99.1              19.4           -99.1  MX              
-#> 2 Scala        45.5   9.19             9 Teatro alla ~             45.5             9.19             45.5             9.19 IT              
-#> 3 Sydney Op~  -33.9 151.               9 Sydney Opera~            -33.9           151.              -33.9           151.   AU              
-#> # ... with 20 more variables: oc_iso_3166_1_alpha_3 <chr>, oc_category <chr>, oc_type <chr>, oc_city <chr>, oc_continent <chr>,
-#> #   oc_country <chr>, oc_country_code <chr>, oc_museum <chr>, oc_neighbourhood <chr>, oc_postcode <chr>, oc_road <chr>,
-#> #   oc_attraction <chr>, oc_county <chr>, oc_political_union <chr>, oc_state <chr>, oc_suburb <chr>, oc_arts_centre <chr>,
-#> #   oc_house_number <chr>, oc_municipality <chr>, oc_state_code <chr>
+#> # A tibble: 3 × 31
+#>   placename     oc_lat oc_lng oc_co…¹ oc_fo…² oc_no…³ oc_no…⁴ oc_so…⁵ oc_so…⁶ oc_is…⁷ oc_is…⁸ oc_is…⁹ oc_ca…˟ oc_type oc_co…˟
+#>   <chr>          <dbl>  <dbl>   <int> <chr>     <dbl>   <dbl>   <dbl>   <dbl> <chr>   <chr>   <list>  <chr>   <chr>   <chr>  
+#> 1 Palacio de B…   19.4  -99.1       9 Palaci…    19.4   -99.1    19.4   -99.1 MX      MEX     <chr>   outdoo… museum  North …
+#> 2 Scala           40.7   14.6       7 Scala,…    40.7    14.6    40.6    14.6 IT      ITA     <chr>   place   city    Europe 
+#> 3 Sydney Opera…  -33.9  151.        9 Sydney…   -33.9   151.    -33.9   151.  AU      AUS     <chr>   outdoo… arts_c… Oceania
+#> # … with 16 more variables: oc_country <chr>, oc_country_code <chr>, oc_museum <chr>, oc_neighbourhood <chr>,
+#> #   oc_postcode <chr>, oc_road <chr>, oc_state <chr>, oc_state_code <chr>, oc_city <chr>, oc_county <chr>,
+#> #   oc_county_code <chr>, oc_political_union <chr>, oc_arts_centre <chr>, oc_house_number <chr>, oc_municipality <chr>,
+#> #   oc_suburb <chr>, and abbreviated variable names ¹​oc_confidence, ²​oc_formatted, ³​oc_northeast_lat, ⁴​oc_northeast_lng,
+#> #   ⁵​oc_southwest_lat, ⁶​oc_southwest_lng, ⁷​oc_iso_3166_1_alpha_2, ⁸​oc_iso_3166_1_alpha_3, ⁹​oc_iso_3166_2, ˟​oc_category,
+#> #   ˟​oc_continent
 ```
 
 You can also pass a data frame to `oc_forward_df()`.
@@ -161,12 +163,12 @@ If you want a data frame with only the geocoding results, set `bind_cols = FALSE
 concert_df <-
   data.frame(location = c("Elbphilharmonie", "Concertgebouw", "Suntory Hall"))
 oc_forward_df(data = concert_df, placename = location)
-#> # A tibble: 3 x 4
+#> # A tibble: 3 × 4
 #>   location        oc_lat oc_lng oc_formatted                                                                 
 #>   <chr>            <dbl>  <dbl> <chr>                                                                        
 #> 1 Elbphilharmonie   53.5   9.98 Elbe Philharmonic Hall, Platz der Deutschen Einheit 1, 20457 Hamburg, Germany
 #> 2 Concertgebouw     52.4   4.88 Concertgebouw, Concertgebouwplein 2, 1071 LN Amsterdam, Netherlands          
-#> 3 Suntory Hall      35.7 140.   Suntory Hall, Karayan Plaza, Azabu, Minato, Japan
+#> 3 Suntory Hall      35.7 140.   Suntory Hall, Karayan Plaza, Azabu, Minato, 107-6090, Japan
 ```
 
 You can use it in a piped workflow as well.
@@ -175,12 +177,12 @@ You can use it in a piped workflow as well.
 ```r
 library(dplyr, warn.conflicts = FALSE)
 concert_df %>% oc_forward_df(location)
-#> # A tibble: 3 x 4
+#> # A tibble: 3 × 4
 #>   location        oc_lat oc_lng oc_formatted                                                                 
 #>   <chr>            <dbl>  <dbl> <chr>                                                                        
 #> 1 Elbphilharmonie   53.5   9.98 Elbe Philharmonic Hall, Platz der Deutschen Einheit 1, 20457 Hamburg, Germany
 #> 2 Concertgebouw     52.4   4.88 Concertgebouw, Concertgebouwplein 2, 1071 LN Amsterdam, Netherlands          
-#> 3 Suntory Hall      35.7 140.   Suntory Hall, Karayan Plaza, Azabu, Minato, Japan
+#> 3 Suntory Hall      35.7 140.   Suntory Hall, Karayan Plaza, Azabu, Minato, 107-6090, Japan
 ```
 
 ## Reverse geocoding
@@ -190,10 +192,10 @@ Reverse geocoding works in the opposite direction of forward geocoding: from a p
 
 ```r
 oc_reverse_df(latitude = 51.5034070, longitude = -0.1275920)
-#> # A tibble: 1 x 3
-#>   latitude longitude oc_formatted                                                                            
-#>      <dbl>     <dbl> <chr>                                                                                   
-#> 1     51.5    -0.128 Prime Minister’s Office, Westminster, 10 Downing Street, London SW1A 2AA, United Kingdom
+#> # A tibble: 1 × 3
+#>   latitude longitude oc_formatted                                       
+#>      <dbl>     <dbl> <chr>                                              
+#> 1     51.5    -0.128 10 Downing Street, London, SW1A 2AA, United Kingdom
 ```
 
 Note that all coordinates sent to the OpenCage API must adhere to the [WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System) (also known as [EPSG:4326](https://epsg.io/4326)) [coordinate reference system](https://en.wikipedia.org/wiki/Spatial_reference_system) in decimal format.
@@ -216,11 +218,11 @@ To minimize the number of requests sent to the API {opencage} uses {[memoise](ht
 ```r
 system.time(oc_reverse(latitude = 10, longitude = 10))
 #>    user  system elapsed 
-#>    0.00    0.00    0.86
+#>    0.00    0.00    0.96
 
 system.time(oc_reverse(latitude = 10, longitude = 10))
 #>    user  system elapsed 
-#>    0.01    0.00    0.01
+#>    0.01    0.00    0.02
 ```
 
 To clear the cache of all results either start a new R session or call `oc_clear_cache()`.
@@ -232,7 +234,7 @@ oc_clear_cache()
 
 system.time(oc_reverse(latitude = 10, longitude = 10))
 #>    user  system elapsed 
-#>    0.03    0.00    0.63
+#>    0.01    0.00    0.91
 ```
 
 As you probably know, cache invalidation is one of the harder things to do in computer science.
