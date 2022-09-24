@@ -177,8 +177,7 @@ opencage_format <- function(lst) {
     if ("request" %in% names(lst)) {
       results$query <- as.character(lst$request$query)
     }
-  }
-  else {
+  } else {
     results <- NULL
   }
 
