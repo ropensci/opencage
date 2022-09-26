@@ -18,3 +18,4 @@ datamanagement.R
 ^revdep$
 ^CRAN-RELEASE$
 ^data-raw$
+^CITATION\.cff$
