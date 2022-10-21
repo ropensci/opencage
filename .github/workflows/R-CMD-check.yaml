@@ -19,7 +19,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS-latest,   r: 'release',  oc_auth: OPENCAGE_KEY}
+          - {os: macos-latest,   r: 'release',  oc_auth: OPENCAGE_KEY}
           - {os: windows-latest, r: 'release',  oc_auth: OPENCAGE_NOKEY}
           - {os: ubuntu-latest,  r: 'devel',    oc_auth: OPENCAGE_NOKEY, http-user-agent: 'release'}
           - {os: ubuntu-latest,  r: 'release',  oc_auth: OPENCAGE_NOKEY}
@@ -30,7 +30,7 @@ jobs:
       R_KEEP_PKG_SOURCE: yes
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: r-lib/actions/setup-pandoc@v2
 
