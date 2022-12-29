@@ -13,6 +13,7 @@
 * Use [{lintr} version 3.0](https://www.tidyverse.org/blog/2022/07/lintr-3-0-0/) and add "package development" linters ([#144](https://github.com/ropensci/opencage/pull/144)).
 * `countrycodes` source and script were moved to `data-raw` ([#146](https://github.com/ropensci/opencage/pull/146)).
 * Add CITATION.cff and a corresponding GitHub action ([#148](https://github.com/ropensci/opencage/pull/148)).
+* Select expressions inside `oc_forward_df()` and `oc_reverse_df()` now use `"column"` instead of `.data$column`, because the latter is [deprecated as of tidyselect v1.2.0](https://tidyselect.r-lib.org/news/index.html#tidyselect-120)  [#150](https://github.com/ropensci/opencage/pull/150).
 
 # opencage 0.2.2
 
