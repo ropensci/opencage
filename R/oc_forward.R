@@ -61,6 +61,9 @@
 #' @param abbrv Logical vector (default `FALSE`), when `TRUE` addresses in the
 #'   `formatted` field of the results are abbreviated (e.g. "Main St." instead
 #'   of "Main Street").
+#' @param address_only Logical vector (default `FALSE`), when `TRUE` only the
+#'   address details are returned in the `formatted` field of the results, not
+#'   the name of a point-of-interest should there be one at this address.
 #' @param add_request Logical vector (default `FALSE`) indicating whether the
 #'   request is returned again with the results. If the `return` value is a
 #'   `df_list`, the query text is added as a column to the results. `json_list`
@@ -139,6 +142,7 @@ oc_forward <-
            roadinfo = FALSE,
            no_dedupe = FALSE,
            abbrv = FALSE,
+           address_only = FALSE,
            add_request = FALSE,
            ...) {
 
@@ -163,6 +167,7 @@ oc_forward <-
       roadinfo = roadinfo,
       no_dedupe = no_dedupe,
       abbrv = abbrv,
+      address_only = address_only,
       add_request = add_request
     )
     # process request
@@ -179,6 +184,7 @@ oc_forward <-
       roadinfo = roadinfo,
       no_dedupe = no_dedupe,
       abbrv = abbrv,
+      address_only = address_only,
       add_request = add_request
     )
   }
@@ -256,6 +262,10 @@ oc_forward <-
 #' @param abbrv Logical vector, or an unquoted variable name of such a vector.
 #'   Default is `FALSE`. When `TRUE` addresses in the `oc_formatted` variable of
 #'   the results are abbreviated (e.g. "Main St." instead of "Main Street").
+#' @param address_only Logical vector, or an unquoted variable name of such a
+#'   vector. Default is `FALSE`. When `TRUE` only the address details are
+#'   returned in the `oc_formatted` variable of the results, not the name of a
+#'   point-of-interest should there be one at this address.
 #' @param ... Ignored.
 #'
 #' @return A tibble. Column names coming from the OpenCage API are prefixed with
@@ -348,6 +358,7 @@ oc_forward_df.data.frame <-
            roadinfo = FALSE,
            no_dedupe = FALSE,
            abbrv = FALSE,
+           address_only = FALSE,
            ...) {
 
     # Tidyeval to enable input from data frame columns
@@ -362,6 +373,7 @@ oc_forward_df.data.frame <-
     roadinfo       <- rlang::enquo(roadinfo)
     no_dedupe      <- rlang::enquo(no_dedupe)
     abbrv          <- rlang::enquo(abbrv)
+    address_only   <- rlang::enquo(address_only)
 
     # check a placename is provided
     if (rlang::quo_is_missing(placename) || rlang::quo_is_null(placename)) {
@@ -394,6 +406,7 @@ oc_forward_df.data.frame <-
         roadinfo = rlang::eval_tidy(roadinfo, data = data),
         no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
         abbrv = rlang::eval_tidy(abbrv, data = data),
+        address_only = rlang::eval_tidy(address_only, data = data),
         add_request = add_request
       )
       results <- dplyr::bind_rows(results_list)
@@ -434,6 +447,7 @@ oc_forward_df.data.frame <-
               roadinfo = !!roadinfo,
               no_dedupe = !!no_dedupe,
               abbrv = !!abbrv,
+              address_only = !!address_only,
               add_request = add_request
             )
         )
@@ -487,6 +501,7 @@ oc_forward_df.character <-
            roadinfo = FALSE,
            no_dedupe = FALSE,
            abbrv = FALSE,
+           address_only = FALSE,
            ...) {
     xdf <- tibble::tibble(placename = placename)
     oc_forward_df(
@@ -503,6 +518,7 @@ oc_forward_df.character <-
       no_annotations = no_annotations,
       roadinfo = roadinfo,
       no_dedupe = no_dedupe,
-      abbrv = abbrv
+      abbrv = abbrv,
+      address_only = address_only
     )
   }

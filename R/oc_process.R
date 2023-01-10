@@ -37,6 +37,7 @@ oc_process <-
     roadinfo = FALSE,
     no_dedupe = FALSE,
     abbrv = FALSE,
+    address_only = FALSE,
     add_request = FALSE
   ) {
 
@@ -73,6 +74,7 @@ oc_process <-
           roadinfo = roadinfo,
           no_dedupe = no_dedupe,
           abbrv = abbrv,
+          address_only = address_only,
           add_request = add_request
         )
       )
@@ -104,6 +106,7 @@ oc_process <-
            no_dedupe = NULL,
            no_record = NULL,
            abbrv = NULL,
+           address_only = NULL,
            add_request = NULL,
            pb = NULL) {
 
@@ -145,6 +148,7 @@ oc_process <-
         no_dedupe = as.integer(no_dedupe),
         no_record = as.integer(no_record),
         abbrv = as.integer(abbrv),
+        address_only = as.integer(address_only),
         add_request = as.integer(add_request),
         key = key
       ),

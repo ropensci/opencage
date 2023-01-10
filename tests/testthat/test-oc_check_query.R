@@ -208,6 +208,16 @@ test_that("oc_check_query checks abbrv", {
   )
 })
 
+test_that("oc_check_query checks address_only", {
+  expect_error(
+    oc_check_query(
+      placename = "Sarzeau",
+      address_only = "yes"
+    ),
+    "`address_only` must be a logical vector."
+  )
+})
+
 test_that("oc_check_query checks add_request", {
   expect_error(
     oc_check_query(

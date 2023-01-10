@@ -231,6 +231,7 @@ test_that("oc_process handles various other arguments.", {
     roadinfo = FALSE,
     no_dedupe = FALSE,
     abbrv = FALSE,
+    address_only = FALSE,
     add_request = FALSE
   )
   expect_match(res1[[1]], "&limit=1", fixed = TRUE)
@@ -239,6 +240,7 @@ test_that("oc_process handles various other arguments.", {
   expect_match(res1[[1]], "&roadinfo=0", fixed = TRUE)
   expect_match(res1[[1]], "&no_dedupe=0", fixed = TRUE)
   expect_match(res1[[1]], "&abbrv=0", fixed = TRUE)
+  expect_match(res1[[1]], "&address_only=0", fixed = TRUE)
   expect_match(res1[[1]], "&add_request=0", fixed = TRUE)
 
   res2 <- oc_process(
@@ -250,6 +252,7 @@ test_that("oc_process handles various other arguments.", {
     roadinfo = TRUE,
     no_dedupe = TRUE,
     abbrv = TRUE,
+    address_only = TRUE,
     add_request = TRUE
   )
   expect_match(res2[[1]], "&limit=10", fixed = TRUE)
@@ -258,6 +261,7 @@ test_that("oc_process handles various other arguments.", {
   expect_match(res2[[1]], "&roadinfo=1", fixed = TRUE)
   expect_match(res2[[1]], "&no_dedupe=1", fixed = TRUE)
   expect_match(res2[[1]], "&abbrv=1", fixed = TRUE)
+  expect_match(res2[[1]], "&address_only=1", fixed = TRUE)
   expect_match(res2[[1]], "&add_request=1", fixed = TRUE)
 
   res3 <- oc_process(
@@ -269,6 +273,7 @@ test_that("oc_process handles various other arguments.", {
     roadinfo = c(TRUE, FALSE),
     no_dedupe = c(TRUE, FALSE),
     abbrv = c(TRUE, FALSE),
+    address_only = c(TRUE, FALSE),
     add_request = c(TRUE, FALSE)
   )
   expect_match(res3[[1]], "&limit=10", fixed = TRUE)
@@ -283,6 +288,8 @@ test_that("oc_process handles various other arguments.", {
   expect_match(res3[[2]], "&no_dedupe=0", fixed = TRUE)
   expect_match(res3[[1]], "&abbrv=1", fixed = TRUE)
   expect_match(res3[[2]], "&abbrv=0", fixed = TRUE)
+  expect_match(res3[[1]], "&address_only=1", fixed = TRUE)
+  expect_match(res3[[2]], "&address_only=0", fixed = TRUE)
   expect_match(res3[[1]], "&add_request=1", fixed = TRUE)
   expect_match(res3[[2]], "&add_request=0", fixed = TRUE)
 })
@@ -302,6 +309,7 @@ test_that("arguments that are NULL or NA don't show up in url.", {
     no_annotations = NULL,
     no_dedupe = NULL,
     abbrv = NULL,
+    address_only = NULL,
     add_request = NULL
   )
   expect_match(res_null[[1]], "q=&", perl = TRUE) # contains 'q=' but no query
@@ -315,6 +323,7 @@ test_that("arguments that are NULL or NA don't show up in url.", {
   expect_match(res_null[[1]], "^((?!roadinfo=).)*$", perl = TRUE)
   expect_match(res_null[[1]], "^((?!no_dedupe=).)*$", perl = TRUE)
   expect_match(res_null[[1]], "^((?!abbrv=).)*$", perl = TRUE)
+  expect_match(res_null[[1]], "^((?!address_only=).)*$", perl = TRUE)
   expect_match(res_null[[1]], "^((?!add_request=).)*$", perl = TRUE)
 
   res_na <- oc_process(
@@ -330,6 +339,7 @@ test_that("arguments that are NULL or NA don't show up in url.", {
     roadinfo = NA,
     no_dedupe = NA,
     abbrv = NA,
+    address_only = NA,
     add_request = NA
   )
   expect_match(res_na[[1]], "^((?!q=).)*$", perl = TRUE)
@@ -343,5 +353,6 @@ test_that("arguments that are NULL or NA don't show up in url.", {
   expect_match(res_na[[1]], "^((?!roadinfo=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!no_dedupe=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!abbrv=).)*$", perl = TRUE)
+  expect_match(res_na[[1]], "^((?!address_only=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!add_request=).)*$", perl = TRUE)
 })

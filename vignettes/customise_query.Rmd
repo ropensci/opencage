@@ -2,7 +2,7 @@
 title: "Customise your query"
 subtitle: "Get more and better results from OpenCage"
 author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
-date: "2021-02-18"
+date: "2023-01-10"
 description: >
   "The OpenCage API supports about a dozen parameters to customise a query and here we will explain how to use them."
 output:
@@ -33,7 +33,7 @@ Integer values between 1 and 100 are allowed.
 
 ```r
 oc_forward_df("Berlin")
-#> # A tibble: 1 x 4
+#> # A tibble: 1 × 4
 #>   placename oc_lat oc_lng oc_formatted   
 #>   <chr>      <dbl>  <dbl> <chr>          
 #> 1 Berlin      52.5   13.4 Berlin, Germany
@@ -41,13 +41,14 @@ oc_forward_df("Berlin")
 
 ```r
 oc_forward_df("Berlin", limit = 5)
-#> # A tibble: 4 x 4
+#> # A tibble: 5 × 4
 #>   placename oc_lat oc_lng oc_formatted                                               
 #>   <chr>      <dbl>  <dbl> <chr>                                                      
 #> 1 Berlin      52.5   13.4 Berlin, Germany                                            
-#> 2 Berlin      44.5  -71.2 Berlin, New Hampshire, United States of America            
-#> 3 Berlin      39.8  -89.9 Berlin, Sangamon County, Illinois, United States of America
-#> 4 Berlin      41.6  -72.7 Berlin, Connecticut, United States of America
+#> 2 Berlin      44.5  -71.2 Berlin, NH 03570, United States of America                 
+#> 3 Berlin      52.5   13.4 Berlin Ostbahnhof, Mitteltunnel, 10243 Berlin, Germany     
+#> 4 Berlin      39.8  -89.9 Berlin, Sangamon County, Illinois, United States of America
+#> 5 Berlin      41.6  -72.7 Berlin, Connecticut, United States of America
 ```
 
 
@@ -61,12 +62,12 @@ If you set the `no_dedupe` argument to `TRUE`, you will receive duplicated resul
 
 ```r
 oc_forward_df("Berlin", limit = 5, no_dedupe = TRUE)
-#> # A tibble: 5 x 4
+#> # A tibble: 5 × 4
 #>   placename oc_lat oc_lng oc_formatted                                               
 #>   <chr>      <dbl>  <dbl> <chr>                                                      
 #> 1 Berlin      52.5   13.4 Berlin, Germany                                            
-#> 2 Berlin      52.5   13.4 Berlin, Germany                                            
-#> 3 Berlin      44.5  -71.2 Berlin, New Hampshire, United States of America            
+#> 2 Berlin      44.5  -71.2 Berlin, NH 03570, United States of America                 
+#> 3 Berlin      52.5   13.4 Berlin Ostbahnhof, Mitteltunnel, 10243 Berlin, Germany     
 #> 4 Berlin      39.8  -89.9 Berlin, Sangamon County, Illinois, United States of America
 #> 5 Berlin      41.6  -72.7 Berlin, Connecticut, United States of America
 ```
@@ -88,14 +89,14 @@ E.g. "AR" for Argentina, "FR" for France, and "NZ" for the New Zealand.
 
 ```r
 oc_forward_df(placename = "Paris", countrycode = "US", limit = 5)
-#> # A tibble: 5 x 4
-#>   placename oc_lat oc_lng oc_formatted                                         
-#>   <chr>      <dbl>  <dbl> <chr>                                                
-#> 1 Paris       33.7  -95.6 Paris, TX 75460, United States of America            
-#> 2 Paris       38.2  -84.3 Paris, Kentucky, United States of America            
-#> 3 Paris       36.3  -88.3 Paris, TN 38242, United States of America            
-#> 4 Paris       39.6  -87.7 Paris, IL 61944, United States of America            
-#> 5 Paris       44.3  -70.5 Paris, Oxford County, Maine, United States of America
+#> # A tibble: 5 × 4
+#>   placename oc_lat oc_lng oc_formatted                              
+#>   <chr>      <dbl>  <dbl> <chr>                                     
+#> 1 Paris       33.7  -95.6 Paris, Texas, United States of America    
+#> 2 Paris       38.2  -84.3 Paris, KY 40361, United States of America 
+#> 3 Paris       36.3  -88.3 Paris, Tennessee, United States of America
+#> 4 Paris       39.6  -87.7 Paris, IL 61944, United States of America 
+#> 5 Paris       44.3  -70.5 Paris, 04281, United States of America
 ```
 Multiple countrycodes per `placename` must be wrapped in a list.
 Here is an example with places called "Paris" in Italy and Portugal.
@@ -103,14 +104,14 @@ Here is an example with places called "Paris" in Italy and Portugal.
 
 ```r
 oc_forward_df(placename = "Paris", countrycode = list(c("IT", "PT")), limit = 5)
-#> # A tibble: 5 x 4
-#>   placename oc_lat oc_lng oc_formatted                                                           
-#>   <chr>      <dbl>  <dbl> <chr>                                                                  
-#> 1 Paris       44.6   7.28 Brossasco, Cuneo, Italy                                                
-#> 2 Paris       46.5  10.4  23032 Valfurva, Italy                                                  
-#> 3 Paris       37.4  -8.79 8670-320 Odemira, Portugal                                             
-#> 4 Paris       43.5  12.1  Paris, Monterchi, Arezzo, Italy                                        
-#> 5 Paris       46.5  11.3  Paris, Via Firenze - Florenzstraße, 56, 39100 Bolzano - Bozen BZ, Italy
+#> # A tibble: 5 × 4
+#>   placename oc_lat oc_lng oc_formatted                                   
+#>   <chr>      <dbl>  <dbl> <chr>                                          
+#> 1 Paris       44.6   7.28 Brossasco, Cuneo, Italy                        
+#> 2 Paris       46.5  10.4  23030 Valfurva SO, Italy                       
+#> 3 Paris       37.4  -8.79 8670-320 São Teotónio, Portugal                
+#> 4 Paris       43.5  12.1  Paris, 52035 Monterchi AR, Italy               
+#> 5 Paris       43.8  11.3  Paris, Via dei Banchi, 50123 Florence FI, Italy
 ```
 
 Despite the name, country codes also exist for territories that are not independent states, e.g. Gibraltar ("GI"), Greenland ("GL"), Guadaloupe ("GP"), or Guam ("GU").
@@ -119,7 +120,7 @@ You can look up specific country codes with the {[ISOcodes](https://cran.r-proje
 
 ```r
 oc_forward_df("Curaçao", no_annotations = FALSE)["oc_iso_3166_1_alpha_2"]
-#> # A tibble: 1 x 1
+#> # A tibble: 1 × 1
 #>   oc_iso_3166_1_alpha_2
 #>   <chr>                
 #> 1 CW
@@ -137,22 +138,22 @@ Below is an example of the use of `bounds` where the bounding box specifies the 
 
 ```r
 oc_forward_df(placename = "Paris", bounds = oc_bbox(-97, -56, -32, 12), limit = 5)
-#> # A tibble: 5 x 4
-#>   placename oc_lat oc_lng oc_formatted                                                          
-#>   <chr>      <dbl>  <dbl> <chr>                                                                 
-#> 1 Paris      -6.71  -69.9 Eirunepé, Região Geográfica Intermediária de Tefé, Brazil             
-#> 2 Paris      -3.99  -79.2 110108, Loja, Ecuador                                                 
-#> 3 Paris     -13.5   -62.5 Canton Motegua, Municipio Baures, Provincia de Iténez, Bolivia        
-#> 4 Paris     -23.5   -47.5 Jardim Zezo Miguel, Sorocaba, Região Metropolitana de Sorocaba, Brazil
-#> 5 Paris       6.31  -75.6 París, 051052 Bello, ANT, Colombia
+#> # A tibble: 5 × 4
+#>   placename oc_lat oc_lng oc_formatted                                                  
+#>   <chr>      <dbl>  <dbl> <chr>                                                         
+#> 1 Paris       8.05  -80.6 Paris, Distrito Parita, Panama                                
+#> 2 Paris      -6.71  -69.9 Eirunepé, Região Geográfica Intermediária de Tefé, Brazil     
+#> 3 Paris      -3.99  -79.2 110105, Loja, Ecuador                                         
+#> 4 Paris     -13.5   -62.5 Canton Motegua, Municipio Baures, Provincia de Iténez, Bolivia
+#> 5 Paris     -23.5   -47.5 Paris, Jardim Santa Fé, Sorocaba - SP, Brazil
 ```
 
 Again, you can also use {opencage} to determine a bounding box for subsequent queries.
-If you wanted to map the airports on the Hawaiian islands, for example, you could find the appropriate bounding box and then search for the airports:
+If you wanted to see how many Plaça d'Espanya there are on the Balearic Islands, for example, you could find the appropriate bounding box and then search for the squares:
 
 
 ```r
-hi <- oc_forward_df(placename = "Hawaii", no_annotations = FALSE)
+hi <- oc_forward_df(placename = "Balearic Islands", no_annotations = FALSE)
 
 hi_bbox <-
   oc_bbox(
@@ -162,23 +163,30 @@ hi_bbox <-
     hi$oc_northeast_lat
   )
 
-oc_forward_df(placename = "Airport", bounds = hi_bbox, limit = 10)
-#> # A tibble: 10 x 4
-#>    placename oc_lat oc_lng oc_formatted                                                                                                    
-#>    <chr>      <dbl>  <dbl> <chr>                                                                                                           
-#>  1 Airport     21.3  -158. Daniel K. Inouye International Airport, Aolele Street, Honolulu, HI 96820, United States of America             
-#>  2 Airport     19.7  -156. Ellison Onizuka Kona International Airport at Keahole, Queen Kaahumanu Highway, Keahole, HI, United States of A~
-#>  3 Airport     20.9  -156. Kahului Airport, Airport Access Road, Kahului, HI 96732-3509, United States of America                          
-#>  4 Airport     19.7  -155. Hilo International Airport, Banyan Drive, Hilo, HI 96720, United States of America                              
-#>  5 Airport     21.4  -158. Kaneohe Bay Marine Corp Air Station/Mokapu Point Airport, 6th Street, Honolulu County, HI 96863, United States ~
-#>  6 Airport     19.6  -156. Old Kona Airport State Recreation Area, Laniakea, Kailua-Kona, Hawaii, United States of America                 
-#>  7 Airport     21.2  -157. Molokai Airport, Mauna Loa Highway, Maui County, HI 96729, United States of America                             
-#>  8 Airport     20.8  -157. Lanai Airport, Lanai Airport Road, Maui County, HI 96763, United States of America                              
-#>  9 Airport     21.3  -158. Kalaeloa Airport, Midway Street, Kapolei, HI 96862, United States of America                                    
-#> 10 Airport     21.0  -157. Kapalua-West Maui Airport, Honoapiilani Highway, Lahaina, HI 96761, United States of America
+oc_forward_df(placename = "Plaça d'Espanya", bounds = hi_bbox, limit = 20)
+#> # A tibble: 16 × 4
+#>    placename       oc_lat oc_lng oc_formatted                                                   
+#>    <chr>            <dbl>  <dbl> <chr>                                                          
+#>  1 Plaça d'Espanya   39.6   2.65 Plaça d'Espanya, Carrer d'Eusebi Estada, 07005 Palma, Spain    
+#>  2 Plaça d'Espanya   39.6   2.65 Plaça d'Espanya, Canavall, Palma, Balearic Islands, Spain      
+#>  3 Plaça d'Espanya   39.0   1.53 Plaça d'Espanya, Santa Eulària des Riu, Balearic Islands, Spain
+#>  4 Plaça d'Espanya   39.0   1.30 Plaça d'Espanya, 07820 Sant Antoni de Portmany, Spain          
+#>  5 Plaça d'Espanya   39.9   4.27 Plaça d'Espanya, Maó, Spain                                    
+#>  6 Plaça d'Espanya   39.5   3.15 Plaça d'Espanya, 07200 Felanich, Spain                         
+#>  7 Plaça d'Espanya   39.0   1.53 Plaça d'Espanya, 07840 Santa Eulària des Riu, Spain            
+#>  8 Plaça d'Espanya   39.6   2.65 Plaça d'Espanya, 07002 Palma, Spain                            
+#>  9 Plaça d'Espanya   39.9   4.27 Plaça d'Espanya, 07701 Maó, Spain                              
+#> 10 Plaça d'Espanya   38.9   1.44 Plaça d'Espanya, Ibiza, Spain                                  
+#> 11 Plaça d'Espanya   39.8   2.72 Plaça d'Espanya, Sóller, Spain                                 
+#> 12 Plaça d'Espanya   39.7   2.91 Plaça d'Espanya, Inca, Spain                                   
+#> 13 Plaça d'Espanya   39.6   2.42 plaça d'Espanya, Andratx, Spain                                
+#> 14 Plaça d'Espanya   39.6   2.75 Plaça d'Espanya, Marratxí, Spain                               
+#> 15 Plaça d'Espanya   39.6   2.90 Plaça d'Espanya, 07140 Sencelles, Spain                        
+#> 16 Plaça d'Espanya   39.8   2.74 Plaça d'Espanya, Fornalutx, Spain
 ```
 
-Note that such a query will only give you airports with "Airport" in their name or address, but not necessarily airfields, airstrips, etc. If you are more interested in these kind of features, you might want to take a look at the {[osmdata](https://docs.ropensci.org/osmdata/)} package.
+Note that OpenCage does not support point-of-interest or feature search, like "show me all bus stops in this area". 
+If you are more interested in these kind of features, you might want to take a look at the {[osmdata](https://docs.ropensci.org/osmdata/)} package.
 
 ### `proximity`
 
@@ -196,13 +204,14 @@ lx <- oc_forward_df("Lexington, Kentucky")
 lx_point <- oc_points(lx$oc_lat, lx$oc_lng)
 
 oc_forward_df(placename = "Paris", proximity = lx_point, limit = 5)
-#> # A tibble: 4 x 4
-#>   placename oc_lat oc_lng oc_formatted                             
-#>   <chr>      <dbl>  <dbl> <chr>                                    
-#> 1 Paris       38.2 -84.3  Paris, Kentucky, United States of America
-#> 2 Paris       48.9   2.35 Paris, France                            
-#> 3 Paris       39.6 -87.7  Paris, IL 61944, United States of America
-#> 4 Paris       38.8 -85.6  Paris, IN 47230, United States of America
+#> # A tibble: 5 × 4
+#>   placename oc_lat oc_lng oc_formatted                                              
+#>   <chr>      <dbl>  <dbl> <chr>                                                     
+#> 1 Paris       38.2 -84.3  Paris, KY 40361, United States of America                 
+#> 2 Paris       48.9   2.32 Paris, Ile-de-France, France                              
+#> 3 Paris       39.6 -87.7  Paris, IL 61944, United States of America                 
+#> 4 Paris       38.8 -85.6  Paris, Jennings County, IN 47230, United States of America
+#> 5 Paris       33.7 -95.6  Paris, Texas, United States of America
 ```
 Note that the French capital is listed before other places in the US, which are closer to the point provided.
 This illustrates how `proximity` is only one of many factors influencing the ranking of results.
@@ -216,10 +225,14 @@ Thus, in the following example, the French capital is too large to be returned.
 
 ```r
 oc_forward_df(placename = "Paris", min_confidence = 7, limit = 5)
-#> # A tibble: 1 x 4
-#>   placename oc_lat oc_lng oc_formatted                             
-#>   <chr>      <dbl>  <dbl> <chr>                                    
-#> 1 Paris       38.2  -84.3 Paris, Kentucky, United States of America
+#> # A tibble: 5 × 4
+#>   placename oc_lat oc_lng oc_formatted                                            
+#>   <chr>      <dbl>  <dbl> <chr>                                                   
+#> 1 Paris       38.2  -84.3 Paris, KY 40361, United States of America               
+#> 2 Paris       36.3  -88.3 Paris, Tennessee, United States of America              
+#> 3 Paris       39.6  -87.7 Paris, IL 61944, United States of America               
+#> 4 Paris       35.3  -93.7 Paris, Logan County, AR 72855, United States of America 
+#> 5 Paris       43.0  -75.3 Paris, Oneida County, New York, United States of America
 ```
 
 Note that confidence is not used for the [ranking of results](https://opencagedata.com/api#ranking).
@@ -238,7 +251,7 @@ OpenCage will attempt to return results in that language.
 
 ```r
 oc_forward_df(placename = "Munich", language = "tr")
-#> # A tibble: 1 x 4
+#> # A tibble: 1 × 4
 #>   placename oc_lat oc_lng oc_formatted           
 #>   <chr>      <dbl>  <dbl> <chr>                  
 #> 1 Munich      48.1   11.6 Münih, Bavyera, Almanya
@@ -250,7 +263,7 @@ Keep in mind, however, that some countries have more than one official language 
 
 ```r
 oc_forward_df(placename = "Munich", language = "native")
-#> # A tibble: 1 x 4
+#> # A tibble: 1 × 4
 #>   placename oc_lat oc_lng oc_formatted                
 #>   <chr>      <dbl>  <dbl> <chr>                       
 #> 1 Munich      48.1   11.6 München, Bayern, Deutschland
@@ -261,7 +274,7 @@ If the `language` parameter is set to `NULL` (which is the default), the tag is 
 
 ```r
 oc_forward_df(placename = "München")
-#> # A tibble: 1 x 4
+#> # A tibble: 1 × 4
 #>   placename oc_lat oc_lng oc_formatted            
 #>   <chr>      <dbl>  <dbl> <chr>                   
 #> 1 München     48.1   11.6 Munich, Bavaria, Germany
@@ -285,28 +298,22 @@ Whether the annotations are shown, is controlled by the `no_annotations` argumen
 It is `TRUE` by default, which means that the output will _not_ contain annotations.
 (Yes, inverted argument names are confusing, but we just follow OpenCage's lead here.)
 When you set `no_annotations` to `FALSE`, all columns are returned (i.e. `output` is implicitly set to `"all"`).
-This leads to a results with a lot of columns.
+This leads to a result with a lot of columns.
 
 
 ```r
 oc_forward_df("Dublin", no_annotations = FALSE)
-#> # A tibble: 1 x 71
-#>   placename oc_lat oc_lng oc_confidence oc_formatted oc_mgrs oc_maidenhead oc_callingcode oc_flag oc_geohash oc_qibla oc_wikidata
-#>   <chr>      <dbl>  <dbl>         <int> <chr>        <chr>   <chr>                  <int> <chr>   <chr>         <dbl> <chr>      
-#> 1 Dublin      53.3  -6.26             5 Dublin, Ire~ 29UPV8~ IO63ui83sw               353 "\U000~ gc7x9812v~     114. Q1761      
-#> # ... with 59 more variables: oc_dms_lat <chr>, oc_dms_lng <chr>, oc_itm_easting <chr>, oc_itm_northing <chr>, oc_mercator_x <dbl>,
-#> #   oc_mercator_y <dbl>, oc_osm_edit_url <chr>, oc_osm_note_url <chr>, oc_osm_url <chr>, oc_un_m49_statistical_groupings <list>,
-#> #   oc_un_m49_regions_europe <chr>, oc_un_m49_regions_ie <chr>, oc_un_m49_regions_northern_europe <chr>, oc_un_m49_regions_world <chr>,
-#> #   oc_currency_alternate_symbols <list>, oc_currency_decimal_mark <chr>, oc_currency_html_entity <chr>, oc_currency_iso_code <chr>,
-#> #   oc_currency_iso_numeric <chr>, oc_currency_name <chr>, oc_currency_smallest_denomination <int>, oc_currency_subunit <chr>,
-#> #   oc_currency_subunit_to_unit <int>, oc_currency_symbol <chr>, oc_currency_symbol_first <int>, oc_currency_thousands_separator <chr>,
-#> #   oc_roadinfo_drive_on <chr>, oc_roadinfo_speed_in <chr>, oc_sun_rise_apparent <int>, oc_sun_rise_astronomical <int>,
-#> #   oc_sun_rise_civil <int>, oc_sun_rise_nautical <int>, oc_sun_set_apparent <int>, oc_sun_set_astronomical <int>, oc_sun_set_civil <int>,
-#> #   oc_sun_set_nautical <int>, oc_timezone_name <chr>, oc_timezone_now_in_dst <int>, oc_timezone_offset_sec <int>,
-#> #   oc_timezone_offset_string <chr>, oc_timezone_short_name <chr>, oc_what3words_words <chr>, oc_northeast_lat <dbl>,
-#> #   oc_northeast_lng <dbl>, oc_southwest_lat <dbl>, oc_southwest_lng <dbl>, oc_iso_3166_1_alpha_2 <chr>, oc_iso_3166_1_alpha_3 <chr>,
-#> #   oc_category <chr>, oc_type <chr>, oc_city <chr>, oc_continent <chr>, oc_country <chr>, oc_country_code <chr>, oc_county <chr>,
-#> #   oc_county_code <chr>, oc_political_union <chr>, oc_state <chr>, oc_state_code <chr>
+#> # A tibble: 1 × 70
+#>   placen…¹ oc_lat oc_lng oc_co…² oc_fo…³ oc_mgrs oc_ma…⁴ oc_ca…⁵ oc_flag oc_ge…⁶ oc_qi…⁷ oc_wi…⁸ oc_dm…⁹ oc_dm…˟ oc_it…˟ oc_it…˟
+#>   <chr>     <dbl>  <dbl>   <int> <chr>   <chr>   <chr>     <int> <chr>   <chr>     <dbl> <chr>   <chr>   <chr>   <chr>   <chr>  
+#> 1 Dublin     53.3  -6.26       5 Dublin… 29UPV8… IO63ui…     353 "\U000… gc7x98…    114. Q1761   53° 20… 6° 15'… 715826… 734697…
+#> # … with 54 more variables: oc_mercator_x <dbl>, oc_mercator_y <dbl>, oc_osm_edit_url <chr>, oc_osm_note_url <chr>,
+#> #   oc_osm_url <chr>, oc_un_m49_statistical_groupings <list>, oc_un_m49_regions_europe <chr>, oc_un_m49_regions_ie <chr>,
+#> #   oc_un_m49_regions_northern_europe <chr>, oc_un_m49_regions_world <chr>, oc_currency_alternate_symbols <list>,
+#> #   oc_currency_decimal_mark <chr>, oc_currency_html_entity <chr>, oc_currency_iso_code <chr>, oc_currency_iso_numeric <chr>,
+#> #   oc_currency_name <chr>, oc_currency_smallest_denomination <int>, oc_currency_subunit <chr>,
+#> #   oc_currency_subunit_to_unit <int>, oc_currency_symbol <chr>, oc_currency_symbol_first <int>,
+#> #   oc_currency_thousands_separator <chr>, oc_roadinfo_drive_on <chr>, oc_roadinfo_speed_in <chr>, …
 ```
 
 ### `roadinfo`
@@ -318,15 +325,17 @@ Some road and driving information is nevertheless provided as part of the annota
 
 ```r
 oc_forward_df(placename = c("Europa Advance Rd", "Bovoni Rd"), roadinfo = TRUE)
-#> # A tibble: 2 x 29
-#>   placename oc_lat oc_lng oc_confidence oc_formatted oc_roadinfo_dri~ oc_roadinfo_one~ oc_roadinfo_road oc_roadinfo_roa~ oc_roadinfo_spe~
-#>   <chr>      <dbl>  <dbl>         <int> <chr>        <chr>            <chr>            <chr>            <chr>            <chr>           
-#> 1 Europa A~   36.1  -5.34             9 Europa Adva~ right            yes              Europa Advance ~ secondary        km/h            
-#> 2 Bovoni Rd   18.3 -64.9              9 Bovoni Hill~ left             <NA>             <NA>             <NA>             mph             
-#> # ... with 19 more variables: oc_roadinfo_surface <chr>, oc_northeast_lat <dbl>, oc_northeast_lng <dbl>, oc_southwest_lat <dbl>,
-#> #   oc_southwest_lng <dbl>, oc_iso_3166_1_alpha_2 <chr>, oc_iso_3166_1_alpha_3 <chr>, oc_category <chr>, oc_type <chr>,
-#> #   oc_continent <chr>, oc_country <chr>, oc_country_code <chr>, oc_postcode <chr>, oc_road <chr>, oc_road_type <chr>, oc_state <chr>,
-#> #   oc_county <chr>, oc_peak <chr>, oc_state_code <chr>
+#> # A tibble: 2 × 30
+#>   placen…¹ oc_lat oc_lng oc_co…² oc_fo…³ oc_ro…⁴ oc_ro…⁵ oc_ro…⁶ oc_ro…⁷ oc_ro…⁸ oc_ro…⁹ oc_no…˟ oc_no…˟ oc_so…˟ oc_so…˟ oc_is…˟
+#>   <chr>     <dbl>  <dbl>   <int> <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>     <dbl>   <dbl>   <dbl>   <dbl> <chr>  
+#> 1 Europa …   36.1  -5.34       9 Europa… right   yes     Europa… second… km/h    asphalt    36.1   -5.34    36.1   -5.35 GI     
+#> 2 Bovoni …   18.3 -64.9        8 Bovoni… left    <NA>    Bovoni… primary mph     <NA>       18.3  -64.9     18.3  -64.9  VI     
+#> # … with 14 more variables: oc_iso_3166_1_alpha_3 <chr>, oc_category <chr>, oc_type <chr>, oc_city <chr>, oc_continent <chr>,
+#> #   oc_country <chr>, oc_country_code <chr>, oc_postcode <chr>, oc_road <chr>, oc_road_type <chr>, oc_iso_3166_2 <list>,
+#> #   oc_county <chr>, oc_state <chr>, oc_state_code <chr>, and abbreviated variable names ¹​placename, ²​oc_confidence,
+#> #   ³​oc_formatted, ⁴​oc_roadinfo_drive_on, ⁵​oc_roadinfo_oneway, ⁶​oc_roadinfo_road, ⁷​oc_roadinfo_road_type,
+#> #   ⁸​oc_roadinfo_speed_in, ⁹​oc_roadinfo_surface, ˟​oc_northeast_lat, ˟​oc_northeast_lng, ˟​oc_southwest_lat, ˟​oc_southwest_lng,
+#> #   ˟​oc_iso_3166_1_alpha_2
 ```
 
 A [blog post](https://blog.opencagedata.com/post/new-optional-parameter-roadinfo) provides more details.
@@ -339,18 +348,37 @@ When it is `TRUE`, the addresses in the `formatted` field of the results are abb
 
 ```r
 oc_forward_df("Wall Street")
-#> # A tibble: 1 x 4
+#> # A tibble: 1 × 4
 #>   placename   oc_lat oc_lng oc_formatted                                             
 #>   <chr>        <dbl>  <dbl> <chr>                                                    
 #> 1 Wall Street   40.7  -74.0 Wall Street, New York, NY 10005, United States of America
 oc_forward_df("Wall Street", abbrv = TRUE)
-#> # A tibble: 1 x 4
+#> # A tibble: 1 × 4
 #>   placename   oc_lat oc_lng oc_formatted                    
 #>   <chr>        <dbl>  <dbl> <chr>                           
 #> 1 Wall Street   40.7  -74.0 Wall St, New York, NY 10005, USA
 ```
 
 See [this blog post](https://blog.opencagedata.com/post/160294347883/shrtr-pls) for more information.
+
+### `address_only`
+
+When `address_only` is set to `TRUE` (by default `FALSE`), OpenCage will attempt to exclude names of points-of-interests from the `formatted` field of the results. 
+In the following example, the POI "Hôtel de ville de Nantes" (town hall of Nantes) is removed from the `oc_formatted` column with `address_only = TRUE`.
+
+
+```r
+oc_reverse_df(47.21864, -1.55413)
+#> # A tibble: 1 × 3
+#>   latitude longitude oc_formatted                                                             
+#>      <dbl>     <dbl> <chr>                                                                    
+#> 1     47.2     -1.55 Hôtel de ville de Nantes, Place de l'Hôtel de Ville, 44000 Nantes, France
+oc_reverse_df(47.21864, -1.55413, address_only = TRUE)
+#> # A tibble: 1 × 3
+#>   latitude longitude oc_formatted                                   
+#>      <dbl>     <dbl> <chr>                                          
+#> 1     47.2     -1.55 Place de l'Hôtel de Ville, 44000 Nantes, France
+```
 
 ## Vectorised arguments
 
@@ -362,7 +390,7 @@ oc_forward_df(
   placename = c("New York", "Rio", "Tokyo"),
   language = c("es", "de", "fr")
 )
-#> # A tibble: 3 x 4
+#> # A tibble: 3 × 4
 #>   placename oc_lat oc_lng oc_formatted                                                     
 #>   <chr>      <dbl>  <dbl> <chr>                                                            
 #> 1 New York    40.7  -74.0 Nueva York, Estados Unidos de América                            
@@ -381,12 +409,12 @@ for_df <-
   )
 
 oc_forward_df(for_df, placename = location, countrycode = ccode)
-#> # A tibble: 3 x 5
-#>   location           ccode oc_lat oc_lng oc_formatted                                                                              
-#>   <chr>              <chr>  <dbl>  <dbl> <chr>                                                                                     
-#> 1 Golden Gate Bridge at     48.0   15.6  Karer, Golden Gate Bridge, 3180 Gemeinde Lilienfeld, Austria                              
-#> 2 Buckingham Palace  cg     -4.80  11.8  Buckingham Palace, Boulevard du Général Charles de Gaulle, Pointe-Noire, Congo-Brazzaville
-#> 3 Eiffel Tower       be     50.9    4.34 Eiffel Tower, Avenue de Bouchout - Boechoutlaan, 1020 City of Brussels, Belgium
+#> # A tibble: 3 × 5
+#>   location           ccode oc_lat oc_lng oc_formatted                                                                           
+#>   <chr>              <chr>  <dbl>  <dbl> <chr>                                                                                  
+#> 1 Golden Gate Bridge at     47.6   15.8  Wiesenbauer, Martin's Golden Gate Bridge, 8684 Gemeinde Spital am Semmering, Austria   
+#> 2 Buckingham Palace  cg     -4.80  11.8  Buckingham Palace, Boulevard du Général Charles de Gaulle, Pointe-Noire, Congo-Brazzav…
+#> 3 Eiffel Tower       be     50.9    4.34 Eiffel Tower, Avenue de Bouchout - Boechoutlaan, 1020 Brussels, Belgium
 ```
 
 This also works with `oc_reverse_df()`, of course.
@@ -400,7 +428,7 @@ rev_df <-
   )
 
 oc_reverse_df(rev_df, lat, lon, language = "native")
-#> # A tibble: 2 x 3
+#> # A tibble: 2 × 3
 #>     lat   lon oc_formatted                                        
 #>   <dbl> <dbl> <chr>                                               
 #> 1  52.0  7.63 Friedrich-Ebert-Straße 7, 48153 Münster, Deutschland
