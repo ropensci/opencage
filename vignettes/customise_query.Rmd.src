@@ -21,6 +21,7 @@ knitr::opts_chunk$set(
 )
 
 library("opencage")
+
 ```
 
 Geocoding is surprisingly hard.
@@ -101,10 +102,10 @@ oc_forward_df(placename = "Paris", bounds = oc_bbox(-97, -56, -32, 12), limit = 
 ```
 
 Again, you can also use {opencage} to determine a bounding box for subsequent queries.
-If you wanted to map the airports on the Hawaiian islands, for example, you could find the appropriate bounding box and then search for the airports:
+If you wanted to see how many Plaça d'Espanya there are on the Balearic Islands, for example, you could find the appropriate bounding box and then search for the squares:
 
-```{r hawaii_airports}
-hi <- oc_forward_df(placename = "Hawaii", no_annotations = FALSE)
+```{r balearic}
+hi <- oc_forward_df(placename = "Balearic Islands", no_annotations = FALSE)
 
 hi_bbox <-
   oc_bbox(
@@ -114,11 +115,12 @@ hi_bbox <-
     hi$oc_northeast_lat
   )
 
-oc_forward_df(placename = "Airport", bounds = hi_bbox, limit = 10)
+oc_forward_df(placename = "Plaça d'Espanya", bounds = hi_bbox, limit = 20)
 
 ```
 
-Note that such a query will only give you airports with "Airport" in their name or address, but not necessarily airfields, airstrips, etc. If you are more interested in these kind of features, you might want to take a look at the {[osmdata](https://docs.ropensci.org/osmdata/)} package.
+Note that OpenCage does not support point-of-interest or feature search, like "show me all bus stops in this area". 
+If you are more interested in these kind of features, you might want to take a look at the {[osmdata](https://docs.ropensci.org/osmdata/)} package.
 
 ### `proximity`
 
@@ -197,7 +199,7 @@ Whether the annotations are shown, is controlled by the `no_annotations` argumen
 It is `TRUE` by default, which means that the output will _not_ contain annotations.
 (Yes, inverted argument names are confusing, but we just follow OpenCage's lead here.)
 When you set `no_annotations` to `FALSE`, all columns are returned (i.e. `output` is implicitly set to `"all"`).
-This leads to a results with a lot of columns.
+This leads to a result with a lot of columns.
 
 ```{r annotations}
 oc_forward_df("Dublin", no_annotations = FALSE)
