@@ -14,6 +14,7 @@ oc_reverse(
   roadinfo = FALSE,
   no_dedupe = FALSE,
   abbrv = FALSE,
+  address_only = FALSE,
   add_request = FALSE,
   ...
 )
@@ -55,6 +56,10 @@ will not be deduplicated.}
 \item{abbrv}{Logical vector (default \code{FALSE}), when \code{TRUE} addresses in the
 \code{formatted} field of the results are abbreviated (e.g. "Main St." instead
 of "Main Street").}
+
+\item{address_only}{Logical vector (default \code{FALSE}), when \code{TRUE} only the
+address details are returned in the \code{formatted} field of the results, not
+the name of a point-of-interest should there be one at this address.}
 
 \item{add_request}{Logical vector (default \code{FALSE}) indicating whether the
 request is returned again with the results. If the \code{return} value is a

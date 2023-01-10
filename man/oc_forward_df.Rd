@@ -23,6 +23,7 @@ oc_forward_df(...)
   roadinfo = FALSE,
   no_dedupe = FALSE,
   abbrv = FALSE,
+  address_only = FALSE,
   ...
 )
 
@@ -39,6 +40,7 @@ oc_forward_df(...)
   roadinfo = FALSE,
   no_dedupe = FALSE,
   abbrv = FALSE,
+  address_only = FALSE,
   ...
 )
 }
@@ -117,6 +119,11 @@ deduplicated.}
 \item{abbrv}{Logical vector, or an unquoted variable name of such a vector.
 Default is \code{FALSE}. When \code{TRUE} addresses in the \code{oc_formatted} variable of
 the results are abbreviated (e.g. "Main St." instead of "Main Street").}
+
+\item{address_only}{Logical vector, or an unquoted variable name of such a
+vector. Default is \code{FALSE}. When \code{TRUE} only the address details are
+returned in the \code{oc_formatted} variable of the results, not the name of a
+point-of-interest should there be one at this address.}
 }
 \value{
 A tibble. Column names coming from the OpenCage API are prefixed with
