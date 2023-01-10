@@ -1,5 +1,6 @@
 # opencage (development version)
 
+* opencage now supports an `address_only` parameter, see "[New optional API parameter 'address_only'](https://blog.opencagedata.com/post/new-optional-parameter-addressonly)", ([#151](https://github.com/ropensci/opencage/pull/151)).
 * The geocoding functions will not send a query to the API anymore if no API key is present ([#133](https://github.com/ropensci/opencage/issues/133)).
 * `NA`s are allowed again for the `placename` or `latitude`/`longitude` arguments (also empty strings for `placename`). 
   These queries are not sent to the API. 
@@ -13,7 +14,7 @@
 * Use [{lintr} version 3.0](https://www.tidyverse.org/blog/2022/07/lintr-3-0-0/) and add "package development" linters ([#144](https://github.com/ropensci/opencage/pull/144)).
 * `countrycodes` source and script were moved to `data-raw` ([#146](https://github.com/ropensci/opencage/pull/146)).
 * Add CITATION.cff and a corresponding GitHub action ([#148](https://github.com/ropensci/opencage/pull/148)).
-* Select expressions inside `oc_forward_df()` and `oc_reverse_df()` now use `"column"` instead of `.data$column`, because the latter is [deprecated as of tidyselect v1.2.0](https://tidyselect.r-lib.org/news/index.html#tidyselect-120)  [#150](https://github.com/ropensci/opencage/pull/150).
+* Select expressions inside `oc_forward_df()` and `oc_reverse_df()` now use `"column"` instead of `.data$column`, because the latter is [deprecated as of tidyselect v1.2.0](https://tidyselect.r-lib.org/news/index.html#tidyselect-120)  ([#150](https://github.com/ropensci/opencage/pull/150)).
 
 # opencage 0.2.2
 
