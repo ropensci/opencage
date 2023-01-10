@@ -56,6 +56,7 @@ oc_reverse <-
            roadinfo = FALSE,
            no_dedupe = FALSE,
            abbrv = FALSE,
+           address_only = FALSE,
            add_request = FALSE,
            ...) {
 
@@ -81,6 +82,7 @@ oc_reverse <-
       roadinfo = roadinfo,
       no_dedupe = no_dedupe,
       abbrv = abbrv,
+      address_only = address_only,
       add_request = add_request
     )
     # process request
@@ -94,6 +96,7 @@ oc_reverse <-
       roadinfo = roadinfo,
       no_dedupe = no_dedupe,
       abbrv = abbrv,
+      address_only = address_only,
       add_request = add_request
     )
   }
@@ -181,6 +184,7 @@ oc_reverse_df.data.frame <-
            no_annotations = TRUE,
            no_dedupe = FALSE,
            abbrv = FALSE,
+           address_only = FALSE,
            ...) {
 
     # Tidyeval to enable input from data frame columns
@@ -192,6 +196,7 @@ oc_reverse_df.data.frame <-
     roadinfo       <- rlang::enquo(roadinfo)
     no_dedupe      <- rlang::enquo(no_dedupe)
     abbrv          <- rlang::enquo(abbrv)
+    address_only   <- rlang::enquo(address_only)
 
     # check latitude & longitude is provided
     if (rlang::quo_is_missing(latitude) ||
@@ -224,6 +229,7 @@ oc_reverse_df.data.frame <-
         roadinfo = rlang::eval_tidy(roadinfo, data = data),
         no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
         abbrv = rlang::eval_tidy(abbrv, data = data),
+        address_only = rlang::eval_tidy(address_only, data = data),
         add_request = add_request
       )
       results <- dplyr::bind_rows(results_list)
@@ -249,6 +255,7 @@ oc_reverse_df.data.frame <-
               roadinfo = !!roadinfo,
               no_dedupe = !!no_dedupe,
               abbrv = !!abbrv,
+              address_only = !!address_only,
               add_request = add_request
             )
         )
@@ -294,6 +301,7 @@ oc_reverse_df.numeric <-
            no_annotations = TRUE,
            no_dedupe = FALSE,
            abbrv = FALSE,
+           address_only = FALSE,
            ...) {
     xdf <- tibble::tibble(latitude = latitude, longitude = longitude)
     oc_reverse_df(
@@ -306,6 +314,7 @@ oc_reverse_df.numeric <-
       min_confidence = min_confidence,
       no_annotations = no_annotations,
       no_dedupe = no_dedupe,
-      abbrv = abbrv
+      abbrv = abbrv,
+      address_only = address_only
     )
   }

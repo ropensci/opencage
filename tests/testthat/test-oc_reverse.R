@@ -9,7 +9,8 @@ df2 <- add_column(df,
                   confidence = rep(1L, 3L),
                   annotation = c(FALSE, TRUE, TRUE),
                   roadinfo = c(FALSE, TRUE, TRUE),
-                  abbrv = c(FALSE, FALSE, TRUE))
+                  abbrv = c(FALSE, FALSE, TRUE),
+                  address_only = c(TRUE, TRUE, FALSE))
 df3 <- add_row(df2, id = 4, lat = 25, lng = 36, confidence = 5)
 
 # oc_reverse --------------------------------------------------------------
@@ -203,6 +204,32 @@ test_that("tidyeval works for arguments", {
   expect_true(all.equal(abbrv[1, ], noarg[1, ]))
   expect_true(all.equal(abbrv[2, ], noarg[2, ]))
   expect_false(isTRUE(all.equal(abbrv[3, ], noarg[3, ])))
+
+  # address_only
+  address_only <- oc_reverse_df(df2, lat, lng, address_only = address_only)
+  expect_false(identical(
+    address_only["oc_formatted"],
+    noarg["oc_formatted"]
+  ))
+  expect_false(identical(
+    noarg[1, "oc_formatted"],
+    address_only[1, "oc_formatted"]
+  ))
+  expect_false(identical(
+    noarg[2, "oc_formatted"],
+    address_only[2, "oc_formatted"]
+  ))
+  expect_match(
+    noarg[[1, "oc_formatted"]],
+    address_only[[1, "oc_formatted"]],
+    fixed = TRUE
+  )
+  expect_match(
+    noarg[[2, "oc_formatted"]],
+    address_only[[2, "oc_formatted"]],
+    fixed = TRUE
+  )
+  expect_identical(address_only[3, "oc_formatted"], noarg[3, "oc_formatted"])
 })
 
 # Checks ------------------------------------------------------------------

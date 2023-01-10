@@ -35,6 +35,7 @@ oc_check_query <-
     roadinfo = NULL,
     no_dedupe = NULL,
     abbrv = NULL,
+    address_only = NULL,
     add_request = NULL
   ) {
     arglist <-
@@ -53,6 +54,7 @@ oc_check_query <-
           roadinfo = roadinfo,
           no_dedupe = no_dedupe,
           abbrv = abbrv,
+          address_only = address_only,
           add_request = add_request
         )
       )
@@ -85,6 +87,7 @@ oc_check_query <-
     roadinfo = NULL,
     no_dedupe = NULL,
     abbrv = NULL,
+    address_only = NULL,
     add_request = NULL
   ) {
     # check placename
@@ -177,6 +180,8 @@ oc_check_query <-
     oc_check_logical(no_dedupe)
 
     oc_check_logical(abbrv)
+
+    oc_check_logical(address_only)
 
     oc_check_logical(add_request)
 

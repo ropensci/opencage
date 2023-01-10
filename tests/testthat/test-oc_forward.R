@@ -15,7 +15,8 @@ df2 <- add_column(df,
                   limit = 1:3,
                   confidence = c(7, 9, 5),
                   annotation = c(FALSE, TRUE, TRUE),
-                  abbrv = c(FALSE, FALSE, TRUE))
+                  abbrv = c(FALSE, FALSE, TRUE),
+                  address_only = c(TRUE, FALSE, FALSE))
 
 df3 <- tibble(
   id = 1:3,
@@ -255,6 +256,29 @@ test_that("tidyeval works for arguments", {
   expect_true(all.equal(abbrv[1, ], noarg[1, ]))
   expect_true(all.equal(abbrv[2, ], noarg[2, ]))
   expect_false(isTRUE(all.equal(abbrv[3, ], noarg[3, ])))
+
+  # address_only
+  city_halls <- c("Hôtel de ville de Nantes", "Los Angeles City Hall")
+  address_full <- oc_forward_df(city_halls, address_only = FALSE)
+  address_only <- oc_forward_df(city_halls, address_only = TRUE)
+  expect_false(identical(
+    address_full[[1, "oc_formatted"]],
+    address_only[[1, "oc_formatted"]]
+  ))
+  expect_false(identical(
+    address_full[[1, "oc_formatted"]],
+    address_only[[1, "oc_formatted"]]
+  ))
+  expect_match(
+    address_full[[1, "oc_formatted"]],
+    address_only[[1, "oc_formatted"]],
+    fixed = TRUE
+  )
+  expect_match(
+    address_full[[1, "oc_formatted"]],
+    address_only[[1, "oc_formatted"]],
+    fixed = TRUE
+  )
 })
 
 test_that("list columns are not dropped (by tidyr)", {
