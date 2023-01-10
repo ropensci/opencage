@@ -227,6 +227,16 @@ oc_forward_df("Wall Street", abbrv = TRUE)
 
 See [this blog post](https://blog.opencagedata.com/post/160294347883/shrtr-pls) for more information.
 
+### `address_only`
+
+When `address_only` is set to `TRUE` (by default `FALSE`), OpenCage will attempt to exclude names of points-of-interests from the `formatted` field of the results. 
+In the following example, the POI "Hôtel de ville de Nantes" (town hall of Nantes) is removed from the `oc_formatted` column with `address_only = TRUE`.
+
+```{r address-only}
+oc_reverse_df(47.21864, -1.55413)
+oc_reverse_df(47.21864, -1.55413, address_only = TRUE)
+```
+
 ## Vectorised arguments
 
 All of the function arguments mentioned above are vectorised, so you can send queries like this:
