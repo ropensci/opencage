@@ -229,10 +229,10 @@ oc_reverse_df.data.frame <-
       results <- dplyr::bind_rows(results_list)
       if (output == "short") {
         results <-
-          dplyr::select(results, .data$oc_query, .data$oc_formatted)
+          dplyr::select(results, "oc_query", "oc_formatted")
       } else {
         results <-
-          dplyr::select(results, .data$oc_query, dplyr::everything())
+          dplyr::select(results, "oc_query", dplyr::everything())
       }
     } else {
       results_nest <-
@@ -255,9 +255,9 @@ oc_reverse_df.data.frame <-
 
       if (utils::packageVersion("tidyr") > "0.8.99") {
         results <-
-          tidyr::unnest(results_nest, .data$op, names_repair = "unique")
+          tidyr::unnest(results_nest, "op", names_repair = "unique")
       } else {
-        results <- tidyr::unnest(results_nest, .data$op, .drop = FALSE)
+        results <- tidyr::unnest(results_nest, "op", .drop = FALSE)
         # .drop = FALSE so other list columns are not dropped. Deprecated as of
         # v1.0.0
       }
@@ -266,17 +266,17 @@ oc_reverse_df.data.frame <-
         results <-
           dplyr::select(
             results,
-            1:.data$oc_query,
-            .data$oc_formatted,
-            -.data$oc_query
+            1:"oc_query",
+            "oc_formatted",
+            -"oc_query"
           )
       } else {
         results <-
           dplyr::select(
             results,
-            1:.data$oc_query,
+            1:"oc_query",
             dplyr::everything(),
-            -.data$oc_query
+            -"oc_query"
           )
       }
     }
