@@ -3,16 +3,18 @@ on:
   push:
     branches:
       - main
-  # disabled for PRs, because OpenCage key is not available there
-  # pull_request:
-  #   branches:
-  #     - main
+  pull_request:
+    branches:
+      - main
 
 name: test-coverage
 
 jobs:
   test-coverage:
     runs-on: ubuntu-latest
+    # skip for forks as secrets are only available in main repo
+    # keep an eye on https://github.com/orgs/community/discussions/9098
+    if: ${{ github.repository == 'ropensci/opencage' }}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
