@@ -1,15 +1,3 @@
-oc_check_logical <- function(variable, check_length_one = FALSE) {
-  if (!is.null(variable)) {
-    if (!is.logical(variable)) {
-      var_name <- deparse(substitute(variable)) # deparse only if check fails
-      stop("`", var_name, "` must be a logical vector.", call. = FALSE)
-    } else if (check_length_one && !identical(length(variable), 1L)) {
-      var_name <- deparse(substitute(variable)) # deparse only if check fails
-      stop("`", var_name, "` must be a vector of length one.", call. = FALSE)
-    }
-  }
-}
-
 #' Check OpenCage query arguments
 #'
 #' Function that checks the query arguments passed to OpenCage
@@ -186,6 +174,36 @@ oc_check_query <-
     oc_check_logical(add_request)
 
   }
+
+
+#' Check whether an argument is a boolean and (optionally) of length one
+#'
+#' @param variable argument to check
+#' @param check_length_one boolean whether to check if the argument is of length
+#'   one
+#'
+#' @noRd
+
+oc_check_logical <- function(variable, check_length_one = FALSE) {
+  if (!is.null(variable)) {
+    if (!is.logical(variable)) {
+      var_name <- deparse(substitute(variable)) # deparse only if check fails
+      stop("`", var_name, "` must be a logical vector.", call. = FALSE)
+    } else if (check_length_one && !identical(length(variable), 1L)) {
+      var_name <- deparse(substitute(variable)) # deparse only if check fails
+      stop("`", var_name, "` must be a vector of length one.", call. = FALSE)
+    }
+  }
+}
+
+
+#' Check whether a value is between two values
+#'
+#' @param x numeric value to check
+#' @param left numeric lower bound
+#' @param right numeric upper bound
+#'
+#' @noRd
 
 oc_check_between <- function(x, left, right) {
   if (!is.numeric(x)) {

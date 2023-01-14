@@ -206,7 +206,13 @@ oc_process <-
   }
 
 
-# build URL ---------------------------------------------------------------
+#' Build query URL
+#'
+#' @param query_par A list of query parameters
+#' @param endpoint The endpoint to query ("json" or "geojson")
+#'
+#' @return A character string URL
+#' @noRd
 
 oc_build_url <- function(query_par, endpoint) {
   query_par <- purrr::compact(query_par)
@@ -247,7 +253,13 @@ oc_build_url <- function(query_par, endpoint) {
 }
 
 
-# fetch results -----------------------------------------------------------
+#' GET request from OpenCage
+#'
+#' @param oc_url character string URL with query parameters, built with
+#'   `oc_build_url()`
+#'
+#' @return crul::HttpResponse object
+#' @noRd
 
 oc_get <- function(oc_url) {
   client <- crul::HttpClient$new(
@@ -266,7 +278,29 @@ oc_ua_string <-
   )
 
 
-# check status ------------------------------------------------------------
+#' Parse HttpResponse object to character string
+#'
+#' @param res crul::HttpResponse object
+#'
+#' @return character string (depending on queried endpoint, json or geojson)
+#' @noRd
+
+oc_parse_text <- function(res) {
+  text <- res$parse(encoding = "UTF-8")
+  if (identical(text, "")) {
+    stop("OpenCage returned an empty response.", call. = FALSE)
+  }
+  text
+}
+
+
+#' Check the status of the HttpResponse
+#'
+#' @param res_env crul::HttpResponse object
+#' @param res_text parsed HttpResponse
+#'
+#' @return NULL if status code less than or equal to 201, else `stop()`
+#' @noRd
 
 oc_check_status <- function(res_env, res_text) {
   if (res_env$success()) return(invisible())
@@ -280,18 +314,15 @@ oc_check_status <- function(res_env, res_text) {
 }
 
 
-# parse response ----------------------------------------------------------
-
-oc_parse_text <- function(res) {
-  text <- res$parse(encoding = "UTF-8")
-  if (identical(text, "")) {
-    stop("OpenCage returned an empty response.", call. = FALSE)
-  }
-  text
-}
-
-
-# format results ----------------------------------------------------------
+#' Format the result string
+#'
+#' @param res_text parsed HttpResponse
+#' @param return character, which type of object to return (`df_list`,
+#'   `json_list`, `geojson_list`)
+#' @param query query string ("placename" or "latitude,longitude")
+#'
+#' @return A list of tibbles, json lists or geojson_lists
+#' @noRd
 
 oc_format <- function(res_text, return, query) {
   if (return == "df_list") {

@@ -122,7 +122,15 @@ oc_bbox.bbox <- function(bbox, ...) {
   list(bbox)
 }
 
-# check bbox
+#' Check whether a bounding box has valid longitude and latitude values
+#'
+#' @param xmin numeric minimum longitude
+#' @param ymin numeric minimum latitude
+#' @param xmax numeric maximum longitude
+#' @param ymax numeric maximum latitude
+#'
+#' @noRd
+
 oc_check_bbox <- function(xmin, ymin, xmax, ymax) {
   if (anyNA(c(xmin, ymin, xmax, ymax))) {
     stop("Every `bbox` element must be non-missing.", call. = FALSE)
