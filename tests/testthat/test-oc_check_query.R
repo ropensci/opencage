@@ -71,7 +71,7 @@ test_that("oc_check_query checks proximity", {
   expect_error(
     oc_check_query(
       placename = "Sarzeau",
-    proximity = list(c(1, 2, 3)) # too many coordinates
+      proximity = list(c(1, 2, 3)) # too many coordinates
     ),
     "Every `proximity` point must be a numeric vector of length 2."
   )

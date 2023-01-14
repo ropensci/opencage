@@ -101,10 +101,12 @@ oc_bbox.data.frame <- function(data, xmin, ymin, xmax, ymax, ...) {
   xmax <- rlang::enquo(xmax)
   ymax <- rlang::enquo(ymax)
 
-  oc_bbox(xmin = rlang::eval_tidy(xmin, data = data),
-          ymin = rlang::eval_tidy(ymin, data = data),
-          xmax = rlang::eval_tidy(xmax, data = data),
-          ymax = rlang::eval_tidy(ymax, data = data))
+  oc_bbox(
+    xmin = rlang::eval_tidy(xmin, data = data),
+    ymin = rlang::eval_tidy(ymin, data = data),
+    xmax = rlang::eval_tidy(xmax, data = data),
+    ymax = rlang::eval_tidy(ymax, data = data)
+  )
 }
 
 #' @name oc_bbox

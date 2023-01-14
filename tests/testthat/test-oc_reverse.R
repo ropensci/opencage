@@ -5,12 +5,13 @@ lat <- c(47.21864, 53.55034, 34.05369)
 lng <- c(-1.554136, 10.000654, -118.242767)
 df <- tibble(id = 1:3, lat = lat, lng = lng)
 df2 <- add_column(df,
-                  language = c("en", "fr", "ja"),
-                  confidence = rep(1L, 3L),
-                  annotation = c(FALSE, TRUE, TRUE),
-                  roadinfo = c(FALSE, TRUE, TRUE),
-                  abbrv = c(FALSE, FALSE, TRUE),
-                  address_only = c(TRUE, TRUE, FALSE))
+  language = c("en", "fr", "ja"),
+  confidence = rep(1L, 3L),
+  annotation = c(FALSE, TRUE, TRUE),
+  roadinfo = c(FALSE, TRUE, TRUE),
+  abbrv = c(FALSE, FALSE, TRUE),
+  address_only = c(TRUE, TRUE, FALSE)
+)
 df3 <- add_row(df2, id = 4, lat = 25, lng = 36, confidence = 5)
 
 # oc_reverse --------------------------------------------------------------
@@ -128,7 +129,8 @@ test_that("oc_reverse_df works with NA", {
 
   tbl3 <-
     oc_reverse_df(
-      data.frame(lt_col = lt, ln_col = ln), lt_col, ln_col, bind_cols = FALSE
+      data.frame(lt_col = lt, ln_col = ln), lt_col, ln_col,
+      bind_cols = FALSE
     )
 
   expect_identical(nrow(tbl3), 2L)
@@ -151,10 +153,14 @@ test_that("output arguments work", {
   skip_if_no_key()
   skip_if_oc_offline()
 
-  expect_named(oc_reverse_df(df, lat, lng, bind_cols = TRUE),
-               c("id", "lat", "lng", "oc_formatted"))
-  expect_named(oc_reverse_df(df, lat, lng, bind_cols = FALSE),
-               c("oc_query", "oc_formatted"))
+  expect_named(
+    oc_reverse_df(df, lat, lng, bind_cols = TRUE),
+    c("id", "lat", "lng", "oc_formatted")
+  )
+  expect_named(
+    oc_reverse_df(df, lat, lng, bind_cols = FALSE),
+    c("oc_query", "oc_formatted")
+  )
   expect_gt(ncol(oc_reverse_df(df, lat, lng, output = "all")), 5L)
   expect_gt(
     ncol(oc_reverse_df(df, lat, lng, bind_cols = FALSE, output = "all")),
@@ -183,8 +189,10 @@ test_that("tidyeval works for arguments", {
   expect_false(isTRUE(all.equal(confidence[4, ], no_con[4, ])))
 
   # no_annotations
-  ann <- oc_reverse_df(df2, lat, lng, bind_cols = FALSE,
-                       no_annotations = annotation)
+  ann <- oc_reverse_df(df2, lat, lng,
+    bind_cols = FALSE,
+    no_annotations = annotation
+  )
   expect_gt(ncol(ann), 40)
   expect_identical(ann$oc_currency_name, c("Euro", NA, NA))
 
@@ -236,18 +244,30 @@ test_that("tidyeval works for arguments", {
 
 test_that("Check that latitude & longitude are present", {
   # oc_reverse
-  expect_error(oc_reverse(latitude = lat),
-               "`latitude` and `longitude` must be provided.")
-  expect_error(oc_reverse(longitude = lng),
-               "`latitude` and `longitude` must be provided.")
-  expect_error(oc_reverse(latitude = NULL, longitude = lng),
-               "`latitude` and `longitude` must be provided.")
-  expect_error(oc_reverse(latitude = lat, longitude = NULL),
-               "`latitude` and `longitude` must be provided.")
+  expect_error(
+    oc_reverse(latitude = lat),
+    "`latitude` and `longitude` must be provided."
+  )
+  expect_error(
+    oc_reverse(longitude = lng),
+    "`latitude` and `longitude` must be provided."
+  )
+  expect_error(
+    oc_reverse(latitude = NULL, longitude = lng),
+    "`latitude` and `longitude` must be provided."
+  )
+  expect_error(
+    oc_reverse(latitude = lat, longitude = NULL),
+    "`latitude` and `longitude` must be provided."
+  )
 
   # oc_reverse_df
-  expect_error(oc_reverse_df(df, latitude = lat),
-               "`latitude` and `longitude` must be provided.")
-  expect_error(oc_reverse_df(df, longitude = lng),
-               "`latitude` and `longitude` must be provided.")
+  expect_error(
+    oc_reverse_df(df, latitude = lat),
+    "`latitude` and `longitude` must be provided."
+  )
+  expect_error(
+    oc_reverse_df(df, longitude = lng),
+    "`latitude` and `longitude` must be provided."
+  )
 })

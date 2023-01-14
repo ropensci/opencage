@@ -4,19 +4,24 @@ library(tibble)
 locations <- c("Nantes", "Flensburg", "Los Angeles")
 df <- tibble(id = 1:3, loc = locations)
 df2 <- add_column(df,
-                  bounds = oc_bbox(xmin = c(-72, -98, -73),
-                                   ymin = c(45, 43, -38),
-                                   xmax = c(-70, -90, -71),
-                                   ymax = c(46, 49, -36)),
-                  proximity = oc_points(latitude = c(45.5, 46, -37),
-                                        longitude = c(-71, -95, -72)),
-                  countrycode = c("ca", "us", "cl"),
-                  language = c("de", "fr", "ja"),
-                  limit = 1:3,
-                  confidence = c(7, 9, 5),
-                  annotation = c(FALSE, TRUE, TRUE),
-                  abbrv = c(FALSE, FALSE, TRUE),
-                  address_only = c(TRUE, FALSE, FALSE))
+  bounds = oc_bbox(
+    xmin = c(-72, -98, -73),
+    ymin = c(45, 43, -38),
+    xmax = c(-70, -90, -71),
+    ymax = c(46, 49, -36)
+  ),
+  proximity = oc_points(
+    latitude = c(45.5, 46, -37),
+    longitude = c(-71, -95, -72)
+  ),
+  countrycode = c("ca", "us", "cl"),
+  language = c("de", "fr", "ja"),
+  limit = 1:3,
+  confidence = c(7, 9, 5),
+  annotation = c(FALSE, TRUE, TRUE),
+  abbrv = c(FALSE, FALSE, TRUE),
+  address_only = c(TRUE, FALSE, FALSE)
+)
 
 df3 <- tibble(
   id = 1:3,
@@ -188,10 +193,14 @@ test_that("output arguments work", {
   skip_if_no_key()
   skip_if_oc_offline()
 
-  expect_named(oc_forward_df(df, loc, bind_cols = TRUE),
-               c("id", "loc", "oc_lat", "oc_lng", "oc_formatted"))
-  expect_named(oc_forward_df(df, loc, bind_cols = FALSE),
-               c("oc_query", "oc_lat", "oc_lng", "oc_formatted"))
+  expect_named(
+    oc_forward_df(df, loc, bind_cols = TRUE),
+    c("id", "loc", "oc_lat", "oc_lng", "oc_formatted")
+  )
+  expect_named(
+    oc_forward_df(df, loc, bind_cols = FALSE),
+    c("oc_query", "oc_lat", "oc_lng", "oc_formatted")
+  )
   expect_gt(ncol(oc_forward_df(df, loc, output = "all")), 5)
   expect_gt(ncol(oc_forward_df(df, loc, bind_cols = FALSE, output = "all")), 5)
 })
@@ -223,8 +232,9 @@ test_that("tidyeval works for arguments", {
 
   # min_confidence
   confidence <- oc_forward_df(df2, loc,
-                              min_confidence = confidence,
-                              bind_cols = FALSE)
+    min_confidence = confidence,
+    bind_cols = FALSE
+  )
 
   # make sure we get actual results, not only NA
   expect_false(anyNA(confidence$oc_formatted))
@@ -235,8 +245,10 @@ test_that("tidyeval works for arguments", {
   expect_false(isTRUE(all.equal(confidence[3, ], noarg[3, ])))
 
   # no_annotations
-  ann <- oc_forward_df(df2, loc, bind_cols = FALSE,
-                       no_annotations = annotation)
+  ann <- oc_forward_df(df2, loc,
+    bind_cols = FALSE,
+    no_annotations = annotation
+  )
   expect_gt(ncol(ann), 30)
   expect_identical(ann$oc_currency_name, c("Euro", NA, NA))
 
@@ -250,8 +262,9 @@ test_that("tidyeval works for arguments", {
 
   # abbrv
   abbrv <- oc_forward_df(df2, loc,
-                         abbrv = abbrv,
-                         bind_cols = FALSE)
+    abbrv = abbrv,
+    bind_cols = FALSE
+  )
   expect_false(isTRUE(all.equal(abbrv, noarg)))
   expect_true(all.equal(abbrv[1, ], noarg[1, ]))
   expect_true(all.equal(abbrv[2, ], noarg[2, ]))

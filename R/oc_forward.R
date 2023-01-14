@@ -103,31 +103,40 @@
 #'
 #' # Use bounding box to help return accurate results
 #' # for each placename
-#' bounds <- oc_bbox(xmin = c(-2, 9, -119),
-#'                   ymin = c(47, 53, 34),
-#'                   xmax = c(0, 10, -117),
-#'                   ymax = c(48, 54, 35))
+#' bounds <- oc_bbox(
+#'   xmin = c(-2, 9, -119),
+#'   ymin = c(47, 53, 34),
+#'   xmax = c(0, 10, -117),
+#'   ymax = c(48, 54, 35)
+#' )
 #' oc_forward(placename = locations, bounds = bounds)
 #'
 #' # Another way to help specify the desired results
 #' # is with country codes.
-#' oc_forward(placename = locations,
-#'            countrycode = c("ca", "us", "co"))
+#' oc_forward(
+#'   placename = locations,
+#'   countrycode = c("ca", "us", "co")
+#' )
 #'
 #' # With multiple countrycodes per placename
-#' oc_forward(placename = locations,
-#'            countrycode = list(c("fr", "ca") , c("de", "us"), c("us", "co"))
-#'            )
+#' oc_forward(
+#'   placename = locations,
+#'   countrycode = list(c("fr", "ca"), c("de", "us"), c("us", "co"))
+#' )
 #'
 #' # Return results in a preferred language if possible
-#' oc_forward(placename = c("Brugge", "Mechelen", "Antwerp"),
-#'            language = "fr")
+#' oc_forward(
+#'   placename = c("Brugge", "Mechelen", "Antwerp"),
+#'   language = "fr"
+#' )
 #'
 #' # Limit the number of results per placename and return json_list
-#' oc_forward(placename = locations,
-#'            bounds = bounds,
-#'            limit = 1,
-#'            return = "json_list")
+#' oc_forward(
+#'   placename = locations,
+#'   bounds = bounds,
+#'   limit = 1,
+#'   return = "json_list"
+#' )
 #'
 oc_forward <-
   function(placename,
@@ -145,7 +154,6 @@ oc_forward <-
            address_only = FALSE,
            add_request = FALSE,
            ...) {
-
     # check a placename is provided
     if (missing(placename) || is.null(placename)) {
       stop(call. = FALSE, "`placename` must be provided.")
@@ -281,8 +289,10 @@ oc_forward <-
 #' @examplesIf oc_key_present() && oc_api_ok()
 #'
 #' library(tibble)
-#' df <- tibble(id = 1:3,
-#'              locations = c("Nantes", "Hamburg", "Los Angeles"))
+#' df <- tibble(
+#'   id = 1:3,
+#'   locations = c("Nantes", "Hamburg", "Los Angeles")
+#' )
 #'
 #' # Return lat, lng, and formatted address
 #' oc_forward_df(df, placename = locations)
@@ -297,8 +307,10 @@ oc_forward <-
 #' oc_forward_df(df, placename = locations, limit = 5)
 #'
 #' # Restrict results to a given bounding box
-#' oc_forward_df(df, placename = locations,
-#'               bounds = oc_bbox(-5, 45, 15, 55))
+#' oc_forward_df(df,
+#'   placename = locations,
+#'   bounds = oc_bbox(-5, 45, 15, 55)
+#' )
 #'
 #' # oc_forward_df accepts unquoted column names for all
 #' # arguments except bind_cols and output.
@@ -306,27 +318,36 @@ oc_forward <-
 #' # through the data frame passed to the data argument.
 #'
 #' df2 <- add_column(df,
-#'   bounds = oc_bbox(xmin = c(-2, 9, -119),
-#'                    ymin = c(47, 53, 34),
-#'                    xmax = c(0, 10, -117),
-#'                    ymax = c(48, 54, 35)),
+#'   bounds = oc_bbox(
+#'     xmin = c(-2, 9, -119),
+#'     ymin = c(47, 53, 34),
+#'     xmax = c(0, 10, -117),
+#'     ymax = c(48, 54, 35)
+#'   ),
 #'   limit = 1:3,
 #'   countrycode = c("ca", "us", "co"),
-#'   language = c("fr", "de", "en"))
+#'   language = c("fr", "de", "en")
+#' )
 #'
 #' # Use the bounds column to help return accurate results and
 #' # language column to specify preferred language of results
-#' oc_forward_df(df2, placename = locations,
-#'               bounds = bounds,
-#'               language = language)
+#' oc_forward_df(df2,
+#'   placename = locations,
+#'   bounds = bounds,
+#'   language = language
+#' )
 #'
 #' # Different limit of results for each placename
-#' oc_forward_df(df2, placename = locations,
-#'               limit = limit)
+#' oc_forward_df(df2,
+#'   placename = locations,
+#'   limit = limit
+#' )
 #'
 #' # Specify the desired results by the countrycode column
-#' oc_forward_df(df2, placename = locations,
-#'               countrycode = countrycode)
+#' oc_forward_df(df2,
+#'   placename = locations,
+#'   countrycode = countrycode
+#' )
 #'
 oc_forward_df <- function(...) UseMethod("oc_forward_df")
 
@@ -360,20 +381,19 @@ oc_forward_df.data.frame <-
            abbrv = FALSE,
            address_only = FALSE,
            ...) {
-
     # Tidyeval to enable input from data frame columns
-    placename      <- rlang::enquo(placename)
-    bounds         <- rlang::enquo(bounds)
-    proximity      <- rlang::enquo(proximity)
-    countrycode    <- rlang::enquo(countrycode)
-    language       <- rlang::enquo(language)
-    limit          <- rlang::enquo(limit)
+    placename <- rlang::enquo(placename)
+    bounds <- rlang::enquo(bounds)
+    proximity <- rlang::enquo(proximity)
+    countrycode <- rlang::enquo(countrycode)
+    language <- rlang::enquo(language)
+    limit <- rlang::enquo(limit)
     min_confidence <- rlang::enquo(min_confidence)
     no_annotations <- rlang::enquo(no_annotations)
-    roadinfo       <- rlang::enquo(roadinfo)
-    no_dedupe      <- rlang::enquo(no_dedupe)
-    abbrv          <- rlang::enquo(abbrv)
-    address_only   <- rlang::enquo(address_only)
+    roadinfo <- rlang::enquo(roadinfo)
+    no_dedupe <- rlang::enquo(no_dedupe)
+    abbrv <- rlang::enquo(abbrv)
+    address_only <- rlang::enquo(address_only)
 
     # check a placename is provided
     if (rlang::quo_is_missing(placename) || rlang::quo_is_null(placename)) {
@@ -388,7 +408,7 @@ oc_forward_df.data.frame <-
     # we assume that the user wants the entire output when annotations or
     # roadinfo are requested
     if (any(rlang::eval_tidy(no_annotations, data = data) == FALSE) ||
-        any(rlang::eval_tidy(roadinfo, data = data) == TRUE)) {
+      any(rlang::eval_tidy(roadinfo, data = data) == TRUE)) {
       output <- "all"
     }
 

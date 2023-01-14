@@ -15,7 +15,7 @@ test_that("oc_points works with numeric", {
 test_that("oc_points works with data.frame", {
   xdf <-
     data.frame(
-      y = c(54.0,  42.73),
+      y = c(54.0, 42.73),
       x = c(10.3, -78.81)
     )
 
@@ -26,7 +26,7 @@ test_that("oc_points works with data.frame", {
   expect_length(pnts2[[1]], 2)
   expect_length(pnts2[[2]], 2)
   expect_equal(unlist(pnts2[1]), c(latitude = 54.0, longitude = 10.3))
-  expect_equal(unlist(pnts2[2]), c(latitude =  42.73, longitude = -78.81))
+  expect_equal(unlist(pnts2[2]), c(latitude = 42.73, longitude = -78.81))
 })
 
 test_that("oc_points.default gives informative error message", {

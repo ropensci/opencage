@@ -25,6 +25,6 @@ oc_init_progress <- function(vec) {
 
 oc_show_progress <- function() {
   interactive() &&
-  !isTRUE(getOption("knitr.in.progress")) &&
-  !isTRUE(getOption("rstudio.notebook.executing"))
+    !isTRUE(getOption("knitr.in.progress")) &&
+    !isTRUE(getOption("rstudio.notebook.executing"))
 }

@@ -103,20 +103,26 @@ addresses of a location.
 \dontshow{if (oc_key_present() && oc_api_ok()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 library(tibble)
-df <- tibble(id = 1:4,
-             lat = c(-36.85007, 47.21864, 53.55034, 34.05369),
-             lng = c(174.7706, -1.554136, 10.000654, -118.242767))
+df <- tibble(
+  id = 1:4,
+  lat = c(-36.85007, 47.21864, 53.55034, 34.05369),
+  lng = c(174.7706, -1.554136, 10.000654, -118.242767)
+)
 
 # Return formatted address of lat/lng values
 oc_reverse_df(df, latitude = lat, longitude = lng)
 
 # Return more detailed information about the locations
-oc_reverse_df(df, latitude = lat, longitude = lng,
-              output = "all")
+oc_reverse_df(df,
+  latitude = lat, longitude = lng,
+  output = "all"
+)
 
 # Return results in a preferred language if possible
-oc_reverse_df(df, latitude = lat, longitude = lng,
-              language = "fr")
+oc_reverse_df(df,
+  latitude = lat, longitude = lng,
+  language = "fr"
+)
 
 # oc_reverse_df accepts unquoted column names for all
 # arguments except bind_cols and output.
@@ -124,14 +130,17 @@ oc_reverse_df(df, latitude = lat, longitude = lng,
 # through the data frame passed to the data argument.
 
 df2 <- add_column(df,
-                  language = c("en", "fr", "de", "en"),
-                  confidence = c(8, 10, 10, 10))
+  language = c("en", "fr", "de", "en"),
+  confidence = c(8, 10, 10, 10)
+)
 
 # Use language column to specify preferred language of results
 # and confidence column to allow different confidence levels
-oc_reverse_df(df2, latitude = lat, longitude = lng,
-              language = language,
-              min_confidence = confidence)
+oc_reverse_df(df2,
+  latitude = lat, longitude = lng,
+  language = language,
+  min_confidence = confidence
+)
 \dontshow{\}) # examplesIf}
 }
 \seealso{

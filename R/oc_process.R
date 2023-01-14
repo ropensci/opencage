@@ -22,25 +22,22 @@
 #' @noRd
 
 oc_process <-
-  function(
-    placename = NULL,
-    latitude = NULL,
-    longitude = NULL,
-    return = "url_only",
-    bounds = NULL,
-    proximity = NULL,
-    countrycode = NULL,
-    language = NULL,
-    limit = 1L,
-    min_confidence = NULL,
-    no_annotations = TRUE,
-    roadinfo = FALSE,
-    no_dedupe = FALSE,
-    abbrv = FALSE,
-    address_only = FALSE,
-    add_request = FALSE
-  ) {
-
+  function(placename = NULL,
+           latitude = NULL,
+           longitude = NULL,
+           return = "url_only",
+           bounds = NULL,
+           proximity = NULL,
+           countrycode = NULL,
+           language = NULL,
+           limit = 1L,
+           min_confidence = NULL,
+           no_annotations = TRUE,
+           roadinfo = FALSE,
+           no_dedupe = FALSE,
+           abbrv = FALSE,
+           address_only = FALSE,
+           add_request = FALSE) {
     # get key
     key <- Sys.getenv("OPENCAGE_KEY")
     oc_check_key(key)
@@ -109,7 +106,6 @@ oc_process <-
            address_only = NULL,
            add_request = NULL,
            pb = NULL) {
-
     if (!is.null(pb)) pb$tick()
 
     # define endpoint
@@ -159,7 +155,7 @@ oc_process <-
     if (return == "url_only") {
       if (
         is.null(key) ||
-        (rlang::is_interactive() && isTRUE(getOption("oc_show_key", FALSE)))
+          (rlang::is_interactive() && isTRUE(getOption("oc_show_key", FALSE)))
       ) {
         return(oc_url)
       } else {
@@ -169,7 +165,6 @@ oc_process <-
 
     # send query to API if not NA, else return (fake) empty res_text
     if (!is.na(query) && nchar(query) >= 2) {
-
       # get response
       res_env <- oc_get_memoise(oc_url)
 
@@ -178,16 +173,13 @@ oc_process <-
 
       # check status message
       oc_check_status(res_env, res_text)
-
     } else {
       # Fake 0 results response
 
       if (identical(return, "geojson_list")) {
         res_text <-
           "{\"features\":[],\"total_results\":0,\"type\":\"FeatureCollection\"}"
-
       } else {
-
         request_json <-
           if (add_request) {
             "\"request\":{\"add_request\":1,\"query\":[]}, "
@@ -198,7 +190,6 @@ oc_process <-
         res_text <-
           paste0("{", request_json, "\"results\":[],\"total_results\":0}")
       }
-
     }
 
     # format output
@@ -303,7 +294,9 @@ oc_parse_text <- function(res) {
 #' @noRd
 
 oc_check_status <- function(res_env, res_text) {
-  if (res_env$success()) return(invisible())
+  if (res_env$success()) {
+    return(invisible())
+  }
   message <-
     jsonlite::fromJSON(
       res_text,

@@ -1,7 +1,6 @@
 # Test oc_config() --------------------------------------------------------
 
 test_that("oc_config sets OPENCAGE_KEY environment variable", {
-
   # default envvar
   withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   oc_config()
@@ -35,7 +34,6 @@ test_that("oc_config requests key from terminal", {
 })
 
 test_that("oc_config throws error with faulty OpenCage key", {
-
   # unset key
   withr::local_envvar(c("OPENCAGE_KEY" = ""))
   expect_identical(Sys.getenv("OPENCAGE_KEY"), "")
