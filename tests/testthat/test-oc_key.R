@@ -1,4 +1,4 @@
-## Test oc_check_key ##
+# Test oc_check_key() -----------------------------------------------------
 
 test_that("oc_check_key checks key", {
   expect_error(
@@ -41,7 +41,7 @@ test_that("oc_mask_key does nothing if no key present", {
   )
 })
 
-## Test oc_key_present ##
+# Test oc_key_present() ---------------------------------------------------
 
 test_that("oc_key_present detects if key is present", {
   withr::local_envvar(c("OPENCAGE_KEY" = key_200))

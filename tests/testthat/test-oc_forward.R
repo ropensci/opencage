@@ -1,4 +1,4 @@
-## Test oc_forward functions ##
+# Test oc_forward functions -----------------------------------------------
 
 library(tibble)
 locations <- c("Nantes", "Flensburg", "Los Angeles")

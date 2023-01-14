@@ -1,4 +1,4 @@
-## Test oc_check_query: error messages ##
+# Test oc_check_query() --------------------------------------------------
 
 test_that("oc_check_query checks placename", {
   expect_error(

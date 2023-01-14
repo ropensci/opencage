@@ -1,4 +1,4 @@
-## Test oc_config ##
+# Test oc_config() --------------------------------------------------------
 
 test_that("oc_config sets OPENCAGE_KEY environment variable", {
 
@@ -49,7 +49,6 @@ test_that("oc_config throws error with faulty OpenCage key", {
     "(OpenCage API key must be a )*.( string.)"
   )
 })
-
 
 # test rate_sec argument --------------------------------------------------
 

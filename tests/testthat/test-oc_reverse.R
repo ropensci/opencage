@@ -1,4 +1,4 @@
-## Test oc_reverse functions ##
+# Test oc_reverse functions -----------------------------------------------
 
 library(tibble)
 lat <- c(47.21864, 53.55034, 34.05369)

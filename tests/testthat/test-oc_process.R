@@ -1,4 +1,4 @@
-## Test oc_process ##
+# Test oc_process() -------------------------------------------------------
 
 test_that("oc_process throws error without a key.", {
   withr::local_envvar(c("OPENCAGE_KEY" = ""))

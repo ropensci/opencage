@@ -1,4 +1,4 @@
-## Test oc_check_status ##
+# Test oc_check_status() --------------------------------------------------
 
 test_that("oc_check_status returns no error if HTTP status 200", {
   skip_on_cran()
