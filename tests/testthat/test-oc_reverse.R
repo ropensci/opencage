@@ -182,11 +182,13 @@ test_that("tidyeval works for arguments", {
   confidence <- oc_reverse_df(df3, lat, lng, min_confidence = confidence)
   no_con <- oc_reverse_df(df3, lat, lng)
 
-  expect_false(isTRUE(all.equal(confidence, no_con)))
-  expect_true(isTRUE(all.equal(confidence[1, ], no_con[1, ])))
-  expect_true(isTRUE(all.equal(confidence[2, ], no_con[2, ])))
-  expect_true(isTRUE(all.equal(confidence[3, ], no_con[3, ])))
-  expect_false(isTRUE(all.equal(confidence[4, ], no_con[4, ])))
+  expect_identical(confidence[1, ], no_con[1, ])
+  expect_identical(confidence[2, ], no_con[2, ])
+  expect_identical(confidence[3, ], no_con[3, ])
+  expect_false(identical(
+    confidence[[4, "oc_formatted"]],
+    no_con[[4, "oc_formatted"]]
+  ))
 
   # no_annotations
   ann <- oc_reverse_df(df2, lat, lng,
@@ -208,10 +210,12 @@ test_that("tidyeval works for arguments", {
 
   # abbrv
   abbrv <- oc_reverse_df(df2, lat, lng, abbrv = abbrv)
-  expect_false(isTRUE(all.equal(abbrv, noarg)))
-  expect_true(all.equal(abbrv[1, ], noarg[1, ]))
-  expect_true(all.equal(abbrv[2, ], noarg[2, ]))
-  expect_false(isTRUE(all.equal(abbrv[3, ], noarg[3, ])))
+  expect_identical(abbrv[[1, "oc_formatted"]], noarg[[1, "oc_formatted"]])
+  expect_identical(abbrv[[2, "oc_formatted"]], noarg[[2, "oc_formatted"]])
+  expect_false(identical(
+    abbrv[[3, "oc_formatted"]],
+    noarg[[3, "oc_formatted"]]
+  ))
 
   # address_only
   address_only <- oc_reverse_df(df2, lat, lng, address_only = address_only)

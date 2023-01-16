@@ -215,9 +215,9 @@ test_that("tidyeval works for arguments", {
   bounds <- oc_forward_df(df2, loc, bounds = bounds, bind_cols = FALSE)
   prx <- oc_forward_df(df2, loc, proximity = proximity, bind_cols = FALSE)
   cc <- oc_forward_df(df2, loc, countrycode = countrycode, bind_cols = FALSE)
-  expect_false(isTRUE(all.equal(bounds, noarg)))
-  expect_false(isTRUE(all.equal(prx, noarg)))
-  expect_false(isTRUE(all.equal(cc, noarg)))
+  expect_false(identical(bounds, noarg))
+  expect_false(identical(prx, noarg))
+  expect_false(identical(cc, noarg))
   expect_identical(bounds, prx)
   expect_identical(bounds, cc)
 
@@ -239,10 +239,9 @@ test_that("tidyeval works for arguments", {
   # make sure we get actual results, not only NA
   expect_false(anyNA(confidence$oc_formatted))
 
-  expect_false(isTRUE(all.equal(confidence, noarg)))
-  expect_false(isTRUE(all.equal(confidence[1, ], noarg[1, ])))
-  expect_false(isTRUE(all.equal(confidence[2, ], noarg[2, ])))
-  expect_false(isTRUE(all.equal(confidence[3, ], noarg[3, ])))
+  expect_false(identical(confidence[1, ], noarg[1, ]))
+  expect_false(identical(confidence[2, ], noarg[2, ]))
+  expect_false(identical(confidence[3, ], noarg[3, ]))
 
   # no_annotations
   ann <- oc_forward_df(df2, loc,
@@ -265,10 +264,12 @@ test_that("tidyeval works for arguments", {
     abbrv = abbrv,
     bind_cols = FALSE
   )
-  expect_false(isTRUE(all.equal(abbrv, noarg)))
-  expect_true(all.equal(abbrv[1, ], noarg[1, ]))
-  expect_true(all.equal(abbrv[2, ], noarg[2, ]))
-  expect_false(isTRUE(all.equal(abbrv[3, ], noarg[3, ])))
+  expect_identical(abbrv[[1, "oc_formatted"]], noarg[[1, "oc_formatted"]])
+  expect_identical(abbrv[[2, "oc_formatted"]], noarg[[2, "oc_formatted"]])
+  expect_false(identical(
+    abbrv[[3, "oc_formatted"]],
+    noarg[[3, "oc_formatted"]]
+  ))
 
   # address_only
   city_halls <- c("Hôtel de ville de Nantes", "Los Angeles City Hall")
