@@ -6,7 +6,7 @@ test_that("oc_forward works", {
   skip_if_no_key()
   skip_if_oc_offline()
 
-  res1 <- oc_forward(oc_locs)
+  res1 <- oc_forward(oc_locs())
   expect_type(res1, "list")
   expect_length(res1, 3L)
   expect_s3_class(res1[[1]], c("tbl_df", "tbl", "data.frame"))
@@ -17,13 +17,13 @@ test_that("oc_forward returns correct type", {
   skip_if_oc_offline()
 
   # json_list
-  res2 <- oc_forward(oc_locs, return = "json_list")
+  res2 <- oc_forward(oc_locs(), return = "json_list")
   expect_type(res2, "list")
   expect_length(res2, 3L)
   expect_type(res2[[1]], "list")
 
   # geojson_list
-  res3 <- oc_forward(oc_locs, return = "geojson_list")
+  res3 <- oc_forward(oc_locs(), return = "geojson_list")
   expect_type(res3, "list")
   expect_length(res3, 3L)
   expect_s3_class(res3[[1]], "geo_list")
@@ -97,7 +97,7 @@ test_that("oc_forward_df works", {
   skip_if_no_key()
   skip_if_oc_offline()
 
-  tbl1 <- oc_forward_df(oc_fw1, loc)
+  tbl1 <- oc_forward_df(oc_fw1(), loc)
   expect_s3_class(tbl1, c("tbl_df", "tbl", "data.frame"))
   expect_identical(nrow(tbl1), 3L)
 
@@ -105,7 +105,7 @@ test_that("oc_forward_df works", {
   expect_s3_class(tbl2, c("tbl_df", "tbl", "data.frame"))
   expect_identical(nrow(tbl2), 1L)
 
-  tbl3 <- oc_forward_df(oc_locs)
+  tbl3 <- oc_forward_df(oc_locs())
   expect_s3_class(tbl3, c("tbl_df", "tbl", "data.frame"))
   expect_identical(nrow(tbl3), 3L)
 })
@@ -165,16 +165,16 @@ test_that("output arguments work", {
   skip_if_oc_offline()
 
   expect_named(
-    oc_forward_df(oc_fw1, loc, bind_cols = TRUE),
+    oc_forward_df(oc_fw1(), loc, bind_cols = TRUE),
     c("id", "loc", "oc_lat", "oc_lng", "oc_formatted")
   )
   expect_named(
-    oc_forward_df(oc_fw1, loc, bind_cols = FALSE),
+    oc_forward_df(oc_fw1(), loc, bind_cols = FALSE),
     c("oc_query", "oc_lat", "oc_lng", "oc_formatted")
   )
-  expect_gt(ncol(oc_forward_df(oc_fw1, loc, output = "all")), 5)
+  expect_gt(ncol(oc_forward_df(oc_fw1(), loc, output = "all")), 5)
   expect_gt(
-    ncol(oc_forward_df(oc_fw1, loc, bind_cols = FALSE, output = "all")),
+    ncol(oc_forward_df(oc_fw1(), loc, bind_cols = FALSE, output = "all")),
     5
   )
 })
@@ -183,12 +183,12 @@ test_that("tidyeval works for arguments", {
   skip_if_no_key()
   skip_if_oc_offline()
 
-  noarg <- oc_forward_df(oc_fw2, loc, bind_cols = FALSE)
+  noarg <- oc_forward_df(oc_fw2(), loc, bind_cols = FALSE)
 
   ## bounds, proximity and countrycode
-  bounds <- oc_forward_df(oc_fw2, loc, bounds = bounds, bind_cols = FALSE)
-  prx <- oc_forward_df(oc_fw2, loc, proximity = proximity, bind_cols = FALSE)
-  cc <- oc_forward_df(oc_fw2, loc, countrycode = countrycode, bind_cols = FALSE)
+  bounds <- oc_forward_df(oc_fw2(), loc, bounds = bounds, bind_cols = FALSE)
+  prx <- oc_forward_df(oc_fw2(), loc, proximity = proximity, bind_cols = FALSE)
+  cc <- oc_forward_df(oc_fw2(), loc, countrycode = countrycode, bind_cols = FALSE)
   expect_false(identical(bounds, noarg))
   expect_false(identical(prx, noarg))
   expect_false(identical(cc, noarg))
@@ -196,20 +196,20 @@ test_that("tidyeval works for arguments", {
   expect_identical(bounds, cc)
 
   # language
-  lang <- oc_forward_df(oc_fw2, loc, language = language, output = "all")
+  lang <- oc_forward_df(oc_fw2(), loc, language = language, output = "all")
   expect_identical(
     lang$oc_country,
     c("Frankreich", "Allemagne", "アメリカ合衆国")
   )
 
   # limit
-  limit <- oc_forward_df(oc_fw2, loc, limit = limit)
+  limit <- oc_forward_df(oc_fw2(), loc, limit = limit)
   expect_identical(nrow(limit), 6L)
   expect_identical(limit$id, c(1L, 2L, 2L, 3L, 3L, 3L))
 
   # min_confidence
   confidence <- oc_forward_df(
-    oc_fw2,
+    oc_fw2(),
     loc,
     min_confidence = confidence,
     bind_cols = FALSE
@@ -225,7 +225,7 @@ test_that("tidyeval works for arguments", {
   # no_annotations
   ann <-
     oc_forward_df(
-      oc_fw2,
+      oc_fw2(),
       loc,
       bind_cols = FALSE,
       no_annotations = annotation
@@ -235,7 +235,7 @@ test_that("tidyeval works for arguments", {
 
   # roadinfo
   ri <- oc_forward_df(
-    oc_fw3,
+    oc_fw3(),
     loc,
     roadinfo = roadinfo
   )
@@ -243,7 +243,7 @@ test_that("tidyeval works for arguments", {
 
   # abbrv
   abbrv <- oc_forward_df(
-    oc_fw2,
+    oc_fw2(),
     loc,
     abbrv = abbrv,
     bind_cols = FALSE
@@ -283,7 +283,7 @@ test_that("list columns are not dropped (by tidyr)", {
   skip_if_no_key()
   skip_if_oc_offline()
 
-  bnds <- oc_forward_df(oc_fw2, loc, bounds = bounds, bind_cols = TRUE)
+  bnds <- oc_forward_df(oc_fw2(), loc, bounds = bounds, bind_cols = TRUE)
   expect_false(is.null(bnds[["bounds"]]))
 })
 
@@ -305,6 +305,6 @@ test_that("Check that placename is present", {
   expect_error(oc_forward(placename = NULL), "`placename` must be provided.")
 
   # oc_forward_df
-  expect_error(oc_forward_df(oc_fw1), "`placename` must be provided.")
-  expect_error(oc_forward_df(oc_fw1, NULL), "`placename` must be provided.")
+  expect_error(oc_forward_df(oc_fw1()), "`placename` must be provided.")
+  expect_error(oc_forward_df(oc_fw1(), NULL), "`placename` must be provided.")
 })
