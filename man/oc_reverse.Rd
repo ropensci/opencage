@@ -101,12 +101,16 @@ lng <- c(-1.554136, 10.000654, -118.242767)
 oc_reverse(latitude = lat, longitude = lng)
 
 # Return results in a preferred language if possible
-oc_reverse(latitude = lat, longitude = lng,
-           language = "fr")
+oc_reverse(
+  latitude = lat, longitude = lng,
+  language = "fr"
+)
 
 # Return results as a json list
-oc_reverse(latitude = lat, longitude = lng,
-           return = "json_list")
+oc_reverse(
+  latitude = lat, longitude = lng,
+  return = "json_list"
+)
 \dontshow{\}) # examplesIf}
 }
 \seealso{

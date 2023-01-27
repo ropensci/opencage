@@ -1,4 +1,3 @@
-
 # We use `<<-` below to modify the package's namespace.
 # It doesn't modify the global environment.
 # We do this to prevent build time dependencies on {memoise} and {ratelimitr},

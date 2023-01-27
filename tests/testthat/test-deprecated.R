@@ -101,10 +101,14 @@ test_that("the bounds argument is well taken into account", {
 test_that("Errors with multiple inputs", {
   withr::local_envvar(c("OPENCAGE_KEY" = key_200))
 
-  expect_error(opencage_forward(c("Hamburg", "Los Angeles")),
-    "`opencage_forward` is not vectorised; use `oc_forward` instead.")
-  expect_error(opencage_reverse(c(5, 20), c(6, 21)),
-    "`opencage_reverse` is not vectorised, use `oc_reverse` instead.")
+  expect_error(
+    opencage_forward(c("Hamburg", "Los Angeles")),
+    "`opencage_forward` is not vectorised; use `oc_forward` instead."
+  )
+  expect_error(
+    opencage_reverse(c(5, 20), c(6, 21)),
+    "`opencage_reverse` is not vectorised, use `oc_reverse` instead."
+  )
 })
 
 

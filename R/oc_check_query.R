@@ -1,15 +1,3 @@
-oc_check_logical <- function(variable, check_length_one = FALSE) {
-  if (!is.null(variable)) {
-    if (!is.logical(variable)) {
-      var_name <- deparse(substitute(variable)) # deparse only if check fails
-      stop("`", var_name, "` must be a logical vector.", call. = FALSE)
-    } else if (check_length_one && !identical(length(variable), 1L)) {
-      var_name <- deparse(substitute(variable)) # deparse only if check fails
-      stop("`", var_name, "` must be a vector of length one.", call. = FALSE)
-    }
-  }
-}
-
 #' Check OpenCage query arguments
 #'
 #' Function that checks the query arguments passed to OpenCage
@@ -21,23 +9,21 @@ oc_check_logical <- function(variable, check_length_one = FALSE) {
 #' @noRd
 
 oc_check_query <-
-  function(
-    placename = NULL,
-    latitude = NULL,
-    longitude = NULL,
-    bounds = NULL,
-    proximity = NULL,
-    countrycode = NULL,
-    language = NULL,
-    limit = NULL,
-    min_confidence = NULL,
-    no_annotations = NULL,
-    roadinfo = NULL,
-    no_dedupe = NULL,
-    abbrv = NULL,
-    address_only = NULL,
-    add_request = NULL
-  ) {
+  function(placename = NULL,
+           latitude = NULL,
+           longitude = NULL,
+           bounds = NULL,
+           proximity = NULL,
+           countrycode = NULL,
+           language = NULL,
+           limit = NULL,
+           min_confidence = NULL,
+           no_annotations = NULL,
+           roadinfo = NULL,
+           no_dedupe = NULL,
+           abbrv = NULL,
+           address_only = NULL,
+           add_request = NULL) {
     arglist <-
       purrr::compact(
         list(
@@ -62,8 +48,10 @@ oc_check_query <-
     # ensure arguments are length one or match length of placename/latitude
     arglngths <- lengths(arglist)
     if (!all(arglngths == arglngths[1] | arglngths == 1, na.rm = TRUE)) {
-      stop(call. = FALSE, "All arguments must be of length one \n",
-      "or of the same length as `placename` or `latitude`.")
+      stop(
+        call. = FALSE, "All arguments must be of length one \n",
+        "or of the same length as `placename` or `latitude`."
+      )
     }
 
     purrr::pwalk(
@@ -73,23 +61,21 @@ oc_check_query <-
   }
 
 .oc_check_query <-
-  function(
-    placename = NULL,
-    latitude = NULL,
-    longitude = NULL,
-    bounds = NULL,
-    proximity = NULL,
-    countrycode = NULL,
-    language = NULL,
-    limit = NULL,
-    min_confidence = NULL,
-    no_annotations = NULL,
-    roadinfo = NULL,
-    no_dedupe = NULL,
-    abbrv = NULL,
-    address_only = NULL,
-    add_request = NULL
-  ) {
+  function(placename = NULL,
+           latitude = NULL,
+           longitude = NULL,
+           bounds = NULL,
+           proximity = NULL,
+           countrycode = NULL,
+           language = NULL,
+           limit = NULL,
+           min_confidence = NULL,
+           no_annotations = NULL,
+           roadinfo = NULL,
+           no_dedupe = NULL,
+           abbrv = NULL,
+           address_only = NULL,
+           add_request = NULL) {
     # check placename
     if (!is.null(placename) && !is.character(placename)) {
       stop("`placename` must be a character vector.", call. = FALSE)
@@ -123,7 +109,7 @@ oc_check_query <-
         )
       }
       if (!utils::hasName(proximity, "latitude") ||
-          !utils::hasName(proximity, "longitude")) {
+        !utils::hasName(proximity, "longitude")) {
         stop(
           call. = FALSE,
           "The coordinates of every `proximity` point must be named ",
@@ -184,8 +170,37 @@ oc_check_query <-
     oc_check_logical(address_only)
 
     oc_check_logical(add_request)
-
   }
+
+
+#' Check whether an argument is a boolean and (optionally) of length one
+#'
+#' @param variable argument to check
+#' @param check_length_one boolean whether to check if the argument is of length
+#'   one
+#'
+#' @noRd
+
+oc_check_logical <- function(variable, check_length_one = FALSE) {
+  if (!is.null(variable)) {
+    if (!is.logical(variable)) {
+      var_name <- deparse(substitute(variable)) # deparse only if check fails
+      stop("`", var_name, "` must be a logical vector.", call. = FALSE)
+    } else if (check_length_one && !identical(length(variable), 1L)) {
+      var_name <- deparse(substitute(variable)) # deparse only if check fails
+      stop("`", var_name, "` must be a vector of length one.", call. = FALSE)
+    }
+  }
+}
+
+
+#' Check whether a value is between two values
+#'
+#' @param x numeric value to check
+#' @param left numeric lower bound
+#' @param right numeric upper bound
+#'
+#' @noRd
 
 oc_check_between <- function(x, left, right) {
   if (!is.numeric(x)) {
@@ -197,10 +212,10 @@ oc_check_between <- function(x, left, right) {
       deparse(substitute(x)),
       "` must be between ",
       left,
-       " and ",
-       right,
-       ".",
-       call. = FALSE
+      " and ",
+      right,
+      ".",
+      call. = FALSE
     )
   }
 }

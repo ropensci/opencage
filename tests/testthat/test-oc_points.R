@@ -5,7 +5,7 @@ test_that("oc_points works with numeric", {
   expect_type(pnts1, "list")
   expect_type(pnts1[[1]], "double")
   expect_length(pnts1[[1]], 2)
-  expect_equal(unlist(pnts1), c(latitude = -5.6, longitude = 51.2))
+  expect_identical(unlist(pnts1), c(latitude = -5.6, longitude = 51.2))
   expect_output(
     object = print(pnts1),
     regexp = "latitude\\s+longitude\\s+\\n\\s+-5.6\\s+51.2"
@@ -15,7 +15,7 @@ test_that("oc_points works with numeric", {
 test_that("oc_points works with data.frame", {
   xdf <-
     data.frame(
-      y = c(54.0,  42.73),
+      y = c(54.0, 42.73),
       x = c(10.3, -78.81)
     )
 
@@ -25,8 +25,8 @@ test_that("oc_points works with data.frame", {
   expect_type(pnts2[[2]], "double")
   expect_length(pnts2[[1]], 2)
   expect_length(pnts2[[2]], 2)
-  expect_equal(unlist(pnts2[1]), c(latitude = 54.0, longitude = 10.3))
-  expect_equal(unlist(pnts2[2]), c(latitude =  42.73, longitude = -78.81))
+  expect_identical(unlist(pnts2[1]), c(latitude = 54.0, longitude = 10.3))
+  expect_identical(unlist(pnts2[2]), c(latitude = 42.73, longitude = -78.81))
 })
 
 test_that("oc_points.default gives informative error message", {

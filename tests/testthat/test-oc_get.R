@@ -1,4 +1,4 @@
-## Test oc_get ##
+# Test oc_get() -----------------------------------------------------------
 
 test_that("oc_get returns a response object", {
   skip_if_oc_offline()

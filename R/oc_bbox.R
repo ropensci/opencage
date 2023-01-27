@@ -101,10 +101,12 @@ oc_bbox.data.frame <- function(data, xmin, ymin, xmax, ymax, ...) {
   xmax <- rlang::enquo(xmax)
   ymax <- rlang::enquo(ymax)
 
-  oc_bbox(xmin = rlang::eval_tidy(xmin, data = data),
-          ymin = rlang::eval_tidy(ymin, data = data),
-          xmax = rlang::eval_tidy(xmax, data = data),
-          ymax = rlang::eval_tidy(ymax, data = data))
+  oc_bbox(
+    xmin = rlang::eval_tidy(xmin, data = data),
+    ymin = rlang::eval_tidy(ymin, data = data),
+    xmax = rlang::eval_tidy(xmax, data = data),
+    ymax = rlang::eval_tidy(ymax, data = data)
+  )
 }
 
 #' @name oc_bbox
@@ -122,7 +124,15 @@ oc_bbox.bbox <- function(bbox, ...) {
   list(bbox)
 }
 
-# check bbox
+#' Check whether a bounding box has valid longitude and latitude values
+#'
+#' @param xmin numeric minimum longitude
+#' @param ymin numeric minimum latitude
+#' @param xmax numeric maximum longitude
+#' @param ymax numeric maximum latitude
+#'
+#' @noRd
+
 oc_check_bbox <- function(xmin, ymin, xmax, ymax) {
   if (anyNA(c(xmin, ymin, xmax, ymax))) {
     stop("Every `bbox` element must be non-missing.", call. = FALSE)

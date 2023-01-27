@@ -1,28 +1,4 @@
-## Test oc_forward functions ##
-
-library(tibble)
-locations <- c("Nantes", "Flensburg", "Los Angeles")
-df <- tibble(id = 1:3, loc = locations)
-df2 <- add_column(df,
-                  bounds = oc_bbox(xmin = c(-72, -98, -73),
-                                   ymin = c(45, 43, -38),
-                                   xmax = c(-70, -90, -71),
-                                   ymax = c(46, 49, -36)),
-                  proximity = oc_points(latitude = c(45.5, 46, -37),
-                                        longitude = c(-71, -95, -72)),
-                  countrycode = c("ca", "us", "cl"),
-                  language = c("de", "fr", "ja"),
-                  limit = 1:3,
-                  confidence = c(7, 9, 5),
-                  annotation = c(FALSE, TRUE, TRUE),
-                  abbrv = c(FALSE, FALSE, TRUE),
-                  address_only = c(TRUE, FALSE, FALSE))
-
-df3 <- tibble(
-  id = 1:3,
-  loc = c("Nantes", "Elbphilharmonie Hamburg", "Los Angeles City Hall"),
-  roadinfo = c(FALSE, TRUE, TRUE)
-)
+# Test oc_forward functions -----------------------------------------------
 
 # oc_forward --------------------------------------------------------------
 
@@ -30,7 +6,7 @@ test_that("oc_forward works", {
   skip_if_no_key()
   skip_if_oc_offline()
 
-  res1 <- oc_forward(locations)
+  res1 <- oc_forward(oc_locs())
   expect_type(res1, "list")
   expect_length(res1, 3L)
   expect_s3_class(res1[[1]], c("tbl_df", "tbl", "data.frame"))
@@ -41,13 +17,13 @@ test_that("oc_forward returns correct type", {
   skip_if_oc_offline()
 
   # json_list
-  res2 <- oc_forward(locations, return = "json_list")
+  res2 <- oc_forward(oc_locs(), return = "json_list")
   expect_type(res2, "list")
   expect_length(res2, 3L)
   expect_type(res2[[1]], "list")
 
   # geojson_list
-  res3 <- oc_forward(locations, return = "geojson_list")
+  res3 <- oc_forward(oc_locs(), return = "geojson_list")
   expect_type(res3, "list")
   expect_length(res3, 3L)
   expect_s3_class(res3[[1]], "geo_list")
@@ -121,15 +97,15 @@ test_that("oc_forward_df works", {
   skip_if_no_key()
   skip_if_oc_offline()
 
-  tbl1 <- oc_forward_df(df, loc)
+  tbl1 <- oc_forward_df(oc_fw1(), loc)
   expect_s3_class(tbl1, c("tbl_df", "tbl", "data.frame"))
   expect_identical(nrow(tbl1), 3L)
 
-  tbl2 <- oc_forward_df(tibble(loc = "Nantes"), loc)
+  tbl2 <- oc_forward_df(data.frame(loc = "Nantes"), loc)
   expect_s3_class(tbl2, c("tbl_df", "tbl", "data.frame"))
   expect_identical(nrow(tbl2), 1L)
 
-  tbl3 <- oc_forward_df(locations)
+  tbl3 <- oc_forward_df(oc_locs())
   expect_s3_class(tbl3, c("tbl_df", "tbl", "data.frame"))
   expect_identical(nrow(tbl3), 3L)
 })
@@ -188,74 +164,96 @@ test_that("output arguments work", {
   skip_if_no_key()
   skip_if_oc_offline()
 
-  expect_named(oc_forward_df(df, loc, bind_cols = TRUE),
-               c("id", "loc", "oc_lat", "oc_lng", "oc_formatted"))
-  expect_named(oc_forward_df(df, loc, bind_cols = FALSE),
-               c("oc_query", "oc_lat", "oc_lng", "oc_formatted"))
-  expect_gt(ncol(oc_forward_df(df, loc, output = "all")), 5)
-  expect_gt(ncol(oc_forward_df(df, loc, bind_cols = FALSE, output = "all")), 5)
+  expect_named(
+    oc_forward_df(oc_fw1(), loc, bind_cols = TRUE),
+    c("id", "loc", "oc_lat", "oc_lng", "oc_formatted")
+  )
+  expect_named(
+    oc_forward_df(oc_fw1(), loc, bind_cols = FALSE),
+    c("oc_query", "oc_lat", "oc_lng", "oc_formatted")
+  )
+  expect_gt(ncol(oc_forward_df(oc_fw1(), loc, output = "all")), 5)
+  expect_gt(
+    ncol(oc_forward_df(oc_fw1(), loc, bind_cols = FALSE, output = "all")),
+    5
+  )
 })
 
 test_that("tidyeval works for arguments", {
   skip_if_no_key()
   skip_if_oc_offline()
 
-  noarg <- oc_forward_df(df2, loc, bind_cols = FALSE)
+  noarg <- oc_forward_df(oc_fw2(), loc, bind_cols = FALSE)
 
   ## bounds, proximity and countrycode
-  bounds <- oc_forward_df(df2, loc, bounds = bounds, bind_cols = FALSE)
-  prx <- oc_forward_df(df2, loc, proximity = proximity, bind_cols = FALSE)
-  cc <- oc_forward_df(df2, loc, countrycode = countrycode, bind_cols = FALSE)
-  expect_false(isTRUE(all.equal(bounds, noarg)))
-  expect_false(isTRUE(all.equal(prx, noarg)))
-  expect_false(isTRUE(all.equal(cc, noarg)))
+  bounds <- oc_forward_df(oc_fw2(), loc, bounds = bounds, bind_cols = FALSE)
+  prx <- oc_forward_df(oc_fw2(), loc, proximity = proximity, bind_cols = FALSE)
+  cc <- oc_forward_df(oc_fw2(), loc, countrycode = countrycode, bind_cols = FALSE)
+  expect_false(identical(bounds, noarg))
+  expect_false(identical(prx, noarg))
+  expect_false(identical(cc, noarg))
   expect_identical(bounds, prx)
   expect_identical(bounds, cc)
 
   # language
-  lang <- oc_forward_df(df2, loc, language = language, output = "all")
-  expect_identical(lang$oc_country, c("Frankreich", "Allemagne", "アメリカ合衆国")) # nolint: line_length_linter.
+  lang <- oc_forward_df(oc_fw2(), loc, language = language, output = "all")
+  expect_identical(
+    lang$oc_country,
+    c("Frankreich", "Allemagne", "アメリカ合衆国")
+  )
 
   # limit
-  limit <- oc_forward_df(df2, loc, limit = limit)
+  limit <- oc_forward_df(oc_fw2(), loc, limit = limit)
   expect_identical(nrow(limit), 6L)
   expect_identical(limit$id, c(1L, 2L, 2L, 3L, 3L, 3L))
 
   # min_confidence
-  confidence <- oc_forward_df(df2, loc,
-                              min_confidence = confidence,
-                              bind_cols = FALSE)
+  confidence <- oc_forward_df(
+    oc_fw2(),
+    loc,
+    min_confidence = confidence,
+    bind_cols = FALSE
+  )
 
   # make sure we get actual results, not only NA
   expect_false(anyNA(confidence$oc_formatted))
 
-  expect_false(isTRUE(all.equal(confidence, noarg)))
-  expect_false(isTRUE(all.equal(confidence[1, ], noarg[1, ])))
-  expect_false(isTRUE(all.equal(confidence[2, ], noarg[2, ])))
-  expect_false(isTRUE(all.equal(confidence[3, ], noarg[3, ])))
+  expect_false(identical(confidence[1, ], noarg[1, ]))
+  expect_false(identical(confidence[2, ], noarg[2, ]))
+  expect_false(identical(confidence[3, ], noarg[3, ]))
 
   # no_annotations
-  ann <- oc_forward_df(df2, loc, bind_cols = FALSE,
-                       no_annotations = annotation)
+  ann <-
+    oc_forward_df(
+      oc_fw2(),
+      loc,
+      bind_cols = FALSE,
+      no_annotations = annotation
+    )
   expect_gt(ncol(ann), 30)
   expect_identical(ann$oc_currency_name, c("Euro", NA, NA))
 
   # roadinfo
   ri <- oc_forward_df(
-    df3,
+    oc_fw3(),
     loc,
     roadinfo = roadinfo
   )
   expect_identical(ri$oc_roadinfo_speed_in, c(NA_character_, "km/h", "mph"))
 
   # abbrv
-  abbrv <- oc_forward_df(df2, loc,
-                         abbrv = abbrv,
-                         bind_cols = FALSE)
-  expect_false(isTRUE(all.equal(abbrv, noarg)))
-  expect_true(all.equal(abbrv[1, ], noarg[1, ]))
-  expect_true(all.equal(abbrv[2, ], noarg[2, ]))
-  expect_false(isTRUE(all.equal(abbrv[3, ], noarg[3, ])))
+  abbrv <- oc_forward_df(
+    oc_fw2(),
+    loc,
+    abbrv = abbrv,
+    bind_cols = FALSE
+  )
+  expect_identical(abbrv[[1, "oc_formatted"]], noarg[[1, "oc_formatted"]])
+  expect_identical(abbrv[[2, "oc_formatted"]], noarg[[2, "oc_formatted"]])
+  expect_false(identical(
+    abbrv[[3, "oc_formatted"]],
+    noarg[[3, "oc_formatted"]]
+  ))
 
   # address_only
   city_halls <- c("Hôtel de ville de Nantes", "Los Angeles City Hall")
@@ -285,7 +283,7 @@ test_that("list columns are not dropped (by tidyr)", {
   skip_if_no_key()
   skip_if_oc_offline()
 
-  bnds <- oc_forward_df(df2, loc, bounds = bounds, bind_cols = TRUE)
+  bnds <- oc_forward_df(oc_fw2(), loc, bounds = bounds, bind_cols = TRUE)
   expect_false(is.null(bnds[["bounds"]]))
 })
 
@@ -307,6 +305,6 @@ test_that("Check that placename is present", {
   expect_error(oc_forward(placename = NULL), "`placename` must be provided.")
 
   # oc_forward_df
-  expect_error(oc_forward_df(df), "`placename` must be provided.")
-  expect_error(oc_forward_df(df, NULL), "`placename` must be provided.")
+  expect_error(oc_forward_df(oc_fw1()), "`placename` must be provided.")
+  expect_error(oc_forward_df(oc_fw1(), NULL), "`placename` must be provided.")
 })

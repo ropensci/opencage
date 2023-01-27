@@ -4,7 +4,7 @@ test_that("oc_bbox works with numeric", {
   bbox1 <- oc_bbox(-5.6, 51.2, 0.2, 51.6)
   expect_type(bbox1, "list")
   expect_s3_class(bbox1[[1]], "bbox")
-  expect_equal(
+  expect_identical(
     unlist(bbox1),
     c(xmin = -5.6, ymin = 51.2, xmax = 0.2, ymax = 51.6)
   )
@@ -33,11 +33,11 @@ test_that("oc_bbox works with data.frame", {
     )
   expect_type(bbox2, "list")
   expect_s3_class(bbox2[[1]], "bbox")
-  expect_equal(
+  expect_identical(
     unlist(bbox2[1]),
     c(xmin = 8.1, ymin = 53.3, xmax = 10.3, ymax = 54.0)
   )
-  expect_equal(
+  expect_identical(
     unlist(bbox2[2]),
     c(xmin = -78.86, ymin = 42.70, xmax = -78.81, ymax = 42.73)
   )
@@ -55,7 +55,7 @@ test_that("oc_bbox works with simple features bbox", {
 
   expect_type(ocbbox, "list")
   expect_s3_class(ocbbox[[1]], "bbox")
-  expect_equal(
+  expect_identical(
     unlist(ocbbox),
     c(xmin = 16.1, ymin = 47.9, xmax = 16.6, ymax = 48.6)
   )

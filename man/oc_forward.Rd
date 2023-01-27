@@ -130,31 +130,40 @@ oc_forward(placename = locations)
 
 # Use bounding box to help return accurate results
 # for each placename
-bounds <- oc_bbox(xmin = c(-2, 9, -119),
-                  ymin = c(47, 53, 34),
-                  xmax = c(0, 10, -117),
-                  ymax = c(48, 54, 35))
+bounds <- oc_bbox(
+  xmin = c(-2, 9, -119),
+  ymin = c(47, 53, 34),
+  xmax = c(0, 10, -117),
+  ymax = c(48, 54, 35)
+)
 oc_forward(placename = locations, bounds = bounds)
 
 # Another way to help specify the desired results
 # is with country codes.
-oc_forward(placename = locations,
-           countrycode = c("ca", "us", "co"))
+oc_forward(
+  placename = locations,
+  countrycode = c("ca", "us", "co")
+)
 
 # With multiple countrycodes per placename
-oc_forward(placename = locations,
-           countrycode = list(c("fr", "ca") , c("de", "us"), c("us", "co"))
-           )
+oc_forward(
+  placename = locations,
+  countrycode = list(c("fr", "ca"), c("de", "us"), c("us", "co"))
+)
 
 # Return results in a preferred language if possible
-oc_forward(placename = c("Brugge", "Mechelen", "Antwerp"),
-           language = "fr")
+oc_forward(
+  placename = c("Brugge", "Mechelen", "Antwerp"),
+  language = "fr"
+)
 
 # Limit the number of results per placename and return json_list
-oc_forward(placename = locations,
-           bounds = bounds,
-           limit = 1,
-           return = "json_list")
+oc_forward(
+  placename = locations,
+  bounds = bounds,
+  limit = 1,
+  return = "json_list"
+)
 \dontshow{\}) # examplesIf}
 }
 \seealso{

@@ -1,4 +1,4 @@
-## Test oc_process ##
+# Test oc_process() -------------------------------------------------------
 
 test_that("oc_process throws error without a key.", {
   withr::local_envvar(c("OPENCAGE_KEY" = ""))
@@ -15,10 +15,10 @@ test_that("oc_process throws error without a key.", {
 test_that("oc_process(return = 'url_only') does not reveal key by default.", {
   withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   res <-
-      oc_process(
-        placename = "Paris",
-        return = "url_only"
-      )
+    oc_process(
+      placename = "Paris",
+      return = "url_only"
+    )
   expect_match(res[[1]], "key=OPENCAGE_KEY", fixed = TRUE)
 })
 

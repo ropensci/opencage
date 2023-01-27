@@ -72,7 +72,13 @@ oc_points.data.frame <- function(data, latitude, longitude, ...) {
   )
 }
 
-# check points
+#' Check whether a point has valid latitude and longitude values
+#'
+#' @param latitude numeric latitude value to check
+#' @param longitude numeric longitude value to check
+#'
+#' @noRd
+
 oc_check_point <- function(latitude, longitude) {
   if (anyNA(c(latitude, longitude))) {
     stop("Every `point` element must be non-missing.", call. = FALSE)
