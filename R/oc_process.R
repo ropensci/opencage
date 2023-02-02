@@ -236,8 +236,7 @@ oc_build_url <- function(query_par, endpoint) {
 
   oc_path <- paste0("geocode/v1/", endpoint)
 
-  crul::url_build(
-    url = "https://api.opencagedata.com",
+  list(
     path = oc_path,
     query = query_par
   )
@@ -246,18 +245,19 @@ oc_build_url <- function(query_par, endpoint) {
 
 #' GET request from OpenCage
 #'
-#' @param oc_url character string URL with query parameters, built with
+#' @param oc_url_parts list with path and query, built with
 #'   `oc_build_url()`
 #'
-#' @return crul::HttpResponse object
+#' @return httr2 response
 #' @noRd
 
-oc_get <- function(oc_url) {
-  client <- crul::HttpClient$new(
-    url = oc_url,
-    headers = list(`User-Agent` = oc_ua_string)
-  )
-  client$get()
+oc_get <- function(oc_url_parts) {
+
+  httr2::request("https://api.opencagedata.com") %>%
+    httr2::req_url_path(oc_url[["path"]]) %>%
+    httr2::req_url_query(oc_url[["query"]]) %>%
+    httr2::req_user_agent(oc_ua_string) %>%
+    httr2::req_perform()
 }
 
 # user-agent string: this is set at build-time, but that should be okay,
