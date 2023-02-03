@@ -14,7 +14,7 @@ test_that("oc_get returns a response object", {
         endpoint = "json"
       )
     ),
-    "HttpResponse"
+    "httr2_response"
   )
 })
 
@@ -28,12 +28,13 @@ test_that("oc_get returns a response object for Namibia NA countrycode", {
         query_par = list(
           placename = "Windhoek",
           key = Sys.getenv("OPENCAGE_KEY"),
-          countrycode = "NA"
+          countrycode = "NA",
+          limit = 2
         ),
         endpoint = "json"
       )
     ),
-    "HttpResponse"
+    "httr2_response"
   )
 })
 
@@ -52,7 +53,7 @@ test_that("oc_get returns a response object for vector countrycode", {
         endpoint = "json"
       )
     ),
-    "HttpResponse"
+    "httr2_response"
   )
 })
 
