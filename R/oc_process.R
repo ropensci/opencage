@@ -249,16 +249,28 @@ oc_build_url <- function(query_par, endpoint) {
 #' @return httr2 response
 #' @noRd
 
-oc_get <- function(oc_url_parts) {
+oc_get <- function(oc_url_parts = NULL) {
 
-  req_with_url <- httr2::request("https://api.opencagedata.com") %>%
-    httr2::req_url_path_append(oc_url_parts[["path"]])
+  initial_req <- httr2::request("https://api.opencagedata.com")
 
-  # some gymnastics needed as we can't pass the query as a list to httr2?
-  args <- oc_url_parts[["query"]]
-  args[[".req"]] <- req_with_url
+  req_with_url <- if (!is.null(oc_url_parts[["path"]])) {
+    httr2::req_url_path_append(initial_req, oc_url_parts[["path"]])
+  } else {
+    initial_req
+  }
 
-  do.call(what = httr2::req_url_query, args = args) %>%
+
+  if (!is.null(oc_url_parts[["query"]])) {
+    # some gymnastics needed as we can't pass the query as a list to httr2?
+    args <- oc_url_parts[["query"]]
+    args[[".req"]] <- req_with_url
+
+    query_req <- do.call(what = httr2::req_url_query, args = args)
+  } else {
+    query_req <- req_with_url
+  }
+
+  query_req %>%
     httr2::req_throttle(rate = getOption("oc_rate_sec", default = 1L)/1L) %>%
     httr2::req_user_agent(oc_ua_string) %>%
     httr2::req_perform() # will error if API error :-)
