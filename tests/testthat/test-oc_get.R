@@ -28,8 +28,7 @@ test_that("oc_get returns a response object for Namibia NA countrycode", {
         query_par = list(
           placename = "Windhoek",
           key = Sys.getenv("OPENCAGE_KEY"),
-          countrycode = "NA",
-          limit = 2
+          countrycode = "NA"
         ),
         endpoint = "json"
       )
