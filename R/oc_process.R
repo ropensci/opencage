@@ -270,7 +270,6 @@ build_query_with_req <- function(oc_url_parts) {
     initial_req
   }
 
-
   if (!is.null(oc_url_parts[["query"]])) {
     # some gymnastics needed as we can't pass the query as a list to httr2?
     args <- oc_url_parts[["query"]]
