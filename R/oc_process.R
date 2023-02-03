@@ -256,7 +256,7 @@ oc_get <- function(oc_url_parts = NULL) {
   query_req <- build_query_with_req(oc_url_parts)
 
   query_req %>%
-    httr2::req_throttle(rate = getOption("oc_rate_sec", default = 1L)/1L) %>%
+    httr2::req_throttle(rate = getOption("oc_rate_sec", default = 1L) / 1L) %>%
     httr2::req_user_agent(oc_ua_string) %>%
     httr2::req_perform() # will error if API error :-)
 }
