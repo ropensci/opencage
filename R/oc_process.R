@@ -168,7 +168,7 @@ oc_process <-
     # send query to API if not NA, else return (fake) empty res_text
     if (!is.na(query) && nchar(query) >= 2) {
       # get response
-      res_env <- oc_get_memoise(oc_url)
+      res_env <- oc_get_memoise(oc_url_parts)
 
       # parse response
       res_text <- oc_parse_text(res_env)
