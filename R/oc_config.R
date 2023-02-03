@@ -91,7 +91,6 @@
 #' @export
 oc_config <-
   function(key = Sys.getenv("OPENCAGE_KEY"),
-           rate_sec = getOption("oc_rate_sec", default = 1L),
            no_record = getOption("oc_no_record", default = TRUE),
            show_key = getOption("oc_show_key", default = FALSE),
            ...) {
@@ -118,12 +117,6 @@ oc_config <-
     oc_check_key(pat)
 
     Sys.setenv(OPENCAGE_KEY = pat)
-
-    # set rate limit
-    ratelimitr::UPDATE_RATE(
-      oc_get_limited,
-      ratelimitr::rate(n = rate_sec, period = 1L)
-    )
 
     # set no_record
     oc_check_logical(no_record, check_length_one = TRUE)

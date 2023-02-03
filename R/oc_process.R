@@ -171,8 +171,6 @@ oc_process <-
       # parse response
       res_text <- oc_parse_text(res_env)
 
-      # check status message
-      oc_check_status(res_env, res_text)
     } else {
       # Fake 0 results response
 
@@ -253,11 +251,18 @@ oc_build_url <- function(query_par, endpoint) {
 
 oc_get <- function(oc_url_parts) {
 
-  httr2::request("https://api.opencagedata.com") %>%
-    httr2::req_url_path(oc_url[["path"]]) %>%
-    httr2::req_url_query(oc_url[["query"]]) %>%
+  req_with_url <- httr2::request("https://api.opencagedata.com") %>%
+    httr2::req_url_path_append(oc_url_parts[["path"]])
+
+  # some gymnastics needed as we can't pass the query as a list to httr2?
+  args <- oc_url_parts[["query"]]
+  args[[".req"]] <- req_with_url
+
+  do.call(what = httr2::req_url_query, args = args) %>%
+    httr2::req_throttle(rate = getOption("oc_rate_sec", default = 1L)/1L) %>%
     httr2::req_user_agent(oc_ua_string) %>%
-    httr2::req_perform()
+    httr2::req_perform() %>%
+    httr2::resp_check_status()
 }
 
 # user-agent string: this is set at build-time, but that should be okay,
@@ -277,35 +282,12 @@ oc_ua_string <-
 #' @noRd
 
 oc_parse_text <- function(res) {
-  text <- res$parse(encoding = "UTF-8")
+  text <- httr2::resp_body_string(res)
   if (identical(text, "")) {
     stop("OpenCage returned an empty response.", call. = FALSE)
   }
   text
 }
-
-
-#' Check the status of the HttpResponse
-#'
-#' @param res_env crul::HttpResponse object
-#' @param res_text parsed HttpResponse
-#'
-#' @return NULL if status code less than or equal to 201, else `stop()`
-#' @noRd
-
-oc_check_status <- function(res_env, res_text) {
-  if (res_env$success()) {
-    return(invisible())
-  }
-  message <-
-    jsonlite::fromJSON(
-      res_text,
-      simplifyVector = TRUE,
-      flatten = TRUE
-    )$status$message
-  stop("HTTP failure: ", res_env$status_code, "\n", message, call. = FALSE)
-}
-
 
 #' Format the result string
 #'
