@@ -10,9 +10,10 @@
 #' @keywords internal
 
 oc_api_ok <- function(url = "https://api.opencagedata.com") {
-  resp <- httr2::request("https://api.opencagedata.com") %>%
+  resp <- httr2::request(url) %>%
     httr2::req_method("HEAD") %>%
     httr2::req_user_agent(oc_ua_string) %>%
+    httr2::req_error(is_error = function(resp) FALSE) %>%
     httr2::req_perform()
 
   !httr2::resp_is_error(resp)

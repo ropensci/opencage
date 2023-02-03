@@ -261,8 +261,7 @@ oc_get <- function(oc_url_parts) {
   do.call(what = httr2::req_url_query, args = args) %>%
     httr2::req_throttle(rate = getOption("oc_rate_sec", default = 1L)/1L) %>%
     httr2::req_user_agent(oc_ua_string) %>%
-    httr2::req_perform() %>%
-    httr2::resp_check_status()
+    httr2::req_perform() # will error if API error :-)
 }
 
 # user-agent string: this is set at build-time, but that should be okay,
