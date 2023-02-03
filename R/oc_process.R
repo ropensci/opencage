@@ -130,7 +130,7 @@ oc_process <-
     }
 
     # build url
-    oc_url <- oc_build_url(
+    oc_url_parts <- oc_build_url(
       query_par = list(
         q = query,
         bounds = bounds,
@@ -150,6 +150,8 @@ oc_process <-
       ),
       endpoint = endpoint
     )
+    query_req <- build_query_with_req(oc_url_parts)
+    oc_url <- query_req[["url"]]
 
     # return url only
     if (return == "url_only") {
@@ -251,6 +253,15 @@ oc_build_url <- function(query_par, endpoint) {
 
 oc_get <- function(oc_url_parts = NULL) {
 
+  query_req <- build_query_with_req(oc_url_parts)
+
+  query_req %>%
+    httr2::req_throttle(rate = getOption("oc_rate_sec", default = 1L)/1L) %>%
+    httr2::req_user_agent(oc_ua_string) %>%
+    httr2::req_perform() # will error if API error :-)
+}
+
+build_query_with_req <- function(oc_url_parts) {
   initial_req <- httr2::request("https://api.opencagedata.com")
 
   req_with_url <- if (!is.null(oc_url_parts[["path"]])) {
@@ -270,10 +281,7 @@ oc_get <- function(oc_url_parts = NULL) {
     query_req <- req_with_url
   }
 
-  query_req %>%
-    httr2::req_throttle(rate = getOption("oc_rate_sec", default = 1L)/1L) %>%
-    httr2::req_user_agent(oc_ua_string) %>%
-    httr2::req_perform() # will error if API error :-)
+  query_req
 }
 
 # user-agent string: this is set at build-time, but that should be okay,
