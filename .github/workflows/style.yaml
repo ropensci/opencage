@@ -65,7 +65,7 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          FILES_TO_COMMIT=($(git diff --name-only ${{ github.sha }} | grep -E -i '\.(R|[qR]md|Rmarkdown|Rnw|Rprofile)$'))
+          FILES_TO_COMMIT=($(git diff --name-only ${{ github.sha }} | grep -E -i -s '\.(R|[qR]md|Rmarkdown|Rnw|Rprofile)$'))
           git config --local user.name "$GITHUB_ACTOR"
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git commit ${FILES_TO_COMMIT[*]} -m "Style code" || echo "No changes to commit"
