@@ -12,7 +12,7 @@ test_that("oc_reverse works", {
   expect_s3_class(res1[[1]], c("tbl_df", "tbl", "data.frame"))
 })
 
-test_that("oc_reverse returns correct type", {
+test_that("oc_reverse returns correct types", {
   skip_if_no_key()
   skip_if_oc_offline()
 
