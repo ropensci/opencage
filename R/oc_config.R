@@ -91,9 +91,9 @@
 #' @export
 oc_config <-
   function(key = Sys.getenv("OPENCAGE_KEY"),
+           rate_sec = getOption("oc_rate_sec", default = 1L),
            no_record = getOption("oc_no_record", default = TRUE),
            show_key = getOption("oc_show_key", default = FALSE),
-           rate_sec = getOption("oc_rate_sec", default = 1L),
            ...) {
     key_needed <-
       c(
