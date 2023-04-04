@@ -26,7 +26,7 @@ Depends:
     R (>= 3.4.0)
 Imports: 
     dplyr (>= 0.7.4),
-    httr2,
+    httr2 (>= 0.2.0),
     jsonlite (>= 1.5),
     lifecycle,
     magrittr,
