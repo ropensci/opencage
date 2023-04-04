@@ -8,6 +8,7 @@ oc_config(
   key = Sys.getenv("OPENCAGE_KEY"),
   no_record = getOption("oc_no_record", default = TRUE),
   show_key = getOption("oc_show_key", default = FALSE),
+  rate_sec = getOption("oc_rate_sec", default = 1L),
   ...
 )
 }
@@ -27,11 +28,11 @@ not \code{TRUE}, the API key will be replaced with the string \code{OPENCAGE_KEY
 \code{show_key} defaults to the value set in the \code{oc_show_key} option, or, in
 case that does not exist, to \code{FALSE}.}
 
-\item{...}{Ignored.}
-
 \item{rate_sec}{Numeric vector of length one. Sets the maximum number of
 requests sent to the OpenCage API per second. Defaults to the value set in
 the \code{oc_rate_sec} option, or, in case that does not exist, to 1L.}
+
+\item{...}{Ignored.}
 }
 \description{
 Configure session settings for \pkg{opencage}.
