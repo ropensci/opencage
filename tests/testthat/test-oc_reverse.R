@@ -17,7 +17,7 @@ test_that("oc_reverse returns correct type", {
   skip_if_oc_offline()
 
   # json_list
-  res2 <- oc_reverse(oc_lat1(), oc_lng1(), return = "json_list")
+  res2 <-     oc_reverse(oc_lat1(), oc_lng1(), return = "json_list")
   expect_type(res2, "list")
   expect_length(res2, 3L)
   expect_type(res2[[1]], "list")
