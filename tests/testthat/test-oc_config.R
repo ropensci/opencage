@@ -93,3 +93,12 @@ test_that("oc_config sets show_key option", {
   oc_config(show_key = TRUE)
   expect_true(getOption("oc_show_key"))
 })
+
+test_that("rate_sec checks/sets oc_rate_sec option", {
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
+  withr::local_options(oc_rate_sec = 123)
+  oc_config(rate_sec = 42)
+  expect_equal(getOption("oc_rate_sec"), 42)
+
+  expect_error(oc_config(rate_sec = "blablabla"), "Must")
+})
