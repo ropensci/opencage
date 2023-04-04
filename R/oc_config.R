@@ -93,6 +93,7 @@ oc_config <-
   function(key = Sys.getenv("OPENCAGE_KEY"),
            no_record = getOption("oc_no_record", default = TRUE),
            show_key = getOption("oc_show_key", default = FALSE),
+           rate_sec = getOption("oc_rate_sec", default = 1L),
            ...) {
     key_needed <-
       c(
@@ -124,4 +125,10 @@ oc_config <-
 
     # set show_key
     options("oc_show_key" = show_key)
+
+    # set rate
+    if (!is.numeric(rate_sec)) {
+      cli::cli_abort("Must use a numeric {.code rate_sec}")
+    }
+    options("oc_rate_sec" = rate_sec)
   }
