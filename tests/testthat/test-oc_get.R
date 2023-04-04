@@ -14,7 +14,7 @@ test_that("oc_get returns a response object", {
         endpoint = "json"
       )
     ),
-    "HttpResponse"
+    "httr2_response"
   )
 })
 
@@ -33,7 +33,7 @@ test_that("oc_get returns a response object for Namibia NA countrycode", {
         endpoint = "json"
       )
     ),
-    "HttpResponse"
+    "httr2_response"
   )
 })
 
@@ -52,19 +52,8 @@ test_that("oc_get returns a response object for vector countrycode", {
         endpoint = "json"
       )
     ),
-    "HttpResponse"
+    "httr2_response"
   )
-})
-
-test_that("oc_get_limited is rate limited", {
-  skip_on_cran()
-  skip_if_offline("httpbin.org")
-
-  tm <- system.time({
-    replicate(2, oc_get_limited("https://httpbin.org/get"))
-  })
-  rate <- ratelimitr::get_rates(oc_get_limited)
-  expect_gte(tm[["elapsed"]], rate[[1]][["period"]] / rate[[1]][["n"]])
 })
 
 test_that("oc_get_memoise memoises", {

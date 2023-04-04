@@ -119,16 +119,16 @@ oc_config <-
 
     Sys.setenv(OPENCAGE_KEY = pat)
 
-    # set rate limit
-    ratelimitr::UPDATE_RATE(
-      oc_get_limited,
-      ratelimitr::rate(n = rate_sec, period = 1L)
-    )
-
     # set no_record
     oc_check_logical(no_record, check_length_one = TRUE)
     options("oc_no_record" = no_record)
 
     # set show_key
     options("oc_show_key" = show_key)
+
+    # set rate
+    if (!is.numeric(rate_sec)) {
+      cli::cli_abort("Must use a numeric {.code rate_sec}")
+    }
+    options("oc_rate_sec" = rate_sec)
   }

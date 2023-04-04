@@ -1,5 +1,7 @@
 # opencage (development version)
 
+
+* http requests are now handled by {[httr2](https://httr2.r-lib.org/)}, not {[crul](https://docs.ropensci.org/crul/)}; and rate limitation / throttling by httr2, not [ratelimitr](https://github.com/tarakc02/ratelimitr) ([#156](https://github.com/ropensci/opencage/issues/156)).
 * opencage now supports an `address_only` parameter, see "[New optional API parameter 'address_only'](https://blog.opencagedata.com/post/new-optional-parameter-addressonly)", ([#151](https://github.com/ropensci/opencage/pull/151)).
 * The geocoding functions will not send a query to the API anymore if no API key is present ([#133](https://github.com/ropensci/opencage/issues/133)).
 * `NA`s are allowed again for the `placename` or `latitude`/`longitude` arguments (also empty strings for `placename`). 
