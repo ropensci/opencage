@@ -6,15 +6,19 @@
 \usage{
 oc_config(
   key = Sys.getenv("OPENCAGE_KEY"),
+  rate_sec = getOption("oc_rate_sec", default = 1L),
   no_record = getOption("oc_no_record", default = TRUE),
   show_key = getOption("oc_show_key", default = FALSE),
-  rate_sec = getOption("oc_rate_sec", default = 1L),
   ...
 )
 }
 \arguments{
 \item{key}{Your OpenCage API key as a character vector of length one. Do not
 pass the key directly as a parameter, though. See details.}
+
+\item{rate_sec}{Numeric vector of length one. Sets the maximum number of
+requests sent to the OpenCage API per second. Defaults to the value set in
+the \code{oc_rate_sec} option, or, in case that does not exist, to 1L.}
 
 \item{no_record}{Logical vector of length one. When \code{TRUE}, OpenCage will not
 create log entries of the queries and will not cache the geocoding
@@ -27,10 +31,6 @@ key in the URL as stored in the \code{OPENCAGE_KEY} environment variable. When
 not \code{TRUE}, the API key will be replaced with the string \code{OPENCAGE_KEY}.
 \code{show_key} defaults to the value set in the \code{oc_show_key} option, or, in
 case that does not exist, to \code{FALSE}.}
-
-\item{rate_sec}{Numeric vector of length one. Sets the maximum number of
-requests sent to the OpenCage API per second. Defaults to the value set in
-the \code{oc_rate_sec} option, or, in case that does not exist, to 1L.}
 
 \item{...}{Ignored.}
 }
