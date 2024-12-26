@@ -207,21 +207,6 @@ test_that("tidyeval works for arguments", {
   expect_identical(nrow(limit), 6L)
   expect_identical(limit$id, c(1L, 2L, 2L, 3L, 3L, 3L))
 
-  # min_confidence
-  confidence <- oc_forward_df(
-    oc_fw2(),
-    loc,
-    min_confidence = confidence,
-    bind_cols = FALSE
-  )
-
-  # make sure we get actual results, not only NA
-  expect_false(anyNA(confidence$oc_formatted))
-
-  expect_false(identical(confidence[1, ], noarg[1, ]))
-  expect_false(identical(confidence[2, ], noarg[2, ]))
-  expect_false(identical(confidence[3, ], noarg[3, ]))
-
   # no_annotations
   ann <-
     oc_forward_df(

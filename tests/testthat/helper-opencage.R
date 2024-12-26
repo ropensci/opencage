@@ -47,7 +47,6 @@ oc_fw2 <- function() {
     countrycode = c("cz", "us", "cl"),
     language = c("de", "fr", "ja"),
     limit = 1:3,
-    confidence = c(7, 9, 5),
     annotation = c(FALSE, TRUE, TRUE),
     abbrv = c(FALSE, FALSE, TRUE),
     address_only = c(TRUE, FALSE, FALSE)
@@ -73,7 +72,6 @@ oc_rev2 <- function() {
   tibble::add_column(
     oc_rev1(),
     language = c("en", "fr", "ja"),
-    confidence = rep(1L, 3L),
     annotation = c(FALSE, TRUE, TRUE),
     roadinfo = c(FALSE, TRUE, TRUE),
     abbrv = c(FALSE, FALSE, TRUE),
@@ -82,5 +80,5 @@ oc_rev2 <- function() {
 }
 
 oc_rev3 <- function() {
-  tibble::add_row(oc_rev2(), id = 4, lat = 25, lng = 36, confidence = 5)
+  tibble::add_row(oc_rev2(), id = 4, lat = 25, lng = 36)
 }
