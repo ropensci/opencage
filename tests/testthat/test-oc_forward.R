@@ -188,7 +188,8 @@ test_that("tidyeval works for arguments", {
   ## bounds, proximity and countrycode
   bounds <- oc_forward_df(oc_fw2(), loc, bounds = bounds, bind_cols = FALSE)
   prx <- oc_forward_df(oc_fw2(), loc, proximity = proximity, bind_cols = FALSE)
-  cc <- oc_forward_df(oc_fw2(), loc, countrycode = countrycode, bind_cols = FALSE)
+  cc <-
+    oc_forward_df(oc_fw2(), loc, countrycode = countrycode, bind_cols = FALSE)
   expect_false(identical(bounds, noarg))
   expect_false(identical(prx, noarg))
   expect_false(identical(cc, noarg))
