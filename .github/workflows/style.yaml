@@ -4,16 +4,20 @@ on:
   push:
     paths: ["**.[rR]", "**.[qrR]md", "**.[rR]markdown", "**.[rR]nw", "**.[rR]profile"]
 
-name: Style
+name: style.yaml
+
+permissions: read-all
 
 jobs:
   style:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -46,7 +50,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Cache styler
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.styler-location.outputs.location }}
           key: ${{ runner.os }}-styler-${{ github.sha }}
@@ -60,9 +64,14 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git config --local user.name "$GITHUB_ACTOR"
-          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          git add \*.[rR] \*.[qrR]md \*.[rR]markdown \*.[rR]nw \*.[rR]profile
-          git commit -m "Style code" || echo "No changes to commit"
-          git pull --ff-only
-          git push origin
+          if FILES_TO_COMMIT=($(git diff-index --name-only ${{ github.sha }} \
+              | egrep --ignore-case '\.(R|[qR]md|Rmarkdown|Rnw|Rprofile)$'))
+          then
+            git config --local user.name "$GITHUB_ACTOR"
+            git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+            git commit ${FILES_TO_COMMIT[*]} -m "Style code (GHA)"
+            git pull --ff-only
+            git push origin
+          else
+            echo "No changes to commit."
+          fi
