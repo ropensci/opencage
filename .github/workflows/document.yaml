@@ -4,16 +4,20 @@ on:
   push:
     paths: ["R/**"]
 
-name: Document
+name: document.yaml
+
+permissions: read-all
 
 jobs:
   document:
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      contents: write
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
