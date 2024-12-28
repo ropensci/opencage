@@ -10,7 +10,7 @@
 ## Internals
 
 * {opencage} now uses [{testthat} 3e](https://testthat.r-lib.org/articles/third-edition.html) for unit tests ([#141](https://github.com/ropensci/opencage/issues/141)).
-* GitHub action workflows have been updated ([#142](https://github.com/ropensci/opencage/issues/142),  [#149](https://github.com/ropensci/opencage/pull/149), [#152](https://github.com/ropensci/opencage/pull/152)). Styler and document workflows have been added ([#153](https://github.com/ropensci/opencage/pull/153)).
+* GitHub action workflows have been updated ([#142](https://github.com/ropensci/opencage/issues/142),  [#149](https://github.com/ropensci/opencage/pull/149), [#152](https://github.com/ropensci/opencage/pull/152)), [#164](https://github.com/ropensci/opencage/pull/164)). Styler, document, and rhub workflows have been added ([#153](https://github.com/ropensci/opencage/pull/153), [#164](https://github.com/ropensci/opencage/pull/164)).
 * Use [{lintr} version 3.0](https://www.tidyverse.org/blog/2022/07/lintr-3-0-0/) and add "package development" linters ([#144](https://github.com/ropensci/opencage/pull/144)).
 * `countrycodes` source and script were moved to `data-raw` ([#146](https://github.com/ropensci/opencage/pull/146)).
 * Add CITATION.cff and a corresponding GitHub action ([#148](https://github.com/ropensci/opencage/pull/148)).
