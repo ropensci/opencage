@@ -8,13 +8,14 @@ on:
   release:
     types: [published]
   push:
-    branches: main
     paths:
       - DESCRIPTION
       - inst/CITATION
   workflow_dispatch:
 
-name: Update CITATION.cff
+name: update-citation-cff.yaml
+
+permissions: read-all
 
 jobs:
   update-citation-cff:
