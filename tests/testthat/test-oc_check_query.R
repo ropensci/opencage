@@ -152,16 +152,6 @@ test_that("oc_check_query checks limit", {
   )
 })
 
-test_that("oc_check_query checks min_confidence", {
-  expect_error(
-    oc_check_query(
-      placename = "Sarzeau",
-      min_confidence = 20
-    ),
-    "`min_confidence` must be an integer between 1 and 10."
-  )
-})
-
 test_that("oc_check_query checks no_annotations", {
   expect_error(
     oc_check_query(

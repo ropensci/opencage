@@ -226,7 +226,6 @@ test_that("oc_process handles various other arguments.", {
     placename = "Hamburg",
     return = "url_only",
     limit = 1L,
-    min_confidence = NULL,
     no_annotations = FALSE,
     roadinfo = FALSE,
     no_dedupe = FALSE,
@@ -235,7 +234,6 @@ test_that("oc_process handles various other arguments.", {
     add_request = FALSE
   )
   expect_match(res1[[1]], "&limit=1", fixed = TRUE)
-  expect_false(grepl(pattern = "min_confidence", x = res1[[1]], fixed = TRUE))
   expect_match(res1[[1]], "&no_annotations=0", fixed = TRUE)
   expect_match(res1[[1]], "&roadinfo=0", fixed = TRUE)
   expect_match(res1[[1]], "&no_dedupe=0", fixed = TRUE)
@@ -247,7 +245,6 @@ test_that("oc_process handles various other arguments.", {
     placename = "Hamburg",
     return = "url_only",
     limit = 10,
-    min_confidence = 8,
     no_annotations = TRUE,
     roadinfo = TRUE,
     no_dedupe = TRUE,
@@ -256,7 +253,6 @@ test_that("oc_process handles various other arguments.", {
     add_request = TRUE
   )
   expect_match(res2[[1]], "&limit=10", fixed = TRUE)
-  expect_match(res2[[1]], "&min_confidence=8", fixed = TRUE)
   expect_match(res2[[1]], "&no_annotations=1", fixed = TRUE)
   expect_match(res2[[1]], "&roadinfo=1", fixed = TRUE)
   expect_match(res2[[1]], "&no_dedupe=1", fixed = TRUE)
@@ -268,7 +264,6 @@ test_that("oc_process handles various other arguments.", {
     placename = c("Hamburg", "Hamburg"),
     return = "url_only",
     limit = c(10L, 5L),
-    min_confidence = c(8L, 5L),
     no_annotations = c(TRUE, FALSE),
     roadinfo = c(TRUE, FALSE),
     no_dedupe = c(TRUE, FALSE),
@@ -278,8 +273,6 @@ test_that("oc_process handles various other arguments.", {
   )
   expect_match(res3[[1]], "&limit=10", fixed = TRUE)
   expect_match(res3[[2]], "&limit=5", fixed = TRUE)
-  expect_match(res3[[1]], "&min_confidence=8", fixed = TRUE)
-  expect_match(res3[[2]], "&min_confidence=5", fixed = TRUE)
   expect_match(res3[[1]], "&no_annotations=1", fixed = TRUE)
   expect_match(res3[[2]], "&no_annotations=0", fixed = TRUE)
   expect_match(res3[[1]], "&roadinfo=1", fixed = TRUE)
@@ -304,7 +297,6 @@ test_that("arguments that are NULL or NA don't show up in url.", {
     proximity = NULL,
     language = NULL,
     countrycode = NULL,
-    min_confidence = NULL,
     roadinfo = NULL,
     no_annotations = NULL,
     no_dedupe = NULL,
@@ -318,7 +310,6 @@ test_that("arguments that are NULL or NA don't show up in url.", {
   expect_match(res_null[[1]], "^((?!proximity=).)*$", perl = TRUE)
   expect_match(res_null[[1]], "^((?!language=).)*$", perl = TRUE)
   expect_match(res_null[[1]], "^((?!countrycode=).)*$", perl = TRUE)
-  expect_match(res_null[[1]], "^((?!min_confidence=).)*$", perl = TRUE)
   expect_match(res_null[[1]], "^((?!no_annotations=).)*$", perl = TRUE)
   expect_match(res_null[[1]], "^((?!roadinfo=).)*$", perl = TRUE)
   expect_match(res_null[[1]], "^((?!no_dedupe=).)*$", perl = TRUE)
@@ -334,7 +325,6 @@ test_that("arguments that are NULL or NA don't show up in url.", {
     proximity = list(),
     language = NA_character_,
     countrycode = NA_character_,
-    min_confidence = NA,
     no_annotations = NA,
     roadinfo = NA,
     no_dedupe = NA,
@@ -348,7 +338,6 @@ test_that("arguments that are NULL or NA don't show up in url.", {
   expect_match(res_na[[1]], "^((?!proximity=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!language=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!countrycode=).)*$", perl = TRUE)
-  expect_match(res_na[[1]], "^((?!min_confidence=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!no_annotations=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!roadinfo=).)*$", perl = TRUE)
   expect_match(res_na[[1]], "^((?!no_dedupe=).)*$", perl = TRUE)
