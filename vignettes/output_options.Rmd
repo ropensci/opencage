@@ -2,7 +2,7 @@
 title: "Output options"
 subtitle: "Get different kinds of output from OpenCage"
 author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
-date: "2021-02-18"
+date: "2024-12-31"
 description: >
   "`oc_forward()`/`oc_reverse()` return lists of various type, namely data frames, JSON, GeoJSON or URLs, depending on the `return` value you specify. The possible `return` values are `df_list`, `json_list`, `geojson_list` and `url_only`."
 output:
@@ -32,31 +32,31 @@ The default return value is `df_list`.
 It returns a list of tibbles.
 
 
-```r
+``` r
 stations <- c("Casey Station", "McMurdo Station")
 oc_forward(stations, return = "df_list")
 #> [[1]]
-#> # A tibble: 2 x 18
-#>   oc_confidence oc_formatted oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng oc_category oc_type oc_continent oc_hamlet
-#>           <int> <chr>                   <dbl>            <dbl>            <dbl>            <dbl> <chr>       <chr>   <chr>        <chr>    
-#> 1             9 Casey Stati~            -66.3             111.            -66.3             111. commerce    office  Antarctica   Casey St~
-#> 2             9 Casey Stati~             NA                NA              NA                NA  travel/tou~ point_~ Antarctica   <NA>     
-#> # ... with 8 more variables: oc_office <chr>, oc_iso_3166_1_alpha_2 <chr>, oc_iso_3166_1_alpha_3 <chr>, oc_country <chr>,
-#> #   oc_country_code <chr>, oc_point_of_interest <chr>, oc_lat <dbl>, oc_lng <dbl>
+#> # A tibble: 1 × 15
+#>   oc_confidence oc_formatted    oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng oc_iso_3166_1_alpha_2
+#>           <int> <chr>                      <dbl>            <dbl>            <dbl>            <dbl> <chr>                
+#> 1             7 Casey Station,…            -66.3             111.            -66.3             111. AQ                   
+#> # ℹ 8 more variables: oc_category <chr>, oc_normalized_city <chr>, oc_type <chr>, oc_continent <chr>,
+#> #   oc_country_code <chr>, oc_hamlet <chr>, oc_lat <dbl>, oc_lng <dbl>
 #> 
 #> [[2]]
-#> # A tibble: 1 x 12
-#>   oc_confidence oc_formatted oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng oc_category oc_type oc_continent oc_town
-#>           <int> <chr>                   <dbl>            <dbl>            <dbl>            <dbl> <chr>       <chr>   <chr>        <chr>  
-#> 1             7 McMurdo Sta~            -77.8             167.            -77.9             167. place       city    Antarctica   McMurd~
-#> # ... with 2 more variables: oc_lat <dbl>, oc_lng <dbl>
+#> # A tibble: 1 × 15
+#>   oc_confidence oc_formatted    oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng oc_iso_3166_1_alpha_2
+#>           <int> <chr>                      <dbl>            <dbl>            <dbl>            <dbl> <chr>                
+#> 1             7 McMurdo Statio…            -77.8             167.            -77.9             167. AQ                   
+#> # ℹ 8 more variables: oc_category <chr>, oc_normalized_city <chr>, oc_type <chr>, oc_continent <chr>,
+#> #   oc_country_code <chr>, oc_town <chr>, oc_lat <dbl>, oc_lng <dbl>
 ```
 
 The `df_list` type drives the `oc_forward_df()`/`oc_reverse_df()` functions.
 You can use the `df_list` output in a `dplyr::mutate()` chain to replicate the functionality of `oc_forward_df()`:
 
 
-```r
+``` r
 library(dplyr, warn.conflicts = FALSE)
 
 oc_data <-
@@ -64,28 +64,27 @@ oc_data <-
   mutate(oc_result = oc_forward(place))
 
 oc_data
-#> # A tibble: 2 x 2
+#> # A tibble: 2 × 2
 #>   place           oc_result        
 #>   <chr>           <list>           
-#> 1 Casey Station   <tibble [2 x 18]>
-#> 2 McMurdo Station <tibble [1 x 12]>
+#> 1 Casey Station   <tibble [1 × 15]>
+#> 2 McMurdo Station <tibble [1 × 15]>
 ```
 
 This creates a list column `oc_result`, which can be easily unnested with `tidyr::unnest()`:
 
 
-```r
+``` r
 library(tidyr, warn.conflicts = FALSE)
 
 oc_data %>% unnest(oc_result)
-#> # A tibble: 3 x 20
-#>   place oc_confidence oc_formatted oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng oc_category oc_type oc_continent
-#>   <chr>         <int> <chr>                   <dbl>            <dbl>            <dbl>            <dbl> <chr>       <chr>   <chr>       
-#> 1 Case~             9 Casey Stati~            -66.3             111.            -66.3             111. commerce    office  Antarctica  
-#> 2 Case~             9 Casey Stati~             NA                NA              NA                NA  travel/tou~ point_~ Antarctica  
-#> 3 McMu~             7 McMurdo Sta~            -77.8             167.            -77.9             167. place       city    Antarctica  
-#> # ... with 10 more variables: oc_hamlet <chr>, oc_office <chr>, oc_iso_3166_1_alpha_2 <chr>, oc_iso_3166_1_alpha_3 <chr>,
-#> #   oc_country <chr>, oc_country_code <chr>, oc_point_of_interest <chr>, oc_lat <dbl>, oc_lng <dbl>, oc_town <chr>
+#> # A tibble: 2 × 17
+#>   place           oc_confidence oc_formatted          oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng
+#>   <chr>                   <int> <chr>                            <dbl>            <dbl>            <dbl>            <dbl>
+#> 1 Casey Station               7 Casey Station, Antar…            -66.3             111.            -66.3             111.
+#> 2 McMurdo Station             7 McMurdo Station, Ant…            -77.8             167.            -77.9             167.
+#> # ℹ 10 more variables: oc_iso_3166_1_alpha_2 <chr>, oc_category <chr>, oc_normalized_city <chr>, oc_type <chr>,
+#> #   oc_continent <chr>, oc_country_code <chr>, oc_hamlet <chr>, oc_lat <dbl>, oc_lng <dbl>, oc_town <chr>
 ```
 
 ## `json_list`
@@ -93,7 +92,7 @@ oc_data %>% unnest(oc_result)
 OpenCage's main output format is JSON. When you specify `json_list` as the return type, you get the JSON as an R `list()`.
 
 
-```r
+``` r
 oc_forward("Casey Station", return = "json_list")
 #> [[1]]
 #> [[1]]$documentation
@@ -114,92 +113,56 @@ oc_forward("Casey Station", return = "json_list")
 #> [[1]]$results[[1]]$bounds
 #> [[1]]$results[[1]]$bounds$northeast
 #> [[1]]$results[[1]]$bounds$northeast$lat
-#> [1] -66.28255
+#> [1] -66.26209
 #> 
 #> [[1]]$results[[1]]$bounds$northeast$lng
-#> [1] 110.5267
+#> [1] 110.5441
 #> 
 #> 
 #> [[1]]$results[[1]]$bounds$southwest
 #> [[1]]$results[[1]]$bounds$southwest$lat
-#> [1] -66.28265
+#> [1] -66.30209
 #> 
 #> [[1]]$results[[1]]$bounds$southwest$lng
-#> [1] 110.5266
+#> [1] 110.5041
 #> 
 #> 
 #> 
 #> [[1]]$results[[1]]$components
+#> [[1]]$results[[1]]$components$`ISO_3166-1_alpha-2`
+#> [1] "AQ"
+#> 
 #> [[1]]$results[[1]]$components$`_category`
-#> [1] "commerce"
+#> [1] "place"
+#> 
+#> [[1]]$results[[1]]$components$`_normalized_city`
+#> [1] "Casey Station"
 #> 
 #> [[1]]$results[[1]]$components$`_type`
-#> [1] "office"
+#> [1] "hamlet"
 #> 
 #> [[1]]$results[[1]]$components$continent
 #> [1] "Antarctica"
 #> 
-#> [[1]]$results[[1]]$components$hamlet
-#> [1] "Casey Station"
+#> [[1]]$results[[1]]$components$country_code
+#> [1] "aq"
 #> 
-#> [[1]]$results[[1]]$components$office
+#> [[1]]$results[[1]]$components$hamlet
 #> [1] "Casey Station"
 #> 
 #> 
 #> [[1]]$results[[1]]$confidence
-#> [1] 9
+#> [1] 7
 #> 
 #> [[1]]$results[[1]]$formatted
-#> [1] "Casey Station"
+#> [1] "Casey Station, Antarctica"
 #> 
 #> [[1]]$results[[1]]$geometry
 #> [[1]]$results[[1]]$geometry$lat
-#> [1] -66.2826
+#> [1] -66.28209
 #> 
 #> [[1]]$results[[1]]$geometry$lng
-#> [1] 110.5266
-#> 
-#> 
-#> 
-#> [[1]]$results[[2]]
-#> [[1]]$results[[2]]$components
-#> [[1]]$results[[2]]$components$`ISO_3166-1_alpha-2`
-#> [1] "AQ"
-#> 
-#> [[1]]$results[[2]]$components$`ISO_3166-1_alpha-3`
-#> [1] "ATA"
-#> 
-#> [[1]]$results[[2]]$components$`_category`
-#> [1] "travel/tourism"
-#> 
-#> [[1]]$results[[2]]$components$`_type`
-#> [1] "point_of_interest"
-#> 
-#> [[1]]$results[[2]]$components$continent
-#> [1] "Antarctica"
-#> 
-#> [[1]]$results[[2]]$components$country
-#> [1] "Antarctica"
-#> 
-#> [[1]]$results[[2]]$components$country_code
-#> [1] "aq"
-#> 
-#> [[1]]$results[[2]]$components$point_of_interest
-#> [1] "Casey Station"
-#> 
-#> 
-#> [[1]]$results[[2]]$confidence
-#> [1] 9
-#> 
-#> [[1]]$results[[2]]$formatted
-#> [1] "Casey Station, Antarctica"
-#> 
-#> [[1]]$results[[2]]$geometry
-#> [[1]]$results[[2]]$geometry$lat
-#> [1] -66.28225
-#> 
-#> [[1]]$results[[2]]$geometry$lng
-#> [1] 110.5278
+#> [1] 110.5241
 #> 
 #> 
 #> 
@@ -216,8 +179,8 @@ oc_forward("Casey Station", return = "json_list")
 #> [[1]]$stay_informed$blog
 #> [1] "https://blog.opencagedata.com"
 #> 
-#> [[1]]$stay_informed$twitter
-#> [1] "https://twitter.com/OpenCage"
+#> [[1]]$stay_informed$mastodon
+#> [1] "https://en.osm.town/@opencage"
 #> 
 #> 
 #> [[1]]$thanks
@@ -225,14 +188,14 @@ oc_forward("Casey Station", return = "json_list")
 #> 
 #> [[1]]$timestamp
 #> [[1]]$timestamp$created_http
-#> [1] "Thu, 18 Feb 2021 19:02:13 GMT"
+#> [1] "Tue, 31 Dec 2024 10:46:25 GMT"
 #> 
 #> [[1]]$timestamp$created_unix
-#> [1] 1613674933
+#> [1] 1735641985
 #> 
 #> 
 #> [[1]]$total_results
-#> [1] 2
+#> [1] 1
 ```
 
 ## `geojson_list`
@@ -240,7 +203,7 @@ oc_forward("Casey Station", return = "json_list")
 When you choose `geojson_list` as the return type, the geocoder response will be returned as GeoJSON specified as an R `list()`.
 
 
-```r
+``` r
 gjsn_lst <- oc_forward("Casey Station", return = "geojson_list")
 gjsn_lst
 #> [[1]]
@@ -252,10 +215,10 @@ gjsn_lst
 #> $features[[1]]$geometry
 #> $features[[1]]$geometry$coordinates
 #> $features[[1]]$geometry$coordinates[[1]]
-#> [1] 110.5266
+#> [1] 110.5241
 #> 
 #> $features[[1]]$geometry$coordinates[[2]]
-#> [1] -66.2826
+#> [1] -66.28209
 #> 
 #> 
 #> $features[[1]]$geometry$type
@@ -266,98 +229,52 @@ gjsn_lst
 #> $features[[1]]$properties$bounds
 #> $features[[1]]$properties$bounds$northeast
 #> $features[[1]]$properties$bounds$northeast$lat
-#> [1] -66.28255
+#> [1] -66.26209
 #> 
 #> $features[[1]]$properties$bounds$northeast$lng
-#> [1] 110.5267
+#> [1] 110.5441
 #> 
 #> 
 #> $features[[1]]$properties$bounds$southwest
 #> $features[[1]]$properties$bounds$southwest$lat
-#> [1] -66.28265
+#> [1] -66.30209
 #> 
 #> $features[[1]]$properties$bounds$southwest$lng
-#> [1] 110.5266
+#> [1] 110.5041
 #> 
 #> 
 #> 
 #> $features[[1]]$properties$components
+#> $features[[1]]$properties$components$`ISO_3166-1_alpha-2`
+#> [1] "AQ"
+#> 
 #> $features[[1]]$properties$components$`_category`
-#> [1] "commerce"
+#> [1] "place"
+#> 
+#> $features[[1]]$properties$components$`_normalized_city`
+#> [1] "Casey Station"
 #> 
 #> $features[[1]]$properties$components$`_type`
-#> [1] "office"
+#> [1] "hamlet"
 #> 
 #> $features[[1]]$properties$components$continent
 #> [1] "Antarctica"
 #> 
-#> $features[[1]]$properties$components$hamlet
-#> [1] "Casey Station"
+#> $features[[1]]$properties$components$country_code
+#> [1] "aq"
 #> 
-#> $features[[1]]$properties$components$office
+#> $features[[1]]$properties$components$hamlet
 #> [1] "Casey Station"
 #> 
 #> 
 #> $features[[1]]$properties$confidence
-#> [1] 9
+#> [1] 7
 #> 
 #> $features[[1]]$properties$formatted
-#> [1] "Casey Station"
-#> 
-#> 
-#> $features[[1]]$type
-#> [1] "Feature"
-#> 
-#> 
-#> $features[[2]]
-#> $features[[2]]$geometry
-#> $features[[2]]$geometry$coordinates
-#> $features[[2]]$geometry$coordinates[[1]]
-#> [1] 110.5278
-#> 
-#> $features[[2]]$geometry$coordinates[[2]]
-#> [1] -66.28225
-#> 
-#> 
-#> $features[[2]]$geometry$type
-#> [1] "Point"
-#> 
-#> 
-#> $features[[2]]$properties
-#> $features[[2]]$properties$components
-#> $features[[2]]$properties$components$`ISO_3166-1_alpha-2`
-#> [1] "AQ"
-#> 
-#> $features[[2]]$properties$components$`ISO_3166-1_alpha-3`
-#> [1] "ATA"
-#> 
-#> $features[[2]]$properties$components$`_category`
-#> [1] "travel/tourism"
-#> 
-#> $features[[2]]$properties$components$`_type`
-#> [1] "point_of_interest"
-#> 
-#> $features[[2]]$properties$components$continent
-#> [1] "Antarctica"
-#> 
-#> $features[[2]]$properties$components$country
-#> [1] "Antarctica"
-#> 
-#> $features[[2]]$properties$components$country_code
-#> [1] "aq"
-#> 
-#> $features[[2]]$properties$components$point_of_interest
-#> [1] "Casey Station"
-#> 
-#> 
-#> $features[[2]]$properties$confidence
-#> [1] 9
-#> 
-#> $features[[2]]$properties$formatted
 #> [1] "Casey Station, Antarctica"
 #> 
 #> 
-#> $features[[2]]$type
+#> $features[[1]]$type
 #> [1] "Feature"
 #> 
 #> 
@@ -387,8 +304,8 @@ gjsn_lst
 #> $stay_informed$blog
 #> [1] "https://blog.opencagedata.com"
 #> 
-#> $stay_informed$twitter
-#> [1] "https://twitter.com/OpenCage"
+#> $stay_informed$mastodon
+#> [1] "https://en.osm.town/@opencage"
 #> 
 #> 
 #> $thanks
@@ -396,14 +313,14 @@ gjsn_lst
 #> 
 #> $timestamp
 #> $timestamp$created_http
-#> [1] "Thu, 18 Feb 2021 19:02:15 GMT"
+#> [1] "Tue, 31 Dec 2024 10:46:28 GMT"
 #> 
 #> $timestamp$created_unix
-#> [1] 1613674935
+#> [1] 1735641988
 #> 
 #> 
 #> $total_results
-#> [1] 2
+#> [1] 1
 #> 
 #> $type
 #> [1] "FeatureCollection"
@@ -415,7 +332,7 @@ gjsn_lst
 In fact, {opencage} returns a list of results in `geo_list` format, which should be compatible with the {[geojsonio](https://docs.ropensci.org/geojsonio/)} package.
 
 
-```r
+``` r
 class(gjsn_lst[[1]])
 #> [1] "geo_list"
 ```
@@ -425,17 +342,17 @@ class(gjsn_lst[[1]])
 `url_only` returns the OpenCage URL for debugging purposes.
 
 
-```r
+``` r
 oc_forward("Casey Station", return = "url_only")
 #> [[1]]
-#> [1] "https://api.opencagedata.com/geocode/v1/json?q=Casey%20Station&limit=10&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&add_request=0&key=OPENCAGE_KEY"
+#> [1] "https://api.opencagedata.com/geocode/v1/json?q=Casey%20Station&limit=10&no_annotations=1&roadinfo=0&no_dedupe=0&no_record=1&abbrv=0&address_only=0&add_request=0&key=OPENCAGE_KEY"
 ```
 
 Your OpenCage API key is masked with the `OPENCAGE_KEY` string, by default.
 If you really want {opencage} to display your API key with the URL, set the `show_key` argument in `oc_config()` to `TRUE`.
 
 
-```r
+``` r
 oc_config(show_key = TRUE)
 ```
 
