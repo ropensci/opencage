@@ -39,10 +39,10 @@ To receive more results, modify the `limit` argument, which specifies the maximu
 Integer values between 1 and 100 are allowed.
 
 ```{r limit1}
-oc_forward_df("Berlin")
+oc_forward_df("Paris")
 ```
 ```{r limit2}
-oc_forward_df("Berlin", limit = 5)
+oc_forward_df("Paris", limit = 5)
 ```
 
 
@@ -52,9 +52,11 @@ Therefore, `oc_reverse_df()` does not support the `limit` argument.
 OpenCage may sometimes have more than one record of one place.
 Duplicated records are not returned by default.
 If you set the `no_dedupe` argument to `TRUE`, you will receive duplicated results when available.
+(Yes, inverted argument names are confusing, but we just follow [OpenCage's lead](https://opencagedata.com/api#optional-params) here.
+So, `no_dedupe = TRUE` means that you want duplicates.)
 
 ```{r dedupe}
-oc_forward_df("Berlin", limit = 5, no_dedupe = TRUE)
+oc_forward_df("Paris", limit = 5, no_dedupe = TRUE)
 ```
 
 ## Better targeted results
@@ -74,6 +76,7 @@ E.g. "AR" for Argentina, "FR" for France, and "NZ" for the New Zealand.
 ```{r countrycode}
 oc_forward_df(placename = "Paris", countrycode = "US", limit = 5)
 ```
+
 Multiple countrycodes per `placename` must be wrapped in a list.
 Here is an example with places called "Paris" in Italy and Portugal.
 
@@ -119,7 +122,7 @@ oc_forward_df(placename = "Plaça d'Espanya", bounds = hi_bbox, limit = 20)
 
 ```
 
-Note that OpenCage does not support point-of-interest or feature search, like "show me all bus stops in this area". 
+Note that OpenCage does not support point-of-interest or feature search, like "show me all bus stops in this area".
 If you are more interested in these kind of features, you might want to take a look at the {[osmdata](https://docs.ropensci.org/osmdata/)} package.
 
 ### `proximity`
@@ -138,6 +141,7 @@ lx_point <- oc_points(lx$oc_lat, lx$oc_lng)
 
 oc_forward_df(placename = "Paris", proximity = lx_point, limit = 5)
 ```
+
 Note that the French capital is listed before other places in the US, which are closer to the point provided.
 This illustrates how `proximity` is only one of many factors influencing the ranking of results.
 
@@ -197,12 +201,11 @@ Some annotations, like the [Irish Transverse Mercator](https://en.wikipedia.org/
 
 Whether the annotations are shown, is controlled by the `no_annotations` argument.
 It is `TRUE` by default, which means that the output will _not_ contain annotations.
-(Yes, inverted argument names are confusing, but we just follow OpenCage's lead here.)
 When you set `no_annotations` to `FALSE`, all columns are returned (i.e. `output` is implicitly set to `"all"`).
-This leads to a result with a lot of columns.
+This leads to a result with a _lot_ of columns.
 
 ```{r annotations}
-oc_forward_df("Dublin", no_annotations = FALSE)
+oc_forward_df("Dublin", no_annotations = FALSE) |> colnames()
 ```
 
 ### `roadinfo`
@@ -212,7 +215,9 @@ It is `FALSE` by default, which means OpenCage will not attempt to match the nea
 Some road and driving information is nevertheless provided as part of the annotations (see above), even when `roadinfo` is set to `FALSE`.
 
 ```{r roadinfo}
-oc_forward_df(placename = c("Europa Advance Rd", "Bovoni Rd"), roadinfo = TRUE)
+library(dplyr, warn.conflicts = FALSE)
+oc_forward_df(placename = c("Europa Advance Rd", "Bovoni Rd"), roadinfo = TRUE) |>
+select(placename, contains("roadinfo"))
 ```
 
 A [blog post](https://blog.opencagedata.com/post/new-optional-parameter-roadinfo) provides more details.
@@ -231,12 +236,12 @@ See [this blog post](https://blog.opencagedata.com/post/160294347883/shrtr-pls) 
 
 ### `address_only`
 
-When `address_only` is set to `TRUE` (by default `FALSE`), OpenCage will attempt to exclude names of points-of-interests from the `formatted` field of the results. 
+When `address_only` is set to `TRUE` (by default `FALSE`), OpenCage will attempt to exclude names of points-of-interests from the `formatted` field of the results.
 In the following example, the POI "Hôtel de ville de Nantes" (town hall of Nantes) is removed from the `oc_formatted` column with `address_only = TRUE`.
 
 ```{r address-only}
-oc_reverse_df(47.21864, -1.55413)
-oc_reverse_df(47.21864, -1.55413, address_only = TRUE)
+oc_reverse_df(47.21947, -1.54754)
+oc_reverse_df(47.21947, -1.54754, address_only = TRUE)
 ```
 
 ## Vectorised arguments
@@ -267,8 +272,8 @@ This also works with `oc_reverse_df()`, of course.
 ```{r rev_df}
 rev_df <-
   data.frame(
-    lat = c(51.952659, 41.401372),
-    lon = c(7.632473, 2.128685)
+    lat = c(52.38772, 41.40137),
+    lon = c(9.73336, 2.12868)
   )
 
 oc_reverse_df(rev_df, lat, lon, language = "native")
