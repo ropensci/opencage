@@ -1,7 +1,7 @@
-# -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.4.0
+# --------------------------------------------
+# CITATION file created with {cffr} R package
 # See also: https://docs.ropensci.org/cffr/
-# -----------------------------------------------------------
+# --------------------------------------------
  
 cff-version: 1.2.0
 message: 'To cite package "opencage" in publications use:'
@@ -9,6 +9,7 @@ type: software
 license: GPL-2.0-or-later
 title: 'opencage: Geocode with the OpenCage API'
 version: 0.2.2.9000
+doi: 10.32614/CRAN.package.opencage
 abstract: Geocode with the OpenCage API, either from place name to longitude and latitude
   (forward geocoding) or from longitude and latitude to the name and address of a
   location (reverse geocoding), see <https://opencagedata.com>.
@@ -43,3 +44,4 @@ keywords:
 - r-package
 - rspatial
 - rstats
+
