@@ -188,7 +188,8 @@ test_that("tidyeval works for arguments", {
   ## bounds, proximity and countrycode
   bounds <- oc_forward_df(oc_fw2(), loc, bounds = bounds, bind_cols = FALSE)
   prx <- oc_forward_df(oc_fw2(), loc, proximity = proximity, bind_cols = FALSE)
-  cc <- oc_forward_df(oc_fw2(), loc, countrycode = countrycode, bind_cols = FALSE)
+  cc <-
+    oc_forward_df(oc_fw2(), loc, countrycode = countrycode, bind_cols = FALSE)
   expect_false(identical(bounds, noarg))
   expect_false(identical(prx, noarg))
   expect_false(identical(cc, noarg))
@@ -206,21 +207,6 @@ test_that("tidyeval works for arguments", {
   limit <- oc_forward_df(oc_fw2(), loc, limit = limit)
   expect_identical(nrow(limit), 6L)
   expect_identical(limit$id, c(1L, 2L, 2L, 3L, 3L, 3L))
-
-  # min_confidence
-  confidence <- oc_forward_df(
-    oc_fw2(),
-    loc,
-    min_confidence = confidence,
-    bind_cols = FALSE
-  )
-
-  # make sure we get actual results, not only NA
-  expect_false(anyNA(confidence$oc_formatted))
-
-  expect_false(identical(confidence[1, ], noarg[1, ]))
-  expect_false(identical(confidence[2, ], noarg[2, ]))
-  expect_false(identical(confidence[3, ], noarg[3, ]))
 
   # no_annotations
   ann <-

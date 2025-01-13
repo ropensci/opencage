@@ -28,7 +28,6 @@ test_that("opencage_forward/opencage_reverse return what they should
   results <- opencage_forward(
     placename = "Paris",
     limit = 2,
-    min_confidence = 5,
     language = "fr",
     no_annotations = TRUE
   )
@@ -44,7 +43,6 @@ test_that("opencage_forward/opencage_reverse return what they should
   results <- opencage_reverse(
     latitude = 44,
     longitude = 44,
-    min_confidence = 5,
     language = "pt-BR",
     no_annotations = TRUE
   )
@@ -68,7 +66,6 @@ test_that("opencage_forward deals well with results being NULL", {
     placename = "NOWHERE-INTERESTING",
     key = Sys.getenv("OPENCAGE_KEY"),
     limit = 2,
-    min_confidence = 5,
     language = "pt-BR",
     no_annotations = TRUE
   )

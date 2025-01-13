@@ -2,6 +2,6 @@
 
     Code
       opencage_key(quiet = FALSE)
-    Message <simpleMessage>
+    Message
       Using OpenCage API Key from envvar OPENCAGE_KEY
 

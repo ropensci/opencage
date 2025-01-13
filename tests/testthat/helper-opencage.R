@@ -27,7 +27,7 @@ skip_if_no_key <- function() {
 
 ## forward -----------------------------------------------------------------
 
-oc_locs <- function() c("Nantes", "Flensburg", "Los Angeles")
+oc_locs <- function() c("Brest", "Flensburg", "Los Angeles")
 
 oc_fw1 <- function() tibble::tibble(id = 1:3, loc = oc_locs())
 
@@ -35,19 +35,18 @@ oc_fw2 <- function() {
   tibble::add_column(
     oc_fw1(),
     bounds = oc_bbox(
-      xmin = c(-72, -98, -73),
-      ymin = c(45, 43, -38),
-      xmax = c(-70, -90, -71),
-      ymax = c(46, 49, -36)
+      xmin = c(17, -98, -73),
+      ymin = c(49, 43, -38),
+      xmax = c(18, -90, -71),
+      ymax = c(50, 49, -36)
     ),
     proximity = oc_points(
-      latitude = c(45.5, 46, -37),
-      longitude = c(-71, -95, -72)
+      latitude = c(49.3, 46, -37),
+      longitude = c(17.4, -95, -72)
     ),
-    countrycode = c("ca", "us", "cl"),
+    countrycode = c("cz", "us", "cl"),
     language = c("de", "fr", "ja"),
     limit = 1:3,
-    confidence = c(7, 9, 5),
     annotation = c(FALSE, TRUE, TRUE),
     abbrv = c(FALSE, FALSE, TRUE),
     address_only = c(TRUE, FALSE, FALSE)
@@ -57,15 +56,15 @@ oc_fw2 <- function() {
 oc_fw3 <- function() {
   tibble::tibble(
     id = 1:3,
-    loc = c("Nantes", "Elbphilharmonie Hamburg", "Los Angeles City Hall"),
+    loc = c("Brest", "Elbphilharmonie Hamburg", "Los Angeles City Hall"),
     roadinfo = c(FALSE, TRUE, TRUE)
   )
 }
 
 ## reverse -----------------------------------------------------------------
 
-oc_lat1 <- function() c(47.21864, 53.55034, 34.05369)
-oc_lng1 <- function() c(-1.554136, 10.000654, -118.242767)
+oc_lat1 <- function() c(47.21947, 53.55034, 34.05369)
+oc_lng1 <- function() c(-1.54754, 10.000654, -118.242767)
 
 oc_rev1 <- function() tibble::tibble(id = 1:3, lat = oc_lat1(), lng = oc_lng1())
 
@@ -73,7 +72,6 @@ oc_rev2 <- function() {
   tibble::add_column(
     oc_rev1(),
     language = c("en", "fr", "ja"),
-    confidence = rep(1L, 3L),
     annotation = c(FALSE, TRUE, TRUE),
     roadinfo = c(FALSE, TRUE, TRUE),
     abbrv = c(FALSE, FALSE, TRUE),
@@ -82,5 +80,5 @@ oc_rev2 <- function() {
 }
 
 oc_rev3 <- function() {
-  tibble::add_row(oc_rev2(), id = 4, lat = 25, lng = 36, confidence = 5)
+  tibble::add_row(oc_rev2(), id = 4, lat = 25, lng = 36)
 }

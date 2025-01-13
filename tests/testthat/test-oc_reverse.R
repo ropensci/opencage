@@ -181,20 +181,9 @@ test_that("tidyeval works for arguments", {
   noarg <- oc_reverse_df(oc_rev2(), lat, lng)
 
   # language
-  lang <- oc_reverse_df(oc_rev2(), lat, lng, language = language, output = "all")
+  lang <-
+    oc_reverse_df(oc_rev2(), lat, lng, language = language, output = "all")
   expect_identical(lang$oc_country, c("France", "Allemagne", "アメリカ合衆国"))
-
-  # min_confidence
-  confidence <- oc_reverse_df(oc_rev3(), lat, lng, min_confidence = confidence)
-  no_con <- oc_reverse_df(oc_rev3(), lat, lng)
-
-  expect_identical(confidence[1, ], no_con[1, ])
-  expect_identical(confidence[2, ], no_con[2, ])
-  expect_identical(confidence[3, ], no_con[3, ])
-  expect_false(identical(
-    confidence[[4, "oc_formatted"]],
-    no_con[[4, "oc_formatted"]]
-  ))
 
   # no_annotations
   ann <-
@@ -228,7 +217,8 @@ test_that("tidyeval works for arguments", {
   ))
 
   # address_only
-  address_only <- oc_reverse_df(oc_rev2(), lat, lng, address_only = address_only)
+  address_only <-
+    oc_reverse_df(oc_rev2(), lat, lng, address_only = address_only)
   expect_false(identical(
     address_only["oc_formatted"],
     noarg["oc_formatted"]
