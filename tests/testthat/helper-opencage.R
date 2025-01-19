@@ -63,8 +63,8 @@ oc_fw3 <- function() {
 
 ## reverse -----------------------------------------------------------------
 
-oc_lat1 <- function() c(47.21947, 53.55034, 34.05369)
-oc_lng1 <- function() c(-1.54754, 10.000654, -118.242767)
+oc_lat1 <- function() c(52.087106, 53.55034, 34.05369)
+oc_lng1 <- function() c(4.297312, 10.000654, -118.242767)
 
 oc_rev1 <- function() tibble::tibble(id = 1:3, lat = oc_lat1(), lng = oc_lng1())
 
