@@ -63,6 +63,7 @@ test_that("oc_config updates rate limit of oc_get_limit", {
   expect_identical(ratelimitr::get_rates(oc_get_limited)[[1]][["n"]], rps)
 
   # set rate_sec back to default: 1L/sec
+  withr::local_options(oc_rate_sec = NULL)
   oc_config()
   expect_identical(ratelimitr::get_rates(oc_get_limited)[[1]][["n"]], 1L)
 })
