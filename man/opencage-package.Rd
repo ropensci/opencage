@@ -30,7 +30,7 @@ Other contributors:
 \itemize{
   \item Noam Ross [contributor]
   \item Jake Russ [contributor]
-  \item Julia Silge (Julia Silge reviewed {opencage} (v. 0.1.0) for rOpenSci, see <https://github.com/ropensci/onboarding/issues/36>.) [reviewer]
+  \item Julia Silge (Julia Silge reviewed \{opencage\} (v. 0.1.0) for rOpenSci, see <https://github.com/ropensci/onboarding/issues/36>.) [reviewer]
 }
 
 }
