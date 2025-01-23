@@ -130,7 +130,7 @@ oc_process <-
     }
 
     # build url
-    oc_url <- oc_build_url(
+    oc_url_parts <- oc_build_url(
       query_par = list(
         q = query,
         bounds = bounds,
@@ -150,6 +150,8 @@ oc_process <-
       ),
       endpoint = endpoint
     )
+    query_req <- build_query_with_req(oc_url_parts)
+    oc_url <- query_req[["url"]]
 
     # return url only
     if (return == "url_only") {
@@ -166,13 +168,11 @@ oc_process <-
     # send query to API if not NA, else return (fake) empty res_text
     if (!is.na(query) && nchar(query) >= 2) {
       # get response
-      res_env <- oc_get_memoise(oc_url)
+      res_env <- oc_get_memoise(oc_url_parts)
 
       # parse response
       res_text <- oc_parse_text(res_env)
 
-      # check status message
-      oc_check_status(res_env, res_text)
     } else {
       # Fake 0 results response
 
@@ -236,8 +236,7 @@ oc_build_url <- function(query_par, endpoint) {
 
   oc_path <- paste0("geocode/v1/", endpoint)
 
-  crul::url_build(
-    url = "https://api.opencagedata.com",
+  list(
     path = oc_path,
     query = query_par
   )
@@ -246,18 +245,38 @@ oc_build_url <- function(query_par, endpoint) {
 
 #' GET request from OpenCage
 #'
-#' @param oc_url character string URL with query parameters, built with
+#' @param oc_url_parts list with path and query, built with
 #'   `oc_build_url()`
 #'
-#' @return crul::HttpResponse object
+#' @return httr2 response
 #' @noRd
 
-oc_get <- function(oc_url) {
-  client <- crul::HttpClient$new(
-    url = oc_url,
-    headers = list(`User-Agent` = oc_ua_string)
-  )
-  client$get()
+oc_get <- function(oc_url_parts = NULL) {
+
+  query_req <- build_query_with_req(oc_url_parts)
+
+  query_req %>%
+    httr2::req_throttle(rate = getOption("oc_rate_sec", default = 1L) / 1L) %>%
+    httr2::req_user_agent(oc_ua_string) %>%
+    httr2::req_perform() # will error if API error :-)
+}
+
+build_query_with_req <- function(oc_url_parts) {
+  initial_req <- httr2::request("https://api.opencagedata.com")
+
+  req_with_url <- if (!is.null(oc_url_parts[["path"]])) {
+    httr2::req_url_path_append(initial_req, oc_url_parts[["path"]])
+  } else {
+    initial_req
+  }
+
+  query_req <- if (!is.null(oc_url_parts[["query"]])) {
+    httr2::req_url_query(req_with_url, !!!oc_url_parts[["query"]])
+  } else {
+    req_with_url
+  }
+
+  query_req
 }
 
 # user-agent string: this is set at build-time, but that should be okay,
@@ -277,35 +296,12 @@ oc_ua_string <-
 #' @noRd
 
 oc_parse_text <- function(res) {
-  text <- res$parse(encoding = "UTF-8")
+  text <- httr2::resp_body_string(res)
   if (identical(text, "")) {
     stop("OpenCage returned an empty response.", call. = FALSE)
   }
   text
 }
-
-
-#' Check the status of the HttpResponse
-#'
-#' @param res_env crul::HttpResponse object
-#' @param res_text parsed HttpResponse
-#'
-#' @return NULL if status code less than or equal to 201, else `stop()`
-#' @noRd
-
-oc_check_status <- function(res_env, res_text) {
-  if (res_env$success()) {
-    return(invisible())
-  }
-  message <-
-    jsonlite::fromJSON(
-      res_text,
-      simplifyVector = TRUE,
-      flatten = TRUE
-    )$status$message
-  stop("HTTP failure: ", res_env$status_code, "\n", message, call. = FALSE)
-}
-
 
 #' Format the result string
 #'

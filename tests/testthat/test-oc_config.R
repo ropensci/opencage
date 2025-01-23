@@ -48,25 +48,6 @@ test_that("oc_config throws error with faulty OpenCage key", {
   )
 })
 
-# test rate_sec argument --------------------------------------------------
-
-test_that("oc_config updates rate limit of oc_get_limit", {
-  # make sure there is a key present
-  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
-
-  rps <- 5L
-  oc_config(rate_sec = rps)
-  expect_identical(ratelimitr::get_rates(oc_get_limited)[[1]][["n"]], rps)
-
-  rps <- 3L
-  oc_config(rate_sec = rps)
-  expect_identical(ratelimitr::get_rates(oc_get_limited)[[1]][["n"]], rps)
-
-  # set rate_sec back to default: 1L/sec
-  oc_config()
-  expect_identical(ratelimitr::get_rates(oc_get_limited)[[1]][["n"]], 1L)
-})
-
 # test no_record argument -------------------------------------------------
 
 test_that("oc_config sets no_record option", {
@@ -111,4 +92,13 @@ test_that("oc_config sets show_key option", {
   withr::local_envvar(c("OPENCAGE_KEY" = key_200))
   oc_config(show_key = TRUE)
   expect_true(getOption("oc_show_key"))
+})
+
+test_that("rate_sec checks/sets oc_rate_sec option", {
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
+  withr::local_options(oc_rate_sec = 123)
+  oc_config(rate_sec = 42)
+  expect_equal(getOption("oc_rate_sec"), 42)
+
+  expect_error(oc_config(rate_sec = "blablabla"), "Must")
 })

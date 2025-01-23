@@ -25,14 +25,14 @@ BugReports: https://github.com/ropensci/opencage/issues
 Depends: 
     R (>= 3.4.0)
 Imports: 
-    crul (>= 0.5.2),
     dplyr (>= 0.7.4),
+    httr2 (>= 0.2.0),
     jsonlite (>= 1.5),
     lifecycle,
+    magrittr,
     memoise (>= 1.1.0),
     progress (>= 1.1.2),
     purrr (>= 0.2.4),
-    ratelimitr (>= 0.4.0),
     rlang,
     tibble (>= 1.4.2),
     tidyr (>= 0.8.0),
