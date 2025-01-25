@@ -1,6 +1,10 @@
-# Precompiled vignettes that depend on API key
+# Pre-compile vignettes that depend on API key
 
-library(knitr) # also load the current version of the package
+pak::local_install() # make sure to use current local version
+
+library(opencage)
+library(knitr)
+
 stopifnot("no OPENCAGE_KEY envvar present" = nzchar(Sys.getenv("OPENCAGE_KEY")))
 
 # write data frames as markdown tables via `knitr::kable()`
