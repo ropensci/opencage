@@ -2,7 +2,6 @@
 title: "Output options"
 subtitle: "Get different kinds of output from OpenCage"
 author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
-date: "`r Sys.Date()`"
 description: >
   "`oc_forward()`/`oc_reverse()` return lists of various type, namely data frames, JSON, GeoJSON or URLs, depending on the `return` value you specify. The possible `return` values are `df_list`, `json_list`, `geojson_list` and `url_only`."
 output: rmarkdown::html_vignette
