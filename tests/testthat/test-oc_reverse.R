@@ -183,7 +183,7 @@ test_that("tidyeval works for arguments", {
   # language
   lang <-
     oc_reverse_df(oc_rev2(), lat, lng, language = language, output = "all")
-  expect_identical(lang$oc_country, c("France", "Allemagne", "アメリカ合衆国"))
+  expect_identical(lang$oc_country, c("Netherlands", "Allemagne", "アメリカ合衆国"))
 
   # no_annotations
   ann <-
