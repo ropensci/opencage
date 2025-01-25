@@ -1,13 +1,9 @@
 ---
 title: "Customise your query"
 subtitle: "Get more and better results from OpenCage"
-author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
-date: "2024-12-31"
 description: >
   "The OpenCage API supports about a dozen parameters to customise a query and here we will explain how to use them."
-output:
-  rmarkdown::html_vignette:
-    df_print: kable
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Customise your query}
   %\VignetteEngine{knitr::rmarkdown}
@@ -33,20 +29,21 @@ Integer values between 1 and 100 are allowed.
 
 ``` r
 oc_forward_df("Paris")
-#> # A tibble: 1 × 4
-#>   placename oc_lat oc_lng oc_formatted 
-#>   <chr>      <dbl>  <dbl> <chr>        
-#> 1 Paris       48.9   2.32 Paris, France
 ```
+
+|placename |  oc_lat|   oc_lng|oc_formatted  |
+|:---------|-------:|--------:|:-------------|
+|Paris     | 48.8535| 2.348391|Paris, France |
 
 ``` r
 oc_forward_df("Paris", limit = 5)
-#> # A tibble: 2 × 4
-#>   placename oc_lat oc_lng oc_formatted                          
-#>   <chr>      <dbl>  <dbl> <chr>                                 
-#> 1 Paris       48.9   2.35 Paris, France                         
-#> 2 Paris       33.7 -95.6  Paris, Texas, United States of America
 ```
+
+|placename |   oc_lat|     oc_lng|oc_formatted                              |
+|:---------|--------:|----------:|:-----------------------------------------|
+|Paris     | 48.85889|   2.320041|Paris, France                             |
+|Paris     | 33.66180| -95.555513|Paris, Texas, United States of America    |
+|Paris     | 38.20980| -84.252987|Paris, Kentucky, United States of America |
 
 
 Reverse geocoding only returns [at most one result](https://opencagedata.com/api#ranking).
@@ -61,14 +58,15 @@ So, `no_dedupe = TRUE` means that you want duplicates.)
 
 ``` r
 oc_forward_df("Paris", limit = 5, no_dedupe = TRUE)
-#> # A tibble: 4 × 4
-#>   placename oc_lat oc_lng oc_formatted                          
-#>   <chr>      <dbl>  <dbl> <chr>                                 
-#> 1 Paris       48.9   2.35 Paris, France                         
-#> 2 Paris       48.9   2.32 Paris, France                         
-#> 3 Paris       33.7 -95.6  Paris, Texas, United States of America
-#> 4 Paris       48.9   2.32 Paris, France
 ```
+
+|placename |   oc_lat|     oc_lng|oc_formatted                              |
+|:---------|--------:|----------:|:-----------------------------------------|
+|Paris     | 48.85889|   2.320041|Paris, France                             |
+|Paris     | 48.85350|   2.348391|Paris, France                             |
+|Paris     | 33.66180| -95.555513|Paris, Texas, United States of America    |
+|Paris     | 38.20980| -84.252987|Paris, Kentucky, United States of America |
+|Paris     | 48.85889|   2.320041|Paris, France                             |
 
 ## Better targeted results
 
@@ -87,15 +85,15 @@ E.g. "AR" for Argentina, "FR" for France, and "NZ" for the New Zealand.
 
 ``` r
 oc_forward_df(placename = "Paris", countrycode = "US", limit = 5)
-#> # A tibble: 5 × 4
-#>   placename oc_lat oc_lng oc_formatted                              
-#>   <chr>      <dbl>  <dbl> <chr>                                     
-#> 1 Paris       33.7  -95.6 Paris, Texas, United States of America    
-#> 2 Paris       38.2  -84.3 Paris, Kentucky, United States of America 
-#> 3 Paris       36.3  -88.3 Paris, Tennessee, United States of America
-#> 4 Paris       44.2  -70.5 Paris, ME 04281, United States of America 
-#> 5 Paris       35.3  -93.7 Paris, Arkansas, United States of America
 ```
+
+|placename |   oc_lat|    oc_lng|oc_formatted                               |
+|:---------|--------:|---------:|:------------------------------------------|
+|Paris     | 33.66180| -95.55551|Paris, Texas, United States of America     |
+|Paris     | 38.20980| -84.25299|Paris, Kentucky, United States of America  |
+|Paris     | 36.30195| -88.32586|Paris, Tennessee, United States of America |
+|Paris     | 44.26087| -70.50104|Paris, ME 04281, United States of America  |
+|Paris     | 35.29247| -93.72945|Paris, AR 72855, United States of America  |
 
 Multiple countrycodes per `placename` must be wrapped in a list.
 Here is an example with places called "Paris" in Italy and Portugal.
@@ -103,15 +101,15 @@ Here is an example with places called "Paris" in Italy and Portugal.
 
 ``` r
 oc_forward_df(placename = "Paris", countrycode = list(c("IT", "PT")), limit = 5)
-#> # A tibble: 5 × 4
-#>   placename oc_lat oc_lng oc_formatted                                                 
-#>   <chr>      <dbl>  <dbl> <chr>                                                        
-#> 1 Paris       46.5  10.4  23030 Valfurva SO, Italy                                     
-#> 2 Paris       44.6   7.28 Brossasco, Cuneo, Italy                                      
-#> 3 Paris       43.5  12.1  Paris, 52035 Monterchi AR, Italy                             
-#> 4 Paris       37.4  -8.79 Paris, 7630-581 Odemira, Portugal                            
-#> 5 Paris       45.7  13.1  Paris, Via dei Pini 22, 33054 Lignano Sabbiadoro Udine, Italy
 ```
+
+|placename |   oc_lat|    oc_lng|oc_formatted                                        |
+|:---------|--------:|---------:|:---------------------------------------------------|
+|Paris     | 46.46330| 10.419781|23030 Valfurva SO, Italy                            |
+|Paris     | 44.60143|  7.279508|Brossasco, Cuneo, Italy                             |
+|Paris     | 43.46040| 12.081721|Paris, 52035 Monterchi AR, Italy                    |
+|Paris     | 37.44036| -8.788875|Paris, 7630-581 Odemira, Portugal                   |
+|Paris     | 40.47266| 17.241306|Paris, Corso Umberto primo, 74100 Taranto TA, Italy |
 
 Despite the name, country codes also exist for territories that are not independent states, e.g. Gibraltar ("GI"), Greenland ("GL"), Guadaloupe ("GP"), or Guam ("GU").
 You can look up specific country codes with the {[ISOcodes](https://cran.r-project.org/package=ISOcodes)} or {[countrycodes](https://vincentarelbundock.github.io/countrycode/)} packages or on the [ISO](https://www.iso.org/obp/ui/#search/code/) or [Wikipedia](https://en.wikipedia.org/wiki/ISO_3166-1) webpages. In fact, you can also look up country codes via OpenCage as well. If you were interested in the country code of Curaçao for example, you could run:
@@ -119,11 +117,11 @@ You can look up specific country codes with the {[ISOcodes](https://cran.r-proje
 
 ``` r
 oc_forward_df("Curaçao", no_annotations = FALSE)["oc_iso_3166_1_alpha_2"]
-#> # A tibble: 1 × 1
-#>   oc_iso_3166_1_alpha_2
-#>   <chr>                
-#> 1 CW
 ```
+
+|oc_iso_3166_1_alpha_2 |
+|:---------------------|
+|CW                    |
 
 ### `bounds`
 
@@ -137,15 +135,15 @@ Below is an example of the use of `bounds` where the bounding box specifies the 
 
 ``` r
 oc_forward_df(placename = "Paris", bounds = oc_bbox(-97, -56, -32, 12), limit = 5)
-#> # A tibble: 5 × 4
-#>   placename oc_lat oc_lng oc_formatted                                                       
-#>   <chr>      <dbl>  <dbl> <chr>                                                              
-#> 1 Paris       8.05  -80.6 Paris, Distrito de Parita, Panama                                  
-#> 2 Paris      -3.99  -79.2 110107, Loja, Ecuador                                              
-#> 3 Paris      -6.71  -69.9 Eirunepé, Região Geográfica Intermediária de Tefé, Brazil          
-#> 4 Paris     -13.5   -62.5 Canton Motegua, Municipio Baures, Provincia de Iténez, Bolivia     
-#> 5 Paris     -23.5   -47.5 Jardim Santa Fé, Sorocaba, Região Metropolitana de Sorocaba, Brazil
 ```
+
+|placename |     oc_lat|    oc_lng|oc_formatted                                                        |
+|:---------|----------:|---------:|:-------------------------------------------------------------------|
+|Paris     |   8.054226| -80.55320|Paris, Distrito de Parita, Panama                                   |
+|Paris     | -13.518089| -62.48608|Canton Motegua, Municipio Baures, Provincia de Iténez, Bolivia      |
+|Paris     |  -6.710499| -69.89967|Eirunepé, Região Geográfica Intermediária de Tefé, Brazil           |
+|Paris     |  -3.987306| -79.19942|110107, Loja, Ecuador                                               |
+|Paris     | -23.524882| -47.45521|Jardim Santa Fé, Sorocaba, Região Metropolitana de Sorocaba, Brazil |
 
 Again, you can also use {opencage} to determine a bounding box for subsequent queries.
 If you wanted to see how many Plaça d'Espanya there are on the Balearic Islands, for example, you could find the appropriate bounding box and then search for the squares:
@@ -163,28 +161,27 @@ hi_bbox <-
   )
 
 oc_forward_df(placename = "Plaça d'Espanya", bounds = hi_bbox, limit = 20)
-#> # A tibble: 18 × 4
-#>    placename       oc_lat oc_lng oc_formatted                                                   
-#>    <chr>            <dbl>  <dbl> <chr>                                                          
-#>  1 Plaça d'Espanya   39.6   2.65 Plaça d'Espanya, Carrer d'Eusebi Estada, 07003 Palma, Spain    
-#>  2 Plaça d'Espanya   39.6   2.65 Plaça d'Espanya, Canavall, Palma, Balearic Islands, Spain      
-#>  3 Plaça d'Espanya   39.5   2.89 Plaça d'Espanya, 07620 Llucmajor, Spain                        
-#>  4 Plaça d'Espanya   39.0   1.30 Plaça d'Espanya, 07820 Sant Antoni de Portmany, Spain          
-#>  5 Plaça d'Espanya   39.0   1.53 Plaça d'Espanya, Santa Eulària des Riu, Balearic Islands, Spain
-#>  6 Plaça d'Espanya   38.9   1.44 Plaça d'Espanya, 07800 Ibiza, Spain                            
-#>  7 Plaça d'Espanya   39.9   4.27 Plaça d'Espanya, Maó, Spain                                    
-#>  8 Plaça d'Espanya   39.1   1.51 Plaça d'Espanya, Sant Joan de Labritja, Spain                  
-#>  9 Plaça d'Espanya   39.6   2.65 Plaça d'Espanya, 07002 Palma, Spain                            
-#> 10 Plaça d'Espanya   39.8   2.72 Plaça d'Espanya, 07100 Sóller, Spain                           
-#> 11 Plaça d'Espanya   39.6   2.90 Plaça d'Espanya, 07140 Sencelles, Spain                        
-#> 12 Plaça d'Espanya   39.6   2.75 Plaça d'Espanya, 07141 Marratxí, Spain                         
-#> 13 Plaça d'Espanya   39.7   2.91 Plaça d'Espanya, 07300 Inca, Spain                             
-#> 14 Plaça d'Espanya   39.8   2.74 Plaça d'Espanya, 07109 Fornalutx, Spain                        
-#> 15 Plaça d'Espanya   39.5   3.15 Plaça d'Espanya, 07200 Felanitx, Spain                         
-#> 16 Plaça d'Espanya   39.6   2.42 plaça d'Espanya, 07150 Andratx, Spain                          
-#> 17 Plaça d'Espanya   39.5   2.58 Plaça d'Espanya, 07181 Bendinat, Spain                         
-#> 18 Plaça d'Espanya   39.0   1.53 Plaça d'Espanya, 07840 Santa Eulària des Riu, Spain
 ```
+
+|placename       |   oc_lat|   oc_lng|oc_formatted                                                    |
+|:---------------|--------:|--------:|:---------------------------------------------------------------|
+|Plaça d'Espanya | 39.57646| 2.654359|Plaça d'Espanya, Carrer d'Eusebi Estada, 07003 Palma, Spain     |
+|Plaça d'Espanya | 39.57558| 2.653268|Plaça d'Espanya, Canavall, Palma, Balearic Islands, Spain       |
+|Plaça d'Espanya | 39.49070| 2.891332|Plaça d'Espanya, 07620 Llucmajor, Spain                         |
+|Plaça d'Espanya | 38.97986| 1.300523|Plaça d'Espanya, 07820 Sant Antoni de Portmany, Spain           |
+|Plaça d'Espanya | 38.98491| 1.533508|Plaça d'Espanya, Santa Eulària des Riu, Balearic Islands, Spain |
+|Plaça d'Espanya | 39.88877| 4.265172|Plaça d'Espanya, Maó, Spain                                     |
+|Plaça d'Espanya | 38.90699| 1.437946|Plaça d'Espanya, 07800 Ibiza, Spain                             |
+|Plaça d'Espanya | 39.07787| 1.513485|Plaça d'Espanya, Sant Joan de Labritja, Spain                   |
+|Plaça d'Espanya | 39.57494| 2.653829|Plaça d'Espanya, 07002 Palma, Spain                             |
+|Plaça d'Espanya | 39.53399| 2.576478|Plaça d'Espanya, 07181 Calvià, Spain                            |
+|Plaça d'Espanya | 39.64779| 2.897899|Plaça d'Espanya, 07140 Sencelles, Spain                         |
+|Plaça d'Espanya | 39.62170| 2.750391|Plaça d'Espanya, 07141 Marratxí, Spain                          |
+|Plaça d'Espanya | 39.72119| 2.909691|Plaça d'Espanya, 07300 Inca, Spain                              |
+|Plaça d'Espanya | 39.78246| 2.740895|Plaça d'Espanya, 07109 Fornalutx, Spain                         |
+|Plaça d'Espanya | 39.46762| 3.146003|Plaça d'Espanya, 07200 Felanitx, Spain                          |
+|Plaça d'Espanya | 39.57500| 2.420171|plaça d'Espanya, 07150 Andratx, Spain                           |
+|Plaça d'Espanya | 39.76533| 2.715038|Plaça d'Espanya, 07100 Sóller, Spain                            |
 
 Note that OpenCage does not support point-of-interest or feature search, like "show me all bus stops in this area".
 If you are more interested in these kind of features, you might want to take a look at the {[osmdata](https://docs.ropensci.org/osmdata/)} package.
@@ -205,12 +202,12 @@ lx <- oc_forward_df("Lexington, Kentucky")
 lx_point <- oc_points(lx$oc_lat, lx$oc_lng)
 
 oc_forward_df(placename = "Paris", proximity = lx_point, limit = 5)
-#> # A tibble: 2 × 4
-#>   placename oc_lat oc_lng oc_formatted                             
-#>   <chr>      <dbl>  <dbl> <chr>                                    
-#> 1 Paris       38.2 -84.3  Paris, Kentucky, United States of America
-#> 2 Paris       48.9   2.35 Paris, France
 ```
+
+|placename |   oc_lat|    oc_lng|oc_formatted                              |
+|:---------|--------:|---------:|:-----------------------------------------|
+|Paris     | 38.20980| -84.25299|Paris, Kentucky, United States of America |
+|Paris     | 48.85341|   2.34880|Paris, France                             |
 
 Note that the French capital is listed before other places in the US, which are closer to the point provided.
 This illustrates how `proximity` is only one of many factors influencing the ranking of results.
@@ -224,11 +221,11 @@ Thus, in the following example, the French capital is too large to be returned.
 
 ``` r
 oc_forward_df(placename = "Paris", min_confidence = 7, limit = 5)
-#> # A tibble: 1 × 4
-#>   placename oc_lat oc_lng oc_formatted
-#>   <chr>      <dbl>  <dbl> <chr>       
-#> 1 Paris         NA     NA <NA>
 ```
+
+|placename |  oc_lat|    oc_lng|oc_formatted                              |
+|:---------|-------:|---------:|:-----------------------------------------|
+|Paris     | 38.2098| -84.25299|Paris, Kentucky, United States of America |
 
 Note that confidence is not used for the [ranking of results](https://opencagedata.com/api#ranking).
 It does not tell you which result is more "correct" or "relevant", nor what type of thing the result is, but rather how small a result is, geographically speaking.
@@ -246,11 +243,11 @@ OpenCage will attempt to return results in that language.
 
 ``` r
 oc_forward_df(placename = "Munich", language = "tr")
-#> # A tibble: 1 × 4
-#>   placename oc_lat oc_lng oc_formatted           
-#>   <chr>      <dbl>  <dbl> <chr>                  
-#> 1 Munich      48.1   11.6 Münih, Bavyera, Almanya
 ```
+
+|placename |   oc_lat|   oc_lng|oc_formatted            |
+|:---------|--------:|--------:|:-----------------------|
+|Munich    | 48.13711| 11.57538|Münih, Bavyera, Almanya |
 
 Alternatively, you can specify the "native" tag, in which case OpenCage will attempt to return the response in the "official" language(s) of the location.
 Keep in mind, however, that some countries have more than one official language or that the official language may not be the one actually used day-to-day.
@@ -258,22 +255,22 @@ Keep in mind, however, that some countries have more than one official language 
 
 ``` r
 oc_forward_df(placename = "Munich", language = "native")
-#> # A tibble: 1 × 4
-#>   placename oc_lat oc_lng oc_formatted                
-#>   <chr>      <dbl>  <dbl> <chr>                       
-#> 1 Munich      48.1   11.6 München, Bayern, Deutschland
 ```
+
+|placename |   oc_lat|   oc_lng|oc_formatted                 |
+|:---------|--------:|--------:|:----------------------------|
+|Munich    | 48.13711| 11.57538|München, Bayern, Deutschland |
 
 If the `language` parameter is set to `NULL` (which is the default), the tag is not recognized, or OpenCage does not have a record in that language, the results will be returned in English.
 
 
 ``` r
 oc_forward_df(placename = "München")
-#> # A tibble: 1 × 4
-#>   placename oc_lat oc_lng oc_formatted            
-#>   <chr>      <dbl>  <dbl> <chr>                   
-#> 1 München     48.1   11.6 Munich, Bavaria, Germany
 ```
+
+|placename |   oc_lat|   oc_lng|oc_formatted             |
+|:---------|--------:|--------:|:------------------------|
+|München   | 48.13711| 11.57538|Munich, Bavaria, Germany |
 
 To find the correct language tag for your desired language, you can search for the language on the [BCP47 language subtag lookup](https://r12a.github.io/app-subtags/) for example.
 Note however, that there are some language tags in use on OpenStreetMap, one of OpenCage's main sources, that do not conform with the IETF BCP 47 standard.
@@ -336,13 +333,12 @@ Some road and driving information is nevertheless provided as part of the annota
 library(dplyr, warn.conflicts = FALSE)
 oc_forward_df(placename = c("Europa Advance Rd", "Bovoni Rd"), roadinfo = TRUE) |>
 select(placename, contains("roadinfo"))
-#> # A tibble: 2 × 8
-#>   placename         oc_roadinfo_drive_on oc_roadinfo_lanes oc_roadinfo_oneway oc_roadinfo_road    oc_roadinfo_road_type
-#>   <chr>             <chr>                            <int> <chr>              <chr>               <chr>                
-#> 1 Europa Advance Rd right                                1 yes                Europa Advance Road secondary            
-#> 2 Bovoni Rd         left                                NA <NA>               Bovoni Bay Trail    residential          
-#> # ℹ 2 more variables: oc_roadinfo_speed_in <chr>, oc_roadinfo_surface <chr>
 ```
+
+|placename         |oc_roadinfo_drive_on | oc_roadinfo_lanes|oc_roadinfo_oneway |oc_roadinfo_road    |oc_roadinfo_road_type |oc_roadinfo_speed_in |oc_roadinfo_surface |
+|:-----------------|:--------------------|-----------------:|:------------------|:-------------------|:---------------------|:--------------------|:-------------------|
+|Europa Advance Rd |right                |                 1|yes                |Europa Advance Road |secondary             |km/h                 |asphalt             |
+|Bovoni Rd         |left                 |                NA|NA                 |Bovoni Bay Trail    |residential           |mph                  |NA                  |
 
 A [blog post](https://blog.opencagedata.com/post/new-optional-parameter-roadinfo) provides more details.
 
@@ -354,16 +350,19 @@ When it is `TRUE`, the addresses in the `formatted` field of the results are abb
 
 ``` r
 oc_forward_df("Wall Street")
-#> # A tibble: 1 × 4
-#>   placename   oc_lat oc_lng oc_formatted                                             
-#>   <chr>        <dbl>  <dbl> <chr>                                                    
-#> 1 Wall Street   40.7  -74.0 Wall Street, New York, NY 10005, United States of America
-oc_forward_df("Wall Street", abbrv = TRUE)
-#> # A tibble: 1 × 4
-#>   placename   oc_lat oc_lng oc_formatted                    
-#>   <chr>        <dbl>  <dbl> <chr>                           
-#> 1 Wall Street   40.7  -74.0 Wall St, New York, NY 10005, USA
 ```
+
+|placename   |   oc_lat|    oc_lng|oc_formatted                                              |
+|:-----------|--------:|---------:|:---------------------------------------------------------|
+|Wall Street | 40.70766| -74.01152|Wall Street, New York, NY 10005, United States of America |
+
+``` r
+oc_forward_df("Wall Street", abbrv = TRUE)
+```
+
+|placename   |   oc_lat|    oc_lng|oc_formatted                     |
+|:-----------|--------:|---------:|:--------------------------------|
+|Wall Street | 40.70766| -74.01152|Wall St, New York, NY 10005, USA |
 
 See [this blog post](https://blog.opencagedata.com/post/160294347883/shrtr-pls) for more information.
 
@@ -375,16 +374,19 @@ In the following example, the POI "Hôtel de ville de Nantes" (town hall of Nant
 
 ``` r
 oc_reverse_df(47.21947, -1.54754)
-#> # A tibble: 1 × 3
-#>   latitude longitude oc_formatted                                    
-#>      <dbl>     <dbl> <chr>                                           
-#> 1     47.2     -1.55 Le Palais, 37 Rue Gambetta, 44013 Nantes, France
-oc_reverse_df(47.21947, -1.54754, address_only = TRUE)
-#> # A tibble: 1 × 3
-#>   latitude longitude oc_formatted                         
-#>      <dbl>     <dbl> <chr>                                
-#> 1     47.2     -1.55 37 Rue Gambetta, 44013 Nantes, France
 ```
+
+| latitude| longitude|oc_formatted                                     |
+|--------:|---------:|:------------------------------------------------|
+| 47.21947|  -1.54754|Le Palais, 37 Rue Gambetta, 44013 Nantes, France |
+
+``` r
+oc_reverse_df(47.21947, -1.54754, address_only = TRUE)
+```
+
+| latitude| longitude|oc_formatted                          |
+|--------:|---------:|:-------------------------------------|
+| 47.21947|  -1.54754|37 Rue Gambetta, 44013 Nantes, France |
 
 ## Vectorised arguments
 
@@ -396,13 +398,13 @@ oc_forward_df(
   placename = c("New York", "Rio", "Tokyo"),
   language = c("es", "de", "fr")
 )
-#> # A tibble: 3 × 4
-#>   placename oc_lat oc_lng oc_formatted                                                     
-#>   <chr>      <dbl>  <dbl> <chr>                                                            
-#> 1 New York    40.7  -74.0 Nueva York, Estados Unidos de América                            
-#> 2 Rio        -22.9  -43.2 Rio de Janeiro, Região Metropolitana do Rio de Janeiro, Brasilien
-#> 3 Tokyo       35.7  140.  Tokyo, Japon
 ```
+
+|placename |    oc_lat|    oc_lng|oc_formatted                                                      |
+|:---------|---------:|---------:|:-----------------------------------------------------------------|
+|New York  |  40.71273| -74.00602|Nueva York, Estados Unidos de América                             |
+|Rio       | -22.91101| -43.20937|Rio de Janeiro, Região Metropolitana do Rio de Janeiro, Brasilien |
+|Tokyo     |  35.67686| 139.76389|Tokyo, Japon                                                      |
 
 Or geocode place names with country codes in a data frame:
 
@@ -415,13 +417,13 @@ for_df <-
   )
 
 oc_forward_df(for_df, placename = location, countrycode = ccode)
-#> # A tibble: 3 × 5
-#>   location           ccode oc_lat oc_lng oc_formatted                                                                    
-#>   <chr>              <chr>  <dbl>  <dbl> <chr>                                                                           
-#> 1 Golden Gate Bridge at     47.6   15.8  Wiesenbauer, Martin's Golden Gate Bridge, 8684 Steinhaus am Semmering, Austria  
-#> 2 Buckingham Palace  cg     -4.80  11.8  Buckingham Palace, Boulevard du Général Charles de Gaulle, Pointe-Noire, Congo-…
-#> 3 Eiffel Tower       be     50.9    4.34 Eiffel Tower, Avenue de Bouchout - Boechoutlaan, 1020 Brussels, Belgium
 ```
+
+|location           |ccode |    oc_lat|    oc_lng|oc_formatted                                                                               |
+|:------------------|:-----|---------:|---------:|:------------------------------------------------------------------------------------------|
+|Golden Gate Bridge |at    | 47.617126| 15.796731|Wiesenbauer, Martin's Golden Gate Bridge, 8684 Steinhaus am Semmering, Austria             |
+|Buckingham Palace  |cg    | -4.799647| 11.844394|Buckingham Palace, Boulevard du Général Charles de Gaulle, Pointe-Noire, Congo-Brazzaville |
+|Eiffel Tower       |be    | 50.894291|  4.339217|Eiffel Tower, Avenue de Bouchout - Boechoutlaan, 1020 Brussels, Belgium                    |
 
 This also works with `oc_reverse_df()`, of course.
 
@@ -434,12 +436,12 @@ rev_df <-
   )
 
 oc_reverse_df(rev_df, lat, lon, language = "native")
-#> # A tibble: 2 × 3
-#>     lat   lon oc_formatted                                    
-#>   <dbl> <dbl> <chr>                                           
-#> 1  52.4  9.73 Philipsbornstraße 2, 30165 Hannover, Deutschland
-#> 2  41.4  2.13 Carrer de Calatrava, 64, 08017 Barcelona, España
 ```
+
+|      lat|     lon|oc_formatted                                     |
+|--------:|-------:|:------------------------------------------------|
+| 52.38772| 9.73336|Philipsbornstraße 2, 30165 Hannover, Deutschland |
+| 41.40137| 2.12868|Carrer de Calatrava, 64, 08017 Barcelona, España |
 
 ## Further information
 

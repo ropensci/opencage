@@ -1,13 +1,9 @@
 ---
 title: "Output options"
 subtitle: "Get different kinds of output from OpenCage"
-author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
-date: "2024-12-31"
 description: >
   "`oc_forward()`/`oc_reverse()` return lists of various type, namely data frames, JSON, GeoJSON or URLs, depending on the `return` value you specify. The possible `return` values are `df_list`, `json_list`, `geojson_list` and `url_only`."
-output:
-  rmarkdown::html_vignette:
-    df_print: kable
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Output options}
   %\VignetteEngine{knitr::rmarkdown}
@@ -188,10 +184,10 @@ oc_forward("Casey Station", return = "json_list")
 #> 
 #> [[1]]$timestamp
 #> [[1]]$timestamp$created_http
-#> [1] "Tue, 31 Dec 2024 10:46:25 GMT"
+#> [1] "Sat, 25 Jan 2025 19:14:52 GMT"
 #> 
 #> [[1]]$timestamp$created_unix
-#> [1] 1735641985
+#> [1] 1737832492
 #> 
 #> 
 #> [[1]]$total_results
@@ -313,10 +309,10 @@ gjsn_lst
 #> 
 #> $timestamp
 #> $timestamp$created_http
-#> [1] "Tue, 31 Dec 2024 10:46:28 GMT"
+#> [1] "Sat, 25 Jan 2025 19:14:54 GMT"
 #> 
 #> $timestamp$created_unix
-#> [1] 1735641988
+#> [1] 1737832494
 #> 
 #> 
 #> $total_results
