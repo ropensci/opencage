@@ -32,20 +32,16 @@ It returns a list of tibbles.
 stations <- c("Casey Station", "McMurdo Station")
 oc_forward(stations, return = "df_list")
 #> [[1]]
-#> # A tibble: 1 × 15
-#>   oc_confidence oc_formatted    oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng oc_iso_3166_1_alpha_2
-#>           <int> <chr>                      <dbl>            <dbl>            <dbl>            <dbl> <chr>                
-#> 1             7 Casey Station,…            -66.3             111.            -66.3             111. AQ                   
-#> # ℹ 8 more variables: oc_category <chr>, oc_normalized_city <chr>, oc_type <chr>, oc_continent <chr>,
-#> #   oc_country_code <chr>, oc_hamlet <chr>, oc_lat <dbl>, oc_lng <dbl>
+#> # A tibble: 1 × 17
+#>   oc_confidence oc_formatted              oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng oc_iso_3166_1_alpha_2 oc_iso_3166_1_alpha_3 oc_category oc_normalized_city oc_type oc_continent oc_country_code oc_hamlet     oc_postcode oc_lat oc_lng
+#>           <int> <chr>                                <dbl>            <dbl>            <dbl>            <dbl> <chr>                 <chr>                 <chr>       <chr>              <chr>   <chr>        <chr>           <chr>         <chr>        <dbl>  <dbl>
+#> 1             7 Casey Station, Antarctica            -66.3             111.            -66.3             111. AQ                    ATA                   place       Casey Station      hamlet  Antarctica   aq              Casey Station 7151         -66.3   111.
 #> 
 #> [[2]]
-#> # A tibble: 1 × 15
-#>   oc_confidence oc_formatted    oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng oc_iso_3166_1_alpha_2
-#>           <int> <chr>                      <dbl>            <dbl>            <dbl>            <dbl> <chr>                
-#> 1             7 McMurdo Statio…            -77.8             167.            -77.9             167. AQ                   
-#> # ℹ 8 more variables: oc_category <chr>, oc_normalized_city <chr>, oc_type <chr>, oc_continent <chr>,
-#> #   oc_country_code <chr>, oc_town <chr>, oc_lat <dbl>, oc_lng <dbl>
+#> # A tibble: 1 × 16
+#>   oc_confidence oc_formatted                oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng oc_iso_3166_1_alpha_2 oc_iso_3166_1_alpha_3 oc_category oc_normalized_city oc_type oc_continent oc_country_code oc_town         oc_lat oc_lng
+#>           <int> <chr>                                  <dbl>            <dbl>            <dbl>            <dbl> <chr>                 <chr>                 <chr>       <chr>              <chr>   <chr>        <chr>           <chr>            <dbl>  <dbl>
+#> 1             7 McMurdo Station, Antarctica            -77.8             167.            -77.9             167. AQ                    ATA                   place       McMurdo Station    city    Antarctica   aq              McMurdo Station  -77.8   167.
 ```
 
 The `df_list` type drives the `oc_forward_df()`/`oc_reverse_df()` functions.
@@ -63,8 +59,8 @@ oc_data
 #> # A tibble: 2 × 2
 #>   place           oc_result        
 #>   <chr>           <list>           
-#> 1 Casey Station   <tibble [1 × 15]>
-#> 2 McMurdo Station <tibble [1 × 15]>
+#> 1 Casey Station   <tibble [1 × 17]>
+#> 2 McMurdo Station <tibble [1 × 16]>
 ```
 
 This creates a list column `oc_result`, which can be easily unnested with `tidyr::unnest()`:
@@ -74,13 +70,11 @@ This creates a list column `oc_result`, which can be easily unnested with `tidyr
 library(tidyr, warn.conflicts = FALSE)
 
 oc_data %>% unnest(oc_result)
-#> # A tibble: 2 × 17
-#>   place           oc_confidence oc_formatted          oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng
-#>   <chr>                   <int> <chr>                            <dbl>            <dbl>            <dbl>            <dbl>
-#> 1 Casey Station               7 Casey Station, Antar…            -66.3             111.            -66.3             111.
-#> 2 McMurdo Station             7 McMurdo Station, Ant…            -77.8             167.            -77.9             167.
-#> # ℹ 10 more variables: oc_iso_3166_1_alpha_2 <chr>, oc_category <chr>, oc_normalized_city <chr>, oc_type <chr>,
-#> #   oc_continent <chr>, oc_country_code <chr>, oc_hamlet <chr>, oc_lat <dbl>, oc_lng <dbl>, oc_town <chr>
+#> # A tibble: 2 × 19
+#>   place           oc_confidence oc_formatted             oc_northeast_lat oc_northeast_lng oc_southwest_lat oc_southwest_lng oc_iso_3166_1_alpha_2 oc_iso_3166_1_alpha_3 oc_category oc_normalized_city oc_type oc_continent oc_country_code oc_hamlet oc_postcode oc_lat oc_lng oc_town
+#>   <chr>                   <int> <chr>                               <dbl>            <dbl>            <dbl>            <dbl> <chr>                 <chr>                 <chr>       <chr>              <chr>   <chr>        <chr>           <chr>     <chr>        <dbl>  <dbl> <chr>  
+#> 1 Casey Station               7 Casey Station, Antarcti…            -66.3             111.            -66.3             111. AQ                    ATA                   place       Casey Station      hamlet  Antarctica   aq              Casey St… 7151         -66.3   111. <NA>   
+#> 2 McMurdo Station             7 McMurdo Station, Antarc…            -77.8             167.            -77.9             167. AQ                    ATA                   place       McMurdo Station    city    Antarctica   aq              <NA>      <NA>         -77.8   167. McMurd…
 ```
 
 ## `json_list`
@@ -128,6 +122,9 @@ oc_forward("Casey Station", return = "json_list")
 #> [[1]]$results[[1]]$components$`ISO_3166-1_alpha-2`
 #> [1] "AQ"
 #> 
+#> [[1]]$results[[1]]$components$`ISO_3166-1_alpha-3`
+#> [1] "ATA"
+#> 
 #> [[1]]$results[[1]]$components$`_category`
 #> [1] "place"
 #> 
@@ -145,6 +142,9 @@ oc_forward("Casey Station", return = "json_list")
 #> 
 #> [[1]]$results[[1]]$components$hamlet
 #> [1] "Casey Station"
+#> 
+#> [[1]]$results[[1]]$components$postcode
+#> [1] "7151"
 #> 
 #> 
 #> [[1]]$results[[1]]$confidence
@@ -184,10 +184,10 @@ oc_forward("Casey Station", return = "json_list")
 #> 
 #> [[1]]$timestamp
 #> [[1]]$timestamp$created_http
-#> [1] "Sat, 25 Jan 2025 19:14:52 GMT"
+#> [1] "Wed, 07 Oct 2026 21:01:07 GMT"
 #> 
 #> [[1]]$timestamp$created_unix
-#> [1] 1737832492
+#> [1] 1791406867
 #> 
 #> 
 #> [[1]]$total_results
@@ -244,6 +244,9 @@ gjsn_lst
 #> $features[[1]]$properties$components$`ISO_3166-1_alpha-2`
 #> [1] "AQ"
 #> 
+#> $features[[1]]$properties$components$`ISO_3166-1_alpha-3`
+#> [1] "ATA"
+#> 
 #> $features[[1]]$properties$components$`_category`
 #> [1] "place"
 #> 
@@ -261,6 +264,9 @@ gjsn_lst
 #> 
 #> $features[[1]]$properties$components$hamlet
 #> [1] "Casey Station"
+#> 
+#> $features[[1]]$properties$components$postcode
+#> [1] "7151"
 #> 
 #> 
 #> $features[[1]]$properties$confidence
@@ -309,10 +315,10 @@ gjsn_lst
 #> 
 #> $timestamp
 #> $timestamp$created_http
-#> [1] "Sat, 25 Jan 2025 19:14:54 GMT"
+#> [1] "Wed, 07 Oct 2026 21:01:10 GMT"
 #> 
 #> $timestamp$created_unix
-#> [1] 1737832494
+#> [1] 1791406870
 #> 
 #> 
 #> $total_results

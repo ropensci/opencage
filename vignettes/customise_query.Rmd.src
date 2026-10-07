@@ -245,7 +245,7 @@ All of the function arguments mentioned above are vectorised, so you can send qu
 
 ```{r vectorised}
 oc_forward_df(
-  placename = c("New York", "Rio", "Tokyo"),
+  placename = c("New York", "Rio de Janeiro", "Tokyo"),
   language = c("es", "de", "fr")
 )
 ```
