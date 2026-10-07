@@ -91,9 +91,9 @@ oc_forward_df(placename = "Sarzeau")
 
 <div class="kable-table">
 
-| placename |   oc_lat |  oc_lng | oc_formatted          |
-|:----------|---------:|--------:|:----------------------|
-| Sarzeau   | 47.52877 | -2.7642 | 56370 Sarzeau, France |
+| placename |   oc_lat |    oc_lng | oc_formatted          |
+|:----------|---------:|----------:|:----------------------|
+| Sarzeau   | 47.52752 | -2.768454 | 56370 Sarzeau, France |
 
 </div>
 
@@ -105,9 +105,9 @@ oc_reverse_df(latitude = 51.5034070, longitude = -0.1275920)
 
 <div class="kable-table">
 
-| latitude | longitude | oc_formatted |
-|---:|---:|:---|
-| 51.50341 | -0.127592 | 10 Downing Street, Westminster, London, SW1A 2AA, United Kingdom |
+| latitude | longitude | oc_formatted                                        |
+|---------:|----------:|:----------------------------------------------------|
+| 51.50341 | -0.127592 | 10 Downing Street, London, SW1A 2AA, United Kingdom |
 
 </div>
 
