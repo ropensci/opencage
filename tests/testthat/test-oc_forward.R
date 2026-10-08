@@ -42,13 +42,18 @@ test_that("oc_forward adds request with add_request", {
   expect_identical(res[[1]][["request"]][["query"]], "Hmbg")
 })
 
-test_that("oc_forward masks key when add_request = TRUE", {
+test_that("key is masked on `oc_forward(add_request = TRUE)`", {
   skip_if_oc_offline()
   withr::local_envvar(c("OPENCAGE_KEY" = key_200))
 
   # json_list
   res <- oc_forward("irrelevant", return = "json_list", add_request = TRUE)
-  expect_identical(res[[1]][["request"]][["key"]], "OPENCAGE_KEY")
+  # OpenCage obfuscates the key on `add_request=1` queries,
+  # https://blog.opencagedata.com/post/key-obfuscation
+  expect_identical(
+    res[[1]][["request"]][["key"]],
+    paste0(substr(key_200, 1, 6), strrep("*", 26))
+  )
 })
 
 test_that("oc_forward handles response with no results", {
@@ -205,8 +210,8 @@ test_that("tidyeval works for arguments", {
 
   # limit
   limit <- oc_forward_df(oc_fw2(), loc, limit = limit)
-  expect_identical(nrow(limit), 6L)
-  expect_identical(limit$id, c(1L, 2L, 2L, 3L, 3L, 3L))
+  expect_identical(nrow(limit), 5L)
+  expect_identical(limit$id, c(1L, 2L, 2L, 3L, 3L))
 
   # no_annotations
   ann <-

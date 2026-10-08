@@ -56,7 +56,7 @@ test_that("oc_reverse adds request with add_request", {
   expect_identical(res[[1]][["request"]][["query"]], expected)
 })
 
-test_that("oc_reverse masks key when add_request = TRUE", {
+test_that("key is masked on `oc_reverse(add_request = TRUE)`", {
   skip_if_oc_offline()
   withr::local_envvar(c("OPENCAGE_KEY" = key_200))
 
@@ -67,7 +67,12 @@ test_that("oc_reverse masks key when add_request = TRUE", {
       return = "json_list",
       add_request = TRUE
     )
-  expect_identical(res[[1]][["request"]][["key"]], "OPENCAGE_KEY")
+  # OpenCage obfuscates the key on `add_request=1` queries,
+  # https://blog.opencagedata.com/post/key-obfuscation
+  expect_identical(
+    res[[1]][["request"]][["key"]],
+    paste0(substr(key_200, 1, 6), strrep("*", 26))
+  )
 })
 
 test_that("oc_reverse handles NAs", {
