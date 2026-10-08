@@ -89,7 +89,7 @@ Reverse geocoding from numeric vectors of latitude and longitude pairs to
 the names and addresses of a location.
 }
 \examples{
-\dontshow{if (oc_key_present() && oc_api_ok()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (oc_key_present() && oc_api_ok()) withAutoprint(\{ # examplesIf}
 
 # Reverse geocode a single location
 oc_reverse(latitude = -36.85007, longitude = 174.7706)

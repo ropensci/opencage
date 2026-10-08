@@ -2,7 +2,7 @@
 #'
 #' This function processes all geocoding requests issued by [oc_forward()] and
 #' [oc_reverse()] by calling the respective functions (after the query arguments
-#' have been checked by [oc_check_query()]). It builds the URL, fetches the
+#' have been checked by `oc_check_query()`). It builds the URL, fetches the
 #' results, checks the status of the returned results and finally parses them.
 #'
 #' @param limit The maximum number of results that should be returned. Integer

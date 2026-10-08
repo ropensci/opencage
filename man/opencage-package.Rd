@@ -22,6 +22,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Daniel Possenriede \email{possenriede+r@gmail.com} (\href{https://orcid.org/0000-0002-6738-9845}{ORCID})
   \item Jesse Sadler (\href{https://orcid.org/0000-0001-6081-9681}{ORCID})
   \item Maëlle Salmon (\href{https://orcid.org/0000-0002-2815-0399}{ORCID})
 }
