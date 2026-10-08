@@ -477,14 +477,8 @@ oc_forward_df.data.frame <-
           )
         )
 
-      if (utils::packageVersion("tidyr") > "0.8.99") {
-        results <-
-          tidyr::unnest(results_nest, "op", names_repair = "unique")
-      } else {
-        results <- tidyr::unnest(results_nest, "op", .drop = FALSE)
-        # .drop = FALSE so other list columns are not dropped. Deprecated as of
-        # v1.0.0
-      }
+      results <-
+        tidyr::unnest(results_nest, "op", names_repair = "unique")
 
       if (output == "short") {
         results <-
