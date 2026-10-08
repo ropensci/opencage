@@ -47,7 +47,7 @@ oc_mask_key <- function(string) {
       replacement = "OPENCAGE_KEY"
     )
   } else {
-    return(string)
+    string
   }
 }
 
