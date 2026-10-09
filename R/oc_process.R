@@ -22,22 +22,24 @@
 #' @noRd
 
 oc_process <-
-  function(placename = NULL,
-           latitude = NULL,
-           longitude = NULL,
-           return = "url_only",
-           bounds = NULL,
-           proximity = NULL,
-           countrycode = NULL,
-           language = NULL,
-           limit = 1L,
-           min_confidence = NULL,
-           no_annotations = TRUE,
-           roadinfo = FALSE,
-           no_dedupe = FALSE,
-           abbrv = FALSE,
-           address_only = FALSE,
-           add_request = FALSE) {
+  function(
+    placename = NULL,
+    latitude = NULL,
+    longitude = NULL,
+    return = "url_only",
+    bounds = NULL,
+    proximity = NULL,
+    countrycode = NULL,
+    language = NULL,
+    limit = 1L,
+    min_confidence = NULL,
+    no_annotations = TRUE,
+    roadinfo = FALSE,
+    no_dedupe = FALSE,
+    abbrv = FALSE,
+    address_only = FALSE,
+    add_request = FALSE
+  ) {
     # get key
     key <- Sys.getenv("OPENCAGE_KEY")
     oc_check_key(key)
@@ -87,26 +89,30 @@ oc_process <-
   }
 
 .oc_process <-
-  function(placename = NULL,
-           latitude = NULL,
-           longitude = NULL,
-           key = NULL,
-           return = NULL,
-           bounds = NULL,
-           proximity = NULL,
-           countrycode = NULL,
-           language = NULL,
-           limit = NULL,
-           min_confidence = NULL,
-           no_annotations = NULL,
-           roadinfo = NULL,
-           no_dedupe = NULL,
-           no_record = NULL,
-           abbrv = NULL,
-           address_only = NULL,
-           add_request = NULL,
-           pb = NULL) {
-    if (!is.null(pb)) pb$tick()
+  function(
+    placename = NULL,
+    latitude = NULL,
+    longitude = NULL,
+    key = NULL,
+    return = NULL,
+    bounds = NULL,
+    proximity = NULL,
+    countrycode = NULL,
+    language = NULL,
+    limit = NULL,
+    min_confidence = NULL,
+    no_annotations = NULL,
+    roadinfo = NULL,
+    no_dedupe = NULL,
+    no_record = NULL,
+    abbrv = NULL,
+    address_only = NULL,
+    add_request = NULL,
+    pb = NULL
+  ) {
+    if (!is.null(pb)) {
+      pb$tick()
+    }
 
     # define endpoint
     if (return == "geojson_list") {

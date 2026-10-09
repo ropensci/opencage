@@ -51,18 +51,20 @@
 #' )
 #'
 oc_reverse <-
-  function(latitude,
-           longitude,
-           return = c("df_list", "json_list", "geojson_list", "url_only"),
-           language = NULL,
-           min_confidence = NULL,
-           no_annotations = TRUE,
-           roadinfo = FALSE,
-           no_dedupe = FALSE,
-           abbrv = FALSE,
-           address_only = FALSE,
-           add_request = FALSE,
-           ...) {
+  function(
+    latitude,
+    longitude,
+    return = c("df_list", "json_list", "geojson_list", "url_only"),
+    language = NULL,
+    min_confidence = NULL,
+    no_annotations = TRUE,
+    roadinfo = FALSE,
+    no_dedupe = FALSE,
+    abbrv = FALSE,
+    address_only = FALSE,
+    add_request = FALSE,
+    ...
+  ) {
     # check latitude is provided
     if (missing(latitude) || is.null(latitude)) {
       stop(call. = FALSE, "`latitude` and `longitude` must be provided.")
@@ -184,19 +186,21 @@ oc_reverse_df.default <- function(x, ...) {
 #' @rdname oc_reverse_df
 #' @export
 oc_reverse_df.data.frame <-
-  function(data,
-           latitude,
-           longitude,
-           bind_cols = TRUE,
-           output = c("short", "all"),
-           language = NULL,
-           min_confidence = NULL,
-           roadinfo = FALSE,
-           no_annotations = TRUE,
-           no_dedupe = FALSE,
-           abbrv = FALSE,
-           address_only = FALSE,
-           ...) {
+  function(
+    data,
+    latitude,
+    longitude,
+    bind_cols = TRUE,
+    output = c("short", "all"),
+    language = NULL,
+    min_confidence = NULL,
+    roadinfo = FALSE,
+    no_annotations = TRUE,
+    no_dedupe = FALSE,
+    abbrv = FALSE,
+    address_only = FALSE,
+    ...
+  ) {
     # Tidyeval to enable input from data frame columns
     latitude <- rlang::enquo(latitude)
     longitude <- rlang::enquo(longitude)
@@ -209,10 +213,12 @@ oc_reverse_df.data.frame <-
     address_only <- rlang::enquo(address_only)
 
     # check latitude & longitude is provided
-    if (rlang::quo_is_missing(latitude) ||
-      rlang::quo_is_missing(longitude) ||
-      rlang::quo_is_null(latitude) ||
-      rlang::quo_is_null(longitude)) {
+    if (
+      rlang::quo_is_missing(latitude) ||
+        rlang::quo_is_missing(longitude) ||
+        rlang::quo_is_null(latitude) ||
+        rlang::quo_is_null(longitude)
+    ) {
       stop(call. = FALSE, "`latitude` and `longitude` must be provided.")
     }
 
@@ -223,8 +229,10 @@ oc_reverse_df.data.frame <-
 
     # we assume that the user wants the entire output when annotations or
     # roadinfo are requested
-    if (any(rlang::eval_tidy(no_annotations, data = data) == FALSE) ||
-      any(rlang::eval_tidy(roadinfo, data = data) == TRUE)) {
+    if (
+      any(rlang::eval_tidy(no_annotations, data = data) == FALSE) ||
+        any(rlang::eval_tidy(roadinfo, data = data) == TRUE)
+    ) {
       output <- "all"
     }
 
@@ -254,20 +262,19 @@ oc_reverse_df.data.frame <-
       results_nest <-
         dplyr::mutate(
           data,
-          op =
-            oc_reverse(
-              latitude = !!latitude,
-              longitude = !!longitude,
-              return = "df_list",
-              language = !!language,
-              min_confidence = !!min_confidence,
-              no_annotations = !!no_annotations,
-              roadinfo = !!roadinfo,
-              no_dedupe = !!no_dedupe,
-              abbrv = !!abbrv,
-              address_only = !!address_only,
-              add_request = add_request
-            )
+          op = oc_reverse(
+            latitude = !!latitude,
+            longitude = !!longitude,
+            return = "df_list",
+            language = !!language,
+            min_confidence = !!min_confidence,
+            no_annotations = !!no_annotations,
+            roadinfo = !!roadinfo,
+            no_dedupe = !!no_dedupe,
+            abbrv = !!abbrv,
+            address_only = !!address_only,
+            add_request = add_request
+          )
         )
 
       if (utils::packageVersion("tidyr") > "0.8.99") {
@@ -303,16 +310,18 @@ oc_reverse_df.data.frame <-
 #' @rdname oc_reverse_df
 #' @export
 oc_reverse_df.numeric <-
-  function(latitude,
-           longitude,
-           output = c("short", "all"),
-           language = NULL,
-           min_confidence = NULL,
-           no_annotations = TRUE,
-           no_dedupe = FALSE,
-           abbrv = FALSE,
-           address_only = FALSE,
-           ...) {
+  function(
+    latitude,
+    longitude,
+    output = c("short", "all"),
+    language = NULL,
+    min_confidence = NULL,
+    no_annotations = TRUE,
+    no_dedupe = FALSE,
+    abbrv = FALSE,
+    address_only = FALSE,
+    ...
+  ) {
     xdf <- tibble::tibble(latitude = latitude, longitude = longitude)
     oc_reverse_df(
       data = xdf,

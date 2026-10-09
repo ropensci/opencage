@@ -6,8 +6,7 @@
 
 oc_init_progress <- function(vec) {
   progress::progress_bar$new(
-    format =
-      "Retrieving results from OpenCage [:spin] :percent ETA: :eta",
+    format = "Retrieving results from OpenCage [:spin] :percent ETA: :eta",
     total = length(vec),
     clear = FALSE,
     width = 60

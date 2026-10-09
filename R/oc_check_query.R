@@ -9,21 +9,23 @@
 #' @noRd
 
 oc_check_query <-
-  function(placename = NULL,
-           latitude = NULL,
-           longitude = NULL,
-           bounds = NULL,
-           proximity = NULL,
-           countrycode = NULL,
-           language = NULL,
-           limit = NULL,
-           min_confidence = NULL,
-           no_annotations = NULL,
-           roadinfo = NULL,
-           no_dedupe = NULL,
-           abbrv = NULL,
-           address_only = NULL,
-           add_request = NULL) {
+  function(
+    placename = NULL,
+    latitude = NULL,
+    longitude = NULL,
+    bounds = NULL,
+    proximity = NULL,
+    countrycode = NULL,
+    language = NULL,
+    limit = NULL,
+    min_confidence = NULL,
+    no_annotations = NULL,
+    roadinfo = NULL,
+    no_dedupe = NULL,
+    abbrv = NULL,
+    address_only = NULL,
+    add_request = NULL
+  ) {
     arglist <-
       purrr::compact(
         list(
@@ -49,7 +51,8 @@ oc_check_query <-
     arglngths <- lengths(arglist)
     if (!all(arglngths == arglngths[1] | arglngths == 1, na.rm = TRUE)) {
       stop(
-        call. = FALSE, "All arguments must be of length one \n",
+        call. = FALSE,
+        "All arguments must be of length one \n",
         "or of the same length as `placename` or `latitude`."
       )
     }
@@ -61,31 +64,37 @@ oc_check_query <-
   }
 
 .oc_check_query <-
-  function(placename = NULL,
-           latitude = NULL,
-           longitude = NULL,
-           bounds = NULL,
-           proximity = NULL,
-           countrycode = NULL,
-           language = NULL,
-           limit = NULL,
-           min_confidence = NULL,
-           no_annotations = NULL,
-           roadinfo = NULL,
-           no_dedupe = NULL,
-           abbrv = NULL,
-           address_only = NULL,
-           add_request = NULL) {
+  function(
+    placename = NULL,
+    latitude = NULL,
+    longitude = NULL,
+    bounds = NULL,
+    proximity = NULL,
+    countrycode = NULL,
+    language = NULL,
+    limit = NULL,
+    min_confidence = NULL,
+    no_annotations = NULL,
+    roadinfo = NULL,
+    no_dedupe = NULL,
+    abbrv = NULL,
+    address_only = NULL,
+    add_request = NULL
+  ) {
     # check placename
     if (!is.null(placename) && !is.character(placename)) {
       stop("`placename` must be a character vector.", call. = FALSE)
     }
 
     # check latitude
-    if (!is.null(latitude)) oc_check_between(latitude, -90, 90)
+    if (!is.null(latitude)) {
+      oc_check_between(latitude, -90, 90)
+    }
 
     # check longitude
-    if (!is.null(longitude)) oc_check_between(longitude, -180, 180)
+    if (!is.null(longitude)) {
+      oc_check_between(longitude, -180, 180)
+    }
 
     # check bounds
     if (!is.null(bounds)) {
@@ -108,8 +117,10 @@ oc_check_query <-
           "Did you forget to wrap the vector(s) in a list?"
         )
       }
-      if (!utils::hasName(proximity, "latitude") ||
-        !utils::hasName(proximity, "longitude")) {
+      if (
+        !utils::hasName(proximity, "latitude") ||
+          !utils::hasName(proximity, "longitude")
+      ) {
         stop(
           call. = FALSE,
           "The coordinates of every `proximity` point must be named ",
@@ -125,7 +136,8 @@ oc_check_query <-
     # check countrycode
     if (!is.null(countrycode)) {
       if (!(all(toupper(unlist(countrycode)) %in% countrycodes$code))) {
-        stop("Every `countrycode` must be valid. ",
+        stop(
+          "Every `countrycode` must be valid. ",
           "See `data('countrycodes')` for valid values.",
           call. = FALSE
         )
