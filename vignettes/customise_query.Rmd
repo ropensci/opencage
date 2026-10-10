@@ -218,9 +218,9 @@ Thus, in the following example, the French capital is too large to be returned.
 oc_forward_df(placename = "Paris", min_confidence = 7, limit = 5)
 ```
 
-|placename | oc_lat| oc_lng|oc_formatted |
-|:---------|------:|------:|:------------|
-|Paris     |     NA|     NA|NA           |
+|placename |  oc_lat|    oc_lng|oc_formatted                              |
+|:---------|-------:|---------:|:-----------------------------------------|
+|Paris     | 38.2098| -84.25299|Paris, Kentucky, United States of America |
 
 Note that confidence is not used for the [ranking of results](https://opencagedata.com/api#ranking).
 It does not tell you which result is more "correct" or "relevant", nor what type of thing the result is, but rather how small a result is, geographically speaking.
