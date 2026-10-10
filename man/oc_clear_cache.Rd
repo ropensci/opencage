@@ -10,7 +10,7 @@ oc_clear_cache()
 Forget past results and reset the \pkg{opencage} cache.
 }
 \examples{
-\dontshow{if (oc_key_present() && oc_api_ok()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (oc_key_present() && oc_api_ok()) withAutoprint(\{ # examplesIf}
 
 system.time(oc_reverse(latitude = 10, longitude = 10))
 system.time(oc_reverse(latitude = 10, longitude = 10))

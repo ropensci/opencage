@@ -45,7 +45,8 @@ oc_points <- function(...) UseMethod("oc_points")
 oc_points.default <- function(x, ...) {
   stop(
     "Can't create a list of points from an object of class `",
-    class(x)[[1]], "`.",
+    class(x)[[1]],
+    "`.",
     call. = FALSE
   )
 }

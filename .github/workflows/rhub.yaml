@@ -6,7 +6,7 @@
 #
 # It is unlikely that you need to modify this file manually.
 
-name: rhub.yaml
+name: rhub
 run-name: "${{ github.event.inputs.id }}: ${{ github.event.inputs.name || format('Manually run by {0}', github.triggering_actor) }}"
 
 on:

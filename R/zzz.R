@@ -1,4 +1,4 @@
-# We use `<<-` below to modify the package's namespace.
+# We use `assign()` below to modify the package's namespace.
 # It doesn't modify the global environment.
 # We do this to prevent build time dependencies on {memoise} and {ratelimitr},
 # as recommended in <http://memoise.r-lib.org/reference/memoise.html#details>.
@@ -11,8 +11,11 @@ oc_get_memoise <- oc_get_limited
 # Then modify them at load-time
 # nocov start
 .onLoad <- function(libname, pkgname) {
+  ns <- asNamespace(pkgname)
+
   # limit requests per second
-  oc_get_limited <<-
+  assign(
+    "oc_get_limited",
     ratelimitr::limit_rate(
       oc_get,
       # rate can be changed via oc_config()/ratelimitr::UPDATE_RATE()
@@ -20,8 +23,14 @@ oc_get_memoise <- oc_get_limited
         n = 1L,
         period = 1L
       )
-    )
+    ),
+    envir = ns
+  )
 
-  oc_get_memoise <<- memoise::memoise(oc_get_limited)
+  assign(
+    "oc_get_memoise",
+    memoise::memoise(oc_get_limited),
+    envir = ns
+  )
 }
 # nocov end

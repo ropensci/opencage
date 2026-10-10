@@ -119,7 +119,7 @@ Forward geocoding from a character vector of location names to latitude and
 longitude tuples.
 }
 \examples{
-\dontshow{if (oc_key_present() && oc_api_ok()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (oc_key_present() && oc_api_ok()) withAutoprint(\{ # examplesIf}
 
 # Geocode a single location, an address in this case
 oc_forward(placename = "Triererstr 15, 99432, Weimar, Deutschland")

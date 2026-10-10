@@ -96,7 +96,7 @@ oc_forward_df("Curaçao", no_annotations = FALSE)["oc_iso_3166_1_alpha_2"]
 The `bounds` parameter restricts the possible results to a defined [bounding box](https://wiki.openstreetmap.org/wiki/Bounding_Box).
 A bounding box is a named numeric vector with four coordinates specifying its south-west and north-east corners: `(xmin, ymin, xmax, ymax)`.
 The bounds parameter can most easily be specified with the `oc_bbox()` helper. For example, `bounds = oc_bbox(-0.56, 51.28, 0.27, 51.68)`.
-OpenCage provides a '[bounds-finder](https://opencagedata.com/bounds-finder)' to interactively determine bounds values.
+OpenCage provides a '[bounds-finder](https://opencagedata.com/tools/bounds-finder)' to interactively determine bounds values.
 
 Below is an example of the use of `bounds` where the bounding box specifies the the South American continent.
 
@@ -187,7 +187,6 @@ oc_forward_df(placename = "München")
 
 To find the correct language tag for your desired language, you can search for the language on the [BCP47 language subtag lookup](https://r12a.github.io/app-subtags/) for example.
 Note however, that there are some language tags in use on OpenStreetMap, one of OpenCage's main sources, that do not conform with the IETF BCP 47 standard.
-For example, OSM uses [`zh_pinyin`](https://wiki.openstreetmap.org/w/index.php?title=Multilingual_names#China) instead of `zh-Latn-pinyin` for [Hanyu Pinyin](https://en.wikipedia.org/wiki/Pinyin).
 It might, therefore, be helpful to consult the details page of the target country on openstreetmap.org to see which language tags are actually used.
 In any case, neither the OpenCage API nor the functions in this package will validate the language tags you provide.
 

@@ -139,21 +139,23 @@
 #' )
 #'
 oc_forward <-
-  function(placename,
-           return = c("df_list", "json_list", "geojson_list", "url_only"),
-           bounds = NULL,
-           proximity = NULL,
-           countrycode = NULL,
-           language = NULL,
-           limit = 10L,
-           min_confidence = NULL,
-           no_annotations = TRUE,
-           roadinfo = FALSE,
-           no_dedupe = FALSE,
-           abbrv = FALSE,
-           address_only = FALSE,
-           add_request = FALSE,
-           ...) {
+  function(
+    placename,
+    return = c("df_list", "json_list", "geojson_list", "url_only"),
+    bounds = NULL,
+    proximity = NULL,
+    countrycode = NULL,
+    language = NULL,
+    limit = 10L,
+    min_confidence = NULL,
+    no_annotations = TRUE,
+    roadinfo = FALSE,
+    no_dedupe = FALSE,
+    abbrv = FALSE,
+    address_only = FALSE,
+    add_request = FALSE,
+    ...
+  ) {
     # check a placename is provided
     if (missing(placename) || is.null(placename)) {
       stop(call. = FALSE, "`placename` must be provided.")
@@ -365,22 +367,24 @@ oc_forward_df.default <- function(x, ...) {
 #' @rdname oc_forward_df
 #' @export
 oc_forward_df.data.frame <-
-  function(data,
-           placename,
-           bind_cols = TRUE,
-           output = c("short", "all"),
-           bounds = NULL,
-           proximity = NULL,
-           countrycode = NULL,
-           language = NULL,
-           limit = 1L,
-           min_confidence = NULL,
-           no_annotations = TRUE,
-           roadinfo = FALSE,
-           no_dedupe = FALSE,
-           abbrv = FALSE,
-           address_only = FALSE,
-           ...) {
+  function(
+    data,
+    placename,
+    bind_cols = TRUE,
+    output = c("short", "all"),
+    bounds = NULL,
+    proximity = NULL,
+    countrycode = NULL,
+    language = NULL,
+    limit = 1L,
+    min_confidence = NULL,
+    no_annotations = TRUE,
+    roadinfo = FALSE,
+    no_dedupe = FALSE,
+    abbrv = FALSE,
+    address_only = FALSE,
+    ...
+  ) {
     # Tidyeval to enable input from data frame columns
     placename <- rlang::enquo(placename)
     bounds <- rlang::enquo(bounds)
@@ -407,8 +411,10 @@ oc_forward_df.data.frame <-
 
     # we assume that the user wants the entire output when annotations or
     # roadinfo are requested
-    if (any(rlang::eval_tidy(no_annotations, data = data) == FALSE) ||
-      any(rlang::eval_tidy(roadinfo, data = data) == TRUE)) {
+    if (
+      any(rlang::eval_tidy(no_annotations, data = data) == FALSE) ||
+        any(rlang::eval_tidy(roadinfo, data = data) == TRUE)
+    ) {
       output <- "all"
     }
 
@@ -453,33 +459,26 @@ oc_forward_df.data.frame <-
       results_nest <-
         dplyr::mutate(
           data,
-          op =
-            oc_forward(
-              placename = !!placename,
-              return = "df_list",
-              bounds = !!bounds,
-              proximity = !!proximity,
-              countrycode = !!countrycode,
-              language = !!language,
-              limit = !!limit,
-              min_confidence = !!min_confidence,
-              no_annotations = !!no_annotations,
-              roadinfo = !!roadinfo,
-              no_dedupe = !!no_dedupe,
-              abbrv = !!abbrv,
-              address_only = !!address_only,
-              add_request = add_request
-            )
+          op = oc_forward(
+            placename = !!placename,
+            return = "df_list",
+            bounds = !!bounds,
+            proximity = !!proximity,
+            countrycode = !!countrycode,
+            language = !!language,
+            limit = !!limit,
+            min_confidence = !!min_confidence,
+            no_annotations = !!no_annotations,
+            roadinfo = !!roadinfo,
+            no_dedupe = !!no_dedupe,
+            abbrv = !!abbrv,
+            address_only = !!address_only,
+            add_request = add_request
+          )
         )
 
-      if (utils::packageVersion("tidyr") > "0.8.99") {
-        results <-
-          tidyr::unnest(results_nest, "op", names_repair = "unique")
-      } else {
-        results <- tidyr::unnest(results_nest, "op", .drop = FALSE)
-        # .drop = FALSE so other list columns are not dropped. Deprecated as of
-        # v1.0.0
-      }
+      results <-
+        tidyr::unnest(results_nest, "op", names_repair = "unique")
 
       if (output == "short") {
         results <-
@@ -509,20 +508,22 @@ oc_forward_df.data.frame <-
 #' @rdname oc_forward_df
 #' @export
 oc_forward_df.character <-
-  function(placename,
-           output = c("short", "all"),
-           bounds = NULL,
-           proximity = NULL,
-           countrycode = NULL,
-           language = NULL,
-           limit = 1L,
-           min_confidence = NULL,
-           no_annotations = TRUE,
-           roadinfo = FALSE,
-           no_dedupe = FALSE,
-           abbrv = FALSE,
-           address_only = FALSE,
-           ...) {
+  function(
+    placename,
+    output = c("short", "all"),
+    bounds = NULL,
+    proximity = NULL,
+    countrycode = NULL,
+    language = NULL,
+    limit = 1L,
+    min_confidence = NULL,
+    no_annotations = TRUE,
+    roadinfo = FALSE,
+    no_dedupe = FALSE,
+    abbrv = FALSE,
+    address_only = FALSE,
+    ...
+  ) {
     xdf <- tibble::tibble(placename = placename)
     oc_forward_df(
       data = xdf,

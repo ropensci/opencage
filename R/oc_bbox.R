@@ -79,14 +79,13 @@ oc_bbox.numeric <- function(xmin, ymin, xmax, ymax, ...) {
     oc_check_bbox(xmin = xmin, ymin = ymin, xmax = xmax, ymax = ymax)
     structure(
       c(xmin = xmin, ymin = ymin, xmax = xmax, ymax = ymax),
-      crs =
-        structure(
-          list(
-            epsg = 4326L,
-            proj4string = "+proj=longlat +datum=WGS84 +no_defs"
-          ),
-          class = "crs"
+      crs = structure(
+        list(
+          epsg = 4326L,
+          proj4string = "+proj=longlat +datum=WGS84 +no_defs"
         ),
+        class = "crs"
+      ),
       class = "bbox"
     )
   }

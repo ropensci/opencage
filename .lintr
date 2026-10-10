@@ -1,4 +1,3 @@
 linters: linters_with_tags(
   c("package_development", "default"),
-  cyclocomp_linter = NULL, # .oc_check_query()
   indentation_linter = NULL) # https://github.com/r-lib/lintr/issues/2034, https://github.com/r-lib/lintr/issues/2535

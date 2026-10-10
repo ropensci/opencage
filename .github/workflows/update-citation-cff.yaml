@@ -13,7 +13,7 @@ on:
       - inst/CITATION
   workflow_dispatch:
 
-name: update-citation-cff.yaml
+name: update-citation-cff
 
 permissions: read-all
 

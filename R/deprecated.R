@@ -47,18 +47,20 @@ NULL
 #'                               Deutschland")
 #'
 opencage_forward <-
-  function(placename,
-           key = opencage_key(),
-           bounds = NULL,
-           countrycode = NULL,
-           language = NULL,
-           limit = 10L,
-           min_confidence = NULL,
-           no_annotations = FALSE,
-           no_dedupe = FALSE,
-           no_record = FALSE,
-           abbrv = FALSE,
-           add_request = TRUE) {
+  function(
+    placename,
+    key = opencage_key(),
+    bounds = NULL,
+    countrycode = NULL,
+    language = NULL,
+    limit = 10L,
+    min_confidence = NULL,
+    no_annotations = FALSE,
+    no_dedupe = FALSE,
+    no_record = FALSE,
+    abbrv = FALSE,
+    add_request = TRUE
+  ) {
     if (length(placename) > 1) {
       stop(
         call. = FALSE,
@@ -117,19 +119,21 @@ opencage_forward <-
 #' )
 #'
 opencage_reverse <-
-  function(latitude,
-           longitude,
-           key = opencage_key(),
-           bounds = NULL,
-           countrycode = NULL,
-           language = NULL,
-           limit = 10,
-           min_confidence = NULL,
-           no_annotations = FALSE,
-           no_dedupe = FALSE,
-           no_record = FALSE,
-           abbrv = FALSE,
-           add_request = TRUE) {
+  function(
+    latitude,
+    longitude,
+    key = opencage_key(),
+    bounds = NULL,
+    countrycode = NULL,
+    language = NULL,
+    limit = 10,
+    min_confidence = NULL,
+    no_annotations = FALSE,
+    no_dedupe = FALSE,
+    no_record = FALSE,
+    abbrv = FALSE,
+    add_request = TRUE
+  ) {
     if (length(latitude) > 1) {
       stop(
         call. = FALSE,

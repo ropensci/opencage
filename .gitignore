@@ -1,6 +1,3 @@
-# Created by https://www.gitignore.io/api/r
-# Edit at https://www.gitignore.io/?templates=r
-
 ### R ###
 # History files
 .Rhistory
@@ -40,12 +37,24 @@ vignettes/*.pdf
 *.utf8.md
 *.knit.md
 
-### R.Bookdown Stack ###
-# R package: bookdown caching files
-/*_files/
+# R Environment Variables
+.Renviron
+.env
 
-# End of https://www.gitignore.io/api/r
+# pkgdown site
+docs/
 
+# translation temp files
+po/*~
+
+# RStudio Connect folder
+rsconnect/
+
+# quarto
+/.quarto/
+**/*.quarto_ipynb
+
+### project ###
 inst/doc
 doc
 Meta
