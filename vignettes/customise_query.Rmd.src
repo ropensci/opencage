@@ -1,13 +1,9 @@
 ---
 title: "Customise your query"
 subtitle: "Get more and better results from OpenCage"
-author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
-date: "`r Sys.Date()`"
 description: >
   "The OpenCage API supports about a dozen parameters to customise a query and here we will explain how to use them."
-output:
-  rmarkdown::html_vignette:
-    df_print: kable
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Customise your query}
   %\VignetteEngine{knitr::rmarkdown}
@@ -249,7 +245,7 @@ All of the function arguments mentioned above are vectorised, so you can send qu
 
 ```{r vectorised}
 oc_forward_df(
-  placename = c("New York", "Rio", "Tokyo"),
+  placename = c("New York", "Rio de Janeiro", "Tokyo"),
   language = c("es", "de", "fr")
 )
 ```

@@ -1,13 +1,9 @@
 ---
 title: "Introduction to opencage"
 subtitle: "Forward and Reverse Geocoding"
-author: "Daniel Possenriede, Jesse Sadler, Maëlle Salmon"
-date: "`r Sys.Date()`"
 description: >
   "Get started with the opencage R package to geocode with the OpenCage API, either from place name to longitude and latitude (forward geocoding) or from longitude and latitude to the name and address of a location (reverse geocoding)."
-output:
-  rmarkdown::html_vignette:
-    df_print: kable
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Introduction to opencage}
   %\VignetteEngine{knitr::rmarkdown}
