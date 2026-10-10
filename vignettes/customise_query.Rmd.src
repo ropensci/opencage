@@ -187,7 +187,6 @@ oc_forward_df(placename = "München")
 
 To find the correct language tag for your desired language, you can search for the language on the [BCP47 language subtag lookup](https://r12a.github.io/app-subtags/) for example.
 Note however, that there are some language tags in use on OpenStreetMap, one of OpenCage's main sources, that do not conform with the IETF BCP 47 standard.
-For example, OSM uses [`zh_pinyin`](https://wiki.openstreetmap.org/w/index.php?title=Multilingual_names#China) instead of `zh-Latn-pinyin` for [Hanyu Pinyin](https://en.wikipedia.org/wiki/Pinyin).
 It might, therefore, be helpful to consult the details page of the target country on openstreetmap.org to see which language tags are actually used.
 In any case, neither the OpenCage API nor the functions in this package will validate the language tags you provide.
 
