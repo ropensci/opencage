@@ -4,7 +4,7 @@ on:
   push:
     paths: ["**.[rR]", "**.[qrR]md", "**.[rR]markdown", "**.[rR]nw", "**.[rR]profile"]
 
-name: style.yaml
+name: style
 
 permissions: read-all
 

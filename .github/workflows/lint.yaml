@@ -5,7 +5,7 @@ on:
     branches: main
   pull_request:
 
-name: lint.yaml
+name: lint
 
 permissions: read-all
 
