@@ -16,7 +16,7 @@ status](https://ropensci.r-universe.dev/badges/opencage)](https://ropensci.r-uni
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![R-CMD-check](https://github.com/ropensci/opencage/actions/workflows/R-CMD-check/badge.svg?branch=main)](https://github.com/ropensci/opencage/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/ropensci/opencage/actions/workflows/R-CMD-check.yaml/badge.svg?branch:main)](https://github.com/ropensci/opencage/actions/workflows/R-CMD-check.yaml?query=branch:main)
 [![Codecov test
 coverage](https://codecov.io/gh/ropensci/opencage/graph/badge.svg)](https://app.codecov.io/gh/ropensci/opencage)
 [![rOpenSci
