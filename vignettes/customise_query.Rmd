@@ -130,7 +130,7 @@ oc_forward_df("Curaçao", no_annotations = FALSE)["oc_iso_3166_1_alpha_2"]
 The `bounds` parameter restricts the possible results to a defined [bounding box](https://wiki.openstreetmap.org/wiki/Bounding_Box).
 A bounding box is a named numeric vector with four coordinates specifying its south-west and north-east corners: `(xmin, ymin, xmax, ymax)`.
 The bounds parameter can most easily be specified with the `oc_bbox()` helper. For example, `bounds = oc_bbox(-0.56, 51.28, 0.27, 51.68)`.
-OpenCage provides a '[bounds-finder](https://opencagedata.com/bounds-finder)' to interactively determine bounds values.
+OpenCage provides a '[bounds-finder](https://opencagedata.com/tools/bounds-finder)' to interactively determine bounds values.
 
 Below is an example of the use of `bounds` where the bounding box specifies the the South American continent.
 

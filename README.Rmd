@@ -13,10 +13,10 @@ output:
 [![CRAN Version](https://www.r-pkg.org/badges/version/opencage)](https://cran.r-project.org/package=opencage)
 [![CRAN Checks Status](https://badges.cranchecks.info/worst/opencage.svg)](https://cran.r-project.org/web/checks/check_results_opencage.html)
 [![CRAN Downloads per Month](https://cranlogs.r-pkg.org/badges/opencage)](https://cran.r-project.org/package=opencage)
-[![R-universe status](https://ropensci.r-universe.dev/badges/opencage)](https://ropensci.r-universe.dev/ui#package:opencage)
+[![R-universe status](https://ropensci.r-universe.dev/badges/opencage)](https://ropensci.r-universe.dev/opencage)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![R-CMD-check Status on GitHub Actions](https://github.com/ropensci/opencage/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/opencage/actions?query=workflow%3AR-CMD-check)
-[![codecov.io Status](https://codecov.io/github/ropensci/opencage/coverage.svg?branch=main)](https://codecov.io/github/ropensci/opencage?branch=main)
+[![R-CMD-check](https://github.com/ropensci/opencage/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/opencage/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/ropensci/opencage/graph/badge.svg)](https://app.codecov.io/gh/ropensci/opencage)
 [![rOpenSci Peer-Review](https://badges.ropensci.org/36_status.svg)](https://github.com/ropensci/software-review/issues/36)
 [![License](https://img.shields.io/cran/l/opencage)](https://opensource.org/licenses/gpl-license)
 
@@ -26,7 +26,7 @@ Geocode with the [OpenCage](https://opencagedata.com) API, either from place nam
 
 ## Installation
 
-You can install {opencage} from [CRAN](https://cran.r-project.org/package=opencage), [R-universe](https://ropensci.r-universe.dev/ui#package:opencage) or [GitHub](https://github.com/ropensci/opencage) like this:
+You can install {opencage} from [CRAN](https://cran.r-project.org/package=opencage), [R-universe](https://ropensci.r-universe.dev/opencage) or [GitHub](https://github.com/ropensci/opencage) like this:
 
 - Release version from CRAN
 
