@@ -71,7 +71,6 @@ oc_forward_df("Paris", limit = 5, no_dedupe = TRUE)
 As you can see, place names are often ambiguous.
 Happily, the OpenCage API has tools to deal with this problem.
 The `countrycode`, `bounds`, and `proximity` arguments can make the query more precise.
-`min_confidence` lets you limit the results to those with a specified confidence score (which is not necessarily the "best" or most "relevant" result, though).
 These parameters are only relevant and available for forward geocoding.
 
 ### `countrycode`
@@ -206,25 +205,6 @@ oc_forward_df(placename = "Paris", proximity = lx_point, limit = 5)
 
 Note that the French capital is listed before other places in the US, which are closer to the point provided.
 This illustrates how `proximity` is only one of many factors influencing the ranking of results.
-
-### Confidence
-
-`min_confidence` — an integer value between 0 and 10 — indicates the precision of the returned result as defined by its geographical extent, i.e. by the extent of the result's bounding box.
-When you specify `min_confidence`, only results with at least the requested confidence will be returned.
-Thus, in the following example, the French capital is too large to be returned.
-
-
-``` r
-oc_forward_df(placename = "Paris", min_confidence = 7, limit = 5)
-```
-
-|placename | oc_lat| oc_lng|oc_formatted |
-|:---------|------:|------:|:------------|
-|Paris     |     NA|     NA|NA           |
-
-Note that confidence is not used for the [ranking of results](https://opencagedata.com/api#ranking).
-It does not tell you which result is more "correct" or "relevant", nor what type of thing the result is, but rather how small a result is, geographically speaking.
-See the [API documentation](https://opencagedata.com/api#confidence) for details.
 
 ## Retrieve more information from the API
 

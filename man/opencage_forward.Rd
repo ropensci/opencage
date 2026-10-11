@@ -55,13 +55,6 @@ have a record in that language, the results will be returned in English.}
 of results returned for each \code{placename}. Integer values between 1 and 100
 are allowed. Default is 10.}
 
-\item{min_confidence}{Numeric vector of integer values between 0 and 10
-indicating the precision of the returned result as defined by its
-geographical extent, (i.e. by the extent of the result's bounding box). See
-the \href{https://opencagedata.com/api#confidence}{API documentation} for
-details. Only results with at least the requested confidence will be
-returned. Default is \code{NULL}.}
-
 \item{no_annotations}{Logical vector indicating whether additional
 information about the result location should be returned. \code{TRUE} by
 default, which means that the results will not contain annotations.}

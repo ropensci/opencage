@@ -15,7 +15,6 @@ oc_reverse_df(...)
   bind_cols = TRUE,
   output = c("short", "all"),
   language = NULL,
-  min_confidence = NULL,
   roadinfo = FALSE,
   no_annotations = TRUE,
   no_dedupe = FALSE,
@@ -29,7 +28,6 @@ oc_reverse_df(...)
   longitude,
   output = c("short", "all"),
   language = NULL,
-  min_confidence = NULL,
   no_annotations = TRUE,
   no_dedupe = FALSE,
   abbrv = FALSE,
@@ -60,13 +58,6 @@ tag, in which case OpenCage will attempt to return the response in the
 "official" language(s). In case the \code{language} parameter is set to \code{NULL}
 (which is the default), the tag is not recognized, or OpenCage does not
 have a record in that language, the results will be returned in English.}
-
-\item{min_confidence}{Numeric vector of integer values, or an unquoted
-variable name of such a vector, between 0 and 10 indicating the precision
-of the returned result as defined by its geographical extent, (i.e. by the
-extent of the result's bounding box). See the \href{https://opencagedata.com/api#confidence}{API documentation} for details. Only
-results with at least the requested confidence will be returned. Default is
-\code{NULL}).}
 
 \item{roadinfo}{Logical vector, or an unquoted variable name of such a
 vector, indicating whether the geocoder should attempt to match the nearest
@@ -128,18 +119,15 @@ oc_reverse_df(df,
 # arguments except bind_cols and output.
 # This makes it possible to build up more detailed queries
 # through the data frame passed to the data argument.
-
 df2 <- add_column(df,
   language = c("en", "fr", "de", "en"),
   confidence = c(8, 10, 10, 10)
 )
 
 # Use language column to specify preferred language of results
-# and confidence column to allow different confidence levels
 oc_reverse_df(df2,
   latitude = lat, longitude = lng,
-  language = language,
-  min_confidence = confidence
+  language = language
 )
 \dontshow{\}) # examplesIf}
 }

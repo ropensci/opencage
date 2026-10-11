@@ -70,6 +70,15 @@ opencage_forward <-
 
     lifecycle::deprecate_warn("0.2.0", "opencage_forward()", "oc_forward()")
 
+    # fail if `min_confidence` is provided
+    if (!is.null(min_confidence)) {
+      lifecycle::deprecate_stop(
+        when = "0.3.0",
+        what = "opencage_forward(min_confidence)",
+        details = "The OpenCage API does not support the `min_confidence` parameter anymore." # nolint: line_length_linter.
+      )
+    }
+
     # set key and no_record option locally,
     # i.e. go back to default after function is finished
     withr::local_envvar(list("OPENCAGE_KEY" = key))
@@ -82,7 +91,6 @@ opencage_forward <-
       countrycode = countrycode,
       language = language,
       limit = limit,
-      min_confidence = min_confidence,
       no_annotations = no_annotations,
       no_dedupe = no_dedupe,
       abbrv = abbrv,
@@ -143,6 +151,15 @@ opencage_reverse <-
 
     lifecycle::deprecate_warn("0.2.0", "opencage_reverse()", "oc_reverse()")
 
+    # fail if `min_confidence` is provided
+    if (!is.null(min_confidence)) {
+      lifecycle::deprecate_stop(
+        when = "0.3.0",
+        what = "opencage_reverse(min_confidence)",
+        details = "The OpenCage API does not support the `min_confidence` parameter anymore." # nolint: line_length_linter.
+      )
+    }
+
     # set key and no_record option locally,
     # i.e. go back to default after function is finished
     withr::local_envvar(list("OPENCAGE_KEY" = key))
@@ -154,7 +171,6 @@ opencage_reverse <-
       return = "json_list",
       language = language,
       limit = limit,
-      min_confidence = min_confidence,
       no_annotations = no_annotations,
       no_dedupe = no_dedupe,
       abbrv = abbrv,
