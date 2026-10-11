@@ -299,3 +299,23 @@ test_that("Check that placename is present", {
   expect_error(oc_forward_df(oc_fw1()), "`placename` must be provided.")
   expect_error(oc_forward_df(oc_fw1(), NULL), "`placename` must be provided.")
 })
+
+test_that("oc_forward stops on `min_confidence` parameter", {
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
+
+  lifecycle::expect_defunct(
+    oc_forward(placename = "Irrelevant", min_confidence = 7L)
+  )
+
+  lifecycle::expect_defunct(
+    oc_forward_df(
+      data = oc_fw1(),
+      placename = loc,
+      min_confidence = 7L
+    )
+  )
+
+  lifecycle::expect_defunct(
+    oc_forward_df(placename = "Irrelevant", min_confidence = 7L)
+  )
+})

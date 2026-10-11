@@ -56,7 +56,6 @@ oc_reverse <-
     longitude,
     return = c("df_list", "json_list", "geojson_list", "url_only"),
     language = NULL,
-    min_confidence = NULL,
     no_annotations = TRUE,
     roadinfo = FALSE,
     no_dedupe = FALSE,
@@ -74,6 +73,15 @@ oc_reverse <-
       stop(call. = FALSE, "`latitude` and `longitude` must be provided.")
     }
 
+    # fail if `min_confidence` is provided
+    if (rlang::has_name(rlang::quos(...), "min_confidence")) {
+      lifecycle::deprecate_stop(
+        when = "0.3.0",
+        what = "oc_reverse(min_confidence)",
+        details = "The OpenCage API does not support the `min_confidence` parameter anymore." # nolint: line_length_linter.
+      )
+    }
+
     # check return
     return <- match.arg(return)
 
@@ -82,7 +90,6 @@ oc_reverse <-
       latitude = latitude,
       longitude = longitude,
       language = language,
-      min_confidence = min_confidence,
       no_annotations = no_annotations,
       roadinfo = roadinfo,
       no_dedupe = no_dedupe,
@@ -96,7 +103,6 @@ oc_reverse <-
       longitude = longitude,
       return = return,
       language = language,
-      min_confidence = min_confidence,
       no_annotations = no_annotations,
       roadinfo = roadinfo,
       no_dedupe = no_dedupe,
@@ -156,18 +162,15 @@ oc_reverse <-
 #' # arguments except bind_cols and output.
 #' # This makes it possible to build up more detailed queries
 #' # through the data frame passed to the data argument.
-#'
 #' df2 <- add_column(df,
 #'   language = c("en", "fr", "de", "en"),
 #'   confidence = c(8, 10, 10, 10)
 #' )
 #'
 #' # Use language column to specify preferred language of results
-#' # and confidence column to allow different confidence levels
 #' oc_reverse_df(df2,
 #'   latitude = lat, longitude = lng,
-#'   language = language,
-#'   min_confidence = confidence
+#'   language = language
 #' )
 #'
 oc_reverse_df <- function(...) UseMethod("oc_reverse_df")
@@ -193,7 +196,6 @@ oc_reverse_df.data.frame <-
     bind_cols = TRUE,
     output = c("short", "all"),
     language = NULL,
-    min_confidence = NULL,
     roadinfo = FALSE,
     no_annotations = TRUE,
     no_dedupe = FALSE,
@@ -205,7 +207,6 @@ oc_reverse_df.data.frame <-
     latitude <- rlang::enquo(latitude)
     longitude <- rlang::enquo(longitude)
     language <- rlang::enquo(language)
-    min_confidence <- rlang::enquo(min_confidence)
     no_annotations <- rlang::enquo(no_annotations)
     roadinfo <- rlang::enquo(roadinfo)
     no_dedupe <- rlang::enquo(no_dedupe)
@@ -220,6 +221,15 @@ oc_reverse_df.data.frame <-
         rlang::quo_is_null(longitude)
     ) {
       stop(call. = FALSE, "`latitude` and `longitude` must be provided.")
+    }
+
+    # fail if `min_confidence` is provided
+    if (rlang::has_name(rlang::quos(...), "min_confidence")) {
+      lifecycle::deprecate_stop(
+        when = "0.3.0",
+        what = "oc_reverse_df(min_confidence)",
+        details = "The OpenCage API does not support the `min_confidence` parameter anymore." # nolint: line_length_linter.
+      )
     }
 
     output <- rlang::arg_match(output)
@@ -242,7 +252,6 @@ oc_reverse_df.data.frame <-
         longitude = rlang::eval_tidy(longitude, data = data),
         return = "df_list",
         language = rlang::eval_tidy(language, data = data),
-        min_confidence = rlang::eval_tidy(min_confidence, data = data),
         no_annotations = rlang::eval_tidy(no_annotations, data = data),
         roadinfo = rlang::eval_tidy(roadinfo, data = data),
         no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
@@ -267,7 +276,6 @@ oc_reverse_df.data.frame <-
             longitude = !!longitude,
             return = "df_list",
             language = !!language,
-            min_confidence = !!min_confidence,
             no_annotations = !!no_annotations,
             roadinfo = !!roadinfo,
             no_dedupe = !!no_dedupe,
@@ -309,7 +317,6 @@ oc_reverse_df.numeric <-
     longitude,
     output = c("short", "all"),
     language = NULL,
-    min_confidence = NULL,
     no_annotations = TRUE,
     no_dedupe = FALSE,
     abbrv = FALSE,
@@ -324,10 +331,10 @@ oc_reverse_df.numeric <-
       bind_cols = TRUE,
       output = output,
       language = language,
-      min_confidence = min_confidence,
       no_annotations = no_annotations,
       no_dedupe = no_dedupe,
       abbrv = abbrv,
-      address_only = address_only
+      address_only = address_only,
+      ... = ...
     )
   }
