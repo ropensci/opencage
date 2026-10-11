@@ -22,7 +22,7 @@ NULL
 #' @param key Your OpenCage API key as a character vector of length one. By
 #'   default, [opencage_key()] will attempt to retrieve the key from the
 #'   environment variable `OPENCAGE_KEY`.
-#' @param min_confidence `r lifecycle::badge("deprecated")` `min_confidence` is 
+#' @param min_confidence `r lifecycle::badge("deprecated")` `min_confidence` is
 #'   no longer supported by the OpenCage API.
 #' @param no_record Logical vector of length one (default `FALSE`), when `TRUE`
 #'   no log entry of the query is created, and the geocoding request is not
