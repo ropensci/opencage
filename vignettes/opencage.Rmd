@@ -208,11 +208,11 @@ To minimize the number of requests sent to the API {opencage} uses {[memoise](ht
 ``` r
 system.time(oc_reverse(latitude = 10, longitude = 10))
 #>    user  system elapsed 
-#>    0.03    0.00    1.06
+#>    0.02    0.00    0.95
 
 system.time(oc_reverse(latitude = 10, longitude = 10))
 #>    user  system elapsed 
-#>    0.02    0.00    0.02
+#>    0.01    0.00    0.01
 ```
 
 To clear the cache of all results either start a new R session or call `oc_clear_cache()`.
@@ -224,7 +224,7 @@ oc_clear_cache()
 
 system.time(oc_reverse(latitude = 10, longitude = 10))
 #>    user  system elapsed 
-#>    0.02    0.00    0.99
+#>    0.02    0.00    0.91
 ```
 
 As you probably know, cache invalidation is one of the harder things to do in computer science.
@@ -241,4 +241,4 @@ Besides `oc_forward_df()` and `oc_reverse_df()`, which always return a single ti
 Depending on what you specify as the `return` parameter, `oc_forward()` and `oc_reverse()` will return either a list of tibbles (`df_list`, the default), JSON lists (`json_list`), GeoJSON lists (`geojson_list`), or the URL with which the API would be called (`url_only`).
 Learn more in the ["Output options"](output_options.html) vignette.
 
-Please report any issues or bugs on [our GitHub repository](https://github.com/ropensci/opencage/issues) and post questions on [discuss.ropensci.org](https://discuss.ropensci.org).
+Please report any issues or bugs on [our GitHub repository](https://github.com/ropensci/opencage/issues).

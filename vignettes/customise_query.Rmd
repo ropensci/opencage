@@ -31,18 +31,18 @@ Integer values between 1 and 100 are allowed.
 oc_forward_df("Paris")
 ```
 
-|placename |   oc_lat|   oc_lng|oc_formatted  |
-|:---------|--------:|--------:|:-------------|
-|Paris     | 48.85889| 2.320041|Paris, France |
+|placename |  oc_lat|   oc_lng|oc_formatted  |
+|:---------|-------:|--------:|:-------------|
+|Paris     | 48.8535| 2.348391|Paris, France |
 
 ``` r
 oc_forward_df("Paris", limit = 5)
 ```
 
-|placename |   oc_lat|     oc_lng|oc_formatted                           |
-|:---------|--------:|----------:|:--------------------------------------|
-|Paris     | 48.85889|   2.320041|Paris, France                          |
-|Paris     | 33.66180| -95.555513|Paris, Texas, United States of America |
+|placename |  oc_lat|     oc_lng|oc_formatted                           |
+|:---------|-------:|----------:|:--------------------------------------|
+|Paris     | 48.8535|   2.348391|Paris, France                          |
+|Paris     | 33.6618| -95.555513|Paris, Texas, United States of America |
 
 
 Reverse geocoding only returns [at most one result](https://opencagedata.com/api#ranking).
@@ -61,8 +61,8 @@ oc_forward_df("Paris", limit = 5, no_dedupe = TRUE)
 
 |placename |   oc_lat|     oc_lng|oc_formatted                           |
 |:---------|--------:|----------:|:--------------------------------------|
-|Paris     | 48.85889|   2.320041|Paris, France                          |
 |Paris     | 48.85350|   2.348391|Paris, France                          |
+|Paris     | 48.85889|   2.320041|Paris, France                          |
 |Paris     | 33.66180| -95.555513|Paris, Texas, United States of America |
 |Paris     | 48.85889|   2.320041|Paris, France                          |
 
@@ -101,13 +101,13 @@ Here is an example with places called "Paris" in Italy and Portugal.
 oc_forward_df(placename = "Paris", countrycode = list(c("IT", "PT")), limit = 5)
 ```
 
-|placename |   oc_lat|    oc_lng|oc_formatted                                                      |
-|:---------|--------:|---------:|:-----------------------------------------------------------------|
-|Paris     | 46.46330| 10.419781|23030 Valfurva SO, Italy                                          |
-|Paris     | 44.60143|  7.279508|Brossasco, Cuneo, Italy                                           |
-|Paris     | 37.44036| -8.788875|Paris, Foz do Rio, 7630-581 São Teotónio, Portugal                |
-|Paris     | 43.46040| 12.081721|Paris, 52035 Monterchi AR, Italy                                  |
-|Paris     | 39.91134| -8.271988|Paris, Rua do Carameleiro, 3260-402 Figueiró dos Vinhos, Portugal |
+|placename |   oc_lat|    oc_lng|oc_formatted                                        |
+|:---------|--------:|---------:|:---------------------------------------------------|
+|Paris     | 46.46330| 10.419781|23030 Valfurva SO, Italy                            |
+|Paris     | 44.60143|  7.279508|Brossasco, Cuneo, Italy                             |
+|Paris     | 43.46040| 12.081721|Paris, 52035 Monterchi AR, Italy                    |
+|Paris     | 37.44036| -8.788875|Paris, Foz do Rio, 7630-581 São Teotónio, Portugal  |
+|Paris     | 44.01041| 12.646043|Paris, Viale Arrigo Boito, 47838 Riccione RN, Italy |
 
 Despite the name, country codes also exist for territories that are not independent states, e.g. Gibraltar ("GI"), Greenland ("GL"), Guadaloupe ("GP"), or Guam ("GU").
 You can look up specific country codes with the {[ISOcodes](https://cran.r-project.org/package=ISOcodes)} or {[countrycodes](https://vincentarelbundock.github.io/countrycode/)} packages or on the [ISO](https://www.iso.org/obp/ui/#search/code/) or [Wikipedia](https://en.wikipedia.org/wiki/ISO_3166-1) webpages. In fact, you can also look up country codes via OpenCage as well. If you were interested in the country code of Curaçao for example, you could run:
@@ -218,9 +218,9 @@ Thus, in the following example, the French capital is too large to be returned.
 oc_forward_df(placename = "Paris", min_confidence = 7, limit = 5)
 ```
 
-|placename |  oc_lat|    oc_lng|oc_formatted                              |
-|:---------|-------:|---------:|:-----------------------------------------|
-|Paris     | 38.2098| -84.25299|Paris, Kentucky, United States of America |
+|placename | oc_lat| oc_lng|oc_formatted |
+|:---------|------:|------:|:------------|
+|Paris     |     NA|     NA|NA           |
 
 Note that confidence is not used for the [ranking of results](https://opencagedata.com/api#ranking).
 It does not tell you which result is more "correct" or "relevant", nor what type of thing the result is, but rather how small a result is, geographically speaking.
@@ -269,7 +269,6 @@ oc_forward_df(placename = "München")
 
 To find the correct language tag for your desired language, you can search for the language on the [BCP47 language subtag lookup](https://r12a.github.io/app-subtags/) for example.
 Note however, that there are some language tags in use on OpenStreetMap, one of OpenCage's main sources, that do not conform with the IETF BCP 47 standard.
-For example, OSM uses [`zh_pinyin`](https://wiki.openstreetmap.org/w/index.php?title=Multilingual_names#China) instead of `zh-Latn-pinyin` for [Hanyu Pinyin](https://en.wikipedia.org/wiki/Pinyin).
 It might, therefore, be helpful to consult the details page of the target country on openstreetmap.org to see which language tags are actually used.
 In any case, neither the OpenCage API nor the functions in this package will validate the language tags you provide.
 
@@ -289,17 +288,15 @@ This leads to a result with a _lot_ of columns.
 
 ``` r
 oc_forward_df("Dublin", no_annotations = FALSE) |> colnames()
-#>  [1] "placename"                         "oc_lat"                            "oc_lng"                            "oc_confidence"                     "oc_formatted"                      "oc_mgrs"                           "oc_maidenhead"                    
-#>  [8] "oc_callingcode"                    "oc_flag"                           "oc_geohash"                        "oc_qibla"                          "oc_wikidata"                       "oc_dms_lat"                        "oc_dms_lng"                       
-#> [15] "oc_itm_easting"                    "oc_itm_northing"                   "oc_mercator_x"                     "oc_mercator_y"                     "oc_nuts_nuts0_code"                "oc_nuts_nuts1_code"                "oc_nuts_nuts2_code"               
-#> [22] "oc_nuts_nuts3_code"                "oc_osm_edit_url"                   "oc_osm_note_url"                   "oc_osm_url"                        "oc_un_m49_statistical_groupings"   "oc_un_m49_regions_europe"          "oc_un_m49_regions_ie"             
-#> [29] "oc_un_m49_regions_northern_europe" "oc_un_m49_regions_world"           "oc_currency_alternate_symbols"     "oc_currency_decimal_mark"          "oc_currency_html_entity"           "oc_currency_iso_code"              "oc_currency_iso_numeric"          
-#> [36] "oc_currency_name"                  "oc_currency_smallest_denomination" "oc_currency_subunit"               "oc_currency_subunit_to_unit"       "oc_currency_symbol"                "oc_currency_symbol_first"          "oc_currency_thousands_separator"  
-#> [43] "oc_roadinfo_drive_on"              "oc_roadinfo_speed_in"              "oc_sun_rise_apparent"              "oc_sun_rise_astronomical"          "oc_sun_rise_civil"                 "oc_sun_rise_nautical"              "oc_sun_set_apparent"              
-#> [50] "oc_sun_set_astronomical"           "oc_sun_set_civil"                  "oc_sun_set_nautical"               "oc_timezone_name"                  "oc_timezone_now_in_dst"            "oc_timezone_offset_sec"            "oc_timezone_offset_string"        
-#> [57] "oc_timezone_short_name"            "oc_what3words_words"               "oc_northeast_lat"                  "oc_northeast_lng"                  "oc_southwest_lat"                  "oc_southwest_lng"                  "oc_iso_3166_1_alpha_2"            
-#> [64] "oc_iso_3166_1_alpha_3"             "oc_iso_3166_2"                     "oc_category"                       "oc_normalized_city"                "oc_type"                           "oc_city"                           "oc_continent"                     
-#> [71] "oc_country"                        "oc_country_code"                   "oc_county"                         "oc_county_code"                    "oc_political_union"                "oc_region"
+#>  [1] "placename"                         "oc_lat"                            "oc_lng"                            "oc_confidence"                     "oc_formatted"                      "oc_mgrs"                           "oc_maidenhead"                     "oc_callingcode"                    "oc_flag"                          
+#> [10] "oc_geohash"                        "oc_qibla"                          "oc_wikidata"                       "oc_dms_lat"                        "oc_dms_lng"                        "oc_itm_easting"                    "oc_itm_northing"                   "oc_mercator_x"                     "oc_mercator_y"                    
+#> [19] "oc_nuts_nuts0_code"                "oc_nuts_nuts1_code"                "oc_nuts_nuts2_code"                "oc_nuts_nuts3_code"                "oc_osm_edit_url"                   "oc_osm_note_url"                   "oc_osm_url"                        "oc_un_m49_statistical_groupings"   "oc_un_m49_regions_europe"         
+#> [28] "oc_un_m49_regions_ie"              "oc_un_m49_regions_northern_europe" "oc_un_m49_regions_world"           "oc_currency_alternate_symbols"     "oc_currency_decimal_mark"          "oc_currency_html_entity"           "oc_currency_iso_code"              "oc_currency_iso_numeric"           "oc_currency_name"                 
+#> [37] "oc_currency_smallest_denomination" "oc_currency_subunit"               "oc_currency_subunit_to_unit"       "oc_currency_symbol"                "oc_currency_symbol_first"          "oc_currency_thousands_separator"   "oc_roadinfo_drive_on"              "oc_roadinfo_speed_in"              "oc_sun_rise_apparent"             
+#> [46] "oc_sun_rise_astronomical"          "oc_sun_rise_civil"                 "oc_sun_rise_nautical"              "oc_sun_set_apparent"               "oc_sun_set_astronomical"           "oc_sun_set_civil"                  "oc_sun_set_nautical"               "oc_timezone_name"                  "oc_timezone_now_in_dst"           
+#> [55] "oc_timezone_offset_sec"            "oc_timezone_offset_string"         "oc_timezone_short_name"            "oc_what3words_words"               "oc_northeast_lat"                  "oc_northeast_lng"                  "oc_southwest_lat"                  "oc_southwest_lng"                  "oc_iso_3166_1_alpha_2"            
+#> [64] "oc_iso_3166_1_alpha_3"             "oc_iso_3166_2"                     "oc_category"                       "oc_normalized_city"                "oc_type"                           "oc_city"                           "oc_continent"                      "oc_country"                        "oc_country_code"                  
+#> [73] "oc_county"                         "oc_county_code"                    "oc_political_union"                "oc_region"
 ```
 
 ### `roadinfo`

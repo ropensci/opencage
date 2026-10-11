@@ -24,7 +24,7 @@ Before continuing, please make sure that you:
 ## Description & steps to reproduce
 <!--
 Please provide a clear and concise description of what the bug is.
-Please illustrate the bug with a minimal working example or [reprex](https://www.tidyverse.org/help/#reprex). 
+Please illustrate the bug with a minimal working example or [reprex](https://tidyverse.org/help/#reprex). 
 Please provide detailed steps to reproduce the bug and any information that might be helpful in troubleshooting.
 Please consider using the {reprex} package for this: https://reprex.tidyverse.org/.
 What did you expect to happen instead?

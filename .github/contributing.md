@@ -17,7 +17,7 @@ There are several ways you can contribute to this project.
 
 Think {opencage} is useful? 
 Let others discover it, by telling them in person, via your preferred social medium, or a blog post.
-Please also share your use case in our discussion forum at [discuss.ropensci.org](https://discuss.ropensci.org). 
+Please also share your use case at [ROpenSci discussions](https://github.com/orgs/ropensci/discussions/categories/use-cases). 
 
 Using {opencage} for a paper you are writing? 
 Please consider [citing it](https://docs.ropensci.org/opencage/authors.html).
@@ -28,7 +28,7 @@ Get citation information for {opencage} in R with `citation(package = 'opencage'
 Using {opencage} and got stuck? 
 Browse the [documentation](https://docs.ropensci.org/opencage/) to see if you can find a solution. 
 Still stuck? 
-Post your question on our [discussion forum](https://discuss.ropensci.org) and tag it with the package name.
+Post your question on our [issue tracker](https://github.com/ropensci/opencage/issues/new).
 While we cannot offer user support, we'll try to do our best to address it, as questions often lead to better documentation or the discovery of bugs.
 
 Want to ask a question in private? 
@@ -57,7 +57,7 @@ Since we use a non-standard workflow to render the vignettes in this package, yo
 Using our_package and discovered a bug? 
 That's annoying! 
 Don't let others have the same experience and open an [issue report on GitHub](https://github.com/ropensci/opencage/issues/new) so we can fix it. 
-Please illustrate the bug with a minimal working example, also known as a [reprex](https://www.tidyverse.org/help/#reprex), i.e. please provide detailed steps to reproduce the bug and any information that might be helpful in troubleshooting. The {[reprex](https://reprex.tidyverse.org/)} 📦 can help you with this. 
+Please illustrate the bug with a minimal working example, also known as a [reprex](https://tidyverse.org/help/#reprex), i.e. please provide detailed steps to reproduce the bug and any information that might be helpful in troubleshooting. The {[reprex](https://reprex.tidyverse.org/)} 📦 can help you with this. 
 
 ### Contribute code  🛠
 
@@ -83,23 +83,16 @@ You should also consider the following:
 * Keep the changes in your PR as small and succinct as possible. 
 Most importantly only address one issue per PR. 
 This makes it easier for us to review and merge your PR. 
-* We mostly follow the tidyverse [style guide](http://style.tidyverse.org).
+* We mostly follow the tidyverse [style guide](https://style.tidyverse.org/).
 You can use the {[styler](https://styler.r-lib.org/)} package to apply these styles, but please do not restyle code that has nothing to do with your PR. 
 * We use {[roxygen2](https://roxygen2.r-lib.org/)}, with [Markdown syntax](https://roxygen2.r-lib.org/articles/rd-formatting.html), for documentation.
 * We would prefer it if your PR also included unit tests. 
 Contributions with test cases included are easier to accept and unit tests ensure that the functionality you just added will not break in the future.
-We use {[testthat](https://testthat.r-lib.org/)} for unit tests and we track test coverage with [covr](https://covr.r-lib.org/) and [Codecov](https://codecov.io/).
-* We use {[lintr](https://github.com/jimhester/lintr)} for [static code analysis](https://github.com/jimhester/lintr).
+We use {[testthat](https://testthat.r-lib.org/)} for unit tests and we track test coverage with [covr](https://covr.r-lib.org/) and [Codecov](https://about.codecov.io/).
+* We use {[lintr](https://github.com/r-lib/lintr)} for [static code analysis](https://github.com/r-lib/lintr).
 * We use [GitHub Actions](https://docs.github.com/en/actions) for continuous integration. 
 Workflows are adapted from [r-lib/actions](https://github.com/r-lib/actions). 
 Unfortunately tests requiring an API key will not run on a PR, because neither our nor your API key is available there to prevent it from leaking. 
-
-## rOpenSci discussion forum 👄
-
-Check out our [discussion forum](https://discuss.ropensci.org) if
-
-* you have a question, a use case, or otherwise not a bug or feature request for the software itself.
-* you think your issue requires a longer discussion.
 
 ## License 📜
 
