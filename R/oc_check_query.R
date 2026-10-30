@@ -18,7 +18,6 @@ oc_check_query <-
     countrycode = NULL,
     language = NULL,
     limit = NULL,
-    min_confidence = NULL,
     no_annotations = NULL,
     roadinfo = NULL,
     no_dedupe = NULL,
@@ -37,7 +36,6 @@ oc_check_query <-
           countrycode = countrycode,
           language = language,
           limit = limit,
-          min_confidence = min_confidence,
           no_annotations = no_annotations,
           roadinfo = roadinfo,
           no_dedupe = no_dedupe,
@@ -73,7 +71,6 @@ oc_check_query <-
     countrycode = NULL,
     language = NULL,
     limit = NULL,
-    min_confidence = NULL,
     no_annotations = NULL,
     roadinfo = NULL,
     no_dedupe = NULL,
@@ -157,16 +154,6 @@ oc_check_query <-
         stop(
           call. = FALSE,
           "Every `limit` must be an integer between 1 and 100."
-        )
-      }
-    }
-
-    # check min_confidence
-    if (!is.null(min_confidence)) {
-      if (!(min_confidence %in% 1:10)) {
-        stop(
-          call. = FALSE,
-          "Every `min_confidence` must be an integer between 1 and 10."
         )
       }
     }

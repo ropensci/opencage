@@ -9,7 +9,6 @@ oc_reverse(
   longitude,
   return = c("df_list", "json_list", "geojson_list", "url_only"),
   language = NULL,
-  min_confidence = NULL,
   no_annotations = TRUE,
   roadinfo = FALSE,
   no_dedupe = FALSE,
@@ -34,13 +33,6 @@ tag, in which case OpenCage will attempt to return the response in the
 "official" language(s). In case the \code{language} parameter is set to \code{NULL}
 (which is the default), the tag is not recognized, or OpenCage does not
 have a record in that language, the results will be returned in English.}
-
-\item{min_confidence}{Numeric vector of integer values between 0 and 10
-indicating the precision of the returned result as defined by its
-geographical extent, (i.e. by the extent of the result's bounding box). See
-the \href{https://opencagedata.com/api#confidence}{API documentation} for
-details. Only results with at least the requested confidence will be
-returned. Default is \code{NULL}.}
 
 \item{no_annotations}{Logical vector indicating whether additional
 information about the result location should be returned. \code{TRUE} by

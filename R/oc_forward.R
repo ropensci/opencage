@@ -44,12 +44,6 @@
 #' @param limit Numeric vector of integer values to determine the maximum number
 #'   of results returned for each `placename`. Integer values between 1 and 100
 #'   are allowed. Default is 10.
-#' @param min_confidence Numeric vector of integer values between 0 and 10
-#'   indicating the precision of the returned result as defined by its
-#'   geographical extent, (i.e. by the extent of the result's bounding box). See
-#'   the [API documentation](https://opencagedata.com/api#confidence) for
-#'   details. Only results with at least the requested confidence will be
-#'   returned. Default is `NULL`.
 #' @param no_annotations Logical vector indicating whether additional
 #'   information about the result location should be returned. `TRUE` by
 #'   default, which means that the results will not contain annotations.
@@ -147,7 +141,6 @@ oc_forward <-
     countrycode = NULL,
     language = NULL,
     limit = 10L,
-    min_confidence = NULL,
     no_annotations = TRUE,
     roadinfo = FALSE,
     no_dedupe = FALSE,
@@ -161,6 +154,15 @@ oc_forward <-
       stop(call. = FALSE, "`placename` must be provided.")
     }
 
+    # fail if `min_confidence` is provided
+    if (rlang::has_name(rlang::quos(...), "min_confidence")) {
+      lifecycle::deprecate_stop(
+        when = "0.3.0",
+        what = "oc_forward(min_confidence)",
+        details = "The OpenCage API does not support the `min_confidence` parameter anymore." # nolint: line_length_linter.
+      )
+    }
+
     # check return
     return <- match.arg(return)
 
@@ -172,7 +174,6 @@ oc_forward <-
       countrycode = countrycode,
       language = language,
       limit = limit,
-      min_confidence = min_confidence,
       no_annotations = no_annotations,
       roadinfo = roadinfo,
       no_dedupe = no_dedupe,
@@ -189,7 +190,6 @@ oc_forward <-
       countrycode = countrycode,
       language = language,
       limit = limit,
-      min_confidence = min_confidence,
       no_annotations = no_annotations,
       roadinfo = roadinfo,
       no_dedupe = no_dedupe,
@@ -251,13 +251,6 @@ oc_forward <-
 #'   of such a vector, to determine the maximum number of results returned for
 #'   each `placename`. Integer values between 1 and 100 are allowed. Default is
 #'   1.
-#' @param min_confidence Numeric vector of integer values, or an unquoted
-#'   variable name of such a vector, between 0 and 10 indicating the precision
-#'   of the returned result as defined by its geographical extent, (i.e. by the
-#'   extent of the result's bounding box). See the [API
-#'   documentation](https://opencagedata.com/api#confidence) for details. Only
-#'   results with at least the requested confidence will be returned. Default is
-#'   `NULL`).
 #' @param no_annotations Logical vector, or an unquoted variable name of such a
 #'   vector, indicating whether additional information about the result location
 #'   should be returned. `TRUE` by default, which means that the results will
@@ -377,7 +370,6 @@ oc_forward_df.data.frame <-
     countrycode = NULL,
     language = NULL,
     limit = 1L,
-    min_confidence = NULL,
     no_annotations = TRUE,
     roadinfo = FALSE,
     no_dedupe = FALSE,
@@ -392,7 +384,6 @@ oc_forward_df.data.frame <-
     countrycode <- rlang::enquo(countrycode)
     language <- rlang::enquo(language)
     limit <- rlang::enquo(limit)
-    min_confidence <- rlang::enquo(min_confidence)
     no_annotations <- rlang::enquo(no_annotations)
     roadinfo <- rlang::enquo(roadinfo)
     no_dedupe <- rlang::enquo(no_dedupe)
@@ -402,6 +393,15 @@ oc_forward_df.data.frame <-
     # check a placename is provided
     if (rlang::quo_is_missing(placename) || rlang::quo_is_null(placename)) {
       stop(call. = FALSE, "`placename` must be provided.")
+    }
+
+    # fail if `min_confidence` is provided
+    if (rlang::has_name(rlang::quos(...), "min_confidence")) {
+      lifecycle::deprecate_stop(
+        when = "0.3.0",
+        what = "oc_forward_df(min_confidence)",
+        details = "The OpenCage API does not support the `min_confidence` parameter anymore." # nolint: line_length_linter.
+      )
     }
 
     output <- rlang::arg_match(output)
@@ -427,7 +427,6 @@ oc_forward_df.data.frame <-
         countrycode = rlang::eval_tidy(countrycode, data = data),
         language = rlang::eval_tidy(language, data = data),
         limit = rlang::eval_tidy(limit, data = data),
-        min_confidence = rlang::eval_tidy(min_confidence, data = data),
         no_annotations = rlang::eval_tidy(no_annotations, data = data),
         roadinfo = rlang::eval_tidy(roadinfo, data = data),
         no_dedupe = rlang::eval_tidy(no_dedupe, data = data),
@@ -467,7 +466,6 @@ oc_forward_df.data.frame <-
             countrycode = !!countrycode,
             language = !!language,
             limit = !!limit,
-            min_confidence = !!min_confidence,
             no_annotations = !!no_annotations,
             roadinfo = !!roadinfo,
             no_dedupe = !!no_dedupe,
@@ -516,7 +514,6 @@ oc_forward_df.character <-
     countrycode = NULL,
     language = NULL,
     limit = 1L,
-    min_confidence = NULL,
     no_annotations = TRUE,
     roadinfo = FALSE,
     no_dedupe = FALSE,
@@ -535,11 +532,11 @@ oc_forward_df.character <-
       countrycode = countrycode,
       language = language,
       limit = limit,
-      min_confidence = min_confidence,
       no_annotations = no_annotations,
       roadinfo = roadinfo,
       no_dedupe = no_dedupe,
       abbrv = abbrv,
-      address_only = address_only
+      address_only = address_only,
+      ...
     )
   }

@@ -124,3 +124,24 @@ test_that("`opencage_key(quiet = FALSE)` messages", {
 
   expect_snapshot(x = opencage_key(quiet = FALSE))
 })
+
+test_that("opencage_forward stops on `min_confidence` parameter", {
+  lifecycle::expect_defunct(
+    opencage_forward(
+      placename = "Irrelevant",
+      key = key_200,
+      min_confidence = 7L
+    )
+  )
+})
+
+test_that("opencage_reverse stops on `min_confidence` parameter", {
+  lifecycle::expect_defunct(
+    opencage_reverse(
+      latitude = 0,
+      longitude = 0,
+      key = key_200,
+      min_confidence = 7L
+    )
+  )
+})

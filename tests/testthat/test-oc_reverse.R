@@ -283,3 +283,32 @@ test_that("Check that latitude & longitude are present", {
     "`latitude` and `longitude` must be provided."
   )
 })
+
+test_that("oc_reverse stops on `min_confidence` parameter", {
+  withr::local_envvar(c("OPENCAGE_KEY" = key_200))
+
+  lifecycle::expect_defunct(
+    oc_reverse(
+      latitude = 0L,
+      longitude = 0L,
+      min_confidence = 7L
+    )
+  )
+
+  lifecycle::expect_defunct(
+    oc_reverse_df(
+      data = oc_rev1(),
+      latitude = lat,
+      longitude = lng,
+      min_confidence = 7L
+    )
+  )
+
+  lifecycle::expect_defunct(
+    oc_reverse_df(
+      latitude = 0L,
+      longitude = 0L,
+      min_confidence = 7L
+    )
+  )
+})

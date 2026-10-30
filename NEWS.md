@@ -1,11 +1,13 @@
 # opencage (development version)
 
 * opencage now supports an `address_only` parameter, see "[New optional API parameter 'address_only'](https://blog.opencagedata.com/post/new-optional-parameter-addressonly)", ([#151](https://github.com/ropensci/opencage/pull/151)).
+* The `min_confidence` parameter is not supported by the OpenCage API anymore and has been marked defunct ([#175](https://github.com/ropensci/opencage/pull/175)).
 * The geocoding functions will not send a query to the API anymore if no API key is present ([#133](https://github.com/ropensci/opencage/issues/133)).
 * `NA`s are allowed again for the `placename` or `latitude`/`longitude` arguments (also empty strings for `placename`). 
   These queries are not sent to the API. 
   An empty/`NA` response will be returned depending on the specific query ([#143](https://github.com/ropensci/opencage/issues/143)).
 * `opencage_forward()`, `opencage_reverse()`, and `opencage_key()` are now deprecated (leveling up from soft-deprecated, [#147](https://github.com/ropensci/opencage/pull/147)).
+* The minimal required version of tidyr was raised to v1.0.0 ([#169](https://github.com/ropensci/opencage/pull/169)). 
 
 ## Internals
 
