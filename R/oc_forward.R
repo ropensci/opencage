@@ -537,6 +537,6 @@ oc_forward_df.character <-
       no_dedupe = no_dedupe,
       abbrv = abbrv,
       address_only = address_only,
-      ... = ...
+      ...
     )
   }
