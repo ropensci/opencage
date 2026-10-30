@@ -163,8 +163,7 @@ oc_reverse <-
 #' # This makes it possible to build up more detailed queries
 #' # through the data frame passed to the data argument.
 #' df2 <- add_column(df,
-#'   language = c("en", "fr", "de", "en"),
-#'   confidence = c(8, 10, 10, 10)
+#'   language = c("en", "fr", "de", "en")
 #' )
 #'
 #' # Use language column to specify preferred language of results
