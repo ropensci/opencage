@@ -42,7 +42,7 @@ have a record in that language, the results will be returned in English.}
 \item{limit}{How many results should be returned (1-100), ignored for reverse
 geocoding.}
 
-\item{min_confidence}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{min_confidence} is
+\item{min_confidence}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#defunct}{\figure{lifecycle-defunct.svg}{options: alt='[Defunct]'}}}{\strong{[Defunct]}} \code{min_confidence} is
 no longer supported by the OpenCage API.}
 
 \item{no_annotations}{Logical vector indicating whether additional
