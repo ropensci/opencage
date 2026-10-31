@@ -20,18 +20,20 @@ permissions: read-all
 jobs:
   update-citation-cff:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v7.0.1
+
       - uses: r-lib/actions/setup-r@v2
         with:
           use-public-rspm: true
+
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: |
-            any::cffr
-            any::V8
+          packages: cffr, V8
 
       - name: Update CITATION.cff
         run: |
@@ -43,10 +45,16 @@ jobs:
 
         shell: Rscript {0}
 
-      - name: Commit results
+      - name: Commit and push changes
         run: |
-          git config --local user.name "$GITHUB_ACTOR"
-          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          git add CITATION.cff
-          git commit -m 'Update CITATION.cff' || echo "No changes to commit"
-          git push origin || echo "No changes to commit"
+          if FILES_TO_COMMIT=($(git diff-index --name-only ${{ github.sha }} \
+              | egrep --ignore-case '^(CITATION.cff)$'))
+          then
+            git config --local user.name "$GITHUB_ACTOR"
+            git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+            git commit ${FILES_TO_COMMIT[*]} -m "Update CITATION.cff (GHA)"
+            git pull --ff-only
+            git push origin
+          else
+            echo "No changes to commit."
+          fi
