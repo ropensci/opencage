@@ -19,3 +19,4 @@ datamanagement.R
 ^CRAN-RELEASE$
 ^data-raw$
 ^CITATION\.cff$
+^CRAN-SUBMISSION$

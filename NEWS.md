@@ -1,13 +1,20 @@
 # opencage (development version)
 
-* opencage now supports an `address_only` parameter, see "[New optional API parameter 'address_only'](https://blog.opencagedata.com/post/new-optional-parameter-addressonly)", ([#151](https://github.com/ropensci/opencage/pull/151)).
+# opencage 0.3.0
+
+## Breaking changes
+
 * The `min_confidence` parameter is not supported by the OpenCage API anymore and has been marked defunct ([#175](https://github.com/ropensci/opencage/pull/175)).
+* `opencage_forward()`, `opencage_reverse()`, and `opencage_key()` are now deprecated (leveling up from soft-deprecated, [#147](https://github.com/ropensci/opencage/pull/147)).
+* The minimal required version of tidyr was raised to v1.0.0 ([#169](https://github.com/ropensci/opencage/pull/169)). 
+
+## Improvements
+
+* opencage now supports an `address_only` parameter, see "[New optional API parameter 'address_only'](https://blog.opencagedata.com/post/new-optional-parameter-addressonly)", ([#151](https://github.com/ropensci/opencage/pull/151)).
 * The geocoding functions will not send a query to the API anymore if no API key is present ([#133](https://github.com/ropensci/opencage/issues/133)).
 * `NA`s are allowed again for the `placename` or `latitude`/`longitude` arguments (also empty strings for `placename`). 
   These queries are not sent to the API. 
   An empty/`NA` response will be returned depending on the specific query ([#143](https://github.com/ropensci/opencage/issues/143)).
-* `opencage_forward()`, `opencage_reverse()`, and `opencage_key()` are now deprecated (leveling up from soft-deprecated, [#147](https://github.com/ropensci/opencage/pull/147)).
-* The minimal required version of tidyr was raised to v1.0.0 ([#169](https://github.com/ropensci/opencage/pull/169)). 
 
 ## Internals
 
@@ -15,7 +22,7 @@
 * Use [{lintr} version 3.0](https://tidyverse.org/blog/2022/07/lintr-3-0-0/) and add "package development" linters ([#144](https://github.com/ropensci/opencage/pull/144)).
 * `countrycodes` source and script were moved to `data-raw` ([#146](https://github.com/ropensci/opencage/pull/146)).
 * Add CITATION.cff and a corresponding GitHub action ([#148](https://github.com/ropensci/opencage/pull/148)).
-* Select expressions inside `oc_forward_df()` and `oc_reverse_df()` now use `"column"` instead of `.data$column`, because the latter is [deprecated as of tidyselect v1.2.0](https://tidyselect.r-lib.org/news/index.html#tidyselect-120)  ([#150](https://github.com/ropensci/opencage/pull/150)).
+* `select()` expressions inside `oc_forward_df()` and `oc_reverse_df()` now use `"column"` instead of `.data$column`, because the latter is [deprecated as of tidyselect v1.2.0](https://tidyselect.r-lib.org/news/index.html#tidyselect-120)  ([#150](https://github.com/ropensci/opencage/pull/150)).
 * Dataframes in the opencage and customise query vignettes are now rendered with the `knitr::kable()` print method ([#166](https://github.com/ropensci/opencage/pull/166)).
 * The opencage code now uses a consistent style (`styler::tidyverse_style()`) and all internal functions are documented  ([#153](https://github.com/ropensci/opencage/pull/153)).
 * GitHub action workflows have been updated ([#142](https://github.com/ropensci/opencage/issues/142),  [#149](https://github.com/ropensci/opencage/pull/149), [#152](https://github.com/ropensci/opencage/pull/152)), [#164](https://github.com/ropensci/opencage/pull/164)). 
